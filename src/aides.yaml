@@ -1,0 +1,364 @@
+aides:
+  somme:
+    - nom: commune
+      valeur: 0 €
+    - nom: département
+      valeur: 0 €
+    - nom: région
+      valeur: 0 €
+    - nom: état
+      valeur: 0 €
+
+aides . bonus vélo cargo:
+  remplace: état
+  titre: « Bonus vélo » cargo de l’État
+  description: |
+    L’État accorde une aide de 1 000 € pour l’achat d’un vélo cargo qu’il soit
+    électrique ou non. Votre revenu fiscal de référence par part doit être
+    inférieur à 13 489 € pour en bénéficier.
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - revenu fiscal de référence <= 13489 €/an
+      - vélo . cargo
+  valeur: 1000€
+  plafond: vélo . prix
+  lien: https://www.service-public.fr/particuliers/vosdroits/F35475
+
+aides . bonus vélo électrique:
+  remplace: état
+  titre: « Bonus vélo » de l’État
+  description: |
+    Le Bonus vélo versé par l’État complète l’aide versée par une collectivité
+    territoriale. Votre revenu fiscal de référence par part doit être inférieur
+    à 13 489 € pour en bénéficier. Le montant de l’aide est identique au montant
+    accordé par la collectivité dans la limite de $plafond.
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - revenu fiscal de référence <= 13489 €/an
+      - vélo . électrique
+  valeur:
+    le maximum de:
+      - commune
+      - département
+      - région
+  plafond:
+    valeur: 200 €
+    plafond: vélo . prix
+  lien: https://www.service-public.fr/particuliers/vosdroits/F35475
+
+aides . ile de france:
+  remplace: région
+  titre: Région Île-de-France
+  description: |
+    La région Île-De-France subventionne l’achat d’un $vélo à hauteur de 50% et
+    jusqu’à un plafond de $plafond. Les éventuelles aides locales déjà perçues
+    sont déduites de ce montant.
+  applicable si:
+    toutes ces conditions:
+      - localisation . région = '11'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 600 €
+      - sinon: 500 €
+    abattement: aides . commune
+  lien: https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo
+
+aides . occitanie:
+  remplace: région
+  titre: Région Occitanie
+  condition de ressources: oui
+  applicable si: localisation . région = '76'
+  valeur:
+    variations:
+      - si: personne imposable
+        alors:
+          valeur: 50% * vélo . prix
+          plafond:
+            variations:
+              - si: vélo . électrique
+                alors: 250€
+              - sinon: 150€
+      - sinon:
+          valeur: 80% * vélo . prix
+          plafond:
+            variations:
+              - si: vélo . électrique
+                alors: 400€
+              - sinon: 150€
+  lien: https://lio.laregion.fr/aides-achat-velo
+
+aides . corse:
+  remplace: région
+  titre: Corse
+  applicable si:
+    # note: VTT électriques exclus
+    toutes ces conditions:
+      - localisation . région = '94'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 500€
+  lien: https://www.aue.corsica/Aide-a-l-achat-des-Velos-a-Assistance-Electrique_a205.html
+
+aides . bouches du rhone:
+  remplace: région
+  titre: Bouches du Rhônes
+  applicable si:
+    toutes ces conditions:
+      - localisation . département = '13'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 400€
+  lien: https://www.departement13.fr/400-euros-pour-achat-velo-assistance-electrique/
+
+aides . paris:
+  remplace: commune
+  titre: Ville de Paris
+  description: |
+    La ville de Paris subventionne l’achat d’un $vélo à hauteur de 33% et
+    jusqu’à un plafond de $plafond.
+  applicable si: localisation . code postal = '75000'
+  valeur: 33% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 600€
+      - si: vélo . électrique
+        alors: 500€
+      - sinon: 0€
+  lien: https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373
+
+aides . lyon:
+  remplace: commune
+  titre: Métropole Grand Lyon
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - localisation . intercommunalité = 'lyon'
+      - vélo . prix <= 3000 €
+      - une de ces conditions:
+          - vélo . cargo
+          - vélo . électrique
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 13489 €/an
+        alors: 500€
+      - sinon: 100€
+  lien: https://met.grandlyon.com/aide-a-lachat-dun-velo-face-a-son-succes-comment-sorganise-la-metropole/
+
+aides . bordeaux:
+  remplace: commune
+  titre: Bordeaux Métropole
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - localisation . intercommunalité = 'bordeaux'
+      - revenu fiscal de référence <= 2200 €/mois
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 100 €
+  lien: https://sedeplacer.bordeaux-metropole.fr/Velo/Pratique/Aide-a-l-achat-de-velo
+
+aides . nantes:
+  remplace: commune
+  titre: Nantes Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . intercommunalité = 'nantes'
+      - vélo . cargo
+  valeur: 25% * vélo . prix
+  plafond: 300 €
+  lien: https://metropole.nantes.fr/aide-achat-velo-cargo
+
+aides . toulouse:
+  remplace: commune
+  titre: Toulouse Métropole
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - localisation . intercommunalité = 'toulouse'
+      - revenu fiscal de référence <= 35052 €/an
+  valeur: 40% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors:
+          variations:
+            - si: revenu fiscal de référence <= 18800
+              alors: 600€
+            - sinon: 500€
+      - si: vélo . cargo
+        alors:
+          variations:
+            - si: revenu fiscal de référence <= 18800
+              alors: 400€
+            - sinon: 350€
+      - si: vélo . électrique
+        alors:
+          variations:
+            - si: revenu fiscal de référence <= 18800
+              alors: 250€
+            - sinon: 200€
+      - sinon:
+          variations:
+            - si: revenu fiscal de référence <= 18800
+              alors: 100€
+            - sinon: 0€
+  lien: https://www.toulouse-metropole.fr/missions/environnement/qualite-de-l-air/prime-velo
+
+aides . nice:
+  remplace: commune
+  titre: Métropole Nice Côte d’Azur
+  applicable si: localisation . intercommunalité = 'nice'
+  valeur:
+    variations:
+      - si: vélo . électrique
+        alors:
+          valeur: 25% * vélo . prix
+          plafond: 400€
+      - sinon:
+          valeur: 50% * vélo . prix
+          plafond: 100€
+  lien: https://www.nicecotedazur.org/deplacement/subvention-pour-l-achat-d-un-v%C3%A9lo-%C3%A0-propulsion-humaine
+
+aides . strasbourg:
+  remplace: commune
+  titre: Eurométropole de Strasbourg
+  applicable si: localisation . intercommunalité = 'strasbourg'
+  condition de ressources: oui # todo: seulement pour les vélos électriques
+  variations:
+    - si: vélo . cargo électrique
+      alors: 500€
+    - si: vélo . électrique
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 560 €/mois
+              montant: 500 €
+            - plafond: 764 €/mois
+              montant: 400 €
+            - montant: 300 €
+    - sinon: 150 €
+  plafond: vélo . prix
+  lien: https://www.strasbourg.eu/aides-achat
+
+aides . albi:
+  remplace: commune
+  titre: Grand Albigeois
+  applicable si: localisation . intercommunalité = 'albi'
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 500 €
+      - si: vélo . électrique
+        alors: 250 €
+      - sinon: 100 €
+  lien: https://www.grand-albigeois.fr/1591-aide-a-l-achat-de-velo.htm
+
+aides . toulon:
+  remplace: commune
+  titre: Métropole Toulon Provence Méditerranée
+  applicable si:
+    toutes ces conditions:
+      - localisation . intercommunalité = 'toulon'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 250 €
+  lien: https://metropoletpm.fr/tourisme/proxy/tpm-s-engage-velo-electrique
+
+aides . bretagne romantique:
+  remplace: commune
+  titre: Communauté de communes Bretagne romantique
+  applicable si:
+    toutes ces conditions:
+      - localisation . intercommunalité = 'bretagne-romantique'
+      - vélo . électrique
+  valeur: 100€
+  plafond: vélo . prix
+  lien: https://bretagneromantique.fr/prime-velo/
+
+aides . caen:
+  remplace: commune
+  titre: Ville de Caen
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - localisation . code postal = '14000'
+      - vélo . électrique
+      - revenu fiscal de référence <= 13489 €/an
+  valeur:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 400€
+      - sinon: 300€
+  plafond: vélo . prix
+  lien: https://caen.fr/velo-pied
+
+#####################################################################
+
+vélo: oui
+
+vélo . type:
+  possibilités:
+    - mécanique simple
+    - électrique
+    - cargo
+    - cargo électrique
+    - pliant
+
+vélo . mécanique simple:
+  valeur: oui
+  applicable si: vélo . type = 'mécanique simple'
+
+vélo . électrique:
+  valeur: oui
+  applicable si:
+    une de ces conditions:
+      - vélo . type = 'électrique'
+      - vélo . type = 'cargo électrique'
+
+vélo . mécanique:
+  valeur: oui
+  applicable si: vélo . électrique = 'non'
+
+vélo . cargo:
+  valeur: oui
+  applicable si:
+    une de ces conditions:
+      - vélo . type = 'cargo'
+      - vélo . type = 'cargo électrique'
+
+vélo . cargo électrique:
+  valeur: oui
+  applicable si: vélo . type = 'cargo électrique'
+
+vélo . pliant:
+  valeur: oui
+  applicable si: vélo . type = 'pliant'
+
+vélo . prix:
+  par défaut: 1500 €
+
+revenu fiscal de référence:
+  titre: Revenu fiscal de référence par part
+  par défaut: 10000 €/an # pour activer toutes les aides par défaut
+
+personne imposable: revenu fiscal de référence >= 11120 €/an
+
+localisation: oui
+localisation . code postal: "''"
+localisation . intercommunalité: "''"
+localisation . département: "''"
+localisation . région: "''"

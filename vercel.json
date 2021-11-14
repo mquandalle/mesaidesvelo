@@ -1,0 +1,26 @@
+{
+	"headers": [
+		{
+			"source": "/(.*)",
+			"headers": [
+				{
+					"key": "Cache-Control",
+					"value": "public, max-age=3600, must-revalidate"
+				}
+			]
+		}
+	],
+	"rewrites": [
+		{
+			"source": "/js/script.js",
+			"destination": "https://plausible.io/js/plausible.js"
+		},
+		{
+			"source": "/api/event",
+			"destination": "https://plausible.io/api/event"
+		}
+	],
+	"github": {
+		"silent": true
+	}
+}
