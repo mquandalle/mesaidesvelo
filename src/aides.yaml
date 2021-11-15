@@ -314,10 +314,7 @@ aides . les sables d'olonne:
     variations:
       - si: vélo . mécanique simple
         alors: 50% * vélo . prix
-      - si: vélo . électrique
-        alors: 25% * vélo . prix
-      - si: vélo . cargo
-        alors: 25% * vélo . prix
+      - sinon: 25% * vélo . prix
   plafond:
     variations:
       - si: vélo . mécanique simple
