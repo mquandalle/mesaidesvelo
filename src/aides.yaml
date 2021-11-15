@@ -97,7 +97,7 @@ aides . occitanie:
 
 aides . corse:
   remplace: région
-  titre: Corse
+  titre: Région Corse
   applicable si:
     # note: VTT électriques exclus
     toutes ces conditions:
@@ -109,7 +109,7 @@ aides . corse:
 
 aides . bouches du rhone:
   remplace: région
-  titre: Bouches du Rhônes
+  titre: Département Bouches-du-Rhône
   applicable si:
     toutes ces conditions:
       - localisation . département = '13'
