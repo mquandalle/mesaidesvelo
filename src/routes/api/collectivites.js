@@ -14,7 +14,7 @@
 import fuzzysort from 'fuzzysort';
 import communes from '@etalab/decoupage-administratif/data/communes.json';
 import epci from '@etalab/decoupage-administratif/data/epci.json';
-import { slugify } from '$lib/utils';
+import { removeFrenchAccents, slugify } from '$lib/utils';
 
 const communesInEpci = epci.reduce((acc, { nom, membres }) => {
 	return { ...acc, ...Object.fromEntries(membres.map(({ code }) => [code, nom])) };
@@ -30,7 +30,7 @@ const data = communes
 		...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
 		slug: slugify(c.nom),
 		codePostal: c.codesPostaux[0],
-		indexedName: fuzzysort.prepare(c.nom),
+		indexedName: fuzzysort.prepare(removeFrenchAccents(c.nom)),
 		codePostaux: fuzzysort.prepare(c.codesPostaux.join(' '))
 	}));
 
@@ -48,7 +48,7 @@ const searchOptions = {
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get({ query }) {
-	const search = query.get('search')?.replace(/\s/g, '');
+	const search = removeFrenchAccents(query.get('search')?.replace(/\s/g, '').toLowerCase());
 	const slug = query.get('slug');
 
 	const pick = ({ nom, slug, epci, codePostal, departement, region }) => ({

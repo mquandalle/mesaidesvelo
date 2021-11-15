@@ -24,7 +24,7 @@
 	class="bg-green-100 py-8 px-4 sm:px-6 mt-6 flex flex-col gap-x-4 gap-y-2 sm:flex-row sm:items-center rounded"
 >
 	<label for="localisation-input">Localisation :</label>
-	<div class="flex-1 flex flex-row items-center bg-white shadow rounded-md pl-3 pt-1">
+	<div class="flex-1 flex flex-row items-center bg-white shadow rounded-3xl px-3 pt-1">
 		<svg
 			focusable="false"
 			xmlns="http://www.w3.org/2000/svg"
