@@ -1,5 +1,9 @@
 <script context="module">
 	import aides from '$lib/../aides.yaml';
+
+	// HACK : Le paquet publicodes ne peut pas être importé normallement avec un
+	// `import Engine from "publicodes"`, vraisembablement car le paquet n'est pas sous
+	// le bon format ES Module
 	export const engine = typeof window !== 'undefined' ? new window.publicodes.default(aides) : null;
 </script>
 

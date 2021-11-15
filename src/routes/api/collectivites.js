@@ -27,6 +27,7 @@ const data = communes
 	.map((c) => ({
 		...c,
 		...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
+		slug: slugify(c.nom),
 		codePostal: c.codesPostaux[0],
 		indexedName: fuzzysort.prepare(c.nom),
 		codePostaux: fuzzysort.prepare(c.codesPostaux.join(' '))
@@ -47,14 +48,23 @@ const searchOptions = {
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get({ query }) {
 	const search = query.get('search')?.replace(/\s/g, '');
-	const pick = ({ nom, epci, codePostal, departement, region }) => ({
+	const slug = query.get('slug');
+
+	const pick = ({ nom, slug, epci, codePostal, departement, region }) => ({
 		nom,
+		slug,
 		epci,
 		codePostal,
 		departement,
 		region
 	});
-	if (search) {
+
+	if (slug) {
+		const res = data.find((c) => c.slug === slug);
+		if (res) {
+			return { body: pick(res) };
+		}
+	} else if (search) {
 		return {
 			body: fuzzysort.go(search, data, searchOptions).map(({ obj }) => pick(obj))
 		};
@@ -67,4 +77,31 @@ export async function get({ query }) {
 				.map(pick)
 		};
 	}
+}
+
+// First Google Search result, maybe there are better functions
+function slugify(str) {
+	str = str.replace(/^\s+|\s+$/g, '');
+
+	// Make the string lowercase
+	str = str.toLowerCase();
+
+	// Remove accents, swap ñ for n, etc
+	var from =
+		'ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆÍÌÎÏŇÑÓÖÒÔÕØŘŔŠŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇíìîïňñóöòôõøðřŕšťúůüùûýÿžþÞĐđßÆa·/_,:;';
+	var to =
+		'AAAAAACCCDEEEEEEEEIIIINNOOOOOORRSTUUUUUYYZaaaaaacccdeeeeeeeeiiiinnooooooorrstuuuuuyyzbBDdBAa------';
+	for (var i = 0, l = from.length; i < l; i++) {
+		str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+	}
+
+	// Remove invalid chars
+	str = str
+		.replace(/[^a-z0-9 -]/g, '')
+		// Collapse whitespace and replace by -
+		.replace(/\s+/g, '-')
+		// Collapse dashes
+		.replace(/-+/g, '-');
+
+	return str;
 }

@@ -1,17 +1,11 @@
 <script>
+	import { page } from '$app/stores';
+	import App from '$lib/components/App.svelte';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { localisation } from '$lib/stores/localisation';
 	import 'virtual:windi.css';
 </script>
-
-<!-- TODO : Le paquet publicodes ne peut pas être importé normallement avec un
-`import Engine from "publicodes"`, vraisembablement car le paquet n'est pas sous
-le bon format ES Module. Hack : passer par unpkg directement dans le navigateur.
--->
-<window:head>
-	<script src="https://unpkg.com/publicodes@next/dist/index.min.js"></script>
-</window:head>
 
 <div class="px-4 sm:px-8 max-w-screen-md m-auto h-screen flex flex-col">
 	<a
@@ -23,7 +17,13 @@ le bon format ES Module. Hack : passer par unpkg directement dans le navigateur.
 		<Emoji emoji="🚲" className="-mt-2" />
 	</a>
 	<p class="text-gray-800 text max-w-sm">Trouvez les aides à l’achat d’un vélo</p>
-	<div class="flex-1 pb-6"><slot /></div>
+	<div class="flex-1 pb-6">
+		<!-- We include the <App /> component in the general layout for fluid page transitions -->
+		{#if $page.path === '' || $page.path === '/' || $page.path.startsWith('/ville')}
+			<App />
+		{/if}
+		<slot />
+	</div>
 	<Footer />
 </div>
 

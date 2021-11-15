@@ -35,7 +35,15 @@
 			showClear={!!$localisation}
 			inputId="localisation"
 			bind:selectedItem={$localisation}
-			onChange={() => typeof window !== 'undefined' && goto('/', { noscroll: true })}
+			onChange={(val) => {
+				if (typeof window !== 'undefined') {
+					if (val) {
+						goto(`/ville/${val.slug}`, { noscroll: true });
+					} else {
+						goto('/', { noscroll: true });
+					}
+				}
+			}}
 		/>
 	</div>
 </div>
