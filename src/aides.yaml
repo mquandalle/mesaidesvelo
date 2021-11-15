@@ -21,8 +21,8 @@ aides . bonus vélo cargo:
     toutes ces conditions:
       - revenu fiscal de référence <= 13489 €/an
       - vélo . cargo
-  valeur: 1000€
-  plafond: vélo . prix
+  valeur: 40% * vélo . prix
+  plafond: 1000€
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
 aides . bonus vélo électrique:
