@@ -141,7 +141,7 @@ aides . lyon:
   condition de ressources: oui
   applicable si:
     toutes ces conditions:
-      - localisation . intercommunalité = 'lyon'
+      - localisation . epci = 'Métropole de Lyon'
       - vélo . prix <= 3000 €
       - une de ces conditions:
           - vélo . cargo
@@ -160,7 +160,7 @@ aides . bordeaux:
   condition de ressources: oui
   applicable si:
     toutes ces conditions:
-      - localisation . intercommunalité = 'bordeaux'
+      - localisation . epci = 'Bordeaux Métropole'
       - revenu fiscal de référence <= 2200 €/mois
       - une de ces conditions:
           - vélo . électrique
@@ -174,7 +174,7 @@ aides . nantes:
   titre: Nantes Métropole
   applicable si:
     toutes ces conditions:
-      - localisation . intercommunalité = 'nantes'
+      - localisation . epci = 'Nantes Métropole'
       - vélo . cargo
   valeur: 25% * vélo . prix
   plafond: 300 €
@@ -186,7 +186,7 @@ aides . toulouse:
   condition de ressources: oui
   applicable si:
     toutes ces conditions:
-      - localisation . intercommunalité = 'toulouse'
+      - localisation . epci = 'Toulouse Métropole'
       - revenu fiscal de référence <= 35052 €/an
   valeur: 40% * vélo . prix
   plafond:
@@ -219,7 +219,7 @@ aides . toulouse:
 aides . nice:
   remplace: commune
   titre: Métropole Nice Côte d’Azur
-  applicable si: localisation . intercommunalité = 'nice'
+  applicable si: localisation . epci = 'Métropole Nice Côte d'Azur'
   valeur:
     variations:
       - si: vélo . électrique
@@ -234,7 +234,7 @@ aides . nice:
 aides . strasbourg:
   remplace: commune
   titre: Eurométropole de Strasbourg
-  applicable si: localisation . intercommunalité = 'strasbourg'
+  applicable si: localisation . epci = 'Eurométropole de Strasbourg'
   condition de ressources: oui # todo: seulement pour les vélos électriques
   variations:
     - si: vélo . cargo électrique
@@ -256,7 +256,7 @@ aides . strasbourg:
 aides . albi:
   remplace: commune
   titre: Grand Albigeois
-  applicable si: localisation . intercommunalité = 'albi'
+  applicable si: localisation . epci = 'CA de l'Albigeois (C2A)'
   valeur: 25% * vélo . prix
   plafond:
     variations:
@@ -269,10 +269,10 @@ aides . albi:
 
 aides . toulon:
   remplace: commune
-  titre: Métropole Toulon Provence Méditerranée
+  titre: Métropole Toulon-Provence-Méditerranée
   applicable si:
     toutes ces conditions:
-      - localisation . intercommunalité = 'toulon'
+      - localisation . epci = 'Métropole Toulon-Provence-Méditerranée'
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 250 €
@@ -283,7 +283,7 @@ aides . bretagne romantique:
   titre: Communauté de communes Bretagne romantique
   applicable si:
     toutes ces conditions:
-      - localisation . intercommunalité = 'bretagne-romantique'
+      - localisation . epci = 'CC Bretagne Romantique'
       - vélo . électrique
   valeur: 100€
   plafond: vélo . prix
@@ -309,7 +309,7 @@ aides . caen:
 aides . les sables d'olonne:
   remplace: commune
   titre: Les Sables d'Olonne
-  applicable si: localisation . intercommunalité = 'les-sables-d-olonne'
+  applicable si: localisation . epci = 'CA Les Sables d'Olonne Agglomération'
   valeur:
     variations:
       - si: vélo . cargo
@@ -379,6 +379,6 @@ personne imposable: revenu fiscal de référence >= 11120 €/an
 
 localisation: oui
 localisation . code postal: "''"
-localisation . intercommunalité: "''"
+localisation . epci: "''"
 localisation . département: "''"
 localisation . région: "''"

@@ -29,16 +29,4 @@ Les aides sont saisies manuellement.
 
 La recherche de ville utilise le paquet [`decoupage-administratif` fournit par Etalab](https://github.com/etalab/decoupage-administratif).
 
-N’ayant pas trouvé de fichier de données pour les intercommunalités, celles-ci sont renseignées à la main dans le fichier `intercommunalités.json` à partir des données extraites du site de l’INSEE.
-
-<details><summary>Script pour récupérer les données</summary>
-Copiez/collez le script suivant dans le navigateur pour récupérer la liste des codes communes sur une page Insee comme https://www.insee.fr/fr/metadonnees/cog/intercommunalite-metropole/EPCI243300316-bordeaux-metropole
-
-```js
-[...document.querySelectorAll("a[href^='/fr/metadonnees/cog/commune/']")]
-	.map((elm) => elm.innerText)
-	.filter((label) => !label.toLowerCase().includes('arrondissement'))
-	.map((label) => label.replace(/[^0-9]/g, ''));
-```
-
-</details>
+Pour référencer une métropole ou une intercommunalité, utilisez le nom exact défini dans [la liste des EPCI](https://www.collectivites-locales.gouv.fr/institutions/liste-et-composition-des-epci-fiscalite-propre)

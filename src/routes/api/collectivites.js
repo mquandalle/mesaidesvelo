@@ -13,10 +13,10 @@
 
 import fuzzysort from 'fuzzysort';
 import communes from '@etalab/decoupage-administratif/data/communes.json';
-import intercommunalites from './intercommunalités.json';
+import epci from '@etalab/decoupage-administratif/data/epci.json';
 
-const communesInInterCo = Object.entries(intercommunalites).reduce((acc, [interco, communes]) => {
-	return { ...acc, ...Object.fromEntries(communes.map((commune) => [commune, interco])) };
+const communesInEpci = epci.reduce((acc, { nom, membres }) => {
+	return { ...acc, ...Object.fromEntries(membres.map(({ code }) => [code, nom])) };
 }, {});
 
 const data = communes
@@ -26,7 +26,7 @@ const data = communes
 	)
 	.map((c) => ({
 		...c,
-		...(communesInInterCo[c.code] ? { intercommunalite: communesInInterCo[c.code] } : {}),
+		...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
 		codePostal: c.codesPostaux[0],
 		indexedName: fuzzysort.prepare(c.nom),
 		codePostaux: fuzzysort.prepare(c.codesPostaux.join(' '))
@@ -47,9 +47,9 @@ const searchOptions = {
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get({ query }) {
 	const search = query.get('search')?.replace(/\s/g, '');
-	const pick = ({ nom, intercommunalite, codePostal, departement, region }) => ({
+	const pick = ({ nom, epci, codePostal, departement, region }) => ({
 		nom,
-		intercommunalite,
+		epci,
 		codePostal,
 		departement,
 		region
