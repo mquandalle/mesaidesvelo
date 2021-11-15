@@ -41,6 +41,13 @@
 					<button class="bg-green-600 text-white px-4 py-2 rounded">ENVOYER</button>
 					<button class="text-gray-500" on:click={() => (showFeedbackform = false)}>FERMER</button>
 				</div>
+				<p>
+					→ Ou accédez au <a
+						class="hover:underline text-green-600"
+						href="https://docs.google.com/spreadsheets/d/12q5-N4tRUyBUL03zQhOjz_DMYwuRzm080vaJhTEHnRc/edit?usp=sharing"
+						target="_blank">Google Sheet partagé</a
+					>.
+				</p>
 			</form>
 		{/if}
 	{:else}
