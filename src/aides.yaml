@@ -124,7 +124,7 @@ aides . paris:
   description: |
     La ville de Paris subventionne l’achat d’un $vélo à hauteur de 33% et
     jusqu’à un plafond de $plafond.
-  applicable si: localisation . code postal = '75000'
+  applicable si: localisation . code postal = '75001'
   valeur: 33% * vélo . prix
   plafond:
     variations:
