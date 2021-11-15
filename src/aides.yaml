@@ -326,6 +326,16 @@ aides . les sables d'olonne:
       - sinon: 100€
   lien: http://www.lsoagglo.fr/vivreauxolonnes/vie-pratique/transports/plan-velo-2025/
 
+aides . vallons du lyonnais:
+  remplace: commune
+  titre: Communauté de Communes des Vallons du Lyonnais
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC des Vallons du Lyonnais (CCVL)'
+      - vélo . électrique
+  valeur: 200€
+  lien: http://www.ccvl.fr/page.php?page=DT1620223333
+
 #####################################################################
 
 vélo: oui
