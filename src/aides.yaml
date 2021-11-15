@@ -317,12 +317,11 @@ aides . les sables d'olonne:
       - sinon: 25% * vélo . prix
   plafond:
     variations:
-      - si: vélo . mécanique
-        alors: 100€
       - si: vélo . cargo
         alors: 300€
       - si: vélo . électrique
         alors: 200€
+      - sinon: 100€
   lien: http://www.lsoagglo.fr/vivreauxolonnes/vie-pratique/transports/plan-velo-2025/
 
 #####################################################################
