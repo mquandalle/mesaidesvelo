@@ -306,6 +306,28 @@ aides . caen:
   plafond: vélo . prix
   lien: https://caen.fr/velo-pied
 
+aides . les sables d'olonne:
+  remplace: commune
+  titre: Les Sables d'Olonne
+  applicable si: localisation . intercommunalité = 'les-sables-d-olonne'
+  valeur:
+    variations:
+      - si: vélo . mécanique simple
+        alors: 50% * vélo . prix
+      - si: vélo . électrique
+        alors: 25% * vélo . prix
+      - si: vélo . cargo
+        alors: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . mécanique simple
+        alors: 100€
+      - si: vélo . électrique
+        alors: 200€
+      - si: vélo . cargo
+        alors: 300€
+  lien: http://www.lsoagglo.fr/vivreauxolonnes/vie-pratique/transports/plan-velo-2025/
+
 #####################################################################
 
 vélo: oui
