@@ -44,7 +44,9 @@ aides . bonus vélo électrique:
       - département
       - région
   plafond:
-    valeur: 200 €
+    valeur:
+      nom: $plafond
+      valeur: 200 €
     plafond: vélo . prix
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
@@ -64,10 +66,15 @@ aides . ile de france:
           - vélo . pliant
   valeur: 50% * vélo . prix
   plafond:
-    variations:
-      - si: vélo . cargo électrique
-        alors: 600 €
-      - sinon: 500 €
+    valeur:
+      # Même si le plafond de l'aide est imputé du montant déjà versé par la
+      # commue, on veut afficher le montant avant imputation dans le descriptif
+      # de l’aide.
+      nom: $plafond
+      variations:
+        - si: vélo . cargo électrique
+          alors: 600 €
+        - sinon: 500 €
     abattement: aides . commune
   lien: https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo
 
@@ -127,6 +134,7 @@ aides . paris:
   applicable si: localisation . code postal = '75001'
   valeur: 33% * vélo . prix
   plafond:
+    nom: $plafond
     variations:
       - si: vélo . cargo
         alors: 600€

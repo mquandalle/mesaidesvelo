@@ -35,7 +35,9 @@
 			const originalRuleName = aide.explanation.find(({ satisfied }) => satisfied).consequence.name;
 			const { title, rawNode } = engine.getRule(originalRuleName);
 			const description = rawNode.description ?? defaultDescription;
-			const plafond = rawNode.plafond && engine.evaluate(rawNode.plafond);
+			const plafondRuleName = `${originalRuleName} . $plafond`;
+			const plafondIsDefined = Object.keys(engine.parsedRules).includes(plafondRuleName);
+			const plafond = plafondIsDefined && engine.evaluate(plafondRuleName);
 			const notice = description
 				.replace(/\$vélo/g, `vélo ${veloCat}`)
 				.replace(
