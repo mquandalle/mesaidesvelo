@@ -306,6 +306,80 @@ aides . caen:
   plafond: vélo . prix
   lien: https://caen.fr/velo-pied
 
+aides . mondeville:
+  remplace: commune
+  titre: Ville de Mondeville
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - localisation . code postal = '14120'
+    - une de ces conditions:
+        - vélo . cargo
+        - vélo . électrique
+        - vélo
+  variations:
+    - si: vélo . électrique
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 620 €/mois
+              montant:
+                valeur: 300€
+                plafond:
+                  variations:
+                    - si: revenu fiscal de référence <= 13489 €/an
+                      alors: 500€
+            - plafond: 920 €/mois
+              montant:
+                valeur: 200€
+                plafond:
+                  variations:
+                    - si: revenu fiscal de référence <= 13489 €/an
+                      alors: 400€
+            - plafond: 1200 €/mois
+              montant:
+                valeur: 100€
+                plafond:
+                  variations:
+                    - si: revenu fiscal de référence <= 13489 €/an
+                      alors: 200€
+    - si: vélo . cargo
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 620 €/mois
+              montant:
+                valeur: 400€
+                plafond:
+                  variations:
+                    - si: revenu fiscal de référence <= 13489 €/an
+                      alors: 600€
+            - plafond: 920 €/mois
+              montant:
+                valeur: 300€
+                plafond:
+                  variations:
+                    - si: revenu fiscal de référence <= 13489 €/an
+                      alors: 500€
+            - plafond: 1200 €/mois
+              montant:
+                valeur: 200€
+                plafond:
+                  variations:
+                    - si: revenu fiscal de référence <= 13489 €/an
+                      alors: 300€
+    - si: vélo
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 620 €/mois
+              montant:
+                valeur: 50€
+  lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
+
 aides . les sables d'olonne:
   remplace: commune
   titre: Les Sables d'Olonne
