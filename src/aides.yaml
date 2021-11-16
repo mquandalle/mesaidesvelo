@@ -310,13 +310,7 @@ aides . mondeville:
   remplace: commune
   titre: Ville de Mondeville
   condition de ressources: oui
-  applicable si:
-    toutes ces conditions:
-      - localisation . code postal = '14120'
-      - une de ces conditions:
-        - vélo . cargo
-        - vélo . électrique
-        - vélo
+  applicable si: localisation . code postal = '14120'
   variations:
     - si: vélo . électrique
       alors:
