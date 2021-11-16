@@ -17,7 +17,7 @@
 			state = 'sent';
 			setTimeout(() => {
 				state = 'closed';
-			}, 5000);
+			}, 8000);
 		}
 	}
 </script>
@@ -38,9 +38,9 @@
 			autofocus
 			id="feedback-message"
 		/>
-		<div class="flex gap-x-4">
-			<button class="bg-green-600 text-white px-4 py-2 rounded">ENVOYER</button>
-			<button class="text-gray-500" on:click={() => (state = 'closed')}>FERMER</button>
+		<div class="flex gap-x-4 uppercase">
+			<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Envoyer</button>
+			<button class="text-gray-500" on:click={() => (state = 'closed')}>Fermer</button>
 		</div>
 		<p>
 			→ Ou accédez au <a
@@ -51,5 +51,5 @@
 		</p>
 	</form>
 {:else if state === 'sent'}
-	<span class="text-md">Merci pour votre retour ! 😍</span>
+	<span class="text-xl">Merci pour votre retour ! 😍</span>
 {/if}

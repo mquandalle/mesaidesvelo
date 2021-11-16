@@ -85,7 +85,7 @@ aides . occitanie:
   applicable si: localisation . région = '76'
   valeur:
     variations:
-      - si: personne imposable
+      - si: ménage imposable
         alors:
           valeur: 50% * vélo . prix
           plafond:
@@ -116,7 +116,7 @@ aides . corse:
 
 aides . bouches du rhone:
   remplace: région
-  titre: Département Bouches-du-Rhône
+  titre: Département des Bouches-du-Rhône
   applicable si:
     toutes ces conditions:
       - localisation . département = '13'
@@ -257,7 +257,8 @@ aides . strasbourg:
             - plafond: 764 €/mois
               montant: 400 €
             - montant: 300 €
-    - sinon: 150 €
+    # Aide à la motorisation du vélo classique
+    # - sinon: 150 €
   plafond: vélo . prix
   lien: https://www.strasbourg.eu/aides-achat
 
@@ -585,7 +586,7 @@ aides . mougins:
 
 aides . mandelieu:
   remplace: commune
-  titre: Commune  de  Mandelieu-La  Napoule
+  titre: Commune de Mandelieu-La Napoule
   condition de ressources: oui
   applicable si:
     toutes ces conditions:
@@ -598,6 +599,71 @@ aides . mandelieu:
         alors: 150€
       - sinon: 100€
   lien: https://www.mandelieu.fr/services-publics/transports/plan-velo.php
+
+aides . pantin:
+  remplace: commune
+  titre: Pantin
+  applicable si: localisation . code postal = '93500'
+  description: |
+    La ville de Pantin propose une aide forfaitaire pour l’achat de tout type de
+    vélo neuf ou d’occasion. À noter que la demande de subvention est soumise à
+    l’approbation du Conseil municipal et que plusieurs mois peuvent s’écouler
+    avant le versement de la subvention.
+  variations:
+    - si: vélo . électrique
+      alors: 200€
+    - sinon: 100€
+  plafond: vélo . prix
+  lien: https://pratique.pantin.fr/deplacement-et-stationnement/transports-alternatifs-velo
+
+aides . mons en baroeul:
+  remplace: commune
+  titre: Ville de Mons en Baroœul
+  applicable si: localisation . code postal = '59370'
+  condition de ressources: oui
+  description: |
+    Note: Les vélos dédiés exclusivement à des activités de loisirs ne sont pas
+    éligibles (BMX, VTT, vélo de course)
+  grille:
+    assiette: revenu fiscal de référence
+    tranches:
+      - plafond: 851 €/mois
+        montant:
+          valeur: 40% * vélo . prix
+          plafond: 400€
+      - plafond: 1124 €/mois
+        montant:
+          valeur: 30% * vélo . prix
+          plafond: 300€
+      - plafond: 1500 €/mois
+        montant:
+          valeur: 20% * vélo . prix
+          plafond: 200€
+      - plafond: 1800 €/mois
+        montant:
+          valeur: 10% * vélo . prix
+          plafond: 100€
+  lien: https://www.monsenbaroeul.fr/vivre-mons-en-baroeul/se-deplacer/demander-ma-prime-velo
+
+aides . nevers:
+  remplace: commune
+  titre: Nevers Agglomération
+  applicable si: localisation . epci = 'CA de Nevers'
+  condition de ressources: oui
+  valeur: 30% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors:
+          variations:
+            - si: ménage imposable
+              alors: 250€
+            - sinon: 200€
+      - sinon:
+          variations:
+            - si: ménage imposable
+              alors: 125€
+            - sinon: 100€
 
 ########################
 
@@ -653,9 +719,9 @@ revenu fiscal de référence:
   titre: Revenu fiscal de référence par part
   # Comme pour le prix du vélo, la valeur par défaut est choisie pour maximiser
   # les aides
-  par défaut: 10000 €/an
+  par défaut: 5000 €/an
 
-personne imposable: revenu fiscal de référence >= 11120 €/an
+ménage imposable: revenu fiscal de référence >= 11120 €/an
 
 localisation: oui
 localisation . code postal: "''"
