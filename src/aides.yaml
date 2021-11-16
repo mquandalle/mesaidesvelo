@@ -318,14 +318,11 @@ aides . mondeville:
           assiette: revenu fiscal de référence
           tranches:
             - plafond: 620 €/mois
-              montant:
-                valeur: 300€
+              montant: 300€
             - plafond: 920 €/mois
-              montant:
-                valeur: 200€
+              montant: 200€
             - plafond: 1200 €/mois
-              montant:
-                valeur: 100€
+              montant: 100€
     - si: vélo . cargo
       alors:
         grille:
