@@ -314,6 +314,43 @@ aides . caen:
   plafond: vélo . prix
   lien: https://caen.fr/velo-pied
 
+aides . mondeville:
+  remplace: commune
+  titre: Ville de Mondeville
+  condition de ressources: oui
+  applicable si: localisation . code postal = '14120'
+  variations:
+    - si: vélo . électrique
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 620 €/mois
+              montant: 300€
+            - plafond: 920 €/mois
+              montant: 200€
+            - plafond: 1200 €/mois
+              montant: 100€
+    - si: vélo . cargo
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 620 €/mois
+              montant: 400€
+            - plafond: 920 €/mois
+              montant: 300€
+            - plafond: 1200 €/mois
+              montant: 200€
+    - si: vélo . mécanique
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 620 €/mois
+              montant: 50€
+  lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
+
 aides . les sables d'olonne:
   remplace: commune
   titre: Les Sables d'Olonne
