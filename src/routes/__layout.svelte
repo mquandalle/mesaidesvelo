@@ -7,8 +7,8 @@
 	import 'virtual:windi.css';
 </script>
 
-<div class="px-4 sm:px-8 max-w-screen-md m-auto h-screen flex flex-col">
-	<header class="mt-8">
+<div class="px-4 sm:px-8 h-screen flex flex-col">
+	<header class="mt-8 block w-full max-w-screen-md m-auto">
 		<a href="/" class="text-3xl font-bold cursor-pointer" on:click={() => localisation.set(null)}>
 			Mes<span class="text-green-800">Aides</span>Vélo
 			<sup class="text-sm text-gray-400">[béta]</sup>

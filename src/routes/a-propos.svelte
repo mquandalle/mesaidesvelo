@@ -16,7 +16,7 @@
 	}
 </script>
 
-<div class="prose mt-8">
+<div class="prose mt-8 w-full max-w-screen-md m-auto">
 	<h1>À propos</h1>
 	<h2>Qu’est ce que c’est ?</h2>
 	<p>

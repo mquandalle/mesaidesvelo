@@ -7,24 +7,26 @@
 	import { fly } from 'svelte/transition';
 </script>
 
-<Search />
+<div class="w-full max-w-screen-md m-auto">
+	<Search />
 
-{#if $localisation}
-	<div class="grid overflow-hidden -m-4 p-4" transition:fly|local={{ y: 30 }}>
-		{#if $page.query.get('velo')}
-			<div
-				class="col-start-1 col-end-1 row-start-1 row-end-1"
-				transition:fly|local={{ x: 600, duration: 400 }}
-			>
-				<Details />
-			</div>
-		{:else}
-			<div
-				class="col-start-1 col-end-1 row-start-1 row-end-1"
-				transition:fly|local={{ x: -600, duration: 400 }}
-			>
-				<Results />
-			</div>
-		{/if}
-	</div>
-{/if}
+	{#if $localisation}
+		<div class="grid overflow-hidden -m-4 p-4" transition:fly|local={{ y: 30 }}>
+			{#if $page.query.get('velo')}
+				<div
+					class="col-start-1 col-end-1 row-start-1 row-end-1"
+					transition:fly|local={{ x: 600, duration: 400 }}
+				>
+					<Details />
+				</div>
+			{:else}
+				<div
+					class="col-start-1 col-end-1 row-start-1 row-end-1"
+					transition:fly|local={{ x: -600, duration: 400 }}
+				>
+					<Results />
+				</div>
+			{/if}
+		</div>
+	{/if}
+</div>
