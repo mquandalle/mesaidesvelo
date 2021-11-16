@@ -313,7 +313,7 @@ aides . mondeville:
   applicable si:
     toutes ces conditions:
       - localisation . code postal = '14120'
-    - une de ces conditions:
+      - une de ces conditions:
         - vélo . cargo
         - vélo . électrique
         - vélo
@@ -338,22 +338,18 @@ aides . mondeville:
           assiette: revenu fiscal de référence
           tranches:
             - plafond: 620 €/mois
-              montant:
-                valeur: 400€
+              montant: 400€
             - plafond: 920 €/mois
-              montant:
-                valeur: 300€
+              montant: 300€
             - plafond: 1200 €/mois
-              montant:
-                valeur: 200€
-    - si: vélo
+              montant: 200€
+    - si: vélo . mécanique
       alors:
         grille:
           assiette: revenu fiscal de référence
           tranches:
             - plafond: 620 €/mois
-              montant:
-                valeur: 50€
+              montant: 50€
   lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
 
 aides . les sables d'olonne:
