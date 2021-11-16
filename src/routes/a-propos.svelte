@@ -21,7 +21,7 @@
 	<h2>Qu’est ce que c’est ?</h2>
 	<p>
 		Cet outil rassemble l’ensemble des aides à l’achat de vélo. Il vous permet d’identifier en
-		quelques clics celles auxquelles vous avez le droit.
+		quelques clics celles auxquelles vous avez droit.
 	</p>
 	<hr />
 	<h2>Mentions Légales</h2>
