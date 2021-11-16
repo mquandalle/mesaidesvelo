@@ -16,6 +16,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>À propos - MesAidesVélo</title>
+	<meta
+		name="description"
+		content="Les infos sur Mesaidesvelo.fr, le site qui vous permet de trouver toutes les aides vélo auxquelles vous avez le droit."
+	/>
+</svelte:head>
+
 <div class="prose mt-8 w-full max-w-screen-md m-auto">
 	<h1>À propos</h1>
 	<h2>Qu’est ce que c’est ?</h2>

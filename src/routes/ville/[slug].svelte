@@ -17,3 +17,11 @@
 		}
 	});
 </script>
+
+<svelte:head>
+	<title>Les aides vélo à {$localisation.nom} - MesAidesVélo</title>
+	<meta
+		name="description"
+		content="Découvrez l’ensemble des aides à l’achat ou la localisation de vélo proposées à {$localisation.nom}. Simple, rapide et gratuit."
+	/>
+</svelte:head>

@@ -10,6 +10,7 @@ export async function post({ body: { message, page } }) {
 	if (!GITHUB_TOKEN) {
 		console.log(`Titre: ${title}`);
 		console.log(`Message:\n${body}`);
+		return { status: 200 };
 	}
 
 	const res = await fetch('https://api.github.com/repos/mquandalle/mesaidesvelo/issues', {
@@ -20,8 +21,8 @@ export async function post({ body: { message, page } }) {
 			Accept: 'Accept: application/vnd.github.v3+json'
 		},
 		body: JSON.stringify({
-			title: 'Retour utilisateur',
-			body: message,
+			title,
+			body,
 			labels: ['retour utilisateur']
 		})
 	});
