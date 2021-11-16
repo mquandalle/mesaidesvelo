@@ -326,24 +326,12 @@ aides . mondeville:
             - plafond: 620 €/mois
               montant:
                 valeur: 300€
-                plafond:
-                  variations:
-                    - si: revenu fiscal de référence <= 13489 €/an
-                      alors: 500€
             - plafond: 920 €/mois
               montant:
                 valeur: 200€
-                plafond:
-                  variations:
-                    - si: revenu fiscal de référence <= 13489 €/an
-                      alors: 400€
             - plafond: 1200 €/mois
               montant:
                 valeur: 100€
-                plafond:
-                  variations:
-                    - si: revenu fiscal de référence <= 13489 €/an
-                      alors: 200€
     - si: vélo . cargo
       alors:
         grille:
@@ -352,24 +340,12 @@ aides . mondeville:
             - plafond: 620 €/mois
               montant:
                 valeur: 400€
-                plafond:
-                  variations:
-                    - si: revenu fiscal de référence <= 13489 €/an
-                      alors: 600€
             - plafond: 920 €/mois
               montant:
                 valeur: 300€
-                plafond:
-                  variations:
-                    - si: revenu fiscal de référence <= 13489 €/an
-                      alors: 500€
             - plafond: 1200 €/mois
               montant:
                 valeur: 200€
-                plafond:
-                  variations:
-                    - si: revenu fiscal de référence <= 13489 €/an
-                      alors: 300€
     - si: vélo
       alors:
         grille:
