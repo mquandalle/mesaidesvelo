@@ -336,7 +336,225 @@ aides . vallons du lyonnais:
   valeur: 200€
   lien: http://www.ccvl.fr/page.php?page=DT1620223333
 
-#####################################################################
+aides . département Hérault:
+  remplace: département
+  titre: Département Hérault
+  applicable si:
+    toutes ces conditions:
+      - localisation . département = '34'
+      - vélo . électrique
+      - revenu fiscal de référence <= 27086 €/an
+  valeur: 250€
+  lien: https://herault.fr/409-mon-velo.htm
+
+aides . montpellier:
+  remplace: commune
+  titre: Montpellier Méditerranée Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'Montpellier Méditerranée Métropole'
+      - vélo . électrique
+  valeur: 50% * vélo . prix
+  plafond: 500€
+  lien: https://www.montpellier3m.fr/actualite/jusqua-1150-eu-daide-pour-lachat-dun-velo-assistance-electrique
+
+aides . colmar:
+  remplace: commune
+  titre: Ville de Colmar
+  applicable si: localisation . code postal = '68000'
+  variations:
+    - si: vélo . électrique
+      alors: 200€
+    - sinon: 120€
+  lien: https://www.colmar.fr/sites/colmar.fr/files/documents/35-FE-participation-achat-velo-neuf_1.pdf
+
+aides . avignon:
+  remplace: commune
+  titre: Grand avignon
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA du Grand Avignon (COGA)'
+      - vélo . électrique
+  valeur: 25% * vélo . prix # TODO: à vérifier, j'ai du mal à comprendre leur formulation
+  plafond: 400€
+  lien: https://www.grandavignon.fr/fr/actualites/aide-lobtention-dun-vae
+
+aides . charenton:
+  remplace: commune
+  titre: Charenton
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - localisation . code postal = '94220'
+      - revenu fiscal de référence <= 15000 €/an
+  valeur: 50% * vélo . prix
+  plafond: 200€
+  lien: https://www.charenton.fr/velo/velo_pass-velo.php
+
+aides . pays basque:
+  remplace: commune
+  titre: Agglomération Pays Basque
+  condition de ressources: oui
+  applicable si: localisation . epci = 'CA du Pays Basque'
+  variations:
+    - si: vélo . cargo électrique
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 430 €/mois
+              montant:
+                valeur: 30% * vélo . prix
+                plafond: 1000€
+            - plafond: 620 €/mois
+              montant:
+                valeur: 30% * vélo . prix
+                plafond: 900€
+            - plafond: 1200 €/mois
+              montant:
+                valeur: 20% * vélo . prix
+                plafond: 800€
+    - si: vélo . cargo
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 430 €/mois
+              montant:
+                valeur: 30% * vélo . prix
+                plafond: 700€
+            - plafond: 620 €/mois
+              montant:
+                valeur: 30% * vélo . prix
+                plafond: 600€
+            - plafond: 1200 €/mois
+              montant:
+                valeur: 20% * vélo . prix
+                plafond: 400€
+    - si: vélo . électrique
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 430 €/mois
+              montant:
+                valeur: 60% * vélo . prix
+                plafond: 600€
+            - plafond: 620 €/mois
+              montant:
+                valeur: 50% * vélo . prix
+                plafond: 500€
+            - plafond: 1200 €/mois
+              montant:
+                valeur: 30% * vélo . prix
+                plafond: 300€
+    - si: vélo . pliant
+      alors:
+        grille:
+          assiette: revenu fiscal de référence
+          tranches:
+            - plafond: 430 €/mois
+              montant:
+                valeur: 50% * vélo . prix
+                plafond: 300€
+            - plafond: 620 €/mois
+              montant:
+                valeur: 40% * vélo . prix
+                plafond: 250€
+            - plafond: 1200 €/mois
+              montant:
+                valeur: 30% * vélo . prix
+                plafond: 200€
+  lien: https://www.velo-paysbasque.fr/fr/pages/demande-de-subvention-velo-assistance-electrique
+
+aides . aix les bains:
+  remplace: commune
+  titre: Ville d’Aix-les-Bains
+  applicable si:
+    toutes ces conditions:
+      - localisation . code postal = '73100'
+      - vélo . électrique
+  valeur: 250€
+  plafond: vélo . prix
+  lien: https://www.aixlesbains.fr/Cadre-de-vie/Transports-et-deplacements/A-velo/Aides-financieres-pour-se-deplacer-a-velo
+
+# TODO : majoration de l'aide pour un vélo « conçu et assemblé en France »
+aides . ardenne:
+  remplace: commune
+  titre: Ardenne Métropole
+  applicable si: localisation . epci = 'CA Ardenne Métropole'
+  valeur: 33% * vélo . prix
+  plafond: 200€
+  lien: https://ardenne-metropole.fr/storage/2021/04/Plaquette-subvention-v2.pdf
+
+aides . erdregesvres:
+  remplace: commune
+  titre: Communauté de communes d’Erdre et Gesvres
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC d'Erdre et Gesvres'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 100€
+  lien: https://www.cceg.fr/vos-services/faciliter-et-simplifier-vos-deplacements/bonus-velo-4559.html
+
+# TODO : coût de pousse pour un vélo assemblé ou produit en côte d'or
+aides . cote d'or:
+  remplace: département
+  titre: Département Côte d’Or
+  applicable si:
+    toutes ces conditions:
+      - localisation . département = '21'
+      - vélo . électrique
+  valeur: 250€
+  plafond: vélo . prix
+  lien: https://www.cotedor.fr/actualite/une-aide-de-250-eu-pour-lacquisition-dun-velo-electrique
+
+aides . sophia antipolis:
+  remplace: commune
+  titre: Communauté d’Agglomération Sophia Antipolis
+  applicable si: localisation . epci = 'CA de Sophia Antipolis'
+  valeur: 25% * vélo . prix
+  plafond:
+    grille:
+      assiette: revenu fiscal de référence
+      tranches:
+        - plafond: 1200 €/mois
+          montant: 300€
+        - plafond: 1600 €/mois
+          montant: 200€
+        - plafond: 2000 €/mois
+          montant: 100€
+  lien: https://www.agglo-sophiaantipolis.fr/vivre-et-habiter/se-deplacer/le-velo/demande-subvention-aide-a-lacquisition
+
+aides . mougins:
+  remplace: commune
+  titre: Commune de Mougins
+  applicable si:
+    toutes ces conditions:
+      - localisation . code postal = '06250'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 300€
+  lien: https://www.espace-citoyens.net/mougins/espace-citoyens/Demande/NouvelleDemande/SUBV/D_SUBVAE
+
+aides . mandelieu:
+  remplace: commune
+  titre: Commune  de  Mandelieu-La  Napoule
+  condition de ressources: oui
+  applicable si:
+    toutes ces conditions:
+      - localisation . code postal = '06210'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 13489 €/an
+        alors: 150€
+      - sinon: 100€
+  lien: https://www.mandelieu.fr/services-publics/transports/plan-velo.php
+
+########################
 
 vélo: oui
 
