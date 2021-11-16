@@ -597,11 +597,18 @@ vélo . pliant:
   applicable si: vélo . type = 'pliant'
 
 vélo . prix:
-  par défaut: 1500 €
+  par défaut: prix pour maximiser les aides
+
+# On met par défaut un prix élevé pour maximiser les aides proportionnelles au
+# prix du vélo, tout en restant sous les 3000€ pour éviter l'inéligibilité de
+# l'aide de la Métropole de Lyon pour les vélos de plus de 3000€
+vélo . prix pour maximiser les aides: 2900 €
 
 revenu fiscal de référence:
   titre: Revenu fiscal de référence par part
-  par défaut: 10000 €/an # pour activer toutes les aides par défaut
+  # Comme pour le prix du vélo, la valeur par défaut est choisie pour maximiser
+  # les aides
+  par défaut: 10000 €/an
 
 personne imposable: revenu fiscal de référence >= 11120 €/an
 

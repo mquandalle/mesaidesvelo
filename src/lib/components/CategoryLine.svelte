@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="flex gap-x-4 items-center justify-between p-4 hover:bg-gray-100 cursor-pointer border-b last:border-b-0 group"
+	class="flex gap-x-4 items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer border-b last:border-b-0 group"
 	on:click
 	tabindex="0"
 >
@@ -14,7 +14,10 @@
 		>{label}{#if label.includes('électrique')}
 			&nbsp;<Emoji emoji="⚡" />{/if}</span
 	>
-	<span class="font-semibold flex-1 text-right whitespace-nowrap">{montant}</span>
+	<div class="flex-1 flex flex-col items-end gap-x-2">
+		<span class="text-xs text-gray-500">jusqu’à</span>
+		<span class="font-semibold text-right text-xl whitespace-nowrap">{montant}</span>
+	</div>
 	<span class="fill-gray-300 group-hover:fill-green-600">
 		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 " viewBox="0 0 290 492"
 			><path
