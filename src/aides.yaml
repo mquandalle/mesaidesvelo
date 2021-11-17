@@ -18,7 +18,6 @@ aides . bonus vélo cargo:
     L’État accorde une aide de 1 000 € pour l’achat d’un vélo cargo qu’il soit
     électrique ou non. Votre revenu fiscal de référence par part doit être
     inférieur à 13 489 € pour en bénéficier.
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - revenu fiscal de référence <= 13489 €/an
@@ -36,7 +35,6 @@ aides . bonus vélo électrique:
     territoriale. Votre revenu fiscal de référence par part doit être inférieur
     à 13 489 € pour en bénéficier. Le montant de l’aide est identique au montant
     accordé par la collectivité dans la limite de 200€.
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - revenu fiscal de référence <= 13489 €/an
@@ -84,7 +82,6 @@ aides . ile de france:
 aides . occitanie:
   remplace: région
   titre: Région Occitanie
-  condition de ressources: oui
   applicable si: localisation . région = '76'
   valeur:
     variations:
@@ -149,7 +146,6 @@ aides . paris:
 aides . lyon:
   remplace: intercommunalité
   titre: Métropole Grand Lyon
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'Métropole de Lyon'
@@ -168,7 +164,6 @@ aides . lyon:
 aides . bordeaux:
   remplace: intercommunalité
   titre: Bordeaux Métropole
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'Bordeaux Métropole'
@@ -194,7 +189,6 @@ aides . nantes:
 aides . toulouse:
   remplace: intercommunalité
   titre: Toulouse Métropole
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'Toulouse Métropole'
@@ -246,7 +240,6 @@ aides . strasbourg:
   remplace: intercommunalité
   titre: Eurométropole de Strasbourg
   applicable si: localisation . epci = 'Eurométropole de Strasbourg'
-  condition de ressources: oui # todo: seulement pour les vélos électriques
   variations:
     - si: vélo . cargo électrique
       alors: 500€
@@ -304,7 +297,6 @@ aides . bretagne romantique:
 aides . caen:
   remplace: commune
   titre: Ville de Caen
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - localisation . code postal = '14000'
@@ -321,7 +313,6 @@ aides . caen:
 aides . mondeville:
   remplace: commune
   titre: Ville de Mondeville
-  condition de ressources: oui
   applicable si: localisation . code postal = '14120'
   variations:
     - si: vélo . électrique
@@ -431,7 +422,6 @@ aides . avignon:
 aides . charenton:
   remplace: commune
   titre: Charenton
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - localisation . code postal = '94220'
@@ -443,7 +433,6 @@ aides . charenton:
 aides . pays basque:
   remplace: intercommunalité
   titre: Agglomération Pays Basque
-  condition de ressources: oui
   applicable si: localisation . epci = 'CA du Pays Basque'
   variations:
     - si: vélo . cargo électrique
@@ -590,7 +579,6 @@ aides . mougins:
 aides . mandelieu:
   remplace: commune
   titre: Commune de Mandelieu-La Napoule
-  condition de ressources: oui
   applicable si:
     toutes ces conditions:
       - localisation . code postal = '06210'
@@ -623,7 +611,6 @@ aides . mons en baroeul:
   remplace: commune
   titre: Ville de Mons en Baroœul
   applicable si: localisation . code postal = '59370'
-  condition de ressources: oui
   description: |
     Note: Les vélos dédiés exclusivement à des activités de loisirs ne sont pas
     éligibles (BMX, VTT, vélo de course)
@@ -652,7 +639,6 @@ aides . nevers:
   remplace: intercommunalité
   titre: Nevers Agglomération
   applicable si: localisation . epci = 'CA de Nevers'
-  condition de ressources: oui
   valeur: 30% * vélo . prix
   plafond:
     variations:

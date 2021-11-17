@@ -44,16 +44,19 @@
 					/\$plafond/,
 					window.publicodes.formatValue(plafond?.nodeValue, { displayedUnit: '€' })
 				);
+
+			// Requis pour contourner https://github.com/betagouv/publicodes/issues/100
+			const ruleWithoutParentDependency = engine.getRule(originalRuleName).explanation.valeur;
+			const missingVariables = Object.keys(
+				engine.evaluate(ruleWithoutParentDependency).missingVariables
+			);
+			const conditionDeRessources = missingVariables.includes('revenu fiscal de référence');
 			return {
 				title,
 				link: rawNode.lien,
 				notice,
 				montant: window.publicodes.formatValue(aide, { precision: 0 }),
-				// TODO: L'idée était initialement d'utilisr les missingsVariable pour détecter
-				// si "revenu fiscal de référence" était utilisé dans le calcul de l'aide, mais
-				// cela ne fonctionne pas, sans doute à cause des remplacement qui font remonter
-				// l'ensemble des missingVariables de l'ensemble des branches
-				conditionDeRessources: rawNode['condition de ressources'] === 'oui'
+				conditionDeRessources
 			};
 		})
 		.filter(Boolean);
