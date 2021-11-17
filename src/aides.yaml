@@ -2,6 +2,8 @@ aides:
   somme:
     - nom: commune
       valeur: 0 €
+    - nom: intercommunalité
+      valeur: 0 €
     - nom: département
       valeur: 0 €
     - nom: région
@@ -41,6 +43,7 @@ aides . bonus vélo électrique:
   valeur:
     le maximum de:
       - commune
+      - intercommunalité
       - département
       - région
   plafond:
@@ -144,7 +147,7 @@ aides . paris:
   lien: https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373
 
 aides . lyon:
-  remplace: commune
+  remplace: intercommunalité
   titre: Métropole Grand Lyon
   condition de ressources: oui
   applicable si:
@@ -163,7 +166,7 @@ aides . lyon:
   lien: https://met.grandlyon.com/aide-a-lachat-dun-velo-face-a-son-succes-comment-sorganise-la-metropole/
 
 aides . bordeaux:
-  remplace: commune
+  remplace: intercommunalité
   titre: Bordeaux Métropole
   condition de ressources: oui
   applicable si:
@@ -178,7 +181,7 @@ aides . bordeaux:
   lien: https://sedeplacer.bordeaux-metropole.fr/Velo/Pratique/Aide-a-l-achat-de-velo
 
 aides . nantes:
-  remplace: commune
+  remplace: intercommunalité
   titre: Nantes Métropole
   applicable si:
     toutes ces conditions:
@@ -189,7 +192,7 @@ aides . nantes:
   lien: https://metropole.nantes.fr/aide-achat-velo-cargo
 
 aides . toulouse:
-  remplace: commune
+  remplace: intercommunalité
   titre: Toulouse Métropole
   condition de ressources: oui
   applicable si:
@@ -225,7 +228,7 @@ aides . toulouse:
   lien: https://www.toulouse-metropole.fr/missions/environnement/qualite-de-l-air/prime-velo
 
 aides . nice:
-  remplace: commune
+  remplace: intercommunalité
   titre: Métropole Nice Côte d’Azur
   applicable si: localisation . epci = 'Métropole Nice Côte d'Azur'
   valeur:
@@ -240,7 +243,7 @@ aides . nice:
   lien: https://www.nicecotedazur.org/deplacement/subvention-pour-l-achat-d-un-v%C3%A9lo-%C3%A0-propulsion-humaine
 
 aides . strasbourg:
-  remplace: commune
+  remplace: intercommunalité
   titre: Eurométropole de Strasbourg
   applicable si: localisation . epci = 'Eurométropole de Strasbourg'
   condition de ressources: oui # todo: seulement pour les vélos électriques
@@ -263,7 +266,7 @@ aides . strasbourg:
   lien: https://www.strasbourg.eu/aides-achat
 
 aides . albi:
-  remplace: commune
+  remplace: intercommunalité
   titre: Grand Albigeois
   applicable si: localisation . epci = 'CA de l'Albigeois (C2A)'
   valeur: 25% * vélo . prix
@@ -277,7 +280,7 @@ aides . albi:
   lien: https://www.grand-albigeois.fr/1591-aide-a-l-achat-de-velo.htm
 
 aides . toulon:
-  remplace: commune
+  remplace: intercommunalité
   titre: Métropole Toulon-Provence-Méditerranée
   applicable si:
     toutes ces conditions:
@@ -288,7 +291,7 @@ aides . toulon:
   lien: https://metropoletpm.fr/tourisme/proxy/tpm-s-engage-velo-electrique
 
 aides . bretagne romantique:
-  remplace: commune
+  remplace: intercommunalité
   titre: Communauté de communes Bretagne romantique
   applicable si:
     toutes ces conditions:
@@ -353,7 +356,7 @@ aides . mondeville:
   lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
 
 aides . les sables d'olonne:
-  remplace: commune
+  remplace: intercommunalité
   titre: Les Sables d'Olonne
   applicable si: localisation . epci = 'CA Les Sables d'Olonne Agglomération'
   valeur:
@@ -373,7 +376,7 @@ aides . les sables d'olonne:
   lien: http://www.lsoagglo.fr/vivreauxolonnes/vie-pratique/transports/plan-velo-2025/
 
 aides . vallons du lyonnais:
-  remplace: commune
+  remplace: intercommunalité
   titre: Communauté de Communes des Vallons du Lyonnais
   applicable si:
     toutes ces conditions:
@@ -394,7 +397,7 @@ aides . département Hérault:
   lien: https://herault.fr/409-mon-velo.htm
 
 aides . montpellier:
-  remplace: commune
+  remplace: intercommunalité
   titre: Montpellier Méditerranée Métropole
   applicable si:
     toutes ces conditions:
@@ -415,7 +418,7 @@ aides . colmar:
   lien: https://www.colmar.fr/sites/colmar.fr/files/documents/35-FE-participation-achat-velo-neuf_1.pdf
 
 aides . avignon:
-  remplace: commune
+  remplace: intercommunalité
   titre: Grand avignon
   applicable si:
     toutes ces conditions:
@@ -438,7 +441,7 @@ aides . charenton:
   lien: https://www.charenton.fr/velo/velo_pass-velo.php
 
 aides . pays basque:
-  remplace: commune
+  remplace: intercommunalité
   titre: Agglomération Pays Basque
   condition de ressources: oui
   applicable si: localisation . epci = 'CA du Pays Basque'
@@ -526,7 +529,7 @@ aides . aix les bains:
 
 # TODO : majoration de l'aide pour un vélo « conçu et assemblé en France »
 aides . ardenne:
-  remplace: commune
+  remplace: intercommunalité
   titre: Ardenne Métropole
   applicable si: localisation . epci = 'CA Ardenne Métropole'
   valeur: 33% * vélo . prix
@@ -534,7 +537,7 @@ aides . ardenne:
   lien: https://ardenne-metropole.fr/storage/2021/04/Plaquette-subvention-v2.pdf
 
 aides . erdregesvres:
-  remplace: commune
+  remplace: intercommunalité
   titre: Communauté de communes d’Erdre et Gesvres
   applicable si:
     toutes ces conditions:
@@ -557,7 +560,7 @@ aides . cote d'or:
   lien: https://www.cotedor.fr/actualite/une-aide-de-250-eu-pour-lacquisition-dun-velo-electrique
 
 aides . sophia antipolis:
-  remplace: commune
+  remplace: intercommunalité
   titre: Communauté d’Agglomération Sophia Antipolis
   applicable si: localisation . epci = 'CA de Sophia Antipolis'
   valeur: 25% * vélo . prix
@@ -646,7 +649,7 @@ aides . mons en baroeul:
   lien: https://www.monsenbaroeul.fr/vivre-mons-en-baroeul/se-deplacer/demander-ma-prime-velo
 
 aides . nevers:
-  remplace: commune
+  remplace: intercommunalité
   titre: Nevers Agglomération
   applicable si: localisation . epci = 'CA de Nevers'
   condition de ressources: oui
@@ -664,6 +667,68 @@ aides . nevers:
             - si: ménage imposable
               alors: 125€
             - sinon: 100€
+
+aides . aurillac:
+  remplace: intercommunalité
+  titre: Vélo'Cab - Aurillac
+  description: |
+    La communauté d’agglomération propose une subvention pour l’achat d’un vélo
+    électrique. Cette subvention est conditionné au fait d’avoir loué un vélo
+    électrique auprès de la Stabus pendant au moins 3 mois consécutifs
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA du Bassin d'Aurillac'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 300€
+  lien: https://www.stabus.fr/fr/velocab/
+
+aides . carvin:
+  remplace: commune
+  titre: Ville de Carvin
+  applicable si: localisation . code postal = '62220'
+  valeur: 75% * vélo . prix
+  plafond: 300€
+  lien: http://www.carvin.fr/carvinfr/actualites/2021/prime-velo.html
+
+aides . les herbiers:
+  remplace: intercommunalité
+  titre: Pays des Herbiers
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays des Herbiers'
+      - vélo . électrique
+  valeur: 15% * vélo . prix
+  plafond: 200€
+  lien: https://www.paysdesherbiers.fr/2-le-velo/
+
+aides . riviera francaise:
+  remplace: intercommunalité
+  titre: Riviera Française
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA de la Riviera Française'
+      - vélo . électrique
+  valeur: 150€
+  plafond:
+    valeur: vélo . prix
+    abattement: aides . commune
+  lien: https://www.riviera-francaise.fr/les-actualites/item/236-prime-pour-l-achat-d-un-velo-electrique-il-est-encore-temps-d-en-profiter
+
+aides . communes riviera francaise:
+  remplace: commune
+  titre: Menton, Beausoleil, La Turbie, Fontan
+  applicable si:
+    toutes ces conditions:
+      - vélo . électrique
+      - une de ces conditions:
+          - localisation . code postal = '06500'
+          - localisation . code postal = '06240'
+          - localisation . code postal = '06320'
+          - localisation . code postal = '06540'
+  valeur: 150€
+  plafond: vélo . prix
+  lien: https://www.riviera-francaise.fr/les-actualites/item/236-prime-pour-l-achat-d-un-velo-electrique-il-est-encore-temps-d-en-profiter
 
 ########################
 

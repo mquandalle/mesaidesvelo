@@ -25,7 +25,7 @@
 
 	const defaultDescription = '';
 
-	const collectivites = ['commune', 'département', 'région', 'état'];
+	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
 	$: aidesDetails = collectivites
 		.map((collectivite) => {
 			const aide = getEngine().evaluate(`aides . ${collectivite}`);

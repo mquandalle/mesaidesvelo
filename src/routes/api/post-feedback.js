@@ -20,14 +20,8 @@ export async function post({ body: { message, page } }) {
 			'Content-Type': 'application/json',
 			Accept: 'Accept: application/vnd.github.v3+json'
 		},
-		body: JSON.stringify({
-			title,
-			body,
-			labels: ['retour utilisateur']
-		})
+		body: JSON.stringify({ title, body })
 	});
 
-	return {
-		status: res.status
-	};
+	return { status: res.status };
 }
