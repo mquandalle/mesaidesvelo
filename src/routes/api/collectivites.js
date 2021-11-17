@@ -20,19 +20,36 @@ const communesInEpci = epci.reduce((acc, { nom, membres }) => {
 	return { ...acc, ...Object.fromEntries(membres.map(({ code }) => [code, nom])) };
 }, {});
 
-const data = communes
-	.filter(
-		(c) =>
-			c.type === 'commune-actuelle' && c.codesPostaux && c.population && !c.code?.startsWith('97')
-	)
-	.map((c) => ({
-		...c,
-		...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
-		slug: slugify(c.nom),
-		codePostal: c.codesPostaux[0],
-		indexedName: fuzzysort.prepare(removeFrenchAccents(c.nom)),
-		codePostaux: fuzzysort.prepare(c.codesPostaux.join(' '))
-	}));
+const extraData = [
+	{
+		nom: 'Monaco',
+		codePostal: '98000',
+		codesPostaux: ['98000'],
+		departement: '06',
+		region: '84',
+		population: 39244,
+		etat: 'monaco'
+	}
+];
+
+const data = [
+	...communes
+		.filter(
+			(c) =>
+				c.type === 'commune-actuelle' && c.codesPostaux && c.population && !c.code?.startsWith('97')
+		)
+		.map((c) => ({
+			...c,
+			...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
+			codePostal: c.codesPostaux[0]
+		})),
+	...extraData
+].map((c) => ({
+	...c,
+	slug: slugify(c.nom),
+	indexedName: fuzzysort.prepare(removeFrenchAccents(c.nom)),
+	codePostaux: fuzzysort.prepare(c.codesPostaux.join(' '))
+}));
 
 const searchOptions = {
 	keys: ['indexedName', 'codePostaux'],

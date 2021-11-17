@@ -4,13 +4,9 @@
 	import { localisation } from '$lib/stores/localisation';
 	import AutoComplete from 'simple-svelte-autocomplete';
 
-	// cancellebale fetch
-	let previousFetchAbortController = null;
 	async function loadItems(keyword) {
-		previousFetchAbortController?.abort();
-		previousFetchAbortController = new AbortController();
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
-		const response = await fetch(url, { signal: previousFetchAbortController.signal });
+		const response = await fetch(url);
 		return await response.json();
 	}
 
