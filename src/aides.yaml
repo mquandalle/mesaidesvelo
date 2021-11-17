@@ -29,13 +29,13 @@ aides . bonus vélo cargo:
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
 aides . bonus vélo électrique:
-  replace: état
+  remplace: état
   titre: « Bonus vélo » de l’État
   description: |
     Le Bonus vélo versé par l’État complète l’aide versée par une collectivité
     territoriale. Votre revenu fiscal de référence par part doit être inférieur
     à 13 489 € pour en bénéficier. Le montant de l’aide est identique au montant
-    accordé par la collectivité dans la limite de $plafond.
+    accordé par la collectivité dans la limite de 200€.
   condition de ressources: oui
   applicable si:
     toutes ces conditions:
@@ -49,9 +49,7 @@ aides . bonus vélo électrique:
       - département
       - région
   plafond:
-    valeur:
-      nom: $plafond
-      valeur: 200 €
+    valeur: 200 €
     plafond: vélo . prix
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
@@ -739,7 +737,10 @@ aides . communes riviera francaise:
 aides . monaco:
   remplace: commune
   titre: Monaco
-  applicable si: vélo . électrique
+  applicable si:
+    toutes ces conditions:
+      - vélo . électrique
+      - localisation . code postal = '98000'
   valeur: 30% * vélo . prix
   plafond: 400€
   lien: https://www.gouv.mc/Action-Gouvernementale/L-Environnement/Une-mobilite-plus-douce/Dispositif-de-subventions-des-vehicules-electriques-et-hybrides
