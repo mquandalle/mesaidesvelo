@@ -612,27 +612,52 @@ aides . mons en baroeul:
   titre: Ville de Mons en Baroœul
   applicable si: localisation . code postal = '59370'
   description: |
+    La commune de Mons en Baroeul offre une aide à l’achat d’un $vélo à hauteur de 50% et
+    jusqu’à $plafond pour ses résidants. Le taux de l’aide (en % du prix d’acquisition) est inversement proportionnel au Quotient
+    Familial et cette aide est plafonnée.
     Note: Les vélos dédiés exclusivement à des activités de loisirs ne sont pas
     éligibles (BMX, VTT, vélo de course)
-  grille:
-    assiette: revenu fiscal de référence
-    tranches:
-      - plafond: 851 €/mois
-        montant:
-          valeur: 40% * vélo . prix
-          plafond: 400€
-      - plafond: 1124 €/mois
-        montant:
-          valeur: 30% * vélo . prix
-          plafond: 300€
-      - plafond: 1500 €/mois
-        montant:
-          valeur: 20% * vélo . prix
-          plafond: 200€
-      - plafond: 1800 €/mois
-        montant:
-          valeur: 10% * vélo . prix
-          plafond: 100€
+  plafond:
+    valeur:
+      nom: $plafond
+      variations:
+        - si: vélo . électrique
+          alors: 400 €
+        - sinon: 200 €
+  variations:
+    - si: vélo . électrique
+      alors:
+        grille:
+          assiette: quotient familial
+          tranches:
+            - plafond: 851 €
+              montant:
+                valeur: 40% * vélo . prix
+                plafond: 400 €
+            - plafond: 1300 €
+              montant:
+                valeur: 30% * vélo . prix
+                plafond: 300€
+            - plafond: 1500 €
+              montant:
+                valeur: 20% * vélo . prix
+                plafond: 200€
+            - plafond: 1800 €
+              montant:
+                valeur: 10% * vélo . prix
+                plafond: 100€
+    - sinon:
+        grille:
+          assiette: quotient familial
+          tranches:
+            - plafond: 851 €
+              montant:
+                valeur: 50% * vélo . prix
+                plafond: 200€
+            - plafond: 1124 €
+              montant:
+                valeur: 25% * vélo . prix
+                plafond: 100€
   lien: https://www.monsenbaroeul.fr/vivre-mons-en-baroeul/se-deplacer/demander-ma-prime-velo
 
 aides . nevers:
@@ -786,6 +811,10 @@ revenu fiscal de référence:
   # Comme pour le prix du vélo, la valeur par défaut est choisie pour maximiser
   # les aides
   par défaut: 5000 €/an
+
+quotient familial:
+  titre: Quotient Familial
+  par défaut: 800 €
 
 ménage imposable: revenu fiscal de référence >= 11120 €/an
 
