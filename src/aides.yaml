@@ -99,7 +99,7 @@ aides . occitanie:
             variations:
               - si: vélo . électrique
                 alors: 400€
-              - sinon: 150€
+              - sinon: 240€
   lien: https://lio.laregion.fr/aides-achat-velo
 
 aides . corse:
@@ -629,19 +629,19 @@ aides . mons en baroeul:
         grille:
           assiette: revenu fiscal de référence
           tranches:
-            - plafond: 851 €
+            - plafond: 851 €/mois
               montant:
                 valeur: 40% * vélo . prix
                 plafond: 400 €
-            - plafond: 1300 €
+            - plafond: 1300 €/mois
               montant:
                 valeur: 30% * vélo . prix
                 plafond: 300€
-            - plafond: 1500 €
+            - plafond: 1500 €/mois
               montant:
                 valeur: 20% * vélo . prix
                 plafond: 200€
-            - plafond: 1800 €
+            - plafond: 1800 €/mois
               montant:
                 valeur: 10% * vélo . prix
                 plafond: 100€
@@ -649,11 +649,11 @@ aides . mons en baroeul:
         grille:
           assiette: revenu fiscal de référence
           tranches:
-            - plafond: 851 €
+            - plafond: 851 €/mois
               montant:
                 valeur: 50% * vélo . prix
                 plafond: 200€
-            - plafond: 1124 €
+            - plafond: 1124 €/mois
               montant:
                 valeur: 25% * vélo . prix
                 plafond: 100€
