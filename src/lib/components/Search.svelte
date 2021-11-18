@@ -1,8 +1,10 @@
 <script>
 	// TODO: supporter la recherche par région ou département
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { localisation } from '$lib/stores/localisation';
 	import AutoComplete from 'simple-svelte-autocomplete';
+	import { onMount } from 'svelte';
 
 	async function loadItems(keyword) {
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
@@ -14,6 +16,11 @@
 		const inputElement = document.getElementById('localisation-input');
 		inputElement.select();
 	}
+
+	// Super HACKY but the <AutoComplete /> runs its `onChange` on load, even if the user
+	// hasn't type anything yet. We do this to avoid an unwanted redirection.
+	let loaded = false;
+	onMount(() => setTimeout(() => (loaded = true), 50));
 </script>
 
 <div
@@ -43,7 +50,7 @@
 				bind:selectedItem={$localisation}
 				onFocus={autoSelectInput}
 				onChange={(val) => {
-					if (typeof window !== 'undefined') {
+					if (typeof window !== 'undefined' && loaded) {
 						if (val) {
 							goto(`/ville/${val.slug}`, { noscroll: true });
 						} else {

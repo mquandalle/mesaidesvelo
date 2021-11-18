@@ -6,19 +6,22 @@
 	import Emoji from './Emoji.svelte';
 	import { engine } from './Results.svelte';
 	import { localisationPublicodesSituation } from '$lib/stores/localisation';
+	import RevenuSelector from './RevenuSelector.svelte';
+	const formatValue = typeof window !== 'undefined' && window.publicodes.formatValue;
 
 	const veloCat = $page.query.get('velo');
-	let bikePrice = '';
+	let bikePrice;
+	let revenu = 0;
 
 	$: getEngine = () => {
 		if (!$localisationPublicodesSituation) {
 			return engine;
 		}
-		const cleanedBikePrice = parseInt(bikePrice.replace(/[^0-9]/g, ''));
 		engine.setSituation({
 			...$localisationPublicodesSituation,
 			'vélo . type': `'${veloCat}'`,
-			...(cleanedBikePrice ? { 'vélo . prix': `${cleanedBikePrice} €` } : {})
+			'revenu fiscal de référence': `${revenu} €/an`,
+			...(bikePrice ? { 'vélo . prix': `${bikePrice} €` } : {})
 		});
 		return engine;
 	};
@@ -40,28 +43,30 @@
 			const plafond = plafondIsDefined && engine.evaluate(plafondRuleName);
 			const notice = description
 				.replace(/\$vélo/g, `vélo ${veloCat}`)
-				.replace(
-					/\$plafond/,
-					window.publicodes.formatValue(plafond?.nodeValue, { displayedUnit: '€' })
-				);
+				.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }));
 
-			// Requis pour contourner https://github.com/betagouv/publicodes/issues/100
-			const ruleWithoutParentDependency = engine.getRule(originalRuleName).explanation.valeur;
-			const missingVariables = Object.keys(
-				engine.evaluate(ruleWithoutParentDependency).missingVariables
-			);
-			const conditionDeRessources = missingVariables.includes('revenu fiscal de référence');
+			const conditionDeRessources =
+				engine
+					.shallowCopy()
+					.setSituation({
+						...engine.parsedSituation,
+						'revenu fiscal de référence': '100000 €/an',
+						'vélo . prix': 'vélo . prix pour maximiser les aides'
+					})
+					.evaluate(originalRuleName).nodeValue !== aide.nodeValue;
+
 			return {
 				title,
+				ruleName: originalRuleName,
 				link: rawNode.lien,
 				notice,
-				montant: window.publicodes.formatValue(aide, { precision: 0 }),
+				montant: formatValue(aide, { precision: 0 }),
 				conditionDeRessources
 			};
 		})
 		.filter(Boolean);
 
-	$: sum = window.publicodes.formatValue(getEngine().evaluate('aides'), { precision: 0 });
+	$: sum = formatValue(getEngine().evaluate('aides'), { precision: 0 });
 </script>
 
 <div class="mt-8" />
@@ -80,8 +85,10 @@
 </h2>
 
 <div class="border mt-6 rounded-md shadow-sm">
-	{#each aidesDetails as aide}
-		<DetailsLine {aide} />
+	{#each aidesDetails as aide (aide.ruleName)}
+		<div transition:slide|local={{ duration: 200 }} class="border-b last:border-b-0 p-4">
+			<DetailsLine {aide} />
+		</div>
 	{/each}
 	<div class="p-4 bg-gray-50 rounded-b-md">
 		<div class="flex justify-between text-lg">
@@ -103,19 +110,29 @@
 	>
 		€
 	</div>
-	<p class="text-gray-600 text-md -mt-7 pl-3 mb-8 italic">Affinez le calcul :</p>
-	<div class="border inline-flex flex-col rounded p-2 items-start shadow-sm ">
-		<label for="velo-prix" class="relative -top-5 px-2 -mb-5 bg-white">Prix du vélo</label>
-		<div>
+	<p class="text-gray-600 text-md -mt-7 pl-3 mb-6 italic">Affinez le calcul :</p>
+	<RevenuSelector rules={aidesDetails.map((r) => r.ruleName)} bind:value={revenu} />
+	<div class="inline-flex flex-col mt-6 items-start shadow-sm ">
+		<label for="velo-prix">Prix du vélo :</label>
+		<div class="border rounded p-2 mt-1 bg-white">
 			<input
-				placeholder="1 500"
-				type="text"
+				type="number"
 				id="velo-prix"
-				maxlength="5"
-				class="text-right focus:outline-transparent"
+				class="m-0 text-right w-30 focus:outline-transparent"
 				bind:value={bikePrice}
 			/>
 			<span class="text-gray-600">€</span>
 		</div>
 	</div>
 </div>
+
+<style>
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+	}
+</style>
