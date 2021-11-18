@@ -609,12 +609,11 @@ aides . pantin:
 
 aides . mons en baroeul:
   remplace: commune
-  titre: Ville de Mons en Baroœul
+  titre: Ville de Mons en Barœul
   applicable si: localisation . code postal = '59370'
   description: |
-    La commune de Mons en Baroeul offre une aide à l’achat d’un $vélo à hauteur de 50% et
-    jusqu’à $plafond pour ses résidants. Le taux de l’aide (en % du prix d’acquisition) est inversement proportionnel au Quotient
-    Familial et cette aide est plafonnée.
+    La commune de Mons en Barœul offre une aide à l’achat d’un $vélo à hauteur de 50% et
+    jusqu’à $plafond pour ses habitants.
     Note: Les vélos dédiés exclusivement à des activités de loisirs ne sont pas
     éligibles (BMX, VTT, vélo de course)
   plafond:
@@ -628,7 +627,7 @@ aides . mons en baroeul:
     - si: vélo . électrique
       alors:
         grille:
-          assiette: quotient familial
+          assiette: revenu fiscal de référence
           tranches:
             - plafond: 851 €
               montant:
@@ -648,7 +647,7 @@ aides . mons en baroeul:
                 plafond: 100€
     - sinon:
         grille:
-          assiette: quotient familial
+          assiette: revenu fiscal de référence
           tranches:
             - plafond: 851 €
               montant:
@@ -810,11 +809,7 @@ revenu fiscal de référence:
   titre: Revenu fiscal de référence par part
   # Comme pour le prix du vélo, la valeur par défaut est choisie pour maximiser
   # les aides
-  par défaut: 5000 €/an
-
-quotient familial:
-  titre: Quotient Familial
-  par défaut: 800 €
+  par défaut: 800 €/an
 
 ménage imposable: revenu fiscal de référence >= 11120 €/an
 
