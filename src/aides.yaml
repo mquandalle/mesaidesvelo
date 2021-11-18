@@ -659,6 +659,23 @@ aides . mons en baroeul:
                 plafond: 100€
   lien: https://www.monsenbaroeul.fr/vivre-mons-en-baroeul/se-deplacer/demander-ma-prime-velo
 
+aides . la madeleine:
+  remplace: commune
+  titre: Ville de La Madeleine
+  applicable si: localisation . code postal = '59110'
+  description: |
+    Note: Les vélos pour enfant (inférieur à 26 pouces) et les modèles de vélos dédiés exclusivement
+     à des activités de loisirs ne sont pas subventionnés (ex : BMX, vélo de piste, vélo de course haut de gamme,…)
+  valeur: 25% * vélo . prix
+  plafond:
+      variations:
+        - si: vélo . électrique
+          alors: 250 €
+        - si: vélo . cargo
+          alors: 250 €
+        - sinon: 150 €
+  lien: https://www.ville-lamadeleine.fr/formulaires/transition-ecologique-aides-municipales
+
 aides . nevers:
   remplace: intercommunalité
   titre: Nevers Agglomération
