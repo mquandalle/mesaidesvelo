@@ -612,7 +612,7 @@ aides . mons en baroeul:
   titre: Ville de Mons en Barœul
   applicable si: localisation . code postal = '59370'
   description: |
-    La commune de Mons en Barœul offre une aide à l’achat d’un $vélo à hauteur de 50% et
+    La commune de Mons en Barœul offre une aide à l’achat d’un $vélo
     jusqu’à $plafond pour ses habitants.
     Note: Les vélos dédiés exclusivement à des activités de loisirs ne sont pas
     éligibles (BMX, VTT, vélo de course)
