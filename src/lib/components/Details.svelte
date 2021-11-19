@@ -45,15 +45,17 @@
 				.replace(/\$vélo/g, `vélo ${veloCat}`)
 				.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }));
 
-			const conditionDeRessources =
+			const evaluateWithGivenRevenu = (revenu) =>
 				engine
 					.shallowCopy()
 					.setSituation({
 						...engine.parsedSituation,
-						'revenu fiscal de référence': '100000 €/an',
+						'revenu fiscal de référence': `${revenu} €/an`,
 						'vélo . prix': 'vélo . prix pour maximiser les aides'
 					})
-					.evaluate(originalRuleName).nodeValue !== aide.nodeValue;
+					.evaluate(originalRuleName).nodeValue;
+			const conditionDeRessources =
+				evaluateWithGivenRevenu(1000) !== evaluateWithGivenRevenu(100000);
 
 			return {
 				title,
