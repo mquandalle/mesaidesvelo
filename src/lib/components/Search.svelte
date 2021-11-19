@@ -12,15 +12,15 @@
 		return await response.json();
 	}
 
-	function autoSelectInput() {
-		const inputElement = document.getElementById('localisation-input');
-		inputElement.select();
-	}
-
 	// Super HACKY but the <AutoComplete /> runs its `onChange` on load, even if the user
 	// hasn't type anything yet. We do this to avoid an unwanted redirection.
 	let loaded = false;
-	onMount(() => setTimeout(() => (loaded = true), 50));
+
+	function autoSelectInput() {
+		loaded = true;
+		const inputElement = document.getElementById('localisation-input');
+		inputElement.select();
+	}
 </script>
 
 <div

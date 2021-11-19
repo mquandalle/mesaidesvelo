@@ -16,9 +16,9 @@ import communes from '@etalab/decoupage-administratif/data/communes.json';
 import epci from '@etalab/decoupage-administratif/data/epci.json';
 import { removeFrenchAccents, slugify } from '$lib/utils';
 
-const communesInEpci = epci.reduce((acc, { nom, membres }) => {
-	return { ...acc, ...Object.fromEntries(membres.map(({ code }) => [code, nom])) };
-}, {});
+const communesInEpci = Object.fromEntries(
+	epci.map(({ nom, membres }) => membres.map(({ code }) => [code, nom])).flat()
+);
 
 const extraData = [
 	{
