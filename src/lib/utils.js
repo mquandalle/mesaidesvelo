@@ -1,9 +1,12 @@
 export function removeFrenchAccents(str) {
 	return str
-		?.replace(/à/g, 'a')
+		?.replace(/à|â|ä/g, 'a')
 		.replace(/è|é|ê|ë/g, 'e')
 		.replace(/î|ï/g, 'i')
-		.replace(/ô|ï/g, 'o')
+		.replace(/ô|ö/g, 'o')
+		.replace(/û|ü/g, 'u')
+		.replace(/ŷ|ÿ/g, 'y')
+		.replace(/ç/g, 'c')
 		.replace(/œ/g, 'oe');
 }
 
