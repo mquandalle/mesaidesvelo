@@ -93,16 +93,16 @@
 </script>
 
 {#if displayedThresholds.length > 0}
-	<div>
+	<div class="mt-6">
 		Votre revenu annuel (quotient familial) : <span
 			title="Plus d’informations"
 			class="cursor-pointer"
 			on:click={() => (showExplanations = !showExplanations)}><Emoji emoji="ℹ" /></span
 		>
 		{#if showExplanations}
-			<p class="my-4 text-gray-600" transition:slide|local={{ duration: 100 }}>
+			<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide|local={{ duration: 100 }}>
 				Le montant des aides dépend de votre revenu par part de quotient familial. Sur votre avis
-				d'imposition celà correspond au montant du « revenu fiscal de référence » divisé par le
+				d'imposition cela correspond au montant du « revenu fiscal de référence » divisé par le
 				nombre de parts du quotient familial.
 			</p>
 		{/if}

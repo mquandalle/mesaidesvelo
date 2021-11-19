@@ -112,7 +112,7 @@
 	>
 		€
 	</div>
-	<p class="text-gray-600 text-md -mt-7 pl-3 mb-6 italic">Affinez le calcul :</p>
+	<p class="text-gray-600 text-md -mt-7 pl-3 italic">Affinez le calcul :</p>
 	<RevenuSelector rules={aidesDetails.map((r) => r.ruleName)} bind:value={revenu} />
 	<div class="inline-flex flex-col mt-6 items-start shadow-sm ">
 		<label for="velo-prix">Prix du vélo :</label>
