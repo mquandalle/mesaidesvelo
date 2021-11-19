@@ -240,22 +240,24 @@ aides . strasbourg:
   remplace: intercommunalité
   titre: Eurométropole de Strasbourg
   applicable si: localisation . epci = 'Eurométropole de Strasbourg'
-  variations:
-    - si: vélo . cargo électrique
-      alors: 500€
-    - si: vélo . électrique
-      alors:
-        grille:
-          assiette: revenu fiscal de référence
-          tranches:
-            - plafond: 560 €/mois
-              montant: 500 €
-            - plafond: 764 €/mois
-              montant: 400 €
-            - montant: 300 €
-    # Aide à la motorisation du vélo classique
-    # - sinon: 150 €
-  plafond: vélo . prix
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 500€
+      - si: vélo . électrique
+        alors:
+          grille:
+            assiette: revenu fiscal de référence
+            tranches:
+              - plafond: 560 €/mois
+                montant: 500 €
+              - plafond: 764 €/mois
+                montant: 400 €
+              - montant: 300 €
+      - si: vélo . motorisation
+        alors: 150€
+      - sinon: 0€
   lien: https://www.strasbourg.eu/aides-achat
 
 aides . albi:
@@ -668,12 +670,12 @@ aides . la madeleine:
      à des activités de loisirs ne sont pas subventionnés (ex : BMX, vélo de piste, vélo de course haut de gamme,…)
   valeur: 25% * vélo . prix
   plafond:
-      variations:
-        - si: vélo . électrique
-          alors: 250 €
-        - si: vélo . cargo
-          alors: 250 €
-        - sinon: 150 €
+    variations:
+      - si: vélo . électrique
+        alors: 250 €
+      - si: vélo . cargo
+        alors: 250 €
+      - sinon: 150 €
   lien: https://www.ville-lamadeleine.fr/formulaires/transition-ecologique-aides-municipales
 
 aides . nevers:
@@ -783,6 +785,7 @@ vélo . type:
     - cargo
     - cargo électrique
     - pliant
+    - motorisation
 
 vélo . mécanique simple:
   valeur: oui
@@ -813,6 +816,14 @@ vélo . cargo électrique:
 vélo . pliant:
   valeur: oui
   applicable si: vélo . type = 'pliant'
+
+vélo . motorisation:
+  valeur: oui
+  applicable si: vélo . type = 'motorisation'
+  description: |
+    Un kit de conversion permet de transformer un vélo mécanique classique en
+    vélo à assistance électrique. Il est constitué d’un moteur électrique, d’une
+    batterie, ainsi que d’un contrôleur et d’un afficheur.
 
 vélo . prix:
   par défaut: prix pour maximiser les aides

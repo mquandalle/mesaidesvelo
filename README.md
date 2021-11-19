@@ -14,7 +14,7 @@ Vous avez identifié une erreur ou une aide que nous ne prenons pas en compte ? 
 
 Si vous êtes développeur/euse vous pouvez aussi améliorer l’application. Il s'agit d’une application JavaScript, utilisant [Svelte Kit](https://kit.svelte.dev) et [Windi.css](https://windicss.org) pour l’interface.
 
-Pour lancer l'application en mode développement utilisez les commandes suivntes :
+Pour lancer l'application en mode développement utilisez les commandes suivantes :
 
 ```sh
 npm install
@@ -22,6 +22,12 @@ npm run dev
 ```
 
 Les aides utilisent le langage [Publicodes](https://publi.codes) et sont éditables dans le fichier [aides.yaml](./src/aides.yaml).
+
+Les tests d’intégrations utilisent [Playwright](https://playwright.dev/). En cas d'erreur vous pouvez voir le navigateur en action avec l’option `--headed`
+
+```sh
+npm run test -- --headed
+```
 
 ### D’où viennent les données ?
 

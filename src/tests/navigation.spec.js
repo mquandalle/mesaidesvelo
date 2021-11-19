@@ -18,5 +18,5 @@ test('Navigation scenario', async ({ page }) => {
 	await expect(totalAides).toHaveText('Total des aides 300 €');
 
 	await page.fill('input:below(label:text("Prix du vélo"))', '100');
-	await expect(totalAides).toHaveText('Total des aides 100 €');
+	await expect(totalAides).toHaveText('Total des aides 50 €');
 });

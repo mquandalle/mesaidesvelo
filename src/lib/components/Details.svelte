@@ -4,12 +4,14 @@
 	import { slide } from 'svelte/transition';
 	import DetailsLine from './DetailsLine.svelte';
 	import Emoji from './Emoji.svelte';
-	import { engine } from './Results.svelte';
+	import { emoji, engine, title } from './Results.svelte';
 	import { localisationPublicodesSituation } from '$lib/stores/localisation';
 	import RevenuSelector from './RevenuSelector.svelte';
 	const formatValue = typeof window !== 'undefined' && window.publicodes.formatValue;
 
 	const veloCat = $page.query.get('velo');
+	const categoryDescription = engine?.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
+
 	let bikePrice;
 	let revenu = 0;
 
@@ -55,7 +57,7 @@
 					})
 					.evaluate(originalRuleName).nodeValue;
 			const conditionDeRessources =
-				evaluateWithGivenRevenu(1000) !== evaluateWithGivenRevenu(100000);
+				evaluateWithGivenRevenu(revenu) !== evaluateWithGivenRevenu(100000);
 
 			return {
 				title,
@@ -82,9 +84,12 @@
 	← Toutes les aides
 </span>
 <h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
-	Aides à l’achat d’un vélo {veloCat}
-	{#if veloCat.includes('électrique')} <Emoji emoji="⚡" />{/if}
+	{title(veloCat)}{#if emoji(veloCat)}&nbsp;<Emoji emoji={emoji(veloCat)} />{/if}
 </h2>
+
+{#if categoryDescription}
+	<p class="text-gray-700 text-sm">{categoryDescription}</p>
+{/if}
 
 <div class="border mt-6 rounded-md shadow-sm">
 	{#each aidesDetails as aide (aide.ruleName)}
@@ -115,7 +120,9 @@
 	<p class="text-gray-600 text-md -mt-7 pl-3 italic">Affinez le calcul :</p>
 	<RevenuSelector rules={aidesDetails.map((r) => r.ruleName)} bind:value={revenu} />
 	<div class="inline-flex flex-col mt-6 items-start shadow-sm ">
-		<label for="velo-prix">Prix du vélo :</label>
+		<label for="velo-prix"
+			>Prix du {#if veloCat === 'motorisation'}kit de convesion{:else}vélo{/if} :</label
+		>
 		<div class="border rounded p-2 mt-1 bg-white">
 			<input
 				type="number"

@@ -1,7 +1,4 @@
 <script>
-	import Emoji from './Emoji.svelte';
-
-	export let label;
 	export let montant;
 </script>
 
@@ -10,10 +7,7 @@
 	on:click
 	tabindex="0"
 >
-	<span
-		>{label}{#if label.includes('électrique')}
-			&nbsp;<Emoji emoji="⚡" />{/if}</span
-	>
+	<span><slot /></span>
 	<div class="flex-1 flex flex-col items-end gap-x-2">
 		<span class="text-xs text-gray-500">jusqu’à</span>
 		<span class="font-semibold text-right text-xl whitespace-nowrap">{montant}</span>
