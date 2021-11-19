@@ -17,7 +17,7 @@
 			state = 'sent';
 			setTimeout(() => {
 				state = 'closed';
-			}, 8000);
+			}, 15000);
 		}
 	}
 </script>
@@ -30,7 +30,7 @@
 		Une erreur ? Un oubli ? Contactez-nous !
 	</button>
 {:else if state === 'open'}
-	<form class="flex flex-col items-start gap-y-3" on:submit={submitFeedback}>
+	<form class="flex flex-col items-start gap-y-2" on:submit={submitFeedback}>
 		<label for="feedback-message">Votre message :</label>
 		<!-- svelte-ignore a11y-autofocus -->
 		<textarea
@@ -51,5 +51,14 @@
 		</p>
 	</form>
 {:else if state === 'sent'}
-	<span class="text-xl">Merci pour votre retour ! 😍</span>
+	<div>
+		<p class="text-xl">Merci pour votre retour ! 😍</p>
+		<p class="text-xs mt-2">
+			→ Vous pouvez suivre votre ticket sur <a
+				class="text-green-700 underline"
+				href="https://github.com/mquandalle/mesaidesvelo/issues"
+				target="_blank">Github</a
+			>.
+		</p>
+	</div>
 {/if}
