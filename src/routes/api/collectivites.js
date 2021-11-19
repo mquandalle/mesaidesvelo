@@ -48,7 +48,7 @@ const data = [
 	...c,
 	slug: slugify(c.nom),
 	indexedName: fuzzysort.prepare(removeFrenchAccents(c.nom)),
-	codePostaux: fuzzysort.prepare(c.codesPostaux.join(' '))
+	codePostaux: fuzzysort.prepare(c.codePostal)
 }));
 
 const searchOptions = {
