@@ -92,14 +92,18 @@ aides . occitanie:
             variations:
               - si: vélo . électrique
                 alors: 250€
-              - sinon: 150€
+              - si: vélo . mécanique
+                alors: 150€
+              - sinon: 0€
       - sinon:
           valeur: 80% * vélo . prix
           plafond:
             variations:
               - si: vélo . électrique
                 alors: 400€
-              - sinon: 240€
+              - si: vélo . mécanique
+                alors: 240€
+              - sinon: 0€
   lien: https://lio.laregion.fr/aides-achat-velo
 
 aides . corse:
@@ -214,11 +218,13 @@ aides . toulouse:
             - si: revenu fiscal de référence <= 18800
               alors: 250€
             - sinon: 200€
-      - sinon:
+      - si: vélo . mécanique
+        alors:
           variations:
             - si: revenu fiscal de référence <= 18800
               alors: 100€
             - sinon: 0€
+        sinon: 0€
   lien: https://www.toulouse-metropole.fr/missions/environnement/qualite-de-l-air/prime-velo
 
 aides . nice:
@@ -271,7 +277,9 @@ aides . albi:
         alors: 500 €
       - si: vélo . électrique
         alors: 250 €
-      - sinon: 100 €
+      - si: vélo . mécanique
+        alors: 100 €
+      - sinon: 0 €
   lien: https://www.grand-albigeois.fr/1591-aide-a-l-achat-de-velo.htm
 
 aides . toulon:
@@ -365,7 +373,9 @@ aides . les sables d'olonne:
         alors: 300€
       - si: vélo . électrique
         alors: 200€
-      - sinon: 100€
+      - si: vélo . mécanique
+        alors: 100€
+      - sinon: 0€
   lien: http://www.lsoagglo.fr/vivreauxolonnes/vie-pratique/transports/plan-velo-2025/
 
 aides . vallons du lyonnais:
@@ -407,7 +417,9 @@ aides . colmar:
   variations:
     - si: vélo . électrique
       alors: 200€
-    - sinon: 120€
+    - si: vélo . mécanique
+      alors: 120€
+    - sinon: 0€
   lien: https://www.colmar.fr/sites/colmar.fr/files/documents/35-FE-participation-achat-velo-neuf_1.pdf
 
 aides . avignon:
@@ -605,7 +617,9 @@ aides . pantin:
   variations:
     - si: vélo . électrique
       alors: 200€
-    - sinon: 100€
+    - si: vélo . mécanique
+      alors: 100€
+    - sinon: 0€
   plafond: vélo . prix
   lien: https://pratique.pantin.fr/deplacement-et-stationnement/transports-alternatifs-velo
 
@@ -647,7 +661,8 @@ aides . mons en baroeul:
               montant:
                 valeur: 10% * vélo . prix
                 plafond: 100€
-    - sinon:
+    - si: vélo . mécanique
+      alors:
         grille:
           assiette: revenu fiscal de référence
           tranches:
@@ -659,6 +674,7 @@ aides . mons en baroeul:
               montant:
                 valeur: 25% * vélo . prix
                 plafond: 100€
+    - sinon: 0€
   lien: https://www.monsenbaroeul.fr/vivre-mons-en-baroeul/se-deplacer/demander-ma-prime-velo
 
 aides . la madeleine:
@@ -675,7 +691,9 @@ aides . la madeleine:
         alors: 250 €
       - si: vélo . cargo
         alors: 250 €
-      - sinon: 150 €
+      - si: vélo . mécanique
+        alors: 150 €
+      - sinon: 0 €
   lien: https://www.ville-lamadeleine.fr/formulaires/transition-ecologique-aides-municipales
 
 aides . nevers:
@@ -691,11 +709,13 @@ aides . nevers:
             - si: ménage imposable
               alors: 250€
             - sinon: 200€
-      - sinon:
+      - si: vélo . mécanique
+        alors:
           variations:
             - si: ménage imposable
               alors: 125€
             - sinon: 100€
+      - sinon: 0€
 
 aides . aurillac:
   remplace: intercommunalité
@@ -800,7 +820,10 @@ vélo . électrique:
 
 vélo . mécanique:
   valeur: oui
-  applicable si: vélo . électrique = 'non'
+  applicable si:
+    une de ces conditions:
+      - vélo . type = 'mécanique simple'
+      - vélo . type = 'pliant'
 
 vélo . cargo:
   valeur: oui
