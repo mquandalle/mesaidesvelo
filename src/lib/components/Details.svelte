@@ -111,9 +111,9 @@
 	</div>
 </div>
 
-<div class="border-l-4 mt-8 border-green-100 pl-4 py-3">
+<div class="border-l-4 mt-8 border-green-200 pl-4 py-3 bg-gray-50">
 	<div
-		class="inline-block relative -left-8.5 bg-white border-4 border-green-100 w-8 h-8 rounded-full font-bold text-green-200 text-center leading-6"
+		class="inline-block relative -left-8.5 bg-white border-4 border-green-200 w-8 h-8 rounded-full font-bold text-green-300 text-center leading-6"
 	>
 		€
 	</div>
@@ -127,7 +127,7 @@
 			<input
 				type="number"
 				id="velo-prix"
-				class="m-0 text-right w-30 focus:outline-transparent"
+				class="m-0 text-right w-35 focus:outline-transparent"
 				bind:value={bikePrice}
 			/>
 			<span class="text-gray-600">€</span>

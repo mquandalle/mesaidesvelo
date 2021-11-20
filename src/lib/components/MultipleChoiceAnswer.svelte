@@ -8,7 +8,7 @@
 <label
 	class="border rounded px-4 py-2 shadow-sm flex items-center gap-x-2 cursor-pointer {isSelected
 		? 'bg-green-500 text-white'
-		: 'hover:bg-green-100 text-gray-700'}"
+		: 'bg-white hover:bg-green-200 text-gray-700'}"
 >
 	<input type="radio" bind:group {value} />
 	<span class="text-current"><slot /></span>
