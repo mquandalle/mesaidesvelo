@@ -1,10 +1,8 @@
 <script>
 	// TODO: supporter la recherche par région ou département
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { localisation } from '$lib/stores/localisation';
 	import AutoComplete from 'simple-svelte-autocomplete';
-	import { onMount } from 'svelte';
 
 	async function loadItems(keyword) {
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
@@ -24,7 +22,7 @@
 </script>
 
 <div
-	class="bg-green-100 py-8 px-4 sm:px-6 mt-6 flex flex-col gap-x-4 gap-y-2 sm:flex-row sm:items-center rounded"
+	class="w-full max-w-screen-md m-auto bg-green-100 py-8 px-4 sm:px-6 mt-6 flex flex-col gap-x-4 gap-y-2 sm:flex-row sm:items-center rounded"
 >
 	<label for="localisation-input">Localisation :</label>
 	<div class="flex-1 flex flex-row items-center bg-white shadow rounded-3xl px-3 pt-1">

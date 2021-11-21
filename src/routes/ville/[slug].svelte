@@ -1,32 +1,58 @@
 <script context="module">
+	import { browser } from '$app/env';
+	import { localisation } from '$lib/stores/localisation';
+
 	export const ssr = false;
+
+	// This pattern is explained here:
+	// https://github.com/sveltejs/kit/issues/2851
+	export async function load({ page, fetch }) {
+		if (browser && get(localisation)?.slug === page.params.slug) {
+			return { props: { ville: get(localisation) } };
+		} else {
+			const res = await fetch(`/api/collectivites?slug=${page.params.slug}`);
+			return { props: { ville: await res.json() } };
+		}
+	}
 </script>
 
 <script>
 	import { page } from '$app/stores';
-	import { localisation } from '$lib/stores/localisation';
-
+	import Details from '$lib/components/Details.svelte';
+	import Results from '$lib/components/Results.svelte';
+	import { fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
 
-	onMount(async () => {
-		// TODO: investigate better way to load this data from the server if
-		// we need it and from the client if we already got
-		// it from the search field results
-		if ($page.params.slug !== $localisation?.slug) {
-			const res = await fetch(`/api/collectivites?slug=${$page.params.slug}`);
-			if (res.ok) {
-				localisation.set(await res.json());
-			}
-		}
-	});
+	export let ville;
+
+	onMount(() => localisation.set(ville));
 </script>
 
 <svelte:head>
-	{#if $localisation}
-		<title>Les aides vélo à {$localisation.nom} - MesAidesVélo</title>
-		<meta
-			name="description"
-			content="Découvrez l’ensemble des aides à l’achat ou la localisation de vélo proposées à {$localisation.nom}. Simple, rapide et gratuit."
-		/>
-	{/if}
+	<title>Les aides vélo à {ville.nom} - MesAidesVélo</title>
+	<meta
+		name="description"
+		content="Découvrez l’ensemble des aides à l’achat ou la localisation de vélo proposées à {ville.nom}. Simple, rapide et gratuit."
+	/>
 </svelte:head>
+
+<div class="w-full max-w-screen-md m-auto">
+	<div class="grid overflow-hidden -m-4 p-4" transition:fly={{ y: 30 }}>
+		{#if $page.query.get('velo')}
+			<div
+				class="col-start-1 col-end-1 row-start-1 row-end-1"
+				transition:fly|local={{ x: 600, duration: 400 }}
+			>
+				<Details {ville} />
+			</div>
+		{:else}
+			<div
+				class="col-start-1 col-end-1 row-start-1 row-end-1"
+				transition:fly|local={{ x: -600, duration: 400 }}
+			>
+				<Results {ville} />
+			</div>
+		{/if}
+	</div>
+</div>
