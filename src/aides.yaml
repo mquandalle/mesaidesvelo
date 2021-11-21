@@ -230,14 +230,15 @@ aides . toulouse:
 aides . nice:
   remplace: intercommunalité
   titre: Métropole Nice Côte d’Azur
-  applicable si: localisation . epci = 'Métropole Nice Côte d'Azur'
+  applicable si: localisation . epci = 'Métropole Nice Côte d’Azur'
   valeur:
     variations:
       - si: vélo . électrique
         alors:
           valeur: 25% * vélo . prix
           plafond: 400€
-      - sinon:
+      - si: vélo . mécanique
+        alors:
           valeur: 50% * vélo . prix
           plafond: 100€
   lien: https://www.nicecotedazur.org/deplacement/subvention-pour-l-achat-d-un-v%C3%A9lo-%C3%A0-propulsion-humaine
@@ -269,7 +270,7 @@ aides . strasbourg:
 aides . albi:
   remplace: intercommunalité
   titre: Grand Albigeois
-  applicable si: localisation . epci = 'CA de l'Albigeois (C2A)'
+  applicable si: localisation . epci = 'CA de l’Albigeois (C2A)'
   valeur: 25% * vélo . prix
   plafond:
     variations:
@@ -359,7 +360,7 @@ aides . mondeville:
 aides . les sables d'olonne:
   remplace: intercommunalité
   titre: Les Sables d'Olonne
-  applicable si: localisation . epci = 'CA Les Sables d'Olonne Agglomération'
+  applicable si: localisation . epci = 'CA Les Sables d’Olonne Agglomération'
   valeur:
     variations:
       - si: vélo . cargo
@@ -556,7 +557,7 @@ aides . erdregesvres:
   titre: Communauté de communes d’Erdre et Gesvres
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'CC d'Erdre et Gesvres'
+      - localisation . epci = 'CC d’Erdre et Gesvres'
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 100€
