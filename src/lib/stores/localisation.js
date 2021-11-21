@@ -6,7 +6,8 @@ export const localisationPublicodesSituation = derived(localisation, ($localisat
 	$localisation
 		? {
 				'localisation . code postal': `'${$localisation.codePostal}'`,
-				'localisation . epci': `'${$localisation.epci || ''}'`,
+				'localisation . code insee': `'${$localisation.codeInsee}'`,
+				'localisation . epci': `'${$localisation.epci?.replace(/'/g, '’') || ''}'`,
 				'localisation . département': `'${$localisation.departement}'`,
 				'localisation . région': `'${$localisation.region}'`
 		  }

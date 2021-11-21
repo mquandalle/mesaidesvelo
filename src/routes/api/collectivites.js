@@ -24,6 +24,7 @@ const extraData = [
 	{
 		nom: 'Monaco',
 		codePostal: '98000',
+		code: '99138',
 		codesPostaux: ['98000'],
 		departement: '06',
 		region: '84',
@@ -68,10 +69,11 @@ export async function get({ query }) {
 	const search = removeFrenchAccents(query.get('search')?.replace(/\s/g, '').toLowerCase());
 	const slug = query.get('slug');
 
-	const pick = ({ nom, slug, epci, codePostal, departement, region }) => ({
+	const pick = ({ code, nom, slug, epci, codePostal, departement, region }) => ({
 		nom,
 		slug,
 		epci,
+		codeInsee: code,
 		codePostal,
 		departement,
 		region
