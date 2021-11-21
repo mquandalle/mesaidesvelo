@@ -21,12 +21,11 @@
 	import Details from '$lib/components/Details.svelte';
 	import Results from '$lib/components/Results.svelte';
 	import { fly } from 'svelte/transition';
-	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 
 	export let ville;
 
-	onMount(() => localisation.set(ville));
+	localisation.set(ville);
 </script>
 
 <svelte:head>
@@ -38,7 +37,7 @@
 </svelte:head>
 
 <div class="w-full max-w-screen-md m-auto">
-	<div class="grid overflow-hidden -m-4 p-4" transition:fly={{ y: 30 }}>
+	<div class="grid overflow-hidden -m-4 p-4" transition:fly|local={{ y: 30 }}>
 		{#if $page.query.get('velo')}
 			<div
 				class="col-start-1 col-end-1 row-start-1 row-end-1"
