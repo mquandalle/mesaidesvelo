@@ -20,9 +20,9 @@ aides . bonus vélo cargo:
     inférieur à 13 489 € pour en bénéficier.
   applicable si:
     toutes ces conditions:
+      - localisation . pays = 'France'
       - revenu fiscal de référence <= 13489 €/an
       - vélo . cargo
-      - localisation . code postal != '98000'
   valeur: 40% * vélo . prix
   plafond: 1000€
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
@@ -37,9 +37,9 @@ aides . bonus vélo électrique:
     accordé par la collectivité dans la limite de 200€.
   applicable si:
     toutes ces conditions:
+      - localisation . pays = 'France'
       - revenu fiscal de référence <= 13489 €/an
       - vélo . électrique
-      - localisation . code postal != '98000'
   valeur:
     le maximum de:
       - commune
@@ -135,7 +135,7 @@ aides . paris:
   description: |
     La ville de Paris subventionne l’achat d’un $vélo à hauteur de 33% et
     jusqu’à un plafond de $plafond.
-  applicable si: localisation . code postal = '75001'
+  applicable si: localisation . code insee = '75056'
   valeur: 33% * vélo . prix
   plafond:
     nom: $plafond
@@ -309,7 +309,7 @@ aides . caen:
   titre: Ville de Caen
   applicable si:
     toutes ces conditions:
-      - localisation . code postal = '14000'
+      - localisation . code insee = '14118'
       - vélo . électrique
       - revenu fiscal de référence <= 13489 €/an
   valeur:
@@ -323,7 +323,7 @@ aides . caen:
 aides . mondeville:
   remplace: commune
   titre: Ville de Mondeville
-  applicable si: localisation . code postal = '14120'
+  applicable si: localisation . code insee = '14437'
   variations:
     - si: vélo . électrique
       alors:
@@ -425,7 +425,7 @@ aides . puy de dome:
 aides . colmar:
   remplace: commune
   titre: Ville de Colmar
-  applicable si: localisation . code postal = '68000'
+  applicable si: localisation . code insee = '68066'
   variations:
     - si: vélo . électrique
       alors: 200€
@@ -450,7 +450,7 @@ aides . charenton:
   titre: Charenton
   applicable si:
     toutes ces conditions:
-      - localisation . code postal = '94220'
+      - localisation . code insee = '94018'
       - revenu fiscal de référence <= 15000 €/an
   valeur: 50% * vélo . prix
   plafond: 200€
@@ -536,7 +536,7 @@ aides . aix les bains:
   titre: Ville d’Aix-les-Bains
   applicable si:
     toutes ces conditions:
-      - localisation . code postal = '73100'
+      - localisation . code insee = '73008'
       - vélo . électrique
   valeur: 250€
   plafond: vélo . prix
@@ -596,7 +596,7 @@ aides . mougins:
   titre: Commune de Mougins
   applicable si:
     toutes ces conditions:
-      - localisation . code postal = '06250'
+      - localisation . code insee = '06085'
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 300€
@@ -607,7 +607,7 @@ aides . mandelieu:
   titre: Commune de Mandelieu-La Napoule
   applicable si:
     toutes ces conditions:
-      - localisation . code postal = '06210'
+      - localisation . code insee = '06079'
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond:
@@ -620,7 +620,7 @@ aides . mandelieu:
 aides . pantin:
   remplace: commune
   titre: Pantin
-  applicable si: localisation . code postal = '93500'
+  applicable si: localisation . code insee = '93055'
   description: |
     La ville de Pantin propose une aide forfaitaire pour l’achat de tout type de
     vélo neuf ou d’occasion. À noter que la demande de subvention est soumise à
@@ -638,7 +638,7 @@ aides . pantin:
 aides . mons en baroeul:
   remplace: commune
   titre: Ville de Mons en Barœul
-  applicable si: localisation . code postal = '59370'
+  applicable si: localisation . code insee = '59410'
   description: |
     La commune de Mons en Barœul offre une aide à l’achat d’un $vélo
     jusqu’à $plafond pour ses habitants.
@@ -692,7 +692,7 @@ aides . mons en baroeul:
 aides . la madeleine:
   remplace: commune
   titre: Ville de La Madeleine
-  applicable si: localisation . code postal = '59110'
+  applicable si: localisation . code insee = '59368'
   description: |
     Note: Les vélos pour enfant (inférieur à 26 pouces) et les modèles de vélos dédiés exclusivement
      à des activités de loisirs ne sont pas subventionnés (ex : BMX, vélo de piste, vélo de course haut de gamme,…)
@@ -747,7 +747,7 @@ aides . aurillac:
 aides . carvin:
   remplace: commune
   titre: Ville de Carvin
-  applicable si: localisation . code postal = '62220'
+  applicable si: localisation . code insee = '62215'
   valeur: 75% * vélo . prix
   plafond: 300€
   lien: http://www.carvin.fr/carvinfr/actualites/2021/prime-velo.html
@@ -1109,10 +1109,10 @@ aides . communes riviera francaise:
     toutes ces conditions:
       - vélo . électrique
       - une de ces conditions:
-          - localisation . code postal = '06500'
-          - localisation . code postal = '06240'
-          - localisation . code postal = '06320'
-          - localisation . code postal = '06540'
+          - localisation . code insee = '06083'
+          - localisation . code insee = '06012'
+          - localisation . code insee = '06150'
+          - localisation . code insee = '06062'
   valeur: 150€
   plafond: vélo . prix
   lien: https://www.riviera-francaise.fr/les-actualites/item/236-prime-pour-l-achat-d-un-velo-electrique-il-est-encore-temps-d-en-profiter
@@ -1345,17 +1345,14 @@ aides . boulonnais:
         alors: 100€
       - sinon: 200€
   lien: https://www.agglo-boulonnais.fr/a-votre-service/mobilite/tous-a-velos
-# TODO: il serait préférable de rendre les aides de l'état non applicables à
-# partir d'ici plutôt que d'avoir à gérer le cas de monaco dans le cas général.
-# Ce n'est toutefois pas possible (sans HACK) tant que Publicodes ne supporte
-# pas les chaînes de remplacements https://github.com/betagouv/publicodes/issues/55
+
 aides . monaco:
   remplace: commune
   titre: Monaco
   applicable si:
     toutes ces conditions:
       - vélo . électrique
-      - localisation . code postal = '98000'
+      - localisation . pays = 'Monaco'
   valeur: 30% * vélo . prix
   plafond: 400€
   lien: https://www.gouv.mc/Action-Gouvernementale/L-Environnement/Une-mobilite-plus-douce/Dispositif-de-subventions-des-vehicules-electriques-et-hybrides
@@ -1418,7 +1415,8 @@ vélo . prix:
   par défaut: prix pour maximiser les aides
 
 # On met par défaut un prix élevé pour maximiser les aides proportionnelles au
-# prix du vélo, mais certaines collectivités ont instauré un prix maximum d'achat et il faut donc rester en-dessous dans ces cas là
+# prix du vélo, mais certaines collectivités ont instauré un prix maximum
+# d'achat et il faut donc rester en-dessous dans ces cas là
 vélo . prix pour maximiser les aides:
   variations:
     - si: localisation . epci = 'CA du Grand Annecy'
@@ -1439,8 +1437,12 @@ revenu fiscal de référence:
 ménage imposable: revenu fiscal de référence >= 11120 €/an
 
 localisation: oui
-localisation . code postal: "''"
 localisation . code insee: "''"
 localisation . epci: "''"
 localisation . département: "''"
 localisation . région: "''"
+localisation . pays:
+  variations:
+    - si: code insee = '99138'
+      alors: "'Monaco'"
+    - sinon: "'France'"

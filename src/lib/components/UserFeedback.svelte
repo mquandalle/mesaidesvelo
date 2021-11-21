@@ -42,13 +42,6 @@
 			<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Envoyer</button>
 			<button class="text-gray-500" on:click={() => (state = 'closed')}>Fermer</button>
 		</div>
-		<p>
-			→ Ou accédez au <a
-				class="hover:underline text-green-600"
-				href="https://docs.google.com/spreadsheets/d/12q5-N4tRUyBUL03zQhOjz_DMYwuRzm080vaJhTEHnRc/edit?usp=sharing"
-				target="_blank">Google Sheet partagé</a
-			>.
-		</p>
 	</form>
 {:else if state === 'sent'}
 	<div>

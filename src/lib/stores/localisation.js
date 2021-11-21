@@ -5,7 +5,6 @@ export const localisation = writable(null);
 export const localisationPublicodesSituation = derived(localisation, ($localisation) =>
 	$localisation
 		? {
-				'localisation . code postal': `'${$localisation.codePostal}'`,
 				'localisation . code insee': `'${$localisation.codeInsee}'`,
 				'localisation . epci': `'${$localisation.epci?.replace(/'/g, '’') || ''}'`,
 				'localisation . département': `'${$localisation.departement}'`,
