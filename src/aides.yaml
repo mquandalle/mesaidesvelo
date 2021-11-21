@@ -85,7 +85,7 @@ aides . occitanie:
   applicable si: localisation . région = '76'
   valeur:
     variations:
-      - si: ménage imposable
+      - si: revenu fiscal de référence > 25660 €/an
         alors:
           valeur: 50% * vélo . prix
           plafond:
