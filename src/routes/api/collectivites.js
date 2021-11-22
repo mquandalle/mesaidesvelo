@@ -12,42 +12,11 @@
 //   l'utilisateur.
 
 import fuzzysort from 'fuzzysort';
-import communes from '@etalab/decoupage-administratif/data/communes.json';
-import epci from '@etalab/decoupage-administratif/data/epci.json';
-import { removeFrenchAccents, slugify } from '$lib/utils';
+import data from '$lib/data-communes';
+import { removeFrenchAccents } from '$lib/utils';
 
-const communesInEpci = Object.fromEntries(
-	epci.map(({ nom, membres }) => membres.map(({ code }) => [code, nom])).flat()
-);
-
-const extraData = [
-	{
-		nom: 'Monaco',
-		codePostal: '98000',
-		code: '99138',
-		codesPostaux: ['98000'],
-		departement: '06',
-		region: '84',
-		population: 39244,
-		etat: 'monaco'
-	}
-];
-
-const data = [
-	...communes
-		.filter(
-			(c) =>
-				c.type === 'commune-actuelle' && c.codesPostaux && c.population && !c.code?.startsWith('97')
-		)
-		.map((c) => ({
-			...c,
-			...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
-			codePostal: c.codesPostaux[0]
-		})),
-	...extraData
-].map((c) => ({
+const indexedData = data.map((c) => ({
 	...c,
-	slug: slugify(c.nom),
 	indexedName: fuzzysort.prepare(removeFrenchAccents(c.nom)),
 	codePostaux: fuzzysort.prepare(c.codePostal)
 }));
@@ -86,12 +55,12 @@ export async function get({ query }) {
 		}
 	} else if (search) {
 		return {
-			body: fuzzysort.go(search, data, searchOptions).map(({ obj }) => pick(obj))
+			body: fuzzysort.go(search, indexedData, searchOptions).map(({ obj }) => pick(obj))
 		};
 	} else {
 		// Par défaut on retourne les communes les plus peuplées
 		return {
-			body: data
+			body: indexedData
 				.sort((a, b) => b.population - a.population)
 				.slice(0, 10)
 				.map(pick)
