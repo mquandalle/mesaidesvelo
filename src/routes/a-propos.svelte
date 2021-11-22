@@ -31,6 +31,17 @@
 		Cet outil rassemble l’ensemble des aides à l’achat de vélo. Il vous permet d’identifier en
 		quelques clics celles auxquelles vous avez droit.
 	</p>
+	<h2>Quelles sont les aides prises en compte ?</h2>
+	<p>
+		Nous voulons intégrer l’ensemble des aides disponibles dans toutes les villes de France. Il
+		s’agit néanmoins d’un travail de fourmi car il n’existe aucune base centrale les recensant
+		toutes. Il nous faut donc les saisir à la main une par une.
+	</p>
+	<p>
+		Vous pouvez retrouver l'ensemble des aides prise en compte sur <a href="/liste-aides"
+			>cette page</a
+		>
+	</p>
 	<hr />
 	<h2>Mentions Légales</h2>
 	<h3>Éditeur</h3>
