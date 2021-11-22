@@ -1347,6 +1347,28 @@ aides . boulonnais:
       - sinon: 200€
   lien: https://www.agglo-boulonnais.fr/a-votre-service/mobilite/tous-a-velos
 
+aides . chateauroux:
+  remplace: intercommunalité
+  titre: Châteauroux Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Châteauroux Métropole'
+      - vélo . électrique
+  valeur: vélo . prix
+  plafond: 200€
+  lien: https://www.chateauroux-metropole.fr/actualites-20/aide-a-lacquisition-dun-velo-a-assistance-electrique-vae-4838.html
+
+aides . pontivy:
+  remplace: intercommunalité
+  titre: Pontivy Communauté
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Pontivy Communauté'
+      - vélo . électrique
+  valeur: vélo . prix
+  plafond: 200€
+  lien: https://www.chateauroux-metropole.fr/actualites-20/aide-a-lacquisition-dun-velo-a-assistance-electrique-vae-4838.html
+
 aides . monaco:
   remplace: commune
   titre: Monaco
