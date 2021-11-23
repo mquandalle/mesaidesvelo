@@ -1,7 +1,9 @@
 <script>
 	import { prefetchRoutes } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import Search from '$lib/components/Search.svelte';
 	import { onMount } from 'svelte';
 	import 'virtual:windi.css';
 
@@ -20,6 +22,9 @@
 		<p class="text-gray-800 mt-1 max-w-sm">Trouvez les aides à l’achat d’un vélo</p>
 	</header>
 	<div class="flex-1 pb-6">
+		{#if $page.path === '/' || $page.path.startsWith('/ville') || $page.path === '/prime-a-la-conversion'}
+			<Search />
+		{/if}
 		<slot />
 	</div>
 	<Footer />

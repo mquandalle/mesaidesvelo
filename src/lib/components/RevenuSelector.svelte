@@ -76,7 +76,7 @@
 	$: displayedThresholds = [0, ...thresholds]
 		.reduce(
 			(acc, revenu) => {
-				// HACK: The problem whith thresholds evaluation is that their
+				// HACK: The problem with thresholds evaluation is that their
 				// value might depend on other answers, for exemple the bike
 				// price. This implies that in some case we remove relevant
 				// thresholds. This should be fixed with a more clever static

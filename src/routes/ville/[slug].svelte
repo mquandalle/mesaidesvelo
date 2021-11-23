@@ -21,7 +21,6 @@
 	import { fly } from 'svelte/transition';
 	import { get } from 'svelte/store';
 	import ShareButton from '$lib/components/ShareButton.svelte';
-	import Search from '$lib/components/Search.svelte';
 
 	export let ville;
 
@@ -36,7 +35,6 @@
 	/>
 </svelte:head>
 
-<Search />
 <div class="w-full max-w-screen-md m-auto">
 	<!-- In development mode, the transition isn't played the first time this
 	page is shown. This is because the __layout.svelte component is entierly

@@ -10,7 +10,7 @@ export const getCurrentBikeEngine = derived(
 	[publicodeSituation, page],
 	([$publicodeSituation, $page]) =>
 		() => {
-			const veloCat = $page.query.get('velo');
+			const veloCat = $page.query.get('velo') ?? '';
 			engine.setSituation({
 				...$publicodeSituation,
 				'vélo . type': `'${veloCat}'`
