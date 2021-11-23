@@ -49,7 +49,6 @@
 
 			const evaluateWithGivenRevenu = (revenu) =>
 				engine
-					.shallowCopy()
 					.setSituation({
 						...engine.parsedSituation,
 						'revenu fiscal de référence': `${revenu} €/an`,

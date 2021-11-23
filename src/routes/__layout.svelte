@@ -1,9 +1,15 @@
 <script>
+	import { prefetchRoutes } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Search from '$lib/components/Search.svelte';
+	import { onMount } from 'svelte';
 	import 'virtual:windi.css';
+
+	onMount(() => {
+		prefetchRoutes(['/ville/*']);
+	});
 </script>
 
 <div class="px-4 sm:px-8 h-screen flex flex-col">

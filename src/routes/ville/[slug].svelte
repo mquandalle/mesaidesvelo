@@ -2,6 +2,9 @@
 	import { browser } from '$app/env';
 	import { localisation } from '$lib/stores/localisation';
 
+	// We have to disable SSR because the Publicodes can't be imported as a normal
+	// package, but we want to re-activate it in order to improve search engines
+	// indexation of individual city pages.
 	export const ssr = false;
 
 	// This pattern is explained here:
@@ -38,6 +41,9 @@
 </svelte:head>
 
 <div class="w-full max-w-screen-md m-auto">
+	<!-- In development mode, the transition isn't played the first time this
+	page is shown. This is because the __layout.svelte component is entierly
+	re-rendered. cf. https://github.com/sveltejs/kit/issues/2130-->
 	<div class="grid overflow-hidden -m-4 p-4" transition:fly|local={{ y: 30 }}>
 		{#if $page.query.get('velo')}
 			<div

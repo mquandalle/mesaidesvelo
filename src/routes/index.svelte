@@ -1,3 +1,9 @@
+<script>
+	import { localisation } from '$lib/stores/localisation';
+
+	localisation.set(null);
+</script>
+
 <svelte:head>
 	<title>MesAidesVélo - Toutes les aides !</title>
 	<meta
