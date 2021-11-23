@@ -22,6 +22,7 @@
 	import Results from '$lib/components/Results.svelte';
 	import { fly } from 'svelte/transition';
 	import { get } from 'svelte/store';
+	import ShareButton from '$lib/components/ShareButton.svelte';
 
 	export let ville;
 
@@ -54,4 +55,5 @@
 			</div>
 		{/if}
 	</div>
+	<ShareButton title="Toutes les aides vélo à {ville.nom}" />
 </div>
