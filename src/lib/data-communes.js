@@ -1,4 +1,4 @@
-import { removeFrenchAccents, slugify } from '$lib/utils';
+import { removeAccents, slugify } from '$lib/utils';
 import communes from '@etalab/decoupage-administratif/data/communes.json';
 import epci from '@etalab/decoupage-administratif/data/epci.json';
 
@@ -45,7 +45,7 @@ const data = [
 	...c,
 	slug:
 		slugify(c.nom) + (duplicateCommunesNames.includes(slugify(c.nom)) ? `-${c.departement}` : ''),
-	indexedName: removeFrenchAccents(c.nom),
+	indexedName: removeAccents(c.nom),
 	codePostaux: c.codePostal
 }));
 

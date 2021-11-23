@@ -2,7 +2,7 @@
 	// TODO: supporter la recherche par région ou département
 	import { goto } from '$app/navigation';
 	import { localisation } from '$lib/stores/localisation';
-	import AutoComplete from 'simple-svelte-autocomplete';
+	import AutoComplete from '$lib/components/Autocomplete.svelte';
 
 	async function loadItems(keyword) {
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
@@ -10,12 +10,7 @@
 		return await response.json();
 	}
 
-	// Super HACKY but the <AutoComplete /> runs its `onChange` on load, even if the user
-	// hasn't type anything yet. We do this to avoid an unwanted redirection.
-	let loaded = false;
-
 	function autoSelectInput() {
-		loaded = true;
 		const inputElement = document.getElementById('localisation-input');
 		inputElement.select();
 	}
@@ -37,32 +32,38 @@
 				/></svg
 			></label
 		>
-		<form class="flex-1" autocomplete="off" on:submit|preventDefault>
-			<AutoComplete
-				className="w-full"
-				labelFunction={({ codePostal, nom }) => codePostal + ' - ' + nom}
-				placeholder="Commune ou Code postal"
-				searchFunction={loadItems}
-				localFiltering={false}
-				hideArrow={true}
-				showClear={!!$localisation}
-				inputId="localisation-input"
-				bind:selectedItem={$localisation}
-				onFocus={autoSelectInput}
-				onChange={(val) => {
-					if (typeof window !== 'undefined' && loaded) {
-						if (val) {
-							goto(`/ville/${val.slug}`, { noscroll: true });
-						} else {
-							goto('/', { noscroll: true });
-						}
-					}
-				}}
+		<AutoComplete
+			className="w-full"
+			labelFunction={(item) => {
+				if (item === null || item === undefined) {
+					return '';
+				}
+				return item.codePostal + ' - ' + item.nom;
+			}}
+			placeholder="Commune ou Code postal"
+			searchFunction={loadItems}
+			localFiltering={false}
+			hideArrow={true}
+			inputId="localisation-input"
+			bind:selectedItem={$localisation}
+			onFocus={autoSelectInput}
+			onChange={(val) => {
+				if (val) {
+					goto(`/ville/${val.slug}`, { noscroll: true });
+				} else {
+					goto('/', { noscroll: true });
+				}
+			}}
+		>
+			<div slot="loading">Chargement...</div>
+			<div slot="no-results">Pas de résultats</div></AutoComplete
+		>
+		{#if $localisation}
+			<span
+				class="text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800"
+				on:click={() => localisation.set(null)}>&times;</span
 			>
-				<div slot="loading">Chargement...</div>
-				<div slot="no-results">Pas de résultats</div></AutoComplete
-			>
-		</form>
+		{/if}
 	</div>
 </div>
 

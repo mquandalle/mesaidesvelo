@@ -24,7 +24,6 @@
 	"dependencies": {
 		"@etalab/decoupage-administratif": "^0.9.0-0",
 		"fuzzysort": "^1.1.4",
-		"publicodes": "^1.0.0-beta.17",
-		"simple-svelte-autocomplete": "^2.2.4"
+		"publicodes": "^1.0.0-beta.17"
 	}
 }

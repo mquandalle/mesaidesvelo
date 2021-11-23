@@ -13,11 +13,11 @@
 
 import fuzzysort from 'fuzzysort';
 import data from '$lib/data-communes';
-import { removeFrenchAccents } from '$lib/utils';
+import { removeAccents } from '$lib/utils';
 
 const indexedData = data.map((c) => ({
 	...c,
-	indexedName: fuzzysort.prepare(removeFrenchAccents(c.nom)),
+	indexedName: fuzzysort.prepare(removeAccents(c.nom)),
 	codePostaux: fuzzysort.prepare(c.codePostal)
 }));
 
@@ -35,7 +35,7 @@ const searchOptions = {
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get({ query }) {
-	const search = removeFrenchAccents(query.get('search')?.replace(/\s/g, '').toLowerCase());
+	const search = removeAccents(query.get('search')?.replace(/\s/g, '').toLowerCase());
 	const slug = query.get('slug');
 
 	const pick = ({ code, nom, slug, epci, codePostal, departement, region }) => ({

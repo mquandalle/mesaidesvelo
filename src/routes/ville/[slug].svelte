@@ -50,14 +50,14 @@
 				class="col-start-1 col-end-1 row-start-1 row-end-1"
 				transition:fly|local={{ x: 600, duration: 400 }}
 			>
-				<Details {ville} />
+				<Details />
 			</div>
 		{:else}
 			<div
 				class="col-start-1 col-end-1 row-start-1 row-end-1"
 				transition:fly|local={{ x: -600, duration: 400 }}
 			>
-				<Results {ville} />
+				<Results />
 			</div>
 		{/if}
 	</div>
