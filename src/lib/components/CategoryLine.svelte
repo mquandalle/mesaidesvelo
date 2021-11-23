@@ -1,11 +1,12 @@
 <script>
 	export let montant;
+	export let href;
 </script>
 
-<div
+<a
+	{href}
+	sveltekit:noscroll
 	class="flex gap-x-4 items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer border-b last:border-b-0 group"
-	on:click
-	tabindex="0"
 >
 	<span><slot /></span>
 	<div class="flex-1 flex flex-col items-end gap-x-2">
@@ -19,4 +20,4 @@
 			/></svg
 		>
 	</span>
-</div>
+</a>

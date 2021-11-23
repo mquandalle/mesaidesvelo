@@ -5,15 +5,12 @@
 	import DetailsLine from './DetailsLine.svelte';
 	import Emoji from './Emoji.svelte';
 	import { emoji, title } from './Results.svelte';
-	import { formatValue } from 'publicodes';
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
 	import Questions from './Questions.svelte';
 	import AnimatedAmount from './AnimatedAmount.svelte';
 
 	const veloCat = $page.query.get('velo');
 	const categoryDescription = engine.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
-
-	const defaultDescription = '';
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
 	$: aidesDetails = collectivites
@@ -23,34 +20,8 @@
 				return null;
 			}
 			const originalRuleName = aide.explanation.find(({ satisfied }) => satisfied).consequence.name;
-			const { title, rawNode } = engine.getRule(originalRuleName);
-			const description = rawNode.description ?? defaultDescription;
-			const plafondRuleName = `${originalRuleName} . $plafond`;
-			const plafondIsDefined = Object.keys(engine.parsedRules).includes(plafondRuleName);
-			const plafond = plafondIsDefined && engine.evaluate(plafondRuleName);
-			const notice = description
-				.replace(/\$vélo/g, veloCat === 'motorisation' ? 'kit de motorisation' : `vélo ${veloCat}`)
-				.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }));
 
-			const evaluateWithGivenRevenu = (revenu) =>
-				engine
-					.setSituation({
-						...engine.parsedSituation,
-						...(revenu ? { 'revenu fiscal de référence': `${revenu} €/an` } : {}),
-						'vélo . prix': 'vélo . prix pour maximiser les aides'
-					})
-					.evaluate(originalRuleName).nodeValue;
-			const conditionDeRessources = evaluateWithGivenRevenu() !== evaluateWithGivenRevenu(100000);
-
-			return {
-				title,
-				ruleName: originalRuleName,
-				link: rawNode.lien,
-				notice,
-				amount: aide.nodeValue,
-				unit: aide.unit,
-				conditionDeRessources
-			};
+			return originalRuleName;
 		})
 		.filter(Boolean);
 
@@ -59,14 +30,15 @@
 
 <div class="mt-8" />
 
-<span
+<a
 	class="inline-block text-gray-500 text-md 
     cursor-pointer
     hover:text-green-700 transform transition hover:-translate-x-1"
-	on:click={() => goto($page.path, { noscroll: true })}
+	sveltekit:noscroll
+	href={$page.path}
 >
 	← Toutes les aides
-</span>
+</a>
 <h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
 	{title(veloCat)}{#if emoji(veloCat)}&nbsp;<Emoji emoji={emoji(veloCat)} />{/if}
 </h2>
@@ -76,9 +48,9 @@
 {/if}
 
 <div class="border mt-6 rounded-md shadow-sm">
-	{#each aidesDetails as aide (aide.ruleName)}
-		<div transition:slide|local={{ duration: 200 }} class="border-b last:border-b-0 p-4">
-			<DetailsLine {aide} />
+	{#each aidesDetails as ruleName (ruleName)}
+		<div transition:slide|local={{ duration: 200 }} class="border-b last:border-b-0">
+			<DetailsLine {ruleName} {veloCat} />
 		</div>
 	{/each}
 	<div class="p-4 bg-gray-50 rounded-b-md">
@@ -95,4 +67,4 @@
 	</div>
 </div>
 
-<Questions goals={aidesDetails.map((r) => r.ruleName)} />
+<Questions goals={aidesDetails} />

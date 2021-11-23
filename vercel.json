@@ -7,6 +7,10 @@
 		{
 			"source": "/api/event",
 			"destination": "https://plausible.io/api/event"
+		},
+		{
+			"source": "/prime-a-la-conversion",
+			"destination": "/ville/prime-a-la-conversion"
 		}
 	],
 	"github": {

@@ -17,7 +17,6 @@
 	import CategoryLine from '$lib/components/CategoryLine.svelte';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import { answers, localisation, publicodeSituation } from '$lib/stores';
-	import { goto } from '$app/navigation';
 	import { engine } from '$lib/engine';
 	import { formatValue } from 'publicodes';
 
@@ -49,8 +48,11 @@
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
 <div class="border rounded shadow-md sm:text-lg">
 	{#each aidesPerBikeKind as [cat, { montant, label, emoji }]}
-		<CategoryLine {montant} on:click={() => goto(`?velo=${cat}`, { noscroll: true })}
+		<CategoryLine {montant} href="?velo={cat}"
 			>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 		>
 	{/each}
+	<CategoryLine montant="1 500 €" href="/prime-a-la-conversion"
+		>Prime à la conversion <Emoji emoji="🚗" /> →<Emoji emoji="🚲" /></CategoryLine
+	>
 </div>

@@ -9,6 +9,7 @@ export async function get({}) {
 	return {
 		body: [
 			'/',
+			'/prime-a-la-conversion',
 			...communes
 				.sort((a, b) => b.population - a.population)
 				.slice(0, 50)

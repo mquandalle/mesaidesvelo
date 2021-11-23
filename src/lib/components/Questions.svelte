@@ -12,16 +12,20 @@
 
 	const getSortOrder = (name) =>
 		questionsOrder.includes(name) ? questionsOrder.indexOf(name) : Infinity;
-	const questions = [
-		Object.keys($getCurrentBikeEngine().evaluate('aides').missingVariables),
-		Object.keys($answers)
-	]
-		.flat()
+	const uniq = (arr) => [...new Set(arr)];
+	const questions = uniq(
+		[
+			(goals ?? ['aides']).map((ruleName) =>
+				Object.keys($getCurrentBikeEngine().evaluate(ruleName).missingVariables)
+			),
+			Object.keys($answers)
+		].flat(2)
+	)
 		.filter((q) => engine.getRule(q).rawNode.question)
 		.sort((a, b) => getSortOrder(a) - getSortOrder(b));
 </script>
 
-<div class="border-l-4 mt-8 border-green-200 pl-4 py-3 bg-gray-50">
+<div class="border-l-4 mt-8 border-green-200 pl-4 py-3 bg-green-50">
 	<div
 		class="inline-block relative -left-8.5 bg-white border-4 border-green-200 w-8 h-8 rounded-full font-bold text-green-300 text-center leading-6"
 	>

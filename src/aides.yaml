@@ -52,10 +52,22 @@ aides . bonus vélo électrique:
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
 aides . prime à la conversion:
-  applicable si: localisation . pays = 'France'
-  valeur: 30% * vélo . prix
+  applicable si:
+    toutes ces conditions:
+      - localisation . pays = 'France'
+      # Hack: pour ne pas que la règle ressorte quand on précise un type de vélo
+      - vélo . type = ''
+  description: |
+    Pour bénéficier de cette « prime à la casse » vous devez détruire un
+    véhicule diesel immatriculé avant janvier 2011 ou bien un véhicule essence
+    immatriculé avant 2006.
+
+    La prime est de 40% du prix du vélo dans la limite de 1 500 €. Elle est
+    cumulable avec les aides à l'achat d’un vélo électrique, comme le « bonus
+    écologique ».
+  valeur: 40% * vélo . prix
   plafond: 1500€
-  lien:
+  lien: https://www.service-public.fr/particuliers/vosdroits/F35846
 
 aides . ile de france:
   remplace: région
@@ -1630,7 +1642,7 @@ vélo . prix pour maximiser les aides:
       alors: 2400 €
     - si: localisation . epci = 'Métropole de Lyon'
       alors: 3000 €
-    - sinon: 3000 €
+    - sinon: 5000 €
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
