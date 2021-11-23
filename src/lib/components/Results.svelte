@@ -1,10 +1,8 @@
 <script context="module">
 	import aides from '$lib/../aides.yaml';
+	import publicodes, { formatValue } from 'publicodes';
 
-	// HACK : Le paquet publicodes ne peut pas être importé normallement avec un
-	// `import Engine from "publicodes"`, vraisembablement car le paquet n'est pas sous
-	// le bon format ES Module
-	export const engine = typeof window !== 'undefined' ? new window.publicodes.default(aides) : null;
+	export const engine = new publicodes(aides);
 
 	export function title(category) {
 		if (category === 'motorisation') {
@@ -43,7 +41,7 @@
 			{
 				label: title(cat),
 				emoji: emoji(cat),
-				montant: window.publicodes.formatValue(node, { precision: 0 })
+				montant: formatValue(node, { precision: 0 })
 			}
 		]);
 </script>
@@ -53,8 +51,7 @@
 <div class="border rounded shadow-md sm:text-lg">
 	{#each aidesPerBikeKind as [cat, { montant, label, emoji }]}
 		<CategoryLine {montant} on:click={() => goto(`?velo=${cat}`, { noscroll: true })}
-			>{label}{#if emoji}
-				&nbsp;<Emoji {emoji} />{/if}</CategoryLine
+			>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 		>
 	{/each}
 </div>

@@ -2,11 +2,6 @@
 	import { browser } from '$app/env';
 	import { localisation } from '$lib/stores/localisation';
 
-	// We have to disable SSR because the Publicodes can't be imported as a normal
-	// package, but we want to re-activate it in order to improve search engines
-	// indexation of individual city pages.
-	export const ssr = false;
-
 	// This pattern is explained here:
 	// https://github.com/sveltejs/kit/issues/2851
 	export async function load({ page, fetch }) {
@@ -26,6 +21,7 @@
 	import { fly } from 'svelte/transition';
 	import { get } from 'svelte/store';
 	import ShareButton from '$lib/components/ShareButton.svelte';
+	import Search from '$lib/components/Search.svelte';
 
 	export let ville;
 
@@ -40,11 +36,12 @@
 	/>
 </svelte:head>
 
+<Search />
 <div class="w-full max-w-screen-md m-auto">
 	<!-- In development mode, the transition isn't played the first time this
 	page is shown. This is because the __layout.svelte component is entierly
 	re-rendered. cf. https://github.com/sveltejs/kit/issues/2130-->
-	<div class="grid overflow-hidden -m-4 p-4" transition:fly|local={{ y: 30 }}>
+	<div class="grid overflow-hidden -m-4 p-4" in:fly|local={{ y: 30 }}>
 		{#if $page.query.get('velo')}
 			<div
 				class="col-start-1 col-end-1 row-start-1 row-end-1"
