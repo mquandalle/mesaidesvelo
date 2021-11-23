@@ -1,5 +1,4 @@
 // Un sitemap avec les 50 villes les plus peuplées
-// Peu utile tant que l'on a pas de SSR
 import communes from '@etalab/decoupage-administratif/data/communes.json';
 import { slugify } from '$lib/utils';
 

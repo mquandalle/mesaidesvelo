@@ -7,7 +7,7 @@
 	import { emoji, engine, title } from './Results.svelte';
 	import { localisationPublicodesSituation } from '$lib/stores/localisation';
 	import RevenuSelector from './RevenuSelector.svelte';
-	const formatValue = typeof window !== 'undefined' && window.publicodes.formatValue;
+	import { formatValue } from 'publicodes';
 
 	const veloCat = $page.query.get('velo');
 	const categoryDescription = engine?.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';

@@ -1,7 +1,7 @@
 <script context="module">
 	import { engine } from '$lib/components/Results.svelte';
 	import Emoji from './Emoji.svelte';
-	const formatValue = typeof window !== 'undefined' && window.publicodes.formatValue;
+	import { formatValue, reduceAST } from 'publicodes';
 
 	// We do a static analysis of the rules AST to search for a particular rule name.
 	// When in find it in a comparaison expression we retreive the value of the other
@@ -43,7 +43,7 @@
 			}
 		};
 
-		return window.publicodes.reduceAST(accumulateThresholds, [], engine.getRule(dottedName));
+		return reduceAST(accumulateThresholds, [], engine.getRule(dottedName));
 	}
 </script>
 
@@ -113,9 +113,11 @@
 					></MultipleChoiceAnswer
 				>
 			{/each}
-			<MultipleChoiceAnswer value={displayedThresholds.at(-1) + 1} bind:group={value}
+			<MultipleChoiceAnswer
+				value={displayedThresholds[displayedThresholds.length - 1] + 1}
+				bind:group={value}
 				>plus de <strong class="font-semibold"
-					>{formatValue(displayedThresholds.at(-1) + 1)} €</strong
+					>{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €</strong
 				></MultipleChoiceAnswer
 			>
 		</div>
