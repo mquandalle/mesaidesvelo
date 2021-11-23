@@ -1,18 +1,13 @@
 // Un sitemap avec les 50 villes les plus peuplées
-import communes from '@etalab/decoupage-administratif/data/communes.json';
+import communes from '$lib/data-communes';
 import { slugify } from '$lib/utils';
-
-const data = communes.filter(
-	(c) =>
-		c.type === 'commune-actuelle' && c.codesPostaux && c.population && !c.code?.startsWith('97')
-);
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get({}) {
 	return {
 		body: [
 			'/',
-			...data
+			...communes
 				.sort((a, b) => b.population - a.population)
 				.slice(0, 50)
 				.map(({ nom }) => `/ville/${slugify(nom)}`)
