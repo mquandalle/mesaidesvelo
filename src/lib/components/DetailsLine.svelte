@@ -1,4 +1,5 @@
 <script>
+	import AnimatedAmount from './AnimatedAmount.svelte';
 	import Badge from './Badge.svelte';
 
 	export let aide;
@@ -8,7 +9,9 @@
 	<h3 class="font-semibold text-md">
 		{aide.title}
 	</h3>
-	<div class="font-bold text-gray-800 flex-1 text-right sm:order-3">{aide.montant}</div>
+	<div class="font-bold text-gray-800 flex-1 text-right sm:order-3">
+		<AnimatedAmount amount={aide.amount} unit={aide.unit} />
+	</div>
 	{#if aide.conditionDeRessources}
 		<span class="w-full sm:w-auto">
 			<Badge className="sm:order-2">Sous condition de ressources</Badge>

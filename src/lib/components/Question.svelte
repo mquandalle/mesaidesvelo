@@ -30,7 +30,7 @@
 				class="m-0 text-right w-35 focus:outline-transparent"
 				bind:value
 			/>
-			<span class="text-gray-600">{unité || ''}</span>
+			<label for={domId}><span class="text-gray-600">{unité || ''}</span></label>
 		</div>
 	{/if}
 </div>

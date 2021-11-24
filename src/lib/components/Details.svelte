@@ -8,6 +8,7 @@
 	import { formatValue } from 'publicodes';
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
 	import Questions from './Questions.svelte';
+	import AnimatedAmount from './AnimatedAmount.svelte';
 
 	const veloCat = $page.query.get('velo');
 	const categoryDescription = engine.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
@@ -46,13 +47,14 @@
 				ruleName: originalRuleName,
 				link: rawNode.lien,
 				notice,
-				montant: formatValue(aide, { precision: 0 }),
+				amount: aide.nodeValue,
+				unit: aide.unit,
 				conditionDeRessources
 			};
 		})
 		.filter(Boolean);
 
-	$: sum = formatValue($getCurrentBikeEngine().evaluate('aides'), { precision: 0 });
+	$: sum = $getCurrentBikeEngine().evaluate('aides');
 </script>
 
 <div class="mt-8" />
@@ -82,7 +84,7 @@
 	<div class="p-4 bg-gray-50 rounded-b-md">
 		<div class="flex justify-between text-lg">
 			<h3 class="font-semibold text-md">Total des aides</h3>
-			<div class="font-bold">{sum}</div>
+			<div class="font-bold"><AnimatedAmount amount={sum.nodeValue} unit={sum.unit} /></div>
 		</div>
 		{#if false}
 			<div class="flex justify-between text-lg mt-3 text-gray-600" transition:slide|local>
