@@ -1,7 +1,7 @@
 <script context="module">
-	import { engine } from '$lib/components/Results.svelte';
 	import Emoji from './Emoji.svelte';
 	import { formatValue, reduceAST } from 'publicodes';
+	import { engine } from '$lib/engine';
 
 	// We do a static analysis of the rules AST to search for a particular rule name.
 	// When in find it in a comparaison expression we retreive the value of the other
@@ -50,17 +50,17 @@
 <script>
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import { slide } from 'svelte/transition';
+	import { answers } from '$lib/stores';
 
-	export let rules;
-	export let value;
+	export let goals;
+	let value;
 
 	const uniq = (l) => [...new Set(l)];
 	const thresholds = uniq(
-		rules
-			.map((name) =>
+		goals
+			.flatMap((name) =>
 				findAllComparaisonsValue(name, { searchedName: 'revenu fiscal de référence', unit: '€/an' })
 			)
-			.flat()
 			.filter((x) => x !== Infinity)
 	).sort((a, b) => a - b);
 
@@ -90,11 +90,13 @@
 		.thresholds.slice(1);
 
 	let showExplanations = false;
+
+	$: $answers['revenu fiscal de référence'] = value && `${value} €/an`;
 </script>
 
 {#if displayedThresholds.length > 0}
 	<div class="mt-6">
-		Votre revenu annuel (quotient familial) : <span
+		Quel est votre revenu annuel (quotient familial) ? <span
 			title="Plus d’informations"
 			class="cursor-pointer"
 			on:click={() => (showExplanations = !showExplanations)}><Emoji emoji="ℹ" /></span

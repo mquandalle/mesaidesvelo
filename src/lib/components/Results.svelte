@@ -1,9 +1,4 @@
 <script context="module">
-	import aides from '$lib/../aides.yaml';
-	import publicodes, { formatValue } from 'publicodes';
-
-	export const engine = new publicodes(aides);
-
 	export function title(category) {
 		if (category === 'motorisation') {
 			return 'Motorisation d’un vélo classique';
@@ -21,16 +16,20 @@
 <script>
 	import CategoryLine from '$lib/components/CategoryLine.svelte';
 	import Emoji from '$lib/components/Emoji.svelte';
-	import { localisation, localisationPublicodesSituation } from '$lib/stores/localisation';
+	import { answers, localisation, publicodeSituation } from '$lib/stores';
 	import { goto } from '$app/navigation';
+	import { engine } from '$lib/engine';
+	import { formatValue } from 'publicodes';
 
 	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
+
+	answers.set({});
 
 	$: aidesPerBikeKind = bikeKinds
 		.map((type) => {
 			if (!$localisation) return [];
 			engine.setSituation({
-				...$localisationPublicodesSituation,
+				...$publicodeSituation,
 				'vélo . type': `'${type}'`
 			});
 			return [type, engine.evaluate('aides')];

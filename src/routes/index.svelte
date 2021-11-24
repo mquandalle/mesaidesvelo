@@ -1,6 +1,6 @@
 <script>
 	import Search from '$lib/components/Search.svelte';
-	import { localisation } from '$lib/stores/localisation';
+	import { localisation } from '$lib/stores';
 
 	localisation.set(null);
 </script>

@@ -4,36 +4,20 @@
 	import { slide } from 'svelte/transition';
 	import DetailsLine from './DetailsLine.svelte';
 	import Emoji from './Emoji.svelte';
-	import { emoji, engine, title } from './Results.svelte';
-	import { localisationPublicodesSituation } from '$lib/stores/localisation';
-	import RevenuSelector from './RevenuSelector.svelte';
+	import { emoji, title } from './Results.svelte';
 	import { formatValue } from 'publicodes';
+	import { engine, getCurrentBikeEngine } from '$lib/engine';
+	import Questions from './Questions.svelte';
 
 	const veloCat = $page.query.get('velo');
-	const categoryDescription = engine?.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
-
-	let bikePrice;
-	let revenu = 0;
-
-	$: getEngine = () => {
-		if (!$localisationPublicodesSituation) {
-			return engine;
-		}
-		engine.setSituation({
-			...$localisationPublicodesSituation,
-			'vélo . type': `'${veloCat}'`,
-			'revenu fiscal de référence': `${revenu} €/an`,
-			...(bikePrice ? { 'vélo . prix': `${bikePrice} €` } : {})
-		});
-		return engine;
-	};
+	const categoryDescription = engine.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
 
 	const defaultDescription = '';
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
 	$: aidesDetails = collectivites
 		.map((collectivite) => {
-			const aide = getEngine().evaluate(`aides . ${collectivite}`);
+			const aide = $getCurrentBikeEngine().evaluate(`aides . ${collectivite}`);
 			if (!aide.nodeValue) {
 				return null;
 			}
@@ -51,12 +35,11 @@
 				engine
 					.setSituation({
 						...engine.parsedSituation,
-						'revenu fiscal de référence': `${revenu} €/an`,
+						...(revenu ? { 'revenu fiscal de référence': `${revenu} €/an` } : {}),
 						'vélo . prix': 'vélo . prix pour maximiser les aides'
 					})
 					.evaluate(originalRuleName).nodeValue;
-			const conditionDeRessources =
-				evaluateWithGivenRevenu(revenu) !== evaluateWithGivenRevenu(100000);
+			const conditionDeRessources = evaluateWithGivenRevenu() !== evaluateWithGivenRevenu(100000);
 
 			return {
 				title,
@@ -69,7 +52,7 @@
 		})
 		.filter(Boolean);
 
-	$: sum = formatValue(getEngine().evaluate('aides'), { precision: 0 });
+	$: sum = formatValue($getCurrentBikeEngine().evaluate('aides'), { precision: 0 });
 </script>
 
 <div class="mt-8" />
@@ -110,37 +93,4 @@
 	</div>
 </div>
 
-<div class="border-l-4 mt-8 border-green-200 pl-4 py-3 bg-gray-50">
-	<div
-		class="inline-block relative -left-8.5 bg-white border-4 border-green-200 w-8 h-8 rounded-full font-bold text-green-300 text-center leading-6"
-	>
-		€
-	</div>
-	<p class="text-gray-600 text-md -mt-7 pl-3 italic">Affinez le calcul :</p>
-	<RevenuSelector rules={aidesDetails.map((r) => r.ruleName)} bind:value={revenu} />
-	<div class="inline-flex flex-col mt-6 items-start shadow-sm ">
-		<label for="velo-prix"
-			>Prix du {#if veloCat === 'motorisation'}kit de convesion{:else}vélo{/if} :</label
-		>
-		<div class="border rounded p-2 mt-1 bg-white">
-			<input
-				type="number"
-				id="velo-prix"
-				class="m-0 text-right w-35 focus:outline-transparent"
-				bind:value={bikePrice}
-			/>
-			<span class="text-gray-600">€</span>
-		</div>
-	</div>
-</div>
-
-<style>
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
-
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-	}
-</style>
+<Questions goals={aidesDetails.map((r) => r.ruleName)} />

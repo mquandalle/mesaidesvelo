@@ -1,7 +1,7 @@
 <script>
 	// TODO: supporter la recherche par région ou département
 	import { goto } from '$app/navigation';
-	import { localisation } from '$lib/stores/localisation';
+	import { localisation } from '$lib/stores';
 	import AutoComplete from '$lib/components/Autocomplete.svelte';
 	import { page } from '$app/stores';
 
