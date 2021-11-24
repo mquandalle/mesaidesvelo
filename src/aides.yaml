@@ -51,6 +51,12 @@ aides . bonus vélo électrique:
     plafond: vélo . prix
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
+aides . prime à la conversion:
+  applicable si: localisation . pays = 'France'
+  valeur: 30% * vélo . prix
+  plafond: 1500€
+  lien:
+
 aides . ile de france:
   remplace: région
   titre: Région Île-de-France
@@ -136,7 +142,7 @@ aides . paris:
     La ville de Paris subventionne l’achat d’un $vélo à hauteur de 33% et
     jusqu’à un plafond de $plafond.
   applicable si: localisation . code insee = '75056'
-  valeur: 33% * vélo . prix
+  valeur: 33% * vélo . prix . HT
   plafond:
     nom: $plafond
     variations:
@@ -1437,6 +1443,11 @@ vélo . motorisation:
 vélo . prix:
   par défaut: prix pour maximiser les aides
 
+vélo . taux TVA: 20%
+
+vélo . prix . HT:
+  valeur: prix / (1 + taux TVA)
+
 # On met par défaut un prix élevé pour maximiser les aides proportionnelles au
 # prix du vélo, mais certaines collectivités ont instauré un prix maximum
 # d'achat et il faut donc rester en-dessous dans ces cas là
@@ -1444,11 +1455,10 @@ vélo . prix pour maximiser les aides:
   variations:
     - si: localisation . epci = 'CA du Grand Annecy'
       alors: 1000 €
-    - si:
-        une de ces conditions:
-          - localisation . epci = 'Métropole de Lyon'
-          - localisation . epci = 'CA Montluçon Communauté'
+    - si: localisation . epci = 'CA Montluçon Communauté'
       alors: 2400 €
+    - si: localisation . epci = 'Métropole de Lyon'
+      alors: 3000 €
     - sinon: 3000 €
 
 revenu fiscal de référence:
