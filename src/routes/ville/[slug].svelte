@@ -1,6 +1,6 @@
 <script context="module">
 	import { browser } from '$app/env';
-	import { localisation } from '$lib/stores/localisation';
+	import { localisation } from '$lib/stores';
 
 	// This pattern is explained here:
 	// https://github.com/sveltejs/kit/issues/2851

@@ -569,7 +569,6 @@ aides . erdregesvres:
   plafond: 100€
   lien: https://www.cceg.fr/vos-services/faciliter-et-simplifier-vos-deplacements/bonus-velo-4559.html
 
-# TODO : coût de pousse pour un vélo assemblé ou produit en côte d'or
 aides . cote d'or:
   remplace: département
   titre: Département Côte d’Or
@@ -577,9 +576,18 @@ aides . cote d'or:
     toutes ces conditions:
       - localisation . département = '21'
       - vélo . électrique
-  valeur: 250€
+  valeur:
+    variations:
+      - si: vélo assemblé ou produit localement
+        alors: 350€
+      - sinon: 250€
   plafond: vélo . prix
   lien: https://www.cotedor.fr/actualite/une-aide-de-250-eu-pour-lacquisition-dun-velo-electrique
+
+aides . cote d'or . vélo assemblé ou produit localement:
+  question: Le vélo est-il assemblé ou produit en Côte-d’Or ?
+  type: booléen
+  par défaut: non
 
 aides . sophia antipolis:
   remplace: intercommunalité
@@ -1441,6 +1449,12 @@ vélo . motorisation:
     batterie, ainsi que d’un contrôleur et d’un afficheur.
 
 vélo . prix:
+  question:
+    variations:
+      - si: vélo . type = 'motorisation'
+        alors: "'Quel est le prix du kit de motorisation ?'"
+      - sinon: "'Quel est le prix du vélo ?'"
+  unité: €
   par défaut: prix pour maximiser les aides
 
 vélo . taux TVA: 20%
@@ -1462,7 +1476,7 @@ vélo . prix pour maximiser les aides:
     - sinon: 3000 €
 
 revenu fiscal de référence:
-  titre: Revenu fiscal de référence par part
+  question: Quel est votre revenu annuel (quotient familial) ?
   # Comme pour le prix du vélo, la valeur par défaut est choisie pour maximiser
   # les aides
   par défaut: 800 €/an
