@@ -12,6 +12,12 @@ const duplicateCommunesNames = communes
 		return acc;
 	}, []);
 
+const villesAvecArrondissements = {
+	Paris: '75000',
+	Marseille: '13000',
+	Lyon: '69000'
+};
+
 const communesInEpci = Object.fromEntries(
 	epci.flatMap(({ nom, membres }) => membres.map(({ code }) => [code, nom]))
 );
@@ -38,7 +44,7 @@ const data = [
 		.map((c) => ({
 			...c,
 			...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
-			codePostal: c.codesPostaux[0]
+			codePostal: villesAvecArrondissements[c.nom] ?? c.codesPostaux[0]
 		})),
 	...extraData
 ].map((c) => ({
