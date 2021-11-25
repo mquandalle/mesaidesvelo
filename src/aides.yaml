@@ -425,7 +425,8 @@ aides . puy de dome:
     toutes ces conditions:
       - localisation . département = '63'
       - vélo . électrique
-  valeur: vélo . prix
+  valeur: 20% * vélo . prix
+  # TODO 250€ pour un VAE d'occasion
   plafond: 500€
   lien: https://www.puy-de-dome.fr/actualites/mai-2021/aide-a-lachat-de-vae.html
 
