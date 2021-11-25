@@ -27,7 +27,8 @@
 <span class="relative w-[min-content]">
 	{#if difference}
 		{#key difference}
-			<span class="evaporate block absolute -top-5 right-0 font-semibold {color}"
+			<span
+				class="evaporate block absolute -top-5 right-0 font-semibold pointer-events-none {color}"
 				>{format(difference, { withPlusSign: true })}</span
 			>
 		{/key}
