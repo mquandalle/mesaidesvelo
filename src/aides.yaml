@@ -983,6 +983,72 @@ aides . la rochelle:
     - sinon: 0€
   lien: https://yelo.agglo-larochelle.fr/aide-a-lachat-dun-vae/
 
+aides . roanne:
+  remplace: intercommunalité
+  titre: Roannais Agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Roannais Agglomération'
+      - vélo . électrique
+  valeur: 20% * vélo . prix . HT
+  plafond: 200€
+  lien: https://www.aggloroanne.fr/fileadmin/Aggloroanne.fr/3_Au_quotidien/Deplacements/Velos_scooters_electriques/REGLEMENT_DISPOSITIF_AIDE_VAE.pdf
+
+aides . blois:
+  remplace: intercommunalité
+  titre: Agglopolys
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA de Blois ’’Agglopolys’’'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 400€
+  lien: https://www.agglopolys.fr/1247-le-velo-a-assistance-electrique.htm
+
+aides . epinal:
+  remplace: intercommunalité
+  titre: Agglomération Épinal
+  applicable si: localisation . epci = 'CA d’Epinal'
+  valeur: 20% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 300€
+      - si: vélo . électrique
+        alors: 200€
+      - si: vélo . motorisation
+        alors: 200€
+      - sinon: 0€
+  lien: https://www.agglo-epinal.fr/se-deplacer/velo/subvention-a-lachat-dun-vae/
+
+aides . vannes:
+  remplace: intercommunalité
+  titre: Vannes Agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Golfe du Morbihan - Vannes Agglomération'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 1200 €/mois
+        alors: 300€
+      - si: revenu fiscal de référence <= 1400 €/mois
+        alors: 200€
+      - sinon: 0€
+  lien: https://www.golfedumorbihan-vannesagglomeration.bzh/achat-dun-velo-electrique
+
+aides . arcachon:
+  remplace: commune
+  titre: Arcachon
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '33009'
+      - vélo . électrique
+  valeur: vélo . prix
+  plafond: 200€
+  lien: https://www.ville-arcachon.fr/velo-arcachon/
+
 aides . pau:
   remplace: intercommunalité
   titre: Pau Béarn Pyrénées Mobilités
