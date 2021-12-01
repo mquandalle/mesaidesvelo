@@ -1,0 +1,20 @@
+<svelte:head>
+
+<link href="/prism-dracula.css" rel="stylesheet">
+</svelte:head>
+
+<div class="prose mt-8 w-full max-w-screen-md m-auto">
+
+# Intégrer sur mon site
+
+Vous souhaitez intégrer mesaidesvélo de manière transparente sur votre site ? C’est simple et gratuit !
+
+Vous pouvez copier/coller le code ci-dessous dans votre site web. La recherche d’aides sera alors disponibles pour vos utilisateurs sans qu'ils aient à quitter votre site.
+
+```html
+<script src="https://mesaidesvelo.fr/iframe.js" id="mesaidesvelo-iframe"></script>
+```
+
+L’intégration fonctionne avec une [iframe](https://developer.mozilla.org/fr/docs/Web/HTML/Element/iframe), et le script permet de la re-dimensionner automatiquement en fonction du contenu, pour une intégration la plus transparente possible.
+
+</div>

@@ -46,7 +46,7 @@
 
 <div class="mt-8" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
-<div class="border rounded shadow-md sm:text-lg">
+<div class="border rounded shadow-md bg-white sm:text-lg">
 	{#each aidesPerBikeKind as [cat, { montant, label, emoji }]}
 		<CategoryLine {montant} href="?velo={cat}"
 			>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
