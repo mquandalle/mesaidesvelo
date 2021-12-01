@@ -1,5 +1,4 @@
 <script>
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { slide } from 'svelte/transition';
 	import DetailsLine from './DetailsLine.svelte';
@@ -47,7 +46,7 @@
 	<p class="text-gray-700 text-sm">{categoryDescription}</p>
 {/if}
 
-<div class="border mt-6 rounded-md shadow-sm">
+<div class="border mt-6 bg-white rounded-md shadow-sm">
 	{#each aidesDetails as ruleName (ruleName)}
 		<div transition:slide|local={{ duration: 200 }} class="border-b last:border-b-0">
 			<DetailsLine {ruleName} {veloCat} />
