@@ -430,6 +430,25 @@ aides . puy de dome:
   plafond: 500€
   lien: https://www.puy-de-dome.fr/actualites/mai-2021/aide-a-lachat-de-vae.html
 
+aides . cournon d'auvergne:
+  remplace: commune
+  titre: Ville de Cournon-d’Auvergne
+  applicable si:
+    toutes ces conditions:
+      - localisation . département = '63'
+      - vélo . électrique
+  grille:
+    assiette: revenu fiscal de référence
+    tranches:
+      - plafond: 469 €/mois
+        montant: 200€
+      - plafond: 1028 €/mois
+        montant: 150€
+      - plafond: 2233 €/mois
+        montant: 100€
+  plafond: vélo . prix
+  lien: http://www.cournon-auvergne.fr/Urbanisme-et-economie/Transports/Aide-pour-l-achat-d-un-velo-a-assistance-electrique
+
 aides . colmar:
   remplace: commune
   titre: Ville de Colmar
