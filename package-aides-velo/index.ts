@@ -1,4 +1,4 @@
-import Publicodes, { Evaluation, formatValue } from 'publicodes';
+import Publicodes from 'publicodes';
 import aides from './build/aides.js';
 
 type Aide = {
@@ -37,13 +37,13 @@ export default function aidesVelo(situation: InputParameters): Array<Aide> {
 	return aidesRules
 		.map((dottedName) => {
 			const { title, rawNode } = engine.getRule(dottedName);
-			const value = formatValue(engine.evaluate(dottedName));
+			const { nodeValue } = engine.evaluate({ valeur: dottedName, unité: '€' });
 
 			return {
 				title,
 				description: rawNode.description,
 				url: (rawNode as any).lien,
-				amount: value === 'Non' ? 0 : parseInt(value)
+				amount: nodeValue as number
 			};
 		})
 		.filter(({ amount, url }) => amount && url);
