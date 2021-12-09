@@ -1,0 +1,22 @@
+name: NPM Package
+on: push
+jobs:
+  tests-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Build and Test
+        run: |
+          npm ci
+          npm build
+          npm test
+        working-directory: package-aides-velo
+      - name: Publish on NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_PUBLISH_SECRET }}
+          dry-run: ${{ github.ref != 'refs/heads/master' }}
+          package: ./package-aides-velo/package.json
