@@ -44,6 +44,9 @@ const data = [
 		.map((c) => ({
 			...c,
 			...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
+			codesPostaux: villesAvecArrondissements[c.nom]
+				? [villesAvecArrondissements[c.nom], ...c.codesPostaux]
+				: c.codesPostaux,
 			codePostal: villesAvecArrondissements[c.nom] ?? c.codesPostaux[0]
 		})),
 	...extraData
