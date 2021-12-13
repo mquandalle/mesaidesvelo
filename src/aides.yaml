@@ -1170,7 +1170,7 @@ aides . cholet:
 
 aides . laval:
   remplace: intercommunalité
-  titre: Agglomération du Choletais
+  titre: Laval Agglo
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA Laval Agglomération'
