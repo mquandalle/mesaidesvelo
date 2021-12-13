@@ -15,14 +15,23 @@ import fuzzysort from 'fuzzysort';
 import data from '$lib/data-communes';
 import { removeAccents } from '$lib/utils';
 
-const indexedData = data.map((c) => ({
-	...c,
-	indexedName: fuzzysort.prepare(removeAccents(c.nom)),
-	codePostaux: fuzzysort.prepare(c.codePostal)
-}));
+const indexedData = data
+	.flatMap(({ codesPostaux, ...rest }) =>
+		(codesPostaux ?? [rest.codePostal]).map((cp, i) => ({
+			...rest,
+			codePostal: cp,
+			cpPrincipal: i === 0,
+			population: i === 0 ? rest.population : 10
+		}))
+	)
+	.map((c) => ({
+		...c,
+		indexedName: c.cpPrincipal ? fuzzysort.prepare(removeAccents(c.nom)) : '',
+		indexedCodePostal: fuzzysort.prepare(c.codePostal)
+	}));
 
 const searchOptions = {
-	keys: ['indexedName', 'codePostaux'],
+	keys: ['indexedName', 'indexedCodePostal'],
 	limit: 10,
 	threshold: -1000,
 	scoreFn: (a) =>
