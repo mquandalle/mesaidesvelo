@@ -22,7 +22,7 @@
 >
 	<label for="localisation-input">Localisation :</label>
 	<div class="flex-1 flex flex-row items-center bg-white shadow rounded-3xl px-3 pt-1">
-		<label for="localisation-input"
+		<label for="localisation-input" class="relative z-99"
 			><svg
 				focusable="false"
 				xmlns="http://www.w3.org/2000/svg"
@@ -60,24 +60,9 @@
 		>
 		{#if $localisation}
 			<span
-				class="text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800"
+				class="text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800 relative z-99 -ml-[15px]"
 				on:click={() => localisation.set(null)}>&times;</span
 			>
 		{/if}
 	</div>
 </div>
-
-<style>
-	:global(.autocomplete-list-item.selected) {
-		background-color: #047857 !important;
-	}
-
-	:global(.autocomplete-list-item.confirmed) {
-		background-color: #10b981 !important;
-	}
-
-	:global(#localisation-input) {
-		outline: transparent;
-		height: 34px;
-	}
-</style>

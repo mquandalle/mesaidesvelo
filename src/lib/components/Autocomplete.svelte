@@ -654,14 +654,6 @@
 		}
 	}
 
-	function unselectItem(tag) {
-		if (debug) {
-			console.log('unselectItem', tag);
-		}
-		selectedItem = selectedItem.filter((i) => i !== tag);
-		input.focus();
-	}
-
 	function processInput() {
 		if (search()) {
 			highlightIndex = 0;
@@ -687,14 +679,6 @@
 			input.focus();
 			close();
 		}
-	}
-
-	function onBackspace(e) {
-		if (debug) {
-			console.log('onBackspace');
-		}
-
-		unselectItem(selectedItem[selectedItem.length - 1]);
 	}
 
 	function onFocusInternal() {
@@ -814,20 +798,6 @@
 		}
 	}
 
-	function clear() {
-		if (debug) {
-			console.log('clear');
-		}
-
-		text = '';
-		selectedItem = undefined;
-
-		setTimeout(() => {
-			input.focus();
-			close();
-		});
-	}
-
 	export function highlightFilter(keywords, field) {
 		return (item) => {
 			let label = item[field];
@@ -926,7 +896,9 @@
 		/>
 	</div>
 	<div
-		class="{dropdownClassName ? dropdownClassName : ''} autocomplete-list {showList ? '' : 'hidden'}
+		class="{dropdownClassName
+			? dropdownClassName
+			: ''} autocomplete-list shadow-md rounded-b-3xl {showList ? '' : 'hidden'}
       is-fullwidth"
 		bind:this={list}
 	>
@@ -1015,8 +987,11 @@
 	.autocomplete-input {
 		font: inherit;
 		width: 100%;
-		height: 100%;
 		padding: 5px 11px;
+		position: relative;
+		z-index: 99;
+		outline: transparent;
+		height: 34px;
 	}
 
 	.autocomplete:not(.hide-arrow) .autocomplete-input {
@@ -1032,12 +1007,14 @@
 	.autocomplete-list {
 		background: #fff;
 		position: relative;
-		width: 100%;
+		width: calc(100% + 44px);
 		overflow-y: auto;
-		z-index: 99;
+		z-index: 98;
 		padding: 10px 0;
-		top: 0px;
-		border: 1px solid #999;
+		top: -14px;
+		padding: 14px 28px;
+		left: -32px;
+		right: -32px;
 		max-height: calc(15 * (1rem + 10px) + 15px);
 		user-select: none;
 	}
@@ -1045,7 +1022,7 @@
 		padding: 0;
 	}
 	.autocomplete-list-item {
-		padding: 5px 15px;
+		padding: 8px 15px;
 		color: #333;
 		cursor: pointer;
 		line-height: 1;
@@ -1053,10 +1030,11 @@
 
 	.autocomplete-list-item.confirmed {
 		background-color: #789fed;
+		background-color: #10b981;
 		color: #fff;
 	}
 	.autocomplete-list-item.selected {
-		background-color: #2e69e2;
+		background-color: #047857;
 		color: #fff;
 	}
 	.autocomplete-list-item-no-results {
