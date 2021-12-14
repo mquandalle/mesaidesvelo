@@ -2,6 +2,7 @@
 	"name": "mesaidesvelo",
 	"version": "0.0.1",
 	"scripts": {
+		"postinstall": "node ./src/scripts/postinstall.js",
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
