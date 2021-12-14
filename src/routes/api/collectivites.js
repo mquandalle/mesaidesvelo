@@ -1,4 +1,4 @@
-// API de recherche dans la liste des commune.
+// API de recherche dans la liste des communes.
 //
 // Nous pourrions utiliser directement l'API fournie par Etalab
 // https://geo.api.gouv.fr/decoupage-administratif/communes mais elle ne répond
@@ -12,8 +12,8 @@
 //   l'utilisateur.
 
 import fuzzysort from 'fuzzysort';
-import data from '$lib/data-communes';
 import { removeAccents } from '$lib/utils';
+import data from '../../data/communes.json';
 
 const indexedData = data
 	.flatMap(({ codesPostaux, ...rest }) =>

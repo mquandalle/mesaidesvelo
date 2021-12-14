@@ -1,6 +1,8 @@
 // Un sitemap avec les 50 villes les plus peuplées
-import communes from '$lib/data-communes';
+import { loadJsonFile } from '$lib/readWriteJson';
 import { slugify } from '$lib/utils';
+
+const communes = loadJsonFile('src/data/communes.json');
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get({}) {

@@ -1,6 +1,16 @@
-import { removeAccents, slugify } from '$lib/utils';
-import communes from '@etalab/decoupage-administratif/data/communes.json';
-import epci from '@etalab/decoupage-administratif/data/epci.json';
+// A script to generate a static json file with the transformed communes data.
+// This is run a a build-time script instead of a runtime function call mostly
+// to avoid a ~1s cold start penalty.
+//
+// During development it is possible to enable hot reloads by adding the
+// following import somewhere in the dependency graph:
+//
+// import '../src/scripts/transform-communes-data.js';
+import { slugify } from '../lib/utils.js';
+import { loadJsonFile, writeJsonFile } from '../lib/readWriteJson.js';
+
+const communes = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/communes.json');
+const epci = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/epci.json');
 
 const duplicateCommunesNames = communes
 	.map(({ nom }) => slugify(nom))
@@ -25,7 +35,7 @@ const communesInEpci = Object.fromEntries(
 const extraData = [
 	{
 		nom: 'Monaco',
-		codePostal: '98000',
+		codePostal: '980000',
 		code: '99138',
 		codesPostaux: ['98000'],
 		departement: '06',
@@ -53,9 +63,7 @@ const data = [
 ].map((c) => ({
 	...c,
 	slug:
-		slugify(c.nom) + (duplicateCommunesNames.includes(slugify(c.nom)) ? `-${c.departement}` : ''),
-	indexedName: removeAccents(c.nom),
-	codePostaux: c.codePostal
+		slugify(c.nom) + (duplicateCommunesNames.includes(slugify(c.nom)) ? `-${c.departement}` : '')
 }));
 
-export default data;
+writeJsonFile('src/data/communes.json', data);
