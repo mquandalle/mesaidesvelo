@@ -17,13 +17,12 @@
 		"prettier": "^2.4.1",
 		"prettier-plugin-svelte": "^2.4.0",
 		"svelte": "^3.42.6",
-		"vite": "^2.7.0-beta.5",
 		"vite-plugin-windicss": "^1.5.1"
 	},
 	"type": "module",
 	"dependencies": {
 		"@etalab/decoupage-administratif": "^0.9.0-0",
 		"fuzzysort": "^1.1.4",
-		"publicodes": "^1.0.0-beta.18"
+		"publicodes": "^1.0.0-beta.25"
 	}
 }
