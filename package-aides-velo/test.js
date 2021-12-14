@@ -1,5 +1,5 @@
 import test from 'ava';
-import aidesVelo from './build/index.js';
+import aidesVelo from 'aides-velo';
 
 test('aides électrique colmar', (t) => {
 	const colmarElectrique = aidesVelo({

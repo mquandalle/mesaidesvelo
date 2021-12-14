@@ -11,7 +11,7 @@ jobs:
       - name: Build and Test
         run: |
           npm ci
-          npm build
+          npm run build
           npm test
         working-directory: package-aides-velo
       - name: Publish on NPM

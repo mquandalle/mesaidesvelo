@@ -1,5 +1,5 @@
 import Publicodes from 'publicodes';
-import aides from './build/aides.js';
+import aides from '../src/aides.yaml';
 
 type Aide = {
 	title: string;

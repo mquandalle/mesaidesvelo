@@ -1,18 +1,21 @@
 {
 	"name": "aides-velo",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Les aides vélos proposées en France",
 	"author": "Maxime Quandalle <maxime@mesaidesvelo.fr>",
 	"license": "MIT",
-	"main": "build/index.js",
+	"main": "build/index.cjs",
+	"module": "build/index.es.js",
 	"type": "module",
 	"types": "index.d.ts",
 	"exports": {
-		"import": "./build/index.js"
+		".": {
+			"import": "./build/index.es.js",
+			"require": "./build/index.cjs"
+		}
 	},
 	"scripts": {
-		"prepare": "npm run build",
-		"build": "node ./build.js",
+		"build": "rollup -c",
 		"test": "ava"
 	},
 	"repository": {
@@ -25,11 +28,14 @@
 	},
 	"homepage": "https://github.com/mquandalle/mesaidesvelo/package-aides-velo#readme",
 	"devDependencies": {
+		"@rollup/plugin-typescript": "^8.3.0",
+		"@rollup/plugin-yaml": "^3.1.0",
 		"ava": "^3.15.0",
-		"js-yaml": "^4.1.0",
+		"rollup": "^2.61.1",
+		"tslib": "^2.3.1",
 		"typescript": "^4.5.2"
 	},
 	"dependencies": {
-		"publicodes": "^1.0.0-beta.24"
+		"publicodes": "^1.0.0-beta.25"
 	}
 }

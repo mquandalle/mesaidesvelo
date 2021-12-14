@@ -4,9 +4,10 @@
 		"moduleResolution": "node",
 		"declaration": true,
 		"esModuleInterop": true,
+		"outDir": "./build",
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
 		"rootDir": "./"
 	},
-	"include": ["index.ts"]
+	"include": ["global.d.ts", "index.ts"]
 }
