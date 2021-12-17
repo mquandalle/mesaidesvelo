@@ -12,6 +12,14 @@ import { loadJsonFile, writeJsonFile } from '../lib/readWriteJson.js';
 const communes = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/communes.json');
 const epci = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/epci.json');
 
+/**
+ * We overwrite some of the codes provided in the Etalab source because of an
+ * issue with the source data, see
+ * https://github.com/etalab/decoupage-administratif/issues/25
+ * @type {Record<string, Array<string>>}
+ */
+const diffCodesPostaux = loadJsonFile('src/scripts/diff-codepostaux.json');
+
 const duplicateCommunesNames = communes
 	.map(({ nom }) => slugify(nom))
 	.sort()
@@ -51,14 +59,19 @@ const data = [
 			(c) =>
 				c.type === 'commune-actuelle' && c.codesPostaux && c.population && !c.code?.startsWith('97')
 		)
-		.map((c) => ({
-			...c,
-			...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
-			codesPostaux: villesAvecArrondissements[c.nom]
-				? [villesAvecArrondissements[c.nom], ...c.codesPostaux]
-				: c.codesPostaux,
-			codePostal: villesAvecArrondissements[c.nom] ?? c.codesPostaux[0]
-		})),
+		.map((c) => {
+			const codesPostaux = diffCodesPostaux[c.code] ?? c.codesPostaux;
+			if (villesAvecArrondissements[c.nom]) {
+				codesPostaux.unshift(villesAvecArrondissements[c.nom]);
+			}
+
+			return {
+				...c,
+				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
+				codesPostaux,
+				codePostal: codesPostaux[0]
+			};
+		}),
 	...extraData
 ].map((c) => ({
 	...c,
