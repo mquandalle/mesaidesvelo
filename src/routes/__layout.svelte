@@ -7,6 +7,11 @@
 
 	onMount(() => {
 		prefetchRoutes(['/', '/ville/*']);
+		// This is a work-around a cold-start issue with the search
+		// autocompletion. By calling this endpoint as soon as possible we
+		// asynchrounsly warm up the server code, and reduce the latency in case
+		// of a cold start. https://github.com/mquandalle/mesaidesvelo/issues/84
+		fetch('/api/collectivites');
 	});
 </script>
 
