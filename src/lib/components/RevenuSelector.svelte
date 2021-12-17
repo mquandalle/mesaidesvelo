@@ -59,21 +59,35 @@
 	const thresholds = uniq(
 		goals
 			.flatMap((name) =>
-				findAllComparaisonsValue(name, { searchedName: 'revenu fiscal de référence', unit: '€/an' })
+				findAllComparaisonsValue(name, {
+					searchedName: 'revenu fiscal de référence',
+					unit: '€/mois'
+				})
 			)
 			.filter((x) => x !== Infinity)
-	).sort((a, b) => a - b);
+			.map((x) => Math.round(x))
+			.sort((a, b) => a - b)
+	);
 
 	// Not all statically detected thresholds are impactful for the current computation
 	// as some of them might be in inactive branches of the computation.
 	// We evaluate all the thresholds and only keep the one that induice a change in the result.
 	const engineBis = engine.shallowCopy();
-	const displayedThresholds = [0, ...thresholds]
+	$: displayedThresholds = [0, ...thresholds]
 		.reduce(
 			(acc, revenu) => {
+				// HACK: The problem whith thresholds evaluation is that their
+				// value might depend on other answers, for exemple the bike
+				// price. This implies that in some case we remove relevant
+				// thresholds. This should be fixed with a more clever static
+				// analysis.
+				//
+				// The line below is used to reactively recompute thresholds
+				// when a answer is given.
+				$answers;
 				engineBis.setSituation({
 					...engine.parsedSituation,
-					'revenu fiscal de référence': `${revenu + 1} €/an`
+					'revenu fiscal de référence': `${revenu + 1} €/mois`
 				});
 				const montantAides = engineBis.evaluate('aides').nodeValue;
 				if (montantAides === acc.dernierMontant) {
@@ -91,12 +105,12 @@
 
 	let showExplanations = false;
 
-	$: $answers['revenu fiscal de référence'] = value && `${value} €/an`;
+	$: $answers['revenu fiscal de référence'] = value && `${value} €/mois`;
 </script>
 
 {#if displayedThresholds.length > 0}
 	<div class="mt-6">
-		Quel est votre revenu annuel (quotient familial) ? <span
+		Quel est votre revenu net mensuel (quotient familial) ? <span
 			title="Plus d’informations"
 			class="cursor-pointer"
 			on:click={() => (showExplanations = !showExplanations)}><Emoji emoji="ℹ" /></span
@@ -105,7 +119,7 @@
 			<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide|local={{ duration: 100 }}>
 				Le montant des aides dépend de votre revenu par part de quotient familial. Sur votre avis
 				d'imposition cela correspond au montant du « revenu fiscal de référence » divisé par le
-				nombre de parts du quotient familial.
+				nombre de parts du quotient familial, puis divisé par 12.
 			</p>
 		{/if}
 		<div class="flex gap-2 mt-2 flex-wrap">
