@@ -1029,13 +1029,10 @@
 	}
 
 	.autocomplete-list-item.confirmed {
-		background-color: #789fed;
-		background-color: #10b981;
-		color: #fff;
+		font-weight: bold;
 	}
 	.autocomplete-list-item.selected {
-		background-color: #047857;
-		color: #fff;
+		background-color: #d1fae5;
 	}
 	.autocomplete-list-item-no-results {
 		padding: 5px 15px;
