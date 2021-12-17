@@ -29,7 +29,7 @@
 			const plafondIsDefined = Object.keys(engine.parsedRules).includes(plafondRuleName);
 			const plafond = plafondIsDefined && engine.evaluate(plafondRuleName);
 			const notice = description
-				.replace(/\$vélo/g, `vélo ${veloCat}`)
+				.replace(/\$vélo/g, veloCat === 'motorisation' ? 'kit de motorisation' : `vélo ${veloCat}`)
 				.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }));
 
 			const evaluateWithGivenRevenu = (revenu) =>

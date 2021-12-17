@@ -133,7 +133,9 @@ aides . paris:
       - si: vélo . cargo
         alors: 600€
       - si: vélo . électrique
-        alors: 500€
+        alors: 400€
+      - si: vélo . motorisation
+        alors: 400€
       - sinon: 0€
   lien: https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373
 
@@ -166,6 +168,7 @@ aides . bordeaux:
           - vélo . électrique
           - vélo . cargo
           - vélo . pliant
+          - vélo . motorisation
   valeur: 100 €
   lien: https://sedeplacer.bordeaux-metropole.fr/Velo/Pratique/Aide-a-l-achat-de-velo
 
@@ -276,12 +279,15 @@ aides . albi:
 aides . toulon:
   remplace: intercommunalité
   titre: Métropole Toulon-Provence-Méditerranée
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'Métropole Toulon-Provence-Méditerranée'
-      - vélo . électrique
+  applicable si: localisation . epci = 'Métropole Toulon-Provence-Méditerranée'
   valeur: 25% * vélo . prix
-  plafond: 250 €
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 250 €
+      - si: vélo . motorisation
+        alors: 150 €
+      - sinon: 0 €
   lien: https://metropoletpm.fr/tourisme/proxy/tpm-s-engage-velo-electrique
 
 aides . bretagne romantique:
@@ -676,6 +682,34 @@ aides . pantin:
     - sinon: 0€
   plafond: vélo . prix
   lien: https://pratique.pantin.fr/deplacement-et-stationnement/transports-alternatifs-velo
+
+aides . vaucresson:
+  remplace: commune
+  titre: Ville de Vaucresson
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '92076'
+      - vélo . motorisation
+  valeur: 150€
+  lien: http://www.vaucresson.fr/Mobilites.aspx
+
+aides . courbevoie:
+  remplace: commune
+  titre: Ville de Courbevoie
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '92026'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+  variations:
+    - si: revenu fiscal de référence < 20000 €/an
+      alors: 25% * vélo . prix
+    - si: revenu fiscal de référence < 40000 €/an
+      alors: 20% * vélo . prix
+    - sinon: 15% * vélo . prix
+  plafond: 300€
+  lien: https://www.ville-courbevoie.fr/1844/subvention-pour-l-achat-d-un-velo-electrique.htm
 
 aides . mons en baroeul:
   remplace: commune
