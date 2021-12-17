@@ -88,28 +88,12 @@ aides . ile de france:
 aides . occitanie:
   remplace: région
   titre: Région Occitanie
-  applicable si: localisation . région = '76'
-  valeur:
-    variations:
-      - si: revenu fiscal de référence > 25660 €/an
-        alors:
-          valeur: 50% * vélo . prix
-          plafond:
-            variations:
-              - si: vélo . électrique
-                alors: 250€
-              - si: vélo . mécanique
-                alors: 150€
-              - sinon: 0€
-      - sinon:
-          valeur: 80% * vélo . prix
-          plafond:
-            variations:
-              - si: vélo . électrique
-                alors: 400€
-              - si: vélo . mécanique
-                alors: 240€
-              - sinon: 0€
+  applicable si:
+    toutes ces conditions:
+      - localisation . région = '76'
+      - vélo . électrique
+      - revenu fiscal de référence <= 25660 €/an
+  valeur: 200 €
   lien: https://lio.laregion.fr/aides-achat-velo
 
 aides . corse:
@@ -609,6 +593,29 @@ aides . cote d'or . vélo assemblé ou produit localement:
   type: booléen
   par défaut: non
 
+aides . lot:
+  remplace: département
+  titre: Département Côte d’Or
+  applicable si:
+    toutes ces conditions:
+      - localisation . département = '46'
+      - vélo . électrique
+  valeur:
+    variations:
+      - si: ménage imposable
+        alors: 300€
+      - sinon: 400€
+  plafond: 40% * vélo . prix
+  lien: https://lot.fr/vehicules-et-velos-electriques
+
+aides . figeac:
+  remplace: commune
+  titre: Commune de Figeac
+  description: Le montant de l’aide accordée par la ville de Figeac est de 50% de la subvention qui est versée par le Département
+  applicable si: localisation . code insee = '46102'
+  valeur: 50% * aides . département
+  lien: https://ville-figeac.fr/tourisme-et-environnement/environnement/environnement-actualite/1021-aide-a-l-acquisition-d-un-velo-a-assistance-electrique-pour-les-habitants-de-figeac
+
 aides . sophia antipolis:
   remplace: intercommunalité
   titre: Communauté d’Agglomération Sophia Antipolis
@@ -916,6 +923,20 @@ aides . combloux:
   plafond: 80% * vélo . prix
   lien: https://mairie-combloux.fr/aide-a-lachat-dun-velo-a-assistance-electrique/
 
+aides . angers:
+  remplace: intercommunalité
+  titre: Angers Loire Métropole
+  applicable si: localisation . epci = 'CU Angers Loire Métropole'
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 400€
+      - si: vélo . électrique
+        alors: 200€
+      - sinon: 0€
+  lien: https://www.angersloiremetropole.fr/mon-quotidien/mobilites/velo/velo-a-assistance-electrique/index.html
+
 aides . pays de l'or:
   remplace: intercommunalité
   titre: Pays de l’Or
@@ -1002,17 +1023,6 @@ aides . la rochelle:
     - sinon: 0€
   lien: https://yelo.agglo-larochelle.fr/aide-a-lachat-dun-vae/
 
-aides . roanne:
-  remplace: intercommunalité
-  titre: Roannais Agglomération
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Roannais Agglomération'
-      - vélo . électrique
-  valeur: 20% * vélo . prix . HT
-  plafond: 200€
-  lien: https://www.aggloroanne.fr/fileadmin/Aggloroanne.fr/3_Au_quotidien/Deplacements/Velos_scooters_electriques/REGLEMENT_DISPOSITIF_AIDE_VAE.pdf
-
 aides . blois:
   remplace: intercommunalité
   titre: Agglopolys
@@ -1043,19 +1053,46 @@ aides . epinal:
 aides . vannes:
   remplace: intercommunalité
   titre: Vannes Agglomération
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Golfe du Morbihan - Vannes Agglomération'
-      - vélo . électrique
+  applicable si: localisation . epci = 'CA Golfe du Morbihan - Vannes Agglomération'
   valeur: 25% * vélo . prix
   plafond:
     variations:
-      - si: revenu fiscal de référence <= 1200 €/mois
-        alors: 300€
-      - si: revenu fiscal de référence <= 1400 €/mois
-        alors: 200€
+      - si: vélo . cargo électrique
+        alors: 800€
+      - si: vélo . cargo
+        alors: 400€
+      - si: vélo . électrique
+        alors:
+          variations:
+            - si: revenu fiscal de référence <= 1200 €/mois
+              alors: 300€
+            - si: revenu fiscal de référence <= 1400 €/mois
+              alors: 200€
+            - sinon: 0€
       - sinon: 0€
-  lien: https://www.golfedumorbihan-vannesagglomeration.bzh/achat-dun-velo-electrique
+  lien: https://www.golfedumorbihan-vannesagglomeration.bzh/aides-la-pratique-du-velo
+
+aides . rochefort:
+  remplace: intercommunalité
+  titre: Agglomération Rochefort
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Rochefort Océan'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence > 760€
+        alors: 50€
+      - si: revenu fiscal de référence > 500€
+        alors: 100€
+      - si: revenu fiscal de référence > 380€
+        alors: 150€
+      - sinon: 200€
+  lien: https://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisitionhttps://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisition
 
 aides . arcachon:
   remplace: commune
