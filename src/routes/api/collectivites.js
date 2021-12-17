@@ -13,22 +13,7 @@
 
 import fuzzysort from 'fuzzysort';
 import { removeAccents } from '$lib/utils';
-import data from '../../data/communes.json';
-
-const indexedData = data
-	.flatMap(({ codesPostaux, ...rest }) =>
-		(codesPostaux ?? [rest.codePostal]).map((cp, i) => ({
-			...rest,
-			codePostal: cp,
-			cpPrincipal: i === 0,
-			population: i === 0 ? rest.population : 10
-		}))
-	)
-	.map((c) => ({
-		...c,
-		indexedName: c.cpPrincipal ? fuzzysort.prepare(removeAccents(c.nom)) : '',
-		indexedCodePostal: fuzzysort.prepare(c.codePostal)
-	}));
+import data from '$lib/indexed-data-communes';
 
 const searchOptions = {
 	keys: ['indexedName', 'indexedCodePostal'],
@@ -64,12 +49,12 @@ export async function get({ query }) {
 		}
 	} else if (search) {
 		return {
-			body: fuzzysort.go(search, indexedData, searchOptions).map(({ obj }) => pick(obj))
+			body: fuzzysort.go(search, data, searchOptions).map(({ obj }) => pick(obj))
 		};
 	} else {
 		// Par défaut on retourne les communes les plus peuplées
 		return {
-			body: indexedData
+			body: data
 				.sort((a, b) => b.population - a.population)
 				.slice(0, 10)
 				.map(pick)
