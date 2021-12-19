@@ -15,20 +15,18 @@ import { removeAccents } from '$lib/utils';
 import fuzzysort from 'fuzzysort';
 import data from '../../data/communes.json';
 
-const indexedData = data
-	.flatMap(({ codesPostaux, ...rest }) =>
-		(codesPostaux ?? [rest.codePostal]).map((cp, i) => ({
+const indexedData = data.flatMap(({ codesPostaux, ...rest }) =>
+	codesPostaux.map((codePostal, i) => {
+		const cpPrincipal = i === 0;
+		return {
 			...rest,
-			codePostal: cp,
-			cpPrincipal: i === 0,
-			population: i === 0 ? rest.population : 10
-		}))
-	)
-	.map((c) => ({
-		...c,
-		indexedName: c.cpPrincipal ? fuzzysort.prepare(removeAccents(c.nom)) : '',
-		indexedCodePostal: fuzzysort.prepare(c.codePostal)
-	}));
+			codePostal,
+			indexedName: cpPrincipal ? fuzzysort.prepare(removeAccents(rest.nom)) : '',
+			indexedCodePostal: fuzzysort.prepare(codePostal),
+			population: cpPrincipal ? rest.population : 10
+		};
+	})
+);
 
 const searchOptions = {
 	keys: ['indexedName', 'indexedCodePostal'],
@@ -47,13 +45,13 @@ export async function get({ query }) {
 	const search = removeAccents(query.get('search')?.replace(/\s/g, '').toLowerCase());
 	const slug = query.get('slug');
 
-	const pick = ({ code, nom, slug, epci, codePostal, departement, region }) => ({
+	const pick = ({ code, nom, slug, epci, codePostal, codesPostaux, departement, region }) => ({
 		nom,
 		slug,
 		epci,
 		codeInsee: code,
-		codePostal,
-		departement,
+		codePostal: codePostal || codesPostaux[0],
+		departement: departement ?? code.slice(0, 2),
 		region
 	});
 

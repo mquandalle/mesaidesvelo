@@ -48,8 +48,7 @@ const extraData = [
 		codesPostaux: ['98000'],
 		departement: '06',
 		region: '84',
-		population: 39244,
-		etat: 'monaco'
+		population: 39244
 	}
 ];
 
@@ -66,17 +65,22 @@ const data = [
 			}
 
 			return {
-				...c,
+				code: c.code,
+				nom: c.nom,
+				region: c.region,
+				population: c.population,
 				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
-				codesPostaux,
-				codePostal: codesPostaux[0]
+				codesPostaux
 			};
 		}),
 	...extraData
 ].map((c) => ({
 	...c,
 	slug:
-		slugify(c.nom) + (duplicateCommunesNames.includes(slugify(c.nom)) ? `-${c.departement}` : '')
+		slugify(c.nom) +
+		(duplicateCommunesNames.includes(slugify(c.nom))
+			? `-${c.departement ?? c.code.slice(0, 2)}`
+			: '')
 }));
 
 writeJsonFile('src/data/communes.json', data);
