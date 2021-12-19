@@ -42,6 +42,13 @@
 				montant: formatValue(node, { precision: 0 })
 			}
 		]);
+
+	$: primeALaConversion = engine
+		.setSituation({
+			...$publicodeSituation,
+			'vélo . type': "''"
+		})
+		.evaluate('aides . prime à la conversion');
 </script>
 
 <div class="mt-8" />
@@ -52,7 +59,11 @@
 			>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 		>
 	{/each}
-	<CategoryLine montant="1 500 €" href="/prime-a-la-conversion"
-		>Prime à la conversion <Emoji emoji="🚗" /> →<Emoji emoji="🚲" /></CategoryLine
-	>
+	{#if primeALaConversion.nodeValue}
+		<CategoryLine
+			montant={formatValue(primeALaConversion, { precision: 0 })}
+			href="/prime-a-la-conversion"
+			>Prime à la conversion <Emoji emoji="🚗" /> →<Emoji emoji="🚲" /></CategoryLine
+		>
+	{/if}
 </div>
