@@ -42,7 +42,7 @@ Nous voulons intégrer l’ensemble des aides disponibles dans toutes les villes
 s’agit néanmoins d’un travail de fourmi car il n’existe aucune base centrale les recensant
 toutes. Il nous faut donc les saisir à la main une par une.
 
-Vous pouvez retrouver l'ensemble des aides prise en compte sur [cette page](/liste-aides).
+➡ Voir la [liste des aides intégrées](/liste-aides)
 
 ## Comment ajouter ou modifier une aide ?
 
@@ -53,8 +53,7 @@ etc.).
 Nous prévoyons de développer un éditeur sous la forme d’un formulaire en ligne
 pour permettre à un large public de volontaires (citoyens, associations,
 collectivités, etc.) de participer directement à la mise à jour des données.
-Conçevoir cet éditeur demande un travail conséquent, mais c’est prévu pour 2022.
-[En savoir plus](https://github.com/mquandalle/mesaidesvelo/issues/69)
+Conçevoir cet éditeur demande un travail conséquent, mais c’est [prévu pour 2022](https://github.com/mquandalle/mesaidesvelo/issues/69).
 
 ---
 
