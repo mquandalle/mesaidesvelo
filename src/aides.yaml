@@ -432,6 +432,54 @@ aides . puy de dome:
   plafond: 500€
   lien: https://www.puy-de-dome.fr/actualites/mai-2021/aide-a-lachat-de-vae.html
 
+aides . pays d'issoire:
+  remplace: intercommunalité
+  titre: Agglo Pays D'Issoire
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Agglo Pays d’Issoire'
+      - vélo . électrique
+  valeur: 150€
+  plafond: vélo . prix
+  lien: http://www.mairie-egliseneuvedesliards.fr/fileadmin/Mairie_Egliseneuve-des-Liards/2-Documents/pdf/Prime-VAE_Formulaire-demande1309.pdf
+
+aides . cébazat:
+  remplace: commune
+  titre: Ville de Cébazat
+  applicable si: localisation . code insee = '63063'
+  variations:
+    - si: vélo . électrique
+      alors: 150€
+    - si: vélo . motorisation
+      alors: 100€
+    - si: vélo . pliant
+      alors: 50€
+    - sinon: 0€
+  plafond: vélo . prix
+  lien: http://www.cebazat.fr/Plan-velo-communal.html
+
+aides . aubiere:
+  remplace: commune
+  titre: Ville d’Aubière
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '63014'
+      - vélo . électrique
+  valeur: 150€
+  plafond: vélo . prix
+  lien: https://ville-aubiere.fr/2021/02/17/passez-au-velo-pedalez-branche/
+
+aides . romagnat:
+  remplace: commune
+  titre: Ville de Romagnat
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '63307'
+      - vélo . électrique
+  valeur: 100€
+  plafond: vélo . prix
+  lien: https://www.ville-romagnat.fr/cadre-de-vie-urbanisme/developpement-durable/velo-electrique/
+
 aides . cournon d'auvergne:
   remplace: commune
   titre: Ville de Cournon-d’Auvergne
@@ -1211,7 +1259,19 @@ aides . bourg en bresse:
         alors: 300€
       - si: vélo . mécanique
         alors: 100€
+      - sinon: 0€
   lien: https://www.bourgenbresse.fr/actualite/1248/225-aide-a-l-achat-d-un-velo-pour-les-burgiens.htm
+
+aides . valence romans:
+  remplace: intercommunalité
+  titre: Valence Romans Déplacements
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Valence Romans Agglo'
+      - vélo . pliant
+  valeur: 35% * vélo . prix
+  plafond: 150€
+  lien: https://www.vrd-mobilites.fr/velo/#aide-achat-velo-pliant
 
 aides . lorient:
   remplace: intercommunalité
