@@ -619,13 +619,23 @@ aides . aix les bains:
   plafond: vélo . prix
   lien: https://www.aixlesbains.fr/Cadre-de-vie/Transports-et-deplacements/A-velo/Aides-financieres-pour-se-deplacer-a-velo
 
-# TODO : majoration de l'aide pour un vélo « conçu et assemblé en France »
 aides . ardenne:
   remplace: intercommunalité
   titre: Ardenne Métropole
-  applicable si: localisation . epci = 'CA Ardenne Métropole'
-  valeur: 33% * vélo . prix
-  plafond: 200€
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Ardenne Métropole'
+      - une de ces conditions:
+          - vélo . mécanique
+          - vélo . électrique
+  variations:
+    - si: vélo . fabriqué en france
+      alors:
+        valeur: 40% * vélo . prix
+        plafond: 300€
+    - sinon:
+        valeur: 33% * vélo . prix
+        plafond: 200€
   lien: https://ardenne-metropole.fr/storage/2021/04/Plaquette-subvention-v2.pdf
 
 aides . erdregesvres:
@@ -1703,6 +1713,11 @@ vélo . prix pour maximiser les aides:
     - si: localisation . epci = 'Métropole de Lyon'
       alors: 3000 €
     - sinon: 5000 €
+
+vélo . fabriqué en france:
+  question: Le vélo est-il conçu et fabriqué en France ?
+  type: booléen
+  par défaut: non
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
