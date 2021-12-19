@@ -13,7 +13,7 @@ aides:
 
 aides . bonus vélo cargo:
   remplace: état
-  titre: « Bonus vélo » cargo de l’État
+  titre: Bonus vélo cargo de l’État
   description: |
     L’État accorde une aide de 1 000 € pour l’achat d’un vélo cargo qu’il soit
     électrique ou non. Votre revenu fiscal de référence par part doit être
@@ -29,7 +29,7 @@ aides . bonus vélo cargo:
 
 aides . bonus vélo électrique:
   remplace: état
-  titre: « Bonus vélo » de l’État
+  titre: Bonus vélo électrique de l’État
   description: |
     Le Bonus vélo versé par l’État complète l’aide versée par une collectivité
     territoriale. Votre revenu fiscal de référence par part doit être inférieur
@@ -57,6 +57,7 @@ aides . prime à la conversion:
       - localisation . pays = 'France'
       # Hack: pour ne pas que la règle ressorte quand on précise un type de vélo
       - vélo . type = ''
+  titre: Prime à la conversion
   description: |
     Pour bénéficier de cette « prime à la casse » vous devez détruire un
     véhicule diesel immatriculé avant janvier 2011 ou bien un véhicule essence
@@ -485,7 +486,7 @@ aides . cournon d'auvergne:
   titre: Ville de Cournon-d’Auvergne
   applicable si:
     toutes ces conditions:
-      - localisation . département = '63'
+      - localisation . code insee = '63124'
       - vélo . électrique
   grille:
     assiette: revenu fiscal de référence
@@ -671,7 +672,7 @@ aides . cote d'or . vélo assemblé ou produit localement:
 
 aides . lot:
   remplace: département
-  titre: Département Côte d’Or
+  titre: Département du Lot
   applicable si:
     toutes ces conditions:
       - localisation . département = '46'
@@ -1018,7 +1019,7 @@ aides . annecy:
 
 aides . combloux:
   remplace: commune
-  titre: Commune de combloux
+  titre: Commune de Combloux
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '74083'
