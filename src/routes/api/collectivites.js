@@ -13,7 +13,7 @@
 
 import { removeAccents } from '$lib/utils';
 import fuzzysort from 'fuzzysort';
-import data from '../../data/communes.json';
+import data from '$lib/data/communes.json';
 
 const indexedData = data.flatMap(({ codesPostaux, ...rest }) =>
 	codesPostaux.map((codePostal, i) => {
