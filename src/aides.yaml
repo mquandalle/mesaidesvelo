@@ -314,6 +314,29 @@ aides . bretagne romantique:
   plafond: vélo . prix
   lien: https://bretagneromantique.fr/prime-velo/
 
+aides . quimper:
+  remplace: intercommunalité
+  titre: Quimper Bretagne Occidentale
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Quimper Bretagne Occidentale'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors:
+        valeur: 50% * vélo . prix
+        plafond: 500€
+    - si: revenu fiscal de référence <= 20000 €/an
+      alors:
+        valeur: 40% * vélo . prix
+        plafond: 400€
+    - si: revenu fiscal de référence <= 26350 €/an
+      alors:
+        valeur: 20% * vélo . prix
+        plafond: 200€
+    - sinon: 0€
+  lien: https://www.quimper-bretagne-occidentale.bzh/actualite/29332/113-deplacements-a-velo-les-aides-et-dispositifs-mis-en-place-par-qbo.htm&xtmc=aide_velo_electrique&xtcr=1
+
 aides . caen:
   remplace: commune
   titre: Ville de Caen
