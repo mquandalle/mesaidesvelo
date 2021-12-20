@@ -47,7 +47,7 @@ toutes. Il nous faut donc les saisir à la main une par une.
 ## Comment ajouter ou modifier une aide ?
 
 Pour le moment l’ajout ou la modification d’une aide est relativement technique. Cela requiert d'être
-familier avec les outils utilisés pour le développement d’une application web (git, npm yaml,
+familier avec les outils utilisés pour le développement d’une application web (git, npm, yaml,
 etc.).
 
 Nous prévoyons de développer un éditeur sous la forme d’un formulaire en ligne

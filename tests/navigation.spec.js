@@ -25,3 +25,8 @@ test('Navigation scenario', async ({ page }) => {
 	await page.fill('input:below(label:text("Prix du vélo"))', '100');
 	await expect(totalAides).toHaveText('Total des aides 50 €', { useInnerText: true });
 });
+
+test('Liste aides do not crash', async ({ page }) => {
+	await page.goto(baseUrl + '/liste-aides');
+	await expect(page.locator('h1')).toHaveText('Les aides intégrées sur le site');
+});
