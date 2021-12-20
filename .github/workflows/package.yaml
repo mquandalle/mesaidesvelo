@@ -8,6 +8,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
+      - run: npm ci
       - name: Build and Test
         run: |
           npm ci

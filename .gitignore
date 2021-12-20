@@ -10,3 +10,4 @@ node_modules
 
 # Generated at build time
 src/data
+src/lib/data

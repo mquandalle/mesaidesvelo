@@ -26,4 +26,9 @@ test('motorisation vélo strasboug', (t) => {
 	});
 	t.is(strasbourgMotorisation.length, 1, '1 aide de la ville');
 	t.is(strasbourgMotorisation[0].amount, 150, '150 euros');
+	t.deepEqual(
+		strasbourgMotorisation[0].collectivity,
+		{ kind: 'epci', value: 'Eurométropole de Strasbourg' },
+		"Associée à l'EPCI de Strasbourg"
+	);
 });

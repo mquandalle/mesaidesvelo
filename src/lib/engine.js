@@ -1,10 +1,10 @@
 import { page } from '$app/stores';
 import aides from '$lib/../aides.yaml';
-import publicodes from 'publicodes';
+import Publicodes from 'publicodes';
 import { derived } from 'svelte/store';
 import { publicodeSituation } from './stores';
 
-export const engine = new publicodes(aides);
+export const engine = new Publicodes(aides);
 
 export const getCurrentBikeEngine = derived(
 	[publicodeSituation, page],

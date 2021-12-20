@@ -1,5 +1,6 @@
 import Publicodes from 'publicodes';
 import aides from '../src/aides.yaml';
+import { aidesRuleNames, associateCollectivityMetadata } from '$lib/aides-analysis';
 
 type Aide = {
 	title: string;
@@ -24,9 +25,6 @@ type InputParameters = {
 };
 
 const engine = new Publicodes(aides as any);
-const aidesRules = Object.keys(engine.getParsedRules()).filter((dottedName) =>
-	dottedName.startsWith('aides .')
-);
 
 /**
  *  Retourne la liste des aides disponibles pour une situation donnée
@@ -34,16 +32,18 @@ const aidesRules = Object.keys(engine.getParsedRules()).filter((dottedName) =>
 export default function aidesVelo(situation: InputParameters): Array<Aide> {
 	engine.setSituation(formatInput(situation));
 
-	return aidesRules
-		.map((dottedName) => {
-			const { title, rawNode } = engine.getRule(dottedName);
-			const { nodeValue } = engine.evaluate({ valeur: dottedName, unité: '€' });
+	return aidesRuleNames
+		.map((ruleName) => {
+			const rule = engine.getRule(ruleName);
+			const collectivity = associateCollectivityMetadata(rule).collectivity;
+			const { nodeValue } = engine.evaluate({ valeur: ruleName, unité: '€' });
 
 			return {
-				title,
-				description: rawNode.description,
-				url: (rawNode as any).lien,
-				amount: nodeValue as number
+				title: rule.title,
+				description: rule.rawNode.description,
+				url: (rule.rawNode as any).lien,
+				amount: nodeValue as number,
+				collectivity
 			};
 		})
 		.filter(({ amount, url }) => amount && url);

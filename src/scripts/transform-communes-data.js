@@ -83,4 +83,4 @@ const data = [
 			: '')
 }));
 
-writeJsonFile('src/data/communes.json', data);
+writeJsonFile('src/lib/data/communes.json', data);
