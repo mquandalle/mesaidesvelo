@@ -5,6 +5,7 @@
 	import communes from '../data/communes.json';
 	import departements from '@etalab/decoupage-administratif/data/departements.json';
 	import regions from '@etalab/decoupage-administratif/data/regions.json';
+	import AideSummary from '$lib/components/AideSummary.svelte';
 
 	const aidesRuleNames = Object.keys(publicodesRules).filter(
 		(ruleName) => ruleName.startsWith('aides .') && publicodesRules[ruleName].titre
@@ -101,22 +102,21 @@
 	<h2>Les aides de l'État</h2>
 	<ul>
 		{#each aidesEtat as aide}
-			<li>{aide.rawNode.titre.replace(/de l’état/i, '').trim()}</li>
+			<li>
+				{aide.rawNode.titre.replace(/de l’état/i, '').trim()}
+			</li>
 		{/each}
 	</ul>
 	<p>
-		Nous intégrons également les aides de <a
-			href="/ville/monaco"
-			class="!font-normal hover:text-green-700">Monaco</a
+		Nous intégrons également les aides de <a href="/ville/monaco" class="hover:text-green-700"
+			>Monaco</a
 		>.
 	</p>
 	<h2>Les aides régionales</h2>
 	<ul>
 		{#each aidesRegions as aide}
 			<li>
-				<a href="/ville/{aide.slug}" class="!font-normal hover:text-green-700"
-					>{aide.rawNode.titre.replace(/région/i, '').trim()}</a
-				>
+				<AideSummary {aide} />
 			</li>
 		{/each}
 	</ul>
@@ -127,13 +127,7 @@
 		<ul>
 			{#each aides as aide}
 				<li>
-					{#if aide.slug}
-						<a href="/ville/{aide.slug}" class="!font-normal hover:text-green-700"
-							>{aide.rawNode.titre}</a
-						>
-					{:else}
-						{aide.rawNode.titre}
-					{/if}
+					<AideSummary {aide} />
 				</li>
 			{/each}
 		</ul>

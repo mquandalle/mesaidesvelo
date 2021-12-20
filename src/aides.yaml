@@ -530,6 +530,7 @@ aides . charenton:
     toutes ces conditions:
       - localisation . code insee = '94018'
       - revenu fiscal de référence <= 15000 €/an
+      - vélo . électrique ou mécanique
   valeur: 50% * vélo . prix
   plafond: 200€
   lien: https://www.charenton.fr/velo/velo_pass-velo.php
@@ -626,9 +627,7 @@ aides . ardenne:
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA Ardenne Métropole'
-      - une de ces conditions:
-          - vélo . mécanique
-          - vélo . électrique
+      - vélo . électrique ou mécanique
   variations:
     - si: vélo . fabriqué en france
       alors:
@@ -690,13 +689,16 @@ aides . figeac:
   titre: Commune de Figeac
   description: Le montant de l’aide accordée par la ville de Figeac est de 50% de la subvention qui est versée par le Département
   applicable si: localisation . code insee = '46102'
-  valeur: 50% * aides . département
+  valeur: 50% * aides . lot
   lien: https://ville-figeac.fr/tourisme-et-environnement/environnement/environnement-actualite/1021-aide-a-l-acquisition-d-un-velo-a-assistance-electrique-pour-les-habitants-de-figeac
 
 aides . sophia antipolis:
   remplace: intercommunalité
   titre: Communauté d’Agglomération Sophia Antipolis
-  applicable si: localisation . epci = 'CA de Sophia Antipolis'
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA de Sophia Antipolis'
+      - vélo . électrique ou mécanique
   valeur: 25% * vélo . prix
   plafond:
     grille:
@@ -894,7 +896,10 @@ aides . aurillac:
 aides . carvin:
   remplace: commune
   titre: Ville de Carvin
-  applicable si: localisation . code insee = '62215'
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '62215'
+      - vélo . électrique ou mécanique
   valeur: 75% * vélo . prix
   plafond: 300€
   lien: http://www.carvin.fr/carvinfr/actualites/2021/prime-velo.html
@@ -1460,8 +1465,12 @@ aides . billy-berclau:
 aides . marquette-lez-lille:
   remplace: commune
   titre: Ville de Marquette-lez-Lille
-  applicable si: localisation . code insee = '59386'
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '59386'
+      - vélo . électrique ou mécanique
   valeur: 50% * vélo . prix
+  plafond: 150€
   lien: https://www.marquettelezlille.fr/actualite/la-ville-subventionne-votre-achat-de-velo/
 
 aides . gruson:
@@ -1498,7 +1507,10 @@ aides . avesnes-sur-helpe:
 aides . dunkerque:
   remplace: commune
   titre: Communauté urbaine de Dunkerque
-  applicable si: localisation . epci = 'CU de Dunkerque'
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CU de Dunkerque'
+      - vélo . électrique ou mécanique
   valeur: vélo . prix
   plafond: 80€
   lien: https://www.communaute-urbaine-dunkerque.fr/fileadmin/Cud/documents/Subvention/habitat/aide/AideAchatVelo_flyer_A4_Ro.pdf
@@ -1665,6 +1677,13 @@ vélo . mécanique:
       - vélo . type = 'mécanique simple'
       - vélo . type = 'pliant'
 
+vélo . électrique ou mécanique:
+  valeur: oui
+  applicable si:
+    une de ces conditions:
+      - vélo . électrique
+      - vélo . mécanique
+
 vélo . cargo:
   valeur: oui
   applicable si:
@@ -1713,6 +1732,8 @@ vélo . prix pour maximiser les aides:
       alors: 2400 €
     - si: localisation . epci = 'Métropole de Lyon'
       alors: 3000 €
+    - si: localisation . epci = 'CA Annemasse-Les Voirons-Agglomération'
+      alors: 4500 €
     - sinon: 5000 €
 
 vélo . fabriqué en france:
