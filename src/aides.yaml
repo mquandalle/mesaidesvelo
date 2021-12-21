@@ -1285,6 +1285,16 @@ aides . montauban:
   plafond: 250€
   lien: https://www.montauban.com/au-quotidien/mobilite-et-stationnement/velos-et-pistes-cyclables
 
+aides . mont de marsan:
+  remplace: intercommunalité
+  titre: Mont de Marsan Agglo
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Mont de Marsan Agglomération'
+      - vélo . électrique
+  valeur: 250€
+  lien: http://www.montdemarsan-agglo.fr/agglo/document?id=2682&id_attribute=48&usg=AOvVaw1SVEDZSqj0LRmmUyyGkc_n
+
 aides . bourg en bresse:
   remplace: commune
   titre: Commune de Bourg-en-Bresse
