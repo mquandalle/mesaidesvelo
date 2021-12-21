@@ -6,7 +6,7 @@ De nombreuses villes proposent des aides à l’achat de vélos. Leur objectif e
 
 Les modalités de ces aides sont variées, elles sont parfois cumulables et parfois pas, parfois conditionnées à un niveau de revenus et d'autres fois ouvertes à tous, etc.
 
-**Mesaidesvelo.fr** rassemble toutes les aides existantes et permet d’en estimer le montant rapidement et simplement.
+**Mesaidesvelo.fr** rassemble [toutes les aides](https://mesaidesvelo.fr/liste-aides) existantes et permet d’en estimer le montant rapidement et simplement.
 
 ### Comment contribuer ?
 
