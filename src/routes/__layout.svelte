@@ -39,7 +39,6 @@
 		<header class="mt-8 block w-full max-w-screen-md m-auto">
 			<a href="/" class="text-3xl font-bold cursor-pointer">
 				Mes<span class="text-green-800">Aides</span>Vélo
-				<sup class="text-sm text-gray-400">[béta]</sup>
 				<Emoji emoji="🚲" className="-mt-2" />
 			</a>
 			<p class="text-gray-800 mt-1 max-w-sm">Trouvez les aides à l’achat d’un vélo</p>
