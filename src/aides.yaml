@@ -119,7 +119,7 @@ aides . corse:
   lien: https://www.aue.corsica/Aide-a-l-achat-des-Velos-a-Assistance-Electrique_a205.html
 
 aides . bouches du rhone:
-  remplace: région
+  remplace: département
   titre: Département des Bouches-du-Rhône
   applicable si:
     toutes ces conditions:
