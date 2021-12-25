@@ -1733,13 +1733,29 @@ aides . lorient:
 aides . la roche sur yon:
   remplace: intercommunalité
   titre: La Roche-sur-Yon Agglomération
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA La Roche sur Yon - Agglomération'
-      - vélo . électrique
-  valeur: 15% * vélo . prix
-  plafond: 150€
-  lien: https://www.larochesuryon.fr/fileadmin/user_upload/GRC/Reglement_Subvention_VAE.pdf
+  applicable si: localisation . epci = 'CA La Roche sur Yon - Agglomération'
+  variations:
+    # TODO vélo occasion
+    - si: vélo . cargo
+      alors:
+        valeur: 20% * vélo . prix
+        plafond: 400€
+    - si:
+        toutes ces conditions:
+          - vélo . électrique
+          - vélo . prix <= 1500€
+      alors:
+        variations:
+          - si: entreprise adherente au pdie
+            alors: 200€
+          - sinon: 100€
+    - sinon: 0€
+  lien: https://www.larochesuryon.fr/services-infos-pratiques/transports-et-deplacements-durables/velos/
+
+aides . la roche sur yon . entreprise adherente au pdie:
+  question: Êtes-vous salarié d’une entreprise adhérente au Plan de déplacement inter-entreprises (PDIE) ?
+  type: booléen
+  par défaut: non
 
 aides . cholet:
   remplace: intercommunalité
@@ -2284,8 +2300,12 @@ vélo . prix . HT:
 # d'achat et il faut donc rester en-dessous dans ces cas là
 vélo . prix pour maximiser les aides:
   variations:
+    - si: vélo . type = ''
+      alors: 5000€
     - si: localisation . epci = 'CA du Grand Annecy'
       alors: 1000 €
+    - si: localisation . epci = 'CA La Roche sur Yon - Agglomération'
+      alors: 1500 €
     - si:
         une de ces conditions:
           - localisation . epci = 'CA Montluçon Communauté'
