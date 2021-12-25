@@ -155,21 +155,24 @@ aides . lyon:
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'Métropole de Lyon'
-      - vélo . prix <= 3000 €
       - une de ces conditions:
           - vélo . cargo
-          - vélo . électrique
+          - toutes ces conditions:
+              - vélo . prix <= 3000 €
+              - une de ces conditions:
+                  - vélo . électrique
+                  - vélo . pliant
   valeur: 50% * vélo . prix
   plafond:
     variations:
       - si: revenu fiscal de référence <= 13489 €/an
         alors: 500€
       - sinon: 100€
-  lien: https://met.grandlyon.com/aide-a-lachat-dun-velo-face-a-son-succes-comment-sorganise-la-metropole/
+  lien: https://www.grandlyon.com/services/aide-achat-velo.html
 
 aides . sainte foy lès lyon:
   remplace: commune
-  titre: Sainte Foy-Lès-Lyon
+  titre: Ville de Sainte Foy-Lès-Lyon
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '69202'
@@ -384,7 +387,7 @@ aides . caen la mer:
   lien: https://caenlamer.fr/actualites/aide-de-caen-la-mer-pour-lachat-de-velo-assistance-electrique
 
 aides . carpiquet:
-  titre: Commune de Carpiquet
+  titre: Ville de Carpiquet
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '14137'
@@ -393,7 +396,7 @@ aides . carpiquet:
   lien: http://www.carpiquet-mairie.fr/wa_files/CONVENTION_20RELATIVE_20A_20L_27ACQUISITION_20D_27UN_20VAE_20OU_20D_27UNE_20TROTTINETTE_20A_20ASSIST.pdf
 
 aides . grentheville:
-  titre: Grentheville
+  titre: Ville de Grentheville
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '14319'
@@ -402,7 +405,7 @@ aides . grentheville:
   lien: https://grentheville.fr/index.php/component/content/article/90-informations-communales/200-aide-a-l-achat-d-un-velo-electrique-neuf
 
 aides . herouville:
-  titre: Hérouville Saint-Clair
+  titre: Ville d’Hérouville Saint-Clair
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '14327'
@@ -459,9 +462,9 @@ aides . mondeville:
               montant: 50€
   lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
 
-aides . rochin:
+aides . ronchin:
   remplace: commune
-  titre: Ville de Rochin
+  titre: Ville de Ronchin
   applicable si: localisation . code insee = '59507'
   valeur: 25% * vélo . prix
   plafond:
@@ -517,7 +520,7 @@ aides . verson:
 
 aides . cormelles le royal:
   remplace: commune
-  titre: Commune de Cormelles le Royal
+  titre: Ville de Cormelles le Royal
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '14181'
@@ -527,7 +530,7 @@ aides . cormelles le royal:
 
 aides . saint-germain la blanche herbe:
   remplace: commune
-  titre: Saint-Germain la Blanche Herbe
+  titre: Ville de Saint-Germain la Blanche Herbe
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '14587'
@@ -537,7 +540,7 @@ aides . saint-germain la blanche herbe:
 
 aides . mer:
   remplace: commune
-  titre: Commune de Mer
+  titre: Ville de Mer
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '41136'
@@ -558,7 +561,7 @@ aides . montlouis sur loire:
 
 aides . martigues:
   remplace: commune
-  titre: Commune de Martigues
+  titre: Ville de Martigues
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '13056'
@@ -1087,7 +1090,7 @@ aides . lot:
 
 aides . figeac:
   remplace: commune
-  titre: Commune de Figeac
+  titre: Ville de Figeac
   description: Le montant de l’aide accordée par la ville de Figeac est de 50% de la subvention qui est versée par le Département
   applicable si: localisation . code insee = '46102'
   valeur: 50% * aides . lot
@@ -1115,7 +1118,7 @@ aides . sophia antipolis:
 
 aides . mougins:
   remplace: commune
-  titre: Commune de Mougins
+  titre: Ville de Mougins
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '06085'
@@ -1126,7 +1129,7 @@ aides . mougins:
 
 aides . mandelieu:
   remplace: commune
-  titre: Commune de Mandelieu-La Napoule
+  titre: Ville de Mandelieu-La Napoule
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '06079'
@@ -1190,7 +1193,7 @@ aides . mons en baroeul:
   titre: Ville de Mons en Barœul
   applicable si: localisation . code insee = '59410'
   description: |
-    La commune de Mons en Barœul offre une aide à l’achat d’un $vélo
+    La ville de Mons en Barœul offre une aide à l’achat d’un $vélo
     jusqu’à $plafond pour ses habitants.
     Note: Les vélos dédiés exclusivement à des activités de loisirs ne sont pas
     éligibles (BMX, VTT, vélo de course)
@@ -1357,7 +1360,7 @@ aides . orléans:
 
 aides . reims:
   remplae: commune
-  titre: Reims
+  titre: Ville de Reims
   applicable si: localisation . code insee = '51454'
   valeur: 25% * vélo . prix
   plafond:
@@ -1426,7 +1429,7 @@ aides . annecy:
 
 aides . marignier:
   remplace: commune
-  titre: Commune de Marignier
+  titre: Ville de Marignier
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '74164'
@@ -1477,7 +1480,7 @@ aides . pays de l'or:
 
 aides . annemasse:
   remplace: intercommunalité
-  titre: Annemasse Aglo
+  titre: Annemasse Agglo
   applicable si: localisation . epci = 'CA Annemasse-Les Voirons-Agglomération'
   valeur:
     variations:
@@ -1525,7 +1528,7 @@ aides . cotentin:
 
 aides . la rochelle:
   remplace: intercommunalité
-  titre: La Rochelle - Yélo
+  titre: Ville de La Rochelle - Yélo
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA de La Rochelle'
@@ -1621,7 +1624,7 @@ aides . rochefort:
 
 aides . arcachon:
   remplace: commune
-  titre: Arcachon
+  titre: Ville d’Arcachon
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '33009'
@@ -1689,7 +1692,7 @@ aides . mont de marsan:
 
 aides . bourg en bresse:
   remplace: commune
-  titre: Commune de Bourg-en-Bresse
+  titre: Ville de Bourg-en-Bresse
   applicable si: localisation . code insee = '01053'
   valeur: vélo . prix
   plafond:
@@ -1983,16 +1986,16 @@ aides . valenciennes:
       - sinon: 0€
   lien: https://www.valenciennes-metropole.fr/competences/amenagement-du-territoire/mode-doux-mobilite/
 
-aides . thias:
+aides . thiais:
   remplace: commune
-  titre: Ville de Thias
+  titre: Ville de Thiais
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '94073'
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 200€
-  lien: https://www.ville-thias.fr/actualites/aide-a-lachat-dun-velo/
+  lien: https://www.ville-thiais.fr/subvention-pour-lachat-dun-velo-electrique/
 
 aides . nanterre:
   remplace: commune
