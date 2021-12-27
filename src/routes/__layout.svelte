@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import { onMount, setContext } from 'svelte';
 	import 'virtual:windi.css';
@@ -47,8 +48,14 @@
 	<div class="pb-6 {!embeded ? 'flex-1' : ''}">
 		{#if $page.path === '/' || $page.path.startsWith('/ville') || $page.path === '/prime-a-la-conversion'}
 			<Search />
+			{#if $page !== '/'}
+				<PaneNavigation depth={$page.path === '/prime-a-la-conversion' ? 1 : 0}>
+					<slot />
+				</PaneNavigation>
+			{/if}
+		{:else}
+			<slot />
 		{/if}
-		<slot />
 	</div>
 	<Footer />
 </div>

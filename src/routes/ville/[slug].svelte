@@ -21,6 +21,7 @@
 	import { fly } from 'svelte/transition';
 	import { get } from 'svelte/store';
 	import ShareButton from '$lib/components/ShareButton.svelte';
+	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 
 	export let ville;
 
@@ -40,21 +41,13 @@
 	page is shown. This is because the __layout.svelte component is entierly
 	re-rendered. cf. https://github.com/sveltejs/kit/issues/2130-->
 	<div class="grid overflow-hidden -m-4 p-4" in:fly|local={{ y: 30 }}>
-		{#if $page.query.get('velo')}
-			<div
-				class="col-start-1 col-end-1 row-start-1 row-end-1"
-				transition:fly|local={{ x: 600, duration: 400 }}
-			>
+		<PaneNavigation depth={$page.query.get('velo') ? 1 : 0}>
+			{#if $page.query.get('velo')}
 				<Details />
-			</div>
-		{:else}
-			<div
-				class="col-start-1 col-end-1 row-start-1 row-end-1"
-				transition:fly|local={{ x: -600, duration: 400 }}
-			>
+			{:else}
 				<Results />
-			</div>
-		{/if}
+			{/if}
+		</PaneNavigation>
 	</div>
 	<ShareButton title="Toutes les aides vélo à {ville.nom}" />
 </div>
