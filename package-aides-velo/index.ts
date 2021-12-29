@@ -49,6 +49,8 @@ export default function aidesVelo(situation: InputParameters): Array<Aide> {
 		.filter(({ amount, url }) => amount && url);
 }
 
+aidesVelo.aidesAndCollectivities = aidesAndCollectivities;
+
 const formatInput = (input: InputParameters) =>
 	Object.fromEntries(
 		Object.entries(input).map(([key, val]) => [
