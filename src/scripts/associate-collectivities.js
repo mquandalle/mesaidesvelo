@@ -1,11 +1,18 @@
-import departements from '@etalab/decoupage-administratif/data/departements.json';
-import regions from '@etalab/decoupage-administratif/data/regions.json';
-import { reduceAST } from 'publicodes';
-import publicodesRules from '../aides.yaml';
-import communes from '$lib/data/communes.json';
+import { loadJsonFile, writeJsonFile, loadTextFile } from '../lib/readWriteJson.js';
+import Publicodes, { reduceAST } from 'publicodes';
 
-export const aidesRuleNames = Object.keys(publicodesRules).filter(
-	(ruleName) => ruleName.startsWith('aides .') && publicodesRules[ruleName].titre
+const communes = loadJsonFile('src/lib/data/communes.json');
+const departements = loadJsonFile(
+	'node_modules/@etalab/decoupage-administratif/data/departements.json'
+);
+const regions = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/regions.json');
+
+const sourceRules = loadTextFile('src/aides.yaml');
+
+const engine = new Publicodes(sourceRules);
+
+const aidesRuleNames = Object.keys(engine.getParsedRules()).filter(
+	(ruleName) => ruleName.startsWith('aides .') && engine.getRule(ruleName).rawNode.titre
 );
 
 const extractCollectivityFromAST = (rule) => {
@@ -47,14 +54,22 @@ const getCodeInseeForCollectivity = ({ kind, value }) => {
 const getSlugForCodeInsee = (codeInsee) =>
 	codeInsee && communesSorted.find(({ code }) => code === codeInsee)?.slug;
 
-export const associateCollectivityMetadata = (rule) => {
+const associateCollectivityMetadata = (rule) => {
 	const collectivity = extractCollectivityFromAST(rule);
 	const codeInsee = getCodeInseeForCollectivity(collectivity);
 	const slug = getSlugForCodeInsee(codeInsee);
 	return {
-		...rule,
 		collectivity,
 		codeInsee,
 		slug
 	};
 };
+
+const res = Object.fromEntries(
+	aidesRuleNames.map((ruleName) => [
+		ruleName,
+		associateCollectivityMetadata(engine.getRule(ruleName))
+	])
+);
+
+writeJsonFile('src/lib/data/aides-collectivities.json', res);
