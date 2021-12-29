@@ -11,9 +11,13 @@
 import fs from 'fs';
 import { join, dirname } from 'path';
 
-export function loadJsonFile(path) {
+export function loadTextFile(path) {
 	const absolutePath = new URL(join('../../', path), import.meta.url).pathname;
-	return JSON.parse(fs.readFileSync(absolutePath, 'utf8'));
+	return fs.readFileSync(absolutePath, 'utf8');
+}
+
+export function loadJsonFile(path) {
+	return JSON.parse(loadTextFile(path));
 }
 
 export function writeJsonFile(path, data) {

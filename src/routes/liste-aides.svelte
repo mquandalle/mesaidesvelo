@@ -1,8 +1,8 @@
 <script>
-	import { aidesRuleNames, associateCollectivityMetadata } from '$lib/aides-analysis';
 	import AideSummary from '$lib/components/AideSummary.svelte';
 	import { engine } from '$lib/engine';
 	import departements from '@etalab/decoupage-administratif/data/departements.json';
+	import aidesCollectivities from '$lib/data/aides-collectivities.json';
 
 	const groupBy = (list, f) =>
 		list.reduce((acc, elm) => {
@@ -13,9 +13,10 @@
 			};
 		}, {});
 
-	const associatedCollectivities = aidesRuleNames.map((ruleName) =>
-		associateCollectivityMetadata(engine.getRule(ruleName))
-	);
+	const associatedCollectivities = Object.keys(aidesCollectivities).map((ruleName) => ({
+		...engine.getRule(ruleName),
+		...aidesCollectivities[ruleName]
+	}));
 
 	const aidesEtat = associatedCollectivities.filter(
 		({ collectivity }) => collectivity.kind === 'pays' && collectivity.value === 'France'

@@ -1,6 +1,6 @@
 import Publicodes from 'publicodes';
 import aides from '../src/aides.yaml';
-import { aidesRuleNames, associateCollectivityMetadata } from '$lib/aides-analysis';
+import aidesAndCollectivities from '../src/lib/data/aides-collectivities.json';
 
 type Aide = {
 	title: string;
@@ -32,10 +32,10 @@ const engine = new Publicodes(aides as any);
 export default function aidesVelo(situation: InputParameters): Array<Aide> {
 	engine.setSituation(formatInput(situation));
 
-	return aidesRuleNames
+	return Object.keys(aidesAndCollectivities)
 		.map((ruleName) => {
 			const rule = engine.getRule(ruleName);
-			const collectivity = associateCollectivityMetadata(rule).collectivity;
+			const collectivity = aidesAndCollectivities[ruleName].collectivity;
 			const { nodeValue } = engine.evaluate({ valeur: ruleName, unité: '€' });
 
 			return {
