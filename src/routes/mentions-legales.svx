@@ -1,0 +1,47 @@
+<script>
+	import { onMount } from 'svelte';
+
+	let optedOut = false;
+	onMount(() => {
+		if (localStorage.plausible_ignore === 'true') {
+			optedOut = true;
+		}
+	});
+	function optOutTracking(evt) {
+		if (evt.target.checked) {
+			localStorage.plausible_ignore = true;
+		} else {
+			localStorage.clear();
+		}
+	}
+</script>
+
+<svelte:head>
+
+<title>Mentions légales - MesAidesVélo</title>
+</svelte:head>
+
+<div class="prose mt-8 w-full max-w-screen-md m-auto">
+
+## Mentions Légales
+
+### Éditeur
+
+Maxime Quandalle
+
+### Hébergeur
+
+<a href="https://vercel.com" target="_blank">Vercel Inc.</a><br />
+340 S Lemon Ave #4133<br />
+Walnut, CA 91789
+
+### Cookies et suivi d’audience
+
+Ce site n’utilise pas de Cookies.
+
+Le suivi d’audience est accessible librement sur [la page statistiques](/statistiques). Vous pouvez vous exclure du suivi d’audience en cochant la case ci-dessous :
+
+<label
+	><input type="checkbox" checked={optedOut} on:change={optOutTracking} /> Je ne souhaite pas participer au suivi d’audience</label>
+
+</div>

@@ -1,21 +1,3 @@
-<script>
-	import { onMount } from 'svelte';
-
-	let optedOut = false;
-	onMount(() => {
-		if (localStorage.plausible_ignore === 'true') {
-			optedOut = true;
-		}
-	});
-	function optOutTracking(evt) {
-		if (evt.target.checked) {
-			localStorage.plausible_ignore = true;
-		} else {
-			localStorage.clear();
-		}
-	}
-</script>
-
 <svelte:head>
 
 <title>À propos - MesAidesVélo</title>
@@ -54,29 +36,5 @@ Nous prévoyons de développer un éditeur sous la forme d’un formulaire en li
 pour permettre à un large public de volontaires (citoyens, associations,
 collectivités, etc.) de participer directement à la mise à jour des données.
 Conçevoir cet éditeur demande un travail conséquent, mais c’est [prévu pour 2022](https://github.com/mquandalle/mesaidesvelo/issues/69).
-
----
-
-## Mentions Légales
-
-### Éditeur
-
-Maxime Quandalle
-
-### Hébergeur
-
-<a href="https://vercel.com" target="_blank">Vercel Inc.</a><br />
-340 S Lemon Ave #4133<br />
-Walnut, CA 91789
-
-### Cookies et suivi d’audience
-
-Ce site n'utilise pas de Cookies
-
-Le suivi d’audience est accessible librement sur [la page statistiques](/statistiques). Vous pouvez vous exclure du suivi d’audience en cochant la case ci-dessous :
-
-<label
-	><input type="checkbox" checked={optedOut} on:change={optOutTracking} /> Je ne souhaite pas être
-suivi</label>
 
 </div>

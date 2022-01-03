@@ -17,4 +17,8 @@ Vous pouvez copier/coller le code ci-dessous dans votre site web. La recherche d
 
 Techniquement, l’intégration fonctionne avec une [iframe](https://developer.mozilla.org/fr/docs/Web/HTML/Element/iframe), et le script ci-dessus permet de la re-dimensionner automatiquement en fonction du contenu. Cela permet une intégration la plus transparente possible avec le contenu de votre site.
 
+## Paquet NPM
+
+Si l'intégration iframe n'est pas suffisante pour vos besoins et que vous avez des compétences en développement web, vous pouvez utiliser le paquet [aides-velo](https://www.npmjs.com/package/aides-velo) qui contient le code source et les méthodes pour calculer le montant des aides dans une situation donnée.
+
 </div>
