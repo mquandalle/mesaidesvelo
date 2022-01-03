@@ -49,6 +49,15 @@ const extraData = [
 		departement: '06',
 		region: '84',
 		population: 39244
+	},
+	{
+		nom: 'Luxembourg',
+		codePostal: '1111',
+		code: '99137',
+		codesPostaux: ['1111'],
+		departement: '',
+		region: '',
+		population: 632275
 	}
 ];
 

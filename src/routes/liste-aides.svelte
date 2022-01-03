@@ -54,7 +54,8 @@
 	<p>
 		Nous intégrons également les aides de <a href="/ville/monaco" class="hover:text-green-700"
 			>Monaco</a
-		>.
+		>
+		et du <a href="/ville/luxembourg">Luxembourg</a>.
 	</p>
 	<h2>Les aides régionales</h2>
 	<ul>

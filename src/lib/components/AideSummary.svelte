@@ -20,10 +20,6 @@
 		...Object.keys(veloKindsComputed)
 	].map((kind) => `vélo . ${kind}`);
 
-	if (aide.dottedName === 'aides . riviera francaise') {
-		console.log(aide);
-	}
-
 	const extractVeloKindsFromAst = (rule) =>
 		reduceAST(
 			(acc, node) => {

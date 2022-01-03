@@ -2223,6 +2223,21 @@ aides . monaco:
   plafond: 400€
   lien: https://www.gouv.mc/Action-Gouvernementale/L-Environnement/Une-mobilite-plus-douce/Dispositif-de-subventions-des-vehicules-electriques-et-hybrides
 
+aides . luxembourg:
+  remplace: état
+  titre: Luxembourg
+  description: |
+    L’État du Luxembourg instaure une prime jusqu'à 600€ pour l’achat d’un vélo
+    mécanique ou électrique (pedelec25) à des fins privées. Cette aide est
+    plafonnée à 50% du prix du vélo hors taxes.
+  applicable si:
+    toutes ces conditions:
+      - vélo . électrique ou mécanique
+      - localisation . pays = 'Luxembourg'
+  valeur: 50% * vélo . prix . HT
+  plafond: 600€
+  lien: https://guichet.public.lu/fr/citoyens/transports-mobilite/transports-individuels/aides-financieres-acquisition-detention-vehicule/deduction-mobilite-durable-velo.html
+
 ########################
 
 vélo: oui
@@ -2293,7 +2308,11 @@ vélo . prix:
   unité: €
   par défaut: prix pour maximiser les aides
 
-vélo . taux TVA: 20%
+vélo . taux TVA:
+  variations:
+    - si: localisation . pays = 'Luxembourg'
+      alors: 17%
+    - sinon: 20%
 
 vélo . prix . HT:
   valeur: prix / (1 + taux TVA)
@@ -2343,4 +2362,6 @@ localisation . pays:
   variations:
     - si: code insee = '99138'
       alors: "'Monaco'"
+    - si: code insee = '99137'
+      alors: "'Luxembourg'"
     - sinon: "'France'"
