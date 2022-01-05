@@ -1,15 +1,21 @@
 import Publicodes from 'publicodes';
 import aides from '../src/aides.yaml';
-import aidesAndCollectivities from '../src/lib/data/aides-collectivities.json';
+import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
+import { formatDescription } from '$lib/utils';
 
 type Aide = {
 	title: string;
 	description: string;
 	url: string;
-	amount: number;
+	/**
+	 * Le montant de l'aide est calculé seulement si le type de vélo a été
+	 * précisé en entrée.
+	 */
+	amount?: number;
 };
 
-type InputParameters = {
+type InputParameters = Partial<{
+	'localisation . pays': string;
 	'localisation . code insee': string;
 	'localisation . epci': string;
 	'localisation . département': string;
@@ -21,38 +27,74 @@ type InputParameters = {
 		| 'cargo électrique'
 		| 'pliant'
 		| 'motorisation';
-	'vélo . prix'?: number;
-};
+	'vélo . prix': number;
+	'revenu fiscal de référence': number;
+}>;
 
 const engine = new Publicodes(aides as any);
 
 /**
  *  Retourne la liste des aides disponibles pour une situation donnée
  */
-export default function aidesVelo(situation: InputParameters): Array<Aide> {
+export default function aidesVelo(situation: InputParameters = {}): Array<Aide> {
 	engine.setSituation(formatInput(situation));
 
-	return Object.keys(aidesAndCollectivities)
-		.map((ruleName) => {
+	return Object.entries(aidesAndCollectivities)
+		.filter(
+			([, { country: aideCountry }]) =>
+				!situation['localisation . pays'] || aideCountry === situation['localisation . pays']
+		)
+		.flatMap(([ruleName]) => {
 			const rule = engine.getRule(ruleName);
 			const collectivity = aidesAndCollectivities[ruleName].collectivity;
-			const { nodeValue } = engine.evaluate({ valeur: ruleName, unité: '€' });
 
-			return {
+			const metaData = {
+				id: ruleName,
 				title: rule.title,
 				description: rule.rawNode.description,
 				url: (rule.rawNode as any).lien,
-				amount: nodeValue as number,
 				collectivity
 			};
-		})
-		.filter(({ amount, url }) => amount && url);
+
+			if (!situation['vélo . type']) {
+				return [metaData];
+			}
+			const { nodeValue } = engine.evaluate({ valeur: ruleName, unité: '€' });
+			if (typeof nodeValue === 'number' && nodeValue > 0) {
+				return [
+					{
+						...metaData,
+						description: formatDescription({
+							ruleName,
+							engine,
+							veloCat: situation['vélo . type']
+						}),
+						amount: nodeValue
+					}
+				];
+			} else {
+				return [];
+			}
+		});
 }
 
 const formatInput = (input: InputParameters) =>
 	Object.fromEntries(
 		Object.entries(input).map(([key, val]) => [
 			key,
-			typeof val === 'string' ? `'${val.replace(/'/g, '’')}'` : val
+			key === 'localisation . epci'
+				? `'${epciSirenToName[val]?.replace(/'/g, '’')}'`
+				: typeof val === 'string'
+				? `'${val.replace(/'/g, '’')}'`
+				: val
 		])
 	);
+
+const epciSirenToName = Object.fromEntries(
+	Object.values(aidesAndCollectivities).flatMap(({ collectivity }) => {
+		if (collectivity.kind !== 'epci') {
+			return [];
+		}
+		return [[(collectivity as any).code, collectivity.value]];
+	})
+);

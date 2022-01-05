@@ -2,6 +2,7 @@ import { loadJsonFile, writeJsonFile, loadTextFile } from '../lib/readWriteJson.
 import Publicodes, { reduceAST } from 'publicodes';
 
 const communes = loadJsonFile('src/lib/data/communes.json');
+const epci = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/epci.json');
 const departements = loadJsonFile(
 	'node_modules/@etalab/decoupage-administratif/data/departements.json'
 );
@@ -17,7 +18,7 @@ const aidesRuleNames = Object.keys(engine.getParsedRules()).filter(
 
 const extractCollectivityFromAST = (rule) => {
 	const localisationKinds = ['pays', 'région', 'département', 'epci', 'code insee'];
-	return reduceAST(
+	const { kind, value } = reduceAST(
 		(acc, node) => {
 			if (acc) return acc;
 			if (node.nodeKind === 'operation' && node.operationKind === '=') {
@@ -34,6 +35,13 @@ const extractCollectivityFromAST = (rule) => {
 		null,
 		rule
 	);
+	// In our rule basis we reference EPCI by their name but for iteroperability
+	// with third-party systems it is more robust to expose their SIREN code.
+	if (kind === 'epci') {
+		const code = epci.find(({ nom }) => nom.replace(/'/g, '’') === value)?.code;
+		return { kind, value, code };
+	}
+	return { kind, value };
 };
 
 const communesSorted = communes.sort((a, b) => b.population - a.population);
@@ -54,14 +62,25 @@ const getCodeInseeForCollectivity = ({ kind, value }) => {
 const getSlugForCodeInsee = (codeInsee) =>
 	codeInsee && communesSorted.find(({ code }) => code === codeInsee)?.slug;
 
+// TODO: a bit fragile, we should sync this logic with
+// `engine.evaluate('localisation . pays')
+const getCountry = (rule) =>
+	rule.dottedName === 'aides . monaco'
+		? 'monaco'
+		: rule.dottedName === 'aides . luxembourg'
+		? 'luxembourg'
+		: 'france';
+
 const associateCollectivityMetadata = (rule) => {
 	const collectivity = extractCollectivityFromAST(rule);
 	const codeInsee = getCodeInseeForCollectivity(collectivity);
 	const slug = getSlugForCodeInsee(codeInsee);
+	const country = getCountry(rule);
 	return {
 		collectivity,
 		codeInsee,
-		slug
+		slug,
+		country
 	};
 };
 

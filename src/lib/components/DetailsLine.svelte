@@ -1,6 +1,6 @@
 <script>
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
-	import { formatValue } from 'publicodes';
+	import { formatDescription } from '$lib/utils';
 
 	import AnimatedAmount from './AnimatedAmount.svelte';
 	import Badge from './Badge.svelte';
@@ -10,16 +10,8 @@
 
 	$: aide = $getCurrentBikeEngine().evaluate(ruleName);
 
-	const defaultDescription = '';
-
 	const { title, rawNode } = engine.getRule(ruleName);
-	const description = rawNode.description ?? defaultDescription;
-	const plafondRuleName = `${ruleName} . $plafond`;
-	const plafondIsDefined = Object.keys(engine.parsedRules).includes(plafondRuleName);
-	const plafond = plafondIsDefined && engine.evaluate(plafondRuleName);
-	const notice = description
-		.replace(/\$vélo/g, veloCat === 'motorisation' ? 'kit de motorisation' : `vélo ${veloCat}`)
-		.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }));
+	const notice = formatDescription({ ruleName, engine, veloCat });
 
 	const evaluateWithGivenRevenu = (revenu) =>
 		engine
