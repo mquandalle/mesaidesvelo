@@ -1806,21 +1806,6 @@ aides . brive:
   plafond: 200€
   lien: http://www.donzenac.correze.net/data/uploads/actualites/aide-velos-elec.pdf
 
-aides . communes riviera francaise:
-  remplace: commune
-  titre: Menton, Beausoleil, La Turbie, Fontan
-  applicable si:
-    toutes ces conditions:
-      - vélo . électrique
-      - une de ces conditions:
-          - localisation . code insee = '06083'
-          - localisation . code insee = '06012'
-          - localisation . code insee = '06150'
-          - localisation . code insee = '06062'
-  valeur: 150€
-  plafond: vélo . prix
-  lien: https://www.riviera-francaise.fr/les-actualites/item/236-prime-pour-l-achat-d-un-velo-electrique-il-est-encore-temps-d-en-profiter
-
 aides . hem:
   remplace: commune
   titre: Ville de Hem
