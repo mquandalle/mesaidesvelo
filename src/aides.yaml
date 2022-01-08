@@ -377,6 +377,7 @@ aides . caen:
   lien: https://caen.fr/velo-pied
 
 aides . caen la mer:
+  remplace: intercommunalité
   titre: Caen la mer communauté urbaine
   applicable si:
     toutes ces conditions:
@@ -387,6 +388,7 @@ aides . caen la mer:
   lien: https://caenlamer.fr/actualites/aide-de-caen-la-mer-pour-lachat-de-velo-assistance-electrique
 
 aides . carpiquet:
+  remplace: commune
   titre: Ville de Carpiquet
   applicable si:
     toutes ces conditions:
@@ -405,6 +407,7 @@ aides . grentheville:
   lien: https://grentheville.fr/index.php/component/content/article/90-informations-communales/200-aide-a-l-achat-d-un-velo-electrique-neuf
 
 aides . herouville:
+  remplace: commune
   titre: Ville d’Hérouville Saint-Clair
   applicable si:
     toutes ces conditions:
@@ -415,6 +418,7 @@ aides . herouville:
   lien: https://www.herouville.net/services/cadre-de-vie-environnement/vos-deplacements-doux
 
 aides . ifs:
+  remplace: commune
   titre: Ville d’ifs
   applicable si:
     toutes ces conditions:
@@ -537,6 +541,40 @@ aides . saint-germain la blanche herbe:
       - vélo . électrique
   valeur: 100€
   lien: https://www.mairie-stgermainblancheherbe.fr/29-actualites/658-aide-pour-l-achat-d-un-velo-electrique
+
+aides . trouville sur mer:
+  remplace: commune
+  titre: Ville de Trouville-sur-Mer
+  applicable si: localisation . code insee = '14715'
+  valeur: 30% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 400€
+      - si: vélo . électrique
+        alors: 300€
+      - sinon: 0€
+  lien: https://www.trouville.fr/wp-content/uploads/2021/04/Demande-Subvention-Ve%CC%81lo-5.pdf
+
+aides . deauville:
+  remplace: commune
+  titre: Ville de Deauville
+  applicable si: localisation . code insee = '14220'
+  valeur: 30% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 400€
+      - si: vélo . électrique
+        alors: 300€
+      - si: vélo . pliant
+        alors: 80€
+      - si: vélo . mécanique simple
+        alors: 150€
+      - sinon: 0€
+  # TODO: trouver un lien officiel.
+  # Remarque: l'aide est prolongée en 2022 : https://www.ouest-france.fr/normandie/deauville-14800/deauville-les-velos-aussi-finances-pour-les-entreprises-20294384-5c31-11ec-874b-5720349d4e86
+  lien: https://actu.fr/normandie/deauville_14220/deauville-la-ville-maintient-son-aide-pour-l-achat-d-un-velo-neuf_38851211.html
 
 aides . mer:
   remplace: commune
