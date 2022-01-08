@@ -1,4 +1,5 @@
 aides:
+  unité: €
   somme:
     - nom: commune
       valeur: 0 €
