@@ -70,7 +70,7 @@ aides . prime à la conversion:
 
 aides . ile de france:
   remplace: région
-  titre: Région Île-de-France
+  titre: Île-de-France Mobilités
   description: |
     La région Île-De-France subventionne l’achat d’un $vélo à hauteur de 50% et
     jusqu’à un plafond de $plafond. Les éventuelles aides locales déjà perçues
@@ -1844,6 +1844,72 @@ aides . brive:
   valeur: 30% * vélo . prix
   plafond: 200€
   lien: http://www.donzenac.correze.net/data/uploads/actualites/aide-velos-elec.pdf
+
+aides . pays de saint gilles:
+  remplace: intercommunalité
+  titre: Pays de Saint-Gilles Croix de Vie
+  applicable si: localisation . epci = 'CC du Pays de Saint Gilles-Croix-de-Vie'
+  # TODO: vélo adapté
+  variations:
+    - si: vélo . cargo
+      alors:
+        valeur: 20% * vélo . prix
+        plafond: 350€
+    - si: vélo . électrique
+      alors:
+        valeur: 20% * vélo . prix
+        plafond: 300€
+    - si: vélo . mécanique
+      alors:
+        valeur: 50% * vélo . prix
+        plafond: 100€
+    - sinon: 0€
+  lien: https://www.payssaintgilles.fr/actualites/15-janvier-lancement-de-la-nouvelle-aide-a-lachat-de-velo/
+
+aides . ville de talant:
+  remplace: commune
+  titre: Ville de Talant
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '21617'
+      - vélo . électrique
+  valeur: 20% * vélo . prix
+  plafond: 100€
+  lien: https://www.talant.fr/content_page/item/222-prime_vae.html
+
+aides . vendée grand littoral:
+  rempalce: intercommunalité
+  titre: Vendée Grand Littoral
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Vendée Grand Littoral'
+      - vélo . électrique
+  valeur: 20% * vélo . prix
+  plafond: 300€
+  lien: https://www.vendeegrandlittoral.fr/aide-a-lachat-de-velo-a-assistance-electrique/
+
+aides . pays des achards:
+  rempalce: intercommunalité
+  titre: Pays des Achards
+  applicable si: localisation . epci = 'CC du Pays des Achards'
+  variations:
+    - si: vélo . cargo
+      alors:
+        valeur: 25% * vélo . prix
+        plafond: 300€
+    - si:
+        une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+      alors:
+        valeur: 25% * vélo . prix
+        plafond: 200€
+    - si: vélo . mécanique
+      alors:
+        valeur: 25% * vélo . prix
+        plafond: 100€
+    - sinon: 0€
+  lien: https://www.cc-paysdesachards.fr/amenagement/mobilites/351-bonus-velo.html
 
 aides . hem:
   remplace: commune
