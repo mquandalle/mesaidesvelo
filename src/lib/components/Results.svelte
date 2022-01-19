@@ -67,4 +67,7 @@
 			>Prime à la conversion <Emoji emoji="🚗" /> →<Emoji emoji="🚲" /></CategoryLine
 		>
 	{/if}
+	<CategoryLine montant={'500 €/an'} href="/forfait-mobilite-durable"
+		>Forfait mobilités durables
+	</CategoryLine>
 </div>

@@ -69,10 +69,15 @@
 		<p class="text-gray-800 mt-1 max-w-sm">Trouvez les aides à l’achat d’un vélo</p>
 	</header>
 	<div class="pb-6 {!embeded ? 'flex-1' : ''}">
-		{#if $page.url.pathname === '/' || $page.url.pathname.startsWith('/ville') || $page.url.pathname === '/prime-a-la-conversion'}
+		{#if $page.url.pathname === '/' || $page.url.pathname.startsWith('/ville') || $page.url.pathname === '/prime-a-la-conversion' || $page.url.pathname === '/forfait-mobilite-durable'}
 			<Search />
 			{#if $page !== '/'}
-				<PaneNavigation depth={$page.url.pathname === '/prime-a-la-conversion' ? 1 : 0}>
+				<PaneNavigation
+					depth={$page.url.pathname === '/prime-a-la-conversion' ||
+					$page.url.pathname === '/forfait-mobilite-durable'
+						? 1
+						: 0}
+				>
 					<slot />
 				</PaneNavigation>
 			{/if}
