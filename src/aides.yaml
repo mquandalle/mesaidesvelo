@@ -286,6 +286,94 @@ aides . strasbourg:
       - sinon: 0€
   lien: https://www.strasbourg.eu/aides-achat
 
+aides . entzheim:
+  remplace: commune
+  titre: Ville de Entzheim
+  applicable si: localisation . code insee = '67124'
+  variations:
+    - si: vélo . cargo
+      alors:
+        valeur: 10% * vélo . prix
+        plafond: 200€
+    - si: vélo . électrique
+      alors:
+        valeur: 10% * vélo . prix
+        plafond: 150€
+    - si: vélo . mécanique simple
+      alors:
+        valeur: 30% * vélo . prix
+        plafond: 80€
+    - sinon: 0€
+  lien: http://www.entzheim.fr/fr/information/113321/aide-achat-un-velo-neuf-ou-reparation-un-velo
+
+aides . geispolsheim:
+  remplace: commune
+  titre: Ville de Geispolsheim
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '67152'
+      - vélo . électrique
+  variations:
+    - si: ménage imposable = 'non'
+      alors: 200€
+    - si: revenu fiscal de référence <= 750 €/mois
+      alors: 150€
+    - sinon: 100€
+  lien: https://www.geispolsheim.fr/fr/subventions-transport-et-velo-a-assistance-electrique
+
+aides . hangenbieten:
+  remplace: commune
+  titre: Ville de Hangenbieten
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '67182'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 560 €/mois
+      alors: 120€
+    - si: revenu fiscal de référence <= 764 €/mois
+      alors: 100€
+    - sinon: 80€
+  lien: https://hangenbieten.fr/wp-content/uploads/2021/03/SKM_C30821031516140.pdf#page=4
+
+aides . illkirch:
+  remplace: commune
+  titre: Ville de Illkirch-Graffenstaden
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '67218'
+      - vélo . électrique
+  variations:
+    - si: vélo . prix <= 600€
+      alors: 50€
+    - si: vélo . prix <= 800€
+      alors: 100€
+    - sinon: 200€
+  lien: http://www.illkirch.eu/aide-a-lachat-dun-velo-a-assistance-electrique/
+
+aides . plobsheim:
+  remplace: commune
+  titre: Ville de Plobsheim
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '67378'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 100€
+  lien: https://www.plobsheim.fr/subvention-pour-lachat-dun-velo/
+
+aides . vendenheim:
+  remplace: commune
+  titre: Ville de Vendenheim
+  applicable si: localisation . code insee = '67506'
+  variations:
+    - si: vélo . électrique
+      alors: 250€
+    - si: vélo . mécanique
+      alors: 80€
+    - sinon: 0€
+  lien: https://vendenheim.fr/aides-et-subventions/
+
 aides . albi:
   remplace: intercommunalité
   titre: Grand Albigeois
