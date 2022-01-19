@@ -36,3 +36,5 @@ Les aides sont saisies manuellement.
 La recherche de ville utilise le paquet [`decoupage-administratif` fourni par Etalab](https://github.com/etalab/decoupage-administratif).
 
 Pour référencer une métropole ou une intercommunalité, utilisez le nom exact défini dans [la liste des EPCI](https://www.collectivites-locales.gouv.fr/institutions/liste-et-composition-des-epci-fiscalite-propre)
+
+La liste des entreprises pour la page sur le forfait mobilité est [extraite de la base Insee](./src/scripts/download-sirene-data.sh).

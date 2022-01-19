@@ -1,7 +1,8 @@
-import vercel from '@sveltejs/adapter-vercel';
-import WindiCSS from 'vite-plugin-windicss';
 import yaml from '@rollup/plugin-yaml';
+import vercel from '@sveltejs/adapter-vercel';
 import { mdsvex } from 'mdsvex';
+import path from 'path';
+import WindiCSS from 'vite-plugin-windicss';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,7 +11,12 @@ const config = {
 	kit: {
 		adapter: vercel(),
 		vite: {
-			plugins: [WindiCSS(), yaml()]
+			plugins: [WindiCSS(), yaml()],
+			resolve: {
+				alias: {
+					$entreprises: path.resolve('./entreprises/data')
+				}
+			}
 		}
 	}
 };

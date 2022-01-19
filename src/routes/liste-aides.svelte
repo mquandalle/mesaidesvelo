@@ -43,7 +43,7 @@
 		oubli !
 	</p>
 
-	<h2>Les aides de l'État</h2>
+	<h2>Les aides de l’État</h2>
 	<ul>
 		{#each aidesEtat as aide}
 			<li>
