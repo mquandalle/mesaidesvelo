@@ -73,13 +73,15 @@ const data = [
 				codesPostaux.unshift(villesAvecArrondissements[c.nom]);
 			}
 
+			const countTrailingZeros = (x) => x.toString().match(/0+$/)?.[0].length ?? 0;
+
 			return {
 				code: c.code,
 				nom: c.nom,
 				region: c.region,
 				population: c.population,
 				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
-				codesPostaux
+				codesPostaux: codesPostaux.sort((a, b) => countTrailingZeros(b) - countTrailingZeros(a))
 			};
 		}),
 	...extraData
