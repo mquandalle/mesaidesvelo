@@ -19,32 +19,33 @@
 
 	const embeded = Boolean($page.query.get('iframe'));
 	setContext('embeded', embeded);
-	let pageElement;
 	const inIframe = typeof window !== 'undefined' && window.self !== window.top;
 
+	let contentHeight;
 	let prevHeight = 0;
-	function postMessageHeight() {
-		const height = pageElement?.clientHeight;
-		if (height && inIframe && prevHeight !== height) {
-			window.parent.postMessage({ kind: 'resize-height', value: height });
-			prevHeight = height;
-			window.setTimeout(postMessageHeight, 700);
-		}
+
+	const minHeight = 420;
+
+	$: if (inIframe && prevHeight !== contentHeight) {
+		const newHeight = Math.max(minHeight, contentHeight);
+		window.parent.postMessage({ kind: 'resize-height', value: newHeight });
+		prevHeight = contentHeight;
 	}
 </script>
 
-<svelte:window on:sveltekit:navigation-end={postMessageHeight} />
-
-<div class="px-4 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
-	{#if !embeded}
-		<header class="mt-8 block w-full max-w-screen-md m-auto">
+<div
+	class="px-4 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col"
+	bind:offsetHeight={contentHeight}
+>
+	<header class="mt-8 block w-full max-w-screen-md m-auto">
+		{#if !embeded}
 			<a href="/" class="text-3xl font-bold cursor-pointer">
 				Mes<span class="text-green-800">Aides</span>Vélo
 				<Emoji emoji="🚲" className="-mt-2" />
 			</a>
-			<p class="text-gray-800 mt-1 max-w-sm">Trouvez les aides à l’achat d’un vélo</p>
-		</header>
-	{/if}
+		{/if}
+		<p class="text-gray-800 mt-1 max-w-sm">Trouvez les aides à l’achat d’un vélo</p>
+	</header>
 	<div class="pb-6 {!embeded ? 'flex-1' : ''}">
 		{#if $page.path === '/' || $page.path.startsWith('/ville') || $page.path === '/prime-a-la-conversion'}
 			<Search />
