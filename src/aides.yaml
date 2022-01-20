@@ -218,32 +218,33 @@ aides . toulouse:
       - revenu fiscal de référence <= 35052 €/an
   valeur: 40% * vélo . prix
   plafond:
+    # TODO : vélo d'occasion
     variations:
       - si: vélo . cargo électrique
         alors:
           variations:
-            - si: revenu fiscal de référence <= 18800
+            - si: revenu fiscal de référence <= 18800 €/an
               alors: 600€
             - sinon: 500€
       - si: vélo . cargo
         alors:
           variations:
-            - si: revenu fiscal de référence <= 18800
+            - si: revenu fiscal de référence <= 18800 €/an
               alors: 400€
             - sinon: 350€
       - si: vélo . électrique
         alors:
           variations:
-            - si: revenu fiscal de référence <= 18800
+            - si: revenu fiscal de référence <= 18800 €/an
               alors: 250€
             - sinon: 200€
       - si: vélo . mécanique
         alors:
           variations:
-            - si: revenu fiscal de référence <= 18800
+            - si: revenu fiscal de référence <= 18800 €/an
               alors: 100€
             - sinon: 0€
-        sinon: 0€
+      - sinon: 0€
   lien: https://www.toulouse-metropole.fr/missions/environnement/qualite-de-l-air/prime-velo
 
 aides . nice:
