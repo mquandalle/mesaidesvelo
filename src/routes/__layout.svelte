@@ -19,25 +19,28 @@
 
 	const embeded = Boolean($page.query.get('iframe'));
 	setContext('embeded', embeded);
-	const inIframe = typeof window !== 'undefined' && window.self !== window.top;
 
-	let contentHeight;
-	let prevHeight = 0;
+	let pageElement;
 
-	const minHeight = 420;
+	onMount(() => {
+		if (!embeded) {
+			return;
+		}
+		// The code below communicate with the iframe.js script on a host site
+		// to automatically resize the iframe when its inner content height
+		// change.
+		const minHeight = 500; // Also used in iframe.js
+		const observer = new ResizeObserver(([entry]) => {
+			const value = Math.max(minHeight, entry.contentRect.height);
+			window.parent?.postMessage({ kind: 'resize-height', value }, '*');
+		});
 
-	$: if (inIframe && prevHeight !== contentHeight) {
-		const newHeight = Math.max(minHeight, contentHeight);
-		window.parent.postMessage({ kind: 'resize-height', value: newHeight });
-		prevHeight = contentHeight;
-	}
+		observer.observe(pageElement);
+	});
 </script>
 
-<div
-	class="px-4 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col"
-	bind:offsetHeight={contentHeight}
->
-	<header class="mt-8 block w-full max-w-screen-md m-auto">
+<div class="px-4 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
+	<header class="{!embeded ? 'mt-8' : ''} block w-full max-w-screen-md m-auto">
 		{#if !embeded}
 			<a href="/" class="text-3xl font-bold cursor-pointer">
 				Mes<span class="text-green-800">Aides</span>Vélo

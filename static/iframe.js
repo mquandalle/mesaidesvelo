@@ -9,6 +9,7 @@
 	const utmSource = encodeURIComponent(window.location.href);
 	iframeElement.src = 'https://mesaidesvelo.fr/?iframe=1&utm_medium=iframe&utm_source=' + utmSource;
 	iframeElement.style.width = '100%';
+	iframeElement.style.height = '500px';
 	iframeElement.style.border = '0';
 	iframeElement.scrolling = 'no';
 
@@ -17,7 +18,7 @@
 
 	window.addEventListener('message', function (evt) {
 		if (evt.data.kind === 'resize-height') {
-			iframeElement.height = evt.data.value + 'px';
+			iframeElement.style.height = evt.data.value + 'px';
 		}
 	});
 })();
