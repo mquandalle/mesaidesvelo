@@ -666,17 +666,6 @@ aides . deauville:
   # Remarque: l'aide est prolongée en 2022 : https://www.ouest-france.fr/normandie/deauville-14800/deauville-les-velos-aussi-finances-pour-les-entreprises-20294384-5c31-11ec-874b-5720349d4e86
   lien: https://actu.fr/normandie/deauville_14220/deauville-la-ville-maintient-son-aide-pour-l-achat-d-un-velo-neuf_38851211.html
 
-aides . mer:
-  remplace: commune
-  titre: Ville de Mer
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '41136'
-      - vélo . électrique
-  valeur: 20% * vélo . prix
-  plafond: 100€
-  lien: http://www.mer41.fr/Coup-de-pouce-pour-les-velos-electriques
-
 aides . montlouis sur loire:
   remplace: commune
   titre: Montlouis sur Loire
@@ -1394,22 +1383,28 @@ aides . nevers:
   titre: Nevers Agglomération
   applicable si: localisation . epci = 'CA de Nevers'
   valeur: 30% * vélo . prix
+  # TODO: informations contradictoires entre les 2 pages suivantes:
+  # - https://www.agglo-nevers.net/laide-a-lachat-dun-velo-revue-et-reconduite/
+  # - https://www.lejdc.fr/nevers-58000/loisirs/nevers-agglomeration-poursuit-sa-politique-daccompagnement-pour-lachat-dun-nouveau-velo_14071739/
   plafond:
     variations:
-      - si: vélo . électrique
-        alors:
-          variations:
-            - si: ménage imposable
-              alors: 250€
-            - sinon: 200€
-      - si: vélo . mécanique
-        alors:
-          variations:
-            - si: ménage imposable
-              alors: 125€
-            - sinon: 100€
-      - sinon: 0€
-  lien: https://www.agglo-nevers.net/wp-content/uploads/2021/01/RTHglement-attribution-subvention-2021-1.pdf
+      - si:
+          toutes ces conditions:
+            - vélo . électrique
+            - vélo . prix <= 1650 €
+        alors: 150 €
+      - si:
+          toutes ces conditions:
+            - vélo . mécanique
+            - vélo . prix <= 500 €
+        alors: 75 €
+      - si:
+          toutes ces conditions:
+            - vélo . motorisation
+            - vélo . prix <= 500 €
+        alors: 150 €
+      - sinon: 0 €
+  lien: https://www.agglo-nevers.net/laide-a-lachat-dun-velo-revue-et-reconduite/
 
 aides . aurillac:
   remplace: intercommunalité
@@ -1588,10 +1583,14 @@ aides . angers:
     variations:
       - si: vélo . cargo électrique
         alors: 400€
+      - si: vélo . cargo
+        alors: 100€
       - si: vélo . électrique
         alors: 200€
+      - si: vélo . mécanique
+        alors: 50€
       - sinon: 0€
-  lien: https://www.angersloiremetropole.fr/mon-quotidien/mobilites/velo/velo-a-assistance-electrique/index.html
+  lien: https://www.angersloiremetropole.fr/mon-quotidien/mobilites/velo/aide-a-l-achat-d-un-velo-neuf/index.html
 
 aides . pays de l'or:
   remplace: intercommunalité
@@ -1748,7 +1747,7 @@ aides . rochefort:
       - si: revenu fiscal de référence > 380€
         alors: 150€
       - sinon: 200€
-  lien: https://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisitionhttps://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisition
+  lien: https://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisition
 
 aides . arcachon:
   remplace: commune
@@ -1760,23 +1759,6 @@ aides . arcachon:
   valeur: vélo . prix
   plafond: 200€
   lien: https://www.ville-arcachon.fr/velo-arcachon/
-
-aides . pau:
-  remplace: intercommunalité
-  titre: Pau Béarn Pyrénées Mobilités
-  applicable si: localisation . epci = 'CA Pau Béarn Pyrénées'
-  valeur: 15% * vélo . prix
-  plafond:
-    # todo: vélo adapté
-    variations:
-      - si: vélo . cargo
-        alors: 350€
-      - si: vélo . pliant
-        alors: 250€
-      - si: vélo . électrique
-        alors: 250€
-      - sinon: 0€
-  lien: https://www.pau.fr/article/retour-sur-la-premiere-session-daide-a-lachat-velos
 
 aides . bourges:
   remplace: intercommunalité
