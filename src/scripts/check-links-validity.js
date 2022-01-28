@@ -15,38 +15,50 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 // Création d'une queue permettant de paralléliser la vérification des liens
 const queue = [...links];
 const detectedErrors = [];
-const simultaneousItems = 10;
+const simultaneousItems = 5;
 
-const processNextQueueItem = async () => {
+async function processNextQueueItem() {
 	if (queue.length !== 0) {
 		await fetchAndReport(queue.shift());
 		await processNextQueueItem();
 	}
-};
+}
 
-const fetchAndReport = async ({ link, title }) => {
-	try {
-		const res = await timeLimitedFetch(link);
-		report({ status: res.status, link, title });
-	} catch (err) {
-		console.log(err);
-		report({ status: 499, link, title });
+async function fetchAndReport({ link, title }) {
+	let status = await getHTTPStatus(link);
+
+	// Retry one time in case of timeout
+	if (status === 499) {
+		await sleep(10_000);
+		status = await getHTTPStatus(link);
 	}
-};
+	report({ status, link, title });
+}
 
-const timeLimitedFetch = async (link) => {
+async function getHTTPStatus(link) {
 	const maxTime = 15_000;
 	const controller = new AbortController();
 	setTimeout(() => controller.abort(), maxTime);
-	return await fetch(link, { signal: controller.signal });
-};
 
-const report = ({ status, link, title }) => {
+	try {
+		const res = await fetch(link, { signal: controller.signal });
+		return res.status;
+	} catch (err) {
+		console.log(err);
+		return 499;
+	}
+}
+
+async function report({ status, link, title }) {
 	console.log(status === 200 ? '✅' : '❌', status, link);
 	if (status !== 200) {
 		detectedErrors.push({ status, link, title });
 	}
-};
+}
+
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 (async () => {
 	await Promise.allSettled(Array.from({ length: simultaneousItems }).map(processNextQueueItem));
@@ -57,18 +69,23 @@ const report = ({ status, link, title }) => {
             
 			Certains liens référencés ne semblent plus fonctionner :
 			
-			| Status HTTP | Lien |
+			| Aide | Status HTTP |
 			|---|---|
 			${detectedErrors
-				.map(({ status, title, link }) => `| ${status} | [${title}](${link}) |`)
-				.join('\n')}`
-				.trim()
-				.split('\n')
-				.map((line) => line.trim())
-				.join('\n');
-			console.log(`::set-output name=comment::${message.replace(/\n/g, '<br />')}`);
-		} else {
+				.map(({ status, title, link }) => `| [${title}](${link}) | ${status} |`)
+				.join('\n')}`;
+
+			const format = (msg) =>
+				msg
+					.trim()
+					.split('\n')
+					.map((line) => line.trim())
+					.join('<br />');
+			console.log(`::set-output name=comment::${format(message)}`);
+		} else if (detectedErrors) {
 			console.log('Liens invalides :' + detectedErrors.map(({ link }) => `\n- ${link}`));
 		}
+
+		console.log('Terminé');
 	}
 })();
