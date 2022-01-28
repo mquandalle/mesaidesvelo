@@ -487,15 +487,6 @@ aides . carpiquet:
   valeur: 150€
   lien: http://www.carpiquet-mairie.fr/wa_files/CONVENTION_20RELATIVE_20A_20L_27ACQUISITION_20D_27UN_20VAE_20OU_20D_27UNE_20TROTTINETTE_20A_20ASSIST.pdf
 
-aides . grentheville:
-  titre: Ville de Grentheville
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '14319'
-      - vélo . électrique
-  valeur: 100€
-  lien: https://grentheville.fr/index.php/component/content/article/90-informations-communales/200-aide-a-l-achat-d-un-velo-electrique-neuf
-
 aides . herouville:
   remplace: commune
   titre: Ville d’Hérouville Saint-Clair
@@ -1455,17 +1446,6 @@ aides . riviera francaise:
     valeur: vélo . prix
     abattement: aides . commune
   lien: https://www.riviera-francaise.fr/les-actualites/item/236-prime-pour-l-achat-d-un-velo-electrique-il-est-encore-temps-d-en-profiter
-
-aides . frejus:
-  remplace: commune
-  titre: Ville de Fréjus
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '83061'
-      - vélo . électrique
-  valeur: vélo . prix
-  plafond: 200 €
-  lien: https://www.ville-frejus.fr/actu/!/news/aide-financiere-a-lacquisition-dun-velo-a-assistance-electrique-/
 
 aides . orléans:
   remplace: intercommunalité

@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v2.0.5
+
+Suppression des aides de Fréjus et Grentheville
+
 ## v2.0.4
 
 Mise à jour des aides et corrections des liens
