@@ -44,7 +44,6 @@ async function getHTTPStatus(link) {
 		const res = await fetch(link, { signal: controller.signal });
 		return res.status;
 	} catch (err) {
-		console.log(err);
 		return 499;
 	}
 }

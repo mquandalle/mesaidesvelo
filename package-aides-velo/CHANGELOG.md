@@ -8,11 +8,11 @@ Suppression des aides de Fréjus et Grentheville
 
 Mise à jour des aides et corrections des liens
 
-Supprime l'aide de Pau
-Corrige le lien de Rochefort
-Mise à jour de l'aide de Nevers
-Mise à jour de l'aide d'Angers
-Supprime l'aide de Mer
+- Supprime l'aide de Pau
+- Corrige le lien de Rochefort
+- Mise à jour de l'aide de Nevers
+- Mise à jour de l'aide d'Angers
+- Supprime l'aide de Mer
 
 ## v2.0.3
 
