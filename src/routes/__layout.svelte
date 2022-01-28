@@ -37,7 +37,15 @@
 
 		observer.observe(pageElement);
 	});
+
+	// When the site is embeded in an iframe, we don't want to track a “visit”
+	// every time the page is loaded, as the iframe is oftentimes low on the
+	// page and the user might not interact with it or even see it. We disable
+	// tracking up until the first click interaction;
+	let enableTracking = import.meta.env.PROD && !embeded;
 </script>
+
+<svelte:window on:click={() => (enableTracking = true)} />
 
 <div class="px-4 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
 	<header class="{!embeded ? 'mt-8' : ''} block w-full max-w-screen-md m-auto">
@@ -62,6 +70,10 @@
 		{/if}
 	</div>
 	<Footer />
+
+	{#if enableTracking}
+		<script defer data-domain="mesaidesvelo.fr" src="/js/script.js"></script>
+	{/if}
 </div>
 
 <style>
