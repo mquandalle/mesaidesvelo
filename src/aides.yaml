@@ -687,6 +687,22 @@ aides . montbéliard agglo:
   valeur: 100€
   lien: https://aidevelo.agglo-montbeliard.fr/
 
+aides . besançon:
+  remplace: intercommunalité
+  titre: Grand Besançon Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CU Grand Besançon Métropole'
+      - vélo . électrique
+      - revenu fiscal de référence <= 19665 €/an
+  valeur: 25%
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 400€
+      - sinon: 200€
+  lien: https://www.grandbesancon.fr/demarche-administrative/subvention-pour-lachat-dun-velo-electrique/
+
 aides . montbéliard:
   remplace: commune
   titre: Ville de Montbéliard
@@ -813,7 +829,7 @@ aides . amiens métropole:
 
 aides . amiens:
   remplace: commune
-  titre: ville d’Amiens
+  titre: Ville d’Amiens
   applicable si: localisation . code insee = '80021'
   valeur: 25% * vélo . prix
   plafond:
@@ -1395,7 +1411,7 @@ aides . nevers:
             - vélo . prix <= 500 €
         alors: 150 €
       - sinon: 0 €
-  lien: https://www.agglo-nevers.net/laide-a-lachat-dun-velo-revue-et-reconduite/
+  lien: https://www.nevers.fr/actualites/aide-a-lacquisition-dun-velo-2022
 
 aides . aurillac:
   remplace: intercommunalité
@@ -1411,6 +1427,17 @@ aides . aurillac:
   valeur: 25% * vélo . prix
   plafond: 300€
   lien: https://www.stabus.fr/fr/velocab/
+
+aides . terre des 2 caps:
+  remplace: intercommunalité
+  titre: Terre des 2 caps
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de la Terre des Deux Caps'
+      - vélo . électrique
+  valeur: 40% * vélo . prix
+  plafond: 250€
+  lien: http://www.terredes2caps.fr/
 
 aides . carvin:
   remplace: commune
@@ -2234,6 +2261,31 @@ aides . betheny:
   valeur: 100€
   lien: https://ville-betheny.fr/cadre-de-vie/subvention-velo-a-assistance-electrique-vae/article/subvention-velo-a-assistance-electrique-vae
 
+aides . brest:
+  remplace: intercommunalité
+  titre: Brest Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'Brest Métropole'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors:
+        valeur: 50% * vélo . prix
+        plafond: 500€
+    - si: revenu fiscal de référence <= 20000 €/an
+      alors:
+        valeur: 40% * vélo . prix
+        plafond: 400€
+    - si: revenu fiscal de référence <= 26350 €/an
+      alors:
+        valeur: 30% * vélo . prix
+        plafond: 200€
+    - sinon: 0€
+  lien: https://www.brest.fr/mes-demarches/environnement/demander-la-subvention-velo-a-assistance-electrique-7043.html
+
 aides . plouzané:
   remplace: commune
   titre: Ville de Plouzané
@@ -2243,6 +2295,103 @@ aides . plouzané:
       - vélo . électrique
   valeur: 100€
   lien: http://www.ville-plouzane.fr/index.php/fr/toute-l-actualite/1074-aide-a-l-achat-vae
+
+aides . gouesnou:
+  remplace: commune
+  titre: Ville de Gouesnou
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '29061'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.gouesnou.bzh/actualites/prime-a-lachat-dun-velo-a-assistance-electrique/
+
+aides . pougastel-daoulas:
+  remplace: commune
+  titre: Ville de Plougastel-Daoulas
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '29189'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors: 200 €
+    - sinon: 150 €
+  plafond: vélo . prix
+  lien: https://www.brest.fr/mes-demarches/environnement/demander-la-subvention-velo-a-assistance-electrique-7043.html
+
+aides . saint-brieuc armor:
+  remplace: intercommunalité
+  titre: Saint-Brieuc Armor Agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Saint-Brieuc Armor Agglomération'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+  valeur: 25% * vélo . prix
+  plafond: 150€
+  lien: https://www.saintbrieuc-armor-agglo.bzh/information/actualites/aide-a-lachat-de-votre-velo-electrique-ou-velo-cargo-en-2022-2438
+
+aides . morlaix:
+  remplace: intercommunalité
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Morlaix Communauté'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors: 500 €
+    - si: revenu fiscal de référence <= 20234 €/an
+      alors: 200 €
+    - sinon: 100 €
+  plafond: vélo . prix
+  lien: https://www.morlaix-communaute.bzh/Se-deplacer/Velo/Prime-achat-Velo-a-Assistance-Electrique-VAE
+
+aides . crozon:
+  remplace: intercommunalité
+  applicable si: localisation . epci = 'CC Presqu’île de Crozon-Aulne maritime'
+  variations:
+    - si: vélo . électrique
+      alors: vélo . prix
+    - si:
+        une de ces conditions:
+          - vélo . cargo
+          - vélo . mécanique
+      alors: 50% * vélo . prix
+    - sinon: 0€
+  plafond: 100€
+  lien: https://www.comcom-crozon.com/amenagement-et-cadre-de-vie/transports-deplacements-randonnees/deplacements-doux/
+
+aides . ploermel:
+  remplace: intercommunalité
+  applicable si: localisation . epci = 'CC Ploërmel Communauté'
+  variations:
+    - si: vélo . cargo électrique
+      alors: 400€
+    - si: vélo . cargo
+      alors: 200€
+    - si: vélo . électrique
+      alors: 100€
+    - si: vélo . mécanique
+      alors: 50€
+    - sinon: 0€
+  plafond: vélo . prix
+  lien: https://www.ploermelcommunaute.bzh/fonctionnalites/publications-131/l-aide-velo-ploermel-communaute-25650.html
+
+aides . bar-le-duc:
+  remplace: commune
+  titre: Ville de Bar-le-Duc
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '55029'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 30% * vélo . prix
+  plafond: 300€
+  lien: https://www.barleduc.fr/mon-quotidien/transports-et-stationnement/prolongement-de-loperation-dispositif-d-aide-a-l-acquisition-de-velo.html
 
 aides . saint-jacques de la lande:
   remplace: commune
