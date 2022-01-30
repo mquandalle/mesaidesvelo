@@ -183,6 +183,19 @@ aides . sainte foy lès lyon:
   valeur: 100€
   lien: https://www.saintefoyleslyon.fr/Territoire-d-avenir/Deplacements/100-euros-pour-l-achat-d-un-velo
 
+aides . mornant:
+  remplace: commune
+  titre: Ville de Mornant
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69141'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 1000 €/mois
+      alors: 250€
+    - sinon: 150€
+  lien: https://www.ville-mornant.fr/Aide-acquisition-velo-a-assistance-electrique-mornant-art-283.html
+
 aides . bordeaux:
   remplace: intercommunalité
   titre: Bordeaux Métropole
@@ -216,7 +229,7 @@ aides . toulouse:
     toutes ces conditions:
       - localisation . epci = 'Toulouse Métropole'
       - revenu fiscal de référence <= 35052 €/an
-  valeur: 40% * vélo . prix
+  valeur: 40% * vélo . prix . HT
   plafond:
     # TODO : vélo d'occasion
     variations:
@@ -1042,7 +1055,7 @@ aides . colmar:
 
 aides . avignon:
   remplace: intercommunalité
-  titre: Grand avignon
+  titre: Grand Avignon
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA du Grand Avignon (COGA)'
@@ -1050,6 +1063,26 @@ aides . avignon:
   valeur: 25% * vélo . prix # TODO: à vérifier, j'ai du mal à comprendre leur formulation
   plafond: 400€
   lien: https://www.grandavignon.fr/fr/actualites/aide-lobtention-dun-vae
+
+aides . luberon:
+  remplace: intercommunalité
+  titre: Luberon Monts de Vaucluse
+  applicable si: localisation . epci = 'CA Luberon Monts de Vaucluse'
+  valeur: 30% * vélo . prix
+  plafond:
+    variations:
+      - si:
+          toutes ces conditions:
+            - vélo . électrique
+            - vélo . prix <= 2500€
+        alors: 300€
+      - si:
+          toutes ces conditions:
+            - vélo . mécanique
+            - vélo . prix <= 1000€
+        alors: 200€
+      - sinon: 0€
+  lien: https://www.luberonmontsdevaucluse.fr/agglomeration/subvention-velo
 
 aides . charenton:
   remplace: commune
@@ -1557,6 +1590,20 @@ aides . annecy:
       alors: 150€
   lien: https://aide-velo.grandannecy.fr/
 
+aides . évian-les-bains:
+  remplace: commune
+  titre: Ville d’Évian-les-Bains
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '74119'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . motorisation
+  valeur: 20% * vélo . prix
+  plafond: 400€
+  lien: https://forms.gle/FbFMrPU4AYiTqTAg9
+
 aides . marignier:
   remplace: commune
   titre: Ville de Marignier
@@ -1598,6 +1645,23 @@ aides . angers:
         alors: 50€
       - sinon: 0€
   lien: https://www.angersloiremetropole.fr/mon-quotidien/mobilites/velo/aide-a-l-achat-d-un-velo-neuf/index.html
+
+aides . châtellrault:
+  remplace: intercommunalité
+  titre: Grand Châtellerault
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Grand Châtellerault'
+      - vélo . électrique
+  variations:
+    - si:
+        nom: ancien abonné vélibleu
+        type: booléen
+        question: Êtes-vous un ancien abonné Vélibleu d’au moins 6 mois avant le 31 décembre 2021 ?
+        par défaut: non
+      alors: 300€
+    - sinon: 200€
+  lien: https://www.ville-chatellerault.fr/a-votre-service/deplacements/aide-%C3%A0-l-achat-de-v%C3%A9lo
 
 aides . pays de l'or:
   remplace: intercommunalité
@@ -1899,6 +1963,17 @@ aides . laval:
   plafond: 200€
   lien: https://www.agglo-laval.fr/utile-au-quotidien/transports/lagglo-a-velo/prime-a-lachat-dun-velo-electrique
 
+aides . ernée:
+  remplace: intercommunalité
+  titre: L’Ernée Communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de l’Ernée'
+      - vélo . électrique
+  valeur: 10% * vélo . prix
+  plafond: 100€
+  lien: https://www.lernee.fr/au-quotidien/mobilite/subvention-velo-electrique/
+
 aides . saint-martin-de-crau:
   remplace: commune
   titre: Saint-Martin-de-Crau
@@ -1956,7 +2031,7 @@ aides . ville de talant:
   lien: https://www.talant.fr/content_page/item/222-prime_vae.html
 
 aides . vendée grand littoral:
-  rempalce: intercommunalité
+  remplace: intercommunalité
   titre: Vendée Grand Littoral
   applicable si:
     toutes ces conditions:
@@ -1967,7 +2042,7 @@ aides . vendée grand littoral:
   lien: https://www.vendeegrandlittoral.fr/aide-a-lachat-de-velo-a-assistance-electrique/
 
 aides . pays des achards:
-  rempalce: intercommunalité
+  remplace: intercommunalité
   titre: Pays des Achards
   applicable si: localisation . epci = 'CC du Pays des Achards'
   variations:
@@ -2320,6 +2395,16 @@ aides . pougastel-daoulas:
   plafond: vélo . prix
   lien: https://www.brest.fr/mes-demarches/environnement/demander-la-subvention-velo-a-assistance-electrique-7043.html
 
+aides . saint-pol-de-léon:
+  remplace: commune
+  titre: Ville de Saint-Pol-de-Léon
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '29259'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.saintpoldeleon.fr/la-ville-vous-aide-pour-l-achat-d
+
 aides . saint-brieuc armor:
   remplace: intercommunalité
   titre: Saint-Brieuc Armor Agglomération
@@ -2610,11 +2695,15 @@ vélo . prix . HT:
 # On met par défaut un prix élevé pour maximiser les aides proportionnelles au
 # prix du vélo, mais certaines collectivités ont instauré un prix maximum
 # d'achat et il faut donc rester en-dessous dans ces cas là
+# TODO: implémenter sous forme de remplace directement dans les aides
 vélo . prix pour maximiser les aides:
   variations:
     - si: vélo . type = ''
       alors: 5000€
-    - si: localisation . epci = 'CA du Grand Annecy'
+    - si:
+        une de ces conditions:
+          - localisation . epci = 'CA du Grand Annecy'
+          - localisation . epci = 'CA Luberon Monts de Vaucluse'
       alors: 1000 €
     - si: localisation . epci = 'CA La Roche sur Yon - Agglomération'
       alors: 1500 €

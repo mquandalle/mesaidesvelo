@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v2.0.7
+
+Ajout des aides suivantes :
+
+- Luberon Monts de Vaucluse
+- Grand Châtellerault
+- Évian-les-Bains
+- Saint-Pol-de-Léon
+- L’Ernée
+
+Correction calcul Toulouse (prix HT et non TTC)
+
 ## v2.0.6
 
 Ajout des aides suivantes :
@@ -15,8 +27,6 @@ Ajout des aides suivantes :
 - Terre des 2 caps
 - Bar-le-Duc
 - Mornant
-
-Correction calcul Toulouse (prix HT et non TTC)
 
 ## v2.0.5
 
