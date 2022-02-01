@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v2.0.8
+
+Corrige le calcul de l'aide de Grand Besançon Métropole
+
 ## v2.0.7
 
 Ajout des aides suivantes :

@@ -708,7 +708,7 @@ aides . besançon:
       - localisation . epci = 'CU Grand Besançon Métropole'
       - vélo . électrique
       - revenu fiscal de référence <= 19665 €/an
-  valeur: 25%
+  valeur: 25% * vélo . prix
   plafond:
     variations:
       - si: vélo . cargo électrique
