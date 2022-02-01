@@ -1507,6 +1507,17 @@ aides . riviera francaise:
     abattement: aides . commune
   lien: https://www.riviera-francaise.fr/les-actualites/item/236-prime-pour-l-achat-d-un-velo-electrique-il-est-encore-temps-d-en-profiter
 
+aides . frejus:
+  remplace: commune
+  titre: Ville de Fréjus
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '83061'
+      - vélo . électrique
+  valeur: vélo . prix
+  plafond: 200 €
+  lien: https://www.ville-frejus.fr/ma-ville/valorisation-et-preservation/dossier-de-demande-daide-a-lachat-dun-vae/
+
 aides . orléans:
   remplace: intercommunalité
   titre: Orléans Métropole
