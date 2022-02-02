@@ -50,7 +50,7 @@
 			onFocus={autoSelectInput}
 			onChange={(val) => {
 				const derivedPath = val ? `/ville/${val.slug}` : `/`;
-				if ($page.path !== derivedPath) {
+				if ($page.url.pathname !== derivedPath) {
 					goto(derivedPath, { noscroll: true });
 				}
 			}}

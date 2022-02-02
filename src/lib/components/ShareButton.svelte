@@ -4,11 +4,11 @@
 	export let title = 'Trouvez une aide vélo sur MesAidesVélo';
 
 	const shareApiAvailabe =
-		typeof window !== 'undefined' && navigator?.canShare?.({ title, url: $page.path });
+		typeof window !== 'undefined' && navigator?.canShare?.({ title, url: $page.url.pathname });
 	const share = () => {
-		const query = new URLSearchParams($page.query.toString());
+		const query = new URLSearchParams($page.url.searchParams.toString());
 		query.append('utm_source', 'sharing');
-		const url = $page.path + '?' + query.toString();
+		const url = $page.url.pathname + '?' + query.toString();
 		navigator.share({ title, url });
 	};
 </script>

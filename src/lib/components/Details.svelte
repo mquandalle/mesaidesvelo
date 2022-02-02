@@ -8,7 +8,7 @@
 	import Questions from './Questions.svelte';
 	import AnimatedAmount from './AnimatedAmount.svelte';
 
-	const veloCat = $page.query.get('velo');
+	const veloCat = $page.url.searchParams.get('velo');
 	const categoryDescription = engine.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
@@ -34,7 +34,7 @@
     cursor-pointer
     hover:text-green-700 transform transition hover:-translate-x-1"
 	sveltekit:noscroll
-	href={$page.path}
+	href={$page.url.pathname}
 >
 	← Toutes les aides
 </a>

@@ -12,7 +12,7 @@
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ message, page: $page.path })
+				body: JSON.stringify({ message, page: $page.url.pathname })
 			});
 			state = 'sent';
 			setTimeout(() => {

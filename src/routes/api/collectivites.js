@@ -41,9 +41,9 @@ const searchOptions = {
 };
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get({ query }) {
-	const search = removeAccents(query.get('search')?.replace(/\s/g, '').toLowerCase());
-	const slug = query.get('slug');
+export async function get({ url }) {
+	const search = removeAccents(url.searchParams.get('search')?.replace(/\s/g, '').toLowerCase());
+	const slug = url.searchParams.get('slug');
 
 	const pick = ({ code, nom, slug, epci, codePostal, codesPostaux, departement, region }) => ({
 		nom,

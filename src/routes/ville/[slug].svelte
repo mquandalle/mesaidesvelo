@@ -4,11 +4,11 @@
 
 	// This pattern is explained here:
 	// https://github.com/sveltejs/kit/issues/2851
-	export async function load({ page, fetch }) {
-		if (browser && get(localisation)?.slug === page.params.slug) {
+	export async function load({ params, fetch }) {
+		if (browser && get(localisation)?.slug === params.slug) {
 			return { props: { ville: get(localisation) } };
 		} else {
-			const res = await fetch(`/api/collectivites?slug=${page.params.slug}`);
+			const res = await fetch(`/api/collectivites?slug=${params.slug}`);
 			return { props: { ville: await res.json() } };
 		}
 	}
@@ -41,8 +41,8 @@
 	page is shown. This is because the __layout.svelte component is entierly
 	re-rendered. cf. https://github.com/sveltejs/kit/issues/2130-->
 	<div class="grid overflow-hidden -m-4 p-4" in:fly|local={{ y: 30 }}>
-		<PaneNavigation depth={$page.query.get('velo') ? 1 : 0}>
-			{#if $page.query.get('velo')}
+		<PaneNavigation depth={$page.url.searchParams.get('velo') ? 1 : 0}>
+			{#if $page.url.searchParams.get('velo')}
 				<Details />
 			{:else}
 				<Results />

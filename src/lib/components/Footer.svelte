@@ -10,7 +10,7 @@
 <footer
 	class="flex flex-col items-start gap-6 py-6 justify-between w-full max-w-screen-md mx-auto md:(flex-row items-end) text-xs "
 >
-	{#if !embeded || $page.path !== '/'}<UserFeedback />{/if}
+	{#if !embeded || $page.url.pathname !== '/'}<UserFeedback />{/if}
 	{#if !embeded}
 		<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600 md:justify-end">
 			<li>
