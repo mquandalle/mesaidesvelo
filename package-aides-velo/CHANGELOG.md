@@ -1,5 +1,12 @@
 # Historique des modifications
 
+## v2.0.10
+
+Ajout des aides suivantes :
+
+- Saint Étienne Métropole
+- Sète Agglopôle méditerranée
+
 ## v2.0.9
 
 Restaure l'aide de Fréjus

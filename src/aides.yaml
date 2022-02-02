@@ -196,6 +196,22 @@ aides . mornant:
     - sinon: 150€
   lien: https://www.ville-mornant.fr/Aide-acquisition-velo-a-assistance-electrique-mornant-art-283.html
 
+aides . saint-etienne:
+  remplace: intercommunalité
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'Saint-Etienne Métropole'
+      - vélo . électrique
+  description: |
+    La Métropole allouera 100 000 € à cette opération en 2022, qui sera
+    renouvelée chaque année jusqu'en 2026
+  titre: Saint-Étienne Métropole
+  variations:
+    - si: ménage imposable = 'non'
+      alors: 200€
+    - sinon: 100€
+  lien: https://www.saint-etienne.fr/actualites/v%C3%A9lo-passez-%C3%A0-l%C3%A9lectrique
+
 aides . bordeaux:
   remplace: intercommunalité
   titre: Bordeaux Métropole
@@ -961,6 +977,18 @@ aides . montpellier:
   valeur: 50% * vélo . prix
   plafond: 500€
   lien: https://www.montpellier3m.fr/actualite/jusqua-1150-eu-daide-pour-lachat-dun-velo-assistance-electrique
+
+aides . sete:
+  remplace: intercommunalité
+  titre: Sète Agglopôle méditerranée
+  # TODO: valable pour les trotinettes électriques
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Sète Agglopôle Méditerranée'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 200€
+  lien: https://www.agglopole.fr/lagglo-subventionne-lachat-de-velos-et-trottinettes-electriques/
 
 aides . puy de dome:
   remplace: département
