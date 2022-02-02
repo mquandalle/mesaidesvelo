@@ -39,7 +39,7 @@
 				if (item === null || item === undefined) {
 					return '';
 				}
-				return item.codePostal + ' - ' + item.nom;
+				return `${item.codePostal} - ${item.nom}`;
 			}}
 			placeholder="Commune ou Code postal"
 			searchFunction={loadItems}
@@ -55,6 +55,9 @@
 				}
 			}}
 		>
+			<div slot="item" let:item>
+				<span class="tabular-nums">{item.codePostal}</span> - {item.nom}
+			</div>
 			<div slot="loading">Chargement...</div>
 			<div slot="no-results">Pas de résultats</div></AutoComplete
 		>
