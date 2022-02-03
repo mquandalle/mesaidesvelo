@@ -6,10 +6,10 @@
 	// https://github.com/sveltejs/kit/issues/2851
 	export async function load({ params, fetch }) {
 		if (browser && get(localisation)?.slug === params.slug) {
-			return { props: { ville: get(localisation) } };
+			return { stuff: { ville: get(localisation) } };
 		} else {
 			const res = await fetch(`/api/collectivites?slug=${params.slug}`);
-			return { props: { ville: await res.json() } };
+			return { stuff: { ville: await res.json() } };
 		}
 	}
 </script>
@@ -23,9 +23,7 @@
 	import ShareButton from '$lib/components/ShareButton.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 
-	export let ville;
-
-	localisation.set(ville);
+	const ville = $localisation;
 </script>
 
 <svelte:head>

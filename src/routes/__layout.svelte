@@ -1,6 +1,7 @@
 <script>
 	import { prefetchRoutes } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { localisation } from '$lib/stores';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
@@ -43,6 +44,13 @@
 	// page and the user might not interact with it or even see it. We disable
 	// tracking up until the first click interaction;
 	let enableTracking = import.meta.env.PROD && !embeded;
+
+	// The city can be provided from the URL, for instance /ville/paris. The
+	// `stuff` output of a load function provides a mechanism for pages to pass
+	// data 'upward' to layouts, which is useful in our case since the selected
+	// city is a "global state".
+	// https://kit.svelte.dev/docs#loading-output-stuff
+	localisation.set($page.stuff?.ville ?? null);
 </script>
 
 <svelte:window on:click={() => (enableTracking = true)} />
