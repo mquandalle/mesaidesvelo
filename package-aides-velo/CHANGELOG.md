@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v2.0.11
+
+Mise à jour du lien de l'aide de Comines
+
 ## v2.0.10
 
 Ajout des aides suivantes :

@@ -2142,7 +2142,7 @@ aides . comines:
         valeur: 25% * vélo . prix
         plafond: 250€
     - sinon: 0€
-  lien: https://www.ville-comines.fr/vie-pratique/actualites/545-mobilite-douce-la-ville-de-comines-lance-une-aide-pour-l-achat-d-un-velo
+  lien: https://www.ville-comines.fr/images/actualite/dossier-prime-velo_ec5b5.pdf
 
 aides . béthune:
   remplace: commune
