@@ -1,6 +1,6 @@
 {
 	"name": "aides-velo",
-	"version": "2.0.11",
+	"version": "2.0.12",
 	"description": "Les aides vélos proposées en France",
 	"author": "Maxime Quandalle <maxime@mesaidesvelo.fr>",
 	"license": "MIT",

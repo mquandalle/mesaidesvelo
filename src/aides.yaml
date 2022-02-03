@@ -227,6 +227,36 @@ aides . bordeaux:
   valeur: 100 €
   lien: https://sedeplacer.bordeaux-metropole.fr/Velo/Pratique/Aide-a-l-achat-de-velo
 
+aides . pays de la loire:
+  remplace: région
+  titre: Région Pays de la Loire
+  applicable si:
+    toutes ces conditions:
+      - localisation . région = '52'
+      - vélo . pliant
+      - nom: abonné TER
+        question: Êtes-vous abonnés du TER Pays de la Loire ?
+        description: |
+          Sont éligibles les abonnés Tutti illimité, Métrocéane mensuels, les
+          aboonés annuels de Loire-Atlantique, Maine et Loire et Sarthe, ainsi
+          que les abonnés mensuels des réseaux de Mayenne et Vendée (hors
+          scolaires).
+        type: booléen
+        # TODO: Il serait préférable d'utiliser une valeur par défaut à non ici,
+        # mais le problème c'est que cela fait disparaître aussi la question,
+        # car on doit renseigner sa valeur a oui dans la situation et ce n'est
+        # plus une "missingVariable". Cela nécessite une mise à jour de
+        # publicodes pour exposer les variables utilisées plutôts que les
+        # variables manquantes.
+        # https://github.com/betagouv/publicodes/issues/103
+        par défaut: oui
+  description: |
+    Cette aide à l’achat d’un vélo pliant est reservée aux abonnés du TER Pays
+    de la Loire.
+  valeur: 50% * vélo . prix
+  plafond: 200€
+  lien: https://www.paysdelaloire.fr/les-aides/aide-lachat-dun-velo-pliant-ou-assistance-electrique-vae-pour-les-abonnes-aleop
+
 aides . nantes:
   remplace: intercommunalité
   titre: Nantes Métropole
@@ -2770,6 +2800,14 @@ revenu fiscal de référence:
   par défaut: 800 €/an
 
 ménage imposable: revenu fiscal de référence >= 11120 €/an
+
+maximiser les aides:
+  par défaut: non
+  remplace:
+    - règle: vélo . prix
+      par: vélo . prix pour maximiser les aides
+    - règle: aides . pays de la loire . abonné TER
+      par: oui
 
 localisation: oui
 localisation . code insee: "''"

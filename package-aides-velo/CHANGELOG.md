@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v2.0.12
+
+Ajout de l'aide Pays de la Loire pour les abonnés TER
+
 ## v2.0.11
 
 Mise à jour du lien de l'aide de Comines

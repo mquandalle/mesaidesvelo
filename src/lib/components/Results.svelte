@@ -29,6 +29,7 @@
 			if (!$localisation) return [];
 			engine.setSituation({
 				...$publicodeSituation,
+				'maximiser les aides': 'oui',
 				'vélo . type': `'${type}'`
 			});
 			return [type, engine.evaluate('aides')];
