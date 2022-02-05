@@ -1,5 +1,14 @@
 # Historique des modifications
 
+## v2.0.13
+
+Ajout des aides suivantes :
+
+- Divonne-les-Bains
+- Mérignac
+- Communauté de Communes de Flandre Intérieure
+- Rives de Moselle
+
 ## v2.0.12
 
 Ajout de l'aide Pays de la Loire pour les abonnés TER

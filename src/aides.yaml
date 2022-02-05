@@ -227,6 +227,19 @@ aides . bordeaux:
   valeur: 100 €
   lien: https://sedeplacer.bordeaux-metropole.fr/Velo/Pratique/Aide-a-l-achat-de-velo
 
+aides . mérignac:
+  remplace: commune
+  titre: Ville de Mérignac
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '33281'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . pliant
+          - vélo . cargo
+  valeur: 100€
+  lien: https://www.merignac.com/actualites/une-aide-de-100-eu-pour-un-velo-electrique-pliant-ou-cargo
+
 aides . pays de la loire:
   remplace: région
   titre: Région Pays de la Loire
@@ -1956,6 +1969,22 @@ aides . bourg en bresse:
       - sinon: 0€
   lien: https://www.bourgenbresse.fr/actualite/1248/225-aide-a-l-achat-d-un-velo-pour-les-burgiens.htm
 
+aides . divonne-les-bains:
+  remplace: commune
+  titre: Ville de Divonne-lesBains
+  applicable si: localisation . code insee = '01143'
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 200€
+      - si: vélo . cargo
+        alors: 200€
+      - si: vélo . mécanique
+        alors: 100€
+      - sinon: 0€
+  lien: http://www.divonnelesbains.fr/prime_a_l_achat_de_velos_a_divonne_les_bains.html
+
 aides . valence romans:
   remplace: intercommunalité
   titre: Valence Romans Déplacements
@@ -2261,7 +2290,7 @@ aides . avesnes-sur-helpe:
   lien: https://www.avesnes-sur-helpe.fr/actualites-1/actualites/2021-avril/1030-formulaire-de-demande-daide-pour-lacquisition-dun-velo-neuf
 
 aides . dunkerque:
-  remplace: commune
+  remplace: intercommunalité
   titre: Communauté urbaine de Dunkerque
   applicable si:
     toutes ces conditions:
@@ -2270,6 +2299,29 @@ aides . dunkerque:
   valeur: vélo . prix
   plafond: 80€
   lien: https://www.communaute-urbaine-dunkerque.fr/fileadmin/Cud/documents/Subvention/habitat/aide/AideAchatVelo_flyer_A4_Ro.pdf
+
+aides . flandre intérieure:
+  remplace: intercommunalité
+  titre: Communauté de Communes de Flandre Intérieure
+  applicable si: localisation . epci = 'CC de Flandre Intérieure'
+  valeur: 20% * vélo . prix
+  plafond:
+    somme:
+      - variations:
+          - si: vélo . électrique
+            alors: 200€
+          - si: vélo . mécanique
+            alors: 100€
+          - si: vélo . motorisation
+            alors: 100€
+          - sinon: 0€
+      - variations:
+          - si: vélo . cargo
+            alors: 100€
+          - si: vélo . pliant
+            alors: 50€
+          - sinon: 0€
+  lien: https://cc-flandreinterieure.fr/fr/nw/574368/863449/renouvellement-de-laide-velo
 
 aides . grande-synthe:
   remplace: commune
@@ -2381,6 +2433,32 @@ aides . fontenay:
   valeur: 80€ # TODO: « jusqu'à 400€, mais je ne trouve pas le barème »
   plafond: 70% * vélo . prix
   lien: https://www.fontenay.fr/cadre-de-vie/deplacements/aide-velo-electrique-1278.html
+
+aides . rives de moselle:
+  remplace: intercommunalité
+  titre: Rives de Moselle
+  applicable si: localisation . epci = 'CC Rives de Moselle'
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si:
+          une de ces conditions:
+            - vélo . électrique
+            - vélo . cargo
+            - vélo . pliant
+        alors:
+          variations:
+            - si: vélo . fabriqué en france
+              alors: 300€
+            - sinon: 200€
+      - si: vélo . mécanique simple
+        alors:
+          variations:
+            - si: vélo . fabriqué en france
+              alors: 150€
+            - sinon: 100€
+      - sinon: 0€
+  lien: https://www.rivesdemoselle.fr/Aide-a-l-achat-pour-un-velo-avec-ou-sans-assistance-electrique.html
 
 aides . thionville:
   remplace: commune
@@ -2712,6 +2790,7 @@ vélo . mécanique:
     une de ces conditions:
       - vélo . type = 'mécanique simple'
       - vélo . type = 'pliant'
+      - vélo . type = 'cargo'
 
 vélo . électrique ou mécanique:
   valeur: oui
