@@ -9,7 +9,6 @@ const config = {
 	extensions: ['.svelte', '.svx'],
 	kit: {
 		adapter: vercel(),
-		target: '#svelte',
 		vite: {
 			plugins: [WindiCSS(), yaml()]
 		}
