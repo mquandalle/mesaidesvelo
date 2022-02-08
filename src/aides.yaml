@@ -1893,11 +1893,11 @@ aides . rochefort:
   valeur: vélo . prix
   plafond:
     variations:
-      - si: revenu fiscal de référence > 760€
+      - si: revenu fiscal de référence > 760€/mois
         alors: 50€
-      - si: revenu fiscal de référence > 500€
+      - si: revenu fiscal de référence > 500€/mois
         alors: 100€
-      - si: revenu fiscal de référence > 380€
+      - si: revenu fiscal de référence > 380€/mois
         alors: 150€
       - sinon: 200€
   lien: https://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisition
@@ -2201,7 +2201,18 @@ aides . comines:
         valeur: 25% * vélo . prix
         plafond: 250€
     - sinon: 0€
-  lien: https://www.ville-comines.fr/images/actualite/dossier-prime-velo_ec5b5.pdf
+  lien: https://www.ville-comines.fr/vie-pratique/actualites/545-mobilite-douce-la-ville-de-comines-lance-une-aide-pour-l-achat-d-un-velo
+
+aides . liévin:
+  remplace: commune
+  titre: Ville de Liévin
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '62510'
+      - vélo . électrique
+  valeur: 250€
+  plafond: vélo . prix
+  lien: https://www.lievin.fr/velo-ou-trottinette
 
 aides . béthune:
   remplace: commune
@@ -2272,22 +2283,6 @@ aides . gruson:
         alors: 200€
       - sinon: 100€
   lien: https://www.mairie-gruson.fr/environnement/developpement-durable/prime-velo-a-assistance-electrique
-
-aides . avesnes-sur-helpe:
-  remplace: commune
-  titre: Ville d’Avesnes-sur-Helpe
-  applicable si: localisation . code insee = '59036'
-  variations:
-    - si: vélo . électrique
-      alors:
-        valeur: 30% * vélo . prix
-        plafond: 200€
-    - si: vélo . mécanique
-      alors:
-        valeur: 20% * vélo . prix
-        plafond: 50€
-    - sinon: 0€
-  lien: https://www.avesnes-sur-helpe.fr/actualites-1/actualites/2021-avril/1030-formulaire-de-demande-daide-pour-lacquisition-dun-velo-neuf
 
 aides . dunkerque:
   remplace: intercommunalité
@@ -2551,6 +2546,21 @@ aides . saint-pol-de-léon:
       - vélo . électrique
   valeur: 100€
   lien: https://www.saintpoldeleon.fr/la-ville-vous-aide-pour-l-achat-d
+
+aides . saint-malo:
+  remplace: intercommunalité
+  titre: Pays de Saint Malo Agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA du Pays de Saint Malo Agglomération'
+      - vélo . électrique
+  valeur: 10% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 400€
+      - sinon: 120€
+  lien: https://www.stmalo-agglomeration.fr/aide-achat-velo-electrique.html
 
 aides . saint-brieuc armor:
   remplace: intercommunalité

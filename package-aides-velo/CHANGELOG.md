@@ -1,5 +1,14 @@
 # Historique des modifications
 
+## v2.0.14
+
+Ajout des aides suivantes :
+
+- Pays de Saint Malo Agglomération
+- Ville de Liévin
+
+Supprime l'aide d’Avesnes-sur-Helpe
+
 ## v2.0.13
 
 Ajout des aides suivantes :
