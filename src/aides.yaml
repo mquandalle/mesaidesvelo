@@ -2099,7 +2099,7 @@ aides . brive:
 aides . pays de saint gilles:
   remplace: intercommunalité
   titre: Pays de Saint-Gilles Croix de Vie
-  applicable si: localisation . epci = 'CC du Pays de Saint Gilles-Croix-de-Vie'
+  applicable si: localisation . epci = 'CC du Pays de Saint-Gilles-Croix-de-Vie'
   # TODO: vélo adapté
   variations:
     - si: vélo . cargo
