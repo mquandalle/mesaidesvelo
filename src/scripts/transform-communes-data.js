@@ -64,6 +64,7 @@ const data = [
 				c.codesPostaux.push(villesAvecArrondissements[c.nom]);
 			}
 
+			const uniq = (l) => [...new Set(l)];
 			const countTrailingZeros = (x) => x.toString().match(/0+$/)?.[0].length ?? 0;
 
 			return {
@@ -72,7 +73,9 @@ const data = [
 				region: c.region,
 				population: c.population,
 				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
-				codesPostaux: c.codesPostaux.sort((a, b) => countTrailingZeros(b) - countTrailingZeros(a))
+				codesPostaux: uniq(c.codesPostaux).sort(
+					(a, b) => countTrailingZeros(b) - countTrailingZeros(a)
+				)
 			};
 		}),
 	...extraData
