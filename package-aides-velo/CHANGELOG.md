@@ -1,5 +1,12 @@
 # Historique des modifications
 
+## v2.0.15
+
+Ajout des aides suivantes :
+
+- Communauté de communes Dieulefit-Bourdeaux
+- Ville de Granville
+
 ## v2.0.14
 
 Ajout des aides suivantes :

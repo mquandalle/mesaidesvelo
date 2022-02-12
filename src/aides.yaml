@@ -1806,6 +1806,38 @@ aides . cotentin:
   plafond: 150 €
   lien: https://www.capcotentin.fr/velo/
 
+aides . granville:
+  remplace: commune
+  titre: Ville de Granville
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '50218'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: revenu fiscal de référence <= 13488€/an
+      alors:
+        variations:
+          - si: vélo . électrique
+            alors: 600€
+          - sinon: 250€
+    - si: revenu fiscal de référence <= 20230€/an
+      alors:
+        variations:
+          - si: vélo . électrique
+            alors: 250€
+          - sinon: 100€
+    - si: revenu fiscal de référence <= 26972€/an
+      alors: 100€
+    - sinon: 0€
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 13488€/an
+        alors: 75% * vélo . prix
+      - sinon: 50% * vélo . prix
+    # référence cyclique:
+    # abattement: aides . état
+  lien: https://www.ville-granville.fr/vivre-au-quotidien-demarches-services/se-deplacer/aide-a-lachat-dun-velo/
+
 aides . la rochelle:
   remplace: intercommunalité
   titre: Ville de La Rochelle - Yélo
@@ -1995,6 +2027,16 @@ aides . valence romans:
   valeur: 35% * vélo . prix
   plafond: 150€
   lien: https://www.vrd-mobilites.fr/velo/#aide-achat-velo-pliant
+
+aides . dieulefit-bourdeaux:
+  remplace: intercommunalité
+  titre: Communauté de communes Dieulefit-Bourdeaux
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Dieulefit-Bourdeaux'
+      - vélo . électrique
+  valeur: 100€
+  lien: http://www.paysdedieulefit.info/ccpdj2/index.php/defi-climat/les-mobilites/aide-forfaitaire-pour-vae
 
 aides . lorient:
   remplace: intercommunalité
