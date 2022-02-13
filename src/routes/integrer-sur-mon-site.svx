@@ -12,7 +12,7 @@ Vous souhaitez intégrer mesaidesvélo de manière transparente sur votre site ?
 Vous pouvez copier/coller le code ci-dessous dans votre site web. La recherche d’aides sera alors disponible pour vos utilisateurs sans qu'ils aient à quitter votre site.
 
 ```html
-<script src="https://mesaidesvelo.fr/iframe.js" id="mesaidesvelo-iframe"></script>
+<script src="https://mesaidesvelo.fr/iframe.js"></script>
 ```
 
 Techniquement, l’intégration fonctionne avec une [iframe](https://developer.mozilla.org/fr/docs/Web/HTML/Element/iframe), et le script ci-dessus permet de la re-dimensionner automatiquement en fonction du contenu. Cela permet une intégration la plus transparente possible avec le contenu de votre site.

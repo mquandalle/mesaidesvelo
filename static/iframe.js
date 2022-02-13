@@ -13,8 +13,7 @@
 	iframeElement.style.border = '0';
 	iframeElement.scrolling = 'no';
 
-	const scriptTag = document.getElementById('mesaidesvelo-iframe');
-	scriptTag.after(iframeElement);
+	document.currentScript.after(iframeElement);
 
 	window.addEventListener('message', function (evt) {
 		if (evt.data.kind === 'resize-height') {
