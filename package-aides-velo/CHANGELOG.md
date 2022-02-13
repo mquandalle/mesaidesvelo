@@ -1,5 +1,12 @@
 # Historique des modifications
 
+## v2.0.16
+
+Ajout des aides suivantes :
+
+- Lannion-Trégor Communauté
+- Ville de Perros-Guirec
+
 ## v2.0.15
 
 Ajout des aides suivantes :

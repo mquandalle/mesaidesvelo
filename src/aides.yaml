@@ -2617,6 +2617,28 @@ aides . saint-brieuc armor:
   plafond: 150€
   lien: https://www.saintbrieuc-armor-agglo.bzh/information/actualites/aide-a-lachat-de-votre-velo-electrique-ou-velo-cargo-en-2022-2438
 
+aides . lannion-trégor:
+  remplace: intercommunalité
+  titre: Lannion-Trégor Communauté
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Lannion-Trégor Communauté'
+      - vélo . électrique
+  valeur: 10% * vélo . prix
+  plafond: 100€
+  lien: https://www.lannion-tregor.com/fr/deplacements/les-mobilites-electriques/les-aides-a-l-acquisition.html
+
+aides . perros-guirec:
+  remplace: commune
+  titre: Ville de Perros-Guirec
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '22168'
+      - vélo . électrique
+  valeur: 10% * vélo . prix
+  plafond: 100€
+  lien: http://ville.perros-guirec.com/ma-ville/vie-quotidienne/les-transports/en-velo/aide-a-l-acquisition-d-un-velo-a-assistance-electrique.html
+
 aides . morlaix:
   remplace: intercommunalité
   applicable si:
