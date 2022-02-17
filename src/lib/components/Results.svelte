@@ -24,6 +24,8 @@
 
 	answers.set({});
 
+	$: console.log($publicodeSituation);
+
 	$: aidesPerBikeKind = bikeKinds
 		.map((type) => {
 			if (!$localisation) return [];

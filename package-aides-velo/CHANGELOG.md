@@ -1,5 +1,14 @@
 # Historique des modifications
 
+## v2.0.17
+
+Ajout des aides suivantes :
+
+- Communauté de communes du Genevois
+- Grand Reims Communauté urbaine
+
+Corrige l'aide de la ville de Reims
+
 ## v2.0.16
 
 Ajout des aides suivantes :

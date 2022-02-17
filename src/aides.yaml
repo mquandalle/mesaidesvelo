@@ -1604,7 +1604,7 @@ aides . orléans:
   lien: https://www.orleans-metropole.fr/actualites/detail/il-est-temps-de-passer-au-velo-electrique
 
 aides . reims:
-  remplae: commune
+  remplace: commune
   titre: Ville de Reims
   applicable si: localisation . code insee = '51454'
   valeur: 25% * vélo . prix
@@ -1620,6 +1620,22 @@ aides . reims:
         alors: 50€
       - sinon: 0€
   lien: https://www.reims.fr/qualite-de-vie-environnement/stationnement-et-deplacements/operation-aide-a-lachat-dun-velo-14528.html
+
+aides . grand reims:
+  remplace: intercommunalité
+  titre: Grand Reims Communauté urbaine
+  applicable si: localisation . epci = 'CU du Grand Reims'
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 500€
+      - si: vélo . électrique
+        alors: 300€
+      - si: vélo . pliant
+        alors: 300€
+      - sinon: 0€
+  lien: https://www.grandreims.fr/les-services/deplacements-et-mobilites/operation-aide-a-lachat-dun-velo-a-assistance-electrique-14525.html
 
 aides . annecy:
   remplace: intercommunalité
@@ -1671,6 +1687,16 @@ aides . annecy:
           - revenu fiscal de référence <= 13489 €/an
       alors: 150€
   lien: https://aide-velo.grandannecy.fr/
+
+aides . genevois:
+  remplace: intercommunalité
+  titre: Communauté de communes du Genevois
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Genevois'
+      - vélo . électrique
+  valeur: 250€
+  lien: https://www.cc-genevois.fr/fr/vie-pratique-et-services/vous-deplacer/velo-ou-pied
 
 aides . évian-les-bains:
   remplace: commune
