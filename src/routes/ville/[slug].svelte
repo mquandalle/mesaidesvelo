@@ -5,12 +5,10 @@
 	// This pattern is explained here:
 	// https://github.com/sveltejs/kit/issues/2851
 	export async function load({ params, fetch }) {
-		console.log(get(localisation)?.slug, params.slug);
 		if (browser && get(localisation)?.slug === params.slug) {
 			return { stuff: { ville: get(localisation) } };
 		} else {
 			const res = await fetch(`/api/collectivites?slug=${params.slug}`);
-			console.log('ok', params.slug);
 			return { stuff: { ville: await res.json() } };
 		}
 	}
