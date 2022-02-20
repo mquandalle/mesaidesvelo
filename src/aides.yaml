@@ -240,6 +240,17 @@ aides . mérignac:
   valeur: 100€
   lien: https://www.merignac.com/actualites/une-aide-de-100-eu-pour-un-velo-electrique-pliant-ou-cargo
 
+aides . saint-émilionnais:
+  remplace: intercommunalité
+  titre: Communauté de communes du Grand Saint-Émilionnais
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Grand Saint Emilionnais'
+      - vélo . électrique ou mécanique
+      - vélo . prix >= 200€
+  valeur: 200€
+  lien: http://www.grand-saint-emilionnais.fr/actualites/un-projet-velo-la-cdc-vous-aide-primovelo/
+
 aides . pays de la loire:
   remplace: région
   titre: Région Pays de la Loire
@@ -1937,6 +1948,17 @@ aides . vannes:
             - sinon: 0€
       - sinon: 0€
   lien: https://www.golfedumorbihan-vannesagglomeration.bzh/aides-la-pratique-du-velo
+
+aides . quéven:
+  remplace: commune
+  titre: Ville de Quéven
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '56185'
+      - vélo . électrique ou mécanique
+  valeur: 30% * vélo . prix
+  plafond: 100€
+  lien: https://www.queven.com/vivre-a-queven/transports/demande-de-subvention-velo/
 
 aides . rochefort:
   remplace: intercommunalité

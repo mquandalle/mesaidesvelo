@@ -1,5 +1,12 @@
 # Historique des modifications
 
+## v2.0.18
+
+Ajout des aides suivantes :
+
+- Ville de Quéven
+- Communauté de communes du Grand Saint-Émilionnais
+
 ## v2.0.17
 
 Ajout des aides suivantes :
