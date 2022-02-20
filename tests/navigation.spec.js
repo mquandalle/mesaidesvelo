@@ -24,6 +24,10 @@ test('Navigation scenario', async ({ page }) => {
 
 	await page.fill('input:below(label:text("Prix du vélo"))', '100');
 	await expect(totalAides).toHaveText('Total des aides 50 €', { useInnerText: true });
+
+	await page.goBack();
+	await page.click('text=Prime à la conversion');
+	await expect(page.locator('text=prime à la casse')).toBeTruthy();
 });
 
 test('Liste aides do not crash', async ({ page }) => {

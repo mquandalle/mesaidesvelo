@@ -50,7 +50,10 @@
 	// data 'upward' to layouts, which is useful in our case since the selected
 	// city is a "global state".
 	// https://kit.svelte.dev/docs#loading-output-stuff
-	$: localisation.set($page.stuff?.ville ?? null);
+	localisation.set($page.stuff?.ville ?? null);
+	$: if ($page.stuff?.ville) {
+		localisation.set($page.stuff.ville);
+	}
 </script>
 
 <svelte:window on:click={() => (enableTracking = true)} />
