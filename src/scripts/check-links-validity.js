@@ -61,7 +61,7 @@ function sleep(ms) {
 
 (async () => {
 	await Promise.allSettled(Array.from({ length: simultaneousItems }).map(processNextQueueItem));
-	if (detectedErrors) {
+	if (detectedErrors.length > 0) {
 		// Formattage spécifique pour récupérer le résultat avec l'action Github
 		if (process.argv.slice(2).includes('--ci')) {
 			const message = `
