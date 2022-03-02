@@ -1,5 +1,14 @@
 # Historique des modifications
 
+## v2.0.19
+
+Ajout des aides suivantes :
+
+- Communauté de communes des Portes de Rosheim
+- Communes du Pays Rhénan
+
+Mise à jour de l'aide de la ville de Reims
+
 ## v2.0.18
 
 Ajout des aides suivantes :

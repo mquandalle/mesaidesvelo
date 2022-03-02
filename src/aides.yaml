@@ -520,7 +520,7 @@ aides . quimper:
         valeur: 20% * vélo . prix
         plafond: 200€
     - sinon: 0€
-  lien: https://www.quimper-bretagne-occidentale.bzh/actualite/29332/113-deplacements-a-velo-les-aides-et-dispositifs-mis-en-place-par-qbo.htm&xtmc=aide_velo_electrique&xtcr=1
+  lien: https://www.quimper-bretagne-occidentale.bzh/1763-deplacements-a-velo.htm
 
 aides . laon:
   remplace: intercommunalité
@@ -976,6 +976,36 @@ aides . pays sainte odile:
         plafond: 60€
     - sinon: 0€
   lien: http://www.cc-paysdesainteodile.fr/competences/se-deplacer/2/
+
+aides . portes de rosheim:
+  remplace: intercommunalité
+  titre: Communauté de communes des Portes de Rosheim
+  applicable si: localisation . epci = 'CC des Portes de Rosheim'
+  description: La communauté de communes a prévu un budget de 40 000 € en 2022
+  variations:
+    - si: vélo . cargo électrique
+      alors:
+        valeur: 10% * vélo . prix
+        plafond: 180€
+    - si: vélo . électrique
+      alors:
+        valeur: 10% * vélo . prix
+        plafond: 120€
+    - si: vélo . mécanique
+      alors:
+        valeur: 20% * vélo . prix
+        plafond: 60€
+  lien: https://www.cc-portesderosheim.fr/services_a_la_population/prime_a_lachat_dun_velo_neuf_80.php
+
+aides . pays rhénan:
+  remplace: intercommunalité
+  titre: Communes du Pays Rhénan
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays Rhénan'
+      - vélo . électrique
+  valeur: 200€
+  lien: https://www.cc-paysrhenan.fr/Actualites/AIDE-ACHAT-UN-VELO-ASSISTANCE-ELECTRIQUE-00626.html
 
 aides . les sables d'olonne:
   remplace: intercommunalité
@@ -1618,19 +1648,22 @@ aides . reims:
   remplace: commune
   titre: Ville de Reims
   applicable si: localisation . code insee = '51454'
-  valeur: 25% * vélo . prix
-  plafond:
+  valeur:
     variations:
-      - si: vélo . cargo
-        alors: 150€
-      - si: vélo . pliant
-        alors: 150€
+      - si: vélo . cargo électrique
+        alors:
+          valeur: 25% * vélo . prix
+          plafond: 250€
       - si: vélo . électrique
-        alors: 100€
+        alors:
+          valeur: 25% * vélo . prix
+          plafond: 150€
       - si: vélo . mécanique
-        alors: 50€
+        alors:
+          valeur: 50% * vélo . prix
+          plafond: 80€
       - sinon: 0€
-  lien: https://www.reims.fr/qualite-de-vie-environnement/stationnement-et-deplacements/operation-aide-a-lachat-dun-velo-14528.html
+  lien: https://www.reims.fr/qualite-de-vie-environnement/stationnement-et-deplacements/operation-aide-a-lachat-dun-velo
 
 aides . grand reims:
   remplace: intercommunalité
