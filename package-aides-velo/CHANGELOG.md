@@ -1,5 +1,13 @@
 # Historique des modifications
 
+## v2.0.20
+
+Ajout des aides suivantes :
+
+- Grand Lac Communauté d'agglomération
+- Ville du Bourget-du-Lac
+- Ville de Quesnoy-sur-Deûle
+
 ## v2.0.19
 
 Ajout des aides suivantes :

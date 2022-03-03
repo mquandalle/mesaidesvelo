@@ -1283,6 +1283,16 @@ aides . pays basque:
                 plafond: 200€
   lien: https://www.velo-paysbasque.fr/fr/pages/demande-de-subvention-velo-assistance-electrique
 
+aides . grand lac:
+  remplace: intercommunalité
+  titre: Grand Lac Communauté d'agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Grand Lac'
+      - vélo . électrique
+  valeur: 150€
+  lien: https://grand-lac.fr/au-quotidien/services-a-la-population/deplacements/le-velo
+
 aides . aix les bains:
   remplace: commune
   titre: Ville d’Aix-les-Bains
@@ -1293,6 +1303,22 @@ aides . aix les bains:
   valeur: 250€
   plafond: vélo . prix
   lien: https://www.aixlesbains.fr/Cadre-de-vie/Transports-et-deplacements/A-velo/Aides-financieres-pour-se-deplacer-a-velo
+
+aides . bourget-du-lac:
+  remplace: commune
+  titre: Ville du Bourget-du-Lac
+  applicable si: localisation . code insee = '73051'
+  variations:
+    - si: vélo . électrique
+      alors:
+        somme:
+          - 200€
+          - applicable si: revenu fiscal de référence <= 13489 €/an
+            valeur: 200€
+    - si: vélo . cargo
+      alors: 200€
+    - sinon: 0€
+  lien: https://www.lebourgetdulac.fr/actualites/le-bourget-du-lac-sengage-pour-le-velo-a-assistance-electrique/
 
 aides . ardenne:
   remplace: intercommunalité
@@ -2826,6 +2852,17 @@ aides . lezennes:
       - si: vélo . mécanique
         alors: 150€
   lien: https://droitauvelo.org/Ville-de-Lezennes-prime-a-l-achat-de-velos
+
+aides . quesnoy-sur-deûle:
+  remplace: commune
+  titre: Ville de Quesnoy-sur-Deûle
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '59482'
+      - vélo . électrique
+  valeur: 20% * vélo . prix
+  plafond: 200€
+  lien: http://www.quesnoysurdeule.fr/fr/actualite/202950
 
 aides . arras:
   remplace: intercommunalité
