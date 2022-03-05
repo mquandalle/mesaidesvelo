@@ -2071,6 +2071,26 @@ aides . bourges:
       - sinon: 0€
   lien: https://www.agglo-bourgesplus.fr/site/aide-achat-velo
 
+aides . tulle:
+  remplace: intercommunalité
+  titre: Tulle Agglo
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Tulle Agglo'
+      - vélo . électrique
+  valeur: 200€
+  lien: https://www.agglo-tulle.fr/vie-pratique/mobilites/transports/velo/aide-achat-vae
+
+aides . corrèze:
+  remplace: commune
+  titre: Ville de Corrèze
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '19062'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.mairie-de-correze.fr/app/download/16358677024/Bulletin+Municipal+Janvier+2022.pdf?t=1641302365#page=19
+
 aides . montauban:
   remplace: intercommunalité
   titre: Grand-Montauban

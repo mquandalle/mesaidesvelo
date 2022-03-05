@@ -1,5 +1,12 @@
 # Historique des modifications
 
+## v2.0.21
+
+Ajout des aides suivantes :
+
+- Tulle Agglo
+- Ville de Corrèze
+
 ## v2.0.20
 
 Ajout des aides suivantes :
