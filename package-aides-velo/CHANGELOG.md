@@ -1,5 +1,15 @@
 # Historique des modifications
 
+## v2.0.22
+
+Ajout des aides suivantes :
+
+- Saintes Communauté d'agglomération
+- Yvetot Normandie
+- La Porte du Hainaut communauté d'Agglomération
+- Vienne Condrieu Agglomération
+- Grand Périgueux
+
 ## v2.0.21
 
 Ajout des aides suivantes :

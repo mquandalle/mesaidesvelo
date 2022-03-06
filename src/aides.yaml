@@ -644,6 +644,22 @@ aides . ronchin:
       - sinon: 0€
   lien: https://www.ville-ronchin.fr/aide-lachat-dun-velo
 
+aides . porte du hainaut:
+  remplace: intercommunalité
+  titre: La Porte du Hainaut communauté d'Agglomération
+  applicable si: localisation . epci = 'CA de la Porte du Hainaut'
+  description: Dans la limite de l’enveloppe budgétaire de 100 000 €.
+  # TODO: vélo d'occasion
+  # TODO: trottinette électrique
+  variations:
+    - si: vélo . électrique
+      alors: 300€
+    - si: vélo . mécanique
+      alors: 150€
+    - sinon: 0€
+  plafond: 50% * vélo . prix
+  lien: https://www.agglo-porteduhainaut.fr/actualites/une-aide-pour-acheter-velo-et-trottinettes
+
 aides . wasquehal:
   remplace: commune
   titre: Ville de Wasquehal
@@ -796,6 +812,16 @@ aides . montbéliard:
   valeur: 150€
   lien: https://www.montbeliard.fr/pages-datterrissage-temporaires/subvention-pour-lachat-dun-velo-a-assistance-electrique.html
 
+aides . vienne condrieu:
+  remplace: intercommunalité
+  titre: Vienne Condrieu Agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Vienne Condrieu'
+      - vélo . électrique
+  valeur: 150€
+  lien: https://www.vienne-condrieu-agglomeration.fr/nos-services-au-quotidien/deplacements/faire-du-velo/aide-financiere-vae/
+
 aides . vif:
   remplace: commune
   titre: Ville de Vif
@@ -861,6 +887,22 @@ aides . sorgues du comtat:
   valeur: 20% * vélo . prix
   plafond: 120€
   lien: https://www.sorgues.fr/vivre/demarches/prime-velo.htm
+
+aides . grand périgueux:
+  remplace: intercommunalité
+  titre: Grand Périgueux
+  applicable si: localisation . epci = 'CA Le Grand Périgueux'
+  variations:
+    - si: vélo . cargo
+      alors: 500€
+    - si: vélo . électrique
+      alors: 250€
+    - si: vélo . mécanique
+      alors:
+        valeur: 30€
+        plafond: 50% * vélo . prix
+  plafond: vélo . prix
+  lien: https://www.grandperigueux.fr/au-quotidien/deplacements/cap-sur-le-velo/aide-a-lachat-velo/cheques-velo
 
 aides . sarlat:
   remplace: commune
@@ -2041,6 +2083,27 @@ aides . rochefort:
       - sinon: 200€
   lien: https://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisition
 
+aides . saintes:
+  remplace: intercommunalité
+  titre: Saintes Communauté d'agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA de Saintes'
+      - vélo . électrique
+  valeur: 200€
+  lien: https://www.agglo-saintes.fr/l-agglo-au-quotidien/transports-et-mobilites/530-aide-a-l-achat-d-un-velo-a-assistance-electrique.html
+
+aides . yvetot normandie:
+  remplace: intercommunalité
+  titre: Yvetot Normandie
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Yvetot Normandie'
+      - vélo . électrique ou mécanique
+  valeur: 30% * vélo . prix
+  plafond: 200€
+  lien: https://www.yvetot-normandie.fr/vivre-in-yvetot-normandie/subventions/plan-velo-aide-a-lachat-de-velo/
+
 aides . arcachon:
   remplace: commune
   titre: Ville d’Arcachon
@@ -2130,7 +2193,7 @@ aides . bourg en bresse:
 
 aides . divonne-les-bains:
   remplace: commune
-  titre: Ville de Divonne-lesBains
+  titre: Ville de Divonne-les-Bains
   applicable si: localisation . code insee = '01143'
   valeur: 50% * vélo . prix
   plafond:
