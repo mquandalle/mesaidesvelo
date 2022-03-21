@@ -119,6 +119,18 @@ aides . corse:
   plafond: 500€
   lien: https://www.aue.corsica/Aide-a-l-achat-des-Velos-a-Assistance-Electrique_a205.html
 
+aides . grand est:
+  remplace: région
+  titre: Région Grand Est
+  applicable si:
+    toutes ces conditions:
+      - localisation . région = '44'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+  valeur: 200€
+  lien: https://www.grandest.fr/vos-aides-regionales/acquisition-velo-electrique/
+
 aides . bouches du rhone:
   remplace: département
   titre: Département des Bouches-du-Rhône
@@ -171,6 +183,21 @@ aides . lyon:
       - sinon: 100€
   lien: https://www.grandlyon.com/services/aide-achat-velo.html
 
+aides . villefranche beaujolais saône:
+  remplace: intercommunalité
+  titre: VilleFranche Beaujolais Saône Agglo
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Villefranche Beaujolais Saône'
+      - vélo . électrique ou mécanique
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 200€
+      - sinon: 100€
+  lien: https://www.agglo-villefranche.fr/aide-a-lachat-velo.html
+
 aides . sainte foy lès lyon:
   remplace: commune
   titre: Ville de Sainte Foy-Lès-Lyon
@@ -195,6 +222,17 @@ aides . mornant:
       alors: 250€
     - sinon: 150€
   lien: https://www.ville-mornant.fr/Aide-acquisition-velo-a-assistance-electrique-mornant-art-283.html
+
+aides . dardilly:
+  remplace: commune
+  titre: Ville de Dardilly
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69072'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 250€
+  lien: https://www.dardilly.fr/mes-infos-quotidiennes/actus-evenements/31-vie-citoyenne/91-subventions-eco-citoyennes
 
 aides . saint-etienne:
   remplace: intercommunalité
@@ -226,6 +264,30 @@ aides . bordeaux:
           - vélo . motorisation
   valeur: 100 €
   lien: https://sedeplacer.bordeaux-metropole.fr/Velo/Pratique/Aide-a-l-achat-de-velo
+
+aides . département saône-et-loire:
+  remplace: département
+  titre: Département de Saône-et-Loire
+  applicable si: localisation . département = '71'
+  variations:
+    - si: vélo . cargo électrique
+      alors: 450€
+    - si:
+        toutes ces conditions:
+          - vélo . électrique
+          - vélo . prix >= 1000 €
+      alors: 350€
+    - si:
+        toutes ces conditions:
+          - vélo . mécanique
+          - vélo . prix >= 500 €
+      alors: 200€
+    - si: vélo . motorisation
+      alors:
+        valeur: 80% * vélo . prix
+        plafond: 100€
+    - sinon: 0€
+  lien: https://www.saoneetloire71.fr/chequevelo
 
 aides . mérignac:
   remplace: commune
@@ -521,6 +583,17 @@ aides . quimper:
         plafond: 200€
     - sinon: 0€
   lien: https://www.quimper-bretagne-occidentale.bzh/1763-deplacements-a-velo.htm
+
+aides . quimperlé:
+  remplace: intercommunalité
+  titre: Quimperlé Communauté
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Quimperlé Communauté'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 150€
+  lien: https://www.quimperle-communaute.bzh/vos-demarches/deplacements/aide-a-lachat-de-velo-electrique/
 
 aides . laon:
   remplace: intercommunalité
@@ -936,22 +1009,6 @@ aides . département somme:
   plafond: 400€
   lien: https://www.somme.fr/services/loisirs-et-sports/sports-et-loisirs-de-nature/aide-a-lacquisition-de-velo-a-assistance-electrique/
 
-aides . amiens métropole:
-  remplace: intercommunalité
-  titre: Amiens Métropole
-  applicable si: localisation . epci = 'CA Amiens Métropole'
-  valeur: 25% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo
-        alors: 300€
-      - si: vélo . électrique
-        alors: 200€
-      - si: vélo . mécanique
-        alors: 100€
-      - sinon: 0€
-  lien: https://www.amiens.fr/Actualites/Dispositifs-d-aides-a-l-achat-de-velo-pour-les-habitants-de-la-Ville-d-Amiens-et-d-Amiens-Metropole
-
 aides . amiens:
   remplace: commune
   titre: Ville d’Amiens
@@ -966,7 +1023,23 @@ aides . amiens:
       - si: vélo . mécanique
         alors: 100€
       - sinon: 0€
-  lien: https://www.amiens.fr/Actualites/Dispositifs-d-aides-a-l-achat-de-velo-pour-les-habitants-de-la-Ville-d-Amiens-et-d-Amiens-Metropole
+  lien: https://www.amiens.fr/Actualites/L-aide-a-l-achat-de-velo-s-electrise
+
+aides . camon:
+  remplace: commune
+  titre: Ville de Camon
+  applicable si: localisation . code insee = '80164'
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 300€
+      - si: vélo . électrique
+        alors: 200€
+      - si: vélo . mécanique
+        alors: 100€
+      - sinon: 0€
+  lien: https://www.camon.fr/aide-a-lachat-de-velos/
 
 aides . rivery:
   remplace: commune
@@ -1250,6 +1323,22 @@ aides . charenton:
   plafond: 200€
   lien: https://www.charenton.fr/velo/velo_pass-velo.php
 
+aides . pau:
+  remplace: intercommunalité
+  titre: Pau Béarn Pyrénées Mobilité
+  applicable si: localisation . epci = 'CA Pau Béarn Pyrénées'
+  valeur: 15% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 350€
+      - si: vélo . pliant
+        alors: 200€
+      - si: vélo . électrique
+        alors: 200€
+      - sinon: 0€
+  lien: https://www.pau.fr/article/aide-a-lachat-velo--profitez-dun-coup-de-pouce-pour-changer-de-braquet
+
 aides . pays basque:
   remplace: intercommunalité
   titre: Agglomération Pays Basque
@@ -1362,6 +1451,19 @@ aides . bourget-du-lac:
     - sinon: 0€
   lien: https://www.lebourgetdulac.fr/actualites/le-bourget-du-lac-sengage-pour-le-velo-a-assistance-electrique/
 
+aides . la motte servolex:
+  remplace: commune
+  titre: Ville de La Motte Servolex
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '73179'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . pliant
+  valeur: 20% * vélo . prix
+  plafond: 150€
+  lien: https://www.mairie-lamotteservolex.fr/vos-demarches/subventions-eco-citoyennes-la-motte-servolex/
+
 aides . ardenne:
   remplace: intercommunalité
   titre: Ardenne Métropole
@@ -1424,14 +1526,6 @@ aides . lot:
       - sinon: 400€
   plafond: 40% * vélo . prix
   lien: https://lot.fr/vehicules-et-velos-electriques
-
-aides . figeac:
-  remplace: commune
-  titre: Ville de Figeac
-  description: Le montant de l’aide accordée par la ville de Figeac est de 50% de la subvention qui est versée par le Département
-  applicable si: localisation . code insee = '46102'
-  valeur: 50% * aides . lot
-  lien: https://ville-figeac.fr/tourisme-et-environnement/environnement/environnement-actualite/1021-aide-a-l-acquisition-d-un-velo-a-assistance-electrique-pour-les-habitants-de-figeac
 
 aides . sophia antipolis:
   remplace: intercommunalité
@@ -1712,6 +1806,17 @@ aides . orléans:
   plafond: 300€
   lien: https://www.orleans-metropole.fr/actualites/detail/il-est-temps-de-passer-au-velo-electrique
 
+aides . chalette-sur-loing:
+  remplace: commune
+  titre: Ville de Chalette-sur-Loing
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '45068'
+      - vélo . électrique
+  valeur: 15% * vélo . prix
+  plafond: 250€
+  lien: https://www.ville-chalette.fr/Une-aide-a-l-achat-d-un-Velo-a.html
+
 aides . reims:
   remplace: commune
   titre: Ville de Reims
@@ -1866,6 +1971,21 @@ aides . angers:
       - sinon: 0€
   lien: https://www.angersloiremetropole.fr/mon-quotidien/mobilites/velo/aide-a-l-achat-d-un-velo-neuf/index.html
 
+aides . brissac loire aubance:
+  remplace: intercommunalité
+  titre: Brissac Loire Aubance
+  applicable si: localisation . epci = 'CC Loire Layon Aubance'
+  variations:
+    - si: vélo . cargo électrique
+      alors: 350€
+    - si: vélo . électrique
+      alors: 200€
+    - si: vélo . motorisation
+      alors: 200€
+    - sinon: 0€
+  plafond: vélo . prix
+  lien: https://www.brissacloireaubance.fr/actualites/une-nouvelle-aide-de-la-cclla-pour-lachat-de-velo-a-assistance-electrique/
+
 aides . châtellrault:
   remplace: intercommunalité
   titre: Grand Châtellerault
@@ -1931,7 +2051,7 @@ aides . montlucon:
       - vélo . prix <= 2500€
   valeur: vélo . prix
   plafond: 200 €
-  lien: https://www.montlucon-communaute.com/index.php/toutes-les-actualites/246-vae-l-agglo-vous-aide
+  lien: https://vae.montlucon-communaute.com/
 
 aides . cotentin:
   remplace: intercommunalité
@@ -2291,7 +2411,7 @@ aides . laval:
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 200€
-  lien: https://www.agglo-laval.fr/utile-au-quotidien/transports/lagglo-a-velo/prime-a-lachat-dun-velo-electrique
+  lien: https://www.agglo-laval.fr/utile-au-quotidien/transports-et-mobilites/lagglo-a-velo/prime-a-lachat-dun-velo-electrique
 
 aides . ernée:
   remplace: intercommunalité
@@ -2709,6 +2829,17 @@ aides . betheny:
       - vélo . électrique
   valeur: 100€
   lien: https://ville-betheny.fr/cadre-de-vie/subvention-velo-a-assistance-electrique-vae/article/subvention-velo-a-assistance-electrique-vae
+
+aides . épernay:
+  remplace: commune
+  titre: Ville d’Épernay
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '51230'
+      - vélo . électrique
+  valeur: 50% * vélo . prix
+  plafond: 150€
+  lien: https://www.epernay.fr/sites/epernay/files/document/article/reglement_sub_velo_2021.pdf
 
 aides . brest:
   remplace: intercommunalité

@@ -25,7 +25,7 @@ test('aides électrique colmar', (t) => {
 		'localisation . région': '44',
 		'vélo . type': 'électrique'
 	});
-	t.is(colmarElectrique.length, 2, '2 aides');
+	t.is(colmarElectrique.length, 3, '3 aides');
 	t.truthy(
 		colmarElectrique.find(({ title }) => title.toLowerCase().includes('colmar')),
 		'Dont une de la ville'
@@ -39,7 +39,7 @@ test('motorisation vélo strasboug', (t) => {
 		'localisation . département': '67',
 		'localisation . région': '44',
 		'vélo . type': 'motorisation'
-	});
+	}).filter(({ title }) => title.toLowerCase().includes('strasbourg'));
 	t.is(strasbourgMotorisation.length, 1, '1 aide de la ville');
 	t.is(strasbourgMotorisation[0].amount, 150, '150 euros');
 	t.deepEqual(

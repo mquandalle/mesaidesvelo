@@ -1,5 +1,31 @@
 # Historique des modifications
 
+## v2.0.23
+
+Ajout des aides suivantes :
+
+- Région Grand Est
+- Département de Saône-et-Loire
+- Pau Béarn Pyrénées Mobilité
+- Quimperlé Communauté
+- Ville de Camon
+- VilleFranche Beaujolais Saône Agglo
+- Ville de Dardilly
+- Ville de La Motte Servolex
+- Ville d’Épernay
+- Ville de Chalette-sur-Loing
+
+Suppression des aides suivantes :
+
+- Ville de Figeac
+- Amiens Métropole
+
+Mise à jour des liens pour les aides suivantes :
+
+- Montluçon Communauté
+- Laval Agglo
+- Ville d’Amiens
+
 ## v2.0.22
 
 Ajout des aides suivantes :
