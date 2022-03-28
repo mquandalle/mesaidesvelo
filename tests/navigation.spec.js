@@ -17,13 +17,13 @@ test('Navigation scenario', async ({ page }) => {
 
 	await page.click('text=Achat d’un vélo électrique');
 	const totalAides = page.locator('text=Total des aides >> ..');
-	await expect(totalAides).toHaveText('Total des aides 700 €', { useInnerText: true });
+	await expect(totalAides).toHaveText('Total des aides 900 €', { useInnerText: true });
 
 	await page.click('label:last-child');
-	await expect(totalAides).toHaveText('Total des aides 300 €', { useInnerText: true });
+	await expect(totalAides).toHaveText('Total des aides 500 €', { useInnerText: true });
 
 	await page.fill('input:below(label:text("Prix du vélo"))', '100');
-	await expect(totalAides).toHaveText('Total des aides 50 €', { useInnerText: true });
+	await expect(totalAides).toHaveText('Total des aides 250 €', { useInnerText: true });
 
 	await page.goBack();
 	await page.click('text=Prime à la conversion');
