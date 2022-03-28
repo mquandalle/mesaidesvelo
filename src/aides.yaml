@@ -944,7 +944,7 @@ aides . chateau du loir:
   # TODO valable pour un vélo mécanique pour un bénéficiaire du RSA
   applicable si:
     toutes ces conditions:
-      - localisation . code insee = '33009'
+      - localisation . code insee = '72071'
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 150€
