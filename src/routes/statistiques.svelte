@@ -1,13 +1,18 @@
 <script>
 	const articles = [
 		{
+			titre: 'Trouvez les aides à l’achat d’un vélo',
+			media: 'BFM Paris Île-de-France',
+			url: 'https://twitter.com/BFMParis/status/1508321459747368963'
+		},
+		{
 			titre: 'Le site qui recense toutes les subventions par commune !',
-			site: 'Les Echos Start',
+			media: 'Les Echos Start',
 			url: 'https://start.lesechos.fr/au-quotidien/budget-conso/mes-aides-velo-le-site-qui-recense-toutes-les-subventions-par-commune-1378553'
 		},
 		{
 			titre: 'Le site qui mouline pour vous les aides à l’achat d’un vélo',
-			site: 'Enlarge Your Paris',
+			media: 'Enlarge Your Paris',
 			url: 'https://www.enlargeyourparis.fr/societe/mesaidesvelo-le-site-qui-mouline-pour-vous-les-aides-a-lachat-dun-velo'
 		}
 	];
@@ -41,7 +46,7 @@
 					class="hover:text-green-600 !font-normal !no-underline"
 					><span class="font-semibold">« {article.titre} »</span><br /><span
 						class="text-sm text-gray-700"
-						>sur <strong class="!text-gray-700">{article.site}</strong></span
+						>sur <strong class="!text-gray-700">{article.media}</strong></span
 					></a
 				>
 			</li>
