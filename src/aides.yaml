@@ -72,8 +72,8 @@ aides . ile de france:
   remplace: région
   titre: Île-de-France Mobilités
   description: |
-    La région Île-De-France subventionne l’achat d’un $vélo à hauteur de 50% et
-    jusqu’à un plafond de $plafond. Les éventuelles aides locales déjà perçues
+    La région Île-de-France subventionne l’achat d’un vélo à hauteur de 50% et
+    jusqu’à un plafond de plafond. Les éventuelles aides locales déjà perçues
     sont déduites de ce montant.
   applicable si:
     toutes ces conditions:
