@@ -328,13 +328,6 @@ aides . pays de la loire:
           que les abonnés mensuels des réseaux de Mayenne et Vendée (hors
           scolaires).
         type: booléen
-        # TODO: Il serait préférable d'utiliser une valeur par défaut à non ici,
-        # mais le problème c'est que cela fait disparaître aussi la question,
-        # car on doit renseigner sa valeur a oui dans la situation et ce n'est
-        # plus une "missingVariable". Cela nécessite une mise à jour de
-        # publicodes pour exposer les variables utilisées plutôts que les
-        # variables manquantes.
-        # https://github.com/betagouv/publicodes/issues/103
         par défaut: oui
   description: |
     Cette aide à l’achat d’un vélo pliant est reservée aux abonnés du TER Pays

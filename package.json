@@ -30,7 +30,7 @@
 		"@etalab/decoupage-administratif": "^1.0.0",
 		"fuzzysort": "^1.1.4",
 		"node-fetch": "^3.2.0",
-		"publicodes": "^1.0.0-beta.25",
+		"publicodes": "^1.0.0-beta.34",
 		"wget-improved": "^3.3.0"
 	}
 }
