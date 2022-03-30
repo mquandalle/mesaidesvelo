@@ -1182,6 +1182,16 @@ aides . sete:
   plafond: 200€
   lien: https://www.agglopole.fr/lagglo-subventionne-lachat-de-velos-et-trottinettes-electriques/
 
+aides . vauvert:
+  remplace: commune
+  titre: Ville de Vauvert
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '30341'
+      - vélo . électrique
+  valeur: 200€
+  lien: https://www.vauvert.com/aide-2021-achat-velo-assistance-electrique/
+
 aides . puy de dome:
   remplace: département
   titre: Département Puy-de-Dôme
@@ -1498,7 +1508,7 @@ aides . cote d'or:
         alors: 350€
       - sinon: 250€
   plafond: vélo . prix
-  lien: https://www.cotedor.fr/actualite/une-aide-de-250-eu-pour-lacquisition-dun-velo-electrique
+  lien: https://www.cotedor.fr/aide/acquisition-de-velo-assistance-electrique
 
 aides . cote d'or . vélo assemblé ou produit localement:
   question: Le vélo est-il assemblé ou produit en Côte-d’Or ?
@@ -2507,6 +2517,24 @@ aides . pays des achards:
     - sinon: 0€
   lien: https://www.cc-paysdesachards.fr/amenagement/mobilites/351-bonus-velo.html
 
+aides . terres de montaigu:
+  remplace: intercommunalité
+  titre: Terres de Montaigu
+  # TODO: vérifier pourquoi ce double nom étrange
+  applicable si: localisation . epci = 'CC Terres de Montaigu, CC Montaigu-Rocheservière'
+  variations:
+    - si: vélo . cargo électrique
+      alors: 400€
+    - si: vélo . cargo
+      alors: 200€
+    - si: vélo . électrique
+      alors: 100€
+    - si: vélo . mécanique
+      alors: 50€
+    - sinon: 0€
+  # Note : aide relancée en 2022 mais le lien sur le site n'est pas encore à jour
+  lien: https://www.terresdemontaigu.fr/demarche/demande-aide-acquisition-velo/
+
 aides . hem:
   remplace: commune
   titre: Ville de Hem
@@ -2902,6 +2930,16 @@ aides . saint-pol-de-léon:
       - vélo . électrique
   valeur: 100€
   lien: https://www.saintpoldeleon.fr/la-ville-vous-aide-pour-l-achat-d
+
+aides . douarnenez:
+  remplace: intercommunalité
+  titre: Douarnenez communauté
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Douarnenez Communauté'
+      - vélo . électrique
+  valeur: 200€
+  lien: https://www.douarnenez-communaute.fr/velo-electrique-subvention/
 
 aides . saint-malo:
   remplace: intercommunalité

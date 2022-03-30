@@ -1,5 +1,18 @@
 # Historique des modifications
 
+## v2.0.24
+
+Ajout des aides suivantes :
+
+- Douarnenez communauté
+- Terres de Montaigu
+- Ville de Vauvert
+
+Correction des aides suivantes :
+
+- Ville de Château du Loir
+- Département Côte d’Or (lien)
+
 ## v2.0.23
 
 Ajout des aides suivantes :
