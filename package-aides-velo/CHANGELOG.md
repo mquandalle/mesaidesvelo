@@ -1,5 +1,15 @@
 # Historique des modifications
 
+## v2.0.25
+
+Ajout des aides suivantes :
+
+- Agglomération Agen
+- Ville d’Istres
+- Ville de Bonningues-lès-Calais
+
+Retouche texte Île-de-France Mobilités
+
 ## v2.0.24
 
 Ajout des aides suivantes :

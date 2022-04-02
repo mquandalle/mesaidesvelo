@@ -72,7 +72,7 @@ aides . ile de france:
   remplace: région
   titre: Île-de-France Mobilités
   description: |
-    La région Île-De-France subventionne l’achat d’un $vélo à hauteur de 50% et
+    La région Île-de-France subventionne l’achat d’un $vélo à hauteur de 50% et
     jusqu’à un plafond de $plafond. Les éventuelles aides locales déjà perçues
     sont déduites de ce montant.
   applicable si:
@@ -832,6 +832,17 @@ aides . montlouis sur loire:
   valeur: 200€
   lien: https://www.ville-montlouis-loire.fr/aide-a-lachat-dun-velo-electrique-neuf/
 
+aides . istres:
+  remplace: commune
+  titre: Ville d’Istres
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '13047'
+      - vélo . électrique
+  valeur: 150€
+  plafond: vélo . prix
+  lien: https://www.istres.fr/index.php?id=1024
+
 aides . martigues:
   remplace: commune
   titre: Ville de Martigues
@@ -1515,7 +1526,7 @@ aides . cote d'or . vélo assemblé ou produit localement:
   type: booléen
   par défaut: non
 
-aides . lot:
+aides . département lot:
   remplace: département
   titre: Département du Lot
   applicable si:
@@ -1529,6 +1540,17 @@ aides . lot:
       - sinon: 400€
   plafond: 40% * vélo . prix
   lien: https://lot.fr/vehicules-et-velos-electriques
+
+aides . agen:
+  remplace: intercommunalité
+  titre: Agglomération Agen
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA d’Agen'
+      - vélo . électrique
+  valeur: 200€
+  plafond: vélo . prix
+  lien: https://www.agglo-agen.net/vie-quotidienne/mobilites/aide-velo-electrique-634.html
 
 aides . sophia antipolis:
   remplace: intercommunalité
@@ -2630,6 +2652,19 @@ aides . billy-berclau:
         alors: 50€
       - sinon: 0€
   lien: https://www.billy-berclau.fr/blog/mairie/aide-municipale-pour-lachat-dun-velo/
+
+aides . bonningues-lès-calais:
+  remplace: commune
+  titre: Ville de Bonningues-lès-Calais
+  applicable si: localisation . code insee = '62156'
+  variations:
+    - si: vélo . électrique
+      alors: 250€
+    - si: vélo . mécanique
+      alors: 200€
+    - sinon: 0€
+  plafond: 50% * vélo . prix
+  lien: http://www.bonningues-les-calais.fr/more?type=news&id=255
 
 aides . marquette-lez-lille:
   remplace: commune
