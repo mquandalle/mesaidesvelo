@@ -2,7 +2,11 @@
 
 ## v2.0.26
 
-Mise à jour des aides suivantes :
+Ajout de l'aide suivante :
+
+- Agglo Bocage-Bressuirais
+
+Mise à jour de l'aide suivante :
 
 - Métropole Grand Lyon
 

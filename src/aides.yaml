@@ -2003,6 +2003,20 @@ aides . angers:
       - sinon: 0€
   lien: https://www.angersloiremetropole.fr/mon-quotidien/mobilites/velo/aide-a-l-achat-d-un-velo-neuf/index.html
 
+aides . agglo bocage bressuirais:
+  remplace: intercommunalité
+  titre: Agglo Bocage-Bressuirais
+  applicable si: localisation . epci = 'CA du Bocage Bressuirais'
+  variations:
+    - si: vélo . cargo
+      alors: 150€
+    - si: vélo . électrique
+      alors: 100€
+    - si: vélo . mécanique
+      alors: 50€
+    - sinon: 0€
+  lien: https://www.agglo2b.fr/actus/979-aide-a-l-achat-d-un-velo
+
 aides . brissac loire aubance:
   remplace: intercommunalité
   titre: Brissac Loire Aubance
