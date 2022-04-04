@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## v2.0.26
+
+Mise à jour des aides suivantes :
+
+- Métropole Grand Lyon
+
 ## v2.0.25
 
 Ajout des aides suivantes :

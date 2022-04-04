@@ -162,25 +162,32 @@ aides . paris:
       - sinon: 0€
   lien: https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373
 
+# TODO : intégrer l'aide aux vélo mécanique d'occasion
 aides . lyon:
   remplace: intercommunalité
   titre: Métropole Grand Lyon
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'Métropole de Lyon'
-      - une de ces conditions:
-          - vélo . cargo
-          - toutes ces conditions:
-              - vélo . prix <= 3000 €
-              - une de ces conditions:
-                  - vélo . électrique
-                  - vélo . pliant
+  applicable si: localisation . epci = 'Métropole de Lyon'
   valeur: 50% * vélo . prix
   plafond:
     variations:
-      - si: revenu fiscal de référence <= 13489 €/an
-        alors: 500€
-      - sinon: 100€
+      - si: vélo . cargo
+        alors:
+          variations:
+            - si: revenu fiscal de référence <= 16800 €/an
+              alors: 800 €
+            - sinon: 100€
+      - si:
+          toutes ces conditions:
+            - vélo . prix <= 3000 €
+            - une de ces conditions:
+                - vélo . pliant
+                - vélo . électrique
+        alors:
+          variations:
+            - si: revenu fiscal de référence <= 16800 €/an
+              alors: 500 €
+            - sinon: 100€
+      - sinon: 0€
   lien: https://www.grandlyon.com/services/aide-achat-velo.html
 
 aides . villefranche beaujolais saône:
