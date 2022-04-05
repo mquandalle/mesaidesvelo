@@ -99,6 +99,8 @@ aides . ile de france:
 aides . occitanie:
   remplace: région
   titre: Région Occitanie
+  description: |
+  La Région Occitanie subventionne l'achat d'un vélo classique ou d'un vélo à assistance électrique, à hauteur de 80%  de l'achat pour une personne non imposable et  50% de l'achat pour une personne imposable.
   applicable si:
     toutes ces conditions:
       - localisation . région = '76'
