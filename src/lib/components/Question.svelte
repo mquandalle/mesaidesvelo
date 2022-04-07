@@ -30,7 +30,7 @@
 			>
 			{#if showExplanations}
 				<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide|local={{ duration: 100 }}>
-					{description}
+					{@html description}
 				</p>
 			{/if}
 		{/if}

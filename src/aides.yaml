@@ -102,10 +102,35 @@ aides . occitanie:
   applicable si:
     toutes ces conditions:
       - localisation . région = '76'
-      - vélo . électrique
-      - revenu fiscal de référence <= 25660 €/an
-  valeur: 200 €
-  lien: https://lio.laregion.fr/aides-achat-velo
+      - demandeur . bénéficie du forfait mobilités durables
+      - revenu fiscal de référence <= 25710 €/an
+      - vélo . électrique ou mécanique
+  description: |
+    Attention : le demandeur doit percevoir le forfait mobilités durables de son
+    employeur afin de bénéficier de cette aide de la région.
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: ménage imposable = 'non'
+            alors:
+              valeur: 80% * vélo . prix
+              plafond: 400€
+          - sinon:
+              valeur: 50% * vélo . prix
+              plafond: 250€
+    - si: vélo . mécanique
+      alors:
+        variations:
+          - si: ménage imposable = 'non'
+            alors:
+              valeur: 80% * vélo . prix
+              plafond: 240€
+          - sinon:
+              valeur: 50% * vélo . prix
+              plafond: 150€
+    - sinon: 0€
+  lien: https://www.laregion.fr/IMG/pdf/dispositif_bonus_forfait_mobilite_durable_actualise_dec_2021.pdf
 
 aides . corse:
   remplace: région
@@ -1132,6 +1157,26 @@ aides . pays rhénan:
       - vélo . électrique
   valeur: 200€
   lien: https://www.cc-paysrhenan.fr/Actualites/AIDE-ACHAT-UN-VELO-ASSISTANCE-ELECTRIQUE-00626.html
+
+aides . wasselonne:
+  remplace: commune
+  titre: Ville de Wasselonne
+  applicable si: localisation . code insee = '67520'
+  variations:
+    - si: vélo . cargo
+      alors:
+        valeur: 10% * vélo . prix
+        plafond: 200€
+    - si: vélo . électrique
+      alors:
+        valeur: 10% * vélo . prix
+        plafond: 150€
+    - si: vélo . mécanique
+      alors:
+        valeur: 30% * vélo . prix
+        plafond: 80€
+    - sinon: 0€
+  lien: https://www.wasselonne.fr/Actualites/Subvention-municipale-pour-achat-un-velo-01654.html
 
 aides . les sables d'olonne:
   remplace: intercommunalité
@@ -3372,6 +3417,17 @@ revenu fiscal de référence:
   par défaut: 800 €/an
 
 ménage imposable: revenu fiscal de référence >= 11120 €/an
+
+demandeur:
+
+demandeur . bénéficie du forfait mobilités durables:
+  question: Percevez-vous le forfait mobilités durables ?
+  description: |
+    Le forfait mobilités durables est une prise en charge par vous employeur des
+    frais liés à vos déplacements domicile-travail réalisés à vélo. <a
+    href="/forfait-mobilite-durable" class="text-green-800 underline">En savoir plus</a>
+  type: booléen
+  par défaut: oui
 
 maximiser les aides:
   par défaut: non

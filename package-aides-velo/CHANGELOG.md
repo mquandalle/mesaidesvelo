@@ -1,5 +1,15 @@
 # Historique des modifications
 
+## v2.0.27
+
+Ajout de l'aide suivante :
+
+- Ville de Wasselonne
+
+Mise à jour de l'aide suivante :
+
+- Région Occitanie
+
 ## v2.0.26
 
 Ajout de l'aide suivante :
