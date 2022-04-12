@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v2.0.28
+
+Ajout des aides suivantes :
+
+- Haut-Poitou Communauté de Communes
+- Flers Agglo
+
+Mise à jour des aides suivantes :
+
+- Ville de Vendenheim
+- Grand Lac Communauté d'agglomération
+
 ## v2.0.27
 
 Ajout de l'aide suivante :

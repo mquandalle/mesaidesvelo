@@ -39,7 +39,7 @@ aides . bonus vélo électrique:
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
-      - revenu fiscal de référence <= 13489 €/an
+      - revenu fiscal de référence <= première tranche IR
       - vélo . électrique
   somme:
     - commune
@@ -539,9 +539,21 @@ aides . vendenheim:
   applicable si: localisation . code insee = '67506'
   variations:
     - si: vélo . électrique
-      alors: 250€
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 500 €/mois
+            alors: 300€
+          - si: revenu fiscal de référence <= 700 €/mois
+            alors: 275€
+          - sinon: 250€
     - si: vélo . mécanique
-      alors: 80€
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 500 €/mois
+            alors: 100€
+          - si: revenu fiscal de référence <= 700 €/mois
+            alors: 90€
+          - sinon: 80€
     - sinon: 0€
   lien: https://vendenheim.fr/aides-et-subventions/
 
@@ -727,6 +739,18 @@ aides . mondeville:
             - plafond: 620 €/mois
               montant: 50€
   lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
+
+aides . flers:
+  remplace: intercommunalité
+  titre: Flers Agglo
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Flers Agglo'
+      - vélo . électrique
+      - revenu fiscal de référence <= première tranche IR
+  valeur: 30% * vélo . prix
+  plafond: 200€
+  lien: https://www.flers-agglo.fr/mobilite-aide-a-lacquisition-de-velos/
 
 aides . ronchin:
   remplace: commune
@@ -1486,7 +1510,12 @@ aides . grand lac:
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA Grand Lac'
-      - vélo . électrique
+      - une de ces conditions:
+          - vélo . cargo
+          - toutes ces conditions:
+              - vélo . électrique
+              - vélo . prix >= 900 €
+              - vélo . prix <= 3000 €
   valeur: 150€
   lien: https://grand-lac.fr/au-quotidien/services-a-la-population/deplacements/le-velo
 
@@ -2076,6 +2105,20 @@ aides . brissac loire aubance:
     - sinon: 0€
   plafond: vélo . prix
   lien: https://www.brissacloireaubance.fr/actualites/une-nouvelle-aide-de-la-cclla-pour-lachat-de-velo-a-assistance-electrique/
+
+aides . haut-poitou:
+  remplace: intercommunalité
+  titre: Haut-Poitou Communauté de Communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Haut-Poitou'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . pliant
+          - vélo . cargo
+  valeur: 25% * vélo . prix
+  plafond: 200€
+  lien: https://cc-hautpoitou.fr/habiter/developpement-durable/mobilite-3/
 
 aides . châtellrault:
   remplace: intercommunalité
@@ -3415,6 +3458,8 @@ revenu fiscal de référence:
   # Comme pour le prix du vélo, la valeur par défaut est choisie pour maximiser
   # les aides
   par défaut: 800 €/an
+
+première tranche IR: 13489 €/an
 
 ménage imposable: revenu fiscal de référence >= 11120 €/an
 

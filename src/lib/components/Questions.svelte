@@ -13,11 +13,6 @@
 	const getSortOrder = (name) =>
 		questionsOrder.includes(name) ? questionsOrder.indexOf(name) : Infinity;
 	const uniq = (arr) => [...new Set(arr)];
-	console.log(
-		(goals ?? ['aides'])
-			.map((ruleName) => $getCurrentBikeEngine().evaluate(ruleName).traversedVariables)
-			.flat()
-	);
 	const questions = uniq(
 		(goals ?? ['aides'])
 			.map((ruleName) => $getCurrentBikeEngine().evaluate(ruleName).traversedVariables)
