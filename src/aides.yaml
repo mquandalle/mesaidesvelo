@@ -2106,6 +2106,17 @@ aides . brissac loire aubance:
   plafond: vélo . prix
   lien: https://www.brissacloireaubance.fr/actualites/une-nouvelle-aide-de-la-cclla-pour-lachat-de-velo-a-assistance-electrique/
 
+aides . grand poitiers:
+  remplace: intercommunalité
+  titre: Grand Poitiers
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CU du Grand Poitiers'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 250€
+  lien: https://www.grandpoitiers.fr/au-quotidien/deplacements/velos/aide-a-lachat-dun-velo-a-assistance-electrique-vae
+
 aides . haut-poitou:
   remplace: intercommunalité
   titre: Haut-Poitou Communauté de Communes
@@ -2357,6 +2368,47 @@ aides . yvetot normandie:
   valeur: 30% * vélo . prix
   plafond: 200€
   lien: https://www.yvetot-normandie.fr/vivre-in-yvetot-normandie/subventions/plan-velo-aide-a-lachat-de-velo/
+
+aides . caux austreberthe:
+  remplace: intercommunalité
+  titre: Caux-Austreberthe communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Caux - Austreberthe'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 30% * vélo . prix
+  plafond: 300€
+  lien: https://www.cccauxaustreberthe.fr/media/images/upload/R%C3%A8glement_Velo_2022.pdf
+
+aides . barentin:
+  remplace: commune
+  titre: Ville de Barentin
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '76057'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 200€
+  lien: https://ville-barentin.fr/actualites/aide-a-lacquisition-dun-velo-specifique/
+
+aides . pavilly:
+  remplace: commune
+  titre: Ville de Pavilly
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '76495'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 10% * vélo . prix
+  plafond: 100€
+  lien: https://www.pavilly.fr/wp-content/uploads/2021/07/proces-verbal-conseil-municipal-du-15-mars-2021.pdf#page=12
 
 aides . arcachon:
   remplace: commune
@@ -2970,7 +3022,7 @@ aides . rives de moselle:
               alors: 150€
             - sinon: 100€
       - sinon: 0€
-  lien: https://www.rivesdemoselle.fr/Aide-a-l-achat-pour-un-velo-avec-ou-sans-assistance-electrique.html
+  lien: https://www.rivesdemoselle.fr/aide-a-lachat-pour-un-velo-avec-ou-sans-assistance-electrique/
 
 aides . thionville:
   remplace: commune
@@ -2994,17 +3046,6 @@ aides . betheny:
       - vélo . électrique
   valeur: 100€
   lien: https://ville-betheny.fr/cadre-de-vie/subvention-velo-a-assistance-electrique-vae/article/subvention-velo-a-assistance-electrique-vae
-
-aides . épernay:
-  remplace: commune
-  titre: Ville d’Épernay
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '51230'
-      - vélo . électrique
-  valeur: 50% * vélo . prix
-  plafond: 150€
-  lien: https://www.epernay.fr/sites/epernay/files/document/article/reglement_sub_velo_2021.pdf
 
 aides . brest:
   remplace: intercommunalité

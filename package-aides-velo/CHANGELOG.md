@@ -1,5 +1,22 @@
 # Historique des modifications
 
+## v2.0.29
+
+Ajout des aides suivantes :
+
+- Grand Poitiers
+- Caux-Austreberthe communauté de communes
+- Ville de Barentin
+- Ville de Pavilly
+
+Suppression de l'aide suivante :
+
+- Ville d’Épernay
+
+Mise à jour des aides suivantes :
+
+- Rives de Moselle
+
 ## v2.0.28
 
 Ajout des aides suivantes :
