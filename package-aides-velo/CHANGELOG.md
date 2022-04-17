@@ -1,5 +1,18 @@
 # Historique des modifications
 
+## v2.0.30
+
+Ajout des aides suivantes :
+
+- Saumur Val de Loire agglomération
+- Ville de Rueil-Malmaison
+- Ville d’Elbeuf
+- Ville de Drumettaz-Clarafond
+
+Mise à jour de l'aide suivante :
+
+- Département de Saône-et-Loire
+
 ## v2.0.29
 
 Ajout des aides suivantes :

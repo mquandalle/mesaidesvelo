@@ -302,7 +302,10 @@ aides . département saône-et-loire:
   titre: Département de Saône-et-Loire
   applicable si: localisation . département = '71'
   variations:
-    - si: vélo . cargo électrique
+    - si:
+        toutes ces conditions:
+          - vélo . cargo électrique
+          - vélo . prix >= 2000 €
       alors: 450€
     - si:
         toutes ces conditions:
@@ -1519,6 +1522,10 @@ aides . grand lac:
   valeur: 150€
   lien: https://grand-lac.fr/au-quotidien/services-a-la-population/deplacements/le-velo
 
+aides . grand lac . prix vélo:
+  remplace: vélo . prix pour maximiser les aides
+  valeur: 3000€
+
 aides . aix les bains:
   remplace: commune
   titre: Ville d’Aix-les-Bains
@@ -1558,6 +1565,17 @@ aides . la motte servolex:
   valeur: 20% * vélo . prix
   plafond: 150€
   lien: https://www.mairie-lamotteservolex.fr/vos-demarches/subventions-eco-citoyennes-la-motte-servolex/
+
+aides . drumettaz-clarafond:
+  remplace: commune
+  titre: Ville de Drumettaz-Clarafond
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '73103'
+      - vélo . électrique
+  valeur: 150€
+  plafond: vélo . prix
+  lien: http://www.drumettaz-clarafond.com/www.drumettaz-clarafond.com/fr/actualites/drumettaz-clarafond-en-mode-velo-electrique-232.html
 
 aides . ardenne:
   remplace: intercommunalité
@@ -1696,6 +1714,27 @@ aides . pantin:
     - sinon: 0€
   plafond: vélo . prix
   lien: https://pratique.pantin.fr/deplacement-et-stationnement/transports-alternatifs-velo
+
+aides . rueil-malmaison:
+  remplace: commune
+  titre: Ville de Rueil-Malmaison
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '92063'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 20000 €/an
+      alors:
+        valeur: 40% * vélo . prix
+        plafond: 500€
+    - si: revenu fiscal de référence <= 30000 €/an
+      alors:
+        valeur: 30% * vélo . prix
+        plafond: 300€
+    - sinon:
+        valeur: 20% * vélo . prix
+        plafond: 200€
+  lien: https://www.villederueil.fr/fr/aide-lachat-dun-velo-electrique
 
 aides . vaucresson:
   remplace: commune
@@ -2410,6 +2449,26 @@ aides . pavilly:
   plafond: 100€
   lien: https://www.pavilly.fr/wp-content/uploads/2021/07/proces-verbal-conseil-municipal-du-15-mars-2021.pdf#page=12
 
+aides . elbeuf:
+  remplace: commune
+  titre: Ville d’Elbeuf
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '76231'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . mécanique
+      alors:
+        valeur: 50 % * vélo . prix
+        plafond: 100€
+    - si:
+        toutes ces conditions:
+          - vélo . électrique
+          - vélo . prix <= 4000€
+      alors: 100€
+    - sinon: 0€
+  lien: https://www.mairie-elbeuf.fr/aides/aides-financieres-de-ville/aide-a-lacquisition-de-velos/
+
 aides . arcachon:
   remplace: commune
   titre: Ville d’Arcachon
@@ -2587,6 +2646,18 @@ aides . cholet:
   valeur: 25% * vélo . prix
   plafond: 250€
   lien: https://www.cholet.fr/dossiers/dossier_5364_aide+velo+assistance+electrique.html
+
+aides . saumur val de loire:
+  remplace: intercommunalité
+  titre: Saumur Val de Loire agglomération
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Saumur Val de Loire'
+      - vélo . électrique
+      - revenu fiscal de référence <= première tranche IR
+  valeur: 10% * vélo . prix
+  plafond: 100€
+  lien: https://www.saumur.fr/velo/
 
 aides . laval:
   remplace: intercommunalité
