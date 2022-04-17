@@ -59,8 +59,8 @@ const getCodeInseeForCollectivity = ({ kind, value }) => {
 	}
 };
 
-const getSlugForCodeInsee = (codeInsee) =>
-	codeInsee && communesSorted.find(({ code }) => code === codeInsee)?.slug;
+const getCommune = (codeInsee) =>
+	codeInsee && communesSorted.find(({ code }) => code === codeInsee);
 
 // TODO: a bit fragile, we should sync this logic with
 // `engine.evaluate('localisation . pays')
@@ -74,11 +74,12 @@ const getCountry = (rule) =>
 const associateCollectivityMetadata = (rule) => {
 	const collectivity = extractCollectivityFromAST(rule);
 	const codeInsee = getCodeInseeForCollectivity(collectivity);
-	const slug = getSlugForCodeInsee(codeInsee);
+	const { slug, departement } = getCommune(codeInsee) ?? {};
 	const country = getCountry(rule);
 	return {
 		collectivity,
 		codeInsee,
+		departement,
 		slug,
 		country
 	};

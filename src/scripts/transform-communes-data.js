@@ -70,6 +70,7 @@ const data = [
 			return {
 				code: c.code,
 				nom: c.nom,
+				departement: c.departement,
 				region: c.region,
 				population: c.population,
 				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),

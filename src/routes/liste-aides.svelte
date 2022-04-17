@@ -30,9 +30,7 @@
 		associatedCollectivities.filter(({ collectivity }) =>
 			['code insee', 'epci', 'département'].includes(collectivity.kind)
 		),
-		function getDepartement({ codeInsee }) {
-			return codeInsee?.slice(0, 2);
-		}
+		({ departement }) => departement
 	);
 </script>
 

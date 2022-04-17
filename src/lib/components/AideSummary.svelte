@@ -54,7 +54,7 @@
 					'localisation . région': `'${
 						aide.collectivity.kind === 'région' ? aide.collectivity.value : ''
 					}'`,
-					'localisation . département': `'${aide.codeInsee.slice(0, 2)}'`,
+					'localisation . département': `'${aide.departement}'`,
 					'vélo . type': `'${getBikeKind(kind)}'`
 				})
 				.evaluate(aide.dottedName)
