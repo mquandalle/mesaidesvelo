@@ -266,6 +266,21 @@ aides . dardilly:
   plafond: 250€
   lien: https://www.dardilly.fr/mes-infos-quotidiennes/actus-evenements/31-vie-citoyenne/91-subventions-eco-citoyennes
 
+aides . blacé:
+  remplace: commune
+  titre: Ville de Blacé
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69023'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= première tranche IR
+        alors: 200€
+      - sinon: 100€
+  lien: https://mairie-blace.fr/fr/rb/1541490/prime-velo
+
 aides . saint-etienne:
   remplace: intercommunalité
   applicable si:
@@ -1997,7 +2012,7 @@ aides . grand reims:
       - si: vélo . pliant
         alors: 300€
       - sinon: 0€
-  lien: https://www.grandreims.fr/les-services/deplacements-et-mobilites/operation-aide-a-lachat-dun-velo-a-assistance-electrique-14525.html
+  lien: https://www.grandreims.fr/se-deplacer/operation-aide-a-lachat-dun-velo-a-assistance-electrique
 
 aides . annecy:
   remplace: intercommunalité
@@ -2168,7 +2183,7 @@ aides . haut-poitou:
           - vélo . cargo
   valeur: 25% * vélo . prix
   plafond: 200€
-  lien: https://cc-hautpoitou.fr/habiter/developpement-durable/mobilite-3/
+  lien: https://cc-hautpoitou.fr/amenagement-territoire/developpement-durable/mobilite-3/
 
 aides . châtellrault:
   remplace: intercommunalité
@@ -2352,7 +2367,7 @@ aides . vannes:
               alors: 200€
             - sinon: 0€
       - sinon: 0€
-  lien: https://www.golfedumorbihan-vannesagglomeration.bzh/aides-la-pratique-du-velo
+  lien: https://www.golfedumorbihan-vannesagglomeration.bzh/je-me-deplace-velo
 
 aides . quéven:
   remplace: commune

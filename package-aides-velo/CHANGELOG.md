@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v2.0.31
+
+Ajout de l'aide suivante :
+
+- Ville de Blacé
+
+Mise à jour des liens suivants :
+
+- Haut-Poitou Communauté de Communes
+- Grand Reims Communauté urbaine
+- Vannes Agglomération
+
 ## v2.0.30
 
 Ajout des aides suivantes :
