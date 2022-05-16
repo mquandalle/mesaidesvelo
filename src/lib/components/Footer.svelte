@@ -14,21 +14,7 @@
 	{#if !embeded}
 		<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600 md:justify-end">
 			<li>
-				<a href="/a-propos" class="hover:(underline text-green-600)">Questions fréquentes</a>
-			</li>
-			<li>
-				<a href="/liste-aides" class="hover:(underline text-green-600)">Liste des aides</a>
-			</li>
-			<li>
-				<a href="/integrer-sur-mon-site" class="hover:(underline text-green-600)"
-					>Intégrer sur mon site</a
-				>
-			</li>
-			<li>
-				<a href="/statistiques" class="hover:(underline text-green-600)">Statistiques</a>
-			</li>
-			<li>
-				<a href="/mentions-legales" class="hover:(underline text-green-600)">Mentions légales</a>
+				<a href="/a-propos" class="hover:(underline text-green-600)">À propos</a>
 			</li>
 			<li>
 				<a

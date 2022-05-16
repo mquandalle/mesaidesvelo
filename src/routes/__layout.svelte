@@ -4,8 +4,6 @@
 	import { localisation } from '$lib/stores';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
-	import Search from '$lib/components/Search.svelte';
 	import { onMount, setContext } from 'svelte';
 	import 'virtual:windi.css';
 
@@ -68,24 +66,9 @@
 				<Emoji emoji="🚲" className="-mt-2" />
 			</a>
 		{/if}
-		<p class="text-gray-800 mt-1 max-w-sm">Trouvez les aides à l’achat d’un vélo</p>
 	</header>
 	<div class="pb-6 {!embeded ? 'flex-1' : ''}">
-		{#if $page.url.pathname === '/' || $page.url.pathname.startsWith('/ville') || $page.url.pathname === '/prime-a-la-conversion' || $page.url.pathname === '/forfait-mobilite-durable'}
-			<Search />
-			{#if $page !== '/'}
-				<PaneNavigation
-					depth={$page.url.pathname === '/prime-a-la-conversion' ||
-					$page.url.pathname === '/forfait-mobilite-durable'
-						? 1
-						: 0}
-				>
-					<slot />
-				</PaneNavigation>
-			{/if}
-		{:else}
-			<slot />
-		{/if}
+		<slot />
 	</div>
 	<Footer />
 
