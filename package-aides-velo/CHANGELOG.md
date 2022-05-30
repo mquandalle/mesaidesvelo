@@ -1,5 +1,42 @@
 # Historique des modifications
 
+## v2.0.32
+
+Ajout des aides suivantes :
+
+- Département Mayenne
+- Sud Estuaire Communauté de communes
+- Charlieu-Belmont Communauté
+- Communauté de Communes Aunis Atlantique
+- Communauté des Communes Giennoises
+- Sèvre-et-Loire Communauté
+- Loire Layon Aubance
+- Tarbes Lourdes Pyrénées Communauté d'agglomération
+- Grand Lieu Communauté
+- Vallons de Haute Bretagne Communauté
+- Coutance Mer et Bocage
+- Ville de Guichen
+- Ville de Saint-Jean-de-Védas
+- Ville de Sainghin en Melantois
+- Ville de Louvigny
+- Ville de Voglans
+- Ville de Lescar
+- Ville de Saint-Remy
+
+Mise à jour des aides suivantes :
+
+- Orléans Métropole
+- Saumur Val de Loire agglomération
+- Agglopolys
+- Ville de Hem
+- Ville de Colmar
+
+Suppression des aides suivantes :
+
+- Sète Agglopôle méditerranée
+- Ville de Comines
+- Ville de Thionville
+
 ## v2.0.31
 
 Ajout de l'aide suivante :
