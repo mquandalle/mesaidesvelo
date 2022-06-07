@@ -26,7 +26,7 @@ export function formatDescription({ ruleName, engine, veloCat }) {
 	const { rawNode } = engine.getRule(ruleName);
 	const description = rawNode?.description ?? defaultDescription;
 	const plafondRuleName = `${ruleName} . $plafond`;
-	const plafondIsDefined = Object.keys(engine.parsedRules).includes(plafondRuleName);
+	const plafondIsDefined = Object.keys(engine.getParsedRules()).includes(plafondRuleName);
 	const plafond = plafondIsDefined && engine.evaluate(plafondRuleName);
 	return description
 		.replace(/\$vélo/g, veloCat === 'motorisation' ? 'kit de motorisation' : `vélo ${veloCat}`)

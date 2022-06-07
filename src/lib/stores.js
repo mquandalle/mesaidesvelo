@@ -9,7 +9,7 @@ export const publicodeSituation = derived([localisation, answers], ([$localisati
 	...($localisation
 		? {
 				'localisation . code insee': `'${$localisation.codeInsee}'`,
-				'localisation . epci': `'${$localisation.epci?.replace(/'/g, '’') || ''}'`,
+				'localisation . epci': `'${$localisation.epci || ''}'`,
 				'localisation . département': `'${$localisation.departement}'`,
 				'localisation . région': `'${$localisation.region}'`
 		  }

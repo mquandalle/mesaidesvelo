@@ -38,7 +38,7 @@ const extractCollectivityFromAST = (rule) => {
 	// In our rule basis we reference EPCI by their name but for iteroperability
 	// with third-party systems it is more robust to expose their SIREN code.
 	if (kind === 'epci') {
-		const code = epci.find(({ nom }) => nom.replace(/'/g, '’') === value)?.code;
+		const code = epci.find(({ nom }) => nom === value)?.code;
 		return { kind, value, code };
 	}
 	return { kind, value };
@@ -53,7 +53,7 @@ const getCodeInseeForCollectivity = ({ kind, value }) => {
 		case 'département':
 			return departements.find(({ code }) => code === value).chefLieu;
 		case 'epci':
-			return communesSorted.find(({ epci }) => epci?.replace(/'/g, '’') === value)?.code;
+			return communesSorted.find(({ epci }) => epci === value)?.code;
 		case 'code insee':
 			return value;
 	}
