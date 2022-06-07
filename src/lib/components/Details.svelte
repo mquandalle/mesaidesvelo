@@ -18,7 +18,8 @@
 			if (!aide.nodeValue) {
 				return null;
 			}
-			const originalRuleName = aide.explanation.find(({ satisfied }) => satisfied).consequence.name;
+			const originalRuleName = aide.explanation.find(({ condition }) => condition.isActive)
+				.consequence.name;
 
 			return originalRuleName;
 		})

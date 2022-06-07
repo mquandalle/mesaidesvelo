@@ -83,7 +83,7 @@ const formatInput = (input: InputParameters) =>
 		Object.entries(input).map(([key, val]) => [
 			key,
 			key === 'localisation . epci'
-				? `'${epciSirenToName[val]?.replace(/'/g, '’')}'`
+				? `'${epciSirenToName[val]}'`
 				: typeof val === 'string'
 				? `'${val.replace(/'/g, '’')}'`
 				: val
