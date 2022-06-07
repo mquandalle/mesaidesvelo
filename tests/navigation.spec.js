@@ -34,3 +34,8 @@ test('Liste aides do not crash', async ({ page }) => {
 	await page.goto(baseUrl + '/liste-aides');
 	await expect(page.locator('h1')).toHaveText('Les aides intégrées sur le site');
 });
+
+test('Aide not available', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/landerneau');
+	await expect(page.locator('text=vélo pliant')).toHaveCSS('text-decoration-line', 'line-through');
+});

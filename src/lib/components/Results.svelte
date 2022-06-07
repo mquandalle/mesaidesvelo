@@ -25,22 +25,21 @@
 	answers.set({});
 
 	$: aidesPerBikeKind = bikeKinds
-		.map((type) => {
+		.map((kind) => {
 			if (!$localisation) return [];
 			engine.setSituation({
 				...$publicodeSituation,
 				'maximiser les aides': 'oui',
-				'vélo . type': `'${type}'`
+				'vélo . type': `'${kind}'`
 			});
-			return [type, engine.evaluate('aides')];
+			return [kind, engine.evaluate('aides')];
 		})
-		.filter(([, node]) => node?.nodeValue)
 		.map(([cat, node]) => [
 			cat,
 			{
 				label: title(cat),
 				emoji: emoji(cat),
-				montant: formatValue(node, { precision: 0 })
+				montant: node?.nodeValue ? formatValue(node, { precision: 0 }) : 0
 			}
 		]);
 
@@ -50,12 +49,37 @@
 			'vélo . type': "''"
 		})
 		.evaluate('aides . prime à la conversion');
+
+	// TODO: use `groupBy` partition when available
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/groupBy
+	$: activesAidesPerBikeKind = aidesPerBikeKind.filter(([, { montant }]) => montant !== 0);
+	$: inactivesAidesPerBikeKind = aidesPerBikeKind.filter(([, { montant }]) => montant === 0);
+
+	$: inFrance = !!engine
+		.setSituation($publicodeSituation)
+		.evaluate("localisation . pays = 'France'").nodeValue;
+
+	$: onlyNationalAides =
+		inFrance &&
+		bikeKinds.every(
+			(kind) =>
+				!(
+					engine
+						.setSituation({
+							...$publicodeSituation,
+							'localisation . pays': "'nawak'",
+							'maximiser les aides': 'oui',
+							'vélo . type': `'${kind}'`
+						})
+						.evaluate('aides').nodeValue > 0
+				)
+		);
 </script>
 
 <div class="mt-8" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
 <div class="border rounded shadow-md bg-white sm:text-lg">
-	{#each aidesPerBikeKind as [cat, { montant, label, emoji }]}
+	{#each activesAidesPerBikeKind as [cat, { montant, label, emoji }]}
 		<CategoryLine {montant} href="?velo={cat}"
 			>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 		>
@@ -67,7 +91,21 @@
 			>Prime à la conversion <Emoji emoji="🚗" /> →<Emoji emoji="🚲" /></CategoryLine
 		>
 	{/if}
-	<CategoryLine montant={'500 €/an'} href="/forfait-mobilite-durable"
-		>Forfait mobilités durables
-	</CategoryLine>
+	{#if inFrance}
+		<CategoryLine montant={'500 €/an'} href="/forfait-mobilite-durable"
+			>Forfait mobilités durables
+		</CategoryLine>
+		{#each inactivesAidesPerBikeKind as [cat, { montant, label, emoji }]}
+			<CategoryLine {montant} href="?velo={cat}"
+				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
+			>
+		{/each}
+	{/if}
 </div>
+
+{#if onlyNationalAides}
+	<p class="mt-8 mx-2 text-gray-700">
+		<strong>Note :</strong><br />Les aides affichées sont les aides nationales. Ni la ville de
+		{$localisation.nom}, ni le département, ni la région ne proposent d’aides locales.
+	</p>
+{/if}
