@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v2.0.33
+
+Ajout des aides suivantes :
+
+- Communauté de Communes Sud Nivernais
+- Ville de Larçay
+
+Mise à jour des aides suivantes :
+
+- Agglomération Pays Basque
+- Communauté d’Agglomération Sophia Antipolis
+
 ## v2.0.32
 
 Ajout des aides suivantes :

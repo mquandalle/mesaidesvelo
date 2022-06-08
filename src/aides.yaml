@@ -953,6 +953,17 @@ aides . louvigny:
           - vélo . mécanique simple
   lien: https://ville-louvigny.fr/agenda/aide-communale-a-lacquisition-dun-velo-a-assistance-electrique-neuf-ou-velo-classique-neuf-ou-doccasion-a-la-maison-du-velo-ou-chez-un-velociste/
 
+aides . larçay:
+  remplace: commune
+  titre: Ville de Larçay
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '37124'
+      - vélo . électrique ou mécanique
+  valeur: 20% * vélo . prix
+  plafond: 150€
+  lien: https://www.ville-larcay.fr/9-30/actualites/fiche/aide-a-l-achat-d-un-velo-adulte-neuf-classique-ou-a-assistance-electrique.htm
+
 aides . montlouis sur loire:
   remplace: commune
   titre: Montlouis sur Loire
@@ -1577,6 +1588,7 @@ aides . pays basque:
               montant:
                 valeur: 20% * vélo . prix
                 plafond: 400€
+            - montant: 0€
     - si: vélo . électrique
       alors:
         grille:
@@ -1594,6 +1606,7 @@ aides . pays basque:
               montant:
                 valeur: 30% * vélo . prix
                 plafond: 300€
+            - montant: 0€
     - si: vélo . pliant
       alors:
         grille:
@@ -1611,6 +1624,7 @@ aides . pays basque:
               montant:
                 valeur: 30% * vélo . prix
                 plafond: 200€
+            - montant: 0€
   lien: https://www.velo-paysbasque.fr/fr/pages/demande-de-subvention-velo-assistance-electrique
 
 aides . grand lac:
@@ -1848,6 +1862,7 @@ aides . sophia antipolis:
           montant: 200€
         - plafond: 2000 €/mois
           montant: 100€
+        - montant: 0€
   lien: https://www.agglo-sophiaantipolis.fr/vivre-et-habiter/se-deplacer/le-velo/demande-subvention-aide-a-lacquisition
 
 aides . mougins:
@@ -2043,6 +2058,17 @@ aides . nevers:
         alors: 150 €
       - sinon: 0 €
   lien: https://www.nevers.fr/actualites/aide-a-lacquisition-dun-velo-2022
+
+aides . sud nivernais:
+  remplace: intercommunalité
+  titre: Communauté de Communes Sud Nivernais
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA de Nivernais'
+      - vélo . électrique ou mécanique
+  valeur: 30% * vélo . prix
+  plafond: 300€
+  lien: https://www.ccsn.fr/environnement-5/aide-a-lachat-velo/?fbclid=IwAR00V8aJz8Yk4F4DIcWIxzRAOhKBALJgRSd-UApN6DtmyhYcTns3Jjw6kak
 
 aides . aurillac:
   remplace: intercommunalité
