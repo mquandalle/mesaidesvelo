@@ -15,7 +15,7 @@
 	}
 </script>
 
-<div class="grid overflow-hidden -m-4 p-4">
+<div class="grid overflow-hidden -m-3 p-3">
 	{#key depth}
 		<div
 			class="col-start-1 col-end-1 row-start-1 row-end-1"

@@ -52,7 +52,7 @@
 			<DetailsLine {ruleName} {veloCat} />
 		</div>
 	{/each}
-	<div class="p-4 bg-gray-50 rounded-b-md">
+	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b-md">
 		<div class="flex justify-between text-lg">
 			<h3 class="font-semibold text-md">Total des aides</h3>
 			<div class="font-bold"><AnimatedAmount amount={sum.nodeValue} unit={sum.unit} /></div>

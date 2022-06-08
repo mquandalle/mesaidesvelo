@@ -95,15 +95,13 @@
 		<CategoryLine montant={'500 €/an'} href="/forfait-mobilite-durable"
 			>Forfait mobilités durables
 		</CategoryLine>
-		{#each inactivesAidesPerBikeKind as [cat, { montant, label, emoji }]}
-			<CategoryLine {montant} href="?velo={cat}"
-				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
-			>
+		{#each inactivesAidesPerBikeKind as [cat, { montant, label }]}
+			<CategoryLine {montant} href="?velo={cat}">{label}</CategoryLine>
 		{/each}
 	{/if}
 </div>
 
-{#if onlyNationalAides}
+{#if onlyNationalAides && $localisation?.nom}
 	<p class="mt-8 mx-2 text-gray-700">
 		<strong>Note :</strong><br />Les aides affichées sont les aides nationales. Ni la ville de
 		{$localisation.nom}, ni le département, ni la région ne proposent d’aides locales.

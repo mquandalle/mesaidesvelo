@@ -24,7 +24,7 @@
 	const conditionDeRessources = evaluateWithGivenRevenu() !== evaluateWithGivenRevenu(100000);
 </script>
 
-<div class="m-4">
+<div class="my-4 mx-3 sm:mx-4">
 	<div class="flex gap-x-4 text-lg flex-wrap">
 		<h3 class="font-semibold text-md">
 			{title}

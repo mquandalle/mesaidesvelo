@@ -7,7 +7,7 @@
 	<a
 		{href}
 		sveltekit:noscroll
-		class="flex gap-x-4 items-center justify-between px-4 py-2 hover:bg-green-50 cursor-pointer border-b last:border-b-0 group"
+		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 hover:bg-green-50 cursor-pointer border-b last:border-b-0 group"
 	>
 		<span><slot /></span>
 		<div class="flex-1 flex flex-col items-end gap-x-2">
@@ -26,11 +26,11 @@
 	<span
 		{href}
 		sveltekit:noscroll
-		class="flex gap-x-4 items-center justify-between px-4 py-2 bg-gray-50 border-b last:border-b-0 group "
+		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between px-4 py-2 bg-gray-50 border-b last:border-b-0 group "
 	>
 		<span class="line-through text-gray-600"><slot /></span>
-		<div class="flex-1 flex flex-col items-end gap-x-2">
-			<span class="text-sm text-gray-500">aide non disponible</span>
+		<div class="flex-1 flex flex-col items-end gap-x-2 text-right">
+			<span class="text-sm text-gray-500">aide non <br class="sm:hidden" />disponible</span>
 		</div>
 	</span>
 {/if}

@@ -56,7 +56,7 @@
 
 <svelte:window on:click={() => (enableTracking = true)} />
 
-<div class="px-4 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
+<div class="px-3 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
 	<header class="{!embeded ? 'mt-8' : ''} block w-full max-w-screen-md m-auto">
 		{#if !embeded}
 			<a href="/" class="text-3xl font-bold cursor-pointer">

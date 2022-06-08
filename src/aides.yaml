@@ -2064,7 +2064,7 @@ aides . sud nivernais:
   titre: Communauté de Communes Sud Nivernais
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'CA de Nivernais'
+      - localisation . epci = 'CC Sud Nivernais'
       - vélo . électrique ou mécanique
   valeur: 30% * vélo . prix
   plafond: 300€
