@@ -497,29 +497,29 @@ aides . nice:
           plafond: 100€
   lien: https://www.nicecotedazur.org/deplacement/subvention-pour-l-achat-d-un-v%C3%A9lo-%C3%A0-propulsion-humaine
 
-aides . strasbourg:
-  remplace: intercommunalité
-  titre: Eurométropole de Strasbourg
-  applicable si: localisation . epci = 'Eurométropole de Strasbourg'
-  valeur: 50% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo électrique
-        alors: 500€
-      - si: vélo . électrique
-        alors:
-          grille:
-            assiette: revenu fiscal de référence
-            tranches:
-              - plafond: 6300 €/an
-                montant: 500 €
-              - plafond: 13489 €/an
-                montant: 400 €
-              - montant: 300 €
-      - si: vélo . motorisation
-        alors: 150€
-      - sinon: 0€
-  lien: https://www.strasbourg.eu/aides-achat
+# aides . strasbourg:
+#   remplace: intercommunalité
+#   titre: Eurométropole de Strasbourg
+#   applicable si: localisation . epci = 'Eurométropole de Strasbourg'
+#   valeur: 50% * vélo . prix
+#   plafond:
+#     variations:
+#       - si: vélo . cargo électrique
+#         alors: 500€
+#       - si: vélo . électrique
+#         alors:
+#           grille:
+#             assiette: revenu fiscal de référence
+#             tranches:
+#               - plafond: 6300 €/an
+#                 montant: 500 €
+#               - plafond: 13489 €/an
+#                 montant: 400 €
+#               - montant: 300 €
+#       - si: vélo . motorisation
+#         alors: 150€
+#       - sinon: 0€
+#   lien: https://www.strasbourg.eu/aides-achat
 
 aides . entzheim:
   remplace: commune
@@ -1798,6 +1798,16 @@ aides . sèvre et loire:
         plafond: 100€
   lien: https://interco.cc-sevreloire.fr/rubrique/une-aide-pour-lachat-dun-velo-electrique/
 
+aides . chateaubriant derval:
+  remplace: intercommunalité
+  titre: Châteaubriant Derval Communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Châteaubriant-Derval'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.cc-chateaubriant-derval.fr/espace-services/vie-pratique/mobilite/velos-a-assistance-electrique/
+
 aides . cote d'or:
   remplace: département
   titre: Département Côte d’Or
@@ -2068,7 +2078,7 @@ aides . sud nivernais:
       - vélo . électrique ou mécanique
   valeur: 30% * vélo . prix
   plafond: 300€
-  lien: https://www.ccsn.fr/environnement-5/aide-a-lachat-velo/?fbclid=IwAR00V8aJz8Yk4F4DIcWIxzRAOhKBALJgRSd-UApN6DtmyhYcTns3Jjw6kak
+  lien: https://www.ccsn.fr/environnement-5/aide-a-lachat-velo/
 
 aides . aurillac:
   remplace: intercommunalité
@@ -3112,6 +3122,8 @@ aides . liévin:
   plafond: vélo . prix
   lien: https://www.lievin.fr/velo-ou-trottinette
 
+# TODO : au 1er juillet 2022, passage de l'aide au niveau de l'intercommunalité
+# https://www.bethunebruay.fr/fr/passmobilagglo
 aides . béthune:
   remplace: commune
   titre: Pass Mobilité Béthunes

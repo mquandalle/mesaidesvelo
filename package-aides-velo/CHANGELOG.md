@@ -1,5 +1,13 @@
 # Historique des modifications
 
+## v2.0.34
+
+Ajout des aides suivantes :
+
+- Châteaubriant Derval Communauté de communes
+
+Désactive l'aide de Strasbourg ([réf](https://pokaa.fr/2022/06/02/mauvaise-surprise-laide-aux-velos-de-la-ville-de-strasbourg-nest-plus-disponible/))
+
 ## v2.0.33
 
 Ajout des aides suivantes :
