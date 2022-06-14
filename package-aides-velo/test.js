@@ -32,20 +32,20 @@ test('aides électrique colmar', (t) => {
 	);
 });
 
-test('motorisation vélo strasboug', (t) => {
-	const strasbourgMotorisation = aidesVelo({
-		'localisation . code insee': '67482',
-		'localisation . epci': '246700488',
-		'localisation . département': '67',
-		'localisation . région': '44',
+test('motorisation vélo bordeaux', (t) => {
+	const bordeauxMotorisation = aidesVelo({
+		'localisation . code insee': '33063',
+		'localisation . epci': '243300316',
+		'localisation . département': '33',
+		'localisation . région': '75',
 		'vélo . type': 'motorisation'
-	}).filter(({ title }) => title.toLowerCase().includes('strasbourg'));
-	t.is(strasbourgMotorisation.length, 1, '1 aide de la ville');
-	t.is(strasbourgMotorisation[0].amount, 150, '150 euros');
+	}).filter(({ title }) => title.toLowerCase().includes('bordeaux'));
+	t.is(bordeauxMotorisation.length, 1, '1 aide de la région');
+	t.is(bordeauxMotorisation[0].amount, 100, '100 euros');
 	t.deepEqual(
-		strasbourgMotorisation[0].collectivity,
-		{ kind: 'epci', value: 'Eurométropole de Strasbourg', code: '246700488' },
-		"Associée à l'EPCI de Strasbourg"
+		bordeauxMotorisation[0].collectivity,
+		{ kind: 'epci', value: 'Bordeaux Métropole', code: '243300316' },
+		"Associée à l'EPCI de Bordeaux"
 	);
 });
 
