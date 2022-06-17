@@ -1,5 +1,13 @@
 # Historique des modifications
 
+## v2.0.35
+
+Ajout des aides suivantes :
+
+- Pass'Mobil'Agglo (remplace l'aide de Béthune)
+- Agglomération Provence Verte
+- Balcons du Dauphiné
+
 ## v2.0.34
 
 Ajout des aides suivantes :

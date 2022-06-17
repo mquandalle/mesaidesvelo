@@ -651,6 +651,22 @@ aides . toulon:
       - sinon: 0 €
   lien: https://metropoletpm.fr/tourisme/proxy/tpm-s-engage-velo-electrique
 
+aides . provence verte:
+  remplace: intercommunalité
+  titre: Agglomération Provence Verte
+  applicable si: localisation . epci = 'CA de la Provence Verte'
+  variations:
+    - si: vélo . électrique
+      alors:
+        valeur: 30% * vélo . prix
+        plafond: 300€
+    - si: vélo . mécanique
+      alors:
+        valeur: 80% * vélo . prix
+        plafond: 100€
+    - sinon: 0€
+  lien: https://www.caprovenceverte.fr/vie-pratique/transport-mobilite/aide-a-lacquisition-dun-velo-en-provence-verte/
+
 aides . bretagne romantique:
   remplace: intercommunalité
   titre: Communauté de communes Bretagne romantique
@@ -1040,6 +1056,23 @@ aides . vienne condrieu:
       - vélo . électrique
   valeur: 150€
   lien: https://www.vienne-condrieu-agglomeration.fr/nos-services-au-quotidien/deplacements/faire-du-velo/aide-financiere-vae/
+
+aides . balcons du dauphiné:
+  remplace: intercommunalité
+  titre: Balcons du Dauphiné
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Les Balcons du Dauphiné'
+      - une de ces conditions:
+          - toutes ces conditions:
+              - vélo . cargo
+              - vélo . prix <= 5000 €
+          - toutes ces conditions:
+              - vélo . électrique
+              - vélo . prix <= 3000 €
+  valeur: 50% * vélo . prix
+  plafond: 250€
+  lien: https://www.balconsdudauphine.fr/les-actions/prime-achat-velos-a-assistance-electrique
 
 aides . vif:
   remplace: commune
@@ -1704,6 +1737,7 @@ aides . voglans:
     toutes ces conditions:
       - localisation . code insee = '73329'
       - aides . intercommunalité > 0 €
+      - vélo . électrique
   valeur: 200€
   lien: https://mairie-voglans.fr/actualites/lagglo-en-mode-velo-eclectrique/
 
@@ -3122,20 +3156,21 @@ aides . liévin:
   plafond: vélo . prix
   lien: https://www.lievin.fr/velo-ou-trottinette
 
-# TODO : au 1er juillet 2022, passage de l'aide au niveau de l'intercommunalité
-# https://www.bethunebruay.fr/fr/passmobilagglo
-aides . béthune:
-  remplace: commune
-  titre: Pass Mobilité Béthunes
-  applicable si: localisation . code insee = '62119'
+# TODO : occasion
+aides . béthune bruay:
+  remplace: intercommunalité
+  titre: Pass'Mobil'Agglo
+  applicable si: localisation . epci = 'CA de Béthune-Bruay, Artois-Lys Romane'
   variations:
+    - si: vélo . cargo
+      alors: 400€
     - si: vélo . électrique
-      alors: 200€
+      alors: 360€
     - si: vélo . mécanique
-      alors: 50€
+      alors: 60€
     - sinon: 0€
   plafond: vélo . prix
-  lien: https://www.bethune.fr/actualites-109/le-pass-mobilite-est-disponible-3115.html?cHash=2cb2c65e61700dca65d6e79bce58cdfa
+  lien: https://www.bethunebruay.fr/fr/passmobilagglo
 
 aides . baisieux:
   remplace: commune
@@ -3867,6 +3902,7 @@ vélo . prix pour maximiser les aides:
         une de ces conditions:
           - localisation . epci = 'CA du Grand Annecy'
           - localisation . epci = 'CA Luberon Monts de Vaucluse'
+          - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
       alors: 1000 €
     - si: localisation . epci = 'CA La Roche sur Yon - Agglomération'
       alors: 1500 €
@@ -3876,7 +3912,11 @@ vélo . prix pour maximiser les aides:
           - localisation . code insee = '14327'
           - localisation . code insee = '14341'
       alors: 2400 €
-    - si: localisation . epci = 'Métropole de Lyon'
+    - si:
+        une de ces conditions:
+          - localisation . epci = 'Métropole de Lyon'
+          - localisation . epci = 'CC Les Balcons du Dauphiné'
+          - localisation . epci = 'CA Grand Lac'
       alors: 3000 €
     - si: localisation . epci = 'CA Annemasse-Les Voirons-Agglomération'
       alors: 4500 €
