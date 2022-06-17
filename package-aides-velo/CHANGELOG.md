@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v2.0.36
+
+Réactive l'aide de Strasbourg ([réf](https://github.com/mquandalle/mesaidesvelo/commit/2caf7634a6e06d52887d02b529a27e12131ee919#r76351316))
+
 ## v2.0.35
 
 Ajout des aides suivantes :

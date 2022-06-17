@@ -497,29 +497,29 @@ aides . nice:
           plafond: 100€
   lien: https://www.nicecotedazur.org/deplacement/subvention-pour-l-achat-d-un-v%C3%A9lo-%C3%A0-propulsion-humaine
 
-# aides . strasbourg:
-#   remplace: intercommunalité
-#   titre: Eurométropole de Strasbourg
-#   applicable si: localisation . epci = 'Eurométropole de Strasbourg'
-#   valeur: 50% * vélo . prix
-#   plafond:
-#     variations:
-#       - si: vélo . cargo électrique
-#         alors: 500€
-#       - si: vélo . électrique
-#         alors:
-#           grille:
-#             assiette: revenu fiscal de référence
-#             tranches:
-#               - plafond: 6300 €/an
-#                 montant: 500 €
-#               - plafond: 13489 €/an
-#                 montant: 400 €
-#               - montant: 300 €
-#       - si: vélo . motorisation
-#         alors: 150€
-#       - sinon: 0€
-#   lien: https://www.strasbourg.eu/aides-achat
+aides . strasbourg:
+  remplace: intercommunalité
+  titre: Eurométropole de Strasbourg
+  applicable si: localisation . epci = 'Eurométropole de Strasbourg'
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors: 500€
+      - si: vélo . électrique
+        alors:
+          grille:
+            assiette: revenu fiscal de référence
+            tranches:
+              - plafond: 6300 €/an
+                montant: 500 €
+              - plafond: 13489 €/an
+                montant: 400 €
+              - montant: 300 €
+      - si: vélo . motorisation
+        alors: 150€
+      - sinon: 0€
+  lien: https://www.strasbourg.eu/aides-achat
 
 aides . entzheim:
   remplace: commune
