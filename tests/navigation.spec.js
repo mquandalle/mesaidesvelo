@@ -39,3 +39,8 @@ test('Aide not available', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/landerneau');
 	await expect(page.locator('text=vélo pliant')).toHaveCSS('text-decoration-line', 'line-through');
 });
+
+test('Thumbnail displayed', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/albi?velo=cargo');
+	await expect(page.locator('img[alt="Logo grand albigeois"]')).toBeTruthy();
+});

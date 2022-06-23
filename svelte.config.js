@@ -14,7 +14,7 @@ const config = {
 			plugins: [WindiCSS(), yaml()],
 			resolve: {
 				alias: {
-					$entreprises: path.resolve('./entreprises/data')
+					$entreprises: path.resolve('./data-fetch/entreprises/data')
 				}
 			}
 		}
