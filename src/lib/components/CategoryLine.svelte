@@ -26,7 +26,7 @@
 	<span
 		{href}
 		sveltekit:noscroll
-		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between px-4 py-2 bg-gray-50 border-b last:border-b-0 group "
+		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-gray-50 border-b last:border-b-0 group "
 	>
 		<span class="line-through text-gray-600"><slot /></span>
 		<div class="flex-1 flex flex-col items-end gap-x-2 text-right">

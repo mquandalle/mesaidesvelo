@@ -19,7 +19,7 @@ aides:
 
 aides . bonus vélo cargo:
   remplace: état
-  titre: Bonus vélo cargo de l’État
+  titre: Bonus vélo cargo
   description: |
     L’État accorde une aide de 1 000 € pour l’achat d’un vélo cargo qu’il soit
     électrique ou non. Votre revenu fiscal de référence par part doit être
@@ -35,7 +35,7 @@ aides . bonus vélo cargo:
 
 aides . bonus vélo électrique:
   remplace: état
-  titre: Bonus vélo électrique de l’État
+  titre: Bonus vélo électrique
   description: |
     Le Bonus vélo versé par l’État complète l’aide versée par une collectivité
     territoriale. Votre revenu fiscal de référence par part doit être inférieur
