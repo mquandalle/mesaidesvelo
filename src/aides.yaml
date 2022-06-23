@@ -1,3 +1,8 @@
+# TODO (pages officielles pas encore disponibles)
+# - Département de Seinte-Maritime https://actu.fr/societe/le-departement-de-la-seine-maritime-va-proposer-une-prime-a-l-achat-de-velos-electriques_51948591.html
+# - Portes de Romilly-sur-Seine https://abonne.lest-eclair.fr/id384290/article/2022-06-22/portes-de-romilly-sur-seine-une-aide-de-100-eu-pour-lachat-dun-velo-electrique
+# Côte d’Emeraude https://actu.fr/bretagne/pleurtuit_35228/une-aide-a-lachat-dun-velo-electrique-pour-des-habitants-de-la-cote-demeraude_51306661.html
+
 aides:
   unité: €
   somme:
@@ -281,21 +286,15 @@ aides . blacé:
       - sinon: 100€
   lien: https://mairie-blace.fr/fr/rb/1541490/prime-velo
 
-aides . saint-etienne:
-  remplace: intercommunalité
+aides . département loire:
+  remplace: département
+  titre: Département de la Loire
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'Saint-Etienne Métropole'
+      - localisation . département = '42'
       - vélo . électrique
-  description: |
-    La Métropole allouera 100 000 € à cette opération en 2022, qui sera
-    renouvelée chaque année jusqu'en 2026
-  titre: Saint-Étienne Métropole
-  variations:
-    - si: ménage imposable = 'non'
-      alors: 200€
-    - sinon: 100€
-  lien: https://www.saint-etienne.fr/actualites/v%C3%A9lo-passez-%C3%A0-l%C3%A9lectrique
+  valeur: 300€
+  lien: https://www.loire.fr/jcms/lw_1383840/beneficiez-de-300-euros-pour-l-achat-d-un-velo-a-assistance-electrique-vae
 
 aides . charlieu-belmont:
   remplace: commune
@@ -1001,16 +1000,6 @@ aides . istres:
   plafond: vélo . prix
   lien: https://www.istres.fr/index.php?id=1024
 
-aides . martigues:
-  remplace: commune
-  titre: Ville de Martigues
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '13056'
-      - vélo . électrique
-  valeur: 250€
-  lien: https://www.ville-martigues.fr/services-en-ligne/deplacements/velo-a-assistance-electrique-aide-a-lachat
-
 aides . montbéliard agglo:
   remplace: intercommunalité
   titre: Pays de Montbéliard Agglomération
@@ -1480,6 +1469,16 @@ aides . cournon d'auvergne:
   plafond: vélo . prix
   lien: http://www.cournon-auvergne.fr/Urbanisme-et-economie/Transports/Aide-pour-l-achat-d-un-velo-a-assistance-electrique
 
+aides . lempdes:
+  remplace: commune
+  titre: Ville de Lempdes
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '63193'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://ville-lempdes.fr/subvention-pour-laide-a-lachat-dun-velo-electrique/
+
 aides . colmar:
   remplace: commune
   titre: Ville de Colmar
@@ -1719,17 +1718,6 @@ aides . la motte servolex:
   plafond: 150€
   lien: https://www.mairie-lamotteservolex.fr/vos-demarches/subventions-eco-citoyennes-la-motte-servolex/
 
-aides . drumettaz-clarafond:
-  remplace: commune
-  titre: Ville de Drumettaz-Clarafond
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '73103'
-      - vélo . électrique
-  valeur: 150€
-  plafond: vélo . prix
-  lien: http://www.drumettaz-clarafond.com/www.drumettaz-clarafond.com/fr/actualites/drumettaz-clarafond-en-mode-velo-electrique-232.html
-
 aides . voglans:
   remplace: commune
   titre: Ville de Voglans
@@ -1842,6 +1830,29 @@ aides . chateaubriant derval:
   valeur: 100€
   lien: https://www.cc-chateaubriant-derval.fr/espace-services/vie-pratique/mobilite/velos-a-assistance-electrique/
 
+aides . pays ancenis:
+  remplace: intercommunalité
+  titre: Communauté de communes du Pays d’Ancenis
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays d’Ancenis'
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= première tranche IR
+        alors:
+          variations:
+            - si: vélo . cargo électrique
+              alors: 300€
+            - sinon: 200€
+      - sinon:
+          variations:
+            - si: vélo . cargo électrique
+              alors: 200€
+            - sinon: 100€
+  lien: https://www.pays-ancenis.com/vie-quotidienne/comment-se-deplacer-en-pays-dancenis-compa/mobilites-actives/aide-a-lachat-dun-velo-electrique
+
 aides . cote d'or:
   remplace: département
   titre: Département Côte d’Or
@@ -1951,7 +1962,7 @@ aides . pantin:
       alors: 100€
     - sinon: 0€
   plafond: vélo . prix
-  lien: https://pratique.pantin.fr/deplacement-et-stationnement/transports-alternatifs-velo
+  lien: https://pratique.pantin.fr/tous-les-services/deplacement-et-stationnement/deplacement/transports-alternatifs-velo
 
 aides . rueil-malmaison:
   remplace: commune
@@ -2323,6 +2334,48 @@ aides . genevois:
       - vélo . électrique
   valeur: 250€
   lien: https://www.cc-genevois.fr/fr/vie-pratique-et-services/vous-deplacer/velo-ou-pied
+
+aides . arve salève:
+  remplace: intercommunalité
+  titre: Communauté de communes Arve & Salève
+  applicable si: localisation . epci = 'CC Arve et Salève'
+  variations:
+    - si: revenu fiscal de référence <= première tranche IR
+      alors:
+        variations:
+          - si: vélo . cargo électrique
+            alors: 500€
+          - si: vélo . cargo
+            alors: 400€
+          - si: vélo . électrique
+            alors: 400€
+          - si: vélo . mécanique
+            alors: 150€
+          - sinon: 0€
+    - si: revenu fiscal de référence <= 18000€/an
+      alors:
+        variations:
+          - si: vélo . cargo électrique
+            alors: 400€
+          - si: vélo . cargo
+            alors: 300€
+          - si: vélo . électrique
+            alors: 300€
+          - si: vélo . mécanique
+            alors: 100€
+          - sinon: 0€
+    - sinon:
+        variations:
+          - si: vélo . cargo électrique
+            alors: 300€
+          - si: vélo . cargo
+            alors: 200€
+          - si: vélo . électrique
+            alors: 200€
+          - si: vélo . mécanique
+            alors: 50€
+          - sinon: 0€
+  lien: https://www.arve-saleve.fr/actus/312-prim-o-velo-aide-a-l-achat-velo-2
 
 aides . évian-les-bains:
   remplace: commune

@@ -1,5 +1,24 @@
 # Historique des modifications
 
+## v2.0.37
+
+Ajout des aides suivantes :
+
+- Département de la Loire
+- Communauté de communes du Pays d’Ancenis
+- Communauté de communes Arve & Salève
+- Ville de Lempdes
+
+Suppresion des aides suivantes :
+
+- Métropole de Saint-Étienne ([réf](https://www.saint-etienne-metropole.fr/subvention-vae2022))
+- Ville de Martigues ([réf](https://www.ville-martigues.fr/services-en-ligne/deplacements/pistes-cyclables/velo-a-assistance-electrique-aide-a-lachat))
+- Ville de Drumettaz-Clarafond
+
+Mise à jour des aides suivantes :
+
+- Ville de Pantin
+
 ## v2.0.36
 
 Réactive l'aide de Strasbourg ([réf](https://github.com/mquandalle/mesaidesvelo/commit/2caf7634a6e06d52887d02b529a27e12131ee919#r76351316))
