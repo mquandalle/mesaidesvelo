@@ -1,7 +1,5 @@
 # TODO (pages officielles pas encore disponibles)
-# - Département de Seinte-Maritime https://actu.fr/societe/le-departement-de-la-seine-maritime-va-proposer-une-prime-a-l-achat-de-velos-electriques_51948591.html
 # - Portes de Romilly-sur-Seine https://abonne.lest-eclair.fr/id384290/article/2022-06-22/portes-de-romilly-sur-seine-une-aide-de-100-eu-pour-lachat-dun-velo-electrique
-# Côte d’Emeraude https://actu.fr/bretagne/pleurtuit_35228/une-aide-a-lachat-dun-velo-electrique-pour-des-habitants-de-la-cote-demeraude_51306661.html
 
 aides:
   unité: €
@@ -306,6 +304,16 @@ aides . charlieu-belmont:
   valeur: 20% * vélo . prix
   plafond: 100€
   lien: https://www.charlieubelmont.com/environnement/plan-climat-air-energie-territorial/mobilite/
+
+aides . unieux:
+  remplace: commune
+  titre: Commune d’Unieux
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '42316'
+      - vélo . électrique
+  valeur: 300€
+  lien: https://www.ville-unieux.fr/attachments/article/583/2022%20REGLEMENT%20AIDE%20AUX%20ECONOMIES%20D'ENERGIE%20UNIEUX.pdf#page=4
 
 aides . bordeaux:
   remplace: intercommunalité
@@ -818,6 +826,16 @@ aides . mondeville:
             - plafond: 620 €/mois
               montant: 50€
   lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
+
+aides . terre d'auge:
+  remplace: intercommunalité
+  titre: Communauté de communes Terre d’Auge
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Terre d’Auge'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.terredauge.fr/je-vis-jhabite/mobilites-douces/aide-a-lachat-de-velo-a-assistance-electrique/
 
 aides . flers:
   remplace: intercommunalité
@@ -2226,17 +2244,6 @@ aides . gien:
   plafond: 300€
   lien: https://www.villedegien.fr/actualites/information/subvention-aux-giennois-pour-lacquisition-dun-velo-a-assistance-electrique/
 
-aides . chalette-sur-loing:
-  remplace: commune
-  titre: Ville de Chalette-sur-Loing
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '45068'
-      - vélo . électrique
-  valeur: 15% * vélo . prix
-  plafond: 250€
-  lien: https://www.ville-chalette.fr/Une-aide-a-l-achat-d-un-Velo-a.html
-
 aides . reims:
   remplace: commune
   titre: Ville de Reims
@@ -2756,6 +2763,32 @@ aides . saintes:
   valeur: 200€
   lien: https://www.agglo-saintes.fr/l-agglo-au-quotidien/transports-et-mobilites/530-aide-a-l-achat-d-un-velo-a-assistance-electrique.html
 
+aides . seine-maritime:
+  remplace: département
+  titre: Département de Seine-Maritime
+  applicable si:
+    toutes ces conditions:
+      - localisation . département = '76'
+      - vélo . électrique
+  variations:
+    - si:
+        variations:
+          - si: personnes dans le foyer fiscal = 1
+            alors: revenu fiscal de référence <= 19565€/an
+          - si: personnes dans le foyer fiscal = 2
+            alors: revenu fiscal de référence <= 28614€/an
+          - si: personnes dans le foyer fiscal = 3
+            alors: revenu fiscal de référence <= 34411€/an
+          - si: personnes dans le foyer fiscal = 4
+            alors: revenu fiscal de référence <= 40201€/an
+          - si: personnes dans le foyer fiscal = 5
+            alors: revenu fiscal de référence <= 46015€/an
+          - si: personnes dans le foyer fiscal > 5
+            alors: revenu fiscal de référence <= 46015€/an + (personnes dans le foyer fiscal - 5) * 5797€/an
+      alors: 400€
+    - sinon: 200€
+  lien: https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/ma-prime-velo-76.html
+
 aides . yvetot normandie:
   remplace: intercommunalité
   titre: Yvetot Normandie
@@ -3050,9 +3083,8 @@ aides . laval:
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA Laval Agglomération'
-      - vélo . électrique
-  valeur: 25% * vélo . prix
-  plafond: 200€
+      - vélo . cargo électrique
+  valeur: 300€
   lien: https://www.agglo-laval.fr/utile-au-quotidien/transports-et-mobilites/lagglo-a-velo/prime-a-lachat-dun-velo-electrique
 
 aides . ernée:
@@ -3089,27 +3121,6 @@ aides . brive:
   valeur: 30% * vélo . prix
   plafond: 200€
   lien: http://www.donzenac.correze.net/data/uploads/actualites/aide-velos-elec.pdf
-
-aides . pays de saint gilles:
-  remplace: intercommunalité
-  titre: Pays de Saint-Gilles Croix de Vie
-  applicable si: localisation . epci = 'CC du Pays de Saint-Gilles-Croix-de-Vie'
-  # TODO: vélo adapté
-  variations:
-    - si: vélo . cargo
-      alors:
-        valeur: 20% * vélo . prix
-        plafond: 350€
-    - si: vélo . électrique
-      alors:
-        valeur: 20% * vélo . prix
-        plafond: 300€
-    - si: vélo . mécanique
-      alors:
-        valeur: 50% * vélo . prix
-        plafond: 100€
-    - sinon: 0€
-  lien: https://www.payssaintgilles.fr/actualites/15-janvier-lancement-de-la-nouvelle-aide-a-lachat-de-velo/
 
 aides . ville de talant:
   remplace: commune
@@ -3606,18 +3617,28 @@ aides . guichen:
   valeur: 100€
   lien: https://www.guichenpontrean.fr/aide-a-lacquisition-dun-velo-a-assistance-electrique/
 
-aides . saint-brieuc armor:
+aides . cote d'emeraude:
   remplace: intercommunalité
-  titre: Saint-Brieuc Armor Agglomération
+  titre: Communauté de communes Côte d’Émeraude
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'CA Saint-Brieuc Armor Agglomération'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-  valeur: 25% * vélo . prix
-  plafond: 150€
-  lien: https://www.saintbrieuc-armor-agglo.bzh/information/actualites/aide-a-lachat-de-votre-velo-electrique-ou-velo-cargo-en-2022-2438
+      - localisation . epci = 'CC Côte d’Emeraude'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.cote-emeraude.fr/laide-a-lachat-dun-velo-a-assitance-electrique/
+
+# aides . saint-brieuc armor:
+#   remplace: intercommunalité
+#   titre: Saint-Brieuc Armor Agglomération
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CA Saint-Brieuc Armor Agglomération'
+#       - une de ces conditions:
+#           - vélo . électrique
+#           - vélo . cargo
+#   valeur: 25% * vélo . prix
+#   plafond: 150€
+#   lien: https://www.saintbrieuc-armor-agglo.bzh/information/actualites/aide-a-lachat-de-votre-velo-electrique-ou-velo-cargo-en-2022-2438
 
 aides . lannion-trégor:
   remplace: intercommunalité
@@ -3732,21 +3753,6 @@ aides . castres:
         alors: 100€
       - sinon: 0€
   lien: https://www.castres-mazamet.fr/plan-climat-air-energie-territorial/actualites
-
-aides . lezennes:
-  remplace: commune
-  titre: Ville de Lezennes
-  applicable si: localisation . code insee = '59346'
-  valeur: 50% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo
-        alors: 450€
-      - si: vélo . électrique
-        alors: 300€
-      - si: vélo . mécanique
-        alors: 150€
-  lien: https://droitauvelo.org/Ville-de-Lezennes-prime-a-l-achat-de-velos
 
 aides . quesnoy-sur-deûle:
   remplace: commune
@@ -3989,6 +3995,10 @@ revenu fiscal de référence:
 première tranche IR: 13489 €/an
 
 ménage imposable: revenu fiscal de référence >= 11120 €/an
+
+personnes dans le foyer fiscal:
+  question: Combien de personnes composent le ménage ?
+  par défaut: 1
 
 demandeur:
 

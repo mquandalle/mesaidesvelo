@@ -1,5 +1,25 @@
 # Historique des modifications
 
+## v2.0.38
+
+Ajout des aides suivantes :
+
+- Département de Seinte-Maritime
+- Commune d’Unieux
+- Communauté de communes Terre d’Auge
+- Communauté de communes Côte d’Émeraude
+
+Mise à jour des aides suivantes :
+
+- Laval Agglo
+
+Suppression des aides suivantes :
+
+- Ville de Lezennes
+- Saint-Brieuc Armor Agglomération
+- Pays de Saint-Gilles Croix de Vie
+- Ville de Chalette-sur-Loing
+
 ## v2.0.37
 
 Ajout des aides suivantes :

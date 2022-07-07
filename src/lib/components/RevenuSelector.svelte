@@ -22,6 +22,8 @@
 			return engine.evaluate({ valeur, unité: unit }).nodeValue;
 		};
 
+		const namesToFollow = ['ménage imposable', 'personnes dans le foyer fiscal'];
+
 		const accumulateThresholds = (acc, node) => {
 			if (node.nodeKind === 'grille' && node.explanation.assiette?.dottedName === searchedName) {
 				const thresholds = node.explanation.tranches.map(({ plafond }) => convertValue(plafond));
@@ -38,7 +40,7 @@
 				// Following reference like this is fragile. We could follow all references
 				// but would need some special handling for the dependency on parent.
 				// For now this works well enough.
-			} else if (node.nodeKind === 'reference' && node.name === 'ménage imposable') {
+			} else if (node.nodeKind === 'reference' && namesToFollow.includes(node.name)) {
 				return [...acc, ...findAllComparaisonsValue(node.dottedName, { searchedName, unit })];
 			}
 		};
