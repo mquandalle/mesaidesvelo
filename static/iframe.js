@@ -6,8 +6,11 @@
 
 (function () {
 	const iframeElement = document.createElement('iframe');
-	const utmSource = encodeURIComponent(window.location.href);
-	iframeElement.src = 'https://mesaidesvelo.fr/?iframe=1&utm_medium=iframe&utm_source=' + utmSource;
+	iframeElement.src =
+		'https://mesaidesvelo.fr/?iframe=1&utm_medium=iframe&utm_source=' +
+		encodeURIComponent(window.location.host) +
+		'&utm_content=' +
+		encodeURIComponent(window.location.href);
 	iframeElement.style.width = '100%';
 	iframeElement.style.height = '500px';
 	iframeElement.style.border = '0';
