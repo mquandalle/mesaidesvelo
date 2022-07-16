@@ -1091,6 +1091,24 @@ aides . vif:
   valeur: 100€
   lien: https://ville-vif.fr/velo-a-assistance-electrique-100-e-offerts/
 
+aides . crolles:
+  remplace: commune
+  titre: Ville de Crolles
+  description: |
+    Le « Chèque vélo électrique pour tous » est a demander en mairie de Crolles
+    et son montant est calculé en fonction de votre revenu fiscal de référence.
+    Il est compris entre 150€ et 600€.
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '38140'
+      - vélo . électrique
+      - vélo . prix >= 1400€
+      - vélo . prix <= 3500€
+  valeur: (1700€/mois - revenu fiscal de référence) / (1700€/mois - 600€/mois) * (600€ - 150€) + 150€
+  plancher: 150€
+  plafond: 600€
+  lien: http://www.ville-crolles.fr/vues/pages/services-et-demarches/particuliers/crolles-pratique-cheque-VAE.php#partHome1
+
 aides . meyreuil:
   remplace: commune
   titre: Ville de Meyreuil
@@ -3976,6 +3994,7 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'Métropole de Lyon'
           - localisation . epci = 'CC Les Balcons du Dauphiné'
           - localisation . epci = 'CA Grand Lac'
+          - localisation . code insee = '38140'
       alors: 3000 €
     - si: localisation . epci = 'CA Annemasse-Les Voirons-Agglomération'
       alors: 4500 €

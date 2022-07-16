@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v2.0.39
+
+Ajout de l'aide de la ville de Crolles
+
 ## v2.0.38
 
 Ajout des aides suivantes :

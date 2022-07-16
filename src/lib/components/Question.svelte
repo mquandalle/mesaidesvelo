@@ -5,6 +5,7 @@
 	import { slugify } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import Emoji from './Emoji.svelte';
+	import NumberField from './NumberField.svelte';
 
 	export let rule;
 
@@ -41,25 +42,6 @@
 			<MultipleChoiceAnswer value="non" bind:group={value}>Non</MultipleChoiceAnswer>
 		</div>
 	{:else}
-		<div class="border rounded p-2 mt-1 bg-white shadow-sm">
-			<input
-				type="number"
-				id={domId}
-				class="m-0 text-right w-35 focus:outline-transparent"
-				bind:value
-			/>
-			<label for={domId}><span class="text-gray-600">{unité || ''}</span></label>
-		</div>
+		<NumberField bind:value {unité} id={domId} />
 	{/if}
 </div>
-
-<style>
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
-
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-	}
-</style>

@@ -40,6 +40,11 @@ test('Aide not available', async ({ page }) => {
 	await expect(page.locator('text=vélo pliant')).toHaveCSS('text-decoration-line', 'line-through');
 });
 
+test('Revenu of type number', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/crolles?velo=électrique');
+	await expect(page.locator('input[type=number][id=revenu-fiscal]')).toBeTruthy();
+});
+
 test('Thumbnail displayed', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/albi?velo=cargo');
 	await expect(page.locator('img[alt="Logo grand albigeois"]')).toBeTruthy();
