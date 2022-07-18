@@ -1,10 +1,22 @@
 # Historique des modifications
 
-## v2.0.39
+## v2.0.40 - 18/07/2022
+
+Ajout des aides suivantes :
+
+- Communauté de Communes de la Côte d’Albâtre
+- Ville de Mennecy
+
+Mise à jour des liens des aides suivantes :
+
+- Communauté de communes Arve & Salève
+- Ville de Deauville
+
+## v2.0.39 - 16/07/2022
 
 Ajout de l'aide de la ville de Crolles
 
-## v2.0.38
+## v2.0.38 - 07/07/2022
 
 Ajout des aides suivantes :
 
@@ -24,7 +36,7 @@ Suppression des aides suivantes :
 - Pays de Saint-Gilles Croix de Vie
 - Ville de Chalette-sur-Loing
 
-## v2.0.37
+## v2.0.37 - 23/06/2022
 
 Ajout des aides suivantes :
 
@@ -43,11 +55,11 @@ Mise à jour des aides suivantes :
 
 - Ville de Pantin
 
-## v2.0.36
+## v2.0.36 - 17/06/2022
 
 Réactive l'aide de Strasbourg ([réf](https://github.com/mquandalle/mesaidesvelo/commit/2caf7634a6e06d52887d02b529a27e12131ee919#r76351316))
 
-## v2.0.35
+## v2.0.35 - 17/06/2022
 
 Ajout des aides suivantes :
 
@@ -55,7 +67,7 @@ Ajout des aides suivantes :
 - Agglomération Provence Verte
 - Balcons du Dauphiné
 
-## v2.0.34
+## v2.0.34 - 15/06/2022
 
 Ajout des aides suivantes :
 
@@ -63,7 +75,7 @@ Ajout des aides suivantes :
 
 Désactive l'aide de Strasbourg ([réf](https://pokaa.fr/2022/06/02/mauvaise-surprise-laide-aux-velos-de-la-ville-de-strasbourg-nest-plus-disponible/))
 
-## v2.0.33
+## v2.0.33 - 08/06/2022
 
 Ajout des aides suivantes :
 
@@ -75,7 +87,7 @@ Mise à jour des aides suivantes :
 - Agglomération Pays Basque
 - Communauté d’Agglomération Sophia Antipolis
 
-## v2.0.32
+## v2.0.32 - 30/05/2022
 
 Ajout des aides suivantes :
 
@@ -112,7 +124,7 @@ Suppression des aides suivantes :
 - Ville de Comines
 - Ville de Thionville
 
-## v2.0.31
+## v2.0.31 - 28/04/2022
 
 Ajout de l'aide suivante :
 
@@ -124,7 +136,7 @@ Mise à jour des liens suivants :
 - Grand Reims Communauté urbaine
 - Vannes Agglomération
 
-## v2.0.30
+## v2.0.30 - 17/04/2022
 
 Ajout des aides suivantes :
 
@@ -137,7 +149,7 @@ Mise à jour de l'aide suivante :
 
 - Département de Saône-et-Loire
 
-## v2.0.29
+## v2.0.29 - 13/04/2022
 
 Ajout des aides suivantes :
 
@@ -154,7 +166,7 @@ Mise à jour des aides suivantes :
 
 - Rives de Moselle
 
-## v2.0.28
+## v2.0.28 - 12/04/2022
 
 Ajout des aides suivantes :
 
@@ -166,7 +178,7 @@ Mise à jour des aides suivantes :
 - Ville de Vendenheim
 - Grand Lac Communauté d'agglomération
 
-## v2.0.27
+## v2.0.27 - 07/04/2022
 
 Ajout de l'aide suivante :
 
@@ -176,7 +188,7 @@ Mise à jour de l'aide suivante :
 
 - Région Occitanie
 
-## v2.0.26
+## v2.0.26 - 04/04/2022
 
 Ajout de l'aide suivante :
 
@@ -186,7 +198,7 @@ Mise à jour de l'aide suivante :
 
 - Métropole Grand Lyon
 
-## v2.0.25
+## v2.0.25 - 02/04/2022
 
 Ajout des aides suivantes :
 
@@ -196,7 +208,7 @@ Ajout des aides suivantes :
 
 Retouche texte Île-de-France Mobilités
 
-## v2.0.24
+## v2.0.24 - 02/04/2022
 
 Ajout des aides suivantes :
 
@@ -209,7 +221,7 @@ Correction des aides suivantes :
 - Ville de Château du Loir
 - Département Côte d’Or (lien)
 
-## v2.0.23
+## v2.0.23 - 21/03/2022
 
 Ajout des aides suivantes :
 
@@ -235,7 +247,7 @@ Mise à jour des liens pour les aides suivantes :
 - Laval Agglo
 - Ville d’Amiens
 
-## v2.0.22
+## v2.0.22 - 06/03/2022
 
 Ajout des aides suivantes :
 
@@ -245,14 +257,14 @@ Ajout des aides suivantes :
 - Vienne Condrieu Agglomération
 - Grand Périgueux
 
-## v2.0.21
+## v2.0.21 - 05/03/2022
 
 Ajout des aides suivantes :
 
 - Tulle Agglo
 - Ville de Corrèze
 
-## v2.0.20
+## v2.0.20 - 03/03/2022
 
 Ajout des aides suivantes :
 
@@ -260,7 +272,7 @@ Ajout des aides suivantes :
 - Ville du Bourget-du-Lac
 - Ville de Quesnoy-sur-Deûle
 
-## v2.0.19
+## v2.0.19 - 02/03/2022
 
 Ajout des aides suivantes :
 
@@ -269,14 +281,14 @@ Ajout des aides suivantes :
 
 Mise à jour de l'aide de la ville de Reims
 
-## v2.0.18
+## v2.0.18 - 20/02/2022
 
 Ajout des aides suivantes :
 
 - Ville de Quéven
 - Communauté de communes du Grand Saint-Émilionnais
 
-## v2.0.17
+## v2.0.17 - 17/02/2022
 
 Ajout des aides suivantes :
 
@@ -285,21 +297,21 @@ Ajout des aides suivantes :
 
 Corrige l'aide de la ville de Reims
 
-## v2.0.16
+## v2.0.16 - 13/02/2022
 
 Ajout des aides suivantes :
 
 - Lannion-Trégor Communauté
 - Ville de Perros-Guirec
 
-## v2.0.15
+## v2.0.15 - 12/02/2022
 
 Ajout des aides suivantes :
 
 - Communauté de communes Dieulefit-Bourdeaux
 - Ville de Granville
 
-## v2.0.14
+## v2.0.14 - 08/02/2022
 
 Ajout des aides suivantes :
 
@@ -308,7 +320,7 @@ Ajout des aides suivantes :
 
 Supprime l'aide d’Avesnes-sur-Helpe
 
-## v2.0.13
+## v2.0.13 - 05/02/2022
 
 Ajout des aides suivantes :
 
@@ -317,30 +329,30 @@ Ajout des aides suivantes :
 - Communauté de Communes de Flandre Intérieure
 - Rives de Moselle
 
-## v2.0.12
+## v2.0.12 - 03/02/2022
 
 Ajout de l'aide Pays de la Loire pour les abonnés TER
 
-## v2.0.11
+## v2.0.11 - 03/02/2022
 
 Mise à jour du lien de l'aide de Comines
 
-## v2.0.10
+## v2.0.10 - 02/02/2022
 
 Ajout des aides suivantes :
 
 - Saint Étienne Métropole
 - Sète Agglopôle méditerranée
 
-## v2.0.9
+## v2.0.9 - 01/02/2022
 
 Restaure l'aide de Fréjus
 
-## v2.0.8
+## v2.0.8 - 01/02/2022
 
 Corrige le calcul de l'aide de Grand Besançon Métropole
 
-## v2.0.7
+## v2.0.7 - 30/01/2022
 
 Ajout des aides suivantes :
 
@@ -352,7 +364,7 @@ Ajout des aides suivantes :
 
 Correction calcul Toulouse (prix HT et non TTC)
 
-## v2.0.6
+## v2.0.6 - 29/01/2022
 
 Ajout des aides suivantes :
 
@@ -368,11 +380,11 @@ Ajout des aides suivantes :
 - Bar-le-Duc
 - Mornant
 
-## v2.0.5
+## v2.0.5 - 28/01/2022
 
 Suppression des aides de Fréjus et Grentheville
 
-## v2.0.4
+## v2.0.4 - 26/01/2022
 
 Mise à jour des aides et corrections des liens
 
@@ -382,11 +394,11 @@ Mise à jour des aides et corrections des liens
 - Mise à jour de l'aide d'Angers
 - Supprime l'aide de Mer
 
-## v2.0.3
+## v2.0.3 - 20/01/2022
 
 Corrige l'aide vélo de Toulouse Métropole
 
-## v2.0.2
+## v2.0.2 - 19/01/2022
 
 Ajout d'aides dans la métropole de Strasbourg
 
@@ -397,7 +409,7 @@ Ajout d'aides dans la métropole de Strasbourg
 - Plobsheim
 - Vendenheim
 
-## v2.0.1
+## v2.0.1 - 19/01/2022
 
 Ajout des aides suivantes :
 
@@ -412,7 +424,7 @@ Corrige Hérouville-Saint-Clair
 
 Remplace « région Ile-de-France » par « Ile-de-France Mobilités »
 
-## v2.0.0
+## v2.0.0 - 06/01/2022
 
 Cette version contient les aides suivantes :
 

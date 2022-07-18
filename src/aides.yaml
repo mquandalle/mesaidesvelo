@@ -971,9 +971,7 @@ aides . deauville:
       - si: vélo . mécanique simple
         alors: 150€
       - sinon: 0€
-  # TODO: trouver un lien officiel.
-  # Remarque: l'aide est prolongée en 2022 : https://www.ouest-france.fr/normandie/deauville-14800/deauville-les-velos-aussi-finances-pour-les-entreprises-20294384-5c31-11ec-874b-5720349d4e86
-  lien: https://actu.fr/normandie/deauville_14220/deauville-la-ville-maintient-son-aide-pour-l-achat-d-un-velo-neuf_38851211.html
+  lien: https://www.mairie-deauville.fr/ville/mobilite-en-2022-la-ville-renouvelle-laide-lachat-de-votre-velo
 
 aides . louvigny:
   remplace: commune
@@ -2400,7 +2398,7 @@ aides . arve salève:
           - si: vélo . mécanique
             alors: 50€
           - sinon: 0€
-  lien: https://www.arve-saleve.fr/actus/312-prim-o-velo-aide-a-l-achat-velo-2
+  lien: https://www.arve-saleve.fr/aucoeur-du-mouvement/velo/prim-o-velo
 
 aides . évian-les-bains:
   remplace: commune
@@ -2817,6 +2815,17 @@ aides . yvetot normandie:
   valeur: 30% * vélo . prix
   plafond: 200€
   lien: https://www.yvetot-normandie.fr/vivre-in-yvetot-normandie/subventions/plan-velo-aide-a-lachat-de-velo/
+
+aides . cote albatre:
+  remplace: intercommunalité
+  titre: Communauté de Communes de la Côte d’Albâtre
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de la Côte d’Albâtre'
+      - vélo . électrique ou mécanique
+  valeur: 30% * vélo . prix
+  plafond: 200€
+  lien: https://cote-albatre.fr/aide-velo
 
 aides . caux austreberthe:
   remplace: intercommunalité
@@ -3505,8 +3514,18 @@ aides . thionville:
   valeur: 100€
   lien: https://www.thionville.fr/sites/default/files/public/REGLEMENT%20VELO%20ASSISTANCE%20ELECTRIQUE.pdf
 
-# TODO: Mennecy mais je ne trouve pas le règlement
-# https://www.mennecy.fr/vie-pratique/environnement/mobilites-douces/subvention-velo/
+aides . mennecy:
+  remplace: commune
+  titre: Ville de Mennecy
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '91386'
+      - vélo . mécanique
+  variations:
+    - si: revenu fiscal de référence <= 761€/mois
+      alors: 50€
+    - sinon: 30€
+  lien: https://www.mennecy.fr/vie-pratique/environnement/mobilites-douces/subvention-velo/
 
 aides . betheny:
   remplace: commune
