@@ -3,7 +3,7 @@ import { slugify } from '$lib/utils';
 import communes from '$lib/data/communes.json';
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get({}) {
+export async function GET({}) {
 	return {
 		body: [
 			'/',

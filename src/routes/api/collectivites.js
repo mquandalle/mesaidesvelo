@@ -41,7 +41,7 @@ const searchOptions = {
 };
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get({ url }) {
+export async function GET({ url }) {
 	const search = removeAccents(url.searchParams.get('search')?.replace(/\s/g, '').toLowerCase());
 	const slug = url.searchParams.get('slug');
 
