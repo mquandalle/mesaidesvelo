@@ -1,5 +1,20 @@
 # Historique des modifications
 
+## v2.0.41 - 19/07/2022
+
+Ajout des aides suivantes :
+
+- Pays de Mormal
+- Ville de Montigny lès Metz
+
+Suppression de l'aide suivante :
+
+- Communauté de communes du Grand Saint-Émilionnais
+
+Mise à jour du lien de l'aide suivante :
+
+- Pays de Lumbres
+
 ## v2.0.40 - 18/07/2022
 
 Ajout des aides suivantes :
