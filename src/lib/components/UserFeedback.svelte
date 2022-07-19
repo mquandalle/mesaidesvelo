@@ -3,21 +3,26 @@
 
 	let state = 'closed';
 
-	function submitFeedback(evt) {
+	async function submitFeedback(evt) {
 		evt.preventDefault();
 		const message = document.getElementById('feedback-message').value;
 		if (message) {
-			fetch('/api/post-feedback', {
+			const serverResponse = await fetch('/api/post-feedback', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ message, page: $page.url.pathname })
 			});
-			state = 'sent';
-			setTimeout(() => {
-				state = 'closed';
-			}, 15000);
+
+			if (!serverResponse.ok) {
+				state = 'error';
+			} else {
+				state = 'sent';
+				setTimeout(() => {
+					state = 'closed';
+				}, 20000);
+			}
 		}
 	}
 </script>
@@ -47,11 +52,20 @@
 	<div>
 		<p class="text-xl">Merci pour votre retour ! 😍</p>
 		<p class="text-xs mt-2">
-			→ Vous pouvez suivre votre ticket sur <a
+			→ Vous pouvez suivre les demandes sur <a
 				class="text-green-700 underline"
 				href="https://github.com/mquandalle/mesaidesvelo/issues"
 				target="_blank">Github</a
 			>.
+		</p>
+	</div>
+{:else if state === 'error'}
+	<div>
+		<p class="text-xl">Une erreur s'est produite ☹</p>
+		<p class="text-xs mt-2">
+			Votre message n'a pas pû être envoyé.
+			<br />
+			Vous pouvez nous envoyer un email à maxime@mesaidesvelo.fr
 		</p>
 	</div>
 {/if}

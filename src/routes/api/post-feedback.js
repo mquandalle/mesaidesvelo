@@ -14,7 +14,7 @@ export async function POST({ request }) {
 		return { status: 200 };
 	}
 
-	const res = await fetch('https://api.github.com/repos/mquandalle/mesaidesvelo/issues', {
+	const res = await fetch('https://api.github.com/repos/mquandalle/mesaidesvelo-feedback/issues', {
 		method: 'POST',
 		headers: {
 			Authorization: `token ${GITHUB_TOKEN}`,
