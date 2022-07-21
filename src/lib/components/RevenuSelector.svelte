@@ -117,7 +117,7 @@
 						...engine.parsedSituation,
 						'revenu fiscal de référence': `${revenu + 1} €/mois`
 					});
-					const montantAides = engineBis.evaluate('aides').nodeValue;
+					const montantAides = engineBis.evaluate('aides . montant').nodeValue;
 					if (montantAides === acc.dernierMontant) {
 						return acc;
 					} else {

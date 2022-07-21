@@ -2,18 +2,20 @@
 # - Portes de Romilly-sur-Seine https://abonne.lest-eclair.fr/id384290/article/2022-06-22/portes-de-romilly-sur-seine-une-aide-de-100-eu-pour-lachat-dun-velo-electrique
 
 aides:
-  unité: €
+  avec:
+    commune: 0 €
+    intercommunalité: 0 €
+    département: 0 €
+    région: 0 €
+    état: 0 €
+
+aides . montant:
   somme:
-    - nom: commune
-      valeur: 0 €
-    - nom: intercommunalité
-      valeur: 0 €
-    - nom: département
-      valeur: 0 €
-    - nom: région
-      valeur: 0 €
-    - nom: état
-      valeur: 0 €
+    - commune
+    - intercommunalité
+    - département
+    - région
+    - état
 
 aides . bonus vélo cargo:
   remplace: état
@@ -190,32 +192,43 @@ aides . paris:
       - sinon: 0€
   lien: https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373
 
-# TODO : intégrer l'aide aux vélo mécanique d'occasion
 aides . lyon:
   remplace: intercommunalité
   titre: Métropole Grand Lyon
   applicable si: localisation . epci = 'Métropole de Lyon'
-  valeur: 50% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo
-        alors:
+  variations:
+    - si:
+        toutes ces conditions:
+          - vélo . mécanique simple
+          - vélo . prix <= 150€
+          - vélo . occasion
+      alors:
+        valeur: 100% * vélo . prix
+        plafond: 100€
+    - si: vélo . neuf
+      alors:
+        valeur: 50% * vélo . prix
+        plafond:
           variations:
-            - si: revenu fiscal de référence <= 16800 €/an
-              alors: 800 €
-            - sinon: 100€
-      - si:
-          toutes ces conditions:
-            - vélo . prix <= 3000 €
-            - une de ces conditions:
-                - vélo . pliant
-                - vélo . électrique
-        alors:
-          variations:
-            - si: revenu fiscal de référence <= 16800 €/an
-              alors: 500 €
-            - sinon: 100€
-      - sinon: 0€
+            - si: vélo . cargo
+              alors:
+                variations:
+                  - si: revenu fiscal de référence <= 16800 €/an
+                    alors: 800 €
+                  - sinon: 100€
+            - si:
+                toutes ces conditions:
+                  - vélo . prix <= 3000 €
+                  - une de ces conditions:
+                      - vélo . pliant
+                      - vélo . électrique
+              alors:
+                variations:
+                  - si: revenu fiscal de référence <= 16800 €/an
+                    alors: 500 €
+                  - sinon: 100€
+            - sinon: 0€
+    - sinon: 0€
   lien: https://www.grandlyon.com/services/aide-achat-velo.html
 
 aides . villefranche beaujolais saône:
@@ -445,7 +458,6 @@ aides . toulouse:
       - revenu fiscal de référence <= 35052 €/an
   valeur: 40% * vélo . prix . HT
   plafond:
-    # TODO : vélo d'occasion
     variations:
       - si: vélo . cargo électrique
         alors:
@@ -868,13 +880,20 @@ aides . porte du hainaut:
   titre: La Porte du Hainaut communauté d'Agglomération
   applicable si: localisation . epci = 'CA de la Porte du Hainaut'
   description: Dans la limite de l’enveloppe budgétaire de 100 000 €.
-  # TODO: vélo d'occasion
   # TODO: trottinette électrique
   variations:
     - si: vélo . électrique
-      alors: 300€
+      alors:
+        variations:
+          - si: vélo . occasion
+            alors: 150€
+          - sinon: 300€
     - si: vélo . mécanique
-      alors: 150€
+      alors:
+        variations:
+          - si: vélo . occasion
+            alors: 75€
+          - sinon: 150€
     - sinon: 0€
   plafond: 50% * vélo . prix
   lien: https://www.agglo-porteduhainaut.fr/actualites/une-aide-pour-acheter-velo-et-trottinettes
@@ -1982,18 +2001,16 @@ aides . mandelieu:
 aides . pantin:
   remplace: commune
   titre: Ville de Pantin
-  applicable si: localisation . code insee = '93055'
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '93055'
+      - vélo . mécanique
   description: |
     La ville de Pantin propose une aide forfaitaire pour l’achat de tout type de
     vélo neuf ou d’occasion. À noter que la demande de subvention est soumise à
     l’approbation du Conseil municipal et que plusieurs mois peuvent s’écouler
     avant le versement de la subvention.
-  variations:
-    - si: vélo . électrique
-      alors: 200€
-    - si: vélo . mécanique
-      alors: 100€
-    - sinon: 0€
+  valeur: 100€
   plafond: vélo . prix
   lien: https://pratique.pantin.fr/tous-les-services/deplacement-et-stationnement/deplacement/transports-alternatifs-velo
 
@@ -3032,14 +3049,18 @@ aides . la roche sur yon:
   titre: La Roche-sur-Yon Agglomération
   applicable si: localisation . epci = 'CA La Roche sur Yon - Agglomération'
   variations:
-    # TODO vélo occasion
     - si: vélo . cargo
       alors:
         valeur: 20% * vélo . prix
-        plafond: 400€
+        plafond:
+          variations:
+            - si: vélo . neuf
+              alors: 400€
+            - sinon: 200€
     - si:
         toutes ces conditions:
           - vélo . électrique
+          - vélo . neuf
           - vélo . prix <= 1500€
       alors:
         variations:
@@ -3246,18 +3267,29 @@ aides . liévin:
   plafond: vélo . prix
   lien: https://www.lievin.fr/velo-ou-trottinette
 
-# TODO : occasion
 aides . béthune bruay:
   remplace: intercommunalité
   titre: Pass'Mobil'Agglo
   applicable si: localisation . epci = 'CA de Béthune-Bruay, Artois-Lys Romane'
   variations:
     - si: vélo . cargo
-      alors: 400€
+      alors:
+        variations:
+          - si: vélo . neuf
+            alors: 400€
+          - sinon: 500€
     - si: vélo . électrique
-      alors: 360€
+      alors:
+        variations:
+          - si: vélo . neuf
+            alors: 360€
+          - sinon: 350€
     - si: vélo . mécanique
-      alors: 60€
+      alors:
+        variations:
+          - si: vélo . neuf
+            alors: 60€
+          - sinon: 50€
     - sinon: 0€
   plafond: vélo . prix
   lien: https://www.bethunebruay.fr/fr/passmobilagglo
@@ -3776,9 +3808,10 @@ aides . saint-jacques de la lande:
   remplace: commune
   titre: Saint-Jacques de la Lande
   applicable si: localisation . code insee = '35281'
-  # TODO: 50€ vélo d'occasion
   valeur:
     variations:
+      - si: vélo . occasion
+        alors: 50€
       - si: vélo . cargo
         alors: 100€
       - si: vélo . électrique
@@ -4053,6 +4086,11 @@ vélo . prix pour maximiser les aides:
           - localisation . code insee = '14341'
       alors: 2400 €
     - si:
+        toutes ces conditions:
+          - localisation . epci = 'Métropole de Lyon'
+          - vélo . mécanique simple
+      alors: 100€
+    - si:
         une de ces conditions:
           - localisation . epci = 'Métropole de Lyon'
           - localisation . epci = 'CC Les Balcons du Dauphiné'
@@ -4067,6 +4105,48 @@ vélo . fabriqué en france:
   question: Le vélo est-il conçu et fabriqué en France ?
   type: booléen
   par défaut: non
+
+vélo . neuf ou occasion:
+  question: S’agit-t-il d’un vélo neuf ou d’occasion ?
+  par défaut:
+    variations:
+      - si:
+          toutes ces conditions:
+            - localisation . epci = 'Métropole de Lyon'
+            - vélo . mécanique simple
+        alors: "'occasion'"
+      - sinon: "'neuf'"
+  possibilités:
+    - neuf
+    - occasion
+
+vélo . neuf:
+  titre: Vélo neuf
+  valeur: neuf ou occasion = 'neuf'
+
+vélo . occasion:
+  titre: Vélo d’occasion
+  valeur: neuf ou occasion = 'occasion'
+  # Dans le cas d'un vélo d'occasion nous considérons que l'ensemble des aides
+  # est non applicable par défaut, sauf pour une liste blanche d'aides qui
+  # concernent les vélos d'occasion. Ces règles peuvent utiliser les variables
+  # `vélo . neuf` et `vélo . occasion` dans leur formule de calcul.
+  rend non applicable:
+    règle: aides
+    sauf dans:
+      - aides . montant
+
+      # Liste blanches des aides ouvertes aux vélos d'occasion
+      # TODO:  il faudrait définir cette information au niveau de chaque aide et
+      # non via une liste globale
+      - aides . toulouse
+      - aides . lyon
+      - aides . porte du hainaut
+      - aides . louvigny
+      - aides . pantin
+      - aides . la roche sur yon
+      - aides . saint-jacques de la lande
+      - aides . béthune bruay
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?

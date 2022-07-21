@@ -1,5 +1,18 @@
 # Historique des modifications
 
+## v2.0.42 - 21/07/2022
+
+Support des aides aux vélos d'occasion pour les collectivités suivantes :
+
+- Toulouse
+- Lyon
+- Porte du hainaut
+- Louvigny
+- Pantin
+- La roche sur yon
+- Saint-jacques de la lande
+- Béthune bruay
+
 ## v2.0.41 - 19/07/2022
 
 Ajout des aides suivantes :

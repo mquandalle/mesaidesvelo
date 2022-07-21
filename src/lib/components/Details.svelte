@@ -7,6 +7,9 @@
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
 	import Questions from './Questions.svelte';
 	import AnimatedAmount from './AnimatedAmount.svelte';
+	import { answers, publicodeSituation } from '$lib/stores';
+
+	answers.set({});
 
 	const veloCat = $page.url.searchParams.get('velo');
 	const categoryDescription = engine.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
@@ -25,7 +28,31 @@
 		})
 		.filter(Boolean);
 
-	$: sum = $getCurrentBikeEngine().evaluate('aides');
+	$: sum = $getCurrentBikeEngine().evaluate('aides . montant');
+
+	// On simule deux branches : une pour un vélo neuf et une pour un vélo
+	// d'occasion afin de déterminer s'il faut poser la question sur le vélo
+	// neuf ou d'occasion.
+	// TODO: trouver un moyen de ne pas refaire plusieurs fois les mêmes calculs.
+	const engineBis = engine.shallowCopy();
+	$: montantAidesVeloOccasion = engineBis
+		.setSituation({
+			...$publicodeSituation,
+			'vélo . type': `'${veloCat ?? ''}'`,
+			'vélo . neuf ou occasion': '"occasion"'
+		})
+		.evaluate('aides . montant').nodeValue;
+	$: montantAidesVeloNeuf = engineBis
+		.setSituation({
+			...$publicodeSituation,
+			'vélo . type': `'${veloCat ?? ''}'`,
+			'vélo . neuf ou occasion': '"neuf"'
+		})
+		.evaluate('aides . montant').nodeValue;
+	$: demandeNeufOuOccasion =
+		montantAidesVeloOccasion > 0 &&
+		montantAidesVeloNeuf > 0 &&
+		montantAidesVeloNeuf !== montantAidesVeloOccasion;
 </script>
 
 <div class="mt-8" />
@@ -67,4 +94,15 @@
 	</div>
 </div>
 
-<Questions goals={aidesDetails} />
+<Questions goals={aidesDetails} {demandeNeufOuOccasion} />
+
+{#if !demandeNeufOuOccasion}
+	<p class="mt-4">
+		{#if aidesDetails.length === 1}Cette aide est valable{:else}Ces aides sont valables{/if}
+		{#if montantAidesVeloNeuf === montantAidesVeloOccasion}
+			pour un vélo neuf ou un vélo d’occasion{:else if montantAidesVeloOccasion > 0}
+			uniquement pour l’achat d’un vélo d’occasion{:else}
+			uniquement pour l’achat d’un vélo neuf
+		{/if}.
+	</p>
+{/if}

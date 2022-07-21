@@ -10,13 +10,15 @@
 	export let rule;
 
 	const rawRule = engine.getRule(rule).rawNode;
-	const { question, unité, type, description } = rawRule;
+	const { question, unité, type, description, possibilités } = rawRule;
 	const domId = `question-${slugify(rule)}`;
+	const ruleParent = rule.split(' . ').slice(0, -1).join(' . ');
 
 	let value = '';
 
-	$: $answers[rule] = value && `${value} ${unité || ''}`.trim();
-
+	$: if (value) {
+		$answers[rule] = possibilités ? `'${value}'` : `${value} ${unité || ''}`.trim();
+	}
 	let showExplanations = false;
 </script>
 
@@ -36,10 +38,20 @@
 			{/if}
 		{/if}
 	</span>
+
 	{#if type === 'booléen'}
 		<div class="flex gap-2 mt-2 flex-wrap">
 			<MultipleChoiceAnswer value="oui" bind:group={value}>Oui</MultipleChoiceAnswer>
 			<MultipleChoiceAnswer value="non" bind:group={value}>Non</MultipleChoiceAnswer>
+		</div>
+	{:else if possibilités}
+		<div class="flex gap-2 mt-2 flex-wrap">
+			{#each possibilités as possibilité}
+				<MultipleChoiceAnswer value={possibilité} bind:group={value}
+					>{engine.getRule(ruleParent + ' . ' + possibilité).rawNode.titre ??
+						possibilité}</MultipleChoiceAnswer
+				>
+			{/each}
 		</div>
 	{:else}
 		<NumberField bind:value {unité} id={domId} />

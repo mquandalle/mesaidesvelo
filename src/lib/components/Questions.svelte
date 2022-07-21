@@ -1,12 +1,10 @@
 <script>
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
-
-	import { answers } from '$lib/stores';
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
-	export let goals = [];
 
-	answers.set({});
+	export let goals = [];
+	export let demandeNeufOuOccasion = false;
 
 	const questionsOrder = ['revenu fiscal de référence', 'vélo . prix'];
 
@@ -19,7 +17,12 @@
 			.flat()
 	)
 		.filter((q) => engine.getRule(q).rawNode.question)
+		.filter((q) => q !== 'vélo . neuf ou occasion')
 		.sort((a, b) => getSortOrder(a) - getSortOrder(b));
+
+	if (demandeNeufOuOccasion) {
+		questions.unshift('vélo . neuf ou occasion');
+	}
 </script>
 
 {#if questions.length > 0}

@@ -19,7 +19,7 @@ test('Navigation scenario', async ({ page }) => {
 	const totalAides = page.locator('text=Total des aides >> ..');
 	await expect(totalAides).toHaveText('Total des aides 700 €', { useInnerText: true });
 
-	await page.click('label:nth-child(2)');
+	await page.click('text=plus de 1 125 €');
 	await expect(totalAides).toHaveText('Total des aides 500 €', { useInnerText: true });
 
 	await page.fill('input:below(label:text("Prix du vélo"))', '300');
@@ -48,4 +48,18 @@ test('Revenu of type number', async ({ page }) => {
 test('Thumbnail displayed', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/albi?velo=cargo');
 	await expect(page.locator('img[alt="Logo grand albigeois"]')).toBeTruthy();
+});
+
+test('new or second hand bike', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
+	await expect(page.locator('text=neuf ou d’occasion ?')).toBeTruthy();
+
+	await page.goto(baseUrl + '/ville/lyon?velo=mécanique simple');
+	await expect(page.locator('text=uniquement pour l’achat d’un vélo d’occasion')).toBeTruthy();
+
+	await page.goto(baseUrl + '/ville/lyon?velo=électrique');
+	await expect(page.locator('text=uniquement pour l’achat d’un vélo neuf')).toBeTruthy();
+
+	await page.goto(baseUrl + '/ville/pantin?velo=mécanique simple');
+	await expect(page.locator('text=pour un vélo neuf ou un vélo d’occasion')).toBeTruthy();
 });

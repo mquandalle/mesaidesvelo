@@ -32,7 +32,7 @@
 				'maximiser les aides': 'oui',
 				'vélo . type': `'${kind}'`
 			});
-			return [kind, engine.evaluate('aides')];
+			return [kind, engine.evaluate('aides . montant')];
 		})
 		.map(([cat, node]) => [
 			cat,
@@ -71,7 +71,7 @@
 							'maximiser les aides': 'oui',
 							'vélo . type': `'${kind}'`
 						})
-						.evaluate('aides').nodeValue > 0
+						.evaluate('aides . montant').nodeValue > 0
 				)
 		);
 </script>

@@ -1,7 +1,6 @@
 import { derived, writable } from 'svelte/store';
 
 export const localisation = writable(null);
-
 export const answers = writable({});
 
 export const publicodeSituation = derived([localisation, answers], ([$localisation, $answers]) => ({
