@@ -1002,6 +1002,29 @@ aides . louvigny:
   valeur: 50€
   lien: https://ville-louvigny.fr/agenda/aide-communale-a-lacquisition-dun-velo-a-assistance-electrique-neuf-ou-velo-classique-neuf-ou-doccasion-a-la-maison-du-velo-ou-chez-un-velociste/
 
+aides . honfleur:
+  remplace: intercommunalité
+  titre: Communauté de communes Honfleur-Beuzeville
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays de Honfleur-Beuzeville'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 1000 €/mois
+      alors:
+        valeur: 25% * vélo . prix
+        plafond: 350€
+    - si: revenu fiscal de référence <= 1800 €/mois
+      alors:
+        valeur: 20% * vélo . prix
+        plafond: 250€
+    - si: revenu fiscal de référence <= 3000 €/mois
+      alors:
+        valeur: 10% * vélo . prix
+        plafond: 100€
+    - sinon: 0€
+  lien: https://www.ccphb.fr/amenager-et-developper/grands-projets/plan-velo/
+
 aides . larçay:
   remplace: commune
   titre: Ville de Larçay
@@ -2471,6 +2494,25 @@ aides . angers:
         alors: 50€
       - sinon: 0€
   lien: https://www.angersloiremetropole.fr/mon-quotidien/mobilites/velo/aide-a-l-achat-d-un-velo-neuf/index.html
+
+aides . haut val de sèvre:
+  remplace: intercommunalité
+  titre: Haut Val de Sèvre Communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Haut Val de Sèvre'
+      - vélo . électrique
+      - une de ces conditions:
+          - toutes ces conditions:
+              - vélo . neuf
+              - vélo . prix >= 950 €
+              - vélo . prix <= 3000 €
+          - toutes ces conditions:
+              - vélo . occasion
+              - vélo . prix >= 700 €
+              - vélo . prix <= 2000 €
+  valeur: 150€
+  lien: https://cc-hautvaldesevre.fr/competences/environnement/mobilite/1558-aide-a-l-achat-d-un-velo-a-assistance-electrique.html
 
 aides . agglo bocage bressuirais:
   remplace: intercommunalité
@@ -4147,6 +4189,7 @@ vélo . occasion:
       - aides . la roche sur yon
       - aides . saint-jacques de la lande
       - aides . béthune bruay
+      - aides . haut val de sèvre
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?

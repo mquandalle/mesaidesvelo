@@ -1,5 +1,12 @@
 # Historique des modifications
 
+## v2.0.43 - 01/08/2022
+
+Ajout des aides suivantes :
+
+- Haut Val de Sèvre Communauté de communes
+- Communauté de communes Honfleur-Beuzeville
+
 ## v2.0.42 - 21/07/2022
 
 Support des aides aux vélos d'occasion pour les collectivités suivantes :
