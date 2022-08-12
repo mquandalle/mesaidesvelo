@@ -1209,16 +1209,26 @@ aides . grand périgueux:
   titre: Grand Périgueux
   applicable si: localisation . epci = 'CA Le Grand Périgueux'
   variations:
-    - si: vélo . cargo
-      alors: 500€
-    - si: vélo . électrique
-      alors: 250€
-    - si: vélo . mécanique
+    - si: vélo . neuf
       alors:
-        valeur: 30€
+        variations:
+          - si: vélo . cargo
+            alors: 500€
+          - si: vélo . électrique
+            alors: 250€
+          - si: vélo . mécanique
+            alors:
+              valeur: 30€
+              plafond: 50% * vélo . prix
+    - si:
+        toutes ces conditions:
+          - vélo . occasion
+          - vélo . mécanique
+      alors:
+        valeur: 50€
         plafond: 50% * vélo . prix
   plafond: vélo . prix
-  lien: https://www.grandperigueux.fr/au-quotidien/deplacements/cap-sur-le-velo/aide-a-lachat-velo/cheques-velo
+  lien: https://www.grandperigueux.fr/au-quotidien/deplacements/velo/aide-a-lachat-velo/cheques-velo
 
 aides . sarlat:
   remplace: commune
@@ -1732,7 +1742,7 @@ aides . pays basque:
                 valeur: 30% * vélo . prix
                 plafond: 200€
             - montant: 0€
-  lien: https://www.velo-paysbasque.fr/fr/pages/demande-de-subvention-velo-assistance-electrique
+  lien: https://www.txiktxak.fr/vos-moyens-de-transport-a-la-carte/aide-a-l-achat-velo/
 
 aides . grand lac:
   remplace: intercommunalité
@@ -2598,6 +2608,16 @@ aides . pays de l'or:
   plafond: 200€
   lien: https://www.paysdelor.fr/lagglo-vous-aide-pour-lachat-dun-velo-a-assistance-electrique-vae-cargo-ou-adapte/
 
+aides . grand orb:
+  remplace: intercommunalité
+  titre: Grand Orb Communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Grand Orb communauté de communes en Languedoc'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.grandorb.fr/phototheque_publique/Developpement-durable-/2022/03/convention-aide-achat-VAE-2022pdf.pdf
+
 aides . saint-jean-de-védas:
   remplace: commune
   titre: Ville de Saint-Jean-de-Védas
@@ -2653,7 +2673,7 @@ aides . montlucon:
       - vélo . prix <= 2500€
   valeur: vélo . prix
   plafond: 200 €
-  lien: https://vae.montlucon-communaute.com/
+  lien: https://www.montlucon-communaute.com/vivre-au-quotidien/la-mobilite-durable/a-velo-dans-lagglo/
 
 aides . cotentin:
   remplace: intercommunalité
@@ -2963,7 +2983,7 @@ aides . bourges:
   applicable si: localisation . epci = 'CA Bourges Plus'
   valeur: 50% * vélo . prix
   plafond:
-    # todo: vélo adapaté
+    # todo: vélo adapté
     variations:
       - si: vélo . cargo
         alors: 500€
@@ -3957,12 +3977,8 @@ aides . boulonnais:
       - localisation . epci = 'CA du Boulonnais'
       - vélo . électrique
   valeur: 30% * vélo . prix
-  plafond:
-    variations:
-      - si: ménage imposable
-        alors: 100€
-      - sinon: 200€
-  lien: https://www.agglo-boulonnais.fr/a-votre-service/mobilite/tous-a-velos
+  plafond: 200€
+  lien: https://www.agglo-boulonnais.fr/a-votre-service/mobilite/a-velo-dans-lagglo
 
 aides . chateauroux:
   remplace: intercommunalité
@@ -4190,6 +4206,7 @@ vélo . occasion:
       - aides . saint-jacques de la lande
       - aides . béthune bruay
       - aides . haut val de sèvre
+      - aides . grand périgueux
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?

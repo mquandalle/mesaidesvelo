@@ -1,5 +1,18 @@
 # Historique des modifications
 
+## v2.0.44 - 12/08/2022
+
+Ajout de l'aide suivante :
+
+- Grand Orb Communauté de communes
+
+Mise à jour des aides suivantes :
+
+- Grand Périgueux
+- Montluçon Communauté
+- Agglo Boulonnais
+- Agglomération Pays Basque
+
 ## v2.0.43 - 01/08/2022
 
 Ajout des aides suivantes :
