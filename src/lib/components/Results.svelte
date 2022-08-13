@@ -77,17 +77,6 @@
 </script>
 
 <div class="mt-8" />
-<div class="bg-yellow-100 p-2">
-	<h3 class="font-bold mb-2 text-orange-900">
-		⚠ Les nouvelles aides de l’État au 15 août ne sont pas encore intégrées.
-	</h3>
-	<p>
-		Le détail du calcul des nouvelles aides n’est pas encore connu. Nous attendons la publication
-		d’un décrêt en officialisant les conditions d’accès et les modalités de calcul pour mettre à
-		jour le site.
-	</p>
-</div>
-<div class="mt-8" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
 <div class="border rounded shadow-md bg-white sm:text-lg">
 	{#each activesAidesPerBikeKind as [cat, { montant, label, emoji }]}

@@ -17,41 +17,44 @@ aides . montant:
     - région
     - état
 
-aides . bonus vélo cargo:
+aides . bonus autres vélo:
   remplace: état
   titre: Bonus vélo cargo
   description: |
-    L’État accorde une aide de 1 000 € pour l’achat d’un vélo cargo qu’il soit
-    électrique ou non. Votre revenu fiscal de référence par part doit être
+    L’État accorde une aide de 40% du prix du vélo pour l’achat d’un $vélo qu’il
+    soit électrique ou non. Votre revenu fiscal de référence par part doit être
     inférieur à 13 489 € pour en bénéficier.
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
       - revenu fiscal de référence <= 13489 €/an
-      - vélo . cargo
+      - une de ces conditions:
+          - vélo . cargo
+          - vélo . pliant
   valeur: 40% * vélo . prix
-  plafond: 1000€
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 6300 €/an
+        alors: 2000€
+      - sinon: 1000€
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
 aides . bonus vélo électrique:
   remplace: état
   titre: Bonus vélo électrique
   description: |
-    Le Bonus vélo versé par l’État complète l’aide versée par une collectivité
-    territoriale. Votre revenu fiscal de référence par part doit être inférieur
-    à 13 489 € pour en bénéficier. Le montant de l’aide est identique au montant
-    accordé par la collectivité dans la limite de 200€.
+    Nouveau bonus vélo électrique applicable à compter du 15 août 2022.
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
       - revenu fiscal de référence <= première tranche IR
       - vélo . électrique
-  somme:
-    - commune
-    - intercommunalité
-    - département
-    - région
-  plafond: 200 €
+  valeur: 40% * vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 6300 €/an
+        alors: 400€
+      - sinon: 300€
   lien: https://www.service-public.fr/particuliers/vosdroits/F35475
 
 aides . prime à la conversion:
