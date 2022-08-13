@@ -1,7 +1,7 @@
 <script context="module">
-	import Emoji from './Emoji.svelte';
-	import { formatValue, reduceAST } from 'publicodes';
 	import { engine } from '$lib/engine';
+	import { formatValue, reduceAST } from 'publicodes';
+	import Emoji from './Emoji.svelte';
 
 	// In case the formula involve a “linear operation” such as additions or
 	// product, we cannot extract a fixed set a threshold and we need to display
@@ -68,10 +68,14 @@
 </script>
 
 <script>
-	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
+	import { answers, publicodeSituation } from '$lib/stores';
 	import { slide } from 'svelte/transition';
-	import { answers } from '$lib/stores';
+	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
+	import { page } from '$app/stores';
+
+	// TODO Hacky
+	const veloCat = $page.url.searchParams.get('velo');
 
 	export let goals;
 	let value;
@@ -114,7 +118,9 @@
 					// when a answer is given.
 					$answers;
 					engineBis.setSituation({
-						...engine.parsedSituation,
+						...$publicodeSituation,
+						'vélo . type': `'${veloCat}'`,
+						'maximiser les aides': 'oui',
 						'revenu fiscal de référence': `${revenu + 1} €/mois`
 					});
 					const montantAides = engineBis.evaluate('aides . montant').nodeValue;

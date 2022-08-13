@@ -96,7 +96,7 @@
 
 <Questions goals={aidesDetails} {demandeNeufOuOccasion} />
 
-{#if !demandeNeufOuOccasion}
+{#if !demandeNeufOuOccasion && veloCat !== 'motorisation'}
 	<p class="mt-4">
 		{#if aidesDetails.length === 1}Cette aide est valable{:else}Ces aides sont valables{/if}
 		{#if montantAidesVeloNeuf === montantAidesVeloOccasion}
