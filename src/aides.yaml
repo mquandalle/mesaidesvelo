@@ -192,7 +192,7 @@ aides . ardèche:
   description: |
     Le département ardéchois rembourse 10% du prix d'un vélo électrique
     neuf acheté auprès d'un vélociste partenaire (offre limitée à 1500 vélos).
-  application si:
+  applicable si:
     toutes ces conditions:
       - localisation . département = '07'
       - vélo . électrique
