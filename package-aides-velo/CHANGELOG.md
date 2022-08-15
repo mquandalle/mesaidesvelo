@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## v2.0.45
+
+Ajout de l'aide suivante :
+
+- Département de l'Ardèche
+
 ## v2.0.44 - 12/08/2022
 
 Ajout de l'aide suivante :

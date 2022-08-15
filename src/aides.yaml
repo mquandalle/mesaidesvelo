@@ -196,7 +196,7 @@ aides . ardèche:
     toutes ces conditions:
       - localisation . département = '07'
       - vélo . électrique
-      - vélo . prix >= 3000
+      - vélo . prix <= 3000
   valeur: 10% * vélo . prix
   plafond: 200€
   lien: https://www.ardeche.fr/2084-vae.htm
