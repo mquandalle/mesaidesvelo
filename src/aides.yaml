@@ -21,7 +21,7 @@ aides . bonus autres vélo:
   remplace: état
   titre: Bonus vélo cargo
   description: |
-    Nouveau bonus $vélo électrique applicable à compter du 15 août 2022.
+    Nouveau bonus $vélo applicable à compter du 15 août 2022.
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
@@ -59,7 +59,7 @@ aides . bonus vélo mécanique:
   remplace: état
   titre: Bonus vélo mécanique
   description: |
-    Nouveau bonus vélo électrique applicable à compter du 15 août 2022.
+    Nouveau bonus vélo mécanique simple applicable à compter du 15 août 2022.
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
@@ -4176,6 +4176,7 @@ vélo . prix pour maximiser les aides:
         toutes ces conditions:
           - localisation . epci = 'Métropole de Lyon'
           - vélo . mécanique simple
+          - vélo . occasion
       alors: 100€
     - si:
         une de ces conditions:
@@ -4195,14 +4196,7 @@ vélo . fabriqué en france:
 
 vélo . neuf ou occasion:
   question: S’agit-t-il d’un vélo neuf ou d’occasion ?
-  par défaut:
-    variations:
-      - si:
-          toutes ces conditions:
-            - localisation . epci = 'Métropole de Lyon'
-            - vélo . mécanique simple
-        alors: "'occasion'"
-      - sinon: "'neuf'"
+  par défaut: "'neuf'"
   possibilités:
     - neuf
     - occasion

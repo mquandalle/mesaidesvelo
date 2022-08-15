@@ -2,6 +2,15 @@
 
 ## v2.0.45
 
+Mise à jour des aides de l’État :
+
+- Plafond du bonus vélo électrique augmenté à 300 €
+- Ouverture du bonus « autres vélos » aux vélos pliants
+- Aides supplémentaires pour les ménages les plus modestes -6300 €/an :
+  - vélo mécanique simple jusqu'à 150 €
+  - vélo électrique jusqu'à 400 €
+  - vélo cargo ou pliant jusqu'à 2000 €
+
 Ajout de l'aide suivante :
 
 - Département de l'Ardèche

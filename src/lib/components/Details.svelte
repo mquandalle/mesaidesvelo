@@ -100,9 +100,11 @@
 	<p class="mt-4">
 		{#if aidesDetails.length === 1}Cette aide est valable{:else}Ces aides sont valables{/if}
 		{#if montantAidesVeloNeuf === montantAidesVeloOccasion}
-			pour un vélo neuf ou un vélo d’occasion{:else if montantAidesVeloOccasion > 0}
-			uniquement pour l’achat d’un vélo d’occasion{:else}
-			uniquement pour l’achat d’un vélo neuf
-		{/if}.
+			pour un vélo neuf ou un vélo d’occasion.
+		{:else if montantAidesVeloOccasion > 0}
+			uniquement pour l’achat d’un vélo d’occasion.
+		{:else}
+			uniquement pour l’achat d’un vélo neuf.
+		{/if}
 	</p>
 {/if}
