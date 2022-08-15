@@ -186,6 +186,21 @@ aides . bouches du rhone:
   plafond: 400€
   lien: https://www.departement13.fr/400-euros-pour-achat-velo-assistance-electrique/
 
+aides . ardèche:
+  remplace: département
+  titre: Département de l'Ardèche
+  description: |
+    Le département ardéchois rembourse 10% du prix d'un vélo électrique
+    neuf acheté auprès d'un vélociste partenaire (offre limitée à 1500 vélos).
+  application si:
+    toutes ces conditions:
+      - localisation . département = '07'
+      - vélo . électrique
+      - vélo . prix <= 3000
+  valeur: 10% * vélo . prix
+  plafond: 200€
+  lien: https://www.ardeche.fr/2084-vae.htm
+
 aides . paris:
   remplace: commune
   titre: Ville de Paris
