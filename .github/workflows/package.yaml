@@ -1,5 +1,7 @@
 name: NPM Package
-on: push
+on:
+  push:
+  pull_request:
 jobs:
   tests-and-publish:
     runs-on: ubuntu-latest
