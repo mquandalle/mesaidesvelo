@@ -1,6 +1,6 @@
 # Historique des modifications
 
-## v2.0.45
+## v2.0.45 - 16/08/2022
 
 Mise à jour des aides de l’État :
 
