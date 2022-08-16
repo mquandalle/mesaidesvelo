@@ -67,6 +67,7 @@ aides . bonus vélo mécanique:
       - vélo . mécanique simple
   valeur: 40% * vélo . prix
   plafond: 150€
+  lien: https://www.primealaconversion.gouv.fr/dboneco/accueil/access.html
 
 aides . prime à la conversion:
   applicable si:

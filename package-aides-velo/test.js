@@ -57,8 +57,8 @@ test('prise en compte du revenu fiscal de référence', (t) => {
 	const aidesCharenton = aidesVelo(situationCharenton);
 	t.is(
 		aidesCharenton.reduce((sum, { amount }) => sum + amount, 0),
-		400,
-		"jusqu'à 400 euros d'aides"
+		600,
+		"jusqu'à 600 euros d'aides"
 	);
 	const aidesCharentonRevenuElevé = aidesVelo({
 		...situationCharenton,

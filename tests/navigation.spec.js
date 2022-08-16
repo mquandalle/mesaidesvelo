@@ -17,9 +17,9 @@ test('Navigation scenario', async ({ page }) => {
 
 	await page.click('text=Achat d’un vélo électrique');
 	const totalAides = page.locator('text=Total des aides >> ..');
-	await expect(totalAides).toHaveText('Total des aides 700 €', { useInnerText: true });
+	await expect(totalAides).toHaveText('Total des aides 900 €', { useInnerText: true });
 
-	await page.click('text=plus de 1 125 €');
+	await page.click('text=moins de 1 567 €');
 	await expect(totalAides).toHaveText('Total des aides 500 €', { useInnerText: true });
 
 	await page.fill('input:below(label:text("Prix du vélo"))', '300');
@@ -37,7 +37,10 @@ test('Liste aides do not crash', async ({ page }) => {
 
 test('Aide not available', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/landerneau');
-	await expect(page.locator('text=vélo pliant')).toHaveCSS('text-decoration-line', 'line-through');
+	await expect(page.locator('text=motorisation d’un vélo classique')).toHaveCSS(
+		'text-decoration-line',
+		'line-through'
+	);
 });
 
 test('Revenu of type number', async ({ page }) => {
