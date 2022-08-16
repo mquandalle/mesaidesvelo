@@ -32,3 +32,16 @@ export function formatDescription({ ruleName, engine, veloCat }) {
 		.replace(/\$vélo/g, veloCat === 'motorisation' ? 'kit de motorisation' : `vélo ${veloCat}`)
 		.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }));
 }
+
+export function titleCategory(category) {
+	if (category === 'motorisation') {
+		return 'Motorisation d’un vélo classique';
+	}
+	return `Achat d’un vélo ${category}`;
+}
+
+export function emojiCategory(category) {
+	if (category === 'motorisation' || titleCategory(category).includes('électrique')) {
+		return '⚡';
+	}
+}

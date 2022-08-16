@@ -1,26 +1,15 @@
-<script context="module">
-	export function title(category) {
-		if (category === 'motorisation') {
-			return 'Motorisation d’un vélo classique';
-		}
-		return `Achat d’un vélo ${category}`;
-	}
-
-	export function emoji(category) {
-		if (category === 'motorisation' || title(category).includes('électrique')) {
-			return '⚡';
-		}
-	}
-</script>
-
 <script>
-	import CategoryLine from '$lib/components/CategoryLine.svelte';
 	import Emoji from '$lib/components/Emoji.svelte';
-	import { answers, localisation, publicodeSituation } from '$lib/stores';
 	import { engine } from '$lib/engine';
+	import { answers, localisation, publicodeSituation } from '$lib/stores';
+	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { formatValue } from 'publicodes';
+	import { getContext } from 'svelte';
+	import CategoryLine from './CategoryLine.svelte';
+	import SeoText from './SEOText.svelte';
 
 	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
+	const embeded = getContext('embeded');
 
 	answers.set({});
 
@@ -37,8 +26,8 @@
 		.map(([cat, node]) => [
 			cat,
 			{
-				label: title(cat),
-				emoji: emoji(cat),
+				label: titleCategory(cat),
+				emoji: emojiCategory(cat),
 				montant: node?.nodeValue ? formatValue(node, { precision: 0 }) : 0
 			}
 		]);
@@ -78,7 +67,7 @@
 
 <div class="mt-8" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
-<div class="border rounded shadow-md bg-white sm:text-lg">
+<table class="flex flex-col border rounded shadow-md bg-white sm:text-lg">
 	{#each activesAidesPerBikeKind as [cat, { montant, label, emoji }]}
 		<CategoryLine {montant} href="?velo={cat}"
 			>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
@@ -99,7 +88,11 @@
 			<CategoryLine {montant} href="?velo={cat}">{label}</CategoryLine>
 		{/each}
 	{/if}
-</div>
+</table>
+
+{#if !embeded && $localisation?.nom === 'Bordeaux'}
+	<SeoText />
+{/if}
 
 {#if onlyNationalAides && $localisation?.nom}
 	<p class="mt-8 mx-2 text-gray-700">

@@ -3,11 +3,11 @@
 	import { slide } from 'svelte/transition';
 	import DetailsLine from './DetailsLine.svelte';
 	import Emoji from './Emoji.svelte';
-	import { emoji, title } from './Results.svelte';
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
 	import Questions from './Questions.svelte';
 	import AnimatedAmount from './AnimatedAmount.svelte';
 	import { answers, publicodeSituation } from '$lib/stores';
+	import { emojiCategory, titleCategory } from '$lib/utils';
 
 	answers.set({});
 
@@ -67,7 +67,9 @@
 	← Toutes les aides
 </a>
 <h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
-	{title(veloCat)}{#if emoji(veloCat)}&nbsp;<Emoji emoji={emoji(veloCat)} />{/if}
+	{titleCategory(veloCat)}{#if emojiCategory(veloCat)}&nbsp;<Emoji
+			emoji={emojiCategory(veloCat)}
+		/>{/if}
 </h2>
 
 {#if categoryDescription}

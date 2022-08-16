@@ -1,10 +1,10 @@
 <script>
 	import { page } from '$app/stores';
 	import Details from '$lib/components/Details.svelte';
-	import Results from '$lib/components/Results.svelte';
-	import { fly } from 'svelte/transition';
-	import ShareButton from '$lib/components/ShareButton.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
+	import ShareButton from '$lib/components/ShareButton.svelte';
+	import { fly } from 'svelte/transition';
+	import Results from './Results.svelte';
 
 	/** @type {import('./$types').PageData */
 	export let data;

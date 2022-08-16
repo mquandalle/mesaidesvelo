@@ -1,6 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-
 	import { getContext } from 'svelte';
 	import BugInContactFormNotice from './BugInContactFormNotice.svelte';
 	import UserFeedback from './UserFeedback.svelte';

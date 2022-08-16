@@ -76,7 +76,7 @@ async function generateThumbnail(imgSrc, imgName, { trim = true }) {
 	if (trim) {
 		await img.trim();
 	}
-	await img.resize({ fit: 'inside', height: 85, width: 60 });
+	await img.resize({ fit: 'inside', height: 170, width: 120 });
 	await img.webp().toFile(join(miniatureDirectory, imgName));
 }
 
