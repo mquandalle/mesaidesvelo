@@ -32,7 +32,11 @@ test('Navigation scenario', async ({ page }) => {
 
 test('Liste aides do not crash', async ({ page }) => {
 	await page.goto(baseUrl + '/liste-aides');
-	await expect(page.locator('h1')).toHaveText('Les aides intégrées sur le site');
+	await expect(page.locator('h1')).toHaveText(
+		'Les aides intégrées sur le site',
+		// La page est trop lente à s'afficher
+		{ timeout: 10000 }
+	);
 });
 
 test('Aide not available', async ({ page }) => {
