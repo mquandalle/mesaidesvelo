@@ -76,16 +76,20 @@ export async function GET({ url }) {
 		reference
 	});
 	if (search) {
-		return {
-			body: fuzzysort.go(search, indexedData, searchOptions).map(({ obj: res }) => pick(res))
-		};
+		return new Response(
+			JSON.stringify(
+				fuzzysort.go(search, indexedData, searchOptions).map(({ obj: res }) => pick(res))
+			)
+		);
 	} else {
 		// Par défaut on retourne les entreprises avec le plus de salariés les plus peuplées
-		return {
-			body: indexedData
-				.sort((a, b) => b.effectif - a.effectif)
-				.slice(0, 10)
-				.map(pick)
-		};
+		return new Response(
+			JSON.stringify(
+				indexedData
+					.sort((a, b) => b.effectif - a.effectif)
+					.slice(0, 10)
+					.map(pick)
+			)
+		);
 	}
 }

@@ -3,9 +3,9 @@ import { slugify } from '$lib/utils';
 import communes from '$lib/data/communes.json';
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function GET({}) {
-	return {
-		body: [
+export async function GET() {
+	return new Response(
+		[
 			'/',
 			'/prime-a-la-conversion',
 			...communes
@@ -15,5 +15,5 @@ export async function GET({}) {
 		]
 			.map((path) => `https://mesaidesvelo.fr${path}`)
 			.join('\n')
-	};
+	);
 }

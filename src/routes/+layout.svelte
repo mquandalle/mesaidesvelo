@@ -44,13 +44,12 @@
 	let enableTracking = import.meta.env.PROD && !embeded;
 
 	// The city can be provided from the URL, for instance /ville/paris. The
-	// `stuff` output of a load function provides a mechanism for pages to pass
+	// `data` output of a load function provides a mechanism for pages to pass
 	// data 'upward' to layouts, which is useful in our case since the selected
 	// city is a "global state".
-	// https://kit.svelte.dev/docs#loading-output-stuff
-	localisation.set($page.stuff?.ville ?? null);
-	$: if ($page.stuff?.ville) {
-		localisation.set($page.stuff.ville);
+	localisation.set($page.data?.ville ?? null);
+	$: if ($page.data?.ville) {
+		localisation.set($page.data.ville);
 	}
 </script>
 

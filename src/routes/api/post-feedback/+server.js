@@ -11,7 +11,7 @@ export async function POST({ request }) {
 	if (!GITHUB_TOKEN) {
 		console.log(`Titre: ${title}`);
 		console.log(`Message:\n${body}`);
-		return { status: 200 };
+		return new Response(undefined);
 	}
 
 	const res = await fetch('https://api.github.com/repos/mquandalle/mesaidesvelo-feedback/issues', {
@@ -24,5 +24,5 @@ export async function POST({ request }) {
 		body: JSON.stringify({ title, body })
 	});
 
-	return { status: res.status };
+	return new Response(undefined, { status: res.status });
 }

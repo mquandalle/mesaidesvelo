@@ -58,19 +58,21 @@ export async function GET({ url }) {
 	if (slug) {
 		const res = data.find((c) => c.slug === slug);
 		if (res) {
-			return { body: pick(res) };
+			return new Response(JSON.stringify(pick(res)));
 		}
 	} else if (search) {
-		return {
-			body: fuzzysort.go(search, indexedData, searchOptions).map(({ obj }) => pick(obj))
-		};
+		return new Response(
+			JSON.stringify(fuzzysort.go(search, indexedData, searchOptions).map(({ obj }) => pick(obj)))
+		);
 	} else {
 		// Par défaut on retourne les communes les plus peuplées
-		return {
-			body: indexedData
-				.sort((a, b) => b.population - a.population)
-				.slice(0, 10)
-				.map(pick)
-		};
+		return new Response(
+			JSON.stringify(
+				indexedData
+					.sort((a, b) => b.population - a.population)
+					.slice(0, 10)
+					.map(pick)
+			)
+		);
 	}
 }
