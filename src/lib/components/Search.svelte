@@ -46,7 +46,7 @@
 			localFiltering={false}
 			hideArrow={true}
 			inputId="localisation-input"
-			bind:selectedItem={$localisation}
+			selectedItem={$localisation}
 			onFocus={autoSelectInput}
 			onChange={(val) => {
 				const derivedPath = val ? `/ville/${val.slug}` : `/`;
