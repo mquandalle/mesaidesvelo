@@ -53,8 +53,8 @@
 	</ul>
 	<p>
 		L’aide est de <strong>40% du prix du vélo</strong>, et elle est plafonnée en fonction du type de
-		vélo. Par ailleurs depuis le 15 août 2022, les ménages les plus modestes bénéficient de plafond
-		plus élevés ainsi que d’une aide spécifique pour les vélos mécaniques non électriques.
+		vélo. Par ailleurs du 15 août au 31 décembre 2022, les ménages les plus modestes bénéficient de
+		plafonds plus élevés ainsi que d’une aide spécifique pour les vélos mécaniques non électriques.
 	</p>
 
 	<table>

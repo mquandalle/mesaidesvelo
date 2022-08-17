@@ -1,7 +1,3 @@
-<script context="module">
-	export const prerender = true;
-</script>
-
 <script>
 	import { engine } from '$lib/engine';
 	import { formatValue } from 'publicodes';

@@ -26,7 +26,7 @@
 </script>
 
 {#if questions.length > 0}
-	<div class="border-l-4 mt-8 border-green-200 pl-4 py-3 bg-green-50">
+	<div class="border-l-4 border-green-200 pl-4 py-4 ml-4">
 		<div
 			class="inline-block relative -left-8.5 bg-white border-4 border-green-200 w-8 h-8 rounded-full font-bold text-green-300 text-center leading-6"
 		>

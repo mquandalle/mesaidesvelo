@@ -1,15 +1,15 @@
 <script>
 	import { page } from '$app/stores';
-	import { slide } from 'svelte/transition';
-	import DetailsLine from './DetailsLine.svelte';
-	import Emoji from './Emoji.svelte';
+	import AnimatedAmount from '$lib/components./../../lib/components/AnimatedAmount.svelte';
+	import DetailsLine from '$lib/components./../../lib/components/DetailsLine.svelte';
+	import Emoji from '$lib/components./../../lib/components/Emoji.svelte';
+	import Questions from '$lib/components./../../lib/components/Questions.svelte';
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
-	import Questions from './Questions.svelte';
-	import AnimatedAmount from './AnimatedAmount.svelte';
-	import { answers, publicodeSituation } from '$lib/stores';
+	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
+	import { slide } from 'svelte/transition';
 
-	answers.set({});
+	resetAnswers();
 
 	const veloCat = $page.url.searchParams.get('velo');
 	const categoryDescription = engine.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
@@ -76,7 +76,7 @@
 	<p class="text-gray-700 text-sm">{categoryDescription}</p>
 {/if}
 
-<div class="border mt-6 bg-white rounded-md shadow-sm">
+<div class="border-t border-b mt-6 bg-white">
 	{#each aidesDetails as ruleName (ruleName)}
 		<div transition:slide|local={{ duration: 200 }} class="border-b last:border-b-0">
 			<DetailsLine {ruleName} {veloCat} />

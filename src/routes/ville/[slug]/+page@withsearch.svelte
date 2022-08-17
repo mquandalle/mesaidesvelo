@@ -5,6 +5,7 @@
 	import ShareButton from '$lib/components/ShareButton.svelte';
 	import { fly } from 'svelte/transition';
 	import Results from './Results.svelte';
+	import { localisation } from '$lib/stores';
 
 	/** @type {import('./$types').PageData */
 	export let data;
@@ -27,8 +28,8 @@
 		<PaneNavigation depth={$page.url.searchParams.get('velo') ? 1 : 0}>
 			{#if $page.url.searchParams.get('velo')}
 				<Details />
-			{:else}
-				<Results />
+			{:else if $localisation}
+				<Results {ville} />
 			{/if}
 		</PaneNavigation>
 	</div>

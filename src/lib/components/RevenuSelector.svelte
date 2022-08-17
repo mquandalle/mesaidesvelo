@@ -1,12 +1,50 @@
 <script context="module">
 	import { engine } from '$lib/engine';
 	import { formatValue, reduceAST } from 'publicodes';
+	import { derived } from 'svelte/store';
+	import { localisationSituation } from '$lib/stores';
 	import Emoji from './Emoji.svelte';
 
 	// In case the formula involve a “linear operation” such as additions or
 	// product, we cannot extract a fixed set a threshold and we need to display
 	// a input of type number.
 	const numberFieldRequired = Symbol('number field required');
+
+	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
+	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
+	const uniq = (arr) => [...new Set(arr)];
+
+	export const originalNames = derived([localisationSituation], ([$localisationSituation]) => {
+		if (!localisationSituation) {
+			return [];
+		}
+		return uniq(
+			bikeKinds
+				.map((veloCat) => {
+					engine.setSituation({
+						...$localisationSituation,
+						'maximiser les aides': 'oui',
+						'vélo . type': `'${veloCat}'`
+					});
+
+					const originalNames = collectivites
+						.map((collectivite) => {
+							const aide = engine.evaluate(`aides . ${collectivite}`);
+							if (!aide.nodeValue) {
+								return null;
+							}
+							const originalRuleName = aide.explanation.find(({ condition }) => condition.isActive)
+								.consequence.name;
+
+							return originalRuleName;
+						})
+						.filter(Boolean);
+
+					return originalNames;
+				})
+				.flat()
+		);
+	});
 
 	// We do a static analysis of the rules AST to search for a particular rule name.
 	// When in find it in a comparaison expression we retreive the value of the other
@@ -68,55 +106,45 @@
 </script>
 
 <script>
-	import { answers, publicodeSituation } from '$lib/stores';
+	import { page } from '$app/stores';
+	import { publicodeSituation, revenuFiscal } from '$lib/stores';
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
-	import { page } from '$app/stores';
 
-	// TODO Hacky
-	const veloCat = $page.url.searchParams.get('velo');
-
-	export let goals;
-	let value;
+	// TODO Super Hacky
+	const veloCat =
+		$page.url.pathname === '/prime-a-la-conversion' ? '' : $page.url.searchParams.get('velo');
 
 	const uniq = (l) => [...new Set(l)];
-	const tresholds = goals.flatMap((name) =>
+	$: tresholds = $originalNames.flatMap((name) =>
 		findAllComparaisonsValue(name, {
 			searchedName: 'revenu fiscal de référence',
 			unit: '€/mois'
 		})
 	);
 
-	const numberFieldIsRequired = tresholds.includes(numberFieldRequired);
+	$: numberFieldIsRequired = tresholds.includes(numberFieldRequired);
+
+	$: uniqThresholds =
+		!numberFieldIsRequired &&
+		uniq(
+			tresholds
+
+				.filter((x) => x !== Infinity)
+				.map((x) => Math.round(x))
+				.sort((a, b) => a - b)
+		);
+
+	const engineBis = engine.shallowCopy();
 
 	// Not all statically detected thresholds are impactful for the current computation
 	// as some of them might be in inactive branches of the computation.
 	// We evaluate all the thresholds and only keep the one that induice a change in the result.
-	const engineBis = engine.shallowCopy();
-	$: displayedThresholds =
-		!numberFieldIsRequired &&
-		[
-			0,
-			...uniq(
-				tresholds
-
-					.filter((x) => x !== Infinity)
-					.map((x) => Math.round(x))
-					.sort((a, b) => a - b)
-			)
-		]
+	function removeUnecessaryThresholds(thresholds) {
+		return [0, ...thresholds]
 			.reduce(
 				(acc, revenu) => {
-					// HACK: The problem with thresholds evaluation is that their
-					// value might depend on other answers, for exemple the bike
-					// price. This implies that in some case we remove relevant
-					// thresholds. This should be fixed with a more clever static
-					// analysis.
-					//
-					// The line below is used to reactively recompute thresholds
-					// when a answer is given.
-					$answers;
 					engineBis.setSituation({
 						...$publicodeSituation,
 						'vélo . type': `'${veloCat}'`,
@@ -124,6 +152,7 @@
 						'revenu fiscal de référence': `${revenu + 1} €/mois`
 					});
 					const montantAides = engineBis.evaluate('aides . montant').nodeValue;
+					console.log(montantAides);
 					if (montantAides === acc.dernierMontant) {
 						return acc;
 					} else {
@@ -136,10 +165,23 @@
 				{ thresholds: [], dernierMontant: null }
 			)
 			.thresholds.slice(1);
+	}
+
+	$: displayedThresholds =
+		!numberFieldIsRequired &&
+		(veloCat === null ? uniqThresholds : removeUnecessaryThresholds(uniqThresholds));
+
+	$: if (
+		$revenuFiscal &&
+		!displayedThresholds.map((threshold) => threshold - 1).includes($revenuFiscal)
+	) {
+		const closestThreshold = displayedThresholds.find((plafond) => $revenuFiscal <= plafond);
+		$revenuFiscal = closestThreshold
+			? closestThreshold - 1
+			: displayedThresholds[displayedThresholds.length - 1] + 1;
+	}
 
 	let showExplanations = false;
-
-	$: $answers['revenu fiscal de référence'] = value && `${value} €/mois`;
 </script>
 
 {#if numberFieldIsRequired || displayedThresholds.length > 0}
@@ -158,17 +200,17 @@
 		{/if}
 		<div class="flex gap-2 mt-2 flex-wrap">
 			{#if numberFieldIsRequired}
-				<NumberField bind:value id="revenu-fiscal" unité="€" />
+				<NumberField bind:$revenuFiscal id="revenu-fiscal" unité="€" />
 			{:else}
 				{#each displayedThresholds as threshold}
-					<MultipleChoiceAnswer value={threshold - 1} bind:group={value}
+					<MultipleChoiceAnswer value={threshold - 1} bind:group={$revenuFiscal}
 						>moins de <strong class="font-semibold">{formatValue(threshold)} €</strong
 						></MultipleChoiceAnswer
 					>
 				{/each}
 				<MultipleChoiceAnswer
 					value={displayedThresholds[displayedThresholds.length - 1] + 1}
-					bind:group={value}
+					bind:group={$revenuFiscal}
 					>plus de <strong class="font-semibold"
 						>{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €</strong
 					></MultipleChoiceAnswer

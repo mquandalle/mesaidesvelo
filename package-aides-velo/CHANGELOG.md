@@ -1,5 +1,12 @@
 # Historique des modifications
 
+## v2.0.46
+
+Corrige les aides suivantes :
+
+- Prime à la conversion
+- Agglomération Pays Basque
+
 ## v2.0.45 - 16/08/2022
 
 Mise à jour des aides de l’État :

@@ -28,7 +28,7 @@
 	{#if difference}
 		{#key difference}
 			<span
-				class="evaporate block absolute -top-5 right-0 font-semibold pointer-events-none {color}"
+				class="evaporate block absolute -top-5 right-0 font-semibold pointer-events-none {color} bg-white"
 				>{format(difference, { withPlusSign: true })}</span
 			>
 		{/key}

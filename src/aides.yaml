@@ -70,6 +70,7 @@ aides . bonus vélo mécanique:
   lien: https://www.primealaconversion.gouv.fr/dboneco/accueil/access.html
 
 aides . prime à la conversion:
+  remplace: état
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
@@ -85,8 +86,14 @@ aides . prime à la conversion:
     cumulable avec les aides à l'achat d’un vélo électrique, comme le « bonus
     écologique ».
   valeur: 40% * vélo . prix
-  plafond: 1500€
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 6300 €/an
+        alors: 3000€
+      - sinon: 1500€
   lien: https://www.service-public.fr/particuliers/vosdroits/F35846
+
+aides . forfait mobilités durables: 500 €/an
 
 aides . ile de france:
   remplace: région
@@ -1718,6 +1725,7 @@ aides . pays basque:
               montant:
                 valeur: 20% * vélo . prix
                 plafond: 800€
+            - montant: 0€
     - si: vélo . cargo
       alors:
         grille:
@@ -4145,7 +4153,7 @@ vélo . prix . HT:
 vélo . prix pour maximiser les aides:
   variations:
     - si: vélo . type = ''
-      alors: 5000€
+      alors: 10000€
     - si: localisation . epci = 'CA de Nevers'
       alors:
         variations:

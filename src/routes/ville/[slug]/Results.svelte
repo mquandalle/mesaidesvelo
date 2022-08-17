@@ -1,36 +1,36 @@
 <script>
 	import Emoji from '$lib/components/Emoji.svelte';
+	import RevenuSelector, { originalNames } from '$lib/components/RevenuSelector.svelte';
 	import { engine } from '$lib/engine';
-	import { answers, localisation, publicodeSituation } from '$lib/stores';
+	import { localisation, publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
-	import { formatValue } from 'publicodes';
 	import { getContext } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
 	import SeoText from './SEOText.svelte';
 
 	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
 	const embeded = getContext('embeded');
 
-	answers.set({});
+	resetAnswers();
 
-	$: aidesPerBikeKind = bikeKinds
-		.map((kind) => {
-			if (!$localisation) return [];
-			engine.setSituation({
-				...$publicodeSituation,
-				'maximiser les aides': 'oui',
-				'vélo . type': `'${kind}'`
-			});
-			return [kind, engine.evaluate('aides . montant')];
-		})
-		.map(([cat, node]) => [
+	$: aidesPerBikeKind = bikeKinds.map((cat) => {
+		engine.setSituation({
+			...$publicodeSituation,
+			'maximiser les aides': 'oui',
+			'vélo . type': `'${cat}'`
+		});
+
+		const montant = engine.evaluate('aides . montant');
+
+		return {
 			cat,
-			{
-				label: titleCategory(cat),
-				emoji: emojiCategory(cat),
-				montant: node?.nodeValue ? formatValue(node, { precision: 0 }) : 0
-			}
-		]);
+			label: titleCategory(cat),
+			emoji: emojiCategory(cat),
+			montant
+		};
+	});
 
 	$: primeALaConversion = engine
 		.setSituation({
@@ -41,54 +41,68 @@
 
 	// TODO: use `groupBy` partition when available
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/groupBy
-	$: activesAidesPerBikeKind = aidesPerBikeKind.filter(([, { montant }]) => montant !== 0);
-	$: inactivesAidesPerBikeKind = aidesPerBikeKind.filter(([, { montant }]) => montant === 0);
+	$: activesAidesPerBikeKind = aidesPerBikeKind.filter(({ montant }) => montant.nodeValue !== 0);
+	$: inactivesAidesPerBikeKind = aidesPerBikeKind.filter(({ montant }) => montant.nodeValue === 0);
 
 	$: inFrance = !!engine
 		.setSituation($publicodeSituation)
 		.evaluate("localisation . pays = 'France'").nodeValue;
 
+	$: displayedAides = [
+		...activesAidesPerBikeKind.map(({ cat, ...rest }) => ({
+			...rest,
+			href: `?velo=${cat}`
+		})),
+		primeALaConversion.nodeValue && {
+			montant: primeALaConversion,
+			href: '/prime-a-la-conversion',
+			label: 'Prime à la conversion',
+			emoji: '🚗'
+		},
+		inFrance && [
+			{
+				montant: engine.evaluate('aides . forfait mobilités durables'),
+				href: '/forfait-mobilite-durable',
+				label: 'Forfait mobilités durables'
+			},
+			...inactivesAidesPerBikeKind.map(({ cat, ...rest }) => ({
+				...rest,
+				href: `?velo=${cat}`,
+				emoji: null
+			}))
+		]
+	]
+		.filter(Boolean)
+		.flat();
+
 	$: onlyNationalAides =
-		inFrance &&
-		bikeKinds.every(
-			(kind) =>
-				!(
-					engine
-						.setSituation({
-							...$publicodeSituation,
-							'localisation . pays': "'nawak'",
-							'maximiser les aides': 'oui',
-							'vélo . type': `'${kind}'`
-						})
-						.evaluate('aides . montant').nodeValue > 0
-				)
-		);
+		$originalNames.filter((name) => !name.startsWith('aides . bonus')).length === 0;
 </script>
 
 <div class="mt-8" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
-<table class="flex flex-col border rounded shadow-md bg-white sm:text-lg">
-	{#each activesAidesPerBikeKind as [cat, { montant, label, emoji }]}
-		<CategoryLine {montant} href="?velo={cat}"
-			>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
-		>
+<table class="flex flex-col-reverse bg-white border-t rounded-t sm:text-lg">
+	{#each displayedAides.reverse() as { montant, href, label, emoji } (label)}
+		<tbody animate:flip={{ duration: 600, easing: quintOut }}>
+			<CategoryLine {montant} {href}
+				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
+			>
+		</tbody>
 	{/each}
-	{#if primeALaConversion.nodeValue}
-		<CategoryLine
-			montant={formatValue(primeALaConversion, { precision: 0 })}
-			href="/prime-a-la-conversion"
-			>Prime à la conversion <Emoji emoji="🚗" /> →<Emoji emoji="🚲" /></CategoryLine
-		>
-	{/if}
-	{#if inFrance}
-		<CategoryLine montant={'500 €/an'} href="/forfait-mobilite-durable"
-			>Forfait mobilités durables
-		</CategoryLine>
-		{#each inactivesAidesPerBikeKind as [cat, { montant, label }]}
-			<CategoryLine {montant} href="?velo={cat}">{label}</CategoryLine>
-		{/each}
-	{/if}
 </table>
+{#if inFrance}
+	<div class="border-l-4 border-green-200 pl-4 py-4 ml-4">
+		<div
+			class="inline-block relative -left-8 bg-white border-4 border-green-200 w-8 h-8 rounded-full font-bold text-green-300 text-center leading-6"
+		>
+			€
+		</div>
+		<p class="text-gray-600 text-md -mt-7 pl-3 italic">
+			Répondez à la question pour calculer les aides disponibles :
+		</p>
+		<RevenuSelector />
+	</div>
+{/if}
 
 {#if !embeded && $localisation?.nom === 'Bordeaux'}
 	<SeoText />

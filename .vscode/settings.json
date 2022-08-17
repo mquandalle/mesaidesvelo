@@ -1,0 +1,5 @@
+{
+	"search.exclude": {
+		"data-fetch/miniatures/aides-jeunes-repo": true
+	}
+}

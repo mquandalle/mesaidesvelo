@@ -57,7 +57,13 @@ test('Thumbnail displayed', async ({ page }) => {
 	await expect(page.locator('img[alt="Logo grand albigeois"]')).toBeTruthy();
 });
 
-test('new or second hand bike', async ({ page }) => {
+test('Revenu selector', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/bordeaux');
+	await page.click('text=plus de 2 201 €');
+	await expect(await page.locator('text=aide non disponible').count()).toEqual(6);
+});
+
+test('New or second hand bike', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
 	await expect(page.locator('text=neuf ou d’occasion ?')).toBeTruthy();
 

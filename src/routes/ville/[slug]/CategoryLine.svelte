@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import AnimatedAmount from '$lib/components/AnimatedAmount.svelte';
 
 	export let montant;
 	export let href;
@@ -9,15 +10,17 @@
 	}
 </script>
 
-{#if montant !== 0}
+{#if montant.nodeValue !== 0}
 	<tr
 		on:click={clickLine}
-		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 hover:bg-green-50 cursor-pointer border-b last:border-b-0 group"
+		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-white hover:bg-green-50 cursor-pointer border-b group"
 	>
 		<td class="p-0 "><slot /></td>
 		<td class="p-0 flex-1 flex flex-col items-end gap-x-2">
 			<span class="text-xs text-gray-500">jusqu’à</span>
-			<span class="font-semibold text-right text-xl whitespace-nowrap">{montant}</span>
+			<span class="font-semibold text-right text-xl whitespace-nowrap"
+				><AnimatedAmount amount={montant.nodeValue} unit={montant.unit} /></span
+			>
 		</td>
 		<td class="p-0 fill-gray-300 group-hover:fill-green-600">
 			<a {href} title="Voir les détails" sveltekit:noscroll>
@@ -31,9 +34,7 @@
 	</tr>
 {:else}
 	<tr
-		{href}
-		sveltekit:noscroll
-		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-gray-50 border-b last:border-b-0 group "
+		class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-gray-50 border-b group "
 	>
 		<td class="line-through text-gray-600"><slot /></td>
 		<td class="flex-1 flex flex-col items-end gap-x-2 text-right">

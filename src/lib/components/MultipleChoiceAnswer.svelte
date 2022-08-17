@@ -5,14 +5,16 @@
 	$: isSelected = group === value;
 </script>
 
-<label
-	class="border rounded px-4 py-2 shadow-sm flex items-center gap-x-2 cursor-pointer {isSelected
-		? 'bg-green-500 text-white'
-		: 'bg-white hover:bg-green-200 text-gray-700'}"
->
-	<input type="radio" bind:group {value} />
-	<span class="text-current"><slot /></span>
-</label>
+{#key value}
+	<label
+		class="border rounded px-4 py-2 shadow-sm flex items-center gap-x-2 cursor-pointer {isSelected
+			? 'bg-green-500 text-white'
+			: 'bg-white hover:bg-green-200 text-gray-700'}"
+	>
+		<input type="radio" bind:group {value} />
+		<span class="text-current"><slot /></span>
+	</label>
+{/key}
 
 <style>
 	input[type='radio'] {
