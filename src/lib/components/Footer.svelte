@@ -1,13 +1,11 @@
 <script>
 	import { page } from '$app/stores';
 	import { getContext } from 'svelte';
-	import BugInContactFormNotice from './BugInContactFormNotice.svelte';
 	import UserFeedback from './UserFeedback.svelte';
 
 	const embeded = getContext('embeded');
 </script>
 
-<BugInContactFormNotice />
 <footer
 	class="flex flex-col items-start gap-6 py-6 pt-3 justify-between w-full max-w-screen-md mx-auto md:(flex-row items-end) text-xs "
 >
