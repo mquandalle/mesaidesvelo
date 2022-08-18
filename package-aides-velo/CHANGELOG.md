@@ -6,6 +6,8 @@ Ajout de l’aide suivante :
 
 - Communauté de Communes des Portes de Romilly-sur-Seine
 
+Mise à jour des EPCI pour 2022
+
 ## v2.0.46 - 18/08/2022
 
 Mise à jour du lien service-public.fr du Bonus vélo de l’État

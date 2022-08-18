@@ -1217,7 +1217,7 @@ aides . sorgues du comtat:
   titre: Communauté de communes des Sorgues du Comtat
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'CC des Sorgues du Comtat'
+      - localisation . epci = 'CA des Sorgues du Comtat'
       - vélo . électrique
   valeur: 20% * vélo . prix
   plafond: 120€
@@ -1895,7 +1895,7 @@ aides . grand lieu:
   titre: Grand Lieu Communauté
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'CC de Grand Lieu'
+      - localisation . epci = 'CC Grand Lieu Communauté'
       - vélo . électrique
   valeur: 100€
   lien: https://www.grandlieu.fr/sites/default/files/2022-04/r%C3%A8glement%20op%C3%A9ration%20100%20v%C3%A9lo%202022_0.pdf
@@ -2006,7 +2006,7 @@ aides . agen:
   titre: Agglomération Agen
   applicable si:
     toutes ces conditions:
-      - localisation . epci = "CA d'Agen"
+      - localisation . epci = "CA Agglomération d'Agen"
       - vélo . électrique
   valeur: 200€
   plafond: vélo . prix
@@ -3318,8 +3318,7 @@ aides . pays des achards:
 aides . terres de montaigu:
   remplace: intercommunalité
   titre: Terres de Montaigu
-  # TODO: vérifier pourquoi ce double nom étrange
-  applicable si: localisation . epci = 'CC Terres de Montaigu, CC Montaigu-Rocheservière'
+  applicable si: localisation . epci = 'CA Terres de Montaigu'
   variations:
     - si: vélo . cargo électrique
       alors: 400€

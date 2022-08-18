@@ -40,6 +40,11 @@ const extractCollectivityFromAST = (rule) => {
 	// with third-party systems it is more robust to expose their SIREN code.
 	if (kind === 'epci') {
 		const code = epci.find(({ nom }) => nom === value)?.code;
+
+		if (!code) {
+			console.warn(`Bad EPCI code pour ${value}`);
+		}
+
 		return { kind, value, code };
 	}
 	return { kind, value };
