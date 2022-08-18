@@ -1,6 +1,4 @@
-import { env } from 'process';
-
-const GITHUB_TOKEN = env.GITHUB_TOKEN;
+import { GITHUB_TOKEN } from '$env/static/private';
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function POST({ request }) {
@@ -11,7 +9,7 @@ export async function POST({ request }) {
 	if (!GITHUB_TOKEN) {
 		console.log(`Titre: ${title}`);
 		console.log(`Message:\n${body}`);
-		return new Response(undefined);
+		return new Response(undefined, { status: 500 });
 	}
 
 	const res = await fetch('https://api.github.com/repos/mquandalle/mesaidesvelo-feedback/issues', {
