@@ -15,7 +15,9 @@
 
 	resetAnswers();
 
-	$: console.log($localisation);
+	$: if (import.meta.env.DEV) {
+		console.log($localisation);
+	}
 
 	$: aidesPerBikeKind = bikeKinds.map((cat) => {
 		engine.setSituation({
