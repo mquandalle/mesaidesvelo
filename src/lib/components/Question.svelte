@@ -18,7 +18,10 @@
 
 	$: if (value) {
 		$answers[rule] = possibilités ? `'${value}'` : `${value} ${unité || ''}`.trim();
+	} else if (value === null) {
+		$answers[rule] = undefined;
 	}
+
 	let showExplanations = false;
 </script>
 

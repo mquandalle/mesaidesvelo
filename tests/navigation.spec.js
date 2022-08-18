@@ -25,6 +25,9 @@ test('Navigation scenario', async ({ page }) => {
 	await page.fill('input:below(label:text("Prix du vélo"))', '300');
 	await expect(totalAides).toHaveText('Total des aides 250 €', { useInnerText: true });
 
+	await page.fill('input:below(label:text("Prix du vélo"))', '');
+	await expect(totalAides).toHaveText('Total des aides 500 €', { useInnerText: true });
+
 	await page.goBack();
 	await page.click('text=Prime à la conversion');
 	await expect(page.locator('text=prime à la casse')).toBeTruthy();
@@ -59,8 +62,9 @@ test('Thumbnail displayed', async ({ page }) => {
 
 test('Revenu selector', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/bordeaux');
+	await page.waitForTimeout(100);
 	await page.click('text=plus de 2 201 €');
-	await expect(await page.locator('text=aide non disponible').count()).toEqual(6);
+	await expect(page.locator('text=aide non disponible')).toHaveCount(6);
 });
 
 test('New or second hand bike', async ({ page }) => {

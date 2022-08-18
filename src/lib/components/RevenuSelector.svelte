@@ -152,7 +152,6 @@
 						'revenu fiscal de référence': `${revenu + 1} €/mois`
 					});
 					const montantAides = engineBis.evaluate('aides . montant').nodeValue;
-					console.log(montantAides);
 					if (montantAides === acc.dernierMontant) {
 						return acc;
 					} else {
@@ -173,6 +172,7 @@
 
 	$: if (
 		$revenuFiscal &&
+		!numberFieldIsRequired &&
 		!displayedThresholds.map((threshold) => threshold - 1).includes($revenuFiscal)
 	) {
 		const closestThreshold = displayedThresholds.find((plafond) => $revenuFiscal <= plafond);
@@ -200,7 +200,7 @@
 		{/if}
 		<div class="flex gap-2 mt-2 flex-wrap">
 			{#if numberFieldIsRequired}
-				<NumberField bind:$revenuFiscal id="revenu-fiscal" unité="€" />
+				<NumberField bind:value={$revenuFiscal} id="revenu-fiscal" unité="€" />
 			{:else}
 				{#each displayedThresholds as threshold}
 					<MultipleChoiceAnswer value={threshold - 1} bind:group={$revenuFiscal}
