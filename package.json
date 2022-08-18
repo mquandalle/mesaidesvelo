@@ -1,6 +1,6 @@
 {
 	"name": "mesaidesvelo",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"scripts": {
 		"postinstall": "node ./src/scripts/postinstall.js",
 		"dev": "vite dev",
@@ -11,6 +11,8 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
+	"type": "module",
+	"private": true,
 	"devDependencies": {
 		"@actions/core": "^1.6.0",
 		"@actions/github": "^5.0.0",
@@ -18,20 +20,20 @@
 		"@rollup/plugin-yaml": "^3.1.0",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.66",
 		"@sveltejs/kit": "next",
+		"mdsvex": "^0.10.6",
 		"node-fetch": "^3.2.0",
-		"prettier-plugin-svelte": "^2.4.0",
 		"prettier": "^2.4.1",
+		"prettier-plugin-svelte": "^2.4.0",
 		"sharp": "^0.30.7",
 		"svelte": "^3.42.6",
-		"vite-plugin-windicss": "^1.5.1",
 		"vite": "^3.0.0",
+		"vite-plugin-windicss": "^1.5.1",
 		"wget-improved": "^3.3.0",
 		"yaml": "^2.1.1"
 	},
-	"type": "module",
 	"dependencies": {
 		"@etalab/decoupage-administratif": "^1.0.0",
-		"fuzzysort": "^1.1.4",
+		"fuzzysort": "^2.0.0",
 		"publicodes": "^1.0.0-beta.44"
 	}
 }

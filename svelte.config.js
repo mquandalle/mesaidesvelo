@@ -6,7 +6,10 @@ const config = {
 	preprocess: [mdsvex()],
 	extensions: ['.svelte', '.svx'],
 	kit: {
-		adapter: vercel()
+		adapter: vercel(),
+		prerender: {
+			entries: ['/liste-aides']
+		}
 	}
 };
 
