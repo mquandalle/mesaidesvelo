@@ -23,7 +23,8 @@
 		"svelte": "^3.42.6",
 		"vite": "^3.0.0",
 		"vite-plugin-windicss": "^1.5.1",
-		"wget-improved": "^3.3.0"
+		"wget-improved": "^3.3.0",
+		"yaml": "^2.1.1"
 	},
 	"type": "module",
 	"dependencies": {

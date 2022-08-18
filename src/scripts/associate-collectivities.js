@@ -1,5 +1,6 @@
 import { loadJsonFile, writeJsonFile, loadTextFile } from '../lib/readWriteJson.js';
 import Publicodes, { reduceAST } from 'publicodes';
+import { parse } from 'yaml';
 
 const communes = loadJsonFile('src/lib/data/communes.json');
 const epci = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/epci.json');
@@ -10,7 +11,7 @@ const regions = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/
 
 const sourceRules = loadTextFile('src/aides.yaml');
 
-const engine = new Publicodes(sourceRules);
+const engine = new Publicodes(parse(sourceRules));
 
 const aidesRuleNames = Object.keys(engine.getParsedRules()).filter(
 	(ruleName) => ruleName.startsWith('aides .') && engine.getRule(ruleName).rawNode.titre
