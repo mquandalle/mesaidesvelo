@@ -17,57 +17,42 @@ aides . montant:
     - région
     - état
 
-aides . bonus autres vélo:
+aides . bonus vélo:
   remplace: état
-  titre: Bonus vélo cargo
+  titre: Bonus vélo
   description: |
-    Nouveau bonus $vélo applicable à compter du 15 août 2022.
+    Nouveau bonus $vélo applicable du 15 août au 31 décembre 2022.
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
       - revenu fiscal de référence <= 13489 €/an
-      - une de ces conditions:
-          - vélo . cargo
-          - vélo . pliant
   valeur: 40% * vélo . prix
   plafond:
     variations:
       - si: revenu fiscal de référence <= 6300 €/an
-        alors: 2000€
-      - sinon: 1000€
-  lien: https://www.service-public.fr/particuliers/vosdroits/F35475
-
-aides . bonus vélo électrique:
-  remplace: état
-  titre: Bonus vélo électrique
-  description: |
-    Nouveau bonus vélo électrique applicable à compter du 15 août 2022.
-  applicable si:
-    toutes ces conditions:
-      - localisation . pays = 'France'
-      - revenu fiscal de référence <= première tranche IR
-      - vélo . électrique
-  valeur: 40% * vélo . prix
-  plafond:
-    variations:
-      - si: revenu fiscal de référence <= 6300 €/an
-        alors: 400€
-      - sinon: 300€
-  lien: https://www.service-public.fr/particuliers/vosdroits/F35475
-
-aides . bonus vélo mécanique:
-  remplace: état
-  titre: Bonus vélo mécanique
-  description: |
-    Nouveau bonus vélo mécanique simple applicable à compter du 15 août 2022.
-  applicable si:
-    toutes ces conditions:
-      - localisation . pays = 'France'
-      - revenu fiscal de référence <= 6300 €/an
-      - vélo . mécanique simple
-  valeur: 40% * vélo . prix
-  plafond: 150€
-  lien: https://www.primealaconversion.gouv.fr/dboneco/accueil/access.html
+        alors:
+          variations:
+            - si:
+                une de ces conditions:
+                  - vélo . cargo
+                  - vélo . pliant
+              alors: 2000€
+            - si: vélo . électrique
+              alors: 400€
+            - si: vélo . mécanique simple
+              alors: 150€
+            - sinon: 0€
+      - sinon:
+          variations:
+            - si:
+                une de ces conditions:
+                  - vélo . cargo
+                  - vélo . pliant
+              alors: 1000€
+            - si: vélo . électrique
+              alors: 300€
+            - sinon: 0€
+  lien: https://www.service-public.fr/particuliers/vosdroits/F36601
 
 aides . prime à la conversion:
   remplace: état
@@ -204,7 +189,7 @@ aides . ardèche:
     toutes ces conditions:
       - localisation . département = '07'
       - vélo . électrique
-      - vélo . prix <= 3000
+      - vélo . prix <= 3000 €
   valeur: 10% * vélo . prix
   plafond: 200€
   lien: https://www.ardeche.fr/2084-vae.htm
@@ -1512,18 +1497,6 @@ aides . vauvert:
   valeur: 200€
   lien: https://www.vauvert.com/aide-2021-achat-velo-assistance-electrique/
 
-aides . puy de dome:
-  remplace: département
-  titre: Département Puy-de-Dôme
-  applicable si:
-    toutes ces conditions:
-      - localisation . département = '63'
-      - vélo . électrique
-  valeur: 20% * vélo . prix
-  # TODO 250€ pour un VAE d'occasion
-  plafond: 500€
-  lien: https://www.puy-de-dome.fr/actualites/mai-2021/aide-a-lachat-de-vae.html
-
 aides . pays d'issoire:
   remplace: intercommunalité
   titre: Agglo Pays D'Issoire
@@ -1621,8 +1594,18 @@ aides . avignon:
       - localisation . epci = 'CA du Grand Avignon (COGA)'
       - vélo . électrique
   valeur: 25% * vélo . prix # TODO: à vérifier, j'ai du mal à comprendre leur formulation
-  plafond: 400€
+  plafond: 100€
   lien: https://www.grandavignon.fr/fr/actualites/aide-lobtention-dun-vae
+
+aides . villeneuve lez avignon:
+  remplace: commune
+  titre: Villeneuve lez Avignon
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '30351'
+      - vélo . électrique
+  valeur: 100€
+  lien: http://www.villeneuvelesavignon.fr/Mobilit%C3%A9/40/
 
 aides . luberon:
   remplace: intercommunalité
@@ -2444,6 +2427,17 @@ aides . genevois:
       - vélo . électrique
   valeur: 250€
   lien: https://www.cc-genevois.fr/fr/vie-pratique-et-services/vous-deplacer/velo-ou-pied
+
+aides . pays rochois:
+  remplace: intercommunalité
+  titre: Le Pays Rochois Communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays Rochois'
+      - vélo . électrique
+  valeur: 20% * vélo . prix
+  plafond: 200€
+  lien: https://www.ccpaysrochois.fr/mes-services-demarches/transports/vae/
 
 aides . arve salève:
   remplace: intercommunalité
@@ -4173,6 +4167,10 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'CA Luberon Monts de Vaucluse'
           - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
       alors: 1000 €
+    - si:
+        une de ces conditions:
+          - localisation . epci = 'CC Haut Val de Sèvre'
+      alors: 2000 €
     - si: localisation . epci = 'CA La Roche sur Yon - Agglomération'
       alors: 1500 €
     - si:
@@ -4193,6 +4191,7 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'CC Les Balcons du Dauphiné'
           - localisation . epci = 'CA Grand Lac'
           - localisation . code insee = '38140'
+          - localisation . département = '07'
       alors: 3000 €
     - si: localisation . epci = 'CA Annemasse-Les Voirons-Agglomération'
       alors: 4500 €

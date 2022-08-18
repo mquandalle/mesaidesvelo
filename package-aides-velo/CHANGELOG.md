@@ -1,11 +1,25 @@
 # Historique des modifications
 
-## v2.0.46
+## v2.0.46 - 18/08/2022
+
+Mise à jour du lien service-public.fr du Bonus vélo de l’État
 
 Corrige les aides suivantes :
 
 - Prime à la conversion
 - Agglomération Pays Basque
+- Grand Avignon
+- Département de l'Ardèche
+- Haut Val de Sèvre Communauté de communes
+
+Ajoute les aides suivantes :
+
+- Villeneuve lez Avignon
+- Le Pays Rochois Communauté de communes
+
+Supprime l'aide suivante :
+
+- Département Puy-de-Dôme
 
 ## v2.0.45 - 16/08/2022
 

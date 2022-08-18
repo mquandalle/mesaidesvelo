@@ -15,6 +15,8 @@
 
 	resetAnswers();
 
+	$: console.log($localisation);
+
 	$: aidesPerBikeKind = bikeKinds.map((cat) => {
 		engine.setSituation({
 			...$publicodeSituation,
