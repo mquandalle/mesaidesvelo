@@ -1,4 +1,4 @@
-import { GITHUB_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function POST({ request }) {
@@ -6,7 +6,7 @@ export async function POST({ request }) {
 	const title = page === '/' ? `Retour utilisateur` : `Retour sur ${page.slice(1)}`;
 	const body = `> Retour utilisateur effectué sur la page https://mesaidesvelo.fr${page} :\n\n${message}`;
 
-	if (!GITHUB_TOKEN) {
+	if (!env.GITHUB_TOKEN) {
 		console.log(`Titre: ${title}`);
 		console.log(`Message:\n${body}`);
 		return new Response(undefined, { status: 500 });
@@ -15,7 +15,7 @@ export async function POST({ request }) {
 	const res = await fetch('https://api.github.com/repos/mquandalle/mesaidesvelo-feedback/issues', {
 		method: 'POST',
 		headers: {
-			Authorization: `token ${GITHUB_TOKEN}`,
+			Authorization: `token ${env.GITHUB_TOKEN}`,
 			'Content-Type': 'application/json',
 			Accept: 'Accept: application/vnd.github.v3+json'
 		},
