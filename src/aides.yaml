@@ -3157,12 +3157,13 @@ aides . arche agglo:
     Jusqu'à 150€ d'aide pour l'achat d'un vélo électrique auprès d'un
     vélociste partenaire.
   applicable si:
-    - localisation . epci = 'CA Arche Agglo'
-    - une de ces conditions:
-        - vélo . cargo électrique
-        - toutes ces conditions:
-            - vélo . électrique
-            - vélo . prix <= 4000€
+    toutes ces conditions:
+      - localisation . epci = 'CA Arche Agglo'
+      - une de ces conditions:
+          - vélo . cargo électrique
+          - toutes ces conditions:
+              - vélo . électrique
+              - vélo . prix <= 4000€
   valeur: 15% * vélo . prix
   plafond: 150€
   lien: https://www.archeagglo.fr/vivre-ici/transport-mobilite/velos/
