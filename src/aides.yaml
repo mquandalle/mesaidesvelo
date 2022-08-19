@@ -3123,12 +3123,71 @@ aides . valence romans:
 aides . dieulefit-bourdeaux:
   remplace: intercommunalité
   titre: Communauté de communes Dieulefit-Bourdeaux
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Dieulefit-Bourdeaux'
-      - vélo . électrique
-  valeur: 100€
+  applicable si: localisation . epci = 'CC Dieulefit-Bourdeaux'
+  variations:
+    - si:
+        toutes ces conditions:
+          - vélo . cargo électrique
+          - vélo . prix <= 4000€
+      alors: 100€
+    - si:
+        toutes ces conditions:
+          - vélo . cargo
+          - vélo . prix <= 4000€
+      alors: 50€
+    - si:
+        toutes ces conditions:
+          - vélo . mécanique
+          - vélo . prix <= 3000€
+      alors: 50€
+    - si:
+        toutes ces conditions:
+          - vélo . électrique
+          - vélo . prix <= 3000€
+      alors: 100€
+    - si: vélo . motorisation
+      alors: 100€
+    - sinon: 0€
   lien: http://www.paysdedieulefit.info/ccpdj2/index.php/defi-climat/les-mobilites/aide-forfaitaire-pour-vae
+
+aides . arche agglo:
+  remplace: intercommunalité
+  titre: ARCHE Agglo
+  description: |
+    Jusqu'à 150€ d'aide pour l'achat d'un vélo électrique auprès d'un
+    vélociste partenaire.
+  applicable si:
+    - localisation . epci = 'CA Arche Agglo'
+    - une de ces conditions:
+        - vélo . cargo électrique
+        - toutes ces conditions:
+            - vélo . électrique
+            - vélo . prix <= 4000€
+  valeur: 15% * vélo . prix
+  plafond: 150€
+  lien: https://www.archeagglo.fr/vivre-ici/transport-mobilite/velos/
+
+aides . val de drome:
+  remplace: intercommunalité
+  titre: Val de Drôme en Biovallée
+  applicable si: localisation . epci = 'CC du Val de Drôme en Biovallée'
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors:
+        variations:
+          - si: vélo . mécanique
+            alors: 50€
+          - si: vélo . électrique
+            alors: 200€
+          - si: vélo . motorisation
+            alors: 50€
+          - sinon: 0€
+    - si:
+        toutes ces conditions:
+          - revenu fiscal de référence <= 26071 €/an
+          - vélo . électrique
+      alors: 100€
+  lien: https://www.valdedrome.com/actualite/6561/5417-le-bonus-velo-est-de-retour.htm
 
 aides . lorient:
   remplace: intercommunalité
@@ -4199,6 +4258,7 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'CA Grand Lac'
           - localisation . code insee = '38140'
           - localisation . département = '07'
+          - localisation . epci = 'CC Dieulefit-Bourdeaux'
       alors: 3000 €
     - si: localisation . epci = 'CA Annemasse-Les Voirons-Agglomération'
       alors: 4500 €
