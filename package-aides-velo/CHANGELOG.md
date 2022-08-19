@@ -1,10 +1,16 @@
 # Historique des modifications
 
-## v2.0.47
+## v2.0.47 - 19/08/2022
 
 Ajout de l’aide suivante :
 
 - Communauté de Communes des Portes de Romilly-sur-Seine
+- ARCHE Agglo
+- Val de Drôme en Biovallée
+
+Mise à jour de l’aide suivante :
+
+- Communauté de communes Dieulefit-Bourdeaux
 
 Mise à jour des EPCI pour 2022
 

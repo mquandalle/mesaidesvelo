@@ -3156,19 +3156,15 @@ aides . arche agglo:
   description: |
     Jusqu'à 150€ d'aide pour l'achat d'un vélo électrique auprès d'un
     vélociste partenaire.
-  applicable si: localisation . epci = 'CA Arche Agglo'
-  variations:
-    - si: vélo . cargo électrique
-      alors:
-        valeur: 15% * vélo . prix
-        plafond: 150€
-    - si:
-        toutes ces conditions:
-          - vélo . électrique
-          - vélo . prix < 4000€
-      alors:
-        valeur: 15% * vélo . prix
-        plafond: 150€
+  applicable si:
+    - localisation . epci = 'CA Arche Agglo'
+    - une de ces conditions:
+        - vélo . cargo électrique
+        - toutes ces conditions:
+            - vélo . électrique
+            - vélo . prix <= 4000€
+  valeur: 15% * vélo . prix
+  plafond: 150€
   lien: https://www.archeagglo.fr/vivre-ici/transport-mobilite/velos/
 
 aides . val de drome:
@@ -3188,7 +3184,7 @@ aides . val de drome:
           - sinon: 0€
     - si:
         toutes ces conditions:
-          - revenu fiscal de référence < 26071 €/an
+          - revenu fiscal de référence <= 26071 €/an
           - vélo . électrique
       alors: 100€
   lien: https://www.valdedrome.com/actualite/6561/5417-le-bonus-velo-est-de-retour.htm
