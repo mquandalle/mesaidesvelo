@@ -4,11 +4,12 @@ import { get } from 'svelte/store';
 
 // This pattern is explained here:
 // https://github.com/sveltejs/kit/issues/2851
-export async function load({ params, fetch }) {
+/** @type {import('./$types').PageLoad} */
+export async function load({ params, fetch, data }) {
 	if (browser && get(localisation)?.slug === params.slug) {
-		return { ville: get(localisation) };
+		return { ...data, ville: get(localisation) };
 	} else {
 		const res = await fetch(`/api/collectivites?slug=${params.slug}`);
-		return { ville: await res.json() };
+		return { ...data, ville: await res.json() };
 	}
 }

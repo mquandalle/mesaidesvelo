@@ -7,7 +7,9 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"sync-entreprises": "node ./data-fetch/entreprises/download-gsheet-data.js",
-		"test": "npx playwright test tests/navigation.spec.js",
+		"sync": "svelte-kit sync",
+		"test": "npx playwright test tests/navigation.spec.js && npm run vitest -- run",
+		"vitest": "vitest",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
@@ -28,6 +30,7 @@
 		"svelte": "^3.42.6",
 		"vite": "^3.0.0",
 		"vite-plugin-windicss": "^1.5.1",
+		"vitest": "^0.22.1",
 		"wget-improved": "^3.3.0",
 		"yaml": "^2.1.1"
 	},

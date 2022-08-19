@@ -2,22 +2,17 @@
 	import Emoji from '$lib/components/Emoji.svelte';
 	import RevenuSelector, { originalNames } from '$lib/components/RevenuSelector.svelte';
 	import { engine } from '$lib/engine';
-	import { localisation, publicodeSituation, resetAnswers } from '$lib/stores';
+	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
-	import { getContext } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
-	import SeoText from './SEOText.svelte';
+
+	export let ville;
 
 	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
-	const embeded = getContext('embeded');
 
 	resetAnswers();
-
-	$: if (import.meta.env.DEV) {
-		console.log($localisation);
-	}
 
 	$: aidesPerBikeKind = bikeKinds.map((cat) => {
 		engine.setSituation({
@@ -108,13 +103,9 @@
 	</div>
 {/if}
 
-{#if !embeded && $localisation?.nom === 'Bordeaux'}
-	<SeoText />
-{/if}
-
-{#if onlyNationalAides && $localisation?.nom}
+{#if onlyNationalAides && ville?.nom}
 	<p class="mt-8 mx-2 text-gray-700">
 		<strong>Note :</strong><br />Les aides affichées sont les aides nationales. Ni la ville de
-		{$localisation.nom}, ni le département, ni la région ne proposent d’aides locales.
+		{ville.nom}, ni le département, ni la région ne proposent d’aides locales.
 	</p>
 {/if}

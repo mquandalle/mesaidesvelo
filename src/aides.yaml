@@ -3019,6 +3019,7 @@ aides . arcachon:
 aides . bourges:
   remplace: intercommunalité
   titre: Bourges Plus
+  non applicable si: oui # Budget épuisé en 2022
   applicable si: localisation . epci = 'CA Bourges Plus'
   valeur: 50% * vélo . prix
   plafond:

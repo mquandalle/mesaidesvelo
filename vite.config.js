@@ -10,6 +10,9 @@ const config = {
 		alias: {
 			$entreprises: path.resolve('./data-fetch/entreprises/data')
 		}
+	},
+	test: {
+		include: ['./tests/vitest.js']
 	}
 };
 
