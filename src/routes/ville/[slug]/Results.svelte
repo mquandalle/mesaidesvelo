@@ -80,15 +80,15 @@
 
 <div class="mt-8" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
-<table class="flex flex-col-reverse bg-white border-t rounded-t sm:text-lg">
+<div role="table" class="flex flex-col-reverse bg-white border-t rounded-t sm:text-lg">
 	{#each displayedAides.reverse() as { montant, href, label, emoji } (label)}
-		<tbody animate:flip={{ duration: 600, easing: quintOut }}>
+		<div animate:flip={{ duration: 600, easing: quintOut }}>
 			<CategoryLine {montant} {href}
 				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 			>
-		</tbody>
+		</div>
 	{/each}
-</table>
+</div>
 {#if inFrance}
 	<div class="border-l-4 border-green-200 pl-4 py-4 ml-4">
 		<div
