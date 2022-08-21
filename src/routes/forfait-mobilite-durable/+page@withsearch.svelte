@@ -7,7 +7,10 @@
 	const prefillGoogleFormURL = (company) =>
 		googleFormURL + '?entry.216851643=' + encodeURIComponent(company);
 
-	let entreprises = [];
+	/** @type {import('./$types').PageData */
+	export let data;
+
+	let entreprises = data.entreprises;
 	let searchEntreprise = '';
 
 	async function loadResults(keyword) {
@@ -163,7 +166,7 @@
 		<h2 class="!font-bold !text-xl">Puis-je le cumuler avec d’autres dispositifs ?</h2>
 		<p>
 			Oui, le forfait mobilités durables peut-être cumulé avec le remboursement des frais de
-			transports. Dans ce cas, le montant maximal exonéré d’impôts et de cotisations est porté à 600
+			transports. Dans ce cas, le montant maximal exonéré d’impôts et de cotisations est porté à 800
 			€ par an.
 		</p>
 	</section>
