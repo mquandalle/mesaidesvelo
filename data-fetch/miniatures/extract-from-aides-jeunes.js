@@ -1,15 +1,21 @@
+import fs from 'node:fs';
+import { join } from 'node:path';
+import { URL } from 'node:url';
 import sharp from 'sharp';
-import { URL } from 'url';
-import fs from 'fs';
-import { join } from 'path';
 import { loadJsonFile } from '../../src/lib/readWriteJson.js';
 
 const aidesWithCollectivities = loadJsonFile('src/lib/data/aides-collectivities.json');
 const currentPath = new URL('./', import.meta.url).pathname;
 const repoPath = join(currentPath, 'aides-jeunes-repo/');
 const rootPath = join(currentPath, '../../');
-
 const metadataDirectory = join(repoPath, 'data/institutions/');
+
+if (!fs.existsSync(metadataDirectory)) {
+	console.warn('Impossible de télécharger les miniatures');
+	console.log('Essayez de télécharger le sous-module aides-jeunes :');
+	console.log('git submodule update --init --recursive --depth 1');
+	process.exit();
+}
 
 // Map aides-jeunes identifiers with mesaidesvélo types.
 function imgKey({ type, code_siren, code_insee }) {
