@@ -1,7 +1,9 @@
 <script>
 	import { page } from '$app/stores';
+	import { getContext } from 'svelte';
 
 	let state = 'closed';
+	const { embedSource } = getContext('embed');
 
 	async function submitFeedback(evt) {
 		evt.preventDefault();
@@ -12,7 +14,7 @@
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ message, page: $page.url.pathname })
+				body: JSON.stringify({ message, page: $page.url.pathname, embedSource })
 			});
 
 			if (!serverResponse.ok) {

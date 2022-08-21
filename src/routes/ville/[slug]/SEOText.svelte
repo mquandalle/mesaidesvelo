@@ -4,10 +4,10 @@
 	import { engine } from '$lib/engine';
 	import { getContext } from 'svelte';
 
-	const embeded = getContext('embeded');
+	const { isEmbeded } = getContext('embed');
 	$: epciTitre = $page.data.epciRuleName && engine.getRule($page.data.epciRuleName).rawNode.titre;
 	$: epciText = $page.data.epciText;
-	$: showSEOText = !embeded && $page.data.epciRuleName;
+	$: showSEOText = !isEmbeded && $page.data.epciRuleName;
 </script>
 
 {#if showSEOText}

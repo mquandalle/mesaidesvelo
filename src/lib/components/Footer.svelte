@@ -3,14 +3,14 @@
 	import { getContext } from 'svelte';
 	import UserFeedback from './UserFeedback.svelte';
 
-	const embeded = getContext('embeded');
+	const { isEmbeded } = getContext('embed');
 </script>
 
 <footer
 	class="flex flex-col items-start gap-6 py-6 pt-3 justify-between w-full max-w-screen-md mx-auto md:(flex-row items-end) text-xs "
 >
-	{#if !embeded || $page.url.pathname !== '/'}<UserFeedback />{/if}
-	{#if !embeded}
+	{#if !isEmbeded || $page.url.pathname !== '/'}<UserFeedback />{/if}
+	{#if !isEmbeded}
 		<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600 md:justify-end">
 			<li>
 				<a href="/a-propos" class="hover:(underline text-green-600)">À propos</a>

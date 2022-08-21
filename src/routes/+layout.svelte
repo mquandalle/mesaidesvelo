@@ -9,20 +9,16 @@
 
 	onMount(() => {
 		prefetchRoutes(['/', '/ville/*']);
-		// This is a work-around a cold-start issue with the search
-		// autocompletion. By calling this endpoint as soon as possible we
-		// asynchrounsly warm up the server code, and reduce the latency in case
-		// of a cold start. https://github.com/mquandalle/mesaidesvelo/issues/84
-		fetch('/api/collectivites');
 	});
 
-	const embeded = Boolean($page.url.searchParams.get('iframe'));
-	setContext('embeded', embeded);
+	const isEmbeded = Boolean($page.url.searchParams.get('iframe'));
+	const embedSource = isEmbeded && $page.url.searchParams.get('utm_source');
+	setContext('embed', { isEmbeded, embedSource });
 
 	let pageElement;
 
 	onMount(() => {
-		if (!embeded) {
+		if (!isEmbeded) {
 			return;
 		}
 		// The code below communicate with the iframe.js script on a host site
@@ -41,7 +37,7 @@
 	// every time the page is loaded, as the iframe is oftentimes low on the
 	// page and the user might not interact with it or even see it. We disable
 	// tracking up until the first click interaction;
-	let enableTracking = import.meta.env.PROD && !embeded;
+	let enableTracking = import.meta.env.PROD && !isEmbeded;
 
 	// The city can be provided from the URL, for instance /ville/paris. The
 	// `data` output of a load function provides a mechanism for pages to pass
@@ -55,9 +51,9 @@
 
 <svelte:window on:click={() => (enableTracking = true)} />
 
-<div class="px-3 sm:px-8 {!embeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
-	<header class="{!embeded ? 'mt-8' : ''} block w-full max-w-screen-md m-auto">
-		{#if !embeded}
+<div class="px-3 sm:px-8 {!isEmbeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
+	<header class="{!isEmbeded ? 'mt-8' : ''} block w-full max-w-screen-md m-auto">
+		{#if !isEmbeded}
 			<a href="/" class="text-3xl font-bold cursor-pointer">
 				Mes<span class="text-green-800">Aides</span>Vélo<span class="text-xl text-gray-600"
 					>.fr</span
@@ -66,7 +62,7 @@
 			</a>
 		{/if}
 	</header>
-	<div class="pb-6 {!embeded ? 'flex-1' : ''}">
+	<div class="pb-6 {!isEmbeded ? 'flex-1' : ''}">
 		<slot />
 	</div>
 	<Footer />

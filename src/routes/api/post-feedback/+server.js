@@ -2,9 +2,15 @@ import { env } from '$env/dynamic/private';
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function POST({ request }) {
-	const { message, page } = await request.json();
+	const { message, page, embedSource } = await request.json();
 	const title = page === '/' ? `Retour utilisateur` : `Retour sur ${page.slice(1)}`;
-	const body = `> Retour utilisateur effectué sur la page https://mesaidesvelo.fr${page} :\n\n${message}`;
+	const body = [
+		`> Retour utilisateur effectué sur la page https://mesaidesvelo.fr${page} :`,
+		message,
+		embedSource && `> Via ${embedSource}`
+	]
+		.filter(Boolean)
+		.join('\n\n');
 
 	if (!env.GITHUB_TOKEN) {
 		console.log(`Titre: ${title}`);
