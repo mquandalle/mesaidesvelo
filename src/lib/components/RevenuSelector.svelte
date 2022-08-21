@@ -139,6 +139,8 @@
 		return [0, ...thresholds]
 			.reduce(
 				(acc, revenu) => {
+					// TODO: we could optimize this calcul which is done 2
+					// times : one time in DetailsLine and one time here
 					engineBis.setSituation({
 						...$publicodeSituation,
 						'vélo . type': `'${veloCat}'`,

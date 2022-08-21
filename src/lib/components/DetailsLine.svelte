@@ -5,6 +5,7 @@
 
 	import AnimatedAmount from './AnimatedAmount.svelte';
 	import Badge from './Badge.svelte';
+	import { publicodeSituation } from '$lib/stores';
 
 	export let ruleName;
 	export let veloCat = '';
@@ -17,12 +18,15 @@
 	const evaluateWithGivenRevenu = (revenu) =>
 		engine
 			.setSituation({
-				...engine.parsedSituation,
-				...(revenu ? { 'revenu fiscal de référence': `${revenu} €/an` } : {}),
+				...$publicodeSituation,
+				'revenu fiscal de référence': `${revenu} €/an`,
 				'vélo . prix': 'vélo . prix pour maximiser les aides'
 			})
 			.evaluate(ruleName).nodeValue;
-	const conditionDeRessources = evaluateWithGivenRevenu() !== evaluateWithGivenRevenu(100000);
+
+	// TODO: we could optimize this calcul which is done 2 times : one time in
+	// revenuSelector and one time here
+	const conditionDeRessources = evaluateWithGivenRevenu(100) !== evaluateWithGivenRevenu(100000);
 </script>
 
 <div class="flex flex-row">
