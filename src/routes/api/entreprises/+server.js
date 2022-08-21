@@ -65,7 +65,7 @@ const searchOptions = {
 	// scoreFn: (a) => -a.effectif
 };
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
+/** @type {import('./$types').RequestHandler} */
 export async function GET({ url }) {
 	const search = removeAccents(url.searchParams.get('search')?.replace(/\s/g, '').toLowerCase());
 	const pick = ({ nom, effectif, forfaitMax, commentaire, reference }) => ({

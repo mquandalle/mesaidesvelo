@@ -1,6 +1,6 @@
 import { env } from '$env/dynamic/private';
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
+/** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
 	const { message, page, embedSource } = await request.json();
 	const title = page === '/' ? `Retour utilisateur` : `Retour sur ${page.slice(1)}`;
