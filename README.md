@@ -26,7 +26,8 @@ Les aides utilisent le langage [Publicodes](https://publi.codes) et sont éditab
 Les tests d’intégrations utilisent [Playwright](https://playwright.dev/). En cas d'erreur vous pouvez voir le navigateur en action avec l’option `--headed`
 
 ```sh
-npm run test -- --headed
+npx playwright install
+npm run test:playwright -- --headed
 ```
 
 ### D’où viennent les données ?

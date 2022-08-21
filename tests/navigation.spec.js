@@ -65,6 +65,10 @@ test('Revenu selector', async ({ page }) => {
 	await page.waitForTimeout(100);
 	await page.click('text=plus de 2 201 €');
 	await expect(page.locator('text=aide non disponible')).toHaveCount(6);
+
+	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
+	await page.waitForTimeout(100);
+	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(4);
 });
 
 test('New or second hand bike', async ({ page }) => {

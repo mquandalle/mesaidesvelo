@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## v2.0.48
+
+Corrige l’aide suivante :
+
+- Ville de Charenton
+
 ## v2.0.47 - 19/08/2022
 
 Ajout de l’aide suivante :

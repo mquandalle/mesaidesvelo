@@ -1627,6 +1627,8 @@ aides . luberon:
 aides . charenton:
   remplace: commune
   titre: Ville de Charenton
+  description: |
+    Le Pass' Vélo est a demander auprès du CCAS avant l’achat du vélo
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '94018'
@@ -4306,6 +4308,7 @@ vélo . occasion:
       - aides . béthune bruay
       - aides . haut val de sèvre
       - aides . grand périgueux
+      - aides . charenton
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?

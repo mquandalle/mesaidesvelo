@@ -128,13 +128,7 @@
 
 	$: uniqThresholds =
 		!numberFieldIsRequired &&
-		uniq(
-			tresholds
-
-				.filter((x) => x !== Infinity)
-				.map((x) => Math.round(x))
-				.sort((a, b) => a - b)
-		);
+		uniq(tresholds.filter((x) => x !== Infinity).map((x) => Math.round(x))).sort((a, b) => a - b);
 
 	const engineBis = engine.shallowCopy();
 
@@ -151,17 +145,26 @@
 						'maximiser les aides': 'oui',
 						'revenu fiscal de référence': `${revenu + 1} €/mois`
 					});
-					const montantAides = engineBis.evaluate('aides . montant').nodeValue;
-					if (montantAides === acc.dernierMontant) {
+
+					// In some cases the total amount of aides will be the same
+					// but the repartition will be different, exemple:
+					// revenu 1 :  a 100, b 200  (total 300)
+					// revenu 2 :  a 300         (total 300)
+					// In this case we don't want to filter the threshold #182
+					const aidesDisplayed = $originalNames
+						.map((dottedName) => engineBis.evaluate(dottedName).nodeValue ?? 0)
+						.join('-');
+
+					if (aidesDisplayed === acc.dernieresAidesDisplayed) {
 						return acc;
 					} else {
 						return {
 							thresholds: [...acc.thresholds, revenu],
-							dernierMontant: montantAides
+							dernieresAidesDisplayed: aidesDisplayed
 						};
 					}
 				},
-				{ thresholds: [], dernierMontant: null }
+				{ thresholds: [], dernieresAidesDisplayed: null }
 			)
 			.thresholds.slice(1);
 	}
@@ -198,7 +201,7 @@
 				nombre de parts du quotient familial, puis divisé par 12.
 			</p>
 		{/if}
-		<div class="flex gap-2 mt-2 flex-wrap">
+		<div class="flex gap-2 mt-2 flex-wrap playwright-revenuoptions">
 			{#if numberFieldIsRequired}
 				<NumberField bind:value={$revenuFiscal} id="revenu-fiscal" unité="€" />
 			{:else}

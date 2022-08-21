@@ -8,8 +8,9 @@
 		"preview": "vite preview",
 		"sync-entreprises": "node ./data-fetch/entreprises/download-gsheet-data.js",
 		"sync": "svelte-kit sync",
-		"test": "npx playwright test tests/navigation.spec.js && npm run vitest -- run",
-		"vitest": "vitest",
+		"test": "npm run test:playwright && npm run test:vitest -- run",
+		"test:playwright": "npx playwright test tests/navigation.spec.js",
+		"test:vitest": "vitest",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
