@@ -6,12 +6,13 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import { onMount, setContext } from 'svelte';
 	import 'virtual:windi.css';
+	import { prerendering } from '$app/env';
 
 	onMount(() => {
 		prefetchRoutes(['/', '/ville/*']);
 	});
 
-	const isEmbeded = Boolean($page.url.searchParams.get('iframe'));
+	const isEmbeded = Boolean(prerendering ? false : $page.url.searchParams.get('iframe'));
 	const embedSource = isEmbeded && $page.url.searchParams.get('utm_source');
 	setContext('embed', { isEmbeded, embedSource });
 

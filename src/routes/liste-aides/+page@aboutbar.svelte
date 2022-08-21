@@ -1,37 +1,9 @@
 <script>
-	import AideSummary from '$lib/components/AideSummary.svelte';
-	import { engine } from '$lib/engine';
 	import departements from '@etalab/decoupage-administratif/data/departements.json';
-	import aidesCollectivities from '$lib/data/aides-collectivities.json';
+	import AideSummary from './AideSummary.svelte';
 
-	const groupBy = (list, f) =>
-		list.reduce((acc, elm) => {
-			const key = f(elm);
-			return {
-				...acc,
-				[key]: [...(acc[key] ?? []), elm]
-			};
-		}, {});
-
-	const associatedCollectivities = Object.keys(aidesCollectivities).map((ruleName) => ({
-		...engine.getRule(ruleName),
-		...aidesCollectivities[ruleName]
-	}));
-
-	const aidesEtat = associatedCollectivities.filter(
-		({ collectivity }) => collectivity.kind === 'pays' && collectivity.value === 'France'
-	);
-
-	const aidesRegions = associatedCollectivities.filter(
-		({ collectivity }) => collectivity.kind === 'région'
-	);
-
-	const aidesLocales = groupBy(
-		associatedCollectivities.filter(({ collectivity }) =>
-			['code insee', 'epci', 'département'].includes(collectivity.kind)
-		),
-		({ departement }) => departement
-	);
+	/** @type {import('./$types').PageData */
+	export let data;
 </script>
 
 <div class="prose mt-8 w-full max-w-screen-md m-auto">
@@ -43,9 +15,9 @@
 
 	<h2>Les aides de l’État</h2>
 	<ul>
-		{#each aidesEtat as aide}
+		{#each data.aidesEtat as aide}
 			<li>
-				{aide.rawNode.titre.replace(/de l’état/i, '').trim()}
+				{aide.titre}
 			</li>
 		{/each}
 	</ul>
@@ -57,7 +29,7 @@
 	</p>
 	<h2>Les aides régionales</h2>
 	<ul>
-		{#each aidesRegions as aide}
+		{#each data.aidesRegions as aide}
 			<li>
 				<AideSummary {aide} />
 			</li>
@@ -65,7 +37,7 @@
 	</ul>
 	<h2>Les aides locales</h2>
 
-	{#each Object.entries(aidesLocales).sort(([a], [b]) => parseInt(a) - parseInt(b)) as [departement, aides]}
+	{#each data.aidesLocales as [departement, aides]}
 		<h3>{departement} - {departements.find(({ code }) => code === departement).nom}</h3>
 		<ul>
 			{#each aides as aide}
