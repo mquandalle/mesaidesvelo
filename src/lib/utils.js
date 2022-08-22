@@ -11,6 +11,7 @@ export function slugify(str) {
 
 	// Remove invalid chars
 	str = str
+		.replace('œ', 'oe')
 		.replace(/[^a-z0-9 -]/g, '')
 		// Collapse whitespace and replace by -
 		.replace(/\s+/g, '-')
