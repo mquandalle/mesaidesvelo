@@ -85,7 +85,7 @@ const formatInput = (input: InputParameters) =>
 			key === 'localisation . epci'
 				? `'${epciSirenToName[val]}'`
 				: typeof val === 'string'
-				? `'${val.replace(/'/g, '’')}'`
+				? `'${val}'`
 				: val
 		])
 	);

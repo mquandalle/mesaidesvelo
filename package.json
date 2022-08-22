@@ -19,7 +19,6 @@
 	"devDependencies": {
 		"@actions/core": "^1.6.0",
 		"@actions/github": "^5.0.0",
-		"@playwright/test": "^1.16.3",
 		"@rollup/plugin-yaml": "^3.1.0",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.66",
 		"@sveltejs/kit": "next",
@@ -39,6 +38,8 @@
 	"dependencies": {
 		"@etalab/decoupage-administratif": "^2.0.0",
 		"fuzzysort": "^2.0.0",
+		"playwright-aws-lambda": "^0.9.0",
+		"playwright-core": "^1.25.0",
 		"publicodes": "^1.0.0-beta.44"
 	}
 }
