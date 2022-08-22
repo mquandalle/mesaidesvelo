@@ -16,21 +16,18 @@
 	<title>Les aides vélo à {ville.nom} - MesAidesVélo</title>
 	<meta
 		name="description"
-		content="Découvrez l’ensemble des aides à l’achat ou la localisation de vélo proposées à {ville.nom}. Simple, rapide et gratuit."
+		content="Découvrez l’ensemble des aides à l’achat de vélo proposées à {ville.nom}. Simple, rapide et gratuit."
 	/>
 	<link rel="canonical" href="https://mesaidesvelo.fr/ville/{ville.slug}" />
 </svelte:head>
 
 <div class="w-full max-w-screen-md m-auto">
-	<!-- In development mode, the transition isn't played the first time this
-	page is shown. This is because the __layout.svelte component is entierly
-	re-rendered. cf. https://github.com/sveltejs/kit/issues/2130-->
 	<div in:fly|local={{ y: 30 }}>
 		<PaneNavigation depth={$page.url.searchParams.get('velo') ? 1 : 0}>
 			{#if $page.url.searchParams.get('velo')}
 				<Details />
 			{:else}
-				<Results {ville} />
+				<Results />
 			{/if}
 		</PaneNavigation>
 	</div>

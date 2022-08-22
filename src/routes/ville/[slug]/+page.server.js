@@ -2,6 +2,7 @@ import { compile } from 'mdsvex';
 import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
 import communes from '$lib/data/communes.json';
 import { error } from '@sveltejs/kit';
+import { engine } from '$lib/engine';
 
 const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
 	(manifest, [ruleName, { collectivity }]) => {
@@ -29,6 +30,12 @@ const availableContent = Object.fromEntries(
 	)
 );
 
+const hasCorrespondingContent = (ruleName) =>
+	ruleName &&
+	Object.keys(availableContent)
+		.map((leafName) => `aides . ${leafName}`)
+		.includes(ruleName);
+
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 	const slug = params.slug;
@@ -38,15 +45,56 @@ export async function load({ params }) {
 		throw error(404);
 	}
 
+	const villeRuleName = ruleNamePerCollectivity['code insee'][localisation.code];
 	const epciRuleName = ruleNamePerCollectivity['epci'][localisation.epci];
+	const departementRuleName =
+		ruleNamePerCollectivity['département'][localisation.departement ?? code.slice(0, 2)];
+	const regionRuleName = ruleNamePerCollectivity['région'][localisation.region];
 
 	if (
-		Object.keys(availableContent)
-			.map((leafName) => `aides . ${leafName}`)
-			.includes(epciRuleName)
+		[villeRuleName, epciRuleName, departementRuleName, regionRuleName].every(
+			(ruleName) => ruleName === undefined
+		)
 	) {
-		const source = await availableContent[epciRuleName.replace('aides . ', '')];
-		const epciText = (await compile(source)).code;
-		return { epciRuleName, epciText };
-	} else return {};
+		return { infos: { onlyNationalAides: true } };
+	}
+
+	let infos = {};
+	if (hasCorrespondingContent(epciRuleName)) {
+		const source = availableContent[epciRuleName.replace('aides . ', '')];
+		const text = (await compile(source)).code;
+		infos.epci = {
+			ruleName: epciRuleName,
+			titre: engine.getRule(epciRuleName).rawNode.titre,
+			text
+		};
+	}
+
+	if (hasCorrespondingContent(regionRuleName) && !villeRuleName && !epciRuleName) {
+		const source = availableContent[regionRuleName.replace('aides . ', '')];
+		const text = (await compile(source)).code;
+		return {
+			infos: {
+				region: {
+					ruleName: regionRuleName,
+					titre: engine.getRule(regionRuleName).rawNode.titre.replace(/^Région/, 'la région'),
+					text
+				}
+			}
+		};
+	}
+
+	if (villeRuleName === 'aides . mérignac') {
+		infos.ville = {
+			ruleName: villeRuleName,
+			titre: engine.getRule(villeRuleName).rawNode.titre.replace(/^Ville/, 'la ville'),
+			text: (await compile(availableContent['mérignac'])).code
+		};
+	}
+
+	if (Object.keys(infos).length > 0) {
+		return { infos };
+	} else {
+		return {};
+	}
 }

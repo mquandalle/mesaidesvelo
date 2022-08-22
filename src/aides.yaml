@@ -440,18 +440,20 @@ aides . pays de la loire:
   applicable si:
     toutes ces conditions:
       - localisation . région = '52'
-      - vélo . pliant
+      - une de ces conditions:
+          - vélo . pliant
+          - vélo . électrique
       - nom: abonné TER
         question: Êtes-vous abonnés du TER Pays de la Loire ?
         description: |
           Sont éligibles les abonnés Tutti illimité, Métrocéane mensuels, les
-          aboonés annuels de Loire-Atlantique, Maine et Loire et Sarthe, ainsi
+          abonnés annuels de Loire-Atlantique, Maine et Loire et Sarthe, ainsi
           que les abonnés mensuels des réseaux de Mayenne et Vendée (hors
           scolaires).
         type: booléen
         par défaut: oui
   description: |
-    Cette aide à l’achat d’un vélo pliant est reservée aux abonnés du TER Pays
+    Cette aide à l’achat d’un $vélo est reservée aux abonnés du TER Pays
     de la Loire.
   valeur: 50% * vélo . prix
   plafond: 200€

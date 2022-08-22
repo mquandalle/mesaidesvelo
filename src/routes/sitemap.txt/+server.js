@@ -12,7 +12,7 @@ export async function GET() {
 			'/liste-aides',
 			...communes
 				.sort((a, b) => b.population - a.population)
-				.slice(0, 500)
+				.slice(0, 1000)
 				.map(({ nom }) => `/ville/${slugify(nom)}`)
 		]
 			.map((path) => `https://mesaidesvelo.fr${path}`)

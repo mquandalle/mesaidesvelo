@@ -16,6 +16,9 @@
 				<a href="/a-propos" class="hover:(underline text-green-600)">À propos</a>
 			</li>
 			<li>
+				<a href="/liste-aides" class="hover:(underline text-green-600)">Liste des aides</a>
+			</li>
+			<li>
 				<a
 					href="https://github.com/mquandalle/mesaidesvelo"
 					target="_blank"

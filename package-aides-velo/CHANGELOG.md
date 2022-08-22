@@ -2,8 +2,9 @@
 
 ## v2.0.48
 
-Corrige l’aide suivante :
+Corrige les aides suivantes :
 
+- Région Pays de la Loire
 - Ville de Charenton
 
 ## v2.0.47 - 19/08/2022

@@ -1,5 +1,5 @@
 <script>
-	import { getBikeKind } from './+page.server';
+	import { getBikeKind } from '$lib/textUtils';
 
 	export let aide;
 </script>
@@ -19,6 +19,7 @@
 			{kind}
 			<a
 				href="/ville/{aide.slug}?velo={getBikeKind(kind)}"
+				rel="nofollow"
 				class="inline-block pl-1 !no-underline !text-gray-700 !hover:text-green-600"
 				>{maximumAide}</a
 			>

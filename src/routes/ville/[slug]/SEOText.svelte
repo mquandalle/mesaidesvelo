@@ -1,49 +1,101 @@
 <script>
 	import { page } from '$app/stores';
 	import miniaturesManifest from '$lib/data/miniatures.json';
-	import { engine } from '$lib/engine';
 	import { getContext } from 'svelte';
 
 	const { isEmbeded } = getContext('embed');
-	$: epciTitre = $page.data.epciRuleName && engine.getRule($page.data.epciRuleName).rawNode.titre;
-	$: epciText = $page.data.epciText;
-	$: showSEOText = !isEmbeded && $page.data.epciRuleName;
+	$: infos = $page.data.infos;
+	$: showSEOText = !isEmbeded && infos;
+
+	$: enumeration = ['l’État', infos?.region?.titre, infos?.epci?.titre, infos?.ville?.titre]
+		.filter(Boolean)
+		.reduce((concatenation, item, index, list) => {
+			const separator = index === 0 ? '' : index === list.length - 1 ? ' et ' : ', ';
+			return concatenation + separator + item;
+		}, '');
 </script>
 
 {#if showSEOText}
 	<div class="prose mt-12">
 		<h1>Les aides à l’achat de vélo à {$page.data.ville.nom}</h1>
 
-		<p>
-			Acheter un nouveau vélo peut être un investissement important. Heureusement, vous pouvez
-			peut-être bénéficier d'<strong
-				>aides financières pour l'achat d'un vélo à {$page.data.ville.nom}</strong
-			>. En effet l'État et {epciTitre} cherchent à encourager l'usage du vélo car c'est un moyen de
-			transport écologique et bon pour la santé.
-		</p>
+		{#if !infos.onlyNationalAides}
+			<p>
+				Acheter un nouveau vélo peut être un investissement important. Heureusement, vous pouvez
+				peut-être bénéficier d'<strong
+					>aides financières pour l'achat d'un vélo à {$page.data.ville.nom}</strong
+				>. En effet {enumeration} cherchent à encourager l'usage du vélo car c'est un moyen de transport
+				écologique et bon pour la santé.
+			</p>
 
-		<p>Le montant des aides dépend de plusieurs critères, en particulier :</p>
-		<ul>
-			<li>le type de vélo acheté</li>
-			<li>le prix du vélo</li>
-			<li>les revenus de votre foyer</li>
-		</ul>
-		<p>
-			Pour vous aider à y voir plus clair, nous proposons un calculateur d'aide simple et gratuit.
-			Le tableau ci-dessus indique le montant maximum auquel vous pouvez prétendre pour l'achat de
-			chaque type de vélo. Cliquez sur une catégorie pour accéder au calculateur détaillé et
-			personnalisez le résultat en quelques clics.
-		</p>
+			<p>Le montant des aides dépend de plusieurs critères, en particulier :</p>
+			<ul>
+				<li>le type de vélo acheté</li>
+				<li>le prix du vélo</li>
+				<li>les revenus de votre foyer</li>
+			</ul>
+			<p>
+				Pour vous aider à y voir plus clair, nous proposons un calculateur d'aide simple et gratuit.
+				Le tableau ci-dessus indique le montant maximum auquel vous pouvez prétendre pour l'achat de
+				chaque type de vélo. Cliquez sur une catégorie pour accéder au calculateur détaillé et
+				personnalisez le résultat en quelques clics.
+			</p>
 
-		<h2>Les aides de {epciTitre}</h2>
-		{#if miniaturesManifest[$page.data.epciRuleName]}
-			<img
-				src="/miniatures/{miniaturesManifest[$page.data.epciRuleName]}"
-				alt="Logo de {epciTitre}"
-				class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
-			/>
+			{#if infos.region}
+				<h2>Les aides de {infos.region.titre}</h2>
+				{#if miniaturesManifest[infos.region.ruleName]}
+					<img
+						src="/miniatures/{miniaturesManifest[infos.region.ruleName]}"
+						alt="Logo de {infos.region.titre}"
+						class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
+					/>
+				{/if}
+				{@html infos.region.text}
+			{/if}
+
+			{#if infos.epci}
+				<h2>Les aides de {infos.epci.titre}</h2>
+				{#if miniaturesManifest[infos.epci.ruleName]}
+					<img
+						src="/miniatures/{miniaturesManifest[infos.epci.ruleName]}"
+						alt="Logo de {infos.epci.titre}"
+						class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
+					/>
+				{/if}
+				{@html infos.epci.text}
+			{/if}
+
+			{#if infos.ville}
+				<h2>Les aides de {infos.ville.titre}</h2>
+				{#if miniaturesManifest[infos.ville.ruleName]}
+					<img
+						src="/miniatures/{miniaturesManifest[infos.ville.ruleName]}"
+						alt="Logo de {infos.ville.titre}"
+						class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
+					/>
+				{/if}
+				{@html infos.ville.text}
+
+				{#if infos.epci}
+					<p>Cette aide est cumulable avec l’aide accordée par {infos.epci.titre}.</p>
+				{/if}
+			{/if}
+		{:else}
+			<p>
+				Malheureusement <strong>il n’existe aucune aide locale</strong> à l’achat de vélo dans la
+				ville de {$page.data.ville.nom}. En effet ni la ville, ni le département, ni la région ne
+				proposent d’aide.
+			</p>
+			<p>
+				Si vous y êtes éligible vous pourrez toutefois bénéficier de l’aide nationale accordée par
+				l’État : <strong>le bonus écologique</strong>.
+			</p>
+			<p>
+				Le tableau ci-dessus indique le montant maximal de l’aide de l’État pour chaque type de
+				vélo. Cliquez sur une catégorie pour accéder au calculateur détaillé et personnalisez le
+				résultat en quelques clics, en fonction de vos revenus et du prix du vélo.
+			</p>
 		{/if}
-		{@html epciText}
 
 		<h2>Le bonus écologique de l’État</h2>
 
@@ -97,7 +149,7 @@
 		<p>
 			La demande se fait en ligne au plus tard dans les <strong
 				>6 mois suivant l’achat du vélo</strong
-			>
+			>.
 		</p>
 
 		<h2>Quelles sont les pièces justificatives à fournir ?</h2>

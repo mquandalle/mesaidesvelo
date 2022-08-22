@@ -35,11 +35,7 @@ test('Navigation scenario', async ({ page }) => {
 
 test('Liste aides do not crash', async ({ page }) => {
 	await page.goto(baseUrl + '/liste-aides');
-	await expect(page.locator('h1')).toHaveText(
-		'Les aides intégrées sur le site',
-		// La page est trop lente à s'afficher
-		{ timeout: 10000 }
-	);
+	await expect(page.locator('h1')).toHaveText('Les aides intégrées sur le site');
 });
 
 test('Aide not available', async ({ page }) => {
@@ -83,4 +79,9 @@ test('New or second hand bike', async ({ page }) => {
 
 	await page.goto(baseUrl + '/ville/pantin?velo=mécanique simple');
 	await expect(page.locator('text=pour un vélo neuf ou un vélo d’occasion')).toBeTruthy();
+});
+
+test('Text generation', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/landerneau');
+	await expect(page.locator('text=Malheureusement il n’existe aucune aide locale')).toBeTruthy();
 });

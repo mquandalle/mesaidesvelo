@@ -10,6 +10,12 @@
 
 	onMount(() => {
 		prefetchRoutes(['/', '/ville/*']);
+
+		// This is a work-around a cold-start issue with the search
+		// autocompletion. By calling this endpoint as soon as possible we
+		// asynchrounsly warm up the server code, and reduce the latency in case
+		// of a cold start.
+		fetch('/api/collectivites');
 	});
 
 	const isEmbeded = Boolean(prerendering ? false : $page.url.searchParams.get('iframe'));

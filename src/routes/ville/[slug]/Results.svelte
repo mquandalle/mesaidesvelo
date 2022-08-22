@@ -1,14 +1,12 @@
 <script>
 	import Emoji from '$lib/components/Emoji.svelte';
-	import RevenuSelector, { originalNames } from '$lib/components/RevenuSelector.svelte';
+	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
 	import { engine } from '$lib/engine';
 	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
-
-	export let ville;
 
 	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
 
@@ -73,9 +71,6 @@
 	]
 		.filter(Boolean)
 		.flat();
-
-	$: onlyNationalAides =
-		$originalNames.filter((name) => !name.startsWith('aides . bonus')).length === 0;
 </script>
 
 <div class="mt-8" />
@@ -101,11 +96,4 @@
 		</p>
 		<RevenuSelector />
 	</div>
-{/if}
-
-{#if onlyNationalAides && ville?.nom}
-	<p class="mt-8 mx-2 text-gray-700">
-		<strong>Note :</strong><br />Les aides affichées sont les aides nationales. Ni la ville de
-		{ville.nom}, ni le département, ni la région ne proposent d’aides locales.
-	</p>
 {/if}
