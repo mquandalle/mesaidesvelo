@@ -157,8 +157,8 @@
 
 		<h2>Quelles sont les pièces justificatives à fournir ?</h2>
 		<p>
-			Les pièces demandées peuvent varier seulement le type de vélo et l’organisme qui accorde
-			l’aide. Dans la majorité des cas vous aurez besoin de
+			Les documents demandés peuvent varier selon le type de vélo et l’organisme qui accorde l’aide.
+			Dans la majorité des cas vous aurez besoin de
 		</p>
 		<ul>
 			<li>

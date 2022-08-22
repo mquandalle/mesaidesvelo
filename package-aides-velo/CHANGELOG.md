@@ -1,15 +1,19 @@
 # Historique des modifications
 
-## v2.0.48
+## v2.0.48 - 22/08/2022
 
 Corrige les aides suivantes :
 
 - Région Pays de la Loire
 - Ville de Charenton
 
+Suppression de l’aide suivante :
+
+- Bourges Plus
+
 ## v2.0.47 - 19/08/2022
 
-Ajout de l’aide suivante :
+Ajout des aides suivantes :
 
 - Communauté de Communes des Portes de Romilly-sur-Seine
 - ARCHE Agglo
