@@ -112,9 +112,7 @@
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
 
-	// TODO Super Hacky
-	const veloCat =
-		$page.url.pathname === '/prime-a-la-conversion' ? '' : $page.url.searchParams.get('velo');
+	const veloCat = $page.data.veloCat;
 
 	const uniq = (l) => [...new Set(l)];
 	$: tresholds = $originalNames.flatMap((name) =>
@@ -143,7 +141,6 @@
 					// times : one time in DetailsLine and one time here
 					engineBis.setSituation({
 						...$publicodeSituation,
-						'vélo . type': `'${veloCat}'`,
 						'maximiser les aides': 'oui',
 						'revenu fiscal de référence': `${revenu + 1} €/mois`
 					});

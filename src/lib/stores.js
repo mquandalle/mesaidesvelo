@@ -21,12 +21,10 @@ export const localisationSituation = derived([localisation], ([$localisation]) =
 export const publicodeSituation = derived(
 	[localisationSituation, answers, revenuFiscal, page],
 	([$localisationSituation, $answers, $revenuFiscal, $page]) => {
-		// hacky
-		const veloCat = $page.url.searchParams.get('velo') ?? '';
 		return {
 			...$localisationSituation,
 			...Object.fromEntries(Object.entries($answers).filter(([, val]) => val)),
-			...(veloCat ? { 'vélo . type': `'${veloCat}'` } : {}),
+			...($page.data?.veloCat ? { 'vélo . type': `'${$page.data.veloCat}'` } : {}),
 			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {})
 		};
 	}

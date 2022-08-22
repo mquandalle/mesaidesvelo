@@ -56,8 +56,7 @@ aides . prime à la conversion:
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
-      # Hack: pour ne pas que la règle ressorte quand on précise un type de vélo
-      - vélo . type = ''
+      - vélo . type = 'prime-conversion'
   titre: Prime à la conversion
   description: |
     Pour bénéficier de cette « prime à la casse » vous devez détruire un
@@ -4217,7 +4216,7 @@ vélo . prix . HT:
 # TODO: implémenter sous forme de remplace directement dans les aides
 vélo . prix pour maximiser les aides:
   variations:
-    - si: vélo . type = ''
+    - si: vélo . type = 'prime-conversion'
       alors: 10000€
     - si: localisation . epci = 'CA de Nevers'
       alors:

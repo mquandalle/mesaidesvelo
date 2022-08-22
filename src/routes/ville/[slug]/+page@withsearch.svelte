@@ -23,8 +23,8 @@
 
 <div class="w-full max-w-screen-md m-auto">
 	<div in:fly|local={{ y: 30 }}>
-		<PaneNavigation depth={$page.url.searchParams.get('velo') ? 1 : 0}>
-			{#if $page.url.searchParams.get('velo')}
+		<PaneNavigation depth={$page.data.veloCat ? 1 : 0}>
+			{#if $page.data.veloCat}
 				<Details />
 			{:else}
 				<Results />

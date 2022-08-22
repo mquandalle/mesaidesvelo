@@ -32,7 +32,7 @@
 	$: primeALaConversion = engine
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': "''"
+			'vélo . type': "'prime-conversion'"
 		})
 		.evaluate('aides . prime à la conversion');
 

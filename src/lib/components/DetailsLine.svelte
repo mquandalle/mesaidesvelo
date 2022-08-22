@@ -8,7 +8,7 @@
 	import { publicodeSituation } from '$lib/stores';
 
 	export let ruleName;
-	export let veloCat = '';
+	export let veloCat;
 
 	$: aide = $getCurrentBikeEngine().evaluate(ruleName);
 

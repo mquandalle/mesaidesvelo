@@ -31,6 +31,7 @@ test('Navigation scenario', async ({ page }) => {
 	await page.goBack();
 	await page.click('text=Prime à la conversion');
 	await expect(page.locator('text=prime à la casse')).toBeTruthy();
+	await expect(page.locator('text=3 000 €')).toBeTruthy();
 });
 
 test('Liste aides do not crash', async ({ page }) => {
