@@ -1,11 +1,9 @@
 <script>
 	import { page } from '$app/stores';
 	import miniaturesManifest from '$lib/data/miniatures.json';
-	import { getContext } from 'svelte';
 
-	const { isEmbeded } = getContext('embed');
 	$: infos = $page.data.infos;
-	$: showSEOText = !isEmbeded && infos;
+	$: showExplications = !!infos;
 
 	$: enumeration = ['l’État', infos?.region?.titre, infos?.epci?.titre, infos?.ville?.titre]
 		.filter(Boolean)
@@ -13,9 +11,14 @@
 			const separator = index === 0 ? '' : index === list.length - 1 ? ' et ' : ', ';
 			return concatenation + separator + item;
 		}, '');
+
+	// Temporaire, évenement pour connaître les pages d'explications les plus
+	// lues et celles les plus utiles à ajouter.
+	$: typeof window !== 'undefined' &&
+		window.plausible?.('explications', { props: { disponible: showExplications } });
 </script>
 
-{#if showSEOText}
+{#if showExplications}
 	<div class="prose mt-12">
 		<h1>Les aides à l’achat de vélo à {$page.data.ville.nom}</h1>
 
@@ -155,7 +158,7 @@
 		<h2>Quelles sont les pièces justificatives à fournir ?</h2>
 		<p>
 			Les pièces demandées peuvent varier seulement le type de vélo et l’organisme qui accorde
-			l’aide. Dans la majorité des cas voous aurez besoin de
+			l’aide. Dans la majorité des cas vous aurez besoin de
 		</p>
 		<ul>
 			<li>

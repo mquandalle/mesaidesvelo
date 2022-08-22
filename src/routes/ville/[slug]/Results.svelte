@@ -48,6 +48,7 @@
 	$: displayedAides = [
 		...activesAidesPerBikeKind.map(({ cat, ...rest }) => ({
 			...rest,
+			relNoFollow: true,
 			href: `?velo=${cat}`
 		})),
 		primeALaConversion.nodeValue && {
@@ -76,9 +77,9 @@
 <div class="mt-8" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
 <div role="table" class="flex flex-col-reverse bg-white border-t rounded-t sm:text-lg">
-	{#each displayedAides.reverse() as { montant, href, label, emoji } (label)}
+	{#each displayedAides.reverse() as { montant, href, label, emoji, relNoFollow } (label)}
 		<div animate:flip={{ duration: 600, easing: quintOut }}>
-			<CategoryLine {montant} {href}
+			<CategoryLine {montant} {href} {relNoFollow}
 				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 			>
 		</div>

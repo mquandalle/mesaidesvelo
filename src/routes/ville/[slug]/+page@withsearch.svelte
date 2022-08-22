@@ -5,7 +5,7 @@
 	import ShareButton from '$lib/components/ShareButton.svelte';
 	import { fly } from 'svelte/transition';
 	import Results from './Results.svelte';
-	import SeoText from './SEOText.svelte';
+	import ExplanationsText from './ExplanationsText.svelte';
 
 	/** @type {import('./$types').PageData */
 	export let data;
@@ -32,5 +32,5 @@
 		</PaneNavigation>
 	</div>
 	<ShareButton title="Toutes les aides vélo à {ville.nom}" />
-	<SeoText />
+	<ExplanationsText />
 </div>
