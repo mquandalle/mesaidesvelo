@@ -11,11 +11,6 @@
 			const separator = index === 0 ? '' : index === list.length - 1 ? ' et ' : ', ';
 			return concatenation + separator + item;
 		}, '');
-
-	// Temporaire, évenement pour connaître les pages d'explications les plus
-	// lues et celles les plus utiles à ajouter.
-	$: typeof window !== 'undefined' &&
-		window.plausible?.('explications', { props: { disponible: showExplications } });
 </script>
 
 {#if showExplications}
