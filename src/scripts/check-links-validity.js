@@ -27,9 +27,11 @@ async function processNextQueueItem() {
 async function fetchAndReport({ link, title }) {
 	let status = await getHTTPStatus(link);
 
-	// Retry one time in case of timeout
-	if (status === 499) {
-		await sleep(10_000);
+	// Retries in case of timeout
+	let remainingRetries = 3;
+	while (status === 499 && remainingRetries > 0) {
+		remainingRetries--;
+		await sleep(20_000);
 		status = await getHTTPStatus(link);
 	}
 	report({ status, link, title });

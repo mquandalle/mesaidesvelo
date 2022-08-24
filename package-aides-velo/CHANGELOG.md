@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v2.0.49
+
+Supprime les aides suivantes :
+
+- Département du Lot
+- Ville de Thionville
+- Douarnenez communauté
+
+Mise à jour du lien de l’aide suivante :
+
+- Laval Agglo
+
 ## v2.0.48 - 22/08/2022
 
 Corrige les aides suivantes :

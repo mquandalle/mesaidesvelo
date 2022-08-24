@@ -1989,21 +1989,6 @@ aides . cote d'or . vélo assemblé ou produit localement:
   type: booléen
   par défaut: non
 
-aides . département lot:
-  remplace: département
-  titre: Département du Lot
-  applicable si:
-    toutes ces conditions:
-      - localisation . département = '46'
-      - vélo . électrique
-  valeur:
-    variations:
-      - si: ménage imposable
-        alors: 300€
-      - sinon: 400€
-  plafond: 40% * vélo . prix
-  lien: https://lot.fr/vehicules-et-velos-electriques
-
 aides . agen:
   remplace: intercommunalité
   titre: Agglomération Agen
@@ -3297,7 +3282,7 @@ aides . laval:
       - localisation . epci = 'CA Laval Agglomération'
       - vélo . cargo électrique
   valeur: 300€
-  lien: https://www.agglo-laval.fr/utile-au-quotidien/transports-et-mobilites/lagglo-a-velo/prime-a-lachat-dun-velo-electrique
+  lien: https://www.agglo-laval.fr/utile-au-quotidien/transports-et-mobilites/lagglo-a-velo/prime-a-lachat-dun-velo-cargo
 
 aides . ernée:
   remplace: intercommunalité
@@ -3713,16 +3698,6 @@ aides . montigny les metz:
   plafond: 150€
   lien: http://www.montigny-les-metz.fr/velos-electriques-et-audit-energetique
 
-aides . thionville:
-  remplace: commune
-  titre: Ville de Thionville
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '57672'
-      - vélo . électrique
-  valeur: 100€
-  lien: https://www.thionville.fr/sites/default/files/public/REGLEMENT%20VELO%20ASSISTANCE%20ELECTRIQUE.pdf
-
 aides . mennecy:
   remplace: commune
   titre: Ville de Mennecy
@@ -3814,16 +3789,6 @@ aides . saint-pol-de-léon:
       - vélo . électrique
   valeur: 100€
   lien: https://www.saintpoldeleon.fr/la-ville-vous-aide-pour-l-achat-d
-
-aides . douarnenez:
-  remplace: intercommunalité
-  titre: Douarnenez communauté
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Douarnenez Communauté'
-      - vélo . électrique
-  valeur: 200€
-  lien: https://www.douarnenez-communaute.fr/velo-electrique-subvention/
 
 aides . saint-malo:
   remplace: intercommunalité
