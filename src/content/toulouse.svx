@@ -1,0 +1,15 @@
+Toulouse Métropole met en place des aides à l'achat, la location voire la transformation, de vélos pour les particuliers et les professionnels.
+
+Dans le cadre du Plan de relance adopté en juin 2020 Toulouse Métropole a souhaité développer la résilience et accélérer la transition énergétique et écologique. Toulouse Métropole, consciente que certains ménages et certaines activités professionnelles doivent nécessairement disposer de moyens efficaces de déplacement et convaincue du besoin de transformer nos modes et modèles de déplacements, a décidé d’instituer des mesures d’aides à la mobilité durable. Ces aides ont été adoptées par délibération lors du conseil de la Métropole du 15 octobre 2020.
+
+En 2022, et pour s’adapter au plus près des besoins des citoyens et des entreprises de son territoire, Toulouse Métropole a fait évoluer la prime vélo. Les particuliers dont l’adresse principale se situe sur l’une des 37 communes de Toulouse Métropole et dont le revenu fiscal est en-dessous du seuil de 35 052 € par part, ainsi que les entreprises et les associations de moins de 250 salariés, domiciliées et ayant leur activité sur l’une des 37 communes de Toulouse Métropole, peuvent en bénéficier.
+
+Pour l’aide à l’achat, le montant de l’aide s'élève à 40% du montant HT plafonné selon le type de vélo et le revenu de référence par part. Les aides sont attribuées sous conditions de ressources.
+
+|                                                                | RFR/Part<br/>moins de 18&nbsp;800&nbsp;€ | RFR/Part<br/>moins de 35&nbsp;052&nbsp;€ |
+| -------------------------------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| Location longue durée vélo classique                           | 40 €                                     | /                                        |
+| Achat vélo classique ou pliable neuf ou d’occasion             | 100 €                                    | /                                        |
+| Achat VAE neuf ou d’occasion ou transformation vélo en VAE     | 250 €                                    | 200 €                                    |
+| Achat vélo cargo sans assistance électrique neuf ou d’occasion | 400 €                                    | 350 €                                    |
+| Achat vélo cargo avec assistance électrique neuf ou d’occasion | 600 €                                    | 500 €                                    |

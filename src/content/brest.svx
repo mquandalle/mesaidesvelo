@@ -1,0 +1,9 @@
+Brest métropole propose un dispositif d’aide à l’achat d’un vélo à assistance électrique classique, pliant ou non. L’aide s’applique également pour l’acquisition d’un vélo cargo à assistance électrique, de type biporteur, triporteur, long tail ou tricycles.
+
+Le dispositif d'aide de Brest métropole permet aux particuliers d'obtenir une aide allant jusqu'à 500€ pour l'achat d'un vélo à assistance électrique (VAE). Cette aide est soumise à certaines conditions de ressources :
+
+| Revenu fiscal de référence par part | Montant maximum de la subvention |
+| ----------------------------------- | -------------------------------- |
+| Inférieur à 13 489€                 | 50% dans la limite de 500 €      |
+| Compris entre 13 490€ et 20 000€    | 40% dans la limite de 400 €      |
+| Compris entre 20 001€ et 26 350€    | 20% dans la limite de 200 €      |

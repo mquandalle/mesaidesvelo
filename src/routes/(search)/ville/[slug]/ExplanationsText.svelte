@@ -48,57 +48,22 @@
 					détaillé et personnalisez le résultat en quelques clics.
 				</p>
 
-				{#if infos.region}
-					<h2>Les aides de {infos.region.titre}</h2>
-					{#if miniaturesManifest[infos.region.ruleName]}
-						<img
-							src="/miniatures/{miniaturesManifest[infos.region.ruleName]}"
-							alt="Logo de {infos.region.titre}"
-							class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
-						/>
+				{#each ['epci', 'ville', 'region', 'département'] as collectivite}
+					{#if infos[collectivite]}
+						<h2>
+							Les aides {#if collectivite === 'département'}du{:else}de{/if}
+							{infos[collectivite].titre.replace(/^le/, '')}
+						</h2>
+						{#if miniaturesManifest[infos[collectivite].ruleName]}
+							<img
+								src="/miniatures/{miniaturesManifest[infos[collectivite].ruleName]}"
+								alt="Logo de {infos[collectivite].titre}"
+								class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
+							/>
+						{/if}
+						{@html infos[collectivite].text}
 					{/if}
-					{@html infos.region.text}
-				{/if}
-
-				{#if infos.département}
-					<h2>Les aides du {infos.département.titre.replace(/^le/, '')}</h2>
-					{#if miniaturesManifest[infos.département.ruleName]}
-						<img
-							src="/miniatures/{miniaturesManifest[infos.département.ruleName]}"
-							alt="Logo de {infos.département.titre}"
-							class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
-						/>
-					{/if}
-					{@html infos.département.text}
-				{/if}
-
-				{#if infos.epci}
-					<h2>Les aides de {infos.epci.titre}</h2>
-					{#if miniaturesManifest[infos.epci.ruleName]}
-						<img
-							src="/miniatures/{miniaturesManifest[infos.epci.ruleName]}"
-							alt="Logo de {infos.epci.titre}"
-							class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
-						/>
-					{/if}
-					{@html infos.epci.text}
-				{/if}
-
-				{#if infos.ville}
-					<h2>Les aides de {infos.ville.titre}</h2>
-					{#if miniaturesManifest[infos.ville.ruleName]}
-						<img
-							src="/miniatures/{miniaturesManifest[infos.ville.ruleName]}"
-							alt="Logo de {infos.ville.titre}"
-							class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
-						/>
-					{/if}
-					{@html infos.ville.text}
-
-					{#if infos.epci}
-						<p>Cette aide est cumulable avec l’aide accordée par {infos.epci.titre}.</p>
-					{/if}
-				{/if}
+				{/each}
 			{:else}
 				<p>
 					Malheureusement <strong>il n’existe aucune aide locale</strong> à l’achat de vélo dans la
@@ -136,34 +101,38 @@
 			</p>
 
 			<table>
-				<tr>
-					<th rowspan="2">Type de vélo</th>
-					<th colspan="2" class="text-center">Plafond de l'aide</th>
-				</tr>
-				<tr>
-					<th>Revenu : moins de 6 300 €/an</th>
-					<th>Revenu : moins de 13 489 €/an</th>
-				</tr>
-				<tr>
-					<td>Mécanique simple</td>
-					<td>150 €</td>
-					<td>0 €</td>
-				</tr>
-				<tr>
-					<td>Vélo électrique</td>
-					<td>400 €</td>
-					<td>300 €</td>
-				</tr>
-				<tr>
-					<td>Vélo cargo</td>
-					<td>2 000 €</td>
-					<td>1 000 €</td>
-				</tr>
-				<tr>
-					<td>Vélo pliant</td>
-					<td>2 000 €</td>
-					<td>1 000 €</td>
-				</tr>
+				<thead>
+					<tr>
+						<th rowspan="2">Type de vélo</th>
+						<th colspan="2" class="text-center">Plafond de l'aide</th>
+					</tr>
+					<tr>
+						<th>Revenu : moins de 6 300 €/an</th>
+						<th>Revenu : moins de 13 489 €/an</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Mécanique simple</td>
+						<td>150 €</td>
+						<td>0 €</td>
+					</tr>
+					<tr>
+						<td>Vélo électrique</td>
+						<td>400 €</td>
+						<td>300 €</td>
+					</tr>
+					<tr>
+						<td>Vélo cargo</td>
+						<td>2 000 €</td>
+						<td>1 000 €</td>
+					</tr>
+					<tr>
+						<td>Vélo pliant</td>
+						<td>2 000 €</td>
+						<td>1 000 €</td>
+					</tr>
+				</tbody>
 			</table>
 			<p>
 				La demande se fait en ligne au plus tard dans les <strong

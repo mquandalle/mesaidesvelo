@@ -36,11 +36,15 @@ const ruleToContentFilename = (ruleName) => ruleName.toLowerCase().replace('aide
 const hasCorrespondingContent = (ruleName) =>
 	ruleName && Object.keys(availableContent).includes(ruleToContentFilename(ruleName));
 
-const getCorrespondingContent = async (ruleName) => {
+const getCorrespondingContent = async (ruleName, { prepend } = {}) => {
 	const source = availableContent[ruleToContentFilename(ruleName)];
-	const text = (await compile(source)).code;
+	const modifiedText = prependPartialSentence(source, { prepend });
+	const text = (await compile(modifiedText)).code;
 	return text;
 };
+
+const prependPartialSentence = (content, { prepend } = {}) =>
+	prepend ? prepend + content.slice(0, 1).toLowerCase() + content.slice(1) : content;
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
@@ -88,12 +92,13 @@ export async function load({ params }) {
 		};
 	}
 
-	// TODO : généraliser
-	if (villeRuleName === 'aides . mérignac') {
+	if (hasCorrespondingContent(villeRuleName)) {
 		infos.ville = {
 			ruleName: villeRuleName,
 			titre: engine.getRule(villeRuleName).rawNode.titre.replace(/^Ville/, 'la ville'),
-			text: await getCorrespondingContent('mérignac')
+			text: await getCorrespondingContent(villeRuleName, {
+				prepend: infos.epci ? `En plus de l’aide versée par ${infos.epci.titre}, ` : ''
+			})
 		};
 	}
 
@@ -107,7 +112,9 @@ export async function load({ params }) {
 	}
 
 	if (hasCorrespondingContent(departementRuleName)) {
-		const text = await getCorrespondingContent(departementRuleName);
+		const text = await getCorrespondingContent(departementRuleName, {
+			prepend: infos.region ? `En plus de l’aide versée par la région ${infos.region.titre}, ` : ''
+		});
 		infos.département = {
 			ruleName: departementRuleName,
 			titre: engine
