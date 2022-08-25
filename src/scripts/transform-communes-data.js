@@ -40,7 +40,8 @@ const extraData = [
 		codesPostaux: ['98000'],
 		departement: '06',
 		region: '84',
-		population: 39244
+		population: 39244,
+		pays: 'monaco'
 	},
 	{
 		nom: 'Luxembourg',
@@ -49,7 +50,8 @@ const extraData = [
 		codesPostaux: ['1111'],
 		departement: '',
 		region: '',
-		population: 632275
+		population: 632275,
+		pays: 'luxembourg'
 	}
 ];
 

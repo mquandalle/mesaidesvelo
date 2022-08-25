@@ -19,22 +19,28 @@ const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
 );
 
 const availableContent = Object.fromEntries(
-	Object.entries(import.meta.glob('../../../content/*.svx', { as: 'raw', eager: true })).map(
+	Object.entries(import.meta.glob('/src/content/*.svx', { as: 'raw', eager: true })).map(
 		([name, mod]) => [
 			name
 				.split('/')
 				.at(-1)
+				.toLowerCase()
 				.replace(/\.svx$/, ''),
 			mod
 		]
 	)
 );
 
+const ruleToContentFilename = (ruleName) => ruleName.toLowerCase().replace('aides . ', '');
+
 const hasCorrespondingContent = (ruleName) =>
-	ruleName &&
-	Object.keys(availableContent)
-		.map((leafName) => `aides . ${leafName}`)
-		.includes(ruleName);
+	ruleName && Object.keys(availableContent).includes(ruleToContentFilename(ruleName));
+
+const getCorrespondingContent = async (ruleName) => {
+	const source = availableContent[ruleToContentFilename(ruleName)];
+	const text = (await compile(source)).code;
+	return text;
+};
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
@@ -43,6 +49,19 @@ export async function load({ params }) {
 
 	if (!localisation) {
 		throw error(404);
+	}
+
+	if (localisation.pays && localisation.pays !== 'france') {
+		if (hasCorrespondingContent(localisation.pays)) {
+			return {
+				infos: {
+					pays: {
+						text: await getCorrespondingContent(localisation.pays)
+					}
+				}
+			};
+		}
+		return {};
 	}
 
 	const villeRuleName = ruleNamePerCollectivity['code insee'][localisation.code];
@@ -61,8 +80,7 @@ export async function load({ params }) {
 
 	let infos = {};
 	if (hasCorrespondingContent(epciRuleName)) {
-		const source = availableContent[epciRuleName.replace('aides . ', '')];
-		const text = (await compile(source)).code;
+		const text = await getCorrespondingContent(epciRuleName);
 		infos.epci = {
 			ruleName: epciRuleName,
 			titre: engine.getRule(epciRuleName).rawNode.titre,
@@ -70,25 +88,32 @@ export async function load({ params }) {
 		};
 	}
 
-	if (hasCorrespondingContent(regionRuleName) && !villeRuleName && !epciRuleName) {
-		const source = availableContent[regionRuleName.replace('aides . ', '')];
-		const text = (await compile(source)).code;
-		return {
-			infos: {
-				region: {
-					ruleName: regionRuleName,
-					titre: engine.getRule(regionRuleName).rawNode.titre.replace(/^Région/, 'la région'),
-					text
-				}
-			}
-		};
-	}
-
+	// TODO : généraliser
 	if (villeRuleName === 'aides . mérignac') {
 		infos.ville = {
 			ruleName: villeRuleName,
 			titre: engine.getRule(villeRuleName).rawNode.titre.replace(/^Ville/, 'la ville'),
-			text: (await compile(availableContent['mérignac'])).code
+			text: await getCorrespondingContent('mérignac')
+		};
+	}
+
+	if (hasCorrespondingContent(regionRuleName)) {
+		const text = await getCorrespondingContent(regionRuleName);
+		infos.region = {
+			ruleName: regionRuleName,
+			titre: engine.getRule(regionRuleName).rawNode.titre.replace(/^Région/, 'la région'),
+			text
+		};
+	}
+
+	if (hasCorrespondingContent(departementRuleName)) {
+		const text = await getCorrespondingContent(departementRuleName);
+		infos.département = {
+			ruleName: departementRuleName,
+			titre: engine
+				.getRule(departementRuleName)
+				.rawNode.titre.replace(/^Département/, 'le département'),
+			text
 		};
 	}
 
