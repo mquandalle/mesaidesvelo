@@ -5,6 +5,9 @@
 Supprime les aides suivantes :
 
 - Département du Lot
+- Département de Saône-et-Loire
+- Département de Seine-Maritime
+- Département des Bouches-du-Rhône
 - Ville de Thionville
 - Douarnenez communauté
 
