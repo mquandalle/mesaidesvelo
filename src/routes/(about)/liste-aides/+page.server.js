@@ -58,7 +58,18 @@ export async function load() {
 		)
 	)
 		.sort(([a], [b]) => parseInt(a) - parseInt(b))
-		.map(([dep, aides]) => [dep, aides.map(formatAideForClient)]);
+		.map(([dep, aides]) => [
+			dep,
+			aides
+				.sort((a, b) =>
+					a.collectivity.kind === 'département'
+						? -1
+						: b.collectivity.kind === 'département'
+						? 1
+						: (b.population ?? 0) - (a.population ?? 0)
+				)
+				.map(formatAideForClient)
+		]);
 
 	return { aidesEtat, aidesRegions, aidesLocales };
 }

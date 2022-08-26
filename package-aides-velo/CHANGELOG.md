@@ -7,13 +7,21 @@ Supprime les aides suivantes :
 - Département du Lot
 - Département de Saône-et-Loire
 - Département de Seine-Maritime
+- Département de la Loire
 - Département des Bouches-du-Rhône
+- Agglomération d’Agen
 - Ville de Thionville
 - Douarnenez communauté
+- Grand Poitiers
 
 Mise à jour du lien de l’aide suivante :
 
 - Laval Agglo
+
+Ajout des vélos d'occasion :
+
+- Ville de Divonne-les-bains
+- Ville de Illkirch-Graffenstaden
 
 ## v2.0.48 - 22/08/2022
 

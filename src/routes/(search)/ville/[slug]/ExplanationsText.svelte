@@ -107,8 +107,8 @@
 						<th colspan="2" class="text-center">Plafond de l'aide</th>
 					</tr>
 					<tr>
-						<th>Revenu : moins de 6 300 €/an</th>
-						<th>Revenu : moins de 13 489 €/an</th>
+						<th>Revenu : moins de 6&nbsp;300&nbsp;€/an</th>
+						<th>Revenu : moins de 13&nbsp;489&nbsp;€/an</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -138,6 +138,13 @@
 				La demande se fait en ligne au plus tard dans les <strong
 					>6 mois suivant l’achat du vélo</strong
 				>.
+			</p>
+
+			<p>
+				En plus du bonus écologique, l’État propose aussi la <a href="/prime-a-la-conversion"
+					>prime à la conversion</a
+				> qui est une aide supplémentaire accordée en cas de remise à la case d’une vielle voiture essence
+				ou diesel.
 			</p>
 
 			<h2>Quelles sont les pièces justificatives à fournir ?</h2>

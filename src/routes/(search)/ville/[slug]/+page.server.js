@@ -83,6 +83,7 @@ export async function load({ params }) {
 	}
 
 	let infos = {};
+
 	if (hasCorrespondingContent(epciRuleName)) {
 		const text = await getCorrespondingContent(epciRuleName);
 		infos.epci = {
@@ -113,7 +114,7 @@ export async function load({ params }) {
 
 	if (hasCorrespondingContent(departementRuleName)) {
 		const text = await getCorrespondingContent(departementRuleName, {
-			prepend: infos.region ? `En plus de l’aide versée par la région ${infos.region.titre}, ` : ''
+			prepend: infos.region ? `En plus de l’aide versée par ${infos.region.titre}, ` : ''
 		});
 		infos.département = {
 			ruleName: departementRuleName,

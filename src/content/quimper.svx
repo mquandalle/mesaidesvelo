@@ -1,0 +1,12 @@
+L'agglomération de Quimper Bretagne Occidentale met en place une aide à l'achat pour les vélos à assistance électrique (VAE), pour les particuliers résidants au sein d’une des 14 communes de l’agglomération.
+
+Cette aide vient compléter le dispositif existant de l’Etat et est destinée à inciter les citoyens à se porter vers la pratique régulière du vélo. Elle concerne les vélos à assistance neufs exclusivement.
+
+Cette « aide VAE » sera versée selon les modalités suivantes :
+
+| Revenu fiscal de référence par part | Subvention QBO                              |
+| ----------------------------------- | ------------------------------------------- |
+| Inférieur à 13 489 €.               | 50% du prix du vélo, dans la limite de 500€ |
+| Entre 13 490 € et 20 000 €          | 40% du prix du vélo, dans la limite de 400€ |
+| Entre 20 001 € et 26 350 €          | 20% du prix du vélo, dans la limite de 200€ |
+| A partir de 26 351 €                | Aucune participation n’est attribuée        |

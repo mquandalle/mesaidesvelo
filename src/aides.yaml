@@ -315,15 +315,15 @@ aides . blacé:
       - sinon: 100€
   lien: https://mairie-blace.fr/fr/rb/1541490/prime-velo
 
-aides . département loire:
-  remplace: département
-  titre: Département de la Loire
-  applicable si:
-    toutes ces conditions:
-      - localisation . département = '42'
-      - vélo . électrique
-  valeur: 300€
-  lien: https://www.loire.fr/jcms/lw_1383840/beneficiez-de-300-euros-pour-l-achat-d-un-velo-a-assistance-electrique-vae
+# aides . département loire:
+#   remplace: département
+#   titre: Département de la Loire
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . département = '42'
+#       - vélo . électrique
+#   valeur: 300€
+#   lien: https://www.loire.fr/jcms/lw_1383840/beneficiez-de-300-euros-pour-l-achat-d-un-velo-a-assistance-electrique-vae
 
 aides . charlieu-belmont:
   remplace: commune
@@ -1989,16 +1989,16 @@ aides . cote d'or . vélo assemblé ou produit localement:
   type: booléen
   par défaut: non
 
-aides . agen:
-  remplace: intercommunalité
-  titre: Agglomération Agen
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = "CA Agglomération d'Agen"
-      - vélo . électrique
-  valeur: 200€
-  plafond: vélo . prix
-  lien: https://www.agglo-agen.net/vie-quotidienne/mobilites/aide-velo-electrique-634.html
+# aides . agen:
+#   remplace: intercommunalité
+#   titre: Agglomération d’Agen
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = "CA Agglomération d'Agen"
+#       - vélo . électrique
+#   valeur: 200€
+#   plafond: vélo . prix
+#   lien: https://www.agglo-agen.net/vie-quotidienne/mobilites/aide-velo-electrique-634.html
 
 aides . sophia antipolis:
   remplace: intercommunalité
@@ -2580,16 +2580,16 @@ aides . brissac loire aubance:
   plafond: vélo . prix
   lien: https://www.brissacloireaubance.fr/actualites/une-nouvelle-aide-de-la-cclla-pour-lachat-de-velo-a-assistance-electrique/
 
-aides . grand poitiers:
-  remplace: intercommunalité
-  titre: Grand Poitiers
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CU du Grand Poitiers'
-      - vélo . électrique
-  valeur: 25% * vélo . prix
-  plafond: 250€
-  lien: https://www.grandpoitiers.fr/au-quotidien/deplacements/velos/aide-a-lachat-dun-velo-a-assistance-electrique-vae
+# aides . grand poitiers:
+#   remplace: intercommunalité
+#   titre: Grand Poitiers
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CU du Grand Poitiers'
+#       - vélo . électrique
+#   valeur: 25% * vélo . prix
+#   plafond: 250€
+#   lien: https://www.grandpoitiers.fr/au-quotidien/deplacements/velos/aide-a-lachat-dun-velo-a-assistance-electrique-vae
 
 aides . haut-poitou:
   remplace: intercommunalité
@@ -3065,7 +3065,7 @@ aides . mont de marsan:
   valeur: 250€
   lien: http://www.montdemarsan-agglo.fr/agglo/document?id=2682&id_attribute=48&usg=AOvVaw1SVEDZSqj0LRmmUyyGkc_n
 
-aides . bourg en bresse:
+aides . bourg-en-bresse:
   remplace: commune
   titre: Ville de Bourg-en-Bresse
   applicable si: localisation . code insee = '01053'
@@ -4275,6 +4275,8 @@ vélo . occasion:
       - aides . haut val de sèvre
       - aides . grand périgueux
       - aides . charenton
+      - aides . divonne-les-bains
+      - aides . illkirch
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
