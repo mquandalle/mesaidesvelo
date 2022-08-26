@@ -1,6 +1,6 @@
 # Historique des modifications
 
-## v2.0.49
+## v2.0.49 - 26/08/2022
 
 Supprime les aides suivantes :
 
@@ -17,6 +17,10 @@ Supprime les aides suivantes :
 Mise à jour du lien de l’aide suivante :
 
 - Laval Agglo
+
+Ajout de l’aide suivante :
+
+- Communauté de communes du Pays de Dol et de la Baie du Mont Saint-Michel
 
 Ajout des vélos d'occasion :
 

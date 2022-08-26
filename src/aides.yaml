@@ -3805,6 +3805,18 @@ aides . saint-malo:
       - sinon: 120€
   lien: https://www.stmalo-agglomeration.fr/aide-achat-velo-electrique.html
 
+aides . baie du mont saint-michel:
+  remplace: intercommunalité
+  titre: Communauté de communes du pays de Dol et de la Baie du Mont Saint-Michel
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays de Dol et de la Baie du Mont Saint-Michel'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+  valeur: 100€
+  lien: https://www.ccdol-baiemsm.bzh/favoriser-lusage-du-velo/
+
 aides . Vallons de Haute Bretagne:
   remplace: intercommunalité
   titre: Vallons de Haute Bretagne Communauté

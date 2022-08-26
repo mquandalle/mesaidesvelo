@@ -38,10 +38,7 @@ export async function GET({ params: { slug } }) {
 	});
 
 	await page.setContent(res.code);
-
-	const screenshot = await page.screenshot({
-		type: 'png'
-	});
+	const screenshot = await page.screenshot({ type: 'png' });
 	await browser.close();
 
 	// Set the s-maxage property which caches the images then on the Vercel edge
