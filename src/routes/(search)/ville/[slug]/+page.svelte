@@ -1,11 +1,11 @@
 <script>
-	import { page } from '$app/stores';
 	import Details from '$lib/components/Details.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 	import ShareButton from '$lib/components/ShareButton.svelte';
+	import { veloCat } from '$lib/stores';
 	import { fly } from 'svelte/transition';
-	import Results from './Results.svelte';
 	import ExplanationsText from './ExplanationsText.svelte';
+	import Results from './Results.svelte';
 
 	/** @type {import('./$types').PageData */
 	export let data;
@@ -30,8 +30,8 @@
 
 <div class="w-full max-w-screen-md m-auto">
 	<div in:fly|local={{ y: 30 }}>
-		<PaneNavigation depth={$page.data.veloCat ? 1 : 0}>
-			{#if $page.data.veloCat}
+		<PaneNavigation depth={$veloCat ? 1 : 0}>
+			{#if $veloCat}
 				<Details />
 			{:else}
 				<Results />

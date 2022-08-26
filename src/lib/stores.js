@@ -18,13 +18,20 @@ export const localisationSituation = derived([localisation], ([$localisation]) =
 		: {}
 );
 
+export const veloCat = derived([page], ([$page]) => {
+	if ($page.routeId === '(search)/prime-a-la-conversion') {
+		return 'prime-conversion';
+	}
+	return $page.url?.searchParams.get('velo') ?? null;
+});
+
 export const publicodeSituation = derived(
-	[localisationSituation, answers, revenuFiscal, page],
-	([$localisationSituation, $answers, $revenuFiscal, $page]) => {
+	[localisationSituation, answers, revenuFiscal, veloCat],
+	([$localisationSituation, $answers, $revenuFiscal, $veloCat]) => {
 		return {
 			...$localisationSituation,
 			...Object.fromEntries(Object.entries($answers).filter(([, val]) => val)),
-			...($page.data?.veloCat ? { 'vélo . type': `'${$page.data.veloCat}'` } : {}),
+			...($veloCat ? { 'vélo . type': `'${$veloCat}'` } : {}),
 			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {})
 		};
 	}

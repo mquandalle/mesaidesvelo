@@ -106,13 +106,10 @@
 </script>
 
 <script>
-	import { page } from '$app/stores';
-	import { publicodeSituation, revenuFiscal } from '$lib/stores';
+	import { publicodeSituation, revenuFiscal, veloCat } from '$lib/stores';
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
-
-	const veloCat = $page.data.veloCat;
 
 	const uniq = (l) => [...new Set(l)];
 	$: tresholds = $originalNames.flatMap((name) =>
@@ -170,7 +167,7 @@
 
 	$: displayedThresholds =
 		!numberFieldIsRequired &&
-		(veloCat === null ? uniqThresholds : removeUnecessaryThresholds(uniqThresholds));
+		($veloCat === null ? uniqThresholds : removeUnecessaryThresholds(uniqThresholds));
 
 	$: if (
 		$revenuFiscal &&

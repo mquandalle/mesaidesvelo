@@ -1,5 +1,5 @@
 <script>
-	import { engine, getCurrentBikeEngine } from '$lib/engine';
+	import { getCurrentBikeEngine } from '$lib/engine';
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
 
@@ -16,7 +16,7 @@
 			.map((ruleName) => $getCurrentBikeEngine().evaluate(ruleName).traversedVariables)
 			.flat()
 	)
-		.filter((q) => engine.getRule(q).rawNode.question)
+		.filter((q) => $getCurrentBikeEngine().getRule(q).rawNode.question)
 		.filter((q) => q !== 'vélo . neuf ou occasion')
 		.sort((a, b) => getSortOrder(a) - getSortOrder(b));
 

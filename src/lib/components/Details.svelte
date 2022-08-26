@@ -5,14 +5,13 @@
 	import Emoji from '$lib/components./../../lib/components/Emoji.svelte';
 	import Questions from '$lib/components./../../lib/components/Questions.svelte';
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
-	import { publicodeSituation, resetAnswers } from '$lib/stores';
+	import { publicodeSituation, resetAnswers, veloCat } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 
 	resetAnswers();
 
-	const veloCat = $page.url.searchParams.get('velo');
-	const categoryDescription = engine.getRule(`vélo . ${veloCat}`).rawNode?.description ?? '';
+	const categoryDescription = engine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '';
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
 	$: aidesDetails = collectivites
@@ -38,14 +37,14 @@
 	$: montantAidesVeloOccasion = engineBis
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': `'${veloCat ?? ''}'`,
+			'vélo . type': `'${$veloCat ?? ''}'`,
 			'vélo . neuf ou occasion': '"occasion"'
 		})
 		.evaluate('aides . montant').nodeValue;
 	$: montantAidesVeloNeuf = engineBis
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': `'${veloCat ?? ''}'`,
+			'vélo . type': `'${$veloCat ?? ''}'`,
 			'vélo . neuf ou occasion': '"neuf"'
 		})
 		.evaluate('aides . montant').nodeValue;
@@ -67,8 +66,8 @@
 	← Toutes les aides
 </a>
 <h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
-	{titleCategory(veloCat)}{#if emojiCategory(veloCat)}&nbsp;<Emoji
-			emoji={emojiCategory(veloCat)}
+	{titleCategory($veloCat)}{#if emojiCategory($veloCat)}&nbsp;<Emoji
+			emoji={emojiCategory($veloCat)}
 		/>{/if}
 </h2>
 
@@ -79,7 +78,7 @@
 <div class="border-t border-b mt-6 bg-white">
 	{#each aidesDetails as ruleName (ruleName)}
 		<div transition:slide|local={{ duration: 200 }} class="border-b last:border-b-0">
-			<DetailsLine {ruleName} {veloCat} />
+			<DetailsLine {ruleName} veloCat={$veloCat} />
 		</div>
 	{/each}
 	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b-md">
@@ -98,7 +97,7 @@
 
 <Questions goals={aidesDetails} {demandeNeufOuOccasion} />
 
-{#if !demandeNeufOuOccasion && veloCat !== 'motorisation'}
+{#if !demandeNeufOuOccasion && $veloCat !== 'motorisation'}
 	<p class="mt-4">
 		{#if aidesDetails.length === 1}Cette aide est valable{:else}Ces aides sont valables{/if}
 		{#if montantAidesVeloNeuf === montantAidesVeloOccasion}

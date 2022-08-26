@@ -1,6 +1,6 @@
 <script>
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
-	import { engine, optionalEvaluate } from '$lib/engine';
+	import { engine, getCurrentBikeEngine } from '$lib/engine';
 	import { answers } from '$lib/stores';
 	import { slugify } from '$lib/utils';
 	import { slide } from 'svelte/transition';
@@ -21,6 +21,14 @@
 	} else if (value === null) {
 		$answers[rule] = undefined;
 	}
+
+	$: optionalEvaluate = (expression) => {
+		if (typeof expression === 'string') {
+			return expression;
+		} else {
+			return $getCurrentBikeEngine().evaluate(expression).nodeValue;
+		}
+	};
 
 	let showExplanations = false;
 </script>

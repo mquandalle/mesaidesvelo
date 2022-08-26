@@ -9,11 +9,3 @@ export const getCurrentBikeEngine = derived([publicodeSituation], ([$publicodeSi
 	engine.setSituation($publicodeSituation);
 	return engine;
 });
-
-export const optionalEvaluate = (expression) => {
-	if (typeof expression === 'string') {
-		return expression;
-	} else {
-		return engine.evaluate(expression).nodeValue;
-	}
-};
