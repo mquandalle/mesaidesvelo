@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { localisation } from '$lib/stores';
 	import AutoComplete from '$lib/components/Autocomplete.svelte';
-	import { page } from '$app/stores';
+	import { navigating } from '$app/stores';
 
 	async function loadItems(keyword) {
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
@@ -50,7 +50,7 @@
 			onFocus={autoSelectInput}
 			onChange={(val) => {
 				const derivedPath = val ? `/ville/${val.slug}` : `/`;
-				if ($page.url.pathname !== derivedPath) {
+				if (!$navigating) {
 					goto(derivedPath, { noscroll: true });
 				}
 			}}

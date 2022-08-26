@@ -11,7 +11,7 @@
 // - « recherche approximative » pour gérer les erreurs de saisie de
 //   l'utilisateur.
 
-import { removeAccents } from '$lib/utils';
+import { rawCityToFullLocalisation, removeAccents } from '$lib/utils';
 import fuzzysort from 'fuzzysort';
 import data from '$lib/data/communes.json';
 
@@ -43,36 +43,16 @@ const searchOptions = {
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url }) {
 	const search = removeAccents(url.searchParams.get('search')?.replace(/\s/g, '').toLowerCase());
-	const slug = url.searchParams.get('slug');
 
-	const pick = ({ code, nom, slug, epci, codePostal, codesPostaux, departement, region }) => ({
-		nom,
-		slug,
-		epci,
-		codeInsee: code,
-		codePostal: codePostal || codesPostaux[0],
-		departement: departement ?? code.slice(0, 2),
-		region
-	});
+	const results = search
+		? fuzzysort
+				.go(search, indexedData, searchOptions)
+				.map(({ obj }) => rawCityToFullLocalisation(obj))
+		: // Par défaut on retourne les communes les plus peuplées
+		  indexedData
+				.sort((a, b) => b.population - a.population)
+				.slice(0, 10)
+				.map(rawCityToFullLocalisation);
 
-	if (slug) {
-		const res = data.find((c) => c.slug === slug);
-		if (res) {
-			return new Response(JSON.stringify(pick(res)));
-		}
-	} else if (search) {
-		return new Response(
-			JSON.stringify(fuzzysort.go(search, indexedData, searchOptions).map(({ obj }) => pick(obj)))
-		);
-	} else {
-		// Par défaut on retourne les communes les plus peuplées
-		return new Response(
-			JSON.stringify(
-				indexedData
-					.sort((a, b) => b.population - a.population)
-					.slice(0, 10)
-					.map(pick)
-			)
-		);
-	}
+	return new Response(JSON.stringify(results));
 }

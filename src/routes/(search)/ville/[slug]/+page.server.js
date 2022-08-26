@@ -4,6 +4,7 @@ import communes from '$lib/data/communes.json';
 import labelTourDeFrance from '/src/content/label-tour-de-france.json';
 import { error } from '@sveltejs/kit';
 import { engine } from '$lib/engine';
+import { rawCityToFullLocalisation } from '$lib/utils';
 
 const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
 	(manifest, [ruleName, { collectivity }]) => {
@@ -50,32 +51,28 @@ const prependPartialSentence = (content, { prepend } = {}) =>
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 	const slug = params.slug;
-	const localisation = communes.find((c) => c.slug === slug);
+	const localisation = rawCityToFullLocalisation(communes.find((c) => c.slug === slug));
 
 	if (!localisation) {
 		throw error(404);
 	}
 
+	const baseData = { ville: localisation };
+	const infos = {};
+
 	if (localisation.pays && localisation.pays !== 'france') {
 		if (hasCorrespondingContent(localisation.pays)) {
-			return {
-				infos: {
-					pays: {
-						text: await getCorrespondingContent(localisation.pays)
-					}
-				}
+			infos.pays = {
+				text: await getCorrespondingContent(localisation.pays)
 			};
 		}
-		return {};
+		return { ...baseData, infos };
 	}
 
 	const villeRuleName = ruleNamePerCollectivity['code insee'][localisation.code];
 	const epciRuleName = ruleNamePerCollectivity['epci'][localisation.epci];
-	const departementRuleName =
-		ruleNamePerCollectivity['département'][localisation.departement ?? code.slice(0, 2)];
+	const departementRuleName = ruleNamePerCollectivity['département'][localisation.departement];
 	const regionRuleName = ruleNamePerCollectivity['région'][localisation.region];
-
-	let infos = {};
 
 	if (
 		[villeRuleName, epciRuleName, departementRuleName, regionRuleName].every(
@@ -130,5 +127,5 @@ export async function load({ params }) {
 		};
 	}
 
-	return { infos };
+	return { ...baseData, infos };
 }

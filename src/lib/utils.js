@@ -46,3 +46,24 @@ export function emojiCategory(category) {
 		return '⚡';
 	}
 }
+
+export const rawCityToFullLocalisation = ({
+	code,
+	nom,
+	slug,
+	epci,
+	codePostal,
+	codesPostaux,
+	departement,
+	region,
+	pays
+}) => ({
+	nom,
+	slug,
+	epci,
+	codeInsee: code,
+	codePostal: codePostal || codesPostaux[0],
+	departement: departement ?? code.slice(0, 2),
+	region,
+	pays
+});
