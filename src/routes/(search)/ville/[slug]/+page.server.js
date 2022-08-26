@@ -1,6 +1,7 @@
 import { compile } from 'mdsvex';
 import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
 import communes from '$lib/data/communes.json';
+import labelTourDeFrance from '/src/content/label-tour-de-france.json';
 import { error } from '@sveltejs/kit';
 import { engine } from '$lib/engine';
 
@@ -74,22 +75,21 @@ export async function load({ params }) {
 		ruleNamePerCollectivity['département'][localisation.departement ?? code.slice(0, 2)];
 	const regionRuleName = ruleNamePerCollectivity['région'][localisation.region];
 
+	let infos = {};
+
 	if (
 		[villeRuleName, epciRuleName, departementRuleName, regionRuleName].every(
 			(ruleName) => ruleName === undefined
 		)
 	) {
-		return { infos: { onlyNationalAides: true } };
+		infos.onlyNationalAides = true;
 	}
 
-	let infos = {};
-
 	if (hasCorrespondingContent(epciRuleName)) {
-		const text = await getCorrespondingContent(epciRuleName);
 		infos.epci = {
 			ruleName: epciRuleName,
 			titre: engine.getRule(epciRuleName).rawNode.titre,
-			text
+			text: await getCorrespondingContent(epciRuleName)
 		};
 	}
 
@@ -104,30 +104,31 @@ export async function load({ params }) {
 	}
 
 	if (hasCorrespondingContent(regionRuleName)) {
-		const text = await getCorrespondingContent(regionRuleName);
 		infos.region = {
 			ruleName: regionRuleName,
 			titre: engine.getRule(regionRuleName).rawNode.titre.replace(/^Région/, 'la région'),
-			text
+			text: await getCorrespondingContent(regionRuleName)
 		};
 	}
 
 	if (hasCorrespondingContent(departementRuleName)) {
-		const text = await getCorrespondingContent(departementRuleName, {
-			prepend: infos.region ? `En plus de l’aide versée par ${infos.region.titre}, ` : ''
-		});
 		infos.département = {
 			ruleName: departementRuleName,
 			titre: engine
 				.getRule(departementRuleName)
 				.rawNode.titre.replace(/^Département/, 'le département'),
-			text
+			text: await getCorrespondingContent(departementRuleName, {
+				prepend: infos.region ? `En plus de l’aide versée par ${infos.region.titre}, ` : ''
+			})
 		};
 	}
 
-	if (Object.keys(infos).length > 0) {
-		return { infos };
-	} else {
-		return {};
+	if (Object.keys(labelTourDeFrance).includes(localisation.nom.toLowerCase())) {
+		infos.labelTourDeFrance = {
+			ville: localisation.nom,
+			note: labelTourDeFrance[localisation.nom.toLowerCase()]
+		};
 	}
+
+	return { infos };
 }

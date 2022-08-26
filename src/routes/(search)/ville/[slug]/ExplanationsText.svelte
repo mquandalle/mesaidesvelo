@@ -3,7 +3,7 @@
 	import miniaturesManifest from '$lib/data/miniatures.json';
 
 	$: infos = $page.data.infos;
-	$: showExplications = !!infos;
+	$: showExplications = Object.keys(infos ?? {}).length > 0;
 
 	$: enumeration = [
 		'l’État',
@@ -167,6 +167,29 @@
 					pour les vélos à assiance électrique : la copie du certificat d’homologation du vélo
 				</li>
 			</ul>
+		{/if}
+
+		{#if infos.labelTourDeFrance}
+			<h2>{infos.labelTourDeFrance.ville} labellisé par le Tour-de-France</h2>
+			<img
+				src="/ville-a-velo/{infos.labelTourDeFrance.note}.jpeg"
+				alt="Lavel ville à vélo du Tour de France"
+				class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[200px] object-contain"
+			/>
+			<p>
+				Le label « Ville à Vélo du Tour de France » consacre les collectivités engagées en faveur de
+				la mobilité à vélo. Lancé en 2021 et ouvert à toutes les collectivités ayant accueilli au
+				moins une fois le Tour de France, il a pour but d’encourager les initiatives prises par les
+				communes en faveur de la bicyclette au quotidien.
+			</p>
+
+			<p>Le label est décliné selon quatre niveaux symbolisés par de petits vélos jaunes.</p>
+
+			<p class="font-bold">
+				La ville {#if infos.labelTourDeFrance.ville.match(/^[aeiouy]/i)}d’{:else}de {/if}{infos
+					.labelTourDeFrance.ville} a reçu la labellisation « {infos.labelTourDeFrance.note} vélo{#if infos.labelTourDeFrance.note > 1}s{/if}
+				»{#if infos.labelTourDeFrance.note === 4}, la meilleure note possible{/if}.
+			</p>
 		{/if}
 	</div>
 {/if}
