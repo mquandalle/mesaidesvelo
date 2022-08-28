@@ -58,7 +58,21 @@
 
 <svelte:window on:click={() => (enableTracking = true)} />
 
-<div class="px-3 sm:px-8 {!isEmbeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
+{#if isEmbeded}
+	<div class="embeded-too-small text-xl text-center items-center justify-center h-[100vh]">
+		<p>
+			Retrouvez toutes les aides à l’achat d’un vélo sur le site<br />
+			<a
+				href="https://mesaidesvelo.fr"
+				target="_blank"
+				class="inline-block mt-2 font-bold underline hover:text-green-800"
+				>Mes<span class="text-green-800">aides</span>velo.fr</a
+			>
+		</p>
+	</div>
+{/if}
+
+<div class="app px-3 sm:px-8 {!isEmbeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
 	<header class="{!isEmbeded ? 'mt-8' : ''} block w-full max-w-screen-md m-auto">
 		{#if !isEmbeded}
 			<a href="/" class="text-3xl font-bold cursor-pointer">
@@ -82,5 +96,19 @@
 <style>
 	:global(body) {
 		min-height: 100vh;
+	}
+
+	.embeded-too-small {
+		display: none;
+	}
+
+	@media (max-height: 300px) {
+		.embeded-too-small + .app {
+			display: none;
+		}
+
+		.embeded-too-small {
+			display: flex;
+		}
 	}
 </style>
