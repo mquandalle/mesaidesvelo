@@ -1,6 +1,6 @@
+import fs from 'node:fs';
 import yaml from 'js-yaml';
 import fetch from 'node-fetch';
-import fs from 'fs';
 
 // Extrait la liste des liens référencés dans la base de règles
 const aidesSrc = fs.readFileSync(new URL('../aides.yaml', import.meta.url).pathname);

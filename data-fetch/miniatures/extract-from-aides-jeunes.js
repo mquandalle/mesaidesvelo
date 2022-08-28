@@ -2,9 +2,10 @@ import fs from 'node:fs';
 import { join } from 'node:path';
 import { URL } from 'node:url';
 import sharp from 'sharp';
-import { loadJsonFile } from '../../src/lib/readWriteJson.js';
+import { writeJsonData } from '../../src/scripts/writeData.js';
 
-const aidesWithCollectivities = loadJsonFile('src/lib/data/aides-collectivities.json');
+import aidesWithCollectivities from '../../src/lib/data/aides-collectivities.json' assert { type: 'json' };
+
 const currentPath = new URL('./', import.meta.url).pathname;
 const repoPath = join(currentPath, 'aides-jeunes-repo/');
 const rootPath = join(currentPath, '../../');
@@ -86,7 +87,4 @@ async function generateThumbnail(imgSrc, imgName, { trim = true }) {
 	await img.webp().toFile(join(miniatureDirectory, imgName));
 }
 
-fs.writeFileSync(
-	join(rootPath, 'src/lib/data/miniatures.json'),
-	JSON.stringify(thumbnailsManifest, null, 2)
-);
+writeJsonData('miniatures.json', thumbnailsManifest);

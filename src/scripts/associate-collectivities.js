@@ -1,15 +1,14 @@
-import { loadJsonFile, writeJsonFile, loadTextFile } from '../lib/readWriteJson.js';
+import fs from 'node:fs';
+import { writeJsonData } from './writeData.js';
 import Publicodes, { reduceAST } from 'publicodes';
 import { parse } from 'yaml';
 
-const communes = loadJsonFile('src/lib/data/communes.json');
-const epci = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/epci.json');
-const departements = loadJsonFile(
-	'node_modules/@etalab/decoupage-administratif/data/departements.json'
-);
-const regions = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/regions.json');
+import communes from '../lib/data/communes.json' assert { type: 'json' };
+import epci from '@etalab/decoupage-administratif/data/epci.json' assert { type: 'json' };
+import departements from '@etalab/decoupage-administratif/data/departements.json' assert { type: 'json' };
+import regions from '@etalab/decoupage-administratif/data/regions.json' assert { type: 'json' };
 
-const sourceRules = loadTextFile('src/aides.yaml');
+const sourceRules = fs.readFileSync(new URL('../aides.yaml', import.meta.url).pathname, 'utf8');
 
 const engine = new Publicodes(parse(sourceRules));
 
@@ -99,4 +98,4 @@ const res = Object.fromEntries(
 	])
 );
 
-writeJsonFile('src/lib/data/aides-collectivities.json', res);
+writeJsonData('aides-collectivities.json', res);

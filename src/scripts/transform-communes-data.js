@@ -6,11 +6,12 @@
 // following import somewhere in the dependency graph:
 //
 // import '../src/scripts/transform-communes-data.js';
-import { slugify } from '../lib/utils.js';
-import { loadJsonFile, writeJsonFile } from '../lib/readWriteJson.js';
 
-const communes = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/communes.json');
-const epci = loadJsonFile('node_modules/@etalab/decoupage-administratif/data/epci.json');
+import { slugify } from '../lib/utils.js';
+import { writeJsonData } from './writeData.js';
+
+import communes from '@etalab/decoupage-administratif/data/communes.json' assert { type: 'json' };
+import epci from '@etalab/decoupage-administratif/data/epci.json' assert { type: 'json' };
 
 const duplicateCommunesNames = communes
 	.map(({ nom }) => slugify(nom))
@@ -91,4 +92,4 @@ const data = [
 			: '')
 }));
 
-writeJsonFile('src/lib/data/communes.json', data);
+writeJsonData('communes.json', data);

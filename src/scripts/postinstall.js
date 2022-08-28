@@ -1,3 +1,3 @@
-import './transform-communes-data.js';
-import './associate-collectivities.js';
-import '../../data-fetch/miniatures/extract-from-aides-jeunes.js';
+await import('./transform-communes-data.js');
+await import('./associate-collectivities.js');
+await import('../../data-fetch/miniatures/extract-from-aides-jeunes.js');
