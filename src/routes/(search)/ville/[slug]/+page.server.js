@@ -69,7 +69,7 @@ export async function load({ params }) {
 		return { ...baseData, infos };
 	}
 
-	const villeRuleName = ruleNamePerCollectivity['code insee'][localisation.code];
+	const villeRuleName = ruleNamePerCollectivity['code insee'][localisation.codeInsee];
 	const epciRuleName = ruleNamePerCollectivity['epci'][localisation.epci];
 	const departementRuleName = ruleNamePerCollectivity['département'][localisation.departement];
 	const regionRuleName = ruleNamePerCollectivity['région'][localisation.region];

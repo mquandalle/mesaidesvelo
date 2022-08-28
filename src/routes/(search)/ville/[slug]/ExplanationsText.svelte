@@ -89,8 +89,8 @@
 			<ul>
 				<li>Être majeur et domicilié en France</li>
 				<li>
-					Avoir un revenu fiscal de référence par part de l'année précédant l'achat du vélo est
-					inférieur ou égal à 13 489 €
+					Avoir un revenu fiscal de référence par part l'année précédant l'achat du vélo inférieur
+					ou égal à 13 489 €
 				</li>
 			</ul>
 			<p>
