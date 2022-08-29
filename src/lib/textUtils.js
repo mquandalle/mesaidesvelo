@@ -9,7 +9,7 @@ import publicodesRules from '../aides.yaml';
 export const getBikeKind = (kind) => {
 	const veloKindsComputed = {
 		mécanique: 'mécanique simple',
-		'mécanique ou électrique': 'mécanique simple'
+		'mécanique ou électrique': 'mécanique simple',
 	};
 
 	return veloKindsComputed[kind] ?? kind;
@@ -29,7 +29,7 @@ export function aidesPerVeloKind(aide) {
 					aide.collectivity.kind === 'région' ? aide.collectivity.value : ''
 				}'`,
 				'localisation . département': `'${aide.departement}'`,
-				'vélo . type': `'${getBikeKind(kind)}'`
+				'vélo . type': `'${getBikeKind(kind)}'`,
 			})
 			.evaluate(aide.dottedName);
 
@@ -44,28 +44,28 @@ export function aidesPerVeloKind(aide) {
 const compactionOptions = [
 	{
 		keys: ['électrique', 'cargo électrique', 'cargo', 'mécanique simple', 'pliant'],
-		remplace: 'mécanique ou électrique'
+		remplace: 'mécanique ou électrique',
 	},
 	{
 		keys: ['électrique', 'cargo électrique'],
-		remplace: 'électrique'
+		remplace: 'électrique',
 	},
 	{
 		keys: ['pliant', 'mécanique simple', 'cargo'],
-		remplace: 'mécanique'
+		remplace: 'mécanique',
 	},
 	{
 		keys: ['pliant', 'mécanique simple'],
-		remplace: 'mécanique'
+		remplace: 'mécanique',
 	},
 	{
 		keys: ['cargo', 'cargo électrique'],
-		remplace: 'cargo'
+		remplace: 'cargo',
 	},
 	{
 		keys: ['mécanique simple'],
-		remplace: 'mécanique'
-	}
+		remplace: 'mécanique',
+	},
 ];
 
 function compactAidesList(aidesList) {
@@ -74,7 +74,7 @@ function compactAidesList(aidesList) {
 		if (keys.every((key) => res[key] && res[key].nodeValue === res[keys[0]].nodeValue)) {
 			res = Object.fromEntries([
 				...Object.entries(res).filter(([key]) => !keys.includes(key)),
-				[remplace, res[keys[0]]]
+				[remplace, res[keys[0]]],
 			]);
 		}
 	}

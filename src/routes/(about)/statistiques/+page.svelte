@@ -3,23 +3,23 @@
 		{
 			titre: 'Ce site vous déniche des subventions pour acheter un vélo',
 			media: 'Picala',
-			url: 'https://www.picala.fr/pratique/mesaidesvelo-ce-site-vous-deniche-des-subventions-pour-acheter-un-velo'
+			url: 'https://www.picala.fr/pratique/mesaidesvelo-ce-site-vous-deniche-des-subventions-pour-acheter-un-velo',
 		},
 		{
 			titre: 'Trouvez les aides à l’achat d’un vélo',
 			media: 'BFM Paris Île-de-France',
-			url: 'https://twitter.com/BFMParis/status/1508321459747368963'
+			url: 'https://twitter.com/BFMParis/status/1508321459747368963',
 		},
 		{
 			titre: 'Le site qui recense toutes les subventions par commune !',
 			media: 'Les Echos Start',
-			url: 'https://start.lesechos.fr/au-quotidien/budget-conso/mes-aides-velo-le-site-qui-recense-toutes-les-subventions-par-commune-1378553'
+			url: 'https://start.lesechos.fr/au-quotidien/budget-conso/mes-aides-velo-le-site-qui-recense-toutes-les-subventions-par-commune-1378553',
 		},
 		{
 			titre: 'Le site qui mouline pour vous les aides à l’achat d’un vélo',
 			media: 'Enlarge Your Paris',
-			url: 'https://www.enlargeyourparis.fr/societe/mesaidesvelo-le-site-qui-mouline-pour-vous-les-aides-a-lachat-dun-velo'
-		}
+			url: 'https://www.enlargeyourparis.fr/societe/mesaidesvelo-le-site-qui-mouline-pour-vous-les-aides-a-lachat-dun-velo',
+		},
 	];
 </script>
 

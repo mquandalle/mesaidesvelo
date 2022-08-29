@@ -12,7 +12,7 @@ test('Navigation scenario', async ({ page }) => {
 
 	// Hide evaporate animation
 	await page.addStyleTag({
-		content: '.evaporate { display: none !important; }'
+		content: '.evaporate { display: none !important; }',
 	});
 
 	await page.click('text=Achat d’un vélo électrique');

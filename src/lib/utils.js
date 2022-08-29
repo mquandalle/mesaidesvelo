@@ -56,7 +56,7 @@ export const rawCityToFullLocalisation = ({
 	codesPostaux,
 	departement,
 	region,
-	pays
+	pays,
 }) => ({
 	nom,
 	slug,
@@ -65,5 +65,5 @@ export const rawCityToFullLocalisation = ({
 	codePostal: codePostal || codesPostaux[0],
 	departement: departement ?? code.slice(0, 2),
 	region,
-	pays
+	pays,
 });

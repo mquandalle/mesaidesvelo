@@ -13,7 +13,7 @@ export const localisationSituation = derived([localisation], ([$localisation]) =
 				'localisation . code insee': `'${$localisation.codeInsee}'`,
 				'localisation . epci': `'${$localisation.epci || ''}'`,
 				'localisation . département': `'${$localisation.departement}'`,
-				'localisation . région': `'${$localisation.region}'`
+				'localisation . région': `'${$localisation.region}'`,
 		  }
 		: {}
 );
@@ -32,7 +32,7 @@ export const publicodeSituation = derived(
 			...$localisationSituation,
 			...Object.fromEntries(Object.entries($answers).filter(([, val]) => val)),
 			...($veloCat ? { 'vélo . type': `'${$veloCat}'` } : {}),
-			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {})
+			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {}),
 		};
 	}
 );

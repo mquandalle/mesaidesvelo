@@ -16,7 +16,7 @@ const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
 		epci: {},
 		'code insee': {},
 		région: {},
-		département: {}
+		département: {},
 	}
 );
 
@@ -28,7 +28,7 @@ const availableContent = Object.fromEntries(
 				.at(-1)
 				.toLowerCase()
 				.replace(/\.svx$/, ''),
-			mod
+			mod,
 		]
 	)
 );
@@ -66,7 +66,7 @@ export async function load({ params }) {
 	if (localisation.pays && localisation.pays !== 'france') {
 		if (hasCorrespondingContent(localisation.pays)) {
 			infos.pays = {
-				text: await getCorrespondingContent(localisation.pays)
+				text: await getCorrespondingContent(localisation.pays),
 			};
 		}
 		return { ...baseData, infos };
@@ -89,7 +89,7 @@ export async function load({ params }) {
 		infos.epci = {
 			ruleName: epciRuleName,
 			titre: engine.getRule(epciRuleName).rawNode.titre,
-			text: await getCorrespondingContent(epciRuleName)
+			text: await getCorrespondingContent(epciRuleName),
 		};
 	}
 
@@ -98,8 +98,8 @@ export async function load({ params }) {
 			ruleName: villeRuleName,
 			titre: engine.getRule(villeRuleName).rawNode.titre.replace(/^Ville/, 'la ville'),
 			text: await getCorrespondingContent(villeRuleName, {
-				prepend: infos.epci ? `En plus de l’aide versée par ${infos.epci.titre}, ` : ''
-			})
+				prepend: infos.epci ? `En plus de l’aide versée par ${infos.epci.titre}, ` : '',
+			}),
 		};
 	}
 
@@ -107,7 +107,7 @@ export async function load({ params }) {
 		infos.region = {
 			ruleName: regionRuleName,
 			titre: engine.getRule(regionRuleName).rawNode.titre.replace(/^Région/, 'la région'),
-			text: await getCorrespondingContent(regionRuleName)
+			text: await getCorrespondingContent(regionRuleName),
 		};
 	}
 
@@ -118,15 +118,15 @@ export async function load({ params }) {
 				.getRule(departementRuleName)
 				.rawNode.titre.replace(/^Département/, 'le département'),
 			text: await getCorrespondingContent(departementRuleName, {
-				prepend: infos.region ? `En plus de l’aide versée par ${infos.region.titre}, ` : ''
-			})
+				prepend: infos.region ? `En plus de l’aide versée par ${infos.region.titre}, ` : '',
+			}),
 		};
 	}
 
 	if (Object.keys(labelTourDeFrance).includes(localisation.nom.toLowerCase())) {
 		infos.labelTourDeFrance = {
 			ville: localisation.nom,
-			note: labelTourDeFrance[localisation.nom.toLowerCase()]
+			note: labelTourDeFrance[localisation.nom.toLowerCase()],
 		};
 	}
 

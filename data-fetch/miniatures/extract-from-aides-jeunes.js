@@ -48,12 +48,12 @@ const imagesFromAidesJeunes = Object.fromEntries([
 
 		return [imgKey(data), data];
 	}),
-	['pays - France', { imgSrc: 'img/logo_etat_francais.png' }]
+	['pays - France', { imgSrc: 'img/logo_etat_francais.png' }],
 ]);
 
 const noTrim = [
 	'aides . lyon', // https://github.com/lovell/sharp/issues/2166
-	'aides . paris'
+	'aides . paris',
 ];
 
 const miniatureDirectory = join(rootPath, 'static/miniatures/');

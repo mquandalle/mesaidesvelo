@@ -23,7 +23,7 @@ test('aides électrique colmar', (t) => {
 		'localisation . epci': '246800726',
 		'localisation . département': '68',
 		'localisation . région': '44',
-		'vélo . type': 'électrique'
+		'vélo . type': 'électrique',
 	});
 	t.is(colmarElectrique.length, 3, '3 aides');
 	t.truthy(
@@ -38,7 +38,7 @@ test('motorisation vélo bordeaux', (t) => {
 		'localisation . epci': '243300316',
 		'localisation . département': '33',
 		'localisation . région': '75',
-		'vélo . type': 'motorisation'
+		'vélo . type': 'motorisation',
 	}).filter(({ title }) => title.toLowerCase().includes('bordeaux'));
 	t.is(bordeauxMotorisation.length, 1, '1 aide de la région');
 	t.is(bordeauxMotorisation[0].amount, 100, '100 euros');
@@ -52,7 +52,7 @@ test('motorisation vélo bordeaux', (t) => {
 test('prise en compte du revenu fiscal de référence', (t) => {
 	const situationCharenton = {
 		'localisation . code insee': '94018',
-		'vélo . type': 'électrique'
+		'vélo . type': 'électrique',
 	};
 	const aidesCharenton = aidesVelo(situationCharenton);
 	t.is(
@@ -62,7 +62,7 @@ test('prise en compte du revenu fiscal de référence', (t) => {
 	);
 	const aidesCharentonRevenuElevé = aidesVelo({
 		...situationCharenton,
-		'revenu fiscal de référence': '5000 €/mois'
+		'revenu fiscal de référence': '5000 €/mois',
 	});
 	t.is(
 		aidesCharentonRevenuElevé.reduce((sum, { amount }) => sum + amount, 0),
@@ -78,7 +78,7 @@ test('interpolation des variables $vélo et $plafond', (t) => {
 		'localisation . epci': '200054781',
 		'localisation . département': '75',
 		'localisation . région': '11',
-		'vélo . type': 'électrique'
+		'vélo . type': 'électrique',
 	}).forEach(({ id, description }) =>
 		t.notRegex(
 			description,

@@ -20,7 +20,7 @@
 			.setSituation({
 				...$publicodeSituation,
 				'revenu fiscal de référence': `${revenu} €/an`,
-				'vélo . prix': 'vélo . prix pour maximiser les aides'
+				'vélo . prix': 'vélo . prix pour maximiser les aides',
 			})
 			.evaluate(ruleName).nodeValue;
 

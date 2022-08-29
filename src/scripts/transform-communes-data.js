@@ -26,7 +26,7 @@ const duplicateCommunesNames = communes
 const villesAvecArrondissements = {
 	Paris: '75000',
 	Marseille: '13000',
-	Lyon: '69000'
+	Lyon: '69000',
 };
 
 const communesInEpci = Object.fromEntries(
@@ -42,7 +42,7 @@ const extraData = [
 		departement: '06',
 		region: '84',
 		population: 39244,
-		pays: 'monaco'
+		pays: 'monaco',
 	},
 	{
 		nom: 'Luxembourg',
@@ -52,8 +52,8 @@ const extraData = [
 		departement: '',
 		region: '',
 		population: 632275,
-		pays: 'luxembourg'
-	}
+		pays: 'luxembourg',
+	},
 ];
 
 const data = [
@@ -79,17 +79,17 @@ const data = [
 				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
 				codesPostaux: uniq(c.codesPostaux).sort(
 					(a, b) => countTrailingZeros(b) - countTrailingZeros(a)
-				)
+				),
 			};
 		}),
-	...extraData
+	...extraData,
 ].map((c) => ({
 	...c,
 	slug:
 		slugify(c.nom) +
 		(duplicateCommunesNames.includes(slugify(c.nom))
 			? `-${c.departement ?? c.code.slice(0, 2)}`
-			: '')
+			: ''),
 }));
 
 writeJsonData('communes.json', data);

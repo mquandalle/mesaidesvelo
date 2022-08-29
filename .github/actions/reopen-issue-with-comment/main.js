@@ -6,7 +6,7 @@ async function run() {
 		const inputs = {
 			token: core.getInput('token'),
 			issueNumber: Number(core.getInput('issue-number')),
-			comment: core.getInput('comment')
+			comment: core.getInput('comment'),
 		};
 
 		const repository = process.env.GITHUB_REPOSITORY;
@@ -19,7 +19,7 @@ async function run() {
 			owner: owner,
 			repo: repo,
 			issue_number: inputs.issueNumber,
-			state: 'open'
+			state: 'open',
 		});
 
 		core.info('Adding a comment');
@@ -27,7 +27,7 @@ async function run() {
 			owner: owner,
 			repo: repo,
 			issue_number: inputs.issueNumber,
-			body: inputs.comment.replace(/<br \/>/g, `\n`)
+			body: inputs.comment.replace(/<br \/>/g, `\n`),
 		});
 	} catch (error) {
 		core.setFailed(error.message);

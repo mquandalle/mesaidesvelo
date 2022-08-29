@@ -19,7 +19,7 @@ const groupBy = (list, f) =>
 		const key = f(elm);
 		return {
 			...acc,
-			[key]: [...(acc[key] ?? []), elm]
+			[key]: [...(acc[key] ?? []), elm],
 		};
 	}, {});
 
@@ -29,20 +29,20 @@ const formatAideForClient = (aide) => ({
 	slug: aide.slug,
 	maximumsPerVeloKind: aidesPerVeloKind(aide)
 		.sort(([, maxA], [, maxB]) => maxA.nodeValue - maxB.nodeValue)
-		.map(([kind, maximumAide]) => [kind, formatValue(maximumAide)])
+		.map(([kind, maximumAide]) => [kind, formatValue(maximumAide)]),
 });
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
 	const associatedCollectivities = Object.keys(aidesCollectivities).map((ruleName) => ({
 		...engine.getRule(ruleName),
-		...aidesCollectivities[ruleName]
+		...aidesCollectivities[ruleName],
 	}));
 
 	const aidesEtat = associatedCollectivities
 		.filter(({ collectivity }) => collectivity.kind === 'pays' && collectivity.value === 'France')
 		.map(({ rawNode }) => ({
-			titre: rawNode.titre.replace(/de l’état/i, '').trim()
+			titre: rawNode.titre.replace(/de l’état/i, '').trim(),
 		}));
 
 	const aidesRegions = associatedCollectivities
@@ -68,7 +68,7 @@ export async function load() {
 						? 1
 						: (b.population ?? 0) - (a.population ?? 0)
 				)
-				.map(formatAideForClient)
+				.map(formatAideForClient),
 		]);
 
 	return { aidesEtat, aidesRegions, aidesLocales };

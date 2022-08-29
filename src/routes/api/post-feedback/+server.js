@@ -7,7 +7,7 @@ export async function POST({ request }) {
 	const body = [
 		`> Retour utilisateur effectué sur la page https://mesaidesvelo.fr${page} :`,
 		message,
-		embedSource && `> Via ${embedSource}`
+		embedSource && `> Via ${embedSource}`,
 	]
 		.filter(Boolean)
 		.join('\n\n');
@@ -23,9 +23,9 @@ export async function POST({ request }) {
 		headers: {
 			Authorization: `token ${env.GITHUB_TOKEN}`,
 			'Content-Type': 'application/json',
-			Accept: 'Accept: application/vnd.github.v3+json'
+			Accept: 'Accept: application/vnd.github.v3+json',
 		},
-		body: JSON.stringify({ title, body })
+		body: JSON.stringify({ title, body }),
 	});
 
 	return new Response(undefined, { status: res.status });

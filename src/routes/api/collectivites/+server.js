@@ -23,7 +23,7 @@ const indexedData = data.flatMap(({ codesPostaux, ...rest }) =>
 			codePostal,
 			indexedName: cpPrincipal ? fuzzysort.prepare(removeAccents(rest.nom)) : '',
 			indexedCodePostal: fuzzysort.prepare(codePostal),
-			population: cpPrincipal ? rest.population : 10
+			population: cpPrincipal ? rest.population : 10,
 		};
 	})
 );
@@ -37,7 +37,7 @@ const searchOptions = {
 		Math.max(
 			a[0] ? a[0].score - 1000 / Math.log(a.obj.population) : -1001,
 			a[1] ? a[1].score - 1 / Math.log(a.obj.population) : -1001
-		)
+		),
 };
 
 /** @type {import('./$types').RequestHandler} */

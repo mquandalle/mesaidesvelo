@@ -33,8 +33,8 @@ export async function GET({ params: { slug } }) {
 	const page = await browser.newPage({
 		viewport: {
 			width: 1200,
-			height: 600
-		}
+			height: 600,
+		},
 	});
 
 	await page.setContent(res.code);

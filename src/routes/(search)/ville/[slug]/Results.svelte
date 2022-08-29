@@ -16,7 +16,7 @@
 		engine.setSituation({
 			...$publicodeSituation,
 			'maximiser les aides': 'oui',
-			'vélo . type': `'${cat}'`
+			'vélo . type': `'${cat}'`,
 		});
 
 		const montant = engine.evaluate('aides . montant');
@@ -25,14 +25,14 @@
 			cat,
 			label: titleCategory(cat),
 			emoji: emojiCategory(cat),
-			montant
+			montant,
 		};
 	});
 
 	$: primeALaConversion = engine
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': "'prime-conversion'"
+			'vélo . type': "'prime-conversion'",
 		})
 		.evaluate('aides . prime à la conversion');
 
@@ -49,26 +49,26 @@
 		...activesAidesPerBikeKind.map(({ cat, ...rest }) => ({
 			...rest,
 			relNoFollow: true,
-			href: `?velo=${cat}`
+			href: `?velo=${cat}`,
 		})),
 		primeALaConversion.nodeValue && {
 			montant: primeALaConversion,
 			href: '/prime-a-la-conversion',
 			label: 'Prime à la conversion',
-			emoji: '🚗'
+			emoji: '🚗',
 		},
 		inFrance && [
 			{
 				montant: engine.evaluate('aides . forfait mobilités durables'),
 				href: '/forfait-mobilite-durable',
-				label: 'Forfait mobilités durables'
+				label: 'Forfait mobilités durables',
 			},
 			...inactivesAidesPerBikeKind.map(({ cat, ...rest }) => ({
 				...rest,
 				href: `?velo=${cat}`,
-				emoji: null
-			}))
-		]
+				emoji: null,
+			})),
+		],
 	]
 		.filter(Boolean)
 		.flat();

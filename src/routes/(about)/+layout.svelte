@@ -6,7 +6,7 @@
 		['/liste-aides', 'Liste des aides'],
 		['/integrer-sur-mon-site', 'Intégrer sur mon site'],
 		['/statistiques', 'Statistiques'],
-		['/mentions-legales', 'Mentions légales']
+		['/mentions-legales', 'Mentions légales'],
 	];
 </script>
 

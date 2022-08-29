@@ -26,7 +26,7 @@ const extractCollectivityFromAST = (rule) => {
 					if (node.explanation[0]?.dottedName === `localisation . ${localisationKind}`) {
 						return {
 							kind: localisationKind,
-							value: node.explanation[1]?.nodeValue
+							value: node.explanation[1]?.nodeValue,
 						};
 					}
 				}
@@ -87,14 +87,14 @@ const associateCollectivityMetadata = (rule) => {
 		departement,
 		population,
 		slug,
-		country
+		country,
 	};
 };
 
 const res = Object.fromEntries(
 	aidesRuleNames.map((ruleName) => [
 		ruleName,
-		associateCollectivityMetadata(engine.getRule(ruleName))
+		associateCollectivityMetadata(engine.getRule(ruleName)),
 	])
 );
 

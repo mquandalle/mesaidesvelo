@@ -46,7 +46,7 @@ export async function load({ params }) {
 		)
 		.map(([ruleName, { slug }]) => ({
 			titre: engine.getRule(ruleName).rawNode.titre,
-			slug
+			slug,
 		}));
 
 	const gender = getGender(departement.code);
@@ -58,7 +58,7 @@ export async function load({ params }) {
 		aideDepartementText,
 		aideRegion,
 		aideRegionText,
-		aidesLocales
+		aidesLocales,
 	};
 }
 

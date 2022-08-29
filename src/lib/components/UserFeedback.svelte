@@ -12,9 +12,9 @@
 			const serverResponse = await fetch('/api/post-feedback', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ message, page: $page.url.pathname, embedSource })
+				body: JSON.stringify({ message, page: $page.url.pathname, embedSource }),
 			});
 
 			if (!serverResponse.ok) {

@@ -8,12 +8,12 @@ const config = {
 	plugins: [sveltekit(), WindiCSS(), yaml()],
 	resolve: {
 		alias: {
-			$entreprises: path.resolve('./data-fetch/entreprises/data')
-		}
+			$entreprises: path.resolve('./data-fetch/entreprises/data'),
+		},
 	},
 	test: {
-		include: ['./tests/vitest.js']
-	}
+		include: ['./tests/vitest.js'],
+	},
 };
 
 export default config;

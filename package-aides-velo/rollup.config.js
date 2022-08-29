@@ -19,12 +19,12 @@ export default {
 		{
 			format: 'cjs',
 			exports: 'default',
-			file: 'build/index.cjs'
+			file: 'build/index.cjs',
 		},
 		{
 			format: 'es',
-			file: 'build/index.es.js'
-		}
+			file: 'build/index.es.js',
+		},
 	],
 	external: ['publicodes'],
 
@@ -34,7 +34,7 @@ export default {
 		yaml(),
 		nodeResolve(),
 		alias({
-			entries: [{ find: '$lib', replacement: new URL('../src/lib', import.meta.url).pathname }]
-		})
-	]
+			entries: [{ find: '$lib', replacement: new URL('../src/lib', import.meta.url).pathname }],
+		}),
+	],
 };

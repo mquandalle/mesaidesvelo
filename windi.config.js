@@ -1,3 +1,3 @@
 export default {
-	plugins: [require('windicss/plugin/typography')]
+	plugins: [require('windicss/plugin/typography')],
 };

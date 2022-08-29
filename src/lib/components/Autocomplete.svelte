@@ -249,7 +249,7 @@
 			// item label
 			label: safeLabelFunction(item),
 			// store reference to the origial item
-			item: item
+			item: item,
 		};
 	}
 
@@ -614,7 +614,7 @@
 			ArrowDown: down.bind(this),
 			ArrowUp: up.bind(this),
 			Escape: onEsc.bind(this),
-			Backspace: null
+			Backspace: null,
 		};
 		const fn = fnmap[key];
 		if (typeof fn === 'function') {

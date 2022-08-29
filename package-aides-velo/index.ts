@@ -53,7 +53,7 @@ export default function aidesVelo(situation: InputParameters = {}): Array<Aide> 
 				title: rule.title,
 				description: rule.rawNode.description,
 				url: (rule.rawNode as any).lien,
-				collectivity
+				collectivity,
 			};
 
 			if (!situation['vélo . type']) {
@@ -67,10 +67,10 @@ export default function aidesVelo(situation: InputParameters = {}): Array<Aide> 
 						description: formatDescription({
 							ruleName,
 							engine,
-							veloCat: situation['vélo . type']
+							veloCat: situation['vélo . type'],
 						}),
-						amount: nodeValue
-					}
+						amount: nodeValue,
+					},
 				];
 			} else {
 				return [];
@@ -86,7 +86,7 @@ const formatInput = (input: InputParameters) =>
 				? `'${epciSirenToName[val]}'`
 				: typeof val === 'string'
 				? `'${val}'`
-				: val
+				: val,
 		])
 	);
 

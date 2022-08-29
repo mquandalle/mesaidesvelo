@@ -21,7 +21,7 @@ const tranchesEffectifInsee = {
 	42: 1000,
 	51: 2000,
 	52: 5000,
-	53: 10000
+	53: 10000,
 };
 
 const indexedData = [
@@ -35,7 +35,7 @@ const indexedData = [
 				nom: capitalizeWords(nom),
 				siren,
 				indexedName: fuzzysort.prepare(removeAccents(nom)),
-				effectif: tranchesEffectifInsee[effectif] || 0
+				effectif: tranchesEffectifInsee[effectif] || 0,
 			};
 		}),
 	...gSheetForfaits.values.map(([nom, effectif, forfaitMax, commentaire, reference]) => ({
@@ -44,8 +44,8 @@ const indexedData = [
 		forfaitMax: forfaitMax && Number(forfaitMax),
 		effectif: Number(effectif ?? 0),
 		commentaire,
-		reference
-	}))
+		reference,
+	})),
 ];
 
 function capitalizeWords(str) {
@@ -61,7 +61,7 @@ const searchOptions = {
 	threshold: -1000,
 	scoreFn: (a) =>
 		// testé à la main pour faire remonter les plus grosses villes en premier
-		a[0] ? a[0].score * (1 - Math.log(a.obj.effectif / 10000) * 0.8) : -1001
+		a[0] ? a[0].score * (1 - Math.log(a.obj.effectif / 10000) * 0.8) : -1001,
 	// scoreFn: (a) => -a.effectif
 };
 
@@ -73,7 +73,7 @@ export async function GET({ url }) {
 		effectif,
 		forfaitMax,
 		commentaire,
-		reference
+		reference,
 	});
 	if (search) {
 		return new Response(

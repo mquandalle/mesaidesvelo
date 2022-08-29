@@ -27,7 +27,7 @@ Par défaut le montant de l'aide n'est pas donné. En effet il dépend du type d
 ```js
 aidesVelo({
 	'localisation . pays': 'france',
-	'vélo . type': 'électrique'
+	'vélo . type': 'électrique',
 });
 ```
 

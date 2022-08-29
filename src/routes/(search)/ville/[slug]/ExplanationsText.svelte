@@ -10,7 +10,7 @@
 		infos?.region?.titre,
 		infos?.département?.titre,
 		infos?.epci?.titre,
-		infos?.ville?.titre
+		infos?.ville?.titre,
 	]
 		.filter(Boolean)
 		.reduce((concatenation, item, index, list) => {

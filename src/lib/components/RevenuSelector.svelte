@@ -24,7 +24,7 @@
 					engine.setSituation({
 						...$localisationSituation,
 						'maximiser les aides': 'oui',
-						'vélo . type': `'${veloCat}'`
+						'vélo . type': `'${veloCat}'`,
 					});
 
 					const originalNames = collectivites
@@ -115,7 +115,7 @@
 	$: tresholds = $originalNames.flatMap((name) =>
 		findAllComparaisonsValue(name, {
 			searchedName: 'revenu fiscal de référence',
-			unit: '€/mois'
+			unit: '€/mois',
 		})
 	);
 
@@ -139,7 +139,7 @@
 					engineBis.setSituation({
 						...$publicodeSituation,
 						'maximiser les aides': 'oui',
-						'revenu fiscal de référence': `${revenu + 1} €/mois`
+						'revenu fiscal de référence': `${revenu + 1} €/mois`,
 					});
 
 					// In some cases the total amount of aides will be the same
@@ -156,7 +156,7 @@
 					} else {
 						return {
 							thresholds: [...acc.thresholds, revenu],
-							dernieresAidesDisplayed: aidesDisplayed
+							dernieresAidesDisplayed: aidesDisplayed,
 						};
 					}
 				},
