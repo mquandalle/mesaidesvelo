@@ -1,0 +1,10 @@
+Afin d’encourager les déplacements à vélo, Annemasse Agglo propose d’aider les habitants du territoire à acquérir un vélo grâce à la Prime vélo.
+
+La prime est ouverte à tous les habitants d’Annemasse Agglo, sans conditions de ressources. Le montant de l'aide dépend du type de vélo acheté :
+
+|                              | Montant de l'aide | Montant d'achat du vélo |
+| ---------------------------- | ----------------- | ----------------------- |
+| Vélo à assistance électrique | 300€              | de 750€ à 4500€         |
+| Vélo pliant (neuf)           | 100€              | minimum 200€            |
+| Vélo classique (occasion)    | 50€               | minimum 100€            |
+| Vélo cargo                   | 300€              | minimum 1000€           |

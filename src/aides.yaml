@@ -2674,19 +2674,28 @@ aides . annemasse:
       - si:
           toutes ces conditions:
             - vélo . cargo
+            - vélo . neuf
             - vélo . prix >= 1000€
         alors: 300€
       - si:
           toutes ces conditions:
             - vélo . électrique
+            - vélo . neuf
             - vélo . prix >= 750€
             - vélo . prix <= 4500€
         alors: 300€
       - si:
           toutes ces conditions:
             - vélo . mécanique
+            - vélo . neuf
             - vélo . prix >= 200€
         alors: 100€
+      - si:
+          toutes ces conditions:
+            - vélo . mécanique
+            - vélo . occasion
+            - vélo . prix >= 100€
+        alors: 50€
       - sinon: 0€
   lien: https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/prime-velo-demandez-laide-en-quelques-clics
 
@@ -4289,6 +4298,7 @@ vélo . occasion:
       - aides . charenton
       - aides . divonne-les-bains
       - aides . illkirch
+      - aides . annemasse
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
