@@ -38,7 +38,10 @@ const ruleToContentFilename = (ruleName) => ruleName.toLowerCase().replace('aide
 const hasCorrespondingContent = (ruleName) =>
 	ruleName && Object.keys(availableContent).includes(ruleToContentFilename(ruleName));
 
-const getCorrespondingContent = async (ruleName, { prepend } = {}) => {
+export const getCorrespondingContent = async (ruleName, { prepend } = {}) => {
+	if (!hasCorrespondingContent(ruleName)) {
+		return undefined;
+	}
 	const source = availableContent[ruleToContentFilename(ruleName)];
 	const modifiedText = prependPartialSentence(source, { prepend });
 	const text = (await compile(modifiedText)).code;

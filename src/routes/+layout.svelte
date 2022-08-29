@@ -76,9 +76,7 @@
 	<header class="{!isEmbeded ? 'mt-8' : ''} block w-full max-w-screen-md m-auto">
 		{#if !isEmbeded}
 			<a href="/" class="text-3xl font-bold cursor-pointer">
-				Mes<span class="text-green-800">Aides</span>Vélo<span class="text-xl text-gray-600"
-					>.fr</span
-				>
+				Mes<span class="text-green-800">Aides</span>Vélo
 				<Emoji emoji="🚲" className="-mt-2" />
 			</a>
 		{/if}

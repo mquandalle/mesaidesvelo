@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import miniaturesManifest from '$lib/data/miniatures.json';
+	import MiniatureCollectivite from '$lib/components/MiniatureCollectivite.svelte';
 
 	$: infos = $page.data.infos;
 	$: showExplications = Object.keys(infos ?? {}).length > 0;
@@ -54,13 +54,7 @@
 							Les aides {#if collectivite === 'département'}du{:else}de{/if}
 							{infos[collectivite].titre.replace(/^le/, '')}
 						</h2>
-						{#if miniaturesManifest[infos[collectivite].ruleName]}
-							<img
-								src="/miniatures/{miniaturesManifest[infos[collectivite].ruleName]}"
-								alt="Logo de {infos[collectivite].titre}"
-								class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[140px] object-contain"
-							/>
-						{/if}
+						<MiniatureCollectivite {...infos[collectivite]} />
 						{@html infos[collectivite].text}
 					{/if}
 				{/each}
