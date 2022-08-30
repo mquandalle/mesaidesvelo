@@ -1,0 +1,11 @@
+Valenciennes Métropole, propose à ses habitants une aide financière pour acquérir un vélo ou une trottinette électrique.
+
+L’achat du véhicule devra se faire entre le 1er janvier 2022 et le 31 décembre 2022, chez un professionnel situé sur le territoire de Valenciennes Métropole (l’achat via un site web ne sera pas pris en compte). Cette aide s’adresse aux habitants du territoire de Valenciennes Métropole (35 communes de l’Agglomération) majeurs et actifs (ou étudiants majeurs) ainsi que pour les mineurs sous contrat professionnel sur justificatif (contrat de professionnalisation).
+
+Le montant de l’aide attribuée sera de 30% du prix TTC, dans la limite du plafond fixé :
+
+| Véhicule éligible              | Neuf  | Occasion |
+| ------------------------------ | ----- | -------- |
+| Vélo classique (pliant ou non) | 150 € | 75 €     |
+| Vélo à assistance électrique   | 400 € | 200 €    |
+| Trottinette électrique         | 150 € | 75 €     |

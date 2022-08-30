@@ -5,6 +5,7 @@
 Ajout des vélos d'occasion :
 
 - Annemasse Agglo
+- Valenciennes Métropole
 
 ## v2.0.49 - 26/08/2022
 

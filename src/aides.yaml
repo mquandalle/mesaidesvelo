@@ -3576,10 +3576,22 @@ aides . valenciennes:
   valeur: 30% * vélo . prix
   plafond:
     variations:
-      - si: vélo . électrique
-        alors: 400€
-      - si: vélo . mécanique
-        alors: 150€
+      - si: vélo . neuf
+        alors:
+          variations:
+            - si: vélo . électrique
+              alors: 400€
+            - si: vélo . mécanique
+              alors: 150€
+            - sinon: 0€
+      - si: vélo . occasion
+        alors:
+          variations:
+            - si: vélo . électrique
+              alors: 200€
+            - si: vélo . mécanique
+              alors: 75€
+            - sinon: 0€
       - sinon: 0€
   lien: https://www.valenciennes-metropole.fr/competences/amenagement-du-territoire/mode-doux-mobilite/
 
@@ -4299,6 +4311,7 @@ vélo . occasion:
       - aides . divonne-les-bains
       - aides . illkirch
       - aides . annemasse
+      - aides . valenciennes
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
