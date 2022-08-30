@@ -1,5 +1,5 @@
 <script>
-	import { getCurrentBikeEngine } from '$lib/engine';
+	import { engine } from '$lib/engine';
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
 
@@ -11,12 +11,12 @@
 	const getSortOrder = (name) =>
 		questionsOrder.includes(name) ? questionsOrder.indexOf(name) : Infinity;
 	const uniq = (arr) => [...new Set(arr)];
-	$: questions = uniq(
+	const questions = uniq(
 		(goals ?? ['aides . montant'])
-			.map((ruleName) => $getCurrentBikeEngine.evaluate(ruleName).traversedVariables)
+			.map((ruleName) => engine.evaluate(ruleName).traversedVariables)
 			.flat()
 	)
-		.filter((q) => $getCurrentBikeEngine.getRule(q).rawNode.question)
+		.filter((q) => engine.getRule(q).rawNode.question)
 		.filter((q) => q !== 'vélo . neuf ou occasion')
 		.sort((a, b) => getSortOrder(a) - getSortOrder(b));
 

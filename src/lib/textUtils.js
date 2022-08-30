@@ -15,9 +15,10 @@ export const getBikeKind = (kind) => {
 	return veloKindsComputed[kind] ?? kind;
 };
 
+const engineBis = engine.shallowCopy();
 export function aidesPerVeloKind(aide) {
 	const getMaximumAideForVeloKind = (kind) =>
-		engine
+		engineBis
 			.setSituation({
 				'localisation . code insee': `'${
 					aide.collectivity.kind === 'région' ? '' : aide.codeInsee

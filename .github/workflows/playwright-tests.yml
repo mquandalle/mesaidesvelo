@@ -14,8 +14,6 @@ jobs:
         with:
           node-version: '16'
       - run: npm ci
-      - name: Install Playwright
-        run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npm run test
         env:

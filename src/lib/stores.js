@@ -23,12 +23,11 @@ export const localisationSituation = derived([localisation], ([$localisation]) =
 );
 
 export const publicodeSituation = derived(
-	[localisationSituation, answers, revenuFiscal, page],
-	([$localisationSituation, $answers, $revenuFiscal, $page]) => {
+	[localisationSituation, answers, revenuFiscal],
+	([$localisationSituation, $answers, $revenuFiscal]) => {
 		return {
 			...$localisationSituation,
 			...Object.fromEntries(Object.entries($answers).filter(([, val]) => val)),
-			...($page.data.veloCat ? { 'vélo . type': `'${$page.data.veloCat}'` } : {}),
 			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {}),
 		};
 	}

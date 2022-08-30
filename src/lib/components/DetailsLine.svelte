@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import { engine, getCurrentBikeEngine } from '$lib/engine';
+	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { formatDescription } from '$lib/utils';
 	import miniaturesManifest from '$lib/data/miniatures.json';
 
@@ -11,15 +11,17 @@
 	export let ruleName;
 
 	const veloCat = $page.data.veloCat;
-	$: aide = $getCurrentBikeEngine.evaluate(ruleName);
+	$: engine = getEngine({ ...$publicodeSituation, 'vélo . type': `'${veloCat}'` });
+	$: aide = engine.evaluate(ruleName);
 
-	const { title, rawNode } = engine.getRule(ruleName);
-	const notice = formatDescription({ ruleName, engine, veloCat });
+	const { title, rawNode } = baseEngine.getRule(ruleName);
+	const notice = formatDescription({ ruleName, engine: baseEngine, veloCat });
 
-	const evaluateWithGivenRevenu = (revenu) =>
+	$: evaluateWithGivenRevenu = (revenu) =>
 		engine
 			.setSituation({
 				...$publicodeSituation,
+				'vélo . type': `'${veloCat}'`,
 				'revenu fiscal de référence': `${revenu} €/an`,
 				'vélo . prix': 'vélo . prix pour maximiser les aides',
 			})
@@ -27,7 +29,7 @@
 
 	// TODO: we could optimize this calcul which is done 2 times : one time in
 	// revenuSelector and one time here
-	const conditionDeRessources = evaluateWithGivenRevenu(100) !== evaluateWithGivenRevenu(100000);
+	$: conditionDeRessources = evaluateWithGivenRevenu(100) !== evaluateWithGivenRevenu(100000);
 </script>
 
 <div class="flex flex-row">

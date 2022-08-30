@@ -1,25 +1,28 @@
 <script>
 	import Emoji from '$lib/components/Emoji.svelte';
 	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
-	import { engine } from '$lib/engine';
+	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
 
-	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
+	const bikeKinds = baseEngine?.getRule('vélo . type').rawNode['possibilités'];
 
 	resetAnswers();
 
+	$: engine = getEngine($publicodeSituation);
+	$: engineBis = getEngine($publicodeSituation);
+
 	$: aidesPerBikeKind = bikeKinds.map((cat) => {
-		engine.setSituation({
+		engineBis.setSituation({
 			...$publicodeSituation,
 			'maximiser les aides': 'oui',
 			'vélo . type': `'${cat}'`,
 		});
 
-		const montant = engine.evaluate('aides . montant');
+		const montant = engineBis.evaluate('aides . montant');
 
 		return {
 			cat,
@@ -29,7 +32,7 @@
 		};
 	});
 
-	$: primeALaConversion = engine
+	$: primeALaConversion = engineBis
 		.setSituation({
 			...$publicodeSituation,
 			'vélo . type': "'prime-conversion'",
@@ -41,9 +44,7 @@
 	$: activesAidesPerBikeKind = aidesPerBikeKind.filter(({ montant }) => montant.nodeValue !== 0);
 	$: inactivesAidesPerBikeKind = aidesPerBikeKind.filter(({ montant }) => montant.nodeValue === 0);
 
-	$: inFrance = !!engine
-		.setSituation($publicodeSituation)
-		.evaluate("localisation . pays = 'France'").nodeValue;
+	$: inFrance = !!engine.evaluate("localisation . pays = 'France'").nodeValue;
 
 	$: displayedAides = [
 		...activesAidesPerBikeKind.map(({ cat, ...rest }) => ({

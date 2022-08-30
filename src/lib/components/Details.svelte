@@ -4,46 +4,57 @@
 	import DetailsLine from '$lib/components./../../lib/components/DetailsLine.svelte';
 	import Emoji from '$lib/components./../../lib/components/Emoji.svelte';
 	import Questions from '$lib/components./../../lib/components/Questions.svelte';
-	import { engine, getCurrentBikeEngine } from '$lib/engine';
+	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 
 	resetAnswers();
+	$: engine = getEngine({
+		...$publicodeSituation,
+		'vélo . type': `'${$page.data.veloCat}'`,
+	});
 
 	const categoryDescription =
-		engine.getRule(`vélo . ${$page.data.veloCat}`).rawNode?.description ?? '';
+		baseEngine.getRule(`vélo . ${$page.data.veloCat}`).rawNode?.description ?? '';
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
-	$: aidesDetails = collectivites
-		.map((collectivite) => {
-			const aide = $getCurrentBikeEngine.evaluate(`aides . ${collectivite}`);
-			if (!aide.nodeValue) {
-				return null;
-			}
-			const originalRuleName = aide.explanation.find(({ condition }) => condition.isActive)
-				.consequence.name;
+	$: aidesDetails =
+		$publicodeSituation &&
+		collectivites
+			.map((collectivite) => {
+				const aide = engine.evaluate(`aides . ${collectivite}`);
+				if (!aide.nodeValue) {
+					return null;
+				}
+				const originalRuleName = aide.explanation.find(({ condition }) => condition.isActive)
+					.consequence.name;
 
-			return originalRuleName;
-		})
-		.filter(Boolean);
+				return originalRuleName;
+			})
+			.filter(Boolean);
 
-	$: sum = $getCurrentBikeEngine.evaluate('aides . montant');
+	$: sum = engine.evaluate('aides . montant');
 
 	// On simule deux branches : une pour un vélo neuf et une pour un vélo
 	// d'occasion afin de déterminer s'il faut poser la question sur le vélo
 	// neuf ou d'occasion.
 	// TODO: trouver un moyen de ne pas refaire plusieurs fois les mêmes calculs.
-	const engineBis = engine.shallowCopy();
+	$: engineBis = engine = getEngine({
+		...$publicodeSituation,
+		'vélo . type': `'${$page.data.veloCat}'`,
+	});
 	$: montantAidesVeloOccasion = engineBis
 		.setSituation({
 			...$publicodeSituation,
+			'vélo . type': `'${$page.data.veloCat}'`,
 			'vélo . neuf ou occasion': '"occasion"',
 		})
 		.evaluate('aides . montant').nodeValue;
 	$: montantAidesVeloNeuf = engineBis
 		.setSituation({
 			...$publicodeSituation,
+			'vélo . type': `'${$page.data.veloCat}'`,
 			'vélo . neuf ou occasion': '"neuf"',
 		})
 		.evaluate('aides . montant').nodeValue;

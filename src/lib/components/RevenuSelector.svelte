@@ -14,6 +14,7 @@
 	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
 	const uniq = (arr) => [...new Set(arr)];
 
+	const engineBis = engine.shallowCopy();
 	export const originalNames = derived(
 		[localisationSituation, page],
 		([$localisationSituation, $page]) => {
@@ -26,7 +27,7 @@
 			return uniq(
 				bikeKinds
 					.map((veloCat) => {
-						engine.setSituation({
+						engineBis.setSituation({
 							...$localisationSituation,
 							'maximiser les aides': 'oui',
 							'vélo . type': `'${veloCat}'`,
@@ -34,7 +35,7 @@
 
 						const originalNames = collectivites
 							.map((collectivite) => {
-								const aide = engine.evaluate(`aides . ${collectivite}`);
+								const aide = engineBis.evaluate(`aides . ${collectivite}`);
 								if (!aide.nodeValue) {
 									return null;
 								}
@@ -146,6 +147,7 @@
 					// times : one time in DetailsLine and one time here
 					engineBis.setSituation({
 						...$publicodeSituation,
+						'vélo . type': `'${$page.data.veloCat}'`,
 						'maximiser les aides': 'oui',
 						'revenu fiscal de référence': `${revenu + 1} €/mois`,
 					});

@@ -1,15 +1,16 @@
 <script>
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
-	import { engine, getCurrentBikeEngine } from '$lib/engine';
-	import { answers } from '$lib/stores';
+	import { answers, publicodeSituation } from '$lib/stores';
 	import { slugify } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import Emoji from './Emoji.svelte';
 	import NumberField from './NumberField.svelte';
+	import { engine as baseEngine, getEngine } from '$lib/engine';
+	import { page } from '$app/stores';
 
 	export let rule;
 
-	const rawRule = engine.getRule(rule).rawNode;
+	const rawRule = baseEngine.getRule(rule).rawNode;
 	const { question, unité, type, description, possibilités } = rawRule;
 	const domId = `question-${slugify(rule)}`;
 	const ruleParent = rule.split(' . ').slice(0, -1).join(' . ');
@@ -22,11 +23,15 @@
 		$answers[rule] = undefined;
 	}
 
+	$: engine = getEngine({
+		...$publicodeSituation,
+		'vélo . type': `'${$page.data.veloCat}'`,
+	});
 	$: optionalEvaluate = (expression) => {
 		if (typeof expression === 'string') {
 			return expression;
 		} else {
-			return $getCurrentBikeEngine.evaluate(expression).nodeValue;
+			return engine.evaluate(expression).nodeValue;
 		}
 	};
 
