@@ -1,11 +1,15 @@
 import { page } from '$app/stores';
-import { derived, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
 
 export const localisation = writable(null);
 export const answers = writable({});
 export const revenuFiscal = writable(undefined);
 
-export const resetAnswers = () => answers.set({});
+export const resetAnswers = () => {
+	if (Object.keys(get(answers)).length > 0) {
+		answers.set({});
+	}
+};
 
 export const localisationSituation = derived([localisation], ([$localisation]) =>
 	$localisation
@@ -18,20 +22,13 @@ export const localisationSituation = derived([localisation], ([$localisation]) =
 		: {}
 );
 
-export const veloCat = derived([page], ([$page]) => {
-	if ($page.routeId === '(search)/prime-a-la-conversion') {
-		return 'prime-conversion';
-	}
-	return $page.url?.searchParams.get('velo') ?? null;
-});
-
 export const publicodeSituation = derived(
-	[localisationSituation, answers, revenuFiscal, veloCat],
-	([$localisationSituation, $answers, $revenuFiscal, $veloCat]) => {
+	[localisationSituation, answers, revenuFiscal, page],
+	([$localisationSituation, $answers, $revenuFiscal, $page]) => {
 		return {
 			...$localisationSituation,
 			...Object.fromEntries(Object.entries($answers).filter(([, val]) => val)),
-			...($veloCat ? { 'vélo . type': `'${$veloCat}'` } : {}),
+			...($page.data.veloCat ? { 'vélo . type': `'${$page.data.veloCat}'` } : {}),
 			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {}),
 		};
 	}

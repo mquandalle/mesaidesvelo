@@ -3,7 +3,7 @@
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
 
-	export let goals = [];
+	export let goals;
 	export let demandeNeufOuOccasion = false;
 
 	const questionsOrder = ['revenu fiscal de référence', 'vélo . prix'];
@@ -11,12 +11,12 @@
 	const getSortOrder = (name) =>
 		questionsOrder.includes(name) ? questionsOrder.indexOf(name) : Infinity;
 	const uniq = (arr) => [...new Set(arr)];
-	const questions = uniq(
-		(goals ?? ['aides'])
-			.map((ruleName) => $getCurrentBikeEngine().evaluate(ruleName).traversedVariables)
+	$: questions = uniq(
+		(goals ?? ['aides . montant'])
+			.map((ruleName) => $getCurrentBikeEngine.evaluate(ruleName).traversedVariables)
 			.flat()
 	)
-		.filter((q) => $getCurrentBikeEngine().getRule(q).rawNode.question)
+		.filter((q) => $getCurrentBikeEngine.getRule(q).rawNode.question)
 		.filter((q) => q !== 'vélo . neuf ou occasion')
 		.sort((a, b) => getSortOrder(a) - getSortOrder(b));
 

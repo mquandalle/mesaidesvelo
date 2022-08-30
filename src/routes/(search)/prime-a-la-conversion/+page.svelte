@@ -9,7 +9,7 @@
 	<BackButtonAides />
 
 	<div class="border mt-6 rounded-md shadow-sm">
-		<DetailsLine ruleName="aides . prime à la conversion" veloCat="prime-conversion" />
+		<DetailsLine ruleName="aides . prime à la conversion" />
 	</div>
 
 	<Questions goals={['aides . prime à la conversion']} />

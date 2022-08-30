@@ -5,7 +5,9 @@ import { publicodeSituation } from './stores';
 
 export const engine = new Publicodes(aides);
 
-export const getCurrentBikeEngine = derived([publicodeSituation], ([$publicodeSituation]) => () => {
-	engine.setSituation($publicodeSituation);
-	return engine;
+const currentBikeEngineInstance = engine.shallowCopy();
+
+export const getCurrentBikeEngine = derived([publicodeSituation], ([$publicodeSituation]) => {
+	currentBikeEngineInstance.setSituation($publicodeSituation);
+	return currentBikeEngineInstance;
 });

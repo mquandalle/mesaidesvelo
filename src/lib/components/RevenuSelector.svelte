@@ -14,37 +14,44 @@
 	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
 	const uniq = (arr) => [...new Set(arr)];
 
-	export const originalNames = derived([localisationSituation], ([$localisationSituation]) => {
-		if (!localisationSituation) {
-			return [];
+	export const originalNames = derived(
+		[localisationSituation, page],
+		([$localisationSituation, $page]) => {
+			if (!localisationSituation) {
+				return [];
+			}
+			if ($page.data.veloCat === 'prime-conversion') {
+				return ['aides . prime à la conversion'];
+			}
+			return uniq(
+				bikeKinds
+					.map((veloCat) => {
+						engine.setSituation({
+							...$localisationSituation,
+							'maximiser les aides': 'oui',
+							'vélo . type': `'${veloCat}'`,
+						});
+
+						const originalNames = collectivites
+							.map((collectivite) => {
+								const aide = engine.evaluate(`aides . ${collectivite}`);
+								if (!aide.nodeValue) {
+									return null;
+								}
+								const originalRuleName = aide.explanation.find(
+									({ condition }) => condition.isActive
+								).consequence.name;
+
+								return originalRuleName;
+							})
+							.filter(Boolean);
+
+						return originalNames;
+					})
+					.flat()
+			);
 		}
-		return uniq(
-			bikeKinds
-				.map((veloCat) => {
-					engine.setSituation({
-						...$localisationSituation,
-						'maximiser les aides': 'oui',
-						'vélo . type': `'${veloCat}'`,
-					});
-
-					const originalNames = collectivites
-						.map((collectivite) => {
-							const aide = engine.evaluate(`aides . ${collectivite}`);
-							if (!aide.nodeValue) {
-								return null;
-							}
-							const originalRuleName = aide.explanation.find(({ condition }) => condition.isActive)
-								.consequence.name;
-
-							return originalRuleName;
-						})
-						.filter(Boolean);
-
-					return originalNames;
-				})
-				.flat()
-		);
-	});
+	);
 
 	// We do a static analysis of the rules AST to search for a particular rule name.
 	// When in find it in a comparaison expression we retreive the value of the other
@@ -106,7 +113,8 @@
 </script>
 
 <script>
-	import { publicodeSituation, revenuFiscal, veloCat } from '$lib/stores';
+	import { page } from '$app/stores';
+	import { publicodeSituation, revenuFiscal } from '$lib/stores';
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
@@ -167,7 +175,7 @@
 
 	$: displayedThresholds =
 		!numberFieldIsRequired &&
-		($veloCat === null ? uniqThresholds : removeUnecessaryThresholds(uniqThresholds));
+		($page.data.veloCat === null ? uniqThresholds : removeUnecessaryThresholds(uniqThresholds));
 
 	$: if (
 		$revenuFiscal &&

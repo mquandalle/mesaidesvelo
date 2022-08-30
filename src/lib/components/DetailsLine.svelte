@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import { engine, getCurrentBikeEngine } from '$lib/engine';
 	import { formatDescription } from '$lib/utils';
 	import miniaturesManifest from '$lib/data/miniatures.json';
@@ -8,9 +9,9 @@
 	import { publicodeSituation } from '$lib/stores';
 
 	export let ruleName;
-	export let veloCat;
 
-	$: aide = $getCurrentBikeEngine().evaluate(ruleName);
+	const veloCat = $page.data.veloCat;
+	$: aide = $getCurrentBikeEngine.evaluate(ruleName);
 
 	const { title, rawNode } = engine.getRule(ruleName);
 	const notice = formatDescription({ ruleName, engine, veloCat });

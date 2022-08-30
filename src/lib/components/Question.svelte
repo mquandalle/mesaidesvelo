@@ -26,7 +26,7 @@
 		if (typeof expression === 'string') {
 			return expression;
 		} else {
-			return $getCurrentBikeEngine().evaluate(expression).nodeValue;
+			return $getCurrentBikeEngine.evaluate(expression).nodeValue;
 		}
 	};
 
