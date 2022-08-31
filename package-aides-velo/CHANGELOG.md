@@ -1,11 +1,12 @@
 # Historique des modifications
 
-## v2.0.50
+## v2.0.50 - 31/08/2022
 
 Ajout des vélos d'occasion :
 
 - Annemasse Agglo
 - Valenciennes Métropole
+- Montpellier Méditerranée Métropole
 
 ## v2.0.49 - 26/08/2022
 

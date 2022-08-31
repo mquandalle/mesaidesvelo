@@ -1462,12 +1462,23 @@ aides . département Hérault:
 aides . montpellier:
   remplace: intercommunalité
   titre: Montpellier Méditerranée Métropole
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'Montpellier Méditerranée Métropole'
-      - vélo . électrique
+  applicable si: localisation . epci = 'Montpellier Méditerranée Métropole'
   valeur: 50% * vélo . prix
-  plafond: 500€
+  plafond:
+    variations:
+      - si:
+          toutes ces conditions:
+            - vélo . électrique
+            - vélo . neuf
+        alors: 500€
+      - si:
+          toutes ces conditions:
+            - vélo . électrique
+            - vélo . occasion
+        alors: 200€
+      - si: vélo . motorisation
+        alors: 200€
+      - sinon: 0€
   lien: https://www.montpellier3m.fr/actualite/jusqua-1150-eu-daide-pour-lachat-dun-velo-assistance-electrique
 
 # Terminé pour 2022
@@ -4312,6 +4323,7 @@ vélo . occasion:
       - aides . illkirch
       - aides . annemasse
       - aides . valenciennes
+      - aides . montpellier
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
