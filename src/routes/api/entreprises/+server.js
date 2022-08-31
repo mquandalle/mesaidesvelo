@@ -61,8 +61,7 @@ const searchOptions = {
 	threshold: -1000,
 	scoreFn: (a) =>
 		// testé à la main pour faire remonter les plus grosses villes en premier
-		a[0] ? a[0].score * (1 - Math.log(a.obj.effectif / 10000) * 0.8) : -1001,
-	// scoreFn: (a) => -a.effectif
+		a[0] ? a[0].score * (1 - Math.log((a.obj.effectif || 1000) / 10000) * 0.8) : -1001,
 };
 
 /** @type {import('./$types').RequestHandler} */
