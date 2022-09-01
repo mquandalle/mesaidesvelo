@@ -54,11 +54,12 @@ const prependPartialSentence = (content, { prepend } = {}) =>
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 	const slug = params.slug;
-	const localisation = rawCityToFullLocalisation(communes.find((c) => c.slug === slug));
-
-	if (!localisation) {
+	const city = communes.find((c) => c.slug === slug);
+	if (!city) {
 		throw error(404);
 	}
+
+	const localisation = rawCityToFullLocalisation(city);
 
 	const baseData = { ville: localisation };
 	const infos = {};
