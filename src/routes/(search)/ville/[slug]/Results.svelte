@@ -35,7 +35,7 @@
 	$: primeALaConversion = engineBis
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': "'prime-conversion'",
+			'vélo . prix': '10000 €',
 		})
 		.evaluate('aides . prime à la conversion');
 

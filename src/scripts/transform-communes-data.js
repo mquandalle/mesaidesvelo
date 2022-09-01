@@ -10,6 +10,7 @@
 import { slugify } from '../lib/utils.js';
 import { writeJsonData } from './writeData.js';
 
+import villeInZFE from '../../data-fetch/zones-faibles-emissions/codes-insee.js';
 import communes from '@etalab/decoupage-administratif/data/communes.json' assert { type: 'json' };
 import epci from '@etalab/decoupage-administratif/data/epci.json' assert { type: 'json' };
 
@@ -76,6 +77,7 @@ const data = [
 				departement: c.departement,
 				region: c.region,
 				population: c.population,
+				zfe: villeInZFE.includes(c.code),
 				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
 				codesPostaux: uniq(c.codesPostaux).sort(
 					(a, b) => countTrailingZeros(b) - countTrailingZeros(a)

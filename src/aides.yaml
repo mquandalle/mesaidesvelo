@@ -52,11 +52,11 @@ aides . bonus vélo:
   lien: https://www.service-public.fr/particuliers/vosdroits/F36601
 
 aides . prime à la conversion:
-  remplace: état
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
-      - vélo . type = 'prime-conversion'
+      - vélo . électrique
+  type: état
   titre: Prime à la conversion
   description: |
     Pour bénéficier de cette « prime à la casse » vous devez détruire un
@@ -73,6 +73,24 @@ aides . prime à la conversion:
         alors: 3000€
       - sinon: 1500€
   lien: https://www.service-public.fr/particuliers/vosdroits/F35846
+
+aides . prime à la conversion . surprime ZFE:
+  applicable si:
+    toutes ces conditions:
+      - localisation . pays = 'France'
+      - localisation . ZFE
+  titre: Surprime ZFE
+  description: |
+    Vous pouvez bénéficier d’une surprime car la ville de $ville est une zone à
+    faible émission mobilité (ZFE). Cette surprime est conditionnée à l'octroi
+    d’une aide par la collectivité locale et son montant est identique à l'aide
+    versée par la collectivité locale, dans la limite de 1 000 €.
+  somme:
+    - commune
+    - intercommunalité
+    - département
+    - région
+  plafond: 1000€
 
 aides . forfait mobilités durables: 500 €/an
 
@@ -4151,6 +4169,7 @@ vélo . type:
     - cargo électrique
     - pliant
     - motorisation
+  par défaut: "'électrique'"
 
 vélo . mécanique simple:
   valeur: oui
@@ -4225,8 +4244,6 @@ vélo . prix . HT:
 # TODO: implémenter sous forme de remplace directement dans les aides
 vélo . prix pour maximiser les aides:
   variations:
-    - si: vélo . type = 'prime-conversion'
-      alors: 10000€
     - si: localisation . epci = 'CA de Nevers'
       alors:
         variations:
@@ -4370,6 +4387,7 @@ maximiser les aides:
 
 localisation: oui
 localisation . code insee: "''"
+localisation . ZFE: non
 localisation . epci: "''"
 localisation . département: "''"
 localisation . région: "''"

@@ -23,7 +23,7 @@ export function slugify(str) {
 
 // TODO: To we really need this feature? Could we automatically infer descriptions from the formulas?
 const defaultDescription = '';
-export function formatDescription({ ruleName, engine, veloCat }) {
+export function formatDescription({ ruleName, engine, veloCat, ville }) {
 	const { rawNode } = engine.getRule(ruleName);
 	const description = rawNode?.description ?? defaultDescription;
 	const plafondRuleName = `${ruleName} . $plafond`;
@@ -31,7 +31,8 @@ export function formatDescription({ ruleName, engine, veloCat }) {
 	const plafond = plafondIsDefined && engine.evaluate(plafondRuleName);
 	return description
 		.replace(/\$vélo/g, veloCat === 'motorisation' ? 'kit de motorisation' : `vélo ${veloCat}`)
-		.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }));
+		.replace(/\$plafond/, formatValue(plafond?.nodeValue, { displayedUnit: '€' }))
+		.replace(/\$ville/, ville?.nom);
 }
 
 export function titleCategory(category) {
@@ -52,6 +53,7 @@ export const rawCityToFullLocalisation = ({
 	nom,
 	slug,
 	epci,
+	zfe,
 	codePostal,
 	codesPostaux,
 	departement,
@@ -61,6 +63,7 @@ export const rawCityToFullLocalisation = ({
 	nom,
 	slug,
 	epci,
+	zfe,
 	codeInsee: code,
 	codePostal: codePostal || codesPostaux[0],
 	departement: departement ?? code.slice(0, 2),
