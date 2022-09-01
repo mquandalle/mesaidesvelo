@@ -19,7 +19,6 @@
 	"devDependencies": {
 		"@actions/core": "^1.6.0",
 		"@actions/github": "^5.0.0",
-		"@playwright/test": "^1.25.1",
 		"@rollup/plugin-yaml": "^3.1.0",
 		"@sveltejs/adapter-vercel": "next",
 		"@sveltejs/kit": "next",
