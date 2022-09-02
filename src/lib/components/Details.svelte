@@ -105,7 +105,7 @@
 	</div>
 </div>
 
-<Questions goals={aidesDetails} {demandeNeufOuOccasion} />
+<Questions {demandeNeufOuOccasion} />
 
 {#if !demandeNeufOuOccasion && $page.data.veloCat !== 'motorisation'}
 	<p class="mt-4">
