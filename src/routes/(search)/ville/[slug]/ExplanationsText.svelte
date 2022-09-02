@@ -163,11 +163,39 @@
 			</ul>
 		{/if}
 
+		{#if $page.data.ville.zfe}
+			<h2>{$page.data.ville.nom} est une zone à faibles émissions mobilité (ZFE)</h2>
+			<img
+				src="/images/panneau-zfe.webp"
+				alt="Signalisation d'une zone ZFE avec les vignettes Crit'Air"
+				class="float-left pt-3 mr-6 !mb-6 max-h-[160px] w-[100px] object-contain"
+			/>
+			<p>
+				Instaurée dans le cadre de la loi Climat d'août 2021, la mise en place des Zones à faibles
+				émissions mobilité est obligatoire avant le 31 décembre 2024 pour toutes les agglomérations
+				de plus de 150 000 habitants. Mais les villes qui le souhaitent peuvent mettre en place le
+				mesure avant, ce qui est le cas à {$page.data.ville.nom}.
+			</p>
+			<p>
+				Dans les ZFE les véhicules les plus polluants identifiés par les vignettes Crit'Air 5, 4 et
+				3 sont soumis à des restrictions de circulation. Ces restrictions peuvent s'appliquer sur
+				des plages horaires déterminées. Les collectivités territoriales sont libres de fixer des
+				règles plus strictes.
+			</p>
+			<p>
+				S’agissant des aides à l’achat de vélo, la mise en place d'une ZFE s'accompagne d'un
+				supplément à la <a href="/prime-a-la-conversion">prime à la conversion</a> lors de l'achat d’un
+				vélo électrique si, dans le même temps, vous mettez à la casse un ancien véhicule diesel ou essence.
+				Le montant de la surprime est identique à l'aide versée par la collectivité territoriale, dans
+				la limite de 1 000 €.
+			</p>
+		{/if}
+
 		{#if infos.labelTourDeFrance}
 			<h2>{infos.labelTourDeFrance.ville} labellisé par le Tour-de-France</h2>
 			<img
-				src="/ville-a-velo/{infos.labelTourDeFrance.note}.jpeg"
-				alt="Lavel ville à vélo du Tour de France"
+				src="/images/ville-a-velo/{infos.labelTourDeFrance.note}.jpeg"
+				alt="Label ville à vélo du Tour de France"
 				class="float-left pt-4 mr-6 !mb-6 max-h-[120px] w-[200px] object-contain"
 			/>
 			<p>
@@ -177,7 +205,7 @@
 				communes en faveur de la bicyclette au quotidien.
 			</p>
 
-			<p>Le label est décliné selon quatre niveaux symbolisés par de petits vélos jaunes.</p>
+			<p>Le label est décliné selon quatre niveaux symbolisés par de petits vélos.</p>
 
 			<p class="font-bold">
 				La ville {#if infos.labelTourDeFrance.ville.match(/^[aeiouy]/i)}d’{:else}de {/if}{infos
