@@ -11,13 +11,13 @@
 	export let ruleName;
 
 	const veloCat = $page.data.veloCat;
-	$: engine = getEngine($publicodeSituation);
+	$: engine = getEngine({ ...$publicodeSituation, 'vélo . type': `'${veloCat}'` });
 	$: aide = engine.evaluate(ruleName);
 
 	const { title, rawNode } = baseEngine.getRule(ruleName);
-	const notice = formatDescription({
+	$: notice = formatDescription({
 		ruleName,
-		engine: baseEngine,
+		engine,
 		veloCat,
 		ville: $localisation,
 	});

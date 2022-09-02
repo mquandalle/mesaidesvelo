@@ -4168,6 +4168,7 @@ vélo . type:
     - cargo
     - cargo électrique
     - pliant
+    - pliant électrique
     - motorisation
   par défaut: "'électrique'"
 
@@ -4181,6 +4182,7 @@ vélo . électrique:
     une de ces conditions:
       - vélo . type = 'électrique'
       - vélo . type = 'cargo électrique'
+      - vélo . type = 'pliant électrique'
 
 vélo . mécanique:
   valeur: oui
@@ -4210,7 +4212,14 @@ vélo . cargo électrique:
 
 vélo . pliant:
   valeur: oui
-  applicable si: vélo . type = 'pliant'
+  applicable si:
+    une de ces conditions:
+      - vélo . type = 'pliant'
+      - vélo . type = 'pliant électrique'
+
+vélo . pliant électrique:
+  valeur: oui
+  applicable si: vélo . type = 'pliant électrique'
 
 vélo . motorisation:
   valeur: oui
