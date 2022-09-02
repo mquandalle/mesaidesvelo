@@ -3624,6 +3624,20 @@ aides . valenciennes:
       - sinon: 0€
   lien: https://www.valenciennes-metropole.fr/competences/amenagement-du-territoire/mode-doux-mobilite/
 
+aides . cambrai:
+  remplace: intercommunalité
+  titre: Communauté d'agglomération de Cambrai
+  applicable si: localisation . epci = 'CA de Cambrai'
+  valeur: 30% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 300€
+      - si: vélo . mécanique
+        alors: 150€
+      - sinon: 0€
+  lien: https://www.agglo-cambrai.fr/pratique/actualites/2022-aout/1390-bourse-mobilite
+
 aides . thiais:
   remplace: commune
   titre: Ville de Thiais

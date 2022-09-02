@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## v2.0.51
+
+Ajout des aides suivantes :
+
+- Communauté d'agglomération de Cambrai
+
 ## v2.0.50 - 31/08/2022
 
 Ajout des vélos d'occasion :
