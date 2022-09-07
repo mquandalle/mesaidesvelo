@@ -79,18 +79,19 @@ aides . prime à la conversion . surprime ZFE:
     toutes ces conditions:
       - localisation . pays = 'France'
       - localisation . ZFE
-  titre: Surprime ZFE
+  titre: Surprime Zone à Faibles Émissions (ZFE)
   description: |
-    Vous pouvez bénéficier d’une surprime car la ville de $ville est une zone à
-    faible émission mobilité (ZFE). Cette surprime est conditionnée à l'octroi
-    d’une aide par la collectivité locale et son montant est identique à l'aide
-    versée par la collectivité locale, dans la limite de 1 000 €.
+    Vous pouvez bénéficier d’une surprime car $ville est une zone à faible
+    émission mobilité (ZFE). Cette surprime est conditionnée à l'octroi d’une
+    aide par la collectivité locale et son montant est identique à l'aide versée
+    par la collectivité locale, dans la limite de 1 000 €.
   somme:
     - commune
     - intercommunalité
     - département
     - région
   plafond: 1000€
+  lien: https://www.service-public.fr/particuliers/vosdroits/F35846
 
 aides . forfait mobilités durables: 500 €/an
 
@@ -315,8 +316,85 @@ aides . dardilly:
       - localisation . code insee = '69072'
       - vélo . électrique
   valeur: 25% * vélo . prix
-  plafond: 250€
+  plafond: 150€
   lien: https://www.dardilly.fr/mes-infos-quotidiennes/actus-evenements/31-vie-citoyenne/91-subventions-eco-citoyennes
+
+aides . écully:
+  remplace: commune
+  titre: Ville d’Écully
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69081'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+  valeur: 100€
+  lien: https://www.ecully.fr/actualites-109/prime-pour-lachat-dun-velo-a-assistance-electrique-3708.html
+
+aides . feyzin:
+  remplace: commune
+  titre: Ville de Feyzin
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69276'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  variations:
+    - si: revenu fiscal de référence <= 16800 €/an
+      alors: 100€
+    - sinon: 50€
+  lien: https://feyzin.fr/actualites/560-aide-velo-electrique
+
+aides . grigny:
+  remplace: commune
+  titre: Ville de Grigny
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '91286'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 100€
+  lien: https://www.mairie-grigny69.fr/prime-velo/
+
+aides . irigny:
+  remplace: commune
+  titre: Ville d’Irigny
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69100'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+          - vélo . pliant
+  valeur: 100€
+  lien: https://irigny.fr/Parking-a%CC%80-ve%CC%81los
+
+aides . oullins:
+  remplace: commune
+  titre: Ville d’Oullins
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69149'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.oullins.fr/deplacements/a-velo/subvention-pour-l-achat-d-un-velo-electrique-563.html
+
+aides . pierre-bénite:
+  remplace: commune
+  titre: Ville de Pierre-Bénite
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69152'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.pierrebenite.fr/wp-content/uploads/CONVENTIONVAE.pdf
+
+# TODO: expiré : Givors
+# https://www.givors.fr/dossier/la-mairie-vous-accompagne-pour-lachat-dun-velo-electrique/
 
 aides . blacé:
   remplace: commune
@@ -3232,6 +3310,29 @@ aides . lorient:
       - sinon: 0€
   lien: https://www.lorient-agglo.bzh/actualites/toutes-les-actualites/actualite/news/une-prime-pour-encourager-lacquisition-dun-velo/
 
+# TODO: « la ville réétudiee actuellement son dispositif d'aide »
+aides . lanester:
+  remplace: commune
+  titre: Ville de Lanester
+  applicable si: localisation . code insee = '56098'
+  variations:
+    - si: revenu fiscal de référence <= première tranche IR
+      alors:
+        variations:
+          - si: vélo . cargo
+            alors: 300€
+          - si: vélo . électrique ou mécanique
+            alors: 200€
+          - sinon: 0€
+    - sinon:
+        variations:
+          - si: vélo . cargo
+            alors: 150€
+          - si: vélo . électrique ou mécanique
+            alors: 100€
+          - sinon: 0€
+  lien: https://www.lanester.fr/actualites/une-aide-pour-les-velos-electriques-et-les-velos-cargo
+
 aides . la roche sur yon:
   remplace: intercommunalité
   titre: La Roche-sur-Yon Agglomération
@@ -3687,6 +3788,19 @@ aides . nanterre:
               plafond: 250€
           - sinon: 0€
   lien: https://www.nanterre.fr/1687-velo-les-dispositifs-d-aide.htm
+
+aides . puteaux:
+  remplace: commune
+  titre: Ville de Puteaux
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '92062'
+      - une de ces conditions:
+          - vélo . mécanique
+          - vélo . motorisation
+  valeur: 50% * vélo . prix
+  plafond: 300€
+  lien: https://www.puteaux.fr/puteaux/Ma-ville/Actualites/Toutes-les-aides-pour-l-achat-d-un-velo
 
 aides . genneviliers:
   remplace: commune
@@ -4364,6 +4478,8 @@ vélo . occasion:
       - aides . annemasse
       - aides . valenciennes
       - aides . montpellier
+      - aides . grigny
+      - aides . oullins
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?

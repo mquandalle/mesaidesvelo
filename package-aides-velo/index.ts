@@ -20,6 +20,7 @@ type InputParameters = Partial<{
 	'localisation . epci': string;
 	'localisation . département': string;
 	'localisation . région': string;
+	'localisation . ZFE': boolean;
 	'vélo . type':
 		| 'mécanique simple'
 		| 'électrique'
@@ -68,6 +69,7 @@ export default function aidesVelo(situation: InputParameters = {}): Array<Aide> 
 							ruleName,
 							engine,
 							veloCat: situation['vélo . type'],
+							ville: 'votre ville',
 						}),
 						amount: nodeValue,
 					},
@@ -82,7 +84,11 @@ const formatInput = (input: InputParameters) =>
 	Object.fromEntries(
 		Object.entries(input).map(([key, val]) => [
 			key,
-			key === 'localisation . epci'
+			typeof val === 'boolean'
+				? val
+					? 'oui'
+					: 'non'
+				: key === 'localisation . epci'
 				? `'${epciSirenToName[val]}'`
 				: typeof val === 'string'
 				? `'${val}'`

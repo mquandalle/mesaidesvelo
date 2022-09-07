@@ -1,10 +1,23 @@
 # Historique des modifications
 
-## v2.0.51
+## v2.0.51 - 07/09/2022
 
 Ajout des aides suivantes :
 
+- Surprime Zone à Faibles Émissions
 - Communauté d'agglomération de Cambrai
+- Ville d’Écully
+- Ville de Feyzin
+- Ville de Grigny
+- Ville d’Irigny
+- Ville d’Oullins
+- Ville de Pierre-Bénite
+- Ville de Lanester
+- Ville de Puteaux
+
+Mise à jour des aides suivantes :
+
+- Ville de Dardilly
 
 ## v2.0.50 - 31/08/2022
 

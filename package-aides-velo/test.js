@@ -25,7 +25,7 @@ test('aides électrique colmar', (t) => {
 		'localisation . région': '44',
 		'vélo . type': 'électrique',
 	});
-	t.is(colmarElectrique.length, 3, '3 aides');
+	t.is(colmarElectrique.length, 4, '4 aides');
 	t.truthy(
 		colmarElectrique.find(({ title }) => title.toLowerCase().includes('colmar')),
 		'Dont une de la ville'
@@ -53,6 +53,7 @@ test('prise en compte du revenu fiscal de référence', (t) => {
 	const situationCharenton = {
 		'localisation . code insee': '94018',
 		'vélo . type': 'électrique',
+		'aides . prime à la conversion': 'non',
 	};
 	const aidesCharenton = aidesVelo(situationCharenton);
 	t.is(
@@ -82,7 +83,7 @@ test('interpolation des variables $vélo et $plafond', (t) => {
 	}).forEach(({ id, description }) =>
 		t.notRegex(
 			description,
-			/\$(vélo|plafond)/,
+			/\$(vélo|plafond|ville)/,
 			`variables interpolées dans la description de ${id}`
 		)
 	);
