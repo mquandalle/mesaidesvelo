@@ -6,7 +6,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import { onMount, setContext } from 'svelte';
 	import 'virtual:windi.css';
-	import { prerendering } from '$app/env';
+	import { prerendering } from '$app/environment';
 
 	onMount(() => {
 		prefetchRoutes(['/', '/ville/*']);
