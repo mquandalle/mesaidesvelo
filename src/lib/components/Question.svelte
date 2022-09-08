@@ -1,6 +1,6 @@
 <script>
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
-	import { answers, publicodeSituation } from '$lib/stores';
+	import { answers, publicodeSituation, veloCat } from '$lib/stores';
 	import { slugify } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import Emoji from './Emoji.svelte';
@@ -25,7 +25,7 @@
 
 	$: engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$page.data.veloCat}'`,
+		'vélo . type': `'${$veloCat}'`,
 	});
 	$: optionalEvaluate = (expression) => {
 		if (typeof expression === 'string') {

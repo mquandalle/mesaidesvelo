@@ -10,6 +10,8 @@ export const resetAnswers = () => {
 	}
 };
 
+export const veloCat = writable();
+
 export const localisationSituation = derived([localisation], ([$localisation]) =>
 	$localisation
 		? {

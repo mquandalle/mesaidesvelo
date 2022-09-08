@@ -3,9 +3,10 @@
 	import DetailsLine from '$lib/components/DetailsLine.svelte';
 	import Questions from '$lib/components/Questions.svelte';
 	import { engine } from '$lib/engine';
-	import { publicodeSituation } from '$lib/stores';
+	import { publicodeSituation, veloCat } from '$lib/stores';
 
 	$: engine.setSituation($publicodeSituation);
+	veloCat.set('électrique');
 </script>
 
 <div class="w-full max-w-screen-md m-auto">

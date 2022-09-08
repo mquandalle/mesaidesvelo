@@ -5,18 +5,17 @@
 	import Emoji from '$lib/components./../../lib/components/Emoji.svelte';
 	import Questions from '$lib/components./../../lib/components/Questions.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { publicodeSituation, resetAnswers } from '$lib/stores';
+	import { publicodeSituation, resetAnswers, veloCat } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 
 	resetAnswers();
 	$: engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$page.data.veloCat}'`,
+		'vélo . type': `'${$veloCat}'`,
 	});
 
-	const categoryDescription =
-		baseEngine.getRule(`vélo . ${$page.data.veloCat}`).rawNode?.description ?? '';
+	const categoryDescription = baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '';
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
 	$: aidesDetails =
@@ -42,19 +41,19 @@
 	// TODO: trouver un moyen de ne pas refaire plusieurs fois les mêmes calculs.
 	$: engineBis = engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$page.data.veloCat}'`,
+		'vélo . type': `'${$veloCat}'`,
 	});
 	$: montantAidesVeloOccasion = engineBis
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': `'${$page.data.veloCat}'`,
+			'vélo . type': `'${$veloCat}'`,
 			'vélo . neuf ou occasion': '"occasion"',
 		})
 		.evaluate('aides . montant').nodeValue;
 	$: montantAidesVeloNeuf = engineBis
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': `'${$page.data.veloCat}'`,
+			'vélo . type': `'${$veloCat}'`,
 			'vélo . neuf ou occasion': '"neuf"',
 		})
 		.evaluate('aides . montant').nodeValue;
@@ -76,8 +75,8 @@
 	← Toutes les aides
 </a>
 <h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
-	{titleCategory($page.data.veloCat)}{#if emojiCategory($page.data.veloCat)}&nbsp;<Emoji
-			emoji={emojiCategory($page.data.veloCat)}
+	{titleCategory($veloCat)}{#if emojiCategory($veloCat)}&nbsp;<Emoji
+			emoji={emojiCategory($veloCat)}
 		/>{/if}
 </h2>
 
@@ -107,7 +106,7 @@
 
 <Questions {demandeNeufOuOccasion} />
 
-{#if !demandeNeufOuOccasion && $page.data.veloCat !== 'motorisation'}
+{#if !demandeNeufOuOccasion && $veloCat !== 'motorisation'}
 	<p class="mt-4">
 		{#if aidesDetails.length === 1}Cette aide est valable{:else}Ces aides sont valables{/if}
 		{#if montantAidesVeloNeuf === montantAidesVeloOccasion}

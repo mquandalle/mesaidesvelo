@@ -2,7 +2,7 @@
 	import { engine } from '$lib/engine';
 	import { formatValue, reduceAST } from 'publicodes';
 	import { derived } from 'svelte/store';
-	import { localisationSituation } from '$lib/stores';
+	import { localisationSituation, veloCat } from '$lib/stores';
 	import Emoji from './Emoji.svelte';
 
 	// In case the formula involve a “linear operation” such as additions or
@@ -142,7 +142,7 @@
 					// times : one time in DetailsLine and one time here
 					engineBis.setSituation({
 						...$publicodeSituation,
-						'vélo . type': `'${$page.data.veloCat}'`,
+						'vélo . type': `'${$veloCat}'`,
 						'maximiser les aides': 'oui',
 						'revenu fiscal de référence': `${revenu + 1} €/mois`,
 					});
@@ -172,7 +172,7 @@
 
 	$: displayedThresholds =
 		!numberFieldIsRequired &&
-		($page.data.veloCat ? removeUnecessaryThresholds(uniqThresholds) : uniqThresholds);
+		($veloCat ? removeUnecessaryThresholds(uniqThresholds) : uniqThresholds);
 
 	$: if (
 		$revenuFiscal &&

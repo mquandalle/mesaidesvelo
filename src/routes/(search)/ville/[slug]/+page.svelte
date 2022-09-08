@@ -1,7 +1,10 @@
 <script>
+	import { page } from '$app/stores';
+
 	import Details from '$lib/components/Details.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 	import ShareButton from '$lib/components/ShareButton.svelte';
+	import { veloCat } from '$lib/stores';
 	import { fly } from 'svelte/transition';
 	import ExplanationsText from './ExplanationsText.svelte';
 	import Results from './Results.svelte';
@@ -9,6 +12,8 @@
 	/** @type {import('./$types').PageData */
 	export let data;
 	const ville = data.ville;
+
+	$: veloCat.set($page.url?.searchParams.get('velo'));
 </script>
 
 <svelte:head>
@@ -29,8 +34,8 @@
 
 <div class="w-full max-w-screen-md m-auto">
 	<div in:fly|local={{ y: 30 }}>
-		<PaneNavigation depth={data.veloCat ? 1 : 0}>
-			{#if data.veloCat}
+		<PaneNavigation depth={$veloCat ? 1 : 0}>
+			{#if $veloCat}
 				<Details />
 			{:else}
 				<Results />

@@ -6,19 +6,18 @@
 
 	import AnimatedAmount from './AnimatedAmount.svelte';
 	import Badge from './Badge.svelte';
-	import { localisation, publicodeSituation } from '$lib/stores';
+	import { localisation, publicodeSituation, veloCat } from '$lib/stores';
 
 	export let ruleName;
 
-	const veloCat = $page.data.veloCat;
-	$: engine = getEngine({ ...$publicodeSituation, 'vélo . type': `'${veloCat}'` });
+	$: engine = getEngine({ ...$publicodeSituation, 'vélo . type': `'${$veloCat}'` });
 	$: aide = engine.evaluate(ruleName);
 
 	const { title, rawNode } = baseEngine.getRule(ruleName);
 	$: notice = formatDescription({
 		ruleName,
 		engine,
-		veloCat,
+		veloCat: $veloCat,
 		ville: $localisation,
 	});
 
@@ -26,7 +25,7 @@
 		engine
 			.setSituation({
 				...$publicodeSituation,
-				'vélo . type': `'${veloCat}'`,
+				'vélo . type': `'${$veloCat}'`,
 				'revenu fiscal de référence': `${revenu} €/an`,
 				'vélo . prix': 'vélo . prix pour maximiser les aides',
 			})
