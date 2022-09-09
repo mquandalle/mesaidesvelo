@@ -27,7 +27,7 @@
 	<title>Statistiques - MesAidesVélo</title>
 </svelte:head>
 
-<div>
+<div class="max-w-screen-lg m-auto">
 	<script async src="https://plausible.io/js/embed.host.js"></script>
 	<iframe
 		plausible-embed

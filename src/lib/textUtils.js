@@ -44,19 +44,23 @@ export function aidesPerVeloKind(aide) {
 // TODO: this list is hacky
 const compactionOptions = [
 	{
-		keys: ['électrique', 'cargo électrique', 'cargo', 'mécanique simple', 'pliant'],
-		remplace: 'mécanique ou électrique',
+		keys: ['électrique', 'pliant électrique'],
+		remplace: 'électrique',
+	},
+	{
+		keys: ['pliant', 'pliant électrique'],
+		remplace: 'pliant',
 	},
 	{
 		keys: ['électrique', 'cargo électrique'],
 		remplace: 'électrique',
 	},
 	{
-		keys: ['pliant', 'mécanique simple', 'cargo'],
+		keys: ['mécanique simple'],
 		remplace: 'mécanique',
 	},
 	{
-		keys: ['pliant', 'mécanique simple'],
+		keys: ['pliant', 'mécanique'],
 		remplace: 'mécanique',
 	},
 	{
@@ -64,8 +68,12 @@ const compactionOptions = [
 		remplace: 'cargo',
 	},
 	{
-		keys: ['mécanique simple'],
+		keys: ['cargo', 'mécanique'],
 		remplace: 'mécanique',
+	},
+	{
+		keys: ['électrique', 'mécanique'],
+		remplace: 'mécanique ou électrique',
 	},
 ];
 
