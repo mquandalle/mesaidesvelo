@@ -8,23 +8,25 @@
 	async function submitFeedback(evt) {
 		evt.preventDefault();
 		const message = document.getElementById('feedback-message').value;
-		if (message) {
-			const serverResponse = await fetch('/api/post-feedback', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ message, page: $page.url.pathname, embedSource }),
-			});
+		if (!message) {
+			return;
+		}
+		window?.plausible?.('contact');
+		const serverResponse = await fetch('/api/post-feedback', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ message, page: $page.url.pathname, embedSource }),
+		});
 
-			if (!serverResponse.ok) {
-				state = 'error';
-			} else {
-				state = 'sent';
-				setTimeout(() => {
-					state = 'closed';
-				}, 20000);
-			}
+		if (!serverResponse.ok) {
+			state = 'error';
+		} else {
+			state = 'sent';
+			setTimeout(() => {
+				state = 'closed';
+			}, 20000);
 		}
 	}
 </script>
