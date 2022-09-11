@@ -1,9 +1,9 @@
 {
 	"name": "aides-velo",
-	"version": "2.0.52",
+	"version": "3.0.0",
 	"description": "Les aides vélos proposées en France",
 	"author": "Maxime Quandalle <maxime@mesaidesvelo.fr>",
-	"license": "MIT",
+	"license": "AGPL-3.0-or-later",
 	"main": "build/index.cjs",
 	"module": "build/index.es.js",
 	"type": "module",

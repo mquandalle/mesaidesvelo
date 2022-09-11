@@ -1,4 +1,5 @@
 // This script creates an iframe and resizes it automatically to fit its inner content
+// MIT License
 {
 	let i = document.createElement('iframe'),
 		e = (l) => encodeURIComponent(location[l]);

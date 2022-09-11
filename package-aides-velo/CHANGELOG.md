@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v3.0.0 - 11/09/2022
+
+Passage en licence AGPL v3.
+
 ## v2.0.52 - 11/09/2022
 
 Ajout de l’aide suivante :
