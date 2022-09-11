@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## v2.0.52 - 11/09/2022
+
+Ajout de l’aide suivante :
+
+- Vallée d’Ossau communauté de communes
+
 ## v2.0.51 - 07/09/2022
 
 Ajout des aides suivantes :

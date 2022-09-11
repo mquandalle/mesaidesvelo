@@ -1872,6 +1872,17 @@ aides . pays basque:
             - montant: 0€
   lien: https://www.txiktxak.fr/vos-moyens-de-transport-a-la-carte/aide-a-l-achat-velo/
 
+aides . vallée d'ossau:
+  remplace: intercommunalité
+  titre: Vallée d’Ossau communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de la Vallée d'Ossau'
+      - vélo . électrique
+  valeur: 20% * vélo . prix
+  plafond: 200€
+  lien: https://cc-ossau.fr/aide-a-lachat-dun-vae/
+
 aides . grand lac:
   remplace: intercommunalité
   titre: Grand Lac Communauté d'agglomération
