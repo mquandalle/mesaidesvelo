@@ -156,11 +156,14 @@
 			kilométriques vélos&nbsp;» dont le mode de calcul était plus compliqué.
 		</p>
 		<h2 class="!font-bold !text-xl">Quel est le montant maximal du forfait ?</h2>
-		<p>Le montant maximal du forfait est de 500 € par an.</p>
+		<p>
+			Le montant maximal du forfait est de 700 € par an. Ce plafond a été relevé à titre dérogatoire
+			pour les revenus déclarés en 2022 et 2023 et devrait revenir à 500 € à partir de 2024.
+		</p>
 		<p>
 			Son gros avantage pour l’employeur comme pour le salarié est qu'il bénéficie d’une <em
 				>exonération d’impôt sur le revenu et des cotisations Urssaf</em
-			>. Il est théoriquement possible de verser un forfait supérieur à 500 € mais il faudra alors
+			>. Il est théoriquement possible de verser un forfait supérieur à 700 € mais il faudra alors
 			payer des impôts et des cotisations sur la part dépassant ce seuil.
 		</p>
 		<h2 class="!font-bold !text-xl">Puis-je le cumuler avec d’autres dispositifs ?</h2>
