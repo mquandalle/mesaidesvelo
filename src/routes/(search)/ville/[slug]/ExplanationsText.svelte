@@ -17,6 +17,8 @@
 			const separator = index === 0 ? '' : index === list.length - 1 ? ' et ' : ', ';
 			return concatenation + separator + item;
 		}, '');
+
+	$: deVille = ($page.data.ville.nom.match(/^[aeiouy]/i) ? 'd’' : 'de ') + $page.data.ville.nom;
 </script>
 
 {#if showExplications}
@@ -192,7 +194,7 @@
 		{/if}
 
 		{#if infos.labelTourDeFrance}
-			<h2>{infos.labelTourDeFrance.ville} labellisé par le Tour-de-France</h2>
+			<h2>{$page.data.ville.nom} labellisé par le Tour-de-France</h2>
 			<img
 				src="/images/ville-a-velo/{infos.labelTourDeFrance.note}.jpeg"
 				alt="Label ville à vélo du Tour de France"
@@ -208,10 +210,59 @@
 			<p>Le label est décliné selon quatre niveaux symbolisés par de petits vélos.</p>
 
 			<p class="font-bold">
-				La ville {#if infos.labelTourDeFrance.ville.match(/^[aeiouy]/i)}d’{:else}de {/if}{infos
-					.labelTourDeFrance.ville} a reçu la labellisation « {infos.labelTourDeFrance.note} vélo{#if infos.labelTourDeFrance.note > 1}s{/if}
+				La ville {deVille} a reçu la labellisation « {infos.labelTourDeFrance.note} vélo{#if infos.labelTourDeFrance.note > 1}s{/if}
 				»{#if infos.labelTourDeFrance.note === 4}, la meilleure note possible{/if}.
+			</p>
+		{/if}
+
+		{#if infos.barometreFub}
+			<h2>
+				Une ville «&nbsp;{infos.barometreFub.label}&nbsp;» au vélo d’après le baromètre de la FUB
+			</h2>
+
+			<p>
+				La Fédération des Usagers de la Bicyclette (FUB) réalise chaque année une enquête auprès des
+				cyclistes et non cyclistes pour mesurer leur ressenti sur l’usage du vélo en ville.
+			</p>
+			<div class="flex justify-center my-8">
+				<div class="classement-fub flex shadow shadow-md">
+					{#each [['#e44b23', 'G'], ['#f39939', 'F'], ['#fccb2d', 'E'], ['#ffee31', 'D'], ['#c8d228', 'C'], ['#79b52e', 'B'], ['#4b9833', 'A'], ['#00822C', 'A+']] as [background, label]}
+						<span style:background class:active={label === infos.barometreFub.note}>{label}</span>
+					{/each}
+				</div>
+			</div>
+			<p>
+				En 2021 la ville {deVille} a reçu la note de
+				<strong class="inline-block border px-2 rounded shadow">{infos.barometreFub.note}</strong>
+				sur une échelle allant de <strong class="inline-block border px-2 rounded shadow">G</strong>
+				pour la plus défavorable à
+				<strong class="inline-block border px-2 rounded shadow">A+</strong> pour la plus favorable.
+			</p>
+			<p>
+				Vous pouvez consultez le détail des notes sur le <a
+					href="https://barometre.parlons-velo.fr/2021/palmares/">site du baromètre</a
+				>.
 			</p>
 		{/if}
 	</div>
 {/if}
+
+<style>
+	.classement-fub span {
+		height: 40px;
+		width: 40px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: white;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+		font-family: sans-serif;
+		@apply first:rounded-l last:rounded-r;
+	}
+
+	.classement-fub span.active {
+		transform: scale(1.3);
+		z-index: 10;
+		@apply rounded shadow shadow-md;
+	}
+</style>

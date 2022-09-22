@@ -2,9 +2,17 @@ import { compile } from 'mdsvex';
 import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
 import communes from '$lib/data/communes.json';
 import labelTourDeFrance from '/src/content/label-tour-de-france.json';
+import barometreFubRawCsv from '/src/content/barometre-fub.csv?raw';
 import { error } from '@sveltejs/kit';
 import { engine } from '$lib/engine';
 import { rawCityToFullLocalisation } from '$lib/utils';
+
+const barometreFubPerCity = Object.fromEntries(
+	barometreFubRawCsv
+		.trim()
+		.split('\n')
+		.map((row) => row.split(';'))
+);
 
 const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
 	(manifest, [ruleName, { collectivity }]) => {
@@ -126,8 +134,25 @@ export async function load({ params }) {
 
 	if (Object.keys(labelTourDeFrance).includes(localisation.nom.toLowerCase())) {
 		infos.labelTourDeFrance = {
-			ville: localisation.nom,
 			note: labelTourDeFrance[localisation.nom.toLowerCase()],
+		};
+	}
+
+	if (barometreFubPerCity[localisation.codeInsee]) {
+		const labelsFub = {
+			G: 'très défavorable',
+			F: 'défavorable',
+			E: 'plutôt défavorable',
+			D: 'moyennement favorable',
+			C: 'plutôt favorable',
+			B: 'favorable',
+			A: 'très favorable',
+			'A+': 'moyennement',
+		};
+		const note = barometreFubPerCity[localisation.codeInsee];
+		infos.barometreFub = {
+			note,
+			label: labelsFub[note],
 		};
 	}
 
