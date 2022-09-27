@@ -9,7 +9,7 @@
 // https://kit.svelte.dev/docs#packaging
 import alias from '@rollup/plugin-alias';
 import json from '@rollup/plugin-json';
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import yaml from '@rollup/plugin-yaml';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 

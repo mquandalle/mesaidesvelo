@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v3.0.0 - 27/09/2022
+
+Modifie les fichiers publiés dans le paquet pour résoudre un problème Typescript
+
 ## v3.0.0 - 11/09/2022
 
 Passage en licence AGPL v3.

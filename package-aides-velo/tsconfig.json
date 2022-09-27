@@ -8,7 +8,6 @@
 		"resolveJsonModule": true,
 		"outDir": "./build",
 		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
 		"rootDir": "../",
 		"paths": {
 			"$lib/*": ["../src/lib/*"]
