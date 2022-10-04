@@ -215,8 +215,15 @@ aides . paris:
   description: |
     La ville de Paris subventionne l’achat d’un $vélo à hauteur de 33% et
     jusqu’à un plafond de $plafond.
-  applicable si: localisation . code insee = '75056'
-  valeur: 33% * vélo . prix . HT
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '75056'
+      - revenu fiscal de référence <= 6300 €/an
+  valeur:
+    variations:
+      - si: vélo . mécanique
+        alors: 33% * vélo . prix . HT
+      - sinon: 100% * vélo . prix . HT
   plafond:
     nom: $plafond
     variations:
@@ -705,6 +712,69 @@ aides . hangenbieten:
       alors: 100€
     - sinon: 80€
   lien: https://hangenbieten.fr/wp-content/uploads/2021/03/SKM_C30821031516140.pdf#page=4
+
+aides . gerstheim:
+  remplace: commune
+  titre: Ville de Gerstheim
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '67154'
+      - vélo . électrique
+  valeur: 100€
+  lien: http://www.gerstheim.fr/iso_album/demande_de_subvention_velo_ok.pdf
+
+aides . eschau:
+  remplace: commune
+  titre: Ville d’Eschau
+  applicable si: localisation . code insee = '67131'
+  variations:
+    - si: vélo . cargo
+      alors: 200€
+    - si: vélo . électrique
+      alors: 100€
+    - sinon: 0€
+  lien: https://www.eschau.fr/cadre-de-vie/transport-deplacements/
+
+aides . eckbolsheim:
+  remplace: commune
+  titre: Ville d’Eckbolsheim
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '67118'
+      - vélo . électrique
+  valeur: 10% * vélo . prix
+  plafond: 100€
+  lien: https://www.eckbolsheim.com/ville-verte/actions-pour-lenvironnement/aide_achat_velo_electrique_neuf/
+
+aides . ried de marckolsheim:
+  remplace: intercommunalité
+  titre: Communauté de Communes du Ried de Marckolsheim
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Ried de Marckolsheim'
+      - vélo . électrique ou mécanique
+  valeur: 75€
+  lien: https://selestat-alsace-centrale.fr/beneficier-dune-prime-a-lachat-dun-velo/
+
+aides . marckolsheim:
+  remplace: commune
+  titre: Ville de Marckolsheim
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '67281'
+      - vélo . électrique ou mécanique
+  valeur: 50€
+  lien: https://www.marckolsheim.fr/Votre-ville/Informations-pratiques/Subvention-achat-velo.html
+
+aides . val d'argent:
+  remplace: intercommunalité
+  titre: Communauté de Communes du Val d’Argent
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = "CC du Val d'Argent"
+      - vélo . électrique ou mécanique
+  valeur: 75€
+  lien: https://www.valdargent.com/index.php/intercommunalite/actualites/225-aide-financiere-pour-l-achat-d-un-velo
 
 aides . illkirch:
   remplace: commune
@@ -3663,6 +3733,36 @@ aides . gruson:
       - sinon: 100€
   lien: https://www.mairie-gruson.fr/environnement/developpement-durable/prime-velo-a-assistance-electrique
 
+aides . lezenne:
+  remplace: commune
+  titre: Ville de Lezenne
+  applicable si: localisation . code insee = '59346'
+  variations:
+    - si: demandeur . bénéficiaire de minima sociaux
+      alors:
+        valeur: 80% * vélo . prix
+        plafond:
+          variations:
+            - si: vélo . cargo
+              alors: 900€
+            - si: vélo . électrique
+              alors: 600€
+            - si: vélo . mécanique
+              alors: 300€
+            - sinon: 0€
+    - sinon:
+        valeur: 50% * vélo . prix
+        plafond:
+          variations:
+            - si: vélo . cargo
+              alors: 450€
+            - si: vélo . électrique
+              alors: 300€
+            - si: vélo . mécanique
+              alors: 150€
+            - sinon: 0€
+  lien: http://www.lezennes.fr/index.php?id=167
+
 aides . dunkerque:
   remplace: intercommunalité
   titre: Communauté urbaine de Dunkerque
@@ -3934,6 +4034,19 @@ aides . brest:
         plafond: 200€
     - sinon: 0€
   lien: https://www.brest.fr/mes-demarches/environnement/demander-la-subvention-velo-a-assistance-electrique-7043.html
+
+aides . plougastel:
+  remplace: commune
+  titre: Ville de Plougastel
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '29189'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= première tranche IR
+      alors: 200€
+    - sinon: 150€
+  lien: https://ville-plougastel.bzh/mon-quotidien/developpement-durable/dispositif-daides/
 
 aides . plouzané:
   remplace: commune

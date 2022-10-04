@@ -1,12 +1,27 @@
 # Historique des modifications
 
-## v3.0.0 - 27/09/2022
+## V3.0.2 - 04/10/2022
+
+Ajout des aides suivantes :
+
+- Ville de Lezenne
+- Ville de Plougastel
+- Ville de Gerstheim
+- Ville d’Eschau
+- Ville d’Eckbolsheim
+- Communauté de Communes du Ried de Marckolsheim
+- Ville de Marckolsheim
+- Communauté de Communes du Val d’Argent
+
+Mise à jour de l'aide de la ville de Paris
+
+## v3.0.1 - 27/09/2022
 
 Modifie les fichiers publiés dans le paquet pour résoudre un problème Typescript
 
 ## v3.0.0 - 11/09/2022
 
-Passage en licence AGPL v3.
+Passage en licence AGPL v3
 
 ## v2.0.52 - 11/09/2022
 
