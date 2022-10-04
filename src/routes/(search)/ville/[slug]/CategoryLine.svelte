@@ -7,7 +7,7 @@
 </script>
 
 {#if montant.nodeValue !== 0}
-	<a tabindex="0" sveltekit:noscroll {href} rel={relNoFollow ? 'nofollow' : null}>
+	<a tabindex="0" data-sveltekit-noscroll {href} rel={relNoFollow ? 'nofollow' : null}>
 		<div
 			role="row"
 			class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-white hover:bg-green-50 cursor-pointer border-b group"

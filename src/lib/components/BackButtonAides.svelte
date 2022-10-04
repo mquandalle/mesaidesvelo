@@ -7,7 +7,7 @@
 		class="inline-block text-gray-500 text-md 
 cursor-pointer
 hover:text-green-700 transform transition hover:-translate-x-1"
-		sveltekit:noscroll
+		data-sveltekit-noscroll
 		href="ville/{$localisation.slug}"
 	>
 		← Toutes les aides
