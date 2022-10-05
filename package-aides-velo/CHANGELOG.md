@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## V3.0.3 - 05/10/2022
+
+Supprime l’aide suivante :
+
+- La Porte du Hainaut communauté d'Agglomération
+
 ## V3.0.2 - 04/10/2022
 
 Ajout des aides suivantes :
