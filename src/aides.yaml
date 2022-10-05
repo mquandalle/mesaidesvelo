@@ -1061,28 +1061,6 @@ aides . ronchin:
       - sinon: 0€
   lien: https://www.ville-ronchin.fr/aide-lachat-dun-velo
 
-aides . porte du hainaut:
-  remplace: intercommunalité
-  titre: La Porte du Hainaut communauté d'Agglomération
-  applicable si: localisation . epci = 'CA de la Porte du Hainaut'
-  description: Dans la limite de l’enveloppe budgétaire de 100 000 €.
-  # TODO: trottinette électrique
-  variations:
-    - si: vélo . électrique
-      alors:
-        variations:
-          - si: vélo . occasion
-            alors: 150€
-          - sinon: 300€
-    - si: vélo . mécanique
-      alors:
-        variations:
-          - si: vélo . occasion
-            alors: 75€
-          - sinon: 150€
-    - sinon: 0€
-  plafond: 50% * vélo . prix
-  lien: https://www.agglo-porteduhainaut.fr/actualites/une-aide-pour-acheter-velo-et-trottinettes
 
 aides . wasquehal:
   remplace: commune
