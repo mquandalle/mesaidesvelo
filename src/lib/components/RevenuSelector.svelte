@@ -24,8 +24,8 @@
 				.map((veloCat) => {
 					engineBis.setSituation({
 						...$localisationSituation,
-						'maximiser les aides': 'oui',
-						'vélo . type': `'${veloCat}'`,
+						// 'maximiser les aides': 'oui',
+						// 'vélo . type': `'${veloCat}'`,
 					});
 
 					const originalNames = collectivites
@@ -107,7 +107,6 @@
 </script>
 
 <script>
-	import { page } from '$app/stores';
 	import { publicodeSituation, revenuFiscal } from '$lib/stores';
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
@@ -142,8 +141,8 @@
 					// times : one time in DetailsLine and one time here
 					engineBis.setSituation({
 						...$publicodeSituation,
-						'vélo . type': `'${$veloCat}'`,
-						'maximiser les aides': 'oui',
+						// 'vélo . type': `'${$veloCat}'`,
+						// 'maximiser les aides': 'oui',
 						'revenu fiscal de référence': `${revenu + 1} €/mois`,
 					});
 

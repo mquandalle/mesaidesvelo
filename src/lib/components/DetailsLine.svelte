@@ -1,5 +1,4 @@
 <script>
-	import { page } from '$app/stores';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { formatDescription } from '$lib/utils';
 	import miniaturesManifest from '$lib/data/miniatures.json';

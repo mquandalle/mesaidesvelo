@@ -4624,7 +4624,7 @@ maximiser les aides:
     - règle: aides . pays de la loire . abonné TER
       par: oui
 
-localisation: oui
+localisation:
 localisation . code insee: "''"
 localisation . ZFE: non
 localisation . epci: "''"

@@ -1,0 +1,129 @@
+aides:
+  somme:
+    - état
+    - ile de france
+    - grand est
+    - grenoble
+    - lyon
+    - rouen normandie
+    - toulouse
+    - reims
+    - strasbourg
+
+aides . état:
+  titre: Prime au rétrofit électrique
+  applicable si: localisation . pays = 'France'
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors:
+        applicable si: oui
+        # applicable si:
+        #   une de ces conditions:
+        #     - revenu fiscal de référence <= 6300 €/an
+        #     - km parcours >= 12000 km/an
+        #     - distance domicile-travail >= 30 km
+        valeur: 80 % * prix d'achat
+        plafond: 5000€
+    - sinon: 2500€
+  lien: https://www.service-public.fr/particuliers/vosdroits/F35285/personnalisation/resultat?lang=&quest0=0
+
+aides . ile de france:
+  titre: Île-de-France Mobilités
+  applicable si: localisation . région = '11'
+  valeur: 2500€
+  plafond: 50% * prix d'achat - aides . état
+  lien: https://www.iledefrance.fr/transformation-de-vehicules-thermiques-en-vehicules-propres
+
+aides . grand est:
+  titre: Région Grand Est
+  applicable si: localisation . région = '44'
+  valeur: 50% * prix d'achat
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 13489€/an
+        alors: 4000€
+      - sinon: 2000€
+  lien: https://www.iledefrance.fr/transformation-de-vehicules-thermiques-en-vehicules-propres
+
+aides . grenoble:
+  titre: Grenoble Alpes Métropole
+  applicable si: localisation . epci = 'Grenoble-Alpes-Métropole'
+  valeur: 40% * prix d'achat
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 6300 €/an
+        alors: 12000€
+      - si: revenu fiscal de référence <= 13489 €/an
+        alors: 10000€
+      - sinon: 6000€
+  lien: https://www.grenoblealpesmetropole.fr/762-l-aide-a-l-achat-d-un-vehicule-faibles-emissions.htm#par6680
+
+aides . lyon:
+  titre: Métropole Grand Lyon
+  applicable si: localisation . epci = 'Métropole de Lyon'
+  valeur: 2000€
+  lien: https://www.grandlyon.com/fileadmin/user_upload/media/pdf/deplacements/zfe/20220624_zfe_aides-particuliers_reglement.pdf
+
+aides . rouen normandie:
+  titre: Métropole Rouen Normandie
+  applicable si: localisation . epci = 'Métropole Rouen Normandie'
+  valeur: 80% * prix d'achat
+  plafond: 2000€
+  lien: https://www.metropole-rouen-normandie.fr/sites/default/files/2022-09/ZFE-AideRetrofit_2022-web.pdf
+
+aides . toulouse:
+  titre: Toulouse Métropole
+  applicable si: localisation . epci = 'Toulouse Métropole'
+  valeur: 40% * prix d'achat
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 6300 €/an
+        alors: 3000€
+      - si: revenu fiscal de référence <= 13489 €/an
+        alors: 2500€
+      - si: revenu fiscal de référence <= 18800 €/an
+        alors: 2000€
+      - si: revenu fiscal de référence <= 35052 €/an
+        alors: 1000€
+      - sinon: 0€
+  lien: https://www.toulouse-metropole.fr/-/aides-a-l-achat-la-transformation-ou-a-la-location-de-vehicules
+
+aides . reims:
+  titre: Ville de Reims
+  applicable si: localisation . code insee = '51454'
+  variations:
+    - si: revenu fiscal de référence <= 6300 €/an
+      alors: 2000€
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors: 1000€
+    - sinon: 0€
+  lien: https://www.reims.fr/qualite-de-vie-environnement/ecologie-urbaine/zone-a-faibles-emissions-mobilite-zfem-de-reims/zfem-de-reims-aides-financieres-pour-changer-de-vehicule-ou-son-moteur
+
+aides . strasbourg:
+  titre: Eurométropole de Strasbourg
+  applicable si: localisation . epci = 'Eurométropole de Strasbourg'
+  variations:
+    - si: revenu fiscal de référence <= 20966 €/an
+      alors: 2500€
+    - sinon: 0€
+  lien: https://www.strasbourg.eu/zfe-aides
+
+prix d'achat: 20000 €
+
+revenu fiscal de référence: 500 €/an
+km parcours: 15000 km/an
+distance domicile-travail: 100km
+
+localisation:
+localisation . code insee: "''"
+localisation . ZFE: non
+localisation . epci: "''"
+localisation . département: "''"
+localisation . région: "''"
+localisation . pays:
+  variations:
+    - si: code insee = '99138'
+      alors: "'Monaco'"
+    - si: code insee = '99137'
+      alors: "'Luxembourg'"
+    - sinon: "'France'"

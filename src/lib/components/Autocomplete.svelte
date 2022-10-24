@@ -906,7 +906,7 @@
 			{#each filteredListItems as listItem, i}
 				{#if listItem}
 					<div
-						class="autocomplete-list-item {i === highlightIndex ? 'selected' : ''}"
+						class="autocomplete-list-item {i === highlightIndex ? 'bg-green-100' : ''}"
 						class:confirmed={isConfirmed(listItem.item)}
 						on:click={() => onListItemClick(listItem)}
 						on:pointerenter={() => {
@@ -1030,9 +1030,6 @@
 
 	.autocomplete-list-item.confirmed {
 		font-weight: bold;
-	}
-	.autocomplete-list-item.selected {
-		background-color: #d1fae5;
 	}
 	.autocomplete-list-item-no-results {
 		padding: 5px 15px;
