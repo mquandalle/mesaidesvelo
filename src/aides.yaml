@@ -1061,7 +1061,6 @@ aides . ronchin:
       - sinon: 0€
   lien: https://www.ville-ronchin.fr/aide-lachat-dun-velo
 
-
 aides . wasquehal:
   remplace: commune
   titre: Ville de Wasquehal
@@ -4566,7 +4565,6 @@ vélo . occasion:
       # non via une liste globale
       - aides . toulouse
       - aides . lyon
-      - aides . porte du hainaut
       - aides . louvigny
       - aides . pantin
       - aides . la roche sur yon
