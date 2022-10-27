@@ -6,6 +6,7 @@ import barometreFubRawCsv from '/src/content/barometre-fub.csv?raw';
 import { error } from '@sveltejs/kit';
 import { engine } from '$lib/engine';
 import { rawCityToFullLocalisation } from '$lib/utils';
+import classementVilleplus from '$lib/data/classement-villeplus.json';
 
 const barometreFubPerCity = Object.fromEntries(
 	barometreFubRawCsv
@@ -137,6 +138,8 @@ export async function load({ params }) {
 			note: labelTourDeFrance[localisation.nom.toLowerCase()],
 		};
 	}
+
+	infos.classementVillePlus = classementVilleplus.findIndex((epci) => epci === localisation.epci);
 
 	if (barometreFubPerCity[localisation.codeInsee]) {
 		const labelsFub = {

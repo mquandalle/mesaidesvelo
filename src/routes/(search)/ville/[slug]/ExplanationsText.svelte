@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import MiniatureCollectivite from '$lib/components/MiniatureCollectivite.svelte';
+	import { localisation } from '$lib/stores';
 
 	$: infos = $page.data.infos;
 	$: showExplications = Object.keys(infos ?? {}).length > 0;
@@ -18,7 +19,14 @@
 			return concatenation + separator + item;
 		}, '');
 
-	$: deVille = ($page.data.ville.nom.match(/^[aeiouy]/i) ? 'd’' : 'de ') + $page.data.ville.nom;
+	const determinant = (nom) => (nom.match(/^[aeiouy]/i) ? 'd’' : 'de ');
+	$: deVille = determinant($page.data.ville.nom) + $page.data.ville.nom;
+	$: leEPCI =
+		($localisation?.epci?.startsWith('Eurométropole')
+			? 'l’'
+			: $localisation?.epci?.startsWith('Métropole')
+			? 'la '
+			: '') + $localisation?.epci;
 </script>
 
 {#if showExplications}
@@ -243,6 +251,15 @@
 					href="https://barometre.parlons-velo.fr/2021/palmares/">site du baromètre</a
 				>.
 			</p>
+			{#if infos.classementVillePlus > -1}
+				<p>
+					Par ailleurs {leEPCI} se classe {infos.classementVillePlus + 1}<sup
+						>{infos.classementVillePlus === 0 ? 'ère' : 'ème'}</sup
+					>/20 au <a href="https://villes.plus/cyclables">classement ville.plus</a> des villes cyclables.
+					Ce classement mesure la part de pistes cyclables sécurisées pour relier les différentes mairies
+					de la métropole.
+				</p>
+			{/if}
 		{/if}
 	</div>
 {/if}
