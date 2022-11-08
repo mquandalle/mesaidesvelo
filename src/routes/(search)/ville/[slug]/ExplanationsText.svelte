@@ -245,11 +245,8 @@
 				sur une échelle allant de <strong class="inline-block border px-2 rounded shadow">G</strong>
 				pour la plus défavorable à
 				<strong class="inline-block border px-2 rounded shadow">A+</strong> pour la plus favorable.
-			</p>
-			<p>
-				Vous pouvez consultez le détail des notes sur le <a
-					href="https://barometre.parlons-velo.fr/2021/palmares/">site du baromètre</a
-				>.
+				Vous pouvez consultez le détail des notes sur le
+				<a href="https://barometre.parlons-velo.fr/2021/palmares/">site du baromètre</a>.
 			</p>
 			{#if infos.classementVillePlus > -1}
 				<p>

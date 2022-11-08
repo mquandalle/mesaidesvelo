@@ -1,5 +1,33 @@
 # Historique des modifications
 
+## V3.0.4 - 08/11/2022
+
+Ajout des aides suivantes :
+
+- Grand Villeneuvois
+- Ville de Marcq-en-Barœul
+- Ville de Pont-Saint-Maxence
+
+Mise à jour des liens suivants :
+
+- Grand Albigeois
+- Ville de Lanester
+
+Correction des aides suivantes :
+
+- Brest Métropole
+
+Suppression des aides suivantes :
+
+- Ville de Larçay
+- Balcons du Dauphiné
+- Agglo Bocage-Bressuirais
+- Ville de Barentin
+- Val de Drôme en Biovallée
+- Tulle Agglo
+- Ville de Saint-Martin-de-Crau
+- Ville de Marquette-lez-Lille
+
 ## V3.0.3 - 05/10/2022
 
 Supprime l’aide suivante :
