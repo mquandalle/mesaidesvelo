@@ -51,7 +51,7 @@
 			onChange={(val) => {
 				const derivedPath = val ? `/ville/${val.slug}` : `/`;
 				if (!$navigating) {
-					goto(derivedPath, { noscroll: true });
+					goto(derivedPath, { noScroll: true });
 				}
 			}}
 		>
