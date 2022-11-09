@@ -24,7 +24,7 @@
 			</li>
 			<li>
 				<a
-					href="https://github.com/mquandalle/mesaidesvelo/retrofit"
+					href="https://github.com/mquandalle/mesaidesvelo/tree/master/retrofit"
 					target="_blank"
 					class="inline-flex gap-x-2 hover:(underline text-sky-600)"
 				>
