@@ -63,7 +63,7 @@ aides . prime à la conversion:
     véhicule diesel immatriculé avant janvier 2011 ou bien un véhicule essence
     immatriculé avant 2006.
 
-    La prime est de 40% du prix du vélo dans la limite de 1 500 €. Elle est
+    La prime est de 40% du prix du vélo dans la limite de 3 000 €. Elle est
     cumulable avec les aides à l'achat d’un vélo électrique, comme le « bonus
     écologique ».
   valeur: 40% * vélo . prix
@@ -72,7 +72,7 @@ aides . prime à la conversion:
       - si: revenu fiscal de référence <= 6300 €/an
         alors: 3000€
       - sinon: 1500€
-  lien: https://www.service-public.fr/particuliers/vosdroits/F35846
+  lien: https://www.service-public.fr/particuliers/vosdroits/F36602
 
 aides . prime à la conversion . surprime ZFE:
   applicable si:
