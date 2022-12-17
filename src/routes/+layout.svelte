@@ -1,15 +1,15 @@
 <script>
-	import { prefetchRoutes } from '$app/navigation';
+	import { preloadCode } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { localisation } from '$lib/stores';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { onMount, setContext } from 'svelte';
 	import 'virtual:windi.css';
-	import { prerendering } from '$app/environment';
+	import { building } from '$app/environment';
 
 	onMount(() => {
-		prefetchRoutes(['/', '/ville/*']);
+		preloadCode('/', '/ville/*');
 
 		// This is a work-around a cold-start issue with the search
 		// autocompletion. By calling this endpoint as soon as possible we
@@ -18,7 +18,7 @@
 		fetch('/api/collectivites');
 	});
 
-	const isEmbeded = Boolean(prerendering ? false : $page.url.searchParams.get('iframe'));
+	const isEmbeded = Boolean(building ? false : $page.url.searchParams.get('iframe'));
 	const embedSource = isEmbeded && $page.url.searchParams.get('utm_source');
 	setContext('embed', { isEmbeded, embedSource });
 

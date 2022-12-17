@@ -47,7 +47,7 @@ const ruleToContentFilename = (ruleName) => ruleName.toLowerCase().replace('aide
 const hasCorrespondingContent = (ruleName) =>
 	ruleName && Object.keys(availableContent).includes(ruleToContentFilename(ruleName));
 
-export const getCorrespondingContent = async (ruleName, { prepend } = {}) => {
+export const _getCorrespondingContent = async (ruleName, { prepend } = {}) => {
 	if (!hasCorrespondingContent(ruleName)) {
 		return undefined;
 	}
@@ -76,7 +76,7 @@ export async function load({ params }) {
 	if (localisation.pays && localisation.pays !== 'france') {
 		if (hasCorrespondingContent(localisation.pays)) {
 			infos.pays = {
-				text: await getCorrespondingContent(localisation.pays),
+				text: await _getCorrespondingContent(localisation.pays),
 			};
 		}
 		return { ...baseData, infos };
@@ -99,7 +99,7 @@ export async function load({ params }) {
 		infos.epci = {
 			ruleName: epciRuleName,
 			titre: engine.getRule(epciRuleName).rawNode.titre,
-			text: await getCorrespondingContent(epciRuleName),
+			text: await _getCorrespondingContent(epciRuleName),
 		};
 	}
 
@@ -107,7 +107,7 @@ export async function load({ params }) {
 		infos.ville = {
 			ruleName: villeRuleName,
 			titre: engine.getRule(villeRuleName).rawNode.titre.replace(/^Ville/, 'la ville'),
-			text: await getCorrespondingContent(villeRuleName, {
+			text: await _getCorrespondingContent(villeRuleName, {
 				prepend: infos.epci ? `En plus de l’aide versée par ${infos.epci.titre}, ` : '',
 			}),
 		};
@@ -117,7 +117,7 @@ export async function load({ params }) {
 		infos.region = {
 			ruleName: regionRuleName,
 			titre: engine.getRule(regionRuleName).rawNode.titre.replace(/^Région/, 'la région'),
-			text: await getCorrespondingContent(regionRuleName),
+			text: await _getCorrespondingContent(regionRuleName),
 		};
 	}
 
@@ -127,7 +127,7 @@ export async function load({ params }) {
 			titre: engine
 				.getRule(departementRuleName)
 				.rawNode.titre.replace(/^Département/, 'le département'),
-			text: await getCorrespondingContent(departementRuleName, {
+			text: await _getCorrespondingContent(departementRuleName, {
 				prepend: infos.region ? `En plus de l’aide versée par ${infos.region.titre}, ` : '',
 			}),
 		};

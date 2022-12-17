@@ -4,9 +4,9 @@ import { slugify } from '$lib/utils';
 import departements from '@etalab/decoupage-administratif/data/departements.json';
 import regions from '@etalab/decoupage-administratif/data/regions.json';
 import { error, redirect } from '@sveltejs/kit';
-import { getCorrespondingContent } from '../../(search)/ville/[slug]/+page.server.js';
+import { _getCorrespondingContent } from '../../(search)/ville/[slug]/+page.server.js';
 
-export const departementWithSlug = departements
+export const _departementWithSlug = departements
 	.filter(({ zone }) => zone === 'metro')
 	.map((d) => ({ ...d, slug: slugify(d.nom) }))
 	.filter((d) => d.slug !== 'paris');
@@ -14,7 +14,7 @@ export const departementWithSlug = departements
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 	const slug = params.slug;
-	const departement = departementWithSlug.find((d) => slug === d.slug);
+	const departement = _departementWithSlug.find((d) => slug === d.slug);
 
 	if (slug === 'paris') {
 		throw redirect(308, '/ville/paris');
@@ -29,14 +29,14 @@ export async function load({ params }) {
 			collectivity.kind === 'département' && collectivity.value === departement.code
 	)?.[0];
 
-	const aideDepartementText = getCorrespondingContent(aideDepartement);
+	const aideDepartementText = _getCorrespondingContent(aideDepartement);
 
 	const aideRegion = Object.entries(aidesCollectivities).find(
 		([, { collectivity }]) =>
 			collectivity.kind === 'région' && collectivity.value === departement.region
 	)?.[0];
 
-	const aideRegionText = getCorrespondingContent(aideRegion);
+	const aideRegionText = _getCorrespondingContent(aideRegion);
 
 	const aidesLocales = Object.entries(aidesCollectivities)
 		.filter(
