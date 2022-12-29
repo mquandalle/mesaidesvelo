@@ -4,8 +4,8 @@ import { writeJsonData } from '../../src/scripts/writeData.js';
 
 // TODO: récupérer ce classement depuis le dépôt ville.plus
 const rawClassement = `
-Eurométropole de Strasbourg
 Bordeaux Métropole
+Eurométropole de Strasbourg
 Toulouse Métropole
 Montpellier Méditerranée Métropole
 Orléans Métropole
@@ -14,9 +14,9 @@ Rennes Métropole
 Tours Métropole Val de Loire
 Nantes Métropole
 Clermont Auvergne Métropole
+Métropole du Grand Paris
 Métropole de Lyon
 Métropole du Grand Nancy
-Métropole du Grand Paris
 Métropole Européenne de Lille
 Brest Métropole
 Métropole Rouen Normandie
