@@ -1,5 +1,33 @@
 # Historique des modifications
 
+## V3.0.5 - 29/12/2022
+
+Mise à jour des aides suivantes :
+
+- Bonus vélo de l’État
+- Eurométropole de Strasbourg
+
+Ajout des aides suivantes :
+
+- La Cali - L'agglo Rive Droite de Bordeaux
+- Communauté de communes Ambert Livradois Forez
+- Communauté de communes de Puisaye-Forterre
+- Vesoul agglo
+- Pays de Barr
+
+Supprime les aides suivantes :
+
+- Ville de Bar-le-Duc
+- Ville de Château du Loir
+- Ville de Cormelles le Royal
+
+Mise à jour des liens :
+
+- Prime à la conversion
+- Ville de Marcq-en-Barœul
+- Ville de Carpiquet
+- Ville de Gerstheim
+
 ## V3.0.4 - 08/11/2022
 
 Ajout des aides suivantes :
