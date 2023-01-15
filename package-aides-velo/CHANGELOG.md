@@ -1,5 +1,25 @@
 # Historique des modifications
 
+## V3.0.6 - 15/01/2023
+
+Ajout des aides suivantes :
+
+- Communauté de communes Loue Lison
+- Ville du Kremlin-Bicêtre
+
+Mise à jour des liens suivants :
+
+- Commune d’Unieux
+- Communauté de Communes du Val d’Argent
+- Châteauroux Métropole
+
+Supprime les aides suivantes :
+
+- Région Grand Est
+- Communes du Pays Rhénan
+- Ville de Voglans
+- Communauté de communes Arve & Salève
+
 ## V3.0.5 - 29/12/2022
 
 Mise à jour des aides suivantes :

@@ -7,7 +7,7 @@
 #
 # Aides suspendues avant potentielle reconduction:
 # - Bocage Mayennais https://www.bocage-mayennais.fr/bocage-mayennais_au-quotidien_transport-et-mobilite_aide-a-l-achat-de-velo-a-assistance-electrique-vae.phtml
-
+# - Arve & Salève https://www.arve-saleve.fr/primo-velo-2023-laide-a-lachat-de-velo-darve-saleve/
 aides:
   avec:
     commune: 0 €
@@ -180,18 +180,6 @@ aides . corse:
   valeur: 25% * vélo . prix
   plafond: 500€
   lien: https://www.aue.corsica/Aide-a-l-achat-des-Velos-a-Assistance-Electrique_a205.html
-
-aides . grand est:
-  remplace: région
-  titre: Région Grand Est
-  applicable si:
-    toutes ces conditions:
-      - localisation . région = '44'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . motorisation
-  valeur: 200€
-  lien: https://www.grandest.fr/vos-aides-regionales/acquisition-velo-electrique/
 
 # aides . bouches du rhone:
 #   remplace: département
@@ -457,7 +445,7 @@ aides . unieux:
       - localisation . code insee = '42316'
       - vélo . électrique
   valeur: 300€
-  lien: https://www.ville-unieux.fr/attachments/article/583/2022%20REGLEMENT%20AIDE%20AUX%20ECONOMIES%20D'ENERGIE%20UNIEUX.pdf#page=4
+  lien: https://www.ville-unieux.fr/65-accueil/actusmairie/583-aide-aux-economies-d-energie-transision-energetiques.html
 
 aides . bordeaux:
   remplace: intercommunalité
@@ -849,7 +837,7 @@ aides . val d'argent:
       - localisation . epci = "CC du Val d'Argent"
       - vélo . électrique ou mécanique
   valeur: 75€
-  lien: https://www.valdargent.com/index.php/intercommunalite/actualites/225-aide-financiere-pour-l-achat-d-un-velo
+  lien: https://www.valdargent.com/index.php/environnement-cadre-vie/prime-velo
 
 aides . illkirch:
   remplace: commune
@@ -1469,6 +1457,15 @@ aides . sablé sur sarthe:
   plafond: 100€
   lien: https://www.sablesursarthe.fr/pratique/je-veux/demarches-administratives/aide-a-lachat-dun-velo-electrique/
 
+aides . loue lison:
+  remplace: intercommunalité
+  titre: Communauté de communes Loue Lison
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = 'CC Loue-Lison'
+      - vélo . électrique
+  lien: https://cclouelison.fr/fr/rb/1729730/mobilite-21
+
 aides . département somme:
   remplace: département
   titre: Département de la Somme
@@ -1603,15 +1600,15 @@ aides . pays de barr:
     - sinon: 0€
   lien: https://www.paysdebarr.fr/vivre/fr/velo/les-aides-lachat-de-velos
 
-aides . pays rhénan:
-  remplace: intercommunalité
-  titre: Communes du Pays Rhénan
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC du Pays Rhénan'
-      - vélo . électrique
-  valeur: 200€
-  lien: https://www.cc-paysrhenan.fr/Actualites/AIDE-ACHAT-UN-VELO-ASSISTANCE-ELECTRIQUE-00626.html
+# aides . pays rhénan:
+#   remplace: intercommunalité
+#   titre: Communes du Pays Rhénan
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CC du Pays Rhénan'
+#       - vélo . électrique
+#   valeur: 200€
+#   lien: https://www.cc-paysrhenan.fr/Vivre/Environnement/Mobilites/Pratique-cyclable.html
 
 aides . wasselonne:
   remplace: commune
@@ -1884,6 +1881,27 @@ aides . charenton:
   plafond: 200€
   lien: https://www.charenton.fr/velo/velo_pass-velo.php
 
+aides . kremlin-bicetre:
+  remplace: commune
+  titre: Ville du Kremlin-Bicêtre
+  variations:
+    - si:
+        toutes ces conditions:
+          - vélo . mécanique
+          - vélo . occasion
+      alors:
+        valeur: 200€
+        plafond: 50% * vélo . prix
+    - si:
+        toutes ces conditions:
+          - vélo . électrique
+          - vélo . occasion
+      alors:
+        valeur: 150€
+        plafond: 15% * vélo . prix
+    - sinon: 0€
+  lien: https://www.kremlinbicetre.fr/actualites/subvention-pour-lachat-dun-velo-ou-dune-trottinette/
+
 aides . pau:
   remplace: intercommunalité
   titre: Pau Béarn Pyrénées Mobilité
@@ -2079,17 +2097,6 @@ aides . la motte servolex:
   valeur: 20% * vélo . prix
   plafond: 150€
   lien: https://www.mairie-lamotteservolex.fr/vos-demarches/subventions-eco-citoyennes-la-motte-servolex/
-
-aides . voglans:
-  remplace: commune
-  titre: Ville de Voglans
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '73329'
-      - aides . intercommunalité > 0 €
-      - vélo . électrique
-  valeur: 200€
-  lien: https://mairie-voglans.fr/actualites/lagglo-en-mode-velo-eclectrique/
 
 aides . ardenne:
   remplace: intercommunalité
@@ -2702,47 +2709,47 @@ aides . pays rochois:
   plafond: 200€
   lien: https://www.ccpaysrochois.fr/mes-services-demarches/transports/vae/
 
-aides . arve salève:
-  remplace: intercommunalité
-  titre: Communauté de communes Arve & Salève
-  applicable si: localisation . epci = 'CC Arve et Salève'
-  variations:
-    - si: revenu fiscal de référence <= première tranche IR
-      alors:
-        variations:
-          - si: vélo . cargo électrique
-            alors: 500€
-          - si: vélo . cargo
-            alors: 400€
-          - si: vélo . électrique
-            alors: 400€
-          - si: vélo . mécanique
-            alors: 150€
-          - sinon: 0€
-    - si: revenu fiscal de référence <= 18000€/an
-      alors:
-        variations:
-          - si: vélo . cargo électrique
-            alors: 400€
-          - si: vélo . cargo
-            alors: 300€
-          - si: vélo . électrique
-            alors: 300€
-          - si: vélo . mécanique
-            alors: 100€
-          - sinon: 0€
-    - sinon:
-        variations:
-          - si: vélo . cargo électrique
-            alors: 300€
-          - si: vélo . cargo
-            alors: 200€
-          - si: vélo . électrique
-            alors: 200€
-          - si: vélo . mécanique
-            alors: 50€
-          - sinon: 0€
-  lien: https://www.arve-saleve.fr/aucoeur-du-mouvement/velo/prim-o-velo
+# aides . arve salève:
+#   remplace: intercommunalité
+#   titre: Communauté de communes Arve & Salève
+#   applicable si: localisation . epci = 'CC Arve et Salève'
+#   variations:
+#     - si: revenu fiscal de référence <= première tranche IR
+#       alors:
+#         variations:
+#           - si: vélo . cargo électrique
+#             alors: 500€
+#           - si: vélo . cargo
+#             alors: 400€
+#           - si: vélo . électrique
+#             alors: 400€
+#           - si: vélo . mécanique
+#             alors: 150€
+#           - sinon: 0€
+#     - si: revenu fiscal de référence <= 18000€/an
+#       alors:
+#         variations:
+#           - si: vélo . cargo électrique
+#             alors: 400€
+#           - si: vélo . cargo
+#             alors: 300€
+#           - si: vélo . électrique
+#             alors: 300€
+#           - si: vélo . mécanique
+#             alors: 100€
+#           - sinon: 0€
+#     - sinon:
+#         variations:
+#           - si: vélo . cargo électrique
+#             alors: 300€
+#           - si: vélo . cargo
+#             alors: 200€
+#           - si: vélo . électrique
+#             alors: 200€
+#           - si: vélo . mécanique
+#             alors: 50€
+#           - sinon: 0€
+#   lien: https://www.arve-saleve.fr/aucoeur-du-mouvement/velo/prim-o-velo
 
 aides . évian-les-bains:
   remplace: commune
@@ -4317,7 +4324,7 @@ aides . castres:
       - si: vélo . mécanique
         alors: 100€
       - sinon: 0€
-  lien: https://www.castres-mazamet.fr/plan-climat-air-energie-territorial/actualites
+  lien: https://www.ville-castres.fr/fr/demarche/demande-daide-pour-lacquisition-dun-velo
 
 aides . quesnoy-sur-deûle:
   remplace: commune
@@ -4409,7 +4416,7 @@ aides . chateauroux:
       - vélo . électrique
   valeur: vélo . prix
   plafond: 200€
-  lien: https://www.chateauroux-metropole.fr/actualites-20/aide-a-lacquisition-dun-velo-a-assistance-electrique-vae-4838.html
+  lien: https://www.chateauroux-metropole.fr/vie-pratique-les-services/mobilite-et-stationnements/velo
 
 aides . pontivy:
   remplace: intercommunalité
