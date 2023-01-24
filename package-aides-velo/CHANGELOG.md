@@ -1,6 +1,12 @@
 # Historique des modifications
 
-## V3.0.6 - 15/01/2023
+## v3.0.7
+
+Ajout des aides suivantes :
+
+- Ville de Bourg-Saint-Maurice
+
+## v3.0.6 - 15/01/2023
 
 Ajout des aides suivantes :
 
@@ -20,7 +26,7 @@ Supprime les aides suivantes :
 - Ville de Voglans
 - Communauté de communes Arve & Salève
 
-## V3.0.5 - 29/12/2022
+## v3.0.5 - 29/12/2022
 
 Mise à jour des aides suivantes :
 
@@ -45,10 +51,10 @@ Mise à jour des liens :
 
 - Prime à la conversion
 - Ville de Marcq-en-Barœul
-- Ville de Carpiquet
+- Ville de **Carpiquet**
 - Ville de Gerstheim
 
-## V3.0.4 - 08/11/2022
+## v3.0.4 - 08/11/2022
 
 Ajout des aides suivantes :
 
@@ -76,13 +82,13 @@ Suppression des aides suivantes :
 - Ville de Saint-Martin-de-Crau
 - Ville de Marquette-lez-Lille
 
-## V3.0.3 - 05/10/2022
+## v3.0.3 - 05/10/2022
 
 Supprime l’aide suivante :
 
 - La Porte du Hainaut communauté d'Agglomération
 
-## V3.0.2 - 04/10/2022
+## v3.0.2 - 04/10/2022
 
 Ajout des aides suivantes :
 

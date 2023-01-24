@@ -2085,6 +2085,46 @@ aides . bourget-du-lac:
     - sinon: 0€
   lien: https://www.lebourgetdulac.fr/actualites/le-bourget-du-lac-sengage-pour-le-velo-a-assistance-electrique/
 
+aides . bourg-saint-maurice:
+  remplace: commune
+  titre: Ville de Bourg-Saint-Maurice
+  applicable si: localisation . code insee = '73054'
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors:
+        variations:
+          - si: vélo cargo électrique
+            alors: 600 €
+          - si: vélo cargo
+            alors: 300 €
+          - si: vélo électrique
+            alors: 400 €
+          - si: vélo pliant
+            alors: 150 €
+          - si: vélo mécanique
+            alors: 150 €
+          - sinon: 0 €
+    - si: revenu fiscal de référence <= 18000 €/an
+      alors:
+        variations:
+          - si: vélo cargo électrique
+            alors: 600 €
+          - si: vélo cargo
+            alors: 300 €
+          - si: vélo électrique
+            alors: 400 €
+          - sinon: 0 €
+    - sinon:
+        variations:
+          - si: vélo cargo électrique
+            alors: 400 €
+          - si: vélo cargo
+            alors: 200 €
+          - si: vélo électrique
+            alors: 200 €
+          - sinon: 0 €
+  lien: https://www.bourgsaintmaurice.fr/transports/subvention-achat-velo
+
 aides . la motte servolex:
   remplace: commune
   titre: Ville de La Motte Servolex
