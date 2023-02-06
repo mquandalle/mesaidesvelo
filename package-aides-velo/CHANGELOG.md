@@ -1,10 +1,17 @@
 # Historique des modifications
 
-## v3.0.7
+## v3.0.7 - 06/02/2023
 
 Ajout des aides suivantes :
 
+- Sète Agglopôle éditerranée
 - Ville de Bourg-Saint-Maurice
+- Ville de Lesquin
+- Communauté de Communes Saint-Avold Synergie
+
+Supprime les aides suivantes :
+
+- Valence Romans Déplacements
 
 ## v3.0.6 - 15/01/2023
 

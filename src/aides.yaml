@@ -3,11 +3,12 @@
 # - Ville de Belfort
 # - Nantes
 # - Dieppe
-# - Grenoble https://www.placegrenet.fr/2022/11/17/le-smmag-la-metropole-et-le-gresivaudan-annoncent-la-mise-en-place-de-primes-cumulables-pour-lachat-dun-velo-neuf-ou-doccasion/584529
+# - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 #
 # Aides suspendues avant potentielle reconduction:
 # - Bocage Mayennais https://www.bocage-mayennais.fr/bocage-mayennais_au-quotidien_transport-et-mobilite_aide-a-l-achat-de-velo-a-assistance-electrique-vae.phtml
 # - Arve & Salève https://www.arve-saleve.fr/primo-velo-2023-laide-a-lachat-de-velo-darve-saleve/
+
 aides:
   avec:
     commune: 0 €
@@ -1462,7 +1463,7 @@ aides . loue lison:
   titre: Communauté de communes Loue Lison
   applicable si:
     toutes ces conditions:
-      - localisation . code insee = 'CC Loue-Lison'
+      - localisation . epci = 'CC Loue-Lison'
       - vélo . électrique
   lien: https://cclouelison.fr/fr/rb/1729730/mobilite-21
 
@@ -1696,20 +1697,24 @@ aides . montpellier:
       - sinon: 0€
   lien: https://www.montpellier3m.fr/actualite/jusqua-1150-eu-daide-pour-lachat-dun-velo-assistance-electrique
 
-# Terminé pour 2022
-# https://www.agglopole.fr/bougerdecouvrir/se-deplacer/l-aide-a-l-achat-de-velos-et-trottinettes-electriques/
-#
-# aides . sète:
-#   remplace: intercommunalité
-#   titre: Sète Agglopôle méditerranée
-#   # TODO: valable pour les trotinettes électriques
-#   applicable si:
-#     toutes ces conditions:
-#       - localisation . epci = 'CA Sète Agglopôle Méditerranée'
-#       - vélo . électrique
-#   valeur: 25% * vélo . prix
-#   plafond: 200€
-#   lien: https://www.agglopole.fr/lagglo-subventionne-lachat-de-velos-et-trottinettes-electriques/
+aides . sète:
+  remplace: intercommunalité
+  titre: Sète Agglopôle méditerranée
+  # TODO: valable pour les trotinettes électriques
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Sète Agglopôle Méditerranée'
+      - vélo . électrique
+  somme:
+    - valeur: 25% * vélo . prix
+      plafond: 200€
+    - applicable si:
+        nom: acheté dans un commerce local
+        question: Le vélo est-il acheté dans un commerce de Sètre agglopôle méditerranée ?
+        type: booléen
+        par défaut: non
+      valeur: 50€
+  lien: https://www.agglopole.fr/lagglo-subventionne-lachat-de-velos-et-trottinettes-electriques/
 
 aides . vauvert:
   remplace: commune
@@ -1884,6 +1889,7 @@ aides . charenton:
 aides . kremlin-bicetre:
   remplace: commune
   titre: Ville du Kremlin-Bicêtre
+  applicable si: localisation . code insee = '94043'
   variations:
     - si:
         toutes ces conditions:
@@ -2093,34 +2099,34 @@ aides . bourg-saint-maurice:
     - si: revenu fiscal de référence <= 13489 €/an
       alors:
         variations:
-          - si: vélo cargo électrique
+          - si: vélo . cargo électrique
             alors: 600 €
-          - si: vélo cargo
+          - si: vélo . cargo
             alors: 300 €
-          - si: vélo électrique
+          - si: vélo . électrique
             alors: 400 €
-          - si: vélo pliant
+          - si: vélo . pliant
             alors: 150 €
-          - si: vélo mécanique
+          - si: vélo . mécanique
             alors: 150 €
           - sinon: 0 €
     - si: revenu fiscal de référence <= 18000 €/an
       alors:
         variations:
-          - si: vélo cargo électrique
+          - si: vélo . cargo électrique
             alors: 600 €
-          - si: vélo cargo
+          - si: vélo . cargo
             alors: 300 €
-          - si: vélo électrique
+          - si: vélo . électrique
             alors: 400 €
           - sinon: 0 €
     - sinon:
         variations:
-          - si: vélo cargo électrique
+          - si: vélo . cargo électrique
             alors: 400 €
-          - si: vélo cargo
+          - si: vélo . cargo
             alors: 200 €
-          - si: vélo électrique
+          - si: vélo . électrique
             alors: 200 €
           - sinon: 0 €
   lien: https://www.bourgsaintmaurice.fr/transports/subvention-achat-velo
@@ -3420,17 +3426,6 @@ aides . divonne-les-bains:
       - sinon: 0€
   lien: http://www.divonnelesbains.fr/prime_a_l_achat_de_velos_a_divonne_les_bains.html
 
-aides . valence romans:
-  remplace: intercommunalité
-  titre: Valence Romans Déplacements
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Valence Romans Agglo'
-      - vélo . pliant
-  valeur: 35% * vélo . prix
-  plafond: 150€
-  lien: https://www.vrd-mobilites.fr/velo/#aide-achat-velo-pliant
-
 aides . dieulefit-bourdeaux:
   remplace: intercommunalité
   titre: Communauté de communes Dieulefit-Bourdeaux
@@ -3815,6 +3810,20 @@ aides . gruson:
       - sinon: 100€
   lien: https://www.mairie-gruson.fr/environnement/developpement-durable/prime-velo-a-assistance-electrique
 
+aides . lesquin:
+  remplace: commune
+  titre: Ville de Lesquin
+  applicable si: localisation . code insee = '59343'
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 150€
+      - si: vélo . mécanique
+        alors: 100€
+      - sinon: 0€
+  lien: https://www.ville-lesquin.fr/vivre-a-lesquin/environnement/#toc-5
+
 aides . marcq-en-baroeul:
   remplace: commune
   titre: Ville de Marcq-en-Barœul
@@ -4071,6 +4080,23 @@ aides . rives de moselle:
             - sinon: 100€
       - sinon: 0€
   lien: https://www.rivesdemoselle.fr/aide-a-lachat-pour-un-velo-avec-ou-sans-assistance-electrique/
+
+aides . saint-avold:
+  remplace: intercommunalité
+  titre: Communauté de Communes Saint-Avold Synergie
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Saint-Avold Synergie'
+      - vélo . électrique
+  variations:
+    - si:
+        nom: vélo acheté localement
+        question: Le vélo est-il acheté sur le territoire de l'intercommune Saint-Avold ?
+        type: booléen
+        par défaut: non
+      alors: 100€
+    - sinon: 50€
+  lien: https://www.agglo-saint-avold.fr/actualites/aide-a-lachat-dun-velo-a-assistance-electrique/
 
 aides . montigny les metz:
   remplace: commune

@@ -25,7 +25,7 @@ test('aides électrique colmar', (t) => {
 		'localisation . région': '44',
 		'vélo . type': 'électrique',
 	});
-	t.is(colmarElectrique.length, 4, '4 aides');
+	t.is(colmarElectrique.length, 3, '3 aides');
 	t.truthy(
 		colmarElectrique.find(({ title }) => title.toLowerCase().includes('colmar')),
 		'Dont une de la ville'
