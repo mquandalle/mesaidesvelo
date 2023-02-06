@@ -1,17 +1,23 @@
 <script>
-	import { engine } from '$lib/engine';
+	import { getEngine } from '$lib/engine';
+	import { publicodeSituation, veloCat } from '$lib/stores';
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
 
 	export let goals;
 	export let demandeNeufOuOccasion = false;
 
+	$: engine = getEngine({
+		...$publicodeSituation,
+		'vélo . type': `'${$veloCat}'`,
+	});
+
 	const questionsOrder = ['revenu fiscal de référence', 'vélo . prix'];
 
 	const getSortOrder = (name) =>
 		questionsOrder.includes(name) ? questionsOrder.indexOf(name) : Infinity;
 	const uniq = (arr) => [...new Set(arr)];
-	const questions = uniq(
+	$: questions = uniq(
 		(goals ?? ['aides . montant'])
 			.map((ruleName) => engine.evaluate(ruleName).traversedVariables)
 			.flat()

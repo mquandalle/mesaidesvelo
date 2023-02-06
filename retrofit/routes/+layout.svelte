@@ -2,11 +2,14 @@
 	import 'virtual:windi.css';
 	import Footer from './Footer.svelte';
 	import Emoji from '$lib/components/Emoji.svelte';
+	import { dev } from '$app/environment';
 </script>
 
 <svelte:head>
 	<title>Trouvez les aides pour le retrofit de votre voiture</title>
-	<script defer data-domain="aideretrofit.fr" src="/js/script.js"></script>
+	{#if !dev}
+		<script defer data-domain="aideretrofit.fr" src="/js/script.js"></script>
+	{/if}
 </svelte:head>
 
 <div class="px-3 sm:px-8 max-w-screen-md m-auto h-screen flex flex-col">

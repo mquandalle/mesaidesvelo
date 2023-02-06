@@ -6,7 +6,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import { onMount, setContext } from 'svelte';
 	import 'virtual:windi.css';
-	import { building } from '$app/environment';
+	import { building, dev } from '$app/environment';
 
 	onMount(() => {
 		preloadCode('/', '/ville/*');
@@ -15,7 +15,9 @@
 		// autocompletion. By calling this endpoint as soon as possible we
 		// asynchrounsly warm up the server code, and reduce the latency in case
 		// of a cold start.
-		fetch('/api/collectivites');
+		if (!dev) {
+			fetch('/api/collectivites');
+		}
 	});
 
 	const isEmbeded = Boolean(building ? false : $page.url.searchParams.get('iframe'));
@@ -96,7 +98,7 @@
 	</div>
 	<Footer />
 
-	{#if enableTracking}
+	{#if !dev && enableTracking}
 		<script defer data-domain="mesaidesvelo.fr" src="/js/script.js"></script>
 	{/if}
 </div>
