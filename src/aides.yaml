@@ -1465,6 +1465,7 @@ aides . loue lison:
     toutes ces conditions:
       - localisation . epci = 'CC Loue-Lison'
       - vélo . électrique
+  valeur: 200€
   lien: https://cclouelison.fr/fr/rb/1729730/mobilite-21
 
 aides . département somme:
