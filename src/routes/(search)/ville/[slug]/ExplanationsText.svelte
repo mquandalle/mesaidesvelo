@@ -94,7 +94,7 @@
 				<li>Être majeur et domicilié en France</li>
 				<li>
 					Avoir un revenu fiscal de référence par part l'année précédant l'achat du vélo inférieur
-					ou égal à 13 489 €
+					ou égal à 14 089 €
 				</li>
 			</ul>
 			<p>

@@ -1,5 +1,30 @@
 # Historique des modifications
 
+## v3.0.8 - 14/02/2023
+
+Ajout des aides suivantes :
+
+- Limoges Métropole
+- Saint-Étienne Métropole
+- Communauté de communes côte d'émeraude
+- Bocage Mayennais Communauté de communes
+- Communauté de Communes cœur de Nacre
+
+Mise à jour des aides suivantes :
+
+- Bonus vélo de l'État
+- Communauté de communes Loue Lison
+- Ville de Plouzané
+
+Suppression des aides suivantes :
+
+- L’Ernée Communauté de communes
+- Pays de Saint Malo Agglomération
+- Ville de Bourg-en-Bresse
+- Ville de Meyreuil
+- Ville de Lempdes
+- Ville de Vaucresson
+
 ## v3.0.7 - 06/02/2023
 
 Ajout des aides suivantes :

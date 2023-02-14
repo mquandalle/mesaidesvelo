@@ -1,5 +1,4 @@
 # TODO (aide 1er janvier 2023 mais pas encore de page officielle de présentation):
-# - Limoges Métropole
 # - Ville de Belfort
 # - Nantes
 # - Dieppe
@@ -234,6 +233,19 @@ aides . paris:
         alors: 400€
       - sinon: 0€
   lien: https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373
+
+aides . saint-étienne:
+  remplace: intercommunalité
+  titre: Saint-Étienne Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'Saint-Etienne Métropole'
+      - vélo . électrique
+  variations:
+    - si: ménage imposable = 'non'
+      alors: 200€
+    - sinon: 100€
+  lien: https://www.saint-etienne.fr/actualites/jusqu%C3%A0-200-%E2%82%AC-daide-votre-v%C3%A9lo-lectrique
 
 aides . lyon:
   remplace: intercommunalité
@@ -1177,6 +1189,21 @@ aides . saint-germain la blanche herbe:
   valeur: 100€
   lien: https://www.mairie-stgermainblancheherbe.fr/29-actualites/658-aide-pour-l-achat-d-un-velo-electrique
 
+aides . coeur de nacre:
+  remplace: intercommunalité
+  titre: Communauté de Communes cœur de Nacre
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Coeur de Nacre'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 15000 €/an
+      alors: 200€
+    - si: revenu fiscal de référence <= 30000 €/an
+      alors: 100€
+    - sinon: 50€
+  lien: https://www.courseulles-sur-mer.com/aide-a-lacquisition-dun-velo-a-assistance-electrique-vae/
+
 aides . trouville sur mer:
   remplace: commune
   titre: Ville de Trouville-sur-Mer
@@ -1309,6 +1336,38 @@ aides . vienne condrieu:
   valeur: 150€
   lien: https://www.vienne-condrieu-agglomeration.fr/nos-services-au-quotidien/deplacements/faire-du-velo/aide-financiere-vae/
 
+aides . noyarey:
+  remplace: commune
+  titre: Ville de Noyarey
+  applicable si: localisation . code insee = '38281'
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 800€/mois
+            alors: 200€
+          - si: revenu fiscal de référence <= 1600€/mois
+            alors: 150€
+          - sinon: 100€
+    - si: vélo . motorisation
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 800€/mois
+            alors: 100€
+          - si: revenu fiscal de référence <= 1600€/mois
+            alors: 75€
+          - sinon: 50€
+    - si: vélo . mécanique
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 800€/mois
+            alors: 75€
+          - si: revenu fiscal de référence <= 1600€/mois
+            alors: 50€
+          - sinon: 25€
+    - sinon: 0€
+  lien: https://www.noyarey.fr/ma-ville-mon-quotidien/mon-quotidien/aide-velo/
+
 # aides . balcons du dauphiné:
 #   remplace: intercommunalité
 #   titre: Balcons du Dauphiné
@@ -1353,17 +1412,6 @@ aides . crolles:
   plancher: 150€
   plafond: 600€
   lien: http://www.ville-crolles.fr/vues/pages/services-et-demarches/particuliers/crolles-pratique-cheque-VAE.php#partHome1
-
-aides . meyreuil:
-  remplace: commune
-  titre: Ville de Meyreuil
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '13060'
-      - vélo . électrique
-  valeur: 15% * vélo . prix
-  plafond: 300€
-  lien: https://www.ville-meyreuil.fr/fr/actualites/id-915--pedalez-branche-prime-pour-l-achat-d-un-velo-electrique
 
 aides . ploemeur:
   remplace: commune
@@ -1809,16 +1857,6 @@ aides . cournon d'auvergne:
         montant: 100€
   plafond: vélo . prix
   lien: http://www.cournon-auvergne.fr/Urbanisme-et-economie/Transports/Aide-pour-l-achat-d-un-velo-a-assistance-electrique
-
-aides . lempdes:
-  remplace: commune
-  titre: Ville de Lempdes
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '63193'
-      - vélo . électrique
-  valeur: 100€
-  lien: https://ville-lempdes.fr/subvention-pour-laide-a-lachat-dun-velo-electrique/
 
 aides . colmar:
   remplace: commune
@@ -2394,16 +2432,6 @@ aides . rueil-malmaison:
         plafond: 200€
   lien: https://www.villederueil.fr/fr/aide-lachat-dun-velo-electrique
 
-aides . vaucresson:
-  remplace: commune
-  titre: Ville de Vaucresson
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '92076'
-      - vélo . motorisation
-  valeur: 150€
-  lien: http://www.vaucresson.fr/Mobilites.aspx
-
 aides . courbevoie:
   remplace: commune
   titre: Ville de Courbevoie
@@ -2903,6 +2931,20 @@ aides . brissac loire aubance:
   plafond: vélo . prix
   lien: https://www.brissacloireaubance.fr/actualites/une-nouvelle-aide-de-la-cclla-pour-lachat-de-velo-a-assistance-electrique/
 
+aides . limoges metropole:
+  remplace: intercommunalité
+  titre: Limoges Métropole
+  applicable si: localisation . epci = 'CU Limoges Métropole'
+  variations:
+    - si: vélo . cargo
+      alors: 450€
+    - si: vélo . électrique
+      alors: 300€
+    - si: vélo . mécanique
+      alors: 150€
+  plafond: 25% * vélo . prix
+  lien: https://www.limoges-metropole.fr/informations-transversales/actualites/laide-a-achat-de-velo-repart-pour-un-tour-1991
+
 # aides . grand poitiers:
 #   remplace: intercommunalité
 #   titre: Grand Poitiers
@@ -3395,21 +3437,21 @@ aides . mont de marsan:
   valeur: 250€
   lien: http://www.montdemarsan-agglo.fr/agglo/document?id=2682&id_attribute=48&usg=AOvVaw1SVEDZSqj0LRmmUyyGkc_n
 
-aides . bourg-en-bresse:
-  remplace: commune
-  titre: Ville de Bourg-en-Bresse
-  applicable si: localisation . code insee = '01053'
-  valeur: vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo
-        alors: 400€
-      - si: vélo . électrique
-        alors: 300€
-      - si: vélo . mécanique
-        alors: 100€
-      - sinon: 0€
-  lien: https://www.bourgenbresse.fr/actualite/1248/225-aide-a-l-achat-d-un-velo-pour-les-burgiens.htm
+# aides . bourg-en-bresse:
+#   remplace: commune
+#   titre: Ville de Bourg-en-Bresse
+#   applicable si: localisation . code insee = '01053'
+#   valeur: vélo . prix
+#   plafond:
+#     variations:
+#       - si: vélo . cargo
+#         alors: 400€
+#       - si: vélo . électrique
+#         alors: 300€
+#       - si: vélo . mécanique
+#         alors: 100€
+#       - sinon: 0€
+#   lien: https://www.bourgenbresse.fr/actualite/1248/225-aide-a-l-achat-d-un-velo-pour-les-burgiens.htm
 
 aides . divonne-les-bains:
   remplace: commune
@@ -3604,16 +3646,27 @@ aides . laval:
   valeur: 300€
   lien: https://www.agglo-laval.fr/utile-au-quotidien/transports-et-mobilites/lagglo-a-velo/prime-a-lachat-dun-velo-cargo
 
-aides . ernée:
+# TODO : vérifier si l'aide est réactivée
+# aides . ernée:
+#   remplace: intercommunalité
+#   titre: L’Ernée Communauté de communes
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = "CC de l'Ernée"
+#       - vélo . électrique
+#   valeur: 10% * vélo . prix
+#   plafond: 100€
+#   lien: https://www.lernee.fr/au-quotidien/mobilite/subvention-velo-electrique/
+
+aides . bocage mayennais:
   remplace: intercommunalité
-  titre: L’Ernée Communauté de communes
+  titre: Bocage Mayennais Communauté de communes
   applicable si:
     toutes ces conditions:
-      - localisation . epci = "CC de l'Ernée"
+      - localisation . epci = 'CC du Bocage Mayennais'
       - vélo . électrique
-  valeur: 10% * vélo . prix
-  plafond: 100€
-  lien: https://www.lernee.fr/au-quotidien/mobilite/subvention-velo-electrique/
+  valeur: 100€
+  lien: https://www.bocage-mayennais.fr/bocage-mayennais_au-quotidien_transport-et-mobilite_aide-a-l-achat-de-velo-a-assistance-electrique-vae.phtml
 
 aides . brive:
   remplace: intercommunalité
@@ -4182,7 +4235,7 @@ aides . plouzané:
       - localisation . code insee = '29212'
       - vélo . électrique
   valeur: 100€
-  lien: http://www.ville-plouzane.fr/index.php/fr/toute-l-actualite/1074-aide-a-l-achat-vae
+  lien: http://www.ville-plouzane.fr/index.php/fr/la-mairie/plouzane-ville-durable/1083-aide-a-l-achat-d-un-velo-electrique
 
 aides . gouesnou:
   remplace: commune
@@ -4218,20 +4271,15 @@ aides . brest metropole:
   plafond: vélo . prix
   lien: https://www.brest.fr/mes-demarches/environnement/demander-la-subvention-velo-a-assistance-electrique-7043.html
 
-aides . saint-malo:
+aides . cote d'émeraude:
   remplace: intercommunalité
-  titre: Pays de Saint Malo Agglomération
+  titre: Communauté de communes côte d'émeraude
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'CA du Pays de Saint Malo Agglomération'
+      - localisation . epci = 'CC Terre d'Émeraude Communauté'
       - vélo . électrique
-  valeur: 10% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo électrique
-        alors: 400€
-      - sinon: 120€
-  lien: https://www.stmalo-agglomeration.fr/aide-achat-velo-electrique.html
+  valeur: 100€
+  lien: https://www.cote-emeraude.fr/laide-a-lachat-dun-velo-a-assitance-electrique/
 
 aides . baie du mont saint-michel:
   remplace: intercommunalité
@@ -4743,6 +4791,8 @@ vélo . occasion:
       - aides . marcq-en-baroeul
       - aides . grand villeneuvois
       - aides . ambert livradois forez
+      - aides . limoges metropole
+      - aides . coeur de nacre
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
