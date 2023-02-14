@@ -31,4 +31,4 @@ aidesVelo({
 });
 ```
 
-Le montant de l'aide peut être affiné avec d'autres variables en entrée. La liste est disponible via [le typage Typescript](https://github.com/mquandalle/mesaidesvelo/blob/master/package-aides-velo/index.ts#L17-L33). D'autres exemples sont disponibles dans le fichier de [tests](./test.js).
+Le montant de l'aide peut être affiné avec d'autres variables en entrée. La liste est disponible via [le typage Typescript](./index.ts#L17-L33). D'autres exemples sont disponibles dans le fichier de [tests](./test.js).
