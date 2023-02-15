@@ -4,9 +4,15 @@ import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
 import { formatDescription } from '$lib/utils';
 
 type Aide = {
+	id: string;
 	title: string;
 	description: string;
 	url: string;
+	collectivity: {
+		kind: string;
+		value: string;
+		code?: string;
+	}
 	/**
 	 * Le montant de l'aide est calculé seulement si le type de vélo a été
 	 * précisé en entrée.
