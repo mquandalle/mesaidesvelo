@@ -1,5 +1,20 @@
 # Historique des modifications
 
+## v3.0.9 - 27/02/2023
+
+Ajout des aides suivantes :
+
+- Pays de Saverne
+- Pays Mornantais
+
+Mise à jour des liens suivants :
+
+- Lorient Agglomération
+
+Supprime les aides suivantes :
+
+- Agglomération Pays Basque
+
 ## v3.0.8 - 14/02/2023
 
 Ajout des aides suivantes :

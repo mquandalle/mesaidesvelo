@@ -313,6 +313,21 @@ aides . sainte foy lès lyon:
   valeur: 100€
   lien: https://www.saintefoyleslyon.fr/Territoire-d-avenir/Deplacements/100-euros-pour-l-achat-d-un-velo
 
+aides . pays mornantais:
+  remplace: intercommunalité
+  titre: Pays Mornantais
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays Mornantais (COPAMO)'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+  variations:
+    - si: revenu fiscal de référence <= ANAH . plafond ménage modeste
+      alors: 400€
+    - sinon: 250€
+  lien: https://www.cc-paysmornantais.fr/velo-electrique-on-vous-aide.html
+
 aides . mornant:
   remplace: commune
   titre: Ville de Mornant
@@ -841,6 +856,17 @@ aides . marckolsheim:
       - vélo . électrique ou mécanique
   valeur: 50€
   lien: https://www.marckolsheim.fr/Votre-ville/Informations-pratiques/Subvention-achat-velo.html
+
+aides . pays de saverne:
+  remplace: intercommunalité
+  titre: Pays de Saverne
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays de Saverne'
+      - vélo . électrique
+  valeur: 100€
+  plafond: 10% * vélo . prix
+  lien: http://www.paysdesaverne.fr/Actions/VelosElec/2019-04-VAE-velo-saverne.htm
 
 aides . val d'argent:
   remplace: intercommunalité
@@ -1994,84 +2020,84 @@ aides . lescar:
     - sinon: 0€
   lien: https://www.lescar.fr/information-transversale/fil-infos/mise-en-place-dune-aide-pour-lacquisition-dun-velo-pour-les-lescariens-1140
 
-aides . pays basque:
-  remplace: intercommunalité
-  titre: Agglomération Pays Basque
-  applicable si: localisation . epci = 'CA du Pays Basque'
-  variations:
-    - si: vélo . cargo électrique
-      alors:
-        grille:
-          assiette: revenu fiscal de référence
-          tranches:
-            - plafond: 430 €/mois
-              montant:
-                valeur: 30% * vélo . prix
-                plafond: 1000€
-            - plafond: 620 €/mois
-              montant:
-                valeur: 30% * vélo . prix
-                plafond: 900€
-            - plafond: 1200 €/mois
-              montant:
-                valeur: 20% * vélo . prix
-                plafond: 800€
-            - montant: 0€
-    - si: vélo . cargo
-      alors:
-        grille:
-          assiette: revenu fiscal de référence
-          tranches:
-            - plafond: 430 €/mois
-              montant:
-                valeur: 30% * vélo . prix
-                plafond: 700€
-            - plafond: 620 €/mois
-              montant:
-                valeur: 30% * vélo . prix
-                plafond: 600€
-            - plafond: 1200 €/mois
-              montant:
-                valeur: 20% * vélo . prix
-                plafond: 400€
-            - montant: 0€
-    - si: vélo . électrique
-      alors:
-        grille:
-          assiette: revenu fiscal de référence
-          tranches:
-            - plafond: 430 €/mois
-              montant:
-                valeur: 60% * vélo . prix
-                plafond: 600€
-            - plafond: 620 €/mois
-              montant:
-                valeur: 50% * vélo . prix
-                plafond: 500€
-            - plafond: 1200 €/mois
-              montant:
-                valeur: 30% * vélo . prix
-                plafond: 300€
-            - montant: 0€
-    - si: vélo . pliant
-      alors:
-        grille:
-          assiette: revenu fiscal de référence
-          tranches:
-            - plafond: 430 €/mois
-              montant:
-                valeur: 50% * vélo . prix
-                plafond: 300€
-            - plafond: 620 €/mois
-              montant:
-                valeur: 40% * vélo . prix
-                plafond: 250€
-            - plafond: 1200 €/mois
-              montant:
-                valeur: 30% * vélo . prix
-                plafond: 200€
-            - montant: 0€
-  lien: https://www.txiktxak.fr/vos-moyens-de-transport-a-la-carte/aide-a-l-achat-velo/
+# aides . pays basque:
+#   remplace: intercommunalité
+#   titre: Agglomération Pays Basque
+#   applicable si: localisation . epci = 'CA du Pays Basque'
+#   variations:
+#     - si: vélo . cargo électrique
+#       alors:
+#         grille:
+#           assiette: revenu fiscal de référence
+#           tranches:
+#             - plafond: 430 €/mois
+#               montant:
+#                 valeur: 30% * vélo . prix
+#                 plafond: 1000€
+#             - plafond: 620 €/mois
+#               montant:
+#                 valeur: 30% * vélo . prix
+#                 plafond: 900€
+#             - plafond: 1200 €/mois
+#               montant:
+#                 valeur: 20% * vélo . prix
+#                 plafond: 800€
+#             - montant: 0€
+#     - si: vélo . cargo
+#       alors:
+#         grille:
+#           assiette: revenu fiscal de référence
+#           tranches:
+#             - plafond: 430 €/mois
+#               montant:
+#                 valeur: 30% * vélo . prix
+#                 plafond: 700€
+#             - plafond: 620 €/mois
+#               montant:
+#                 valeur: 30% * vélo . prix
+#                 plafond: 600€
+#             - plafond: 1200 €/mois
+#               montant:
+#                 valeur: 20% * vélo . prix
+#                 plafond: 400€
+#             - montant: 0€
+#     - si: vélo . électrique
+#       alors:
+#         grille:
+#           assiette: revenu fiscal de référence
+#           tranches:
+#             - plafond: 430 €/mois
+#               montant:
+#                 valeur: 60% * vélo . prix
+#                 plafond: 600€
+#             - plafond: 620 €/mois
+#               montant:
+#                 valeur: 50% * vélo . prix
+#                 plafond: 500€
+#             - plafond: 1200 €/mois
+#               montant:
+#                 valeur: 30% * vélo . prix
+#                 plafond: 300€
+#             - montant: 0€
+#     - si: vélo . pliant
+#       alors:
+#         grille:
+#           assiette: revenu fiscal de référence
+#           tranches:
+#             - plafond: 430 €/mois
+#               montant:
+#                 valeur: 50% * vélo . prix
+#                 plafond: 300€
+#             - plafond: 620 €/mois
+#               montant:
+#                 valeur: 40% * vélo . prix
+#                 plafond: 250€
+#             - plafond: 1200 €/mois
+#               montant:
+#                 valeur: 30% * vélo . prix
+#                 plafond: 200€
+#             - montant: 0€
+#   lien: https://www.txiktxak.fr/vos-moyens-de-transport-a-la-carte/aide-a-l-achat-velo/
 
 aides . vallée d'ossau:
   remplace: intercommunalité
@@ -3531,9 +3557,9 @@ aides . lorient:
       - si: vélo . pliant
         alors: 100€
       - sinon: 0€
-  lien: https://www.lorient-agglo.bzh/actualites/toutes-les-actualites/actualite/news/une-prime-pour-encourager-lacquisition-dun-velo/
+  lien: https://www.lorient-agglo.bzh/services/deplacements/aide-achat-velo/
 
-# TODO: « la ville réétudiee actuellement son dispositif d'aide »
+# TODO: remorque vélo
 aides . lanester:
   remplace: commune
   titre: Ville de Lanester
@@ -4801,6 +4827,8 @@ revenu fiscal de référence:
   par défaut: 800 €/an
 
 première tranche IR: 14089 €/an
+ANAH:
+ANAH . plafond ménage modeste: 19565 €/an
 
 ménage imposable: revenu fiscal de référence >= 11120 €/an
 
