@@ -5,6 +5,7 @@
 
 	import { onMount } from 'svelte';
 	import { removeAccents } from '$lib/utils';
+	import { browser } from '$app/environment';
 
 	// the list of items  the user can select from
 	export let items = [];
@@ -128,8 +129,6 @@
 	export let readonly = undefined;
 	// apply a className to the dropdown div
 	export let dropdownClassName = undefined;
-	// adds the disabled tag to the HTML input
-	export let disabled = false;
 
 	export let debug = false;
 
@@ -875,6 +874,7 @@
 		<option {value} selected>{text}</option>
 	</select>
 	<div class="input-container">
+		<!-- disabled on SSR: see https://github.com/sveltejs/svelte/issues/8266#issuecomment-1423372281 -->
 		<input
 			type="text"
 			class="{inputClassName ? inputClassName : ''} input autocomplete-input"
@@ -882,7 +882,7 @@
 			autocomplete="off"
 			{placeholder}
 			{name}
-			{disabled}
+			disabled={!browser}
 			{title}
 			readonly={readonly || (lock && selectedItem)}
 			bind:this={input}
