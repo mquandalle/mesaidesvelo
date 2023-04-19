@@ -7,7 +7,7 @@
 </script>
 
 <footer
-	class="flex flex-col items-start gap-6 py-6 pt-3 justify-between w-full max-w-screen-md mx-auto md:(flex-row items-end) text-xs "
+	class="flex flex-col items-start gap-6 py-6 pt-3 justify-between w-full max-w-screen-md mx-auto md:(flex-row items-end) text-xs"
 >
 	{#if !isEmbeded || $page.url.pathname !== '/'}<UserFeedback />{/if}
 	{#if !isEmbeded}

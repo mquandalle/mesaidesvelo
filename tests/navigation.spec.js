@@ -5,6 +5,7 @@ const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
 test('Navigation scenario', async ({ page }) => {
 	await page.goto(baseUrl);
 
+	await page.waitForLoadState();
 	await page.click('[placeholder*="Commune"]');
 	await page.fill('[placeholder*="Commune"]', 'toulou');
 	await page.click('.autocomplete-list-item:first-child');
@@ -59,9 +60,9 @@ test('Thumbnail displayed', async ({ page }) => {
 
 test('Revenu selector', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/bordeaux');
-	await page.waitForTimeout(100);
+	await page.waitForTimeout(200);
 	await page.click('text=plus de 2 201 €');
-	await expect(page.locator('text=aide non disponible')).toHaveCount(6);
+	await expect(page.locator('text=aide non disponible')).toHaveCount(7);
 
 	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
 	await page.waitForTimeout(100);

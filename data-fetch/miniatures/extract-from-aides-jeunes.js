@@ -48,7 +48,7 @@ const imagesFromAidesJeunes = Object.fromEntries([
 
 		return [imgKey(data), data];
 	}),
-	['pays - France', { imgSrc: 'img/logo_etat_francais.png' }],
+	['pays - France', { imgSrc: 'img/institutions/logo_etat_francais.png' }],
 ]);
 
 const noTrim = [

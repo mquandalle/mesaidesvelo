@@ -53,7 +53,7 @@
 					{/if}
 				</div>
 				{#if rawNode.description}
-					<p class="text-gray-600 mt-2 text-sm ">
+					<p class="text-gray-600 mt-2 text-sm">
 						{rawNode.description}
 					</p>
 				{/if}

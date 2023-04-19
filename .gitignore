@@ -8,6 +8,7 @@ node_modules
 .vercel
 *.tmp
 *.tmp.js
+data-fetch/miniatures/aides-jeunes-repo
 
 # Generated at build time
 src/data

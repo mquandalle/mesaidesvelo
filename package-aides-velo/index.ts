@@ -12,7 +12,7 @@ type Aide = {
 		kind: string;
 		value: string;
 		code?: string;
-	}
+	};
 	/**
 	 * Le montant de l'aide est calculé seulement si le type de vélo a été
 	 * précisé en entrée.

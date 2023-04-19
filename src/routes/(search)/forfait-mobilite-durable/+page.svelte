@@ -84,7 +84,7 @@
 				<th class="p-1 py-2">Plafond du forfait</th>
 			</tr>
 			{#each entreprises as entreprise}
-				<tr class="odd:bg-green-50 ">
+				<tr class="odd:bg-green-50">
 					<td class="p-1 py-2"
 						><div class="max-h-[1.5em] overflow-hidden">
 							{entreprise.nom}

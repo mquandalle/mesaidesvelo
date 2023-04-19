@@ -63,7 +63,7 @@
 					</span>
 				{/if}
 			</div>
-			<p class="text-gray-600 mt-2 text-sm ">
+			<p class="text-gray-600 mt-2 text-sm">
 				{notice}
 			</p>
 			{#if rawNode.lien}
