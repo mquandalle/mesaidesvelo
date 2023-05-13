@@ -1,5 +1,33 @@
 # Historique des modifications
 
+## v3.0.10 - 13/05/2023
+
+Mise à jour des aides suivantes :
+
+- Île-de-France Mobilités
+- Grand Lieu Communauté
+- Nantes Métropole
+- Morlaix Communauté
+- Massif du Vercors communauté de communes
+- Brest Métropole
+
+Ajoute les aides suivantes :
+
+- Grand Angoulême
+- La Porte du Hainaut
+- Val de Drôme en Biovallée
+- Communauté de communes Carmausin-Ségala
+- Ville de Clisson
+- Ville d'Annœullin
+- Ville de Belfort
+- Ville de Dieppe
+- Ville de Lisieux
+
+Supprime les aides suivantes :
+
+- Agglomération Castres-Mazamet
+- Ville de Plouzané
+
 ## v3.0.9 - 27/02/2023
 
 Ajout des aides suivantes :

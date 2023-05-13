@@ -1,7 +1,4 @@
 # TODO (aide 1er janvier 2023 mais pas encore de page officielle de présentation):
-# - Ville de Belfort
-# - Nantes
-# - Dieppe
 # - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 #
 # Aides suspendues avant potentielle reconduction:
@@ -112,25 +109,31 @@ aides . ile de france:
     La région Île-de-France subventionne l’achat d’un $vélo à hauteur de 50% et
     jusqu’à un plafond de $plafond. Les éventuelles aides locales déjà perçues
     sont déduites de ce montant.
-  applicable si:
-    toutes ces conditions:
-      - localisation . région = '11'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-          - vélo . pliant
+  applicable si: localisation . région = '11'
   valeur: 50% * vélo . prix
   plafond:
     valeur:
-      # Même si le plafond de l'aide est imputé du montant déjà versé par la
-      # commue, on veut afficher le montant avant imputation dans le descriptif
-      # de l’aide.
       nom: $plafond
       variations:
         - si: vélo . cargo électrique
           alors: 600 €
-        - sinon: 500 €
-    abattement: aides . commune
+        - si: vélo . motorisation
+          alors: 200 €
+        - si:
+            une de ces conditions:
+              - vélo . électrique
+              - vélo . cargo
+              - vélo . pliant
+          alors: 500 €
+        - si:
+            toutes ces conditions:
+              - vélo . mécanique simple
+              - nom: pour un jeune
+                question: Le bénéficiaire a t-il entre 15 et 25 ans ?
+                type: booléen
+                par défaut: oui
+          alors: 100 €
+        - sinon: 0 €
   lien: https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo
 
 aides . occitanie:
@@ -650,13 +653,70 @@ aides . pays de la loire:
 aides . nantes:
   remplace: intercommunalité
   titre: Nantes Métropole
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'Nantes Métropole'
-      - vélo . cargo
-  valeur: 25% * vélo . prix
-  plafond: 300 €
-  lien: https://metropole.nantes.fr/aide-achat-velo-cargo
+  applicable si: localisation . epci = 'Nantes Métropole'
+  variations:
+    - si: revenu fiscal de référence <= 350 €/mois
+      alors:
+        valeur: 90% * vélo . prix
+        plafond:
+          variations:
+            - si: vélo . cargo
+              alors: 1500 €
+            - si:
+                une de ces conditions:
+                  - vélo . électrique
+                  - vélo . motorisation
+              alors: 800 €
+            - si: vélo . mécanique
+              alors: 150 €
+            - sinon: 0 €
+    - si: revenu fiscal de référence <= 500 €/mois
+      alors:
+        valeur: 70% * vélo . prix
+        plafond:
+          variations:
+            - si: vélo . cargo
+              alors: 1000 €
+            - si:
+                une de ces conditions:
+                  - vélo . électrique
+                  - vélo . motorisation
+              alors: 500 €
+            - si: vélo . mécanique
+              alors: 120 €
+            - sinon: 0 €
+    - si: revenu fiscal de référence <= 750 €/mois
+      alors:
+        valeur: 90% * vélo . prix
+        plafond:
+          variations:
+            - si: vélo . cargo
+              alors: 600 €
+            - si:
+                une de ces conditions:
+                  - vélo . électrique
+                  - vélo . motorisation
+              alors: 250 €
+            - si: vélo . mécanique
+              alors: 100 €
+            - sinon: 0 €
+    - si: revenu fiscal de référence <= 900 €/mois
+      alors:
+        valeur: 90% * vélo . prix
+        plafond:
+          variations:
+            - si: vélo . cargo
+              alors: 300 €
+            - si:
+                une de ces conditions:
+                  - vélo . électrique
+                  - vélo . motorisation
+              alors: 150 €
+            - si: vélo . mécanique
+              alors: 50 €
+            - sinon: 0 €
+    - sinon: 0€
+  lien: https://metropole.nantes.fr/aides-achat-velo
 
 aides . toulouse:
   remplace: intercommunalité
@@ -1176,6 +1236,19 @@ aides . wasquehal:
         alors: 125€
       - sinon: 0€
   lien: https://www.ville-wasquehal.fr/actualite/aides-de-la-ville-pour-une-mobilite-douce/
+
+aides . belfort:
+  remplace: commune
+  titre: Ville de Belfort
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '90010'
+      - vélo . électrique
+  variations:
+    - si: vélo . cargo électrique
+      alors: 300 €
+    - sinon: 200 €
+  lien: https://www.belfort.fr/cadre-de-vie/vie-quotidienne/aide-a-l-achat-d-un-velo-electrique-2996.html
 
 aides . ouistreham:
   remplace: commune
@@ -2270,12 +2343,52 @@ aides . sud estuaire:
 aides . grand lieu:
   remplace: intercommunalité
   titre: Grand Lieu Communauté
+  applicable si: localisation . epci = 'CC Grand Lieu Communauté'
+  # todo réparation
+  variations:
+    - si: vélo . cargo
+      alors: 300 €
+    - si:
+        une de ces conditions:
+          - vélo . électrique
+          - vélo . pliant
+          - vélo . motorisation
+      alors: 100 €
+    - si: vélo . mécanique
+      alors: 50 €
+    - sinon: 0 €
+  lien: https://www.grandlieu.fr/vivre-et-habiter/mobilite/velo/operation-tous-velo
+
+aides . clisson:
+  remplace: commune
   applicable si:
     toutes ces conditions:
-      - localisation . epci = 'CC Grand Lieu Communauté'
-      - vélo . électrique
-  valeur: 100€
-  lien: https://www.grandlieu.fr/sites/default/files/2022-04/r%C3%A8glement%20op%C3%A9ration%20100%20v%C3%A9lo%202022_0.pdf
+      - localisation . code insee = '44043'
+      # TODO: trottinette électrique
+      - vélo . électrique ou mécanique
+  titre: Ville de Clisson
+  description: Cette aide est proposée via le CCAS de Clisson.
+  variations:
+    - si: revenu fiscal de référence <= 400 €/mois
+      alors:
+        valeur: 80% * vélo . prix
+        plafond: 300 €
+    - si: revenu fiscal de référence <= 600 €/mois
+      alors:
+        valeur: 60% * vélo . prix
+        plafond: 250 €
+    - si: revenu fiscal de référence <= 1000 €/mois
+      alors:
+        valeur: 50% * vélo . prix
+        plafond: 200 €
+    - si: revenu fiscal de référence <= 1400 €/mois
+      alors:
+        valeur: 40% * vélo . prix
+        plafond: 180 €
+    - sinon:
+        valeur: 20% * vélo . prix
+        plafond: 100 €
+  lien: https://www.mairie-clisson.fr/fileadmin/Clisson/Telechargements/ACTUALITES/2021/Dossier_Clisson_a_velo_ou_trottinette.pdf
 
 aides . sèvre et loire:
   remplace: intercommunalité
@@ -2529,6 +2642,16 @@ aides . mons en baroeul:
                 plafond: 100€
     - sinon: 0€
   lien: https://www.monsenbaroeul.fr/vivre-mons-en-baroeul/se-deplacer/demander-ma-prime-velo
+
+aides . annoeullin:
+  remplace: commune
+  titre: Ville d'Annœullin
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '59011'
+      - vélo . électrique
+  valeur: 200 €
+  lien: https://www.annoeullin.fr/aide-pour-lachat-velo-electrique
 
 aides . la madeleine:
   remplace: commune
@@ -3319,6 +3442,19 @@ aides . saintes:
 #       alors: 400€
 #     - sinon: 200€
 #   lien: https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/ma-prime-velo-76.html
+
+aides . dieppe:
+  remplace: commune
+  titre: Ville de Dieppe
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '76217'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors: 100€
+    - sinon: 100 €
+  lien: https://www.dieppe.fr/menus/vie-quotidienne-3/developpement-durable-49/aide-municipale-pour-acquerir-un-velo
 
 aides . yvetot normandie:
   remplace: intercommunalité
@@ -4225,20 +4361,28 @@ aides . brest:
           - vélo . électrique
           - vélo . cargo
   variations:
-    - si: revenu fiscal de référence <= 13489 €/an
+    - si: vélo . cargo
       alors:
-        valeur: 50% * vélo . prix
-        plafond: 500€
-    - si: revenu fiscal de référence <= 20000 €/an
-      alors:
-        valeur: 40% * vélo . prix
-        plafond: 400€
-    - si: revenu fiscal de référence <= 26350 €/an
-      alors:
-        valeur: 30% * vélo . prix
-        plafond: 200€
-    - sinon: 0€
-  lien: https://www.brest.fr/mes-demarches/environnement/demander-la-subvention-velo-a-assistance-electrique-7043.html
+        variations:
+          - si: revenu fiscal de référence <= 6538 €/an
+            alors: 500 €
+          - si: revenu fiscal de référence <= 14089 €/an
+            alors: 300 €
+          - si: revenu fiscal de référence <= 22983 €/an
+            alors: 200 €
+          - sinon: 0 €
+    - sinon:
+        variations:
+          - si: revenu fiscal de référence <= 6538 €/an
+            alors:
+              valeur: 30% * vélo . prix
+              plafond: 300 €
+          - si: revenu fiscal de référence <= 14089 €/an
+            alors:
+              valeur: 20% * vélo . prix
+              plafond: 150 €
+          - sinon: 0 €
+  lien: https://brest.fr/gerer-mon-quotidien/demarches/demander-la-subvention-velo-assistance-electrique
 
 aides . plougastel-daoulas:
   remplace: commune
@@ -4252,16 +4396,6 @@ aides . plougastel-daoulas:
       alors: 200€
     - sinon: 150€
   lien: https://ville-plougastel.bzh/mon-quotidien/developpement-durable/dispositif-daides/
-
-aides . plouzané:
-  remplace: commune
-  titre: Ville de Plouzané
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '29212'
-      - vélo . électrique
-  valeur: 100€
-  lien: http://www.ville-plouzane.fr/index.php/fr/la-mairie/plouzane-ville-durable/1083-aide-a-l-achat-d-un-velo-electrique
 
 aides . gouesnou:
   remplace: commune
@@ -4282,20 +4416,6 @@ aides . saint-pol-de-léon:
       - vélo . électrique
   valeur: 100€
   lien: https://www.saintpoldeleon.bzh/la-ville-vous-aide-pour-lachat-dun-velo-a-assistance-electrique/
-
-aides . brest metropole:
-  remplace: intercommunalité
-  titre: Brest Métropole
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '29189'
-      - vélo . électrique
-  variations:
-    - si: revenu fiscal de référence <= 13489 €/an
-      alors: 200 €
-    - sinon: 150 €
-  plafond: vélo . prix
-  lien: https://www.brest.fr/mes-demarches/environnement/demander-la-subvention-velo-a-assistance-electrique-7043.html
 
 aides . cote d'émeraude:
   remplace: intercommunalité
@@ -4390,6 +4510,7 @@ aides . perros-guirec:
 
 aides . morlaix:
   remplace: intercommunalité
+  titre: Morlaix Communauté
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA Morlaix Communauté'
@@ -4400,7 +4521,7 @@ aides . morlaix:
     - si: revenu fiscal de référence <= 20234 €/an
       alors: 200 €
     - sinon: 100 €
-  plafond: vélo . prix
+  plafond: 40% * vélo . prix
   lien: https://www.morlaix-communaute.bzh/Se-deplacer/Velo/Prime-achat-Velo-a-Assistance-Electrique-VAE
 
 aides . crozon:
@@ -4450,22 +4571,6 @@ aides . saint-jacques de la lande:
         alors: 75€
       - sinon: 0€
   lien: https://www.st-jacques.fr/infos-pratiques/acces-et-transport/subvention-velo/
-
-aides . castres:
-  remplace: intercommunalité
-  titre: Agglomération Castres-Mazamet
-  applicable si: localisation . epci = 'CA de Castres Mazamet'
-  valeur: 30% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo
-        alors: 500€
-      - si: vélo . électrique
-        alors: 250€
-      - si: vélo . mécanique
-        alors: 100€
-      - sinon: 0€
-  lien: https://www.ville-castres.fr/fr/demarche/demande-daide-pour-lacquisition-dun-velo
 
 aides . quesnoy-sur-deûle:
   remplace: commune
@@ -4593,6 +4698,122 @@ aides . pont-saint-maxence:
   valeur: 20% * vélo . prix
   plafond: 250€
   lien: https://www.pontsaintemaxence.fr/wp-content/uploads/2019/05/2019_cp_vae.pdf
+
+aides . grand angouleme:
+  remplace: intercommunalité
+  titre: Grand Angoulême
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA du Grand Angoulême'
+      - vélo . électrique ou mécanique
+      - revenu fiscal de référence <= 2000 €/mois
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 1000 €/mois
+            alors:
+              valeur: 50% * vélo . prix
+              plafond: 400 €
+          - si: revenu fiscal de référence <= 1500 €/mois
+            alors:
+              valeur: 30% * vélo . prix
+              plafond: 300 €
+          - sinon:
+              valeur: 20% * vélo . prix
+              plafond: 200 €
+    - sinon:
+        valeur: 50% * vélo . prix
+        plafond: 150 €
+  lien: https://aides-subventions.grandangouleme.fr/catalogue/prime-vae/
+
+aides . massif du vercors:
+  remplace: intercommunalité
+  titre: Massif du Vercors communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Massif du Vercors'
+      - vélo . électrique
+  variations:
+    - si: vélo . neuf
+      alors: 200 €
+    - sinon: 300 €
+  lien: https://www.vercors.org/actualites/bonus-vae/
+
+aides . carmausin-ségala:
+  remplace: intercommunalité
+  titre: Communauté de communes Carmausin-Ségala
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Carmausin-Ségala'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . électrique
+      alors:
+        valeur: 150 €
+        plafond: 20 % * vélo . prix
+    - sinon:
+        valeur: 100 €
+        plafond: 20 % * vélo . prix
+  lien: https://www.carmausin-segala.fr/sites/carmausin-segala.fr/www.carmausin-segala.fr/files/pdf/3cs_-_dossier_aide_a_lachat_velo.pdf
+
+aides . val de drôme en biovalée:
+  remplace: intercommunalité
+  titre: Val de Drôme en Biovallée
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Val de Drôme en Biovallée'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= première tranche IR
+            alors: 200 €
+          - si: revenu fiscal de référence <= 27478 €/an
+            alors: 100 €
+          - sinon: 0
+    - sinon:
+        variations:
+          - si: revenu fiscal de référence <= première tranche IR
+            alors: 50 €
+          - sinon: 0
+  lien: https://www.valdedrome.com/actualite/9707/5417-le-bonus-velo-est-de-retour.htm
+
+aides . porte du hainaut:
+  remplace: intercommunalité
+  titre: La Porte du Hainaut
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA de la Porte du Hainaut'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: vélo . neuf
+            alors: 300 €
+          - sinon: 150 €
+    - sinon:
+        variations:
+          - si: vélo . neuf
+            alors: 150 €
+          - sinon: 75 €
+  plafond: 50% * vélo . prix
+  lien: https://www.agglo-porteduhainaut.fr/actualites/une-prime-pour-vous-accompagner-vers-les-mobilites-decarbonees
+
+aides . lisieux:
+  remplace: commune
+  titre: Ville de Lisieux
+  applicable si: localisation . code insee = '14366'
+  variations:
+    - si: vélo . cargo
+      alors: 500 €
+    - si: vélo . électrique
+      alors: 300 €
+    - sinon: 0 €
+  plafond: 50% * vélo . prix
+  lien: https://s3.cloud.actigraph.com/lisieux/upload/PROJETS/Plan-velo/Flyer-aide-achat-velos-2023.pdf?AWSAccessKeyId=lisieux&Expires=1684015199&Signature=WAGOStct3gJstlkuAyWwDMtR8QI%3D
 
 aides . monaco:
   remplace: commune
@@ -4797,6 +5018,7 @@ vélo . occasion:
       # Liste blanches des aides ouvertes aux vélos d'occasion
       # TODO:  il faudrait définir cette information au niveau de chaque aide et
       # non via une liste globale
+      - aides . ile de france
       - aides . toulouse
       - aides . lyon
       - aides . louvigny
@@ -4819,6 +5041,10 @@ vélo . occasion:
       - aides . ambert livradois forez
       - aides . limoges metropole
       - aides . coeur de nacre
+      - aides . grand angouleme
+      - aides . belfort
+      - aides . dieppe
+      - aides . massif du vercors
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
