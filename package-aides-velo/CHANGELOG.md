@@ -1,5 +1,45 @@
 # Historique des modifications
 
+## v3.0.11 - 01/06/2023
+
+Ajout des aides suivantes :
+
+- Département de Seine-Maritime
+- Département de la Loire
+- Agglo Bocage-Bressuirais
+- Anjou Bleu Communauté
+- Auray Quiberon Terre Atlantique
+- Communauté de communes Arve & Salève
+- Communauté de communes des Villes Soeurs
+- Communauté de communes du Grand Roye
+- Communauté de communes du Grand Saint-Émilionnais
+- Communauté de Communes du Sisteronais-Buëch
+- Communauté de communes des Monts du Pilat
+- Communauté de communes de la Région de Molsheim-Mutzig
+- Saint-Marcellin Vercors Isère Communauté
+- Grand Poitiers
+- Haute Cornouaille Communauté de communes
+- Fougères Agglomération
+- Liffré-Cormier Communauté
+- Montfort Communauté
+- Pévèle Carembault
+- Pornic agglo Pays de Retz
+- Portes du Luxembourg
+- Saint-Brieuc Armor Agglomération
+- Saint-Lô Agglo
+- Saint-Louis Agglomération
+- Ville de Bourg-en-Bresse
+- Ville de la Ferté Saint-Aubin
+- Ville de Chevilly-Larue
+- Ville du Relecq-Kerhuon
+- Ville de Loos-en-Gohelle
+- Ville de Givors
+- Ville d’Hermanville-sur-Mer
+
+Mise à jour des aides suivantes :
+
+- Cap Cotentin
+
 ## v3.0.10 - 13/05/2023
 
 Mise à jour des aides suivantes :
@@ -126,7 +166,7 @@ Mise à jour des liens :
 
 - Prime à la conversion
 - Ville de Marcq-en-Barœul
-- Ville de **Carpiquet**
+- Ville de Carpiquet
 - Ville de Gerstheim
 
 ## v3.0.4 - 08/11/2022

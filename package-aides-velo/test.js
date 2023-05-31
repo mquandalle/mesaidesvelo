@@ -12,7 +12,7 @@ test('liste des aides en France', (t) => {
 	const list = aidesVelo({ 'localisation . pays': 'france' });
 	t.assert(list.length > 50, 'au moins 50 aides en France');
 	t.false(
-		list.some(({ id: aideId }) => aideId.includes('monaco') || aideId.includes('luxembourg')),
+		list.some(({ id: aideId }) => aideId.includes('. monaco') || aideId.includes('. luxembourg')),
 		"pas d'aides de Monaco ou du Luxembourg"
 	);
 });
