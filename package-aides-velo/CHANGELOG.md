@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v3.0.12 - 13/06/2023
+
+Ajoute les aides suivantes :
+
+- Vienne et Gartempe Communauté de communes
+
+Supprime les aides suivantes :
+
+- Orléans Métropole
+
+Technique: retour à une ancienne version de publicodes
+
 ## v3.0.11 - 01/06/2023
 
 Ajout des aides suivantes :

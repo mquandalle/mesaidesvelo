@@ -2,6 +2,7 @@
 # - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 # - Département Calvados https://www.ouest-france.fr/normandie/falaise-14700/aide-a-lachat-de-velo-electrique-dans-le-calvados-le-departement-pourrait-relancer-sa-subvention-2f83a7b6-cd7d-11ed-b493-b75770ef7f91
 # - Cluses Arve et Montagne https://www.ledauphine.com/environnement/2023/05/26/la-2ccam-developpe-sa-politique-velo-avec-une-aide-a-l-achat
+# - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
 #
 # Renouvellement ?
 # - https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
@@ -1500,6 +1501,16 @@ aides . montbéliard:
   valeur: 150€
   lien: https://www.montbeliard.fr/pages-datterrissage-temporaires/subvention-pour-lachat-dun-velo-a-assistance-electrique.html
 
+aides . vienne gartempe:
+  remplace: intercommunalité
+  titre: Vienne et Gartempe Communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Vienne et Gartempe'
+      - vélo . électrique
+  valeur: 300 €
+  lien: https://www.vienneetgartempe.fr/vivre/aide-a-lachat-dun-velo-a-assistance-electrique-vae/
+
 aides . vienne condrieu:
   remplace: intercommunalité
   titre: Vienne Condrieu Agglomération
@@ -2953,24 +2964,6 @@ aides . frejus:
   valeur: vélo . prix
   plafond: 200 €
   lien: https://www.ville-frejus.fr/ma-ville/valorisation-et-preservation/dossier-de-demande-daide-a-lachat-dun-vae/
-
-aides . orléans:
-  remplace: intercommunalité
-  titre: Orléans Métropole
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'Orléans Métropole'
-      - revenu fiscal de référence <= 2000 €/mois
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-  valeur: 25% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo
-        alors: 1000 €
-      - sinon: 300 €
-  lien: https://www.orleans-metropole.fr/actualites/detail/il-est-temps-de-passer-au-velo-electrique
 
 aides . gien:
   remplace: intercommunalité
