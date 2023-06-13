@@ -10,10 +10,7 @@ export async function GET() {
 			'/forfait-mobilite-durable',
 			'/liste-aides',
 			..._departementWithSlug.map(({ slug }) => `/departement/${slug}`),
-			...communes
-				.sort((a, b) => b.population - a.population)
-				.slice(0, 1000)
-				.map(({ slug }) => `/ville/${slug}`),
+			...communes.sort((a, b) => b.population - a.population).map(({ slug }) => `/ville/${slug}`),
 		]
 			.map((path) => `https://mesaidesvelo.fr${path}`)
 			.join('\n')
