@@ -1989,7 +1989,7 @@ aides . montpellier:
       - si: vélo . motorisation
         alors: 200€
       - sinon: 0€
-  lien: https://www.montpellier3m.fr/actualite/jusqua-1150-eu-daide-pour-lachat-dun-velo-assistance-electrique
+  lien: https://www.montpellier3m.fr/vivre-transport/toutes-les-aides-pour-lachat-ou-la-reparation-de-velos
 
 aides . sète:
   remplace: intercommunalité
