@@ -3303,7 +3303,7 @@ aides . grand poitiers:
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 250€
-  lien: https://www.grandpoitiers.fr/au-quotidien/deplacements/velos/aide-a-lachat-dun-velo-a-assistance-electrique-vae
+  lien: https://www.grandpoitiers.fr/au-quotidien/deplacements/velos-et-mobilites-actives/aide-a-lachat-dun-velo-a-assistance-electrique-vae
 
 aides . haut-poitou:
   remplace: intercommunalité
