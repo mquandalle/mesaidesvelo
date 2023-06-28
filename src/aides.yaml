@@ -1689,7 +1689,7 @@ aides . grand périgueux:
         valeur: 50€
         plafond: 50% * vélo . prix
   plafond: vélo . prix
-  lien: https://www.grandperigueux.fr/au-quotidien/deplacements/velo/aide-a-lachat-velo/cheques-velo
+  lien: https://www.grandperigueux.fr/au-quotidien/deplacements/velo/aide-a-lachat-velo
 
 aides . sarlat:
   remplace: commune
