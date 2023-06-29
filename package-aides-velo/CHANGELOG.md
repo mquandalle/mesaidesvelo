@@ -1,5 +1,24 @@
 # Historique des modifications
 
+## v3.0.13 - 29/06/2023
+
+Ajout des aides suivantes :
+
+- Cluses Arve & Montagnes
+- Cœur d'Ostrevent
+- Ville d'Aubervilliers
+
+Mise à jour des aides suivantes :
+
+- Région Occitanie
+- Pass'Mobil'Agglo (Béthune)
+
+Mise à jour des liens suivants :
+
+- Montpellier Méditerranée Métropole
+- Grand Périgueux
+- Grand Poitiers
+
 ## v3.0.12 - 13/06/2023
 
 Ajoute les aides suivantes :

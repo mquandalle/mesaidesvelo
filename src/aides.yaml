@@ -1,11 +1,15 @@
 # TODO (aide annoncée mais pas encore de page officielle de présentation):
 # - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 # - Département Calvados https://www.ouest-france.fr/normandie/falaise-14700/aide-a-lachat-de-velo-electrique-dans-le-calvados-le-departement-pourrait-relancer-sa-subvention-2f83a7b6-cd7d-11ed-b493-b75770ef7f91
-# - Cluses Arve et Montagne https://www.ledauphine.com/environnement/2023/05/26/la-2ccam-developpe-sa-politique-velo-avec-une-aide-a-l-achat
 # - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
+# - Osartis-Marquion https://www.lavoixdunord.fr/1346023/article/2023-06-28/osartis-marquion-va-debloquer-une-aide-de-150-euros-pour-l-acquisition-d-un-velo#:~:text=%C3%80%20force%20d'%C3%AAtre%20sollicit%C3%A9e,sera%20r%C3%A9serv%C3%A9e%20aux%20premiers%20candidats.
+# - Grand Est fin juin 2023 https://www.grandest.fr/actualites/un-an-de-succes-pour-le-plan-velo/
 #
 # Renouvellement ?
 # - https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
+#
+# Terminé pour 2023, renouvellement prévu en 2024 :
+# - https://www.cap-atlantique.fr/services-a-la-population/mobilite/les-deplacements-doux/laide-a-lachat-de-velo-elargie
 
 aides:
   avec:
@@ -144,35 +148,11 @@ aides . occitanie:
   applicable si:
     toutes ces conditions:
       - localisation . région = '76'
-      - demandeur . bénéficie du forfait mobilités durables
-      - revenu fiscal de référence <= 25710 €/an
-      - vélo . électrique ou mécanique
-  description: |
-    Attention : le demandeur doit percevoir le forfait mobilités durables de son
-    employeur afin de bénéficier de cette aide de la région.
-  variations:
-    - si: vélo . électrique
-      alors:
-        variations:
-          - si: ménage imposable = 'non'
-            alors:
-              valeur: 80% * vélo . prix
-              plafond: 400€
-          - sinon:
-              valeur: 50% * vélo . prix
-              plafond: 250€
-    - si: vélo . mécanique
-      alors:
-        variations:
-          - si: ménage imposable = 'non'
-            alors:
-              valeur: 80% * vélo . prix
-              plafond: 240€
-          - sinon:
-              valeur: 50% * vélo . prix
-              plafond: 150€
-    - sinon: 0€
-  lien: https://www.laregion.fr/IMG/pdf/dispositif_bonus_forfait_mobilite_durable_actualise_dec_2021.pdf
+      - revenu fiscal de référence <= première tranche IR
+      - vélo . électrique
+  valeur: 200€
+  plafond: vélo . prix
+  lien: https://www.laregion.fr/Eco-cheque-mobilite-velo-a-assistance-electrique
 
 aides . corse:
   remplace: région
@@ -2720,6 +2700,19 @@ aides . pantin:
   plafond: vélo . prix
   lien: https://pratique.pantin.fr/tous-les-services/deplacement-et-stationnement/deplacement/transports-alternatifs-velo
 
+aides . aubervilliers:
+  remplace: commune
+  titre: Ville d'Aubervilliers
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '93001'
+      - vélo . mécanique
+  variations:
+    - si: vélo . neuf
+      alors: 100 €
+    - sinon: 50 €
+  lien: https://www.aubervilliers.fr/Aide-a-l-achat-d-un-velo
+
 aides . rueil-malmaison:
   remplace: commune
   titre: Ville de Rueil-Malmaison
@@ -3162,6 +3155,34 @@ aides . arve salève:
           - sinon: 0€
   plafond: 80% * vélo . prix
   lien: https://www.arve-saleve.fr/primo-velo-2023-laide-a-lachat-de-velo-darve-saleve/
+
+aides . cluses arve et montagnes:
+  remplace: intercommunalité
+  titre: Cluses Arve & Montagnes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Cluses-Arve et Montagnes'
+      - vélo . électrique ou mécanique
+      - revenu fiscal de référence <= 36000 €/an
+  valeur: 40% * vélo . prix
+  plafond:
+    variations:
+      - si: revenu fiscal de référence <= 20000 €/an
+        alors:
+          variations:
+            - si: vélo . cargo
+              alors: 1000 €
+            - si: vélo . électrique
+              alors: 300 €
+            - sinon: 150 €
+      - sinon:
+          variations:
+            - si: vélo . cargo
+              alors: 500 €
+            - si: vélo . électrique
+              alors: 200 €
+            - sinon: 100 €
+  lien: https://www.2ccam.fr/2023/06/09/prime-velo/
 
 aides . évian-les-bains:
   remplace: commune
@@ -4196,17 +4217,9 @@ aides . béthune bruay:
   applicable si: localisation . epci = 'CA de Béthune-Bruay, Artois-Lys Romane'
   variations:
     - si: vélo . cargo
-      alors:
-        variations:
-          - si: vélo . neuf
-            alors: 400€
-          - sinon: 500€
+      alors: 400 €
     - si: vélo . électrique
-      alors:
-        variations:
-          - si: vélo . neuf
-            alors: 360€
-          - sinon: 350€
+      alors: 300 €
     - si: vélo . mécanique
       alors:
         variations:
@@ -4453,6 +4466,17 @@ aides . cambrai:
         alors: 150€
       - sinon: 0€
   lien: https://www.agglo-cambrai.fr/pratique/actualites/2022-aout/1390-bourse-mobilite
+
+aides . cœur d'ostrevent:
+  remplace: intercommunalité
+  titre: Cœur d'Ostrevent
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = "CC Coeur d'Ostrevent (CCCO)"
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond: 200€
+  lien: https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
 
 aides . thiais:
   remplace: commune
@@ -5461,6 +5485,7 @@ vélo . occasion:
       - aides . ferte saint aubin
       - aides . saint-louis
       - aides . saint-marcellin vercors isère
+      - aides . aubervilliers
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
