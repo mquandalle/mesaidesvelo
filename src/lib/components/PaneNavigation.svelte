@@ -20,7 +20,7 @@
 		<div
 			class="col-start-1 col-end-1 row-start-1 row-end-1"
 			in:fly={{ x: -transitionX, duration: showTransition ? duration : 0 }}
-			out:fly|local={{ x: transitionX, duration }}
+			out:fly={{ x: transitionX, duration }}
 		>
 			<slot />
 		</div>

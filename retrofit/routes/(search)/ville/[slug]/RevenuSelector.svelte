@@ -71,7 +71,7 @@
 		on:click={() => (showExplanations = !showExplanations)}><Emoji emoji="ℹ" /></span
 	>
 	{#if showExplanations}
-		<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide|local={{ duration: 100 }}>
+		<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide={{ duration: 100 }}>
 			Le montant des aides dépend de votre revenu par part de quotient familial. Sur votre avis
 			d'imposition cela correspond au montant du « revenu fiscal de référence » divisé par le nombre
 			de parts du quotient familial, puis divisé par 12.

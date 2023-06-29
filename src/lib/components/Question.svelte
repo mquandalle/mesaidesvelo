@@ -48,7 +48,7 @@
 				on:click={() => (showExplanations = !showExplanations)}><Emoji emoji="ℹ" /></span
 			>
 			{#if showExplanations}
-				<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide|local={{ duration: 100 }}>
+				<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide={{ duration: 100 }}>
 					{@html description}
 				</p>
 			{/if}

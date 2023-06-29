@@ -33,7 +33,7 @@
 </svelte:head>
 
 <div class="w-full max-w-screen-md m-auto">
-	<div in:fly|local={{ y: 30 }}>
+	<div in:fly={{ y: 30 }}>
 		<PaneNavigation depth={$veloCat ? 1 : 0}>
 			{#if $veloCat}
 				<Details />

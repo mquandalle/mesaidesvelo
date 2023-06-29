@@ -86,7 +86,7 @@
 
 <div class="border-t border-b mt-6 bg-white">
 	{#each aidesDetails as ruleName (ruleName)}
-		<div transition:slide|local={{ duration: 200 }} class="border-b last:border-b-0">
+		<div transition:slide={{ duration: 200 }} class="border-b last:border-b-0">
 			<DetailsLine {ruleName} />
 		</div>
 	{/each}
@@ -96,7 +96,7 @@
 			<div class="font-bold"><AnimatedAmount amount={sum.nodeValue} unit={sum.unit} /></div>
 		</div>
 		{#if false}
-			<div class="flex justify-between text-lg mt-3 text-gray-600" transition:slide|local>
+			<div class="flex justify-between text-lg mt-3 text-gray-600" transition:slide>
 				<h3 class="font-semibold text-sm">Reste à charge</h3>
 				<div class="font-semibold text-sm">XXX €</div>
 			</div>

@@ -21,28 +21,28 @@
 	"devDependencies": {
 		"@actions/core": "^1.10.0",
 		"@actions/github": "^5.1.1",
-		"@playwright/test": "^1.32.3",
-		"@rollup/plugin-yaml": "^4.0.1",
-		"@sveltejs/adapter-vercel": "^2.4.2",
-		"@sveltejs/kit": "^1.15.7",
-		"mdsvex": "^0.10.6",
+		"@playwright/test": "^1.35.1",
+		"@rollup/plugin-yaml": "^4.1.1",
+		"@sveltejs/adapter-vercel": "^3.0.1",
+		"@sveltejs/kit": "^1.21.0",
+		"mdsvex": "^0.11.0",
 		"node-fetch": "^3.3.1",
-		"prettier": "^2.8.7",
-		"prettier-plugin-svelte": "^2.10.0",
-		"sharp": "=0.30.7",
-		"svelte": "^3.58.0",
-		"typescript": "^5.0.4",
-		"vite": "^4.2.2",
-		"vite-plugin-windicss": "^1.8.10",
-		"vitest": "^0.30.1",
-		"wget-improved": "^3.3.1",
-		"yaml": "^2.2.1"
+		"prettier": "^2.8.8",
+		"prettier-plugin-svelte": "^2.10.1",
+		"sharp": "=0.32.1",
+		"svelte": "^4.0.1",
+		"typescript": "^5.1.6",
+		"vite": "^4.3.9",
+		"vite-plugin-windicss": "^1.9.0",
+		"vitest": "^0.32.2",
+		"wget-improved": "^3.4.0",
+		"yaml": "^2.3.1"
 	},
 	"dependencies": {
 		"@etalab/decoupage-administratif": "^3.0.0",
 		"fuzzysort": "^2.0.4",
 		"playwright-aws-lambda": "^0.10.0",
-		"playwright-core": "^1.32.3",
-		"publicodes": "^1.0.0-beta.69"
+		"playwright-core": "^1.35.1",
+		"publicodes": "^1.0.0-beta.70"
 	}
 }
