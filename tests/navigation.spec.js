@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
+const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5174';
 
 test('Navigation scenario', async ({ page }) => {
 	await page.goto(baseUrl);
@@ -18,16 +18,16 @@ test('Navigation scenario', async ({ page }) => {
 
 	await page.click('text=Achat d’un vélo électrique');
 	const totalAides = page.locator('text=Total des aides >> ..');
-	await expect(totalAides).toHaveText('Total des aides 900 €', { useInnerText: true });
+	await expect(totalAides).toHaveText('Total des aides 850 €', { useInnerText: true });
 
 	await page.click('text=moins de 1 567 €');
-	await expect(totalAides).toHaveText('Total des aides 500 €', { useInnerText: true });
-
-	await page.fill('input:below(label:text("Prix du vélo"))', '300');
 	await expect(totalAides).toHaveText('Total des aides 250 €', { useInnerText: true });
 
+	await page.fill('input:below(label:text("Prix du vélo"))', '300');
+	await expect(totalAides).toHaveText('Total des aides 100 €', { useInnerText: true });
+
 	await page.fill('input:below(label:text("Prix du vélo"))', '');
-	await expect(totalAides).toHaveText('Total des aides 500 €', { useInnerText: true });
+	await expect(totalAides).toHaveText('Total des aides 250 €', { useInnerText: true });
 
 	await page.goBack();
 	await page.click('text=Prime à la conversion');
