@@ -1,8 +1,46 @@
 # Historique des modifications
 
+## v3.0.14 - 04/07/2023
+
+Ajoute les aides suivantes :
+
+- Région Centre-Val de Loire
+- Maremne Adour Côte-Sud
+- Annonay Rhône Agglo
+
+Mise à jour des aides suivantes :
+
+- Châteauroux Métropole
+- Ville de Saint-Pair-sur-Mer
+
+Suppression des aides suivantes :
+
+- Ville de Ploemeur
+- Ville de Wasselonne
+- Sud Estuaire Communauté de communes
+- Ville du Bourget-du-Lac
+- Vendée Grand Littoral
+- Pays de Saint-Omer
+- Ploërmel communauté
+
+Mise à jour des liens suivants :
+
+- Saint-Étienne Métropole
+- Ville de Saint-Remy
+- Bordeaux Métropole
+- Ville de Belfort
+- Communauté de communes Terre d’Auge
+- Ville de Camon
+- Ville de Rivery
+- Communauté de communes d’Erdre et Gesvres
+- Ville de Carpiquet
+- Communauté de communes Dieulefit-Bourdeaux
+- Ville de Lisieux
+- Villeneuve lez Avignon
+
 ## v3.0.13 - 29/06/2023
 
-Ajout des aides suivantes :
+Ajoute des aides suivantes :
 
 - Cluses Arve & Montagnes
 - Cœur d'Ostrevent

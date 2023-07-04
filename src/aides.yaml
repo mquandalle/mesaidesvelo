@@ -230,7 +230,7 @@ aides . saint-étienne:
     - si: ménage imposable = 'non'
       alors: 200€
     - sinon: 100€
-  lien: https://www.saint-etienne.fr/actualites/jusqu%C3%A0-200-%E2%82%AC-daide-votre-v%C3%A9lo-lectrique
+  lien: https://www.saint-etienne-metropole.fr/form/demande-aide-vae-2023
 
 aides . lyon:
   remplace: intercommunalité
@@ -486,7 +486,7 @@ aides . bordeaux:
           - vélo . pliant
           - vélo . motorisation
   valeur: 100 €
-  lien: https://sedeplacer.bordeaux-metropole.fr/Velo/Pratique/Aide-a-l-achat-de-velo
+  lien: https://sedeplacer.bordeaux-metropole.fr/a-velo/se-deplacer-a-velo/offres-velo/laide-a-lachat-velo
 
 aides . la cali:
   remplace: intercommunalité
@@ -609,7 +609,7 @@ aides . saint-rémy:
           - vélo . prix >= 500€
       alors: 50€
     - sinon: 0€
-  lien: https://www.saint-remy71.fr/a-la-une/subvention-velo/
+  lien: https://www.saint-remy71.fr/plan-velo/
 
 aides . mérignac:
   remplace: commune
@@ -1181,7 +1181,7 @@ aides . carpiquet:
       - localisation . code insee = '14137'
       - vélo . électrique
   valeur: 150€
-  lien: https://www.carpiquet.fr/transport/
+  lien: https://www.carpiquet.fr/wp-content/uploads/2022/12/CONVENTION-2023-AIDE-FINANCIERE-ACQUISITION-VELO-ELECTRIQUE-ET-TROTTINETTE-ELECTRIQUE.pdf
 
 aides . herouville:
   remplace: commune
@@ -1251,7 +1251,7 @@ aides . terre d'auge:
       - localisation . epci = "CC Terre d'Auge"
       - vélo . électrique
   valeur: 100€
-  lien: https://www.terredauge.fr/je-vis-jhabite/mobilites-douces/aide-a-lachat-de-velo-a-assistance-electrique/
+  lien: https://www.terredauge.fr/wp-content/uploads/2022/07/aide_vae_reglement_0422.pdf
 
 aides . flers:
   remplace: intercommunalité
@@ -1304,7 +1304,7 @@ aides . belfort:
     - si: vélo . cargo électrique
       alors: 300 €
     - sinon: 200 €
-  lien: https://www.belfort.fr/cadre-de-vie/vie-quotidienne/aide-a-l-achat-d-un-velo-electrique-2996.html
+  lien: https://www.belfort.fr/cadre-de-vie/vie-quotidienne/aide-a-lachat-dun-velo-electrique
 
 aides . ouistreham:
   remplace: commune
@@ -1599,17 +1599,6 @@ aides . crolles:
   plafond: 600€
   lien: http://www.ville-crolles.fr/vues/pages/services-et-demarches/particuliers/crolles-pratique-cheque-VAE.php#partHome1
 
-aides . ploemeur:
-  remplace: commune
-  titre: Ville de Ploemeur
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '56162'
-      - vélo . électrique
-  valeur: 30% * vélo . prix
-  plafond: 300€
-  lien: https://www.ploemeur.com/2021/06/08/une-aide-pour-lachat-dun-velo-electrique/
-
 aides . daix:
   remplace: commune
   titre: Ville de Daix
@@ -1743,7 +1732,7 @@ aides . camon:
       - si: vélo . mécanique
         alors: 100€
       - sinon: 0€
-  lien: https://www.camon.fr/aide-a-lachat-de-velos/
+  lien: https://www.camon.fr/aide-a-lachat-de-velo/
 
 aides . grand roye:
   remplace: intercommunalité
@@ -1768,7 +1757,7 @@ aides . rivery:
       - si: vélo . mécanique
         alors: 50€
       - sinon: 0€
-  lien: https://www.ville-rivery.fr/2021/05/04/aide-financiere-a-lachat-dun-velo/
+  lien: https://www.ville-rivery.fr/2023/04/13/aide-financiere-a-lachat-dun-velo/
 
 aides . faches-thumesnil:
   remplace: commune
@@ -1873,26 +1862,6 @@ aides . molsheim-mutzig:
 #       - vélo . électrique
 #   valeur: 200€
 #   lien: https://www.cc-paysrhenan.fr/Vivre/Environnement/Mobilites/Pratique-cyclable.html
-
-aides . wasselonne:
-  remplace: commune
-  titre: Ville de Wasselonne
-  applicable si: localisation . code insee = '67520'
-  variations:
-    - si: vélo . cargo
-      alors:
-        valeur: 10% * vélo . prix
-        plafond: 200€
-    - si: vélo . électrique
-      alors:
-        valeur: 10% * vélo . prix
-        plafond: 150€
-    - si: vélo . mécanique
-      alors:
-        valeur: 30% * vélo . prix
-        plafond: 80€
-    - sinon: 0€
-  lien: https://www.wasselonne.fr/Actualites/Subvention-municipale-pour-achat-un-velo-01654.html
 
 aides . les sables d'olonne:
   remplace: intercommunalité
@@ -2114,7 +2083,7 @@ aides . villeneuve lez avignon:
       - localisation . code insee = '30351'
       - vélo . électrique
   valeur: 100€
-  lien: http://www.villeneuvelesavignon.fr/Mobilit%C3%A9/40/
+  lien: https://www.villeneuvelesavignon.fr/Mobilit%C3%A9/40/
 
 aides . luberon:
   remplace: intercommunalité
@@ -2353,22 +2322,6 @@ aides . aix les bains:
   plafond: vélo . prix
   lien: https://www.aixlesbains.fr/Cadre-de-vie/Transports-et-deplacements/A-velo/Aides-financieres-pour-se-deplacer-a-velo
 
-aides . bourget-du-lac:
-  remplace: commune
-  titre: Ville du Bourget-du-Lac
-  applicable si: localisation . code insee = '73051'
-  variations:
-    - si: vélo . électrique
-      alors:
-        somme:
-          - 200€
-          - applicable si: revenu fiscal de référence <= 13489 €/an
-            valeur: 200€
-    - si: vélo . cargo
-      alors: 200€
-    - sinon: 0€
-  lien: https://www.lebourgetdulac.fr/actualites/le-bourget-du-lac-sengage-pour-le-velo-a-assistance-electrique/
-
 aides . bourg-saint-maurice:
   remplace: commune
   titre: Ville de Bourg-Saint-Maurice
@@ -2458,37 +2411,7 @@ aides . erdregesvres:
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 100€
-  lien: https://www.cceg.fr/vos-services/faciliter-et-simplifier-vos-deplacements/bonus-velo-4559.html
-
-aides . sud estuaire:
-  remplace: intercommunalité
-  titre: Sud Estuaire Communauté de communes
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC du Sud Estuaire'
-      - une de ces conditions:
-          - vélo . mécanique simple
-          - vélo . électrique
-          - vélo . pliant
-          - vélo . cargo
-  description: |
-    Attention : Vérifiez les conditions d'attribution. Les conditions de revenus
-    dépendent de la composition du ménage.
-  variations:
-    - si: revenu fiscal de référence <= 15262 €/an
-      alors:
-        valeur: 70% * vélo . prix
-        plafond: 300€
-    - si: revenu fiscal de référence <= 19565 €/an
-      alors:
-        valeur: 50% * vélo . prix
-        plafond: 200€
-    - si: revenu fiscal de référence <= 25435 €/an
-      alors:
-        valeur: 50% * vélo . prix
-        plafond: 100€
-    - sinon: 0€
-  lien: https://www.cc-sudestuaire.fr/aide-lachat-dun-velo/
+  lien: https://www.cceg.fr/vos-services/faciliter-et-simplifier-vos-deplacements/bonus-velo-aide-a-lachat-de-velo-a-assistance-electrique
 
 aides . grand lieu:
   remplace: intercommunalité
@@ -3546,8 +3469,8 @@ aides . saint-pair-sur-mer:
     toutes ces conditions:
       - localisation . code insee = '50532'
       - vélo . électrique
-  valeur: 100€
-  lien: https://saintpairsurmer.fr/prime-a-lacquisition-dun-velo-a-assistance-electrique/
+  valeur: 150€
+  lien: https://saintpairsurmer.fr/prime-a-lacquisition-dun-velo-a-assistance-electrique-2023/
 
 aides . la rochelle:
   remplace: intercommunalité
@@ -3870,6 +3793,21 @@ aides . mont de marsan:
   valeur: 250€
   lien: http://www.montdemarsan-agglo.fr/agglo/document?id=2682&id_attribute=48&usg=AOvVaw1SVEDZSqj0LRmmUyyGkc_n
 
+aides . maremne adour cote-sud:
+  remplace: intercommunalité
+  titre: Maremne Adour Côte-Sud
+  applicable si: localisation . epci = 'CC Maremne Adour Côte Sud'
+  variations:
+    - si: vélo . électrique
+      alors: 200€
+    - si: vélo . mécanique
+      alors: 100€
+    - si: vélo . motorisation
+      alors: 100€
+    - sinon: 0€
+  plafond: 50% * vélo . prix
+  lien: https://www.cc-macs.org/actualite/aide-a-lachat-dun-velo/
+
 aides . bourg-en-bresse:
   remplace: commune
   titre: Ville de Bourg-en-Bresse
@@ -3930,7 +3868,7 @@ aides . dieulefit-bourdeaux:
     - si: vélo . motorisation
       alors: 100€
     - sinon: 0€
-  lien: http://www.paysdedieulefit.info/ccpdj2/index.php/defi-climat/les-mobilites/aide-forfaitaire-pour-vae
+  lien: https://www.ccdb26.fr/vie-quotidienne/mobilites/aide-velos/
 
 aides . arche agglo:
   remplace: intercommunalité
@@ -3949,6 +3887,19 @@ aides . arche agglo:
   valeur: 15% * vélo . prix
   plafond: 150€
   lien: https://www.archeagglo.fr/vivre-ici/transport-mobilite/velos/
+
+aides . annonay:
+  remplace: intercommunalité
+  titre: Annonay Rhône Agglo
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Annonay Rhône Agglo'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= première tranche IR
+      alors: 300€
+    - sinon: 150€
+  lien: https://annonayrhoneagglo.fr/article2059.html
 
 aides . lorient:
   remplace: intercommunalité
@@ -4125,17 +4076,6 @@ aides . ville de talant:
   plafond: 100€
   lien: https://www.talant.fr/content_page/item/222-prime_vae.html
 
-aides . vendée grand littoral:
-  remplace: intercommunalité
-  titre: Vendée Grand Littoral
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Vendée Grand Littoral'
-      - vélo . électrique
-  valeur: 20% * vélo . prix
-  plafond: 300€
-  lien: https://www.vendeegrandlittoral.fr/aide-a-lachat-de-velo-a-assistance-electrique/
-
 aides . pays des achards:
   remplace: intercommunalité
   titre: Pays des Achards
@@ -4185,20 +4125,6 @@ aides . hem:
   valeur: 40% * vélo . prix
   plafond: 300 €
   lien: https://www.ville-hem.fr/cadre-de-vie/environnement/prime-a-lachat-dun-velo-ou-dune-trottinette/
-
-aides . saint-omer:
-  remplace: intercommunalité
-  titre: Pays de Saint-Omer
-  applicable si: localisation . epci = 'CA du Pays de Saint-Omer'
-  valeur: 20% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . électrique
-        alors: 150€
-      - si: vélo . mécanique
-        alors: 100€
-      - sinon: 0€
-  lien: http://demarches.paysdesaintomer.com/subvention-aide-a-lachat-dun-velo/
 
 aides . liévin:
   remplace: commune
@@ -4317,7 +4243,7 @@ aides . gruson:
       - si: revenu fiscal de référence <= 13489 €/an
         alors: 200€
       - sinon: 100€
-  lien: https://www.mairie-gruson.fr/environnement/developpement-durable/prime-velo-a-assistance-electrique
+  lien: https://www.mairie-gruson.fr/environnement/developpement-durable/aides-a-lachat-dun-velo-electrique
 
 aides . lesquin:
   remplace: commune
@@ -4926,22 +4852,6 @@ aides . crozon:
   plafond: 100€
   lien: https://www.comcom-crozon.com/amenagement-et-cadre-de-vie/transports-deplacements-randonnees/deplacements-doux/
 
-aides . ploermel:
-  remplace: intercommunalité
-  applicable si: localisation . epci = 'CC Ploërmel Communauté'
-  variations:
-    - si: vélo . cargo électrique
-      alors: 400€
-    - si: vélo . cargo
-      alors: 200€
-    - si: vélo . électrique
-      alors: 100€
-    - si: vélo . mécanique
-      alors: 50€
-    - sinon: 0€
-  plafond: vélo . prix
-  lien: https://www.ploermelcommunaute.bzh/fonctionnalites/publications-131/l-aide-velo-ploermel-communaute-25650.html
-
 aides . saint-jacques de la lande:
   remplace: commune
   titre: Saint-Jacques de la Lande
@@ -5043,12 +4953,15 @@ aides . boulonnais:
 aides . chateauroux:
   remplace: intercommunalité
   titre: Châteauroux Métropole
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Châteauroux Métropole'
-      - vélo . électrique
+  applicable si: localisation . epci = 'CA Châteauroux Métropole'
   valeur: vélo . prix
-  plafond: 200€
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 200€
+      - si: vélo . motorisation
+        alors: 100€
+      - sinon: 0€
   lien: https://www.chateauroux-metropole.fr/vie-pratique-les-services/mobilite-et-stationnements/velo
 
 aides . pontivy:
@@ -5223,7 +5136,7 @@ aides . lisieux:
       alors: 300 €
     - sinon: 0 €
   plafond: 50% * vélo . prix
-  lien: https://s3.cloud.actigraph.com/lisieux/upload/PROJETS/Plan-velo/Flyer-aide-achat-velos-2023.pdf?AWSAccessKeyId=lisieux&Expires=1684015199&Signature=WAGOStct3gJstlkuAyWwDMtR8QI%3D
+  lien: https://www.ville-lisieux.fr/fr/onw-Le-plan-velo.html
 
 aides . portes du luxembourg:
   remplace: intercommunalité
@@ -5245,6 +5158,76 @@ aides . portes du luxembourg:
         valeur: 33% * vélo . prix
         plafond: 200 €
   lien: https://www.portesduluxembourg.fr/la-prime-velo
+
+aides . region centre:
+  remplace: région
+  titre: Région Centre-Val de Loire
+  description: L'aide régionale est réservée aux habitants d'une commune sur laquelle la Région est l'autorité organisatrice de la mobilité locale de substitution
+  applicable si:
+    toutes ces conditions:
+      - localisation . région = '24'
+      - vélo . électrique
+      - vélo . prix >= 600€
+      - une de ces conditions:
+          - localisation . epci = "CC du Perche"
+          - localisation . epci = "CC du Bonnevalais"
+          - localisation . epci = "CC Coeur de Beauce"
+          - localisation . epci = "CC du Grand Châteaudun"
+          - localisation . epci = "CC des Collines du Perche"
+          - localisation . epci = "CC du Perche et Haut Vendômois"
+          - localisation . epci = "CC Beauce Val de Loire"
+          - localisation . epci = "CC du Grand Chambord"
+          - localisation . epci = "CC de la Sologne des Etangs"
+          - localisation . epci = "CC Coeur de Sologne"
+          - localisation . epci = "CC de la Sologne des Rivières"
+          - localisation . epci = "CC de la Forêt"
+          - localisation . epci = "CC des Loges"
+          - localisation . epci = "CC du Val de Sully"
+          - localisation . epci = "CC de la Plaine du Nord Loiret"
+          - localisation . epci = "CC du Pithiverais"
+          - localisation . epci = "CC du Pithiverais-Gâtinais"
+          - localisation . epci = "CC de la Cléry, du Betz et de l'Ouanne"
+          - localisation . epci = "CC Berry Loire Puisaye"
+          - localisation . epci = "CC Sauldre et Sologne"
+          - localisation . epci = "CC Pays Fort Sancerrois Val de Loire"
+          - localisation . epci = "CC Terres du Haut Berry"
+          - localisation . epci = "CC Vierzon-Sologne-Berry"
+          - localisation . epci = "CC Berry-Loire-Vauvise"
+          - localisation . epci = "CC la Septaine"
+          - localisation . epci = "CC Berry-Loire-Vauvise"
+          - localisation . epci = "CC Pays de Nérondes"
+          - localisation . epci = "CC Portes du Berry entre Loire et Val d'Aubois"
+          - localisation . epci = "CC les Trois Provinces"
+          - localisation . epci = "CC Coeur de France"
+          - localisation . epci = "CC Arnon Boischaut Cher"
+          - localisation . epci = "CC Coeur de Berry"
+          - localisation . epci = "CC FerCher"
+          - localisation . epci = "CC Berry Grand Sud"
+          - localisation . epci = "CC Val-de-Cher-Controis"
+          - localisation . epci = "CC Chabris - Pays de Bazelle"
+          - localisation . epci = "CC du Pays d'Issoudun"
+          - localisation . epci = "CC Champagne Boischauts"
+          - localisation . epci = "CC Coeur de Brenne"
+          - localisation . epci = "CC Brenne - Val de Creuse"
+          - localisation . epci = "CC Loches Sud Touraine"
+          - localisation . epci = "CC Touraine Val de Vienne"
+          - localisation . epci = "CC Touraine Vallée de l'Indre"
+          - localisation . epci = "CC Touraine Ouest Val de Loire"
+          - localisation . epci = "CC de Gâtine-Racan"
+          - localisation . epci = "CC du Val d Amboise"
+          - localisation . epci = "CC Autour de Chenonceaux Bléré-Val de Cher"
+          - localisation . epci = "CC Touraine-Est Vallées"
+          - localisation . epci = "CC du Castelrenaudais"
+          - localisation . epci = "CC Val de l'Indre - Brenne"
+          - localisation . epci = "CC du Val de Bouzanne"
+          - localisation . epci = "CC de la Marche Berrichonne"
+          - localisation . epci = "CC Eguzon - Argenton - Vallée de la Creuse"
+          - localisation . epci = "CC de la Châtre et Sainte-Sévère"
+          - localisation . epci = "CC du Châtillonnais en Berry"
+          - localisation . epci = "CC Ecueillé-Valençay"
+  valeur: 25% * vélo . prix
+  plafond: 200€
+  lien: https://www.centre-valdeloire.fr/le-guide-des-aides-de-la-region-centre-val-de-loire/mobilite-rurale-velo-assistance-electrique
 
 aides . monaco:
   remplace: commune
