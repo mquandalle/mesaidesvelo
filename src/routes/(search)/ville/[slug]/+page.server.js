@@ -2,6 +2,7 @@ import { compile } from 'mdsvex';
 import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
 import communes from '$lib/data/communes.json';
 import labelTourDeFrance from '/src/content/label-tour-de-france.json';
+import labelTourDeFranceCommentairesSource from '/src/content/label-tour-de-france-commentaires.txt?raw';
 import barometreFubRawCsv from '/src/content/barometre-fub.csv?raw';
 import { error } from '@sveltejs/kit';
 import { engine } from '$lib/engine';
@@ -14,6 +15,18 @@ const barometreFubPerCity = Object.fromEntries(
 		.split('\n')
 		.map((row) => row.split(';'))
 );
+
+const labelTourDeFranceCommentairesLines = labelTourDeFranceCommentairesSource
+	.split('\n')
+	.map((l) => l.trim())
+	.filter(Boolean);
+const commentairesLabelTourDeFrance = labelTourDeFranceCommentairesLines.reduce((dic, line, n) => {
+	if (n % 2 === 0) {
+		return dic;
+	} else {
+		return { ...dic, [labelTourDeFranceCommentairesLines[n - 1].toLowerCase()]: line };
+	}
+}, {});
 
 const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
 	(manifest, [ruleName, { collectivity }]) => {
@@ -136,6 +149,7 @@ export async function load({ params }) {
 	if (Object.keys(labelTourDeFrance).includes(localisation.nom.toLowerCase())) {
 		infos.labelTourDeFrance = {
 			note: labelTourDeFrance[localisation.nom.toLowerCase()],
+			commentaire: commentairesLabelTourDeFrance[localisation.nom.toLowerCase()],
 		};
 	}
 

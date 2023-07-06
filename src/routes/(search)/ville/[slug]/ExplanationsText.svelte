@@ -219,8 +219,14 @@
 
 			<p class="font-bold">
 				La ville {deVille} a reçu la labellisation « {infos.labelTourDeFrance.note} vélo{#if infos.labelTourDeFrance.note > 1}s{/if}
-				»{#if infos.labelTourDeFrance.note === 4}, la meilleure note possible{/if}.
+				»{#if infos.labelTourDeFrance.note === 4}, la meilleure note possible{/if}{#if infos.labelTourDeFrance.commentaire}{' '}
+					avec le commentaire du jury :{:else}.{/if}
 			</p>
+			{#if infos.labelTourDeFrance.commentaire}
+				<blockquote>
+					{infos.labelTourDeFrance.commentaire}
+				</blockquote>
+			{/if}
 		{/if}
 
 		{#if infos.barometreFub}
