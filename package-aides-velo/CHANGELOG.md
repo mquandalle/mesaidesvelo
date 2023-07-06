@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## prochaine
+
+Supprime l'aide suivante :
+
+- Métropole Nice Côte d’Azur
+
 ## v3.0.15 - 06/07/2023
 
 Ajoute les aides suivantes :

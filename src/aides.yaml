@@ -801,22 +801,6 @@ aides . tarbes lourdes pyrénées:
   valeur: 200€
   lien: https://www.agglo-tlp.fr/vae
 
-aides . nice:
-  remplace: intercommunalité
-  titre: Métropole Nice Côte d’Azur
-  applicable si: localisation . epci = "Métropole Nice Côte d'Azur"
-  valeur:
-    variations:
-      - si: vélo . électrique
-        alors:
-          valeur: 25% * vélo . prix
-          plafond: 400€
-      - si: vélo . mécanique
-        alors:
-          valeur: 50% * vélo . prix
-          plafond: 100€
-  lien: https://www.nicecotedazur.org/deplacement/subvention-pour-l-achat-d-un-v%C3%A9lo-%C3%A0-propulsion-humaine
-
 aides . strasbourg:
   remplace: intercommunalité
   titre: Eurométropole de Strasbourg
