@@ -1,5 +1,14 @@
 # Historique des modifications
 
+## v3.0.15 - 06/07/2023
+
+Ajoute les aides suivantes :
+
+- Cœur de Maurienne Arvan
+- Communauté de Communes du Pays de L‘Arbresle
+- Ville de Montagnole
+- Ville de Saint-Alban-Leysse
+
 ## v3.0.14 - 04/07/2023
 
 Ajoute les aides suivantes :

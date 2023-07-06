@@ -1895,6 +1895,22 @@ aides . vallons du lyonnais:
   valeur: 200€
   lien: http://www.ccvl.fr/page.php?page=DT1620223333
 
+aides . pays de l'arbresle:
+  remplace: intercommunalité
+  titre: Communauté de Communes du Pays de L‘Arbresle
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = "CC du Pays de l'Arbresle (CCPA)"
+      - une de ces conditions:
+          - vélo . cargo
+          - vélo . motorisation
+          - toutes ces conditions:
+              - vélo . électrique
+              - vélo . prix <= 3000€
+  valeur: 50% * vélo . prix
+  plafond: 250€
+  lien: https://www.paysdelarbresle.fr/aide-a-lachat-dun-velo-a-assistance-electrique/
+
 aides . département loire:
   remplace: département
   titre: Département de la Loire
@@ -2322,6 +2338,18 @@ aides . aix les bains:
   plafond: vélo . prix
   lien: https://www.aixlesbains.fr/Cadre-de-vie/Transports-et-deplacements/A-velo/Aides-financieres-pour-se-deplacer-a-velo
 
+aides . cœur de maurienne arvan:
+  remplace: intercommunalité
+  titre: 3CMA - Cœur de Maurienne Arvan
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Coeur de Maurienne Arvan'
+      - vélo . électrique
+      - revenu fiscal de référence <= première tranche IR
+  valeur: 40% * vélo . prix
+  plafond: 400€
+  lien: https://www.coeurdemaurienne-arvan.com/actualite/velo-electrique/
+
 aides . bourg-saint-maurice:
   remplace: commune
   titre: Ville de Bourg-Saint-Maurice
@@ -2384,6 +2412,29 @@ aides . la motte servolex:
   valeur: 20% * vélo . prix
   plafond: 150€
   lien: https://www.mairie-lamotteservolex.fr/vos-demarches/subventions-eco-citoyennes-la-motte-servolex/
+
+aides . montagnole:
+  remplace: commune
+  titre: Ville de Montagnole
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '73160'
+      - vélo . électrique
+      - vélo . prix >= 1200 €
+  valeur: 200€
+  lien: https://www.mairie-montagnole.fr/vae/
+
+aides . saint alban leysse:
+  remplace: commune
+  titre: Ville de Saint-Alban-Leysse
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '73222'
+      - vélo . électrique
+      - vélo . prix >= 1500 €
+      - vélo . prix <= 3500 €
+  valeur: 200€
+  lien: https://www.saintalbanleysse.fr/3180-prime-a-l-achat-d-un-velo-electrique.htm
 
 aides . ardenne:
   remplace: intercommunalité
