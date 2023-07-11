@@ -1,10 +1,30 @@
 # Historique des modifications
 
-## prochaine
+## v3.0.16 - 11/07/2023
 
-Supprime l'aide suivante :
+Ajoute les aides suivantes :
+
+- Département de l'Oise
+- Agglo de Beauvais
+- Pays de l’Ozon
+- Poher Communauté
+- Communauté de communes Osartis-Marquion
+- Les Crêtes Préardennaises
+- Cœur de Savoie
+- Pays d'Iroise
+- Grand Cubzaguais
+- Ville de Fourmies
+- Ville de Val-au-Perche
+- Ville de Cenon
+
+Mise à jour de l'aide suivante :
+
+- Ville de Granville
+
+Supprime les aides suivantes :
 
 - Métropole Nice Côte d’Azur
+- Montlouis sur Loire
 
 ## v3.0.15 - 06/07/2023
 

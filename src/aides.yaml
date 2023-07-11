@@ -2,7 +2,6 @@
 # - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 # - Département Calvados https://www.ouest-france.fr/normandie/falaise-14700/aide-a-lachat-de-velo-electrique-dans-le-calvados-le-departement-pourrait-relancer-sa-subvention-2f83a7b6-cd7d-11ed-b493-b75770ef7f91
 # - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
-# - Osartis-Marquion https://www.lavoixdunord.fr/1346023/article/2023-06-28/osartis-marquion-va-debloquer-une-aide-de-150-euros-pour-l-acquisition-d-un-velo#:~:text=%C3%80%20force%20d'%C3%AAtre%20sollicit%C3%A9e,sera%20r%C3%A9serv%C3%A9e%20aux%20premiers%20candidats.
 # - Grand Est fin juin 2023 https://www.grandest.fr/actualites/un-an-de-succes-pour-le-plan-velo/
 #
 # Renouvellement ?
@@ -487,6 +486,24 @@ aides . bordeaux:
           - vélo . motorisation
   valeur: 100 €
   lien: https://sedeplacer.bordeaux-metropole.fr/a-velo/se-deplacer-a-velo/offres-velo/laide-a-lachat-velo
+
+aides . cenon:
+  remplace: commune
+  titre: Ville de Cenon
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '33119'
+      - revenu fiscal de référence <= 2200 €/mois
+      - vélo . prix >= 800 €
+  variations:
+    - si: vélo . cargo
+      alors: 400 €
+    - si: vélo . pliant
+      alors: 100 €
+    - si: vélo . électrique
+      alors: 100 €
+    - sinon: 0 €
+  lien: https://www.cenon.fr/a-la-une/actualites/velos-une-aide-a-lachat
 
 aides . la cali:
   remplace: intercommunalité
@@ -1249,6 +1266,16 @@ aides . flers:
   plafond: 200€
   lien: https://www.flers-agglo.fr/mobilite-aide-a-lacquisition-de-velos/
 
+aides . val-au-perche:
+  remplace: commune
+  titre: Ville de Val-au-Perche
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '61484'
+      - vélo . électrique
+  valeur: 50€
+  lien: https://valauperche.fr/transports/
+
 aides . ronchin:
   remplace: commune
   titre: Ville de Ronchin
@@ -1407,16 +1434,6 @@ aides . honfleur:
         plafond: 100€
     - sinon: 0€
   lien: https://www.ccphb.fr/amenager-et-developper/grands-projets/plan-velo/
-
-aides . montlouis sur loire:
-  remplace: commune
-  titre: Montlouis sur Loire
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '37156'
-      - vélo . électrique
-  valeur: 200€
-  lien: https://www.ville-montlouis-loire.fr/aide-a-lachat-dun-velo-electrique-neuf/
 
 aides . istres:
   remplace: commune
@@ -1895,6 +1912,20 @@ aides . pays de l'arbresle:
   plafond: 250€
   lien: https://www.paysdelarbresle.fr/aide-a-lachat-dun-velo-a-assistance-electrique/
 
+aides . pays de l'ozon:
+  remplace: intercommunalité
+  titre: Pays de l’Ozon
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays de l'Ozon'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+          - vélo . cargo
+  valeur: 200€
+  plafond: vélo . prix
+  lien: https://www.pays-ozon.com/vivre-dans-le-pays-de-lozon/les-transports/subvention-velo-electrique/
+
 aides . département loire:
   remplace: département
   titre: Département de la Loire
@@ -2334,6 +2365,31 @@ aides . cœur de maurienne arvan:
   plafond: 400€
   lien: https://www.coeurdemaurienne-arvan.com/actualite/velo-electrique/
 
+aides . cœur de savoie:
+  remplace: intercommunalité
+  titre: Cœur de Savoie
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Coeur de Savoie'
+      - vélo . électrique
+  variations:
+    - si: vélo . cargo électrique
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 13489 €/an
+            alors: 600 €
+          - si: revenu fiscal de référence <= 18000 €/an
+            alors: 450 €
+          - sinon: 300 €
+    - sinon:
+        variations:
+          - si: revenu fiscal de référence <= 13489 €/an
+            alors: 450 €
+          - si: revenu fiscal de référence <= 18000 €/an
+            alors: 300 €
+          - sinon: 150 €
+  lien: https://www.coeurdesavoie.fr/actualite/10362/3783-aide-a-l-achat-de-votre-velo-electrique.htm
+
 aides . bourg-saint-maurice:
   remplace: commune
   titre: Ville de Bourg-Saint-Maurice
@@ -2436,6 +2492,18 @@ aides . ardenne:
         valeur: 33% * vélo . prix
         plafond: 200€
   lien: https://ardenne-metropole.fr/storage/2021/04/Plaquette-subvention-v2.pdf
+
+aides . les crêtes préardennaises:
+  remplace: intercommunalité
+  titre: Les Crêtes Préardennaises
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC des Crêtes Préardennaises'
+      - vélo . électrique
+      - ménage imposable = 'non'
+  valeur: 10% * vélo . prix
+  plafond: 100€
+  lien: https://www.cretespreardennaises.fr/document/document/formulaires-daides-pour-lachat-dun-velo-electrique
 
 aides . erdregesvres:
   remplace: intercommunalité
@@ -3475,8 +3543,7 @@ aides . granville:
       - si: revenu fiscal de référence <= 13488€/an
         alors: 75% * vélo . prix
       - sinon: 50% * vélo . prix
-    # référence cyclique:
-    # abattement: aides . état
+  abattement: aides . état
   lien: https://www.ville-granville.fr/vivre-au-quotidien-demarches-services/se-deplacer/aide-a-lachat-dun-velo/
 
 aides . saint-louis:
@@ -3765,6 +3832,36 @@ aides . arcachon:
   valeur: vélo . prix
   plafond: 200€
   lien: https://www.ville-arcachon.fr/velo-arcachon/
+
+aides . grand cubzaguais:
+  remplace: intercommunalité
+  titre: Grand Cubzaguais
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Grand Cubzaguais'
+      - revenu fiscal de référence <= 19200 €/an
+      - vélo . électrique ou mécanique
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si:
+          une de ces conditions:
+            - vélo . électrique
+            - vélo . pliant
+            - vélo . cargo
+        alors:
+          variations:
+            - si: vélo . neuf
+              alors: 100€
+            - sinon: 150€
+      - si: vélo . mécanique
+        alors:
+          variations:
+            - si: vélo . neuf
+              alors: 50 €
+            - sinon: 70 €
+      - sinon: 0€
+  lien: https://www.grand-cubzaguais.fr/amenagement-durable/jusqua-150e-daide-a-lachat-dun-velo-pour-les-habitants-du-grand-cubzaguais-copy
 
 aides . bourges:
   remplace: intercommunalité
@@ -4280,6 +4377,17 @@ aides . gruson:
       - sinon: 100€
   lien: https://www.mairie-gruson.fr/environnement/developpement-durable/aides-a-lachat-dun-velo-electrique
 
+aides . fourmies:
+  remplace: commune
+  titre: Ville de Fourmies
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '59249'
+      - vélo . électrique
+  valeur: 300€
+  plafond: vélo . prix
+  lien: https://www.fourmies.fr/pages/article-MOBILITE-prime-velo-electrique-27032019.html
+
 aides . lesquin:
   remplace: commune
   titre: Ville de Lesquin
@@ -4690,6 +4798,18 @@ aides . plougastel-daoulas:
     - sinon: 150€
   lien: https://ville-plougastel.bzh/mon-quotidien/developpement-durable/dispositif-daides/
 
+aides . pays d'iroise:
+  remplace: intercommunalité
+  titre: Pays d'Iroise
+  applicable si: localisation . epci = 'CC du Pays d'Iroise'
+  variations:
+    - si: vélo . électrique
+      alors: 200€
+    - si: vélo . motorisation
+      alors: 100€
+    - sinon: 0€
+  lien: https://www.pays-iroise.bzh/mon-quotidien/se-deplacer-2/a-velo/
+
 aides . haute-cornouaille:
   remplace: intercommunalité
   titre: Haute Cornouaille Communauté de communes
@@ -4872,6 +4992,17 @@ aides . morlaix:
   plafond: 40% * vélo . prix
   lien: https://www.morlaix-communaute.bzh/Se-deplacer/Velo/Prime-achat-Velo-a-Assistance-Electrique-VAE
 
+aides . poher:
+  remplace: intercommunalité
+  titre: Poher Communauté
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Poher Communauté'
+      - vélo . électrique
+  valeur: 20% * vélo . prix
+  plafond: 200€
+  lien: https://www.poher.bzh/accueil_poher/les_services/mobilites/covoiturage
+
 aides . crozon:
   remplace: intercommunalité
   applicable si: localisation . epci = "CC Presqu'île de Crozon-Aulne maritime"
@@ -4985,6 +5116,16 @@ aides . boulonnais:
   plafond: 200€
   lien: https://www.agglo-boulonnais.fr/a-votre-service/mobilite/a-velo-dans-lagglo
 
+aides . osartis-marquion:
+  remplace: intercommunalité
+  titre: Communauté de communes Osartis-Marquion
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Osartis Marquion'
+      - vélo . électrique
+  valeur: 150 €
+  lien: https://www.cc-osartis.com/obtenez-une-aide-pour-lachat-dun-velo-assistance-electrique
+
 aides . chateauroux:
   remplace: intercommunalité
   titre: Châteauroux Métropole
@@ -5045,6 +5186,33 @@ aides . grand villeneuvois:
       alors: 200€
     - sinon: 100€
   lien: https://www.grand-villeneuvois.fr/aide-a-l-achat-d-un-velo-a-assistance-electrique-335.html
+
+aides . oise:
+  remplace: département
+  titre: Département de l'Oise
+  applicable si: localisation . département = '60'
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 300€
+      - si: vélo . mécanique
+        alors: 150€
+      - si: vélo . motorisation
+        alors: 150€
+      - sinon: 0€
+  lien: https://www.oise.fr/actions/environnement/plan-oxygene-60/bouquet-oxygene-60/aide-a-lacquisition-dun-velo-classique-ou-electrique
+
+aides . beauvais:
+  remplace: intercommunalité
+  titre: Agglo de Beauvais
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA du Beauvaisis'
+      - vélo . électrique ou mécanique
+  valeur: 25% * vélo . prix
+  plafond: 100€
+  lien: http://www.beauvais.fr/velo/
 
 aides . pont-saint-maxence:
   remplace: commune
@@ -5504,6 +5672,7 @@ vélo . occasion:
       - aides . saint-louis
       - aides . saint-marcellin vercors isère
       - aides . aubervilliers
+      - aides . grand cubzaguais
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
