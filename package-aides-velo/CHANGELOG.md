@@ -1,5 +1,29 @@
 # Historique des modifications
 
+## v3.0.17 - 12/07/2023
+
+Ajoute les aides suivantes :
+
+- Plaine de l'Ain
+- Communauté de communes Saône Beaujolais
+- Île de Ré Communauté de communes
+- Plaine d'Estrées Communauté de communes
+- Communauté de communes Sommes Sud-Ouest
+- Communauté d'agglomération du Bassin d'Arcachon Nord
+- Ville de Dreux
+
+Mise à jour des aides suivantes :
+
+- Pays d'Iroise
+- Saint-Étienne Métropole
+- Les Crêtes Préardennaises
+- Ville de Geispolsheim
+
+Supprime les aides suivantes :
+
+- Département Mayenne ([source](https://www.lamayenne.fr/service/passez-au-velo-electrique))
+- Châteauroux Métropole
+
 ## v3.0.16 - 11/07/2023
 
 Ajoute les aides suivantes :
