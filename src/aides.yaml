@@ -2,8 +2,6 @@
 # - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 # - Département Calvados https://www.ouest-france.fr/normandie/falaise-14700/aide-a-lachat-de-velo-electrique-dans-le-calvados-le-departement-pourrait-relancer-sa-subvention-2f83a7b6-cd7d-11ed-b493-b75770ef7f91
 # - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
-# - Grand Est fin juin 2023 https://www.grandest.fr/actualites/un-an-de-succes-pour-le-plan-velo/
-# - MAJ cote d'émeraude https://www.ouest-france.fr/bretagne/dinard-35800/cote-demeraude-prime-velo-composteurs-des-aides-ecoresponsables-f02fd16e-1c8e-11ee-a71d-c1d363e4dc47
 #
 # Renouvellement ?
 # - https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
@@ -113,8 +111,7 @@ aides . ile de france:
   titre: Île-de-France Mobilités
   description: |
     La région Île-de-France subventionne l’achat d’un $vélo à hauteur de 50% et
-    jusqu’à un plafond de $plafond. Les éventuelles aides locales déjà perçues
-    sont déduites de ce montant.
+    jusqu’à un plafond de $plafond.
   applicable si: localisation . région = '11'
   valeur: 50% * vélo . prix
   plafond:
@@ -130,7 +127,7 @@ aides . ile de france:
               - vélo . électrique
               - vélo . cargo
               - vélo . pliant
-          alors: 500 €
+          alors: 400 €
         - si:
             toutes ces conditions:
               - vélo . mécanique simple
@@ -153,6 +150,18 @@ aides . occitanie:
   valeur: 200€
   plafond: vélo . prix
   lien: https://www.laregion.fr/Eco-cheque-mobilite-velo-a-assistance-electrique
+
+aides . grand est:
+  remplace: région
+  titre: Région Grand Est
+  applicable si: localisation . région = '44'
+  variations:
+    - si: vélo . cargo
+      alors: 500€
+    - si: vélo . motorisation
+      alors: 200€
+    - sinon: 0€
+  lien: https://www.grandest.fr/vos-aides-regionales/achat-velos/
 
 aides . corse:
   remplace: région
@@ -300,18 +309,6 @@ aides . villefranche beaujolais saône:
         alors: 200€
       - sinon: 100€
   lien: https://www.agglo-villefranche.fr/aide-a-lachat-velo.html
-
-aides . sainte foy lès lyon:
-  remplace: commune
-  titre: Ville de Sainte Foy-Lès-Lyon
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '69202'
-      - une de ces conditions:
-          - vélo . électrique ou mécanique
-          - vélo . motorisation
-  valeur: 100€
-  lien: https://www.saintefoyleslyon.fr/Territoire-d-avenir/Deplacements/100-euros-pour-l-achat-d-un-velo
 
 aides . pays mornantais:
   remplace: intercommunalité
@@ -1643,18 +1640,28 @@ aides . daix:
   plafond: 400€
   lien: https://www.daix.fr/fichiers/news_fichiers1/13/Le%20deux-roues%20electrique_vert.pdf
 
-# TODO: Désactivé car le site ne semble plus en ligne ?
-# aides . chateau du loir:
-#   remplace: commune
-#   titre: Ville de Château du Loir
-#   # TODO valable pour un vélo mécanique pour un bénéficiaire du RSA
-#   applicable si:
-#     toutes ces conditions:
-#       - localisation . code insee = '72071'
-#       - vélo . électrique
-#   valeur: 25% * vélo . prix
-#   plafond: 150€
-#   lien: https://ville-chateauduloir.fr/developpement-durable.html
+aides . montval sur loir:
+  remplace: commune
+  titre: Ville de Montval sur Loir
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '72071'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: demandeur . bénéficiaire de minima sociaux
+            alors:
+              valeur: 50% * vélo . prix
+              plafond: 150€
+          - sinon:
+              valeur: 25% * vélo . prix
+              plafond: 150€
+    - sinon:
+        valeur: 50% * vélo . prix
+        plafond: 150€
+  lien: https://www.montvalsurloir.fr/demarche-administrative/demande-de-subvention-velo-electrique/
 
 aides . sorgues du comtat:
   remplace: intercommunalité
@@ -1692,6 +1699,16 @@ aides . grand périgueux:
         plafond: 50% * vélo . prix
   plafond: vélo . prix
   lien: https://www.grandperigueux.fr/au-quotidien/deplacements/velo/aide-a-lachat-velo
+
+aides . pays de fénelon:
+  remplace: intercommunalité
+  titre: Communauté de communes du Pays de Fénelon
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays de Fénelon'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.paysdefenelon.fr/2022/07/07/en-route-pour-une-autre-mobilite/
 
 aides . sarlat:
   remplace: commune
@@ -2145,9 +2162,9 @@ aides . avignon:
     toutes ces conditions:
       - localisation . epci = 'CA du Grand Avignon (COGA)'
       - vélo . électrique
-  valeur: 25% * vélo . prix # TODO: à vérifier, j'ai du mal à comprendre leur formulation
-  plafond: 100€
-  lien: https://www.grandavignon.fr/fr/actualites/aide-lobtention-dun-vae
+      - vélo . prix >= 400 €
+  valeur: 100€
+  lien: https://www.grandavignon.fr/fr/actualites/aide-lachat-de-velo-assistance-electrique
 
 aides . villeneuve lez avignon:
   remplace: commune
@@ -2365,25 +2382,6 @@ aides . vallée d'ossau:
   valeur: 20% * vélo . prix
   plafond: 200€
   lien: https://cc-ossau.fr/aide-a-lachat-dun-vae/
-
-aides . grand lac:
-  remplace: intercommunalité
-  titre: Grand Lac Communauté d'agglomération
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Grand Lac'
-      - une de ces conditions:
-          - vélo . cargo
-          - toutes ces conditions:
-              - vélo . électrique
-              - vélo . prix >= 900 €
-              - vélo . prix <= 3000 €
-  valeur: 150€
-  lien: https://grand-lac.fr/au-quotidien/services-a-la-population/deplacements/le-velo
-
-aides . grand lac . prix vélo:
-  remplace: vélo . prix pour maximiser les aides
-  valeur: 3000€
 
 aides . aix les bains:
   remplace: commune
@@ -3425,19 +3423,6 @@ aides . châtellrault:
       alors: 300€
     - sinon: 200€
   lien: https://www.ville-chatellerault.fr/a-votre-service/deplacements/aide-%C3%A0-l-achat-de-v%C3%A9lo
-
-aides . pays de l'or:
-  remplace: intercommunalité
-  titre: Pays de l’Or
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = "CA du Pays de l'Or"
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-  valeur: 20% * vélo . prix
-  plafond: 200€
-  lien: https://www.paysdelor.fr/lagglo-vous-aide-pour-lachat-dun-velo-a-assistance-electrique-vae-cargo-ou-adapte/
 
 aides . grand orb:
   remplace: intercommunalité
@@ -4701,17 +4686,6 @@ aides . drancy:
       alors: 200€
     - sinon: 100€
   lien: https://www.drancy.fr/les-services-municipaux-et-les-demarches-administratives/annuaire-des-demarches-411/subvention-pour-l-achat-d-un-velo-electrique-1821.html?cHash=e554e270f39900d5ba8d0b528584d11c
-
-aides . fontenay:
-  remplace: commune
-  titre: Ville de Fontenay
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '94033'
-      - vélo . électrique
-  valeur: 80€ # TODO: « jusqu'à 400€, mais je ne trouve pas le barème »
-  plafond: 70% * vélo . prix
-  lien: https://www.fontenay.fr/cadre-de-vie/deplacements/aide-velo-electrique-1278.html
 
 aides . rives de moselle:
   remplace: intercommunalité

@@ -1,5 +1,25 @@
 # Historique des modifications
 
+## v3.0.18 - 28/07/2023
+
+Ajoute les aides suivantes :
+
+- Région Grand Est
+- Communauté de communes du Pays de Fénelon
+- Ville de Montval sur Loir
+
+Mise à jour des aides suivantes :
+
+- Île-de-France Mobilités
+- Grand Avignon
+
+Supprime les aides suivantes :
+
+- Ville de Fontenay
+- Ville de Sainte Foy-Lès-Lyon
+- Grand Lac Communauté d'agglomération
+- Pays de l’Or
+
 ## v3.0.17 - 12/07/2023
 
 Ajoute les aides suivantes :
