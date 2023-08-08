@@ -1,5 +1,30 @@
 # Historique des modifications
 
+## v3.0.19 - 08/08/2023
+
+Ajoute les aides suivantes :
+
+- Communauté de communes de la Vallée de Villé
+- Communauté de communes Vallée de l’Homme
+- Communauté de communes Moselle et Madon
+- Campagnes de l’Artois
+- Vexin Normand
+- Châteauroux Métropole
+- Ville d’Amboise
+- Ville de Saint-Pierre-du-Mont
+- Ville d’Albert
+- Ville d’Igny
+- Ville d’Iwuy
+- Ville de Denain
+- Ville de Feignies
+- Ville d’Ambrechies
+- Ville de Canélan
+- Ville de Trébeurden
+
+Mise à jour des aides suivantes :
+
+- Pontivy Communauté
+
 ## v3.0.18 - 28/07/2023
 
 Ajoute les aides suivantes :

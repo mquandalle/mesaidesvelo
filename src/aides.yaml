@@ -390,6 +390,18 @@ aides . grigny:
   valeur: 100€
   lien: https://www.mairie-grigny69.fr/prime-velo/
 
+aides . igny:
+  remplace: commune
+  titre: Ville d’Igny
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '91312'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+  valeur: 100€
+  lien: https://igny.fr/les-actions-ecologiques/
+
 aides . irigny:
   remplace: commune
   titre: Ville d’Irigny
@@ -952,6 +964,16 @@ aides . ried de marckolsheim:
       - vélo . électrique ou mécanique
   valeur: 75€
   lien: https://selestat-alsace-centrale.fr/beneficier-dune-prime-a-lachat-dun-velo/
+
+aides . vallée de villé:
+  remplace: intercommunalité
+  titre: Communauté de communes de la Vallée de Villé
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de la Vallée de Villé'
+      - vélo . électrique ou mécanique
+  valeur: 50€
+  lien: https://cdc.valleedeville.fr/service-aux-habitants/beneficier-de-la-prime-velo/
 
 aides . marckolsheim:
   remplace: commune
@@ -1720,6 +1742,21 @@ aides . sarlat:
   valeur: 100€
   lien: https://www.sarlat.fr/100-e-daide-pour-lachat-dun-velo-electrique/
 
+aides . vallée de l'homme:
+  remplace: intercommunalité
+  titre: Communauté de communes Vallée de l’Homme
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = "CC de la Vallée de l'Homme"
+      - vélo . électrique
+  valeur: 25% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . neuf
+        alors: 200€
+      - sinon: 100€
+  lien: https://www.cc-valleedelhomme.fr/mobilit%C3%A9-itin%C3%A9rance-douce/dispositifs-v%C3%A9lo/aide-%C3%A0-l-achat-pour-un-v%C3%A9lo-%C3%A9lectrique/
+
 aides . sablé sur sarthe:
   remplace: commune
   titre: Communauté de communes des Sablé sur Sarthe
@@ -1819,6 +1856,16 @@ aides . rivery:
         alors: 50€
       - sinon: 0€
   lien: https://www.ville-rivery.fr/2023/04/13/aide-financiere-a-lachat-dun-velo/
+
+aides . albert:
+  remplace: commune
+  titre: Ville d’Albert
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '80016'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.ville-albert.fr/aide-a-lachat-dun-velo-electrique/
 
 aides . faches-thumesnil:
   remplace: commune
@@ -3872,6 +3919,22 @@ aides . arcachon:
   plafond: 200€
   lien: https://www.ville-arcachon.fr/velo-arcachon/
 
+aides . canélan:
+  remplace: commune
+  titre: Ville de Canélan
+  applicable si: localisation . code insee = '33090'
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: vélo . neuf
+            alors: 100€
+          - sinon: 150€
+    - si: vélo . motorisation
+      alors: 150€
+    - sinon: 0€
+  lien: https://www.canejan.fr/vie-pratique/transports/345-velo-a-assistance-electrique-aide-a-l-acquisition.html
+
 aides . bassin d'arcachon nord:
   remplace: intercommunalité
   titre: Communauté d'agglomération du Bassin d'Arcachon Nord
@@ -3989,6 +4052,16 @@ aides . maremne adour cote-sud:
     - sinon: 0€
   plafond: 50% * vélo . prix
   lien: https://www.cc-macs.org/actualite/aide-a-lachat-dun-velo/
+
+aides . saint pierre du mont:
+  remplace: commune
+  titre: Ville de Saint-Pierre-du-Mont
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '40281'
+      - vélo . électrique
+  valeur: 150€
+  lien: https://saintpierredumont.fr/actualite/aide-a-l-achat-d-un-velo-a-assistance-electrique
 
 aides . plaine de l'ain:
   remplace: intercommunalité
@@ -4430,6 +4503,66 @@ aides . gruson:
         alors: 200€
       - sinon: 100€
   lien: https://www.mairie-gruson.fr/environnement/developpement-durable/aides-a-lachat-dun-velo-electrique
+
+aides . iwuy:
+  remplace: commune
+  titre: Ville d’Iwuy
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '59322'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.iwuy.fr/page.php?id=6#37
+
+aides . denain:
+  remplace: commune
+  titre: Ville de Denain
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '59172'
+      - vélo . électrique ou mécanique
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . mécanique
+        alors:
+          variations:
+            - si: vélo . neuf
+              alors: 300€
+            - sinon: 150€
+      - sinon:
+          variations:
+            - si: vélo . neuf
+              alors: 150€
+            - sinon: 75€
+  lien: https://www.ville-denain.fr/content/view/full/7159
+
+aides . feignies:
+  remplace: commune
+  titre: Ville de Feignies
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '59225'
+      - vélo . électrique ou mécanique
+  valeur: 150€
+  plafond: vélo . prix
+  lien: http://www.ville-feignies.fr/prime-velo/
+
+aides . ambrechies:
+  remplace: commune
+  titre:
+  applicable si: localisation . code insee = '59636'
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 200€
+      - si: vélo . électrique
+        alors: 200€
+      - si: vélo . mécanique
+        alors: 100€
+      - sinon: 0€
+  lien: https://www.wambrechies.fr/actualites/prime-velo-jusqua-250eu-daide
 
 aides . fourmies:
   remplace: commune
@@ -5022,6 +5155,17 @@ aides . perros-guirec:
   plafond: 100€
   lien: http://ville.perros-guirec.com/ma-ville/vie-quotidienne/les-transports/en-velo/aide-a-l-acquisition-d-un-velo-a-assistance-electrique.html
 
+aides . trébeurden:
+  remplace: commune
+  titre: Ville de Trébeurden
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '22343'
+      - vélo . électrique
+  valeur: 20% * vélo . prix
+  plafond: 200€
+  lien: https://www.trebeurden.fr/actualite/subvention-pour-lachat-dun-velo-a-assistance-electrique/
+
 aides . morlaix:
   remplace: intercommunalité
   titre: Morlaix Communauté
@@ -5151,6 +5295,65 @@ aides . pays de lumbres:
       - sinon: 0€
   lien: https://cc-paysdelumbres.fr/fr/vivre-et-habiter/mobilites-durables/aides-a-l-achat-d-un-velo
 
+aides . campagnes de l'artois:
+  remplace: intercommunalité
+  titre: Campagnes de l’Artois
+  applicable si: localisation . epci = 'CC des Campagnes de l'Artois'
+  valeur: 20% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 240€
+      - si: vélo . motorisation
+        alors: 240€
+      - si: vélo . mécanique
+        alors: 80€
+  lien: https://campagnesartois.fr/aide-a-lacquisition-de-velo-a-assistance-electrique-et-mecanique/
+
+aides . amboise:
+  remplace: commune
+  titre: Ville d’Amboise
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '37003'
+      - vélo . électrique
+  produit:
+    taux:
+      variations:
+        - si: revenu fiscal de référence <= 500€/mois
+          alors: 50%
+        - si: revenu fiscal de référence <= 800€/mois
+          alors: 40%
+        - si: revenu fiscal de référence <= 1100€/mois
+          alors: 30%
+        - sinon: 0%
+    assiette:
+      valeur: vélo . prix
+      plafond: 1200€
+  plancher: 200€
+  lien: https://www.ville-amboise.fr/57-1229/fiche/demande-d-aide-a-l-achat-d-un-velo-electrique.htm
+
+aides . vexin normand:
+  remplace: intercommunalité
+  titre: Vexin Normand
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Vexin Normand'
+      - vélo . électrique
+  valeur: 150€
+  lien: https://www.cdc-vexin-normand.fr/transport/transport-a-la-demande/prime-achat-velo-assistance-electrique.html
+
+aides . moselle et madon:
+  remplace: intercommunalité
+  titre: Communauté de communes Moselle et Madon
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Moselle et Madon'
+      - vélo . électrique ou mécanique
+  valeur: 25% * vélo . prix
+  plafond: 200€
+  lien: https://www.cc-mosellemadon.fr/fr/aide-a-l-achat-de-velo.html
+
 aides . boulonnais:
   remplace: intercommunalité
   titre: Agglo Boulonnais
@@ -5179,9 +5382,20 @@ aides . pontivy:
     toutes ces conditions:
       - localisation . epci = 'CC Pontivy Communauté'
       - vélo . électrique
+      - revenu fiscal de référence <= 25000€/an
   valeur: vélo . prix
   plafond: 200€
-  lien: https://www.chateauroux-metropole.fr/actualites-20/aide-a-lacquisition-dun-velo-a-assistance-electrique-vae-4838.html
+  lien: https://www.pontivy-communaute.bzh/actualites/aide-a-lacquisition-dun-velo-a-assistante-electrique-2023/
+
+aides . chateauroux:
+  remplace: intercommunalité
+  titre: Châteauroux Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA Châteauroux Métropole'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.chateauroux-metropole.fr/vie-pratique-les-services/mobilite-et-stationnements/velo
 
 aides . auray quiberon:
   remplace: intercommunalité
@@ -5721,6 +5935,12 @@ vélo . occasion:
       - aides . aubervilliers
       - aides . grand cubzaguais
       - aides . île de ré
+      - aides . vallée de l'homme
+      - aides . denain
+      - aides . feignies
+      - aides . campagnes de l'artois
+      - aides . moselle et madon
+      - aides . canélan
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
