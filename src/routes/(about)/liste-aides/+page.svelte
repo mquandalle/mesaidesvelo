@@ -7,6 +7,9 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>MesAidesVélo - Liste des aides</title>
+</svelte:head>
 <div class="prose mt-8 w-full max-w-screen-md m-auto">
 	<h1>Les aides intégrées sur le site</h1>
 	<p>
@@ -39,17 +42,21 @@
 	</ul>
 	<h2>Les aides locales</h2>
 
-	{#each data.aidesLocales as [departementId, aides]}
-		{@const departement = departements.find(({ code }) => code === departementId)}
+	{#each departements.filter(({ code }) => code.length === 2) as departement}
 		<h3>
 			<a href="/departement/{slugify(departement.nom)}">{departement.code} - {departement.nom}</a>
 		</h3>
-		<ul>
-			{#each aides as aide}
-				<li>
-					<AideSummary {aide} />
-				</li>
-			{/each}
-		</ul>
+		{@const aides = data.aidesLocales[departement.code]}
+		{#if aides}
+			<ul>
+				{#each aides as aide}
+					<li>
+						<AideSummary {aide} />
+					</li>
+				{/each}
+			</ul>
+		{:else}
+			<p class="italic">Pas d’aide locale référencée dans ce département.</p>
+		{/if}
 	{/each}
 </div>

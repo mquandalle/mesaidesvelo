@@ -49,27 +49,29 @@ export async function load() {
 		.filter(({ collectivity }) => collectivity.kind === 'région')
 		.map(formatAideForClient);
 
-	const aidesLocales = Object.entries(
-		groupBy(
-			associatedCollectivities.filter(({ collectivity }) =>
-				['code insee', 'epci', 'département'].includes(collectivity.kind)
-			),
-			({ departement }) => departement
+	const aidesLocales = Object.fromEntries(
+		Object.entries(
+			groupBy(
+				associatedCollectivities.filter(({ collectivity }) =>
+					['code insee', 'epci', 'département'].includes(collectivity.kind)
+				),
+				({ departement }) => departement
+			)
 		)
-	)
-		.sort(([a], [b]) => parseInt(a) - parseInt(b))
-		.map(([dep, aides]) => [
-			dep,
-			aides
-				.sort((a, b) =>
-					a.collectivity.kind === 'département'
-						? -1
-						: b.collectivity.kind === 'département'
-						? 1
-						: (b.population ?? 0) - (a.population ?? 0)
-				)
-				.map(formatAideForClient),
-		]);
+			.sort(([a], [b]) => parseInt(a) - parseInt(b))
+			.map(([dep, aides]) => [
+				dep,
+				aides
+					.sort((a, b) =>
+						a.collectivity.kind === 'département'
+							? -1
+							: b.collectivity.kind === 'département'
+							? 1
+							: (b.population ?? 0) - (a.population ?? 0)
+					)
+					.map(formatAideForClient),
+			])
+	);
 
 	return { aidesEtat, aidesRegions, aidesLocales };
 }
