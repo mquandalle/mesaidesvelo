@@ -51,11 +51,6 @@ const imagesFromAidesJeunes = Object.fromEntries([
 	['pays - France', { imgSrc: 'img/institutions/logo_etat_francais.png' }],
 ]);
 
-const noTrim = [
-	'aides . lyon', // https://github.com/lovell/sharp/issues/2166
-	'aides . paris',
-];
-
 const miniatureDirectory = join(rootPath, 'static/miniatures/');
 if (fs.existsSync(miniatureDirectory)) {
 	fs.rmSync(miniatureDirectory, { recursive: true });
@@ -72,7 +67,7 @@ const thumbnailsManifest = Object.entries(aidesWithCollectivities).reduce((acc, 
 	}
 
 	const imgName = img.imgSrc.split('/').at(-1).split('.')[0] + '.webp';
-	generateThumbnail(img.imgSrc, imgName, { trim: !noTrim.includes(id) });
+	generateThumbnail(img.imgSrc, imgName, { trim: true });
 
 	return { ...acc, [id]: imgName };
 }, {});

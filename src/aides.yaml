@@ -1759,7 +1759,7 @@ aides . vallée de l'homme:
 
 aides . sablé sur sarthe:
   remplace: commune
-  titre: Communauté de communes des Sablé sur Sarthe
+  titre: Communauté de communes de Sablé sur Sarthe
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '72264'
@@ -3327,7 +3327,7 @@ aides . marignier:
 
 aides . combloux:
   remplace: commune
-  titre: Commune de Combloux
+  titre: Ville de Combloux
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '74083'
