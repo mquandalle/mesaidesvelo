@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## v3.0.20
+
+Mise à jour du lien suivant :
+
+- Ville de Marignier
+
 ## v3.0.19 - 08/08/2023
 
 Ajoute les aides suivantes :

@@ -3323,7 +3323,7 @@ aides . marignier:
           - vélo . pliant
   valeur: 100€
   plafond: vélo . prix
-  lien: http://www.marignier.fr/velo_electrique_aide.news
+  lien: https://www.marignier.fr/mon-quotidien/mobilite/
 
 aides . combloux:
   remplace: commune

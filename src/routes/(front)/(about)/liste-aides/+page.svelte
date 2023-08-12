@@ -42,7 +42,7 @@
 	</ul>
 	<h2>Les aides locales</h2>
 
-	{#each departements.filter(({ code }) => code.length === 2) as departement}
+	{#each departements.filter(({ code }) => code.length === 2 && code !== '2A' && code !== '2B') as departement}
 		<h3>
 			<a href="/departement/{slugify(departement.nom)}">{departement.code} - {departement.nom}</a>
 		</h3>
