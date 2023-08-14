@@ -67,17 +67,14 @@ const thumbnailsManifest = Object.entries(aidesWithCollectivities).reduce((acc, 
 	}
 
 	const imgName = img.imgSrc.split('/').at(-1).split('.')[0] + '.webp';
-	generateThumbnail(img.imgSrc, imgName, { trim: true });
+	generateThumbnail(img.imgSrc, imgName);
 
 	return { ...acc, [id]: imgName };
 }, {});
 
-async function generateThumbnail(imgSrc, imgName, { trim = true }) {
+async function generateThumbnail(imgSrc, imgName) {
 	const imgPath = join(repoPath, 'public/', imgSrc);
 	const img = sharp(imgPath);
-	if (trim) {
-		await img.trim();
-	}
 	await img.resize({ fit: 'inside', height: 170, width: 120 });
 	await img.webp().toFile(join(miniatureDirectory, imgName));
 }

@@ -3085,7 +3085,7 @@ aides . gien:
 
 aides . ferte saint aubin:
   remplace: commune
-  titre: Ville de la Ferté Saint-Aubin
+  titre: Ville de La Ferté Saint-Aubin
   applicable si:
     toutes ces conditions:
       - localisation . code insee = '45146'
@@ -5032,7 +5032,7 @@ aides . cote d'émeraude:
 
 aides . baie du mont saint-michel:
   remplace: intercommunalité
-  titre: Communauté de communes du pays de Dol et de la Baie du Mont Saint-Michel
+  titre: Communauté de communes du Pays de Dol et de la Baie du Mont Saint-Michel
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CC du Pays de Dol et de la Baie du Mont Saint-Michel'
