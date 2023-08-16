@@ -1,10 +1,44 @@
 # Historique des modifications
 
-## v3.0.20
+## v3.0.20 - 16/08/2023
+
+Ajoute les aides suivantes :
+
+- Communauté de communes Les Avant-Monts
+- Haut Béarn communauté de communes
+- Agglo de la région de Château-thierry
+- Communauté de communes Vallées de l’Orne et de l’Odon
+- Couesnon Marches de Bretagne
+- Golf de Saint-Tropez
+- Vallées du Clain
+- Ville de Joinville-le-Pont
+- Ville-sur-Jarnioux
+- Ville de Cazouls-Lès-Béziers
+- Ville d’Ecommoy
+- Ville de Joinville
+- Ville de Bannalec
+- Ville de Witry-lès-Reims
+- Ville de Labège
+- Ville d’Hennebont
+- Ville de Villers-sur-mer
+- Ville de Saint-Rémy-de-Provence
 
 Mise à jour du lien suivant :
 
 - Ville de Marignier
+
+Supprime l'aide suivante :
+
+- Terre d'Émeraude Communauté
+
+Retouche les titres suivants :
+
+- Ville d’Ifs
+- Agglo du Beauvaisis
+- Communauté de Communes Cœur de Nacre
+- Communauté de communes du Pays de Dol et de la Baie du Mont Saint-Michel
+- Ville de La Ferté Saint-Aubin
+- Cœur de Maurienne Arvan
 
 ## v3.0.19 - 08/08/2023
 

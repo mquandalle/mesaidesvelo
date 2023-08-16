@@ -18,6 +18,10 @@
 
 	const googleSearchImageHref = (title) =>
 		`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(`logo ${title}`)}`;
+	const startsWithLowerCase = (title) => {
+		const firstChar = simplifyTitle(title)[0];
+		return firstChar === firstChar.toLocaleLowerCase();
+	};
 </script>
 
 <h1 class="mx-4 my-2 font-bold font-serif flex gap-x-3">
@@ -51,7 +55,13 @@
 					{/if}
 				</a>
 			</div>
-			<h3 class="text-xs text-center mt-4">{simplifyTitle(title)}</h3>
+			<h3
+				class="text-xs text-center mt-4 {startsWithLowerCase(title)
+					? 'first-letter:bg-yellow-300'
+					: ''}"
+			>
+				{simplifyTitle(title)}
+			</h3>
 		</article>
 	{/each}
 </div>
