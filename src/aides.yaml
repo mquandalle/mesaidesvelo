@@ -664,18 +664,19 @@ aides . saint-rémy:
     - sinon: 0€
   lien: https://www.saint-remy71.fr/plan-velo/
 
-aides . mérignac:
-  remplace: commune
-  titre: Ville de Mérignac
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '33281'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . pliant
-          - vélo . cargo
-  valeur: 100€
-  lien: https://www.merignac.com/actualites/une-aide-de-100-eu-pour-un-velo-electrique-pliant-ou-cargo
+# Épuisé pour 2023
+# aides . mérignac:
+#   remplace: commune
+#   titre: Ville de Mérignac
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . code insee = '33281'
+#       - une de ces conditions:
+#           - vélo . électrique
+#           - vélo . pliant
+#           - vélo . cargo
+#   valeur: 100€
+#   lien: https://www.merignac.com/actualites/une-aide-de-100-eu-pour-un-velo-electrique-pliant-ou-cargo
 
 aides . saint-émilionnais:
   remplace: intercommunalité
@@ -4804,8 +4805,14 @@ aides . puteaux:
       - une de ces conditions:
           - vélo . mécanique
           - vélo . motorisation
+          - vélo . électrique
   valeur: 50% * vélo . prix
-  plafond: 300€
+  # todo: vérifier l'application de https://www.puteaux.fr/puteaux/Ma-ville/Actualites/Beneficiez-d-une-aide-pour-l-achat-d-un-velo-electrique
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 100€
+      - sinon: 300€
   lien: https://www.puteaux.fr/puteaux/Ma-ville/Actualites/Toutes-les-aides-pour-l-achat-d-un-velo
 
 aides . genneviliers:
@@ -5118,6 +5125,7 @@ aides . cote d'emeraude:
     toutes ces conditions:
       - localisation . epci = "CC Côte d'Emeraude"
       - vélo . électrique
+      - revenu fiscal de référence <= première tranche IR
   valeur: 100€
   lien: https://www.cote-emeraude.fr/laide-a-lachat-dun-velo-a-assitance-electrique/
 
@@ -5848,6 +5856,157 @@ aides . saint-rémy-de-provence:
   valeur: 200€
   lien: https://www.mairie-saintremydeprovence.com/200-euros-daide-pour-un-velo-a-assistance-electrique/
 
+aides . val-revermont:
+  remplace: commune
+  titre: Ville de Val-Revermont
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '01426'
+      - vélo . électrique ou mécanique
+  valeur: 100€
+  lien: http://val-revermont.fr/transition-ecologique-la-commune-met-en-place-un-coup-de-pouce-a-ses-habitants/
+
+aides . marches du velay-rochebaron:
+  remplace: intercommunalité
+  titre: Marches du Velay-Rochebaron
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Marches du Velay-Rochebaron'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.marchesduvelayrochebaron.fr/actualite/aide-a-lachat-dun-velo-a-assistance-electrique/
+
+aides . pays de châteaugiron:
+  remplace: intercommunalité
+  titre: Pays de Châteaugiron
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Pays de Châteaugiron Communauté'
+      - vélo . électrique
+      - revenu fiscal de référence <= première tranche IR
+  valeur: 200€
+  lien: https://www.communaute.paysdechateaugiron.bzh/velo-a-assistance-electrique/
+
+aides . tour du pin:
+  remplace: commune
+  titre: Ville de La Tour du Pin
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = 'https://www.latourdupin.fr/citoyenne/grands-projets/subvention-velos-electriques/'
+      - vélo . électrique
+  valeur: 100€
+  lien: https://www.latourdupin.fr/citoyenne/grands-projets/subvention-velos-electriques/
+
+aides . falaise:
+  remplace: commune
+  titre: Ville de Falaise
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '14258'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+  valeur: 100€
+  lien: https://www.falaise.fr/pratique/deplacements/demande-daides-a-lachat-dun-vae/
+
+aides . saint-flour communauté:
+  remplace: intercommunalité
+  titre: Saint-flour communauté
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de Saint-Flour'
+      - vélo . électrique
+      - revenu fiscal de référence <= 20233€/an
+  valeur: 100€
+  lien: https://saint-flour-communaute.fr/population/velo-electrique-dans-le-cantal/aide-pour-acheter-un-velo-electrique/
+
+aides . bièvre isère:
+  remplace: intercommunalité
+  titre: Bièvre Isère communauté
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC Bièvre Isère'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . électrique
+      alors: 250€
+    - sinon: 100€
+  lien: https://bievre-isere.com/cadre-de-vie/mobilites/prime-velo/
+
+aides . ceyrat:
+  remplace: commune
+  titre: Ville de Ceyrat
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '63070'
+      - vélo . électrique
+  variations:
+    - si: vélo . prix <= 2000€
+      alors: 200€
+    - si: vélo . prix <= 2500€
+      alors: 150€
+    - sinon: 0€
+  lien: https://www.ceyrat.fr/votre-commune/services-municipaux/aides-communales/
+
+aides . baud:
+  remplace: commune
+  titre: Ville de Baud
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '56010'
+      - vélo . électrique
+  valeur: 50€
+  lien: https://www.mairie-baud.fr/7252-2/
+
+aides . longuenesse:
+  remplace: commune
+  titre: Ville de Longuenesse
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = ''
+      - vélo . électrique
+  # TOOO: "arrondi à la dizaine supérieure"
+  valeur: 20% * vélo . prix
+  plafond: 100€
+  lien: https://ville-longuenesse.fr/fr/rb/1916787/prime-velo-2
+
+aides . castelnau de médoc:
+  remplace: commune
+  titre: Ville de Castelnau de Médoc
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '33104'
+      - vélo . électrique
+      - revenu fiscal de référence <= première tranche IR
+  valeur: 100€
+  lien: https://www.mairie-castelnau-medoc.fr/actus/1557-aide-a-l-acquisition-de-velos
+
+aides . la côtière à montluel:
+  remplace: intercommunalité
+  titre: Communauté de Communes de la Côtière à Montluel
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de la Côtière à Montluel'
+      - une de ces conditions:
+          - nom: travailler à moins de 20km
+            question: Travaillez-vous à moins de 20km de votre domicile ?
+            description: Vous devez justifier d’une activité professionnelle en tant que salarié, employeur ou auto-entrepreneur
+            type: booléen
+            par défaut: oui
+          - nom: abonné TER
+            question: Êtes-vous abonné au TER ?
+            type: booléen
+            par défaut: non
+  valeur: 15% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo
+        alors: 400€
+      - si: vélo . électrique
+        alors: 300€
+      - sinon: 0€
+  lien: https://www.3cm.fr/Aide-a-l-achat-de-VAE,5363.html
+
 aides . region centre:
   remplace: région
   titre: Région Centre-Val de Loire
@@ -6167,6 +6326,7 @@ vélo . occasion:
       - aides . campagnes de l'artois
       - aides . moselle et madon
       - aides . canélan
+      - aides . kremlin-bicetre
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?

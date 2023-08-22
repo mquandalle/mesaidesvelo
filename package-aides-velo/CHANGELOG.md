@@ -1,5 +1,30 @@
 # Historique des modifications
 
+## v3.0.21 - 22/08/2023
+
+Ajoute les aides suivantes :
+
+- Ville de Val-Revermont
+- Marches du Velay-Rochebaron
+- Pays de Châteaugiron
+- Ville de La Tour du Pin
+- Ville de Falaise
+- Saint-flour communauté
+- Bièvre Isère communauté
+- Ville de Ceyrat
+- Ville de Baud
+- Ville de Castelnau de Médoc
+- Communauté de Communes de la Côtière à Montluel
+
+Modifie les aides suivantes :
+
+- Communauté de communes Côte d’Émeraude
+- Ville de Puteaux
+
+Supprime l'aide suivante :
+
+- Ville de Mérignac (épuisé pour 2023)
+
 ## v3.0.20 - 16/08/2023
 
 Ajoute les aides suivantes :
@@ -628,7 +653,7 @@ Ajout de l'aide de la ville de Crolles
 
 Ajout des aides suivantes :
 
-- Département de Seinte-Maritime
+- Département de Seine-Maritime
 - Commune d’Unieux
 - Communauté de communes Terre d’Auge
 - Communauté de communes Côte d’Émeraude
