@@ -5892,7 +5892,7 @@ aides . tour du pin:
   titre: Ville de La Tour du Pin
   applicable si:
     toutes ces conditions:
-      - localisation . code insee = 'https://www.latourdupin.fr/citoyenne/grands-projets/subvention-velos-electriques/'
+      - localisation . code insee = '38509'
       - vélo . électrique
   valeur: 100€
   lien: https://www.latourdupin.fr/citoyenne/grands-projets/subvention-velos-electriques/
