@@ -5963,7 +5963,7 @@ aides . longuenesse:
   titre: Ville de Longuenesse
   applicable si:
     toutes ces conditions:
-      - localisation . code insee = ''
+      - localisation . code insee = '62525'
       - vélo . électrique
   # TOOO: "arrondi à la dizaine supérieure"
   valeur: 20% * vélo . prix
