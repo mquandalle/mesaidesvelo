@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v3.0.22 - 24/08/2023
+
+Modifie les aides suivantes :
+
+- Ville de Longuenesse
+- Ville de La Tour du Pin
+- Ville du Relecq-Kerhuon
+
+Supprime l'aide suivante :
+
+- Saint-Brieuc Armor Agglomération
+
 ## v3.0.21 - 22/08/2023
 
 Ajoute les aides suivantes :

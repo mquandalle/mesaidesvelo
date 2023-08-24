@@ -4959,6 +4959,16 @@ aides . relecq-kerhuon:
       - localisation . code insee = '29235'
       - vélo . électrique ou mécanique
   variations:
+    - si: vélo . cargo
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 1012 €/mois
+            alors: 300 €
+          - si: revenu fiscal de référence <= 1291 €/mois
+            alors: 250 €
+          - si: revenu fiscal de référence <= 1544 €/mois
+            alors: 200 €
+          - sinon: 150 €
     - si: vélo . électrique
       alors:
         variations:
@@ -4977,7 +4987,7 @@ aides . relecq-kerhuon:
           - si: revenu fiscal de référence <= 1544 €/mois
             alors: 75 €
           - sinon: 50 €
-  lien: https://www.lerelecqkerhuon.bzh/des-aides-pour-lacquisition-de-votre-velo-electrique/
+  lien: https://www.lerelecqkerhuon.bzh/environnement-et-cadre-de-vie/se-deplacer/a-velo/
 
 aides . plougastel-daoulas:
   remplace: commune
@@ -5129,18 +5139,18 @@ aides . cote d'emeraude:
   valeur: 100€
   lien: https://www.cote-emeraude.fr/laide-a-lachat-dun-velo-a-assitance-electrique/
 
-aides . saint-brieuc armor:
-  remplace: intercommunalité
-  titre: Saint-Brieuc Armor Agglomération
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Saint-Brieuc Armor Agglomération'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-  valeur: 25% * vélo . prix
-  plafond: 150€
-  lien: https://www.saintbrieuc-armor-agglo.bzh/information/actualites/aide-a-lachat-de-votre-velo-electrique-ou-velo-cargo-en-2023-2438
+# aides . saint-brieuc armor:
+#   remplace: intercommunalité
+#   titre: Saint-Brieuc Armor Agglomération
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CA Saint-Brieuc Armor Agglomération'
+#       - une de ces conditions:
+#           - vélo . électrique
+#           - vélo . cargo
+#   valeur: 25% * vélo . prix
+#   plafond: 150€
+#   lien: https://www.saintbrieuc-armor-agglo.bzh/information/actualites/aide-a-lachat-de-votre-velo-electrique-ou-velo-cargo-en-2023-2438
 
 aides . lannion-trégor:
   remplace: intercommunalité
