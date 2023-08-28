@@ -12,7 +12,11 @@
 			.trim()
 			.replace(new RegExp(`ville ${determinants}`, 'i'), '')
 			.replace(new RegExp(`communauté des? communes ${determinants}?`, 'i'), '')
-			.replace(new RegExp(`communauté( urbaine| d'agglomération)? ${determinants}?`, 'i'), '')
+			.replace(
+				new RegExp(`communauté( urbaine| d'agglomération | de communes)? ?${determinants}?`, 'i'),
+				''
+			)
+			.replace(new RegExp(`agglomération\s*$`, 'i'), '')
 			.replace(new RegExp(`département ${determinants}?`, 'i'), '')
 			.trim();
 
