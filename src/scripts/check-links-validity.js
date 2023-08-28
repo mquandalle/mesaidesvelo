@@ -2,11 +2,18 @@ import fs from 'node:fs';
 import yaml from 'js-yaml';
 import fetch from 'node-fetch';
 
+// cli param --grep to filter the links to check
+const grepOptionIndex = process.argv
+	.slice(2)
+	.findIndex((arg) => arg.includes('--grep') || arg.includes('-g'));
+
+const grepFilter = grepOptionIndex !== -1 ? process.argv.slice(2)[grepOptionIndex + 1] : null;
+
 // Extrait la liste des liens référencés dans la base de règles
 const aidesSrc = fs.readFileSync(new URL('../aides.yaml', import.meta.url).pathname);
 const links = Object.entries(yaml.load(aidesSrc))
 	.reduce((acc, [, rule]) => [...acc, { title: rule?.titre ?? null, link: rule?.lien ?? null }], [])
-	.filter(({ link }) => link !== null);
+	.filter(({ link }) => link !== null && (grepFilter === null || link.includes(grepFilter)));
 
 // Certains sites référencés ont des problèmes de certificats, mais ce n'est pas
 // ce que nous cherchons à détecter ici.
