@@ -20,7 +20,7 @@ if (!fs.existsSync(metadataDirectory)) {
 
 // Map aides-jeunes identifiers with mesaidesvélo types.
 function imgKey({ type, code_siren, code_insee }) {
-	const toInt = (str) => parseInt(str.replace(/[^\d]/g, ''), 10);
+	const toInt = (str) => str.replace(/[^\d]/g, '');
 	if (type === 'commune') {
 		return `code insee - ${toInt(code_insee)}`;
 	} else if (type === 'epci') {
@@ -36,7 +36,7 @@ function imgKey({ type, code_siren, code_insee }) {
 
 const imagesFromAidesJeunes = Object.fromEntries([
 	...fs.readdirSync(metadataDirectory).map((file) => {
-		const filePath = metadataDirectory + '/' + file;
+		const filePath = join(metadataDirectory, file);
 		const fileContent = fs.readFileSync(filePath, 'utf8');
 		const fieldsToRetrieve = ['imgSrc', 'type', 'code_siren', 'code_insee'];
 		const data = Object.fromEntries(
