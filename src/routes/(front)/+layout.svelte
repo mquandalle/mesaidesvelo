@@ -84,12 +84,6 @@
 				Mes<span class="text-green-800">Aides</span>Vélo
 				<Emoji emoji="🚲" className="-mt-2" />
 			</a>
-			<a
-				href="https://aideretrofit.fr"
-				rel="external"
-				class="underline underline-green-400 underline-offset-4 text-green-600 hover:text-green-400 <sm:hidden"
-				>Aide Retrofit</a
-			>
 		{/if}
 	</header>
 	<div class="pb-6 {!isEmbeded ? 'flex-1' : ''}">

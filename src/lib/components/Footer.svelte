@@ -16,6 +16,11 @@
 				<a href="/a-propos" class="hover:(underline text-green-600)">À propos</a>
 			</li>
 			<li>
+				<a href="https://aideretrofit.fr" rel="external" class="  hover:(underline text-green-600)"
+					>Aide Retrofit</a
+				>
+			</li>
+			<li>
 				<a href="/liste-aides" class="hover:(underline text-green-600)">Liste des aides</a>
 			</li>
 			<li>

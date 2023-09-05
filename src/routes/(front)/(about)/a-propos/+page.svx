@@ -26,15 +26,4 @@ toutes. Il nous faut donc les saisir à la main une par une.
 
 ➡ Voir la [liste des aides intégrées](/liste-aides)
 
-## Comment ajouter ou modifier une aide ?
-
-Pour le moment l’ajout ou la modification d’une aide est relativement technique. Cela requiert d'être
-familier avec les outils utilisés pour le développement d’une application web (git, npm, yaml,
-etc.).
-
-Nous prévoyons de développer un éditeur sous la forme d’un formulaire en ligne
-pour permettre à un large public de volontaires (citoyens, associations,
-collectivités, etc.) de participer directement à la mise à jour des données.
-Conçevoir cet éditeur demande un travail conséquent, mais c’est [prévu pour 2022](https://github.com/mquandalle/mesaidesvelo/issues/69).
-
 </div>
