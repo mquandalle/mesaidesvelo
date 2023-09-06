@@ -841,6 +841,30 @@ aides . toulouse:
       - sinon: 0€
   lien: https://www.toulouse-metropole.fr/missions/environnement/qualite-de-l-air/prime-velo
 
+aides . perpignan métropole:
+  remplace: intercommunalité
+  titre: Perpignan Méditerranée Métropole
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CU Perpignan Méditerranée Métropole'
+      - une de ces conditions:
+          - vélo . cargo
+          - toutes ces conditions:
+              - vélo . électrique
+              - variations:
+                  - si: vélo . neuf
+                    alors: vélo . prix <= 2500€
+                  - sinon: vélo . prix <= 1500€
+          - toutes ces conditions:
+              - vélo . mécanique
+              - vélo . prix >= 600€
+              - vélo . prix <= 1500€
+          - toutes ces conditions:
+              - vélo . motorisation
+              - vélo . prix <= 1500€
+  valeur: 250€
+  lien: https://aide-velo.perpignan-mediterranee.org/
+
 aides . tarbes lourdes pyrénées:
   remplace: intercommunalité
   titre: Tarbes Lourdes Pyrénées Communauté d'agglomération
@@ -2212,7 +2236,7 @@ aides . colmar:
     - si: vélo . mécanique
       alors: 120€
     - sinon: 0€
-  lien: https://www.colmar.fr/sites/colmar.fr/files/documents/35-FE-participation-achat-velo-neuf.pdf
+  lien: https://www.colmar.fr/sites/colmar.fr/files/documents/35-fe-participation-achat-velo-neuf.pdf
 
 aides . avignon:
   remplace: intercommunalité
@@ -3216,17 +3240,6 @@ aides . genevois:
   valeur: 250€
   lien: https://www.cc-genevois.fr/fr/vie-pratique-et-services/vous-deplacer/velo-ou-pied
 
-aides . pays rochois:
-  remplace: intercommunalité
-  titre: Le Pays Rochois Communauté de communes
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC du Pays Rochois'
-      - vélo . électrique
-  valeur: 20% * vélo . prix
-  plafond: 200€
-  lien: https://www.ccpaysrochois.fr/mes-services-demarches/transports/vae/
-
 aides . arve salève:
   remplace: intercommunalité
   titre: Communauté de communes Arve & Salève
@@ -3347,6 +3360,26 @@ aides . combloux:
   valeur: 200€
   plafond: 80% * vélo . prix
   lien: https://mairie-combloux.fr/aide-a-lachat-dun-velo-a-assistance-electrique/
+
+aides . châtel:
+  remplace: commune
+  titre: Ville de Châtel
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '74063'
+      - vélo . électrique
+  valeur: 200€
+  lien: https://www.mairie-chatel.com/Actions-environnement
+
+aides . le vigan:
+  remplace: commune
+  titre: Ville du Vigan
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '30350'
+      - vélo . électrique
+  valeur: 200€
+  lien: https://www.levigan.fr/mes-demarches-administratives/velo-finance/
 
 aides . angers:
   remplace: intercommunalité
@@ -3570,17 +3603,6 @@ aides . cotentin:
   valeur: 40% * vélo . prix
   plafond: 350 €
   lien: https://www.capcotentin.fr/aide-a-lacquisition/
-
-aides . coutances mer et bocage:
-  remplace: intercommunalité
-  titre: Coutance Mer et Bocage
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Coutances Mer et Bocage'
-      - vélo . électrique ou mécanique
-  valeur: 25% * vélo . prix
-  plafond: 200€
-  lien: https://www.coutancesmeretbocage.fr/accueil/actu-29-aides-v%C3%A9lo/
 
 aides . saint-lô:
   remplace: intercommunalité
@@ -4836,7 +4858,7 @@ aides . drancy:
     - si: ménage imposable
       alors: 200€
     - sinon: 100€
-  lien: https://www.drancy.fr/les-services-municipaux-et-les-demarches-administratives/annuaire-des-demarches-411/subvention-pour-l-achat-d-un-velo-electrique-1821.html?cHash=e554e270f39900d5ba8d0b528584d11c
+  lien: https://www.drancy.fr/annuaire-des-demarches/transport-et-mobilite/subvention-pour-l-achat-d-un-velo-electrique-1167.html
 
 aides . rives de moselle:
   remplace: intercommunalité
@@ -5504,33 +5526,34 @@ aides . plaine d'estrées:
       - sinon: 0€
   lien: https://www.ccplaine-estrees.com/actualite/renouvellement-de-laide-a-lachat-dun-velo/
 
-aides . grand angouleme:
-  remplace: intercommunalité
-  titre: Grand Angoulême
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA du Grand Angoulême'
-      - vélo . électrique ou mécanique
-      - revenu fiscal de référence <= 2000 €/mois
-  variations:
-    - si: vélo . électrique
-      alors:
-        variations:
-          - si: revenu fiscal de référence <= 1000 €/mois
-            alors:
-              valeur: 50% * vélo . prix
-              plafond: 400 €
-          - si: revenu fiscal de référence <= 1500 €/mois
-            alors:
-              valeur: 30% * vélo . prix
-              plafond: 300 €
-          - sinon:
-              valeur: 20% * vélo . prix
-              plafond: 200 €
-    - sinon:
-        valeur: 50% * vélo . prix
-        plafond: 150 €
-  lien: https://aides-subventions.grandangouleme.fr/catalogue/prime-vae/
+# Épuisé pour 2023
+# aides . grand angouleme:
+#   remplace: intercommunalité
+#   titre: Grand Angoulême
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CA du Grand Angoulême'
+#       - vélo . électrique ou mécanique
+#       - revenu fiscal de référence <= 2000 €/mois
+#   variations:
+#     - si: vélo . électrique
+#       alors:
+#         variations:
+#           - si: revenu fiscal de référence <= 1000 €/mois
+#             alors:
+#               valeur: 50% * vélo . prix
+#               plafond: 400 €
+#           - si: revenu fiscal de référence <= 1500 €/mois
+#             alors:
+#               valeur: 30% * vélo . prix
+#               plafond: 300 €
+#           - sinon:
+#               valeur: 20% * vélo . prix
+#               plafond: 200 €
+#     - sinon:
+#         valeur: 50% * vélo . prix
+#         plafond: 150 €
+#   lien: https://aides-subventions.grandangouleme.fr/catalogue/prime-vae/
 
 aides . massif du vercors:
   remplace: intercommunalité
@@ -6228,6 +6251,7 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'CA Luberon Monts de Vaucluse'
           - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
           - localisation . epci = 'CC Saint-Marcellin Vercors Isère Communauté'
+          - localisation . epci = 'CU Perpignan Méditerranée Métropole'
       alors: 1000 €
     - si:
         une de ces conditions:
@@ -6317,7 +6341,6 @@ vélo . occasion:
       - aides . ambert livradois forez
       - aides . limoges metropole
       - aides . coeur de nacre
-      - aides . grand angouleme
       - aides . belfort
       - aides . dieppe
       - aides . massif du vercors
@@ -6337,6 +6360,7 @@ vélo . occasion:
       - aides . moselle et madon
       - aides . canélan
       - aides . kremlin-bicetre
+      - aides . perpignan métropole
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?

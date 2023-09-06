@@ -1,5 +1,24 @@
 # Historique des modifications
 
+## v3.0.23 - 06/09/2023
+
+Ajoute les aides suivantes :
+
+- Perpignan Méditerranée Métropole
+- Ville de Châtel
+- Ville du Vigan
+
+Modifie les liens suivants :
+
+- Ville de Colmar
+- Ville de Drancy
+
+Supprime les aides suivantes :
+
+- Grand Angoulême
+- Le Pays Rochois Communauté de communes
+- Coutance Mer et Bocage
+
 ## v3.0.22 - 24/08/2023
 
 Modifie les aides suivantes :
