@@ -1,3 +1,0 @@
-{
-	"extends": "./.svelte-kit/mesaidesvelo.fr/tsconfig.json"
-}

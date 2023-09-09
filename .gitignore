@@ -6,10 +6,11 @@ node_modules
 .env
 .vercel_build_output/
 .vercel
+local/
 *.tmp
 *.tmp.*
 data-fetch/miniatures/aides-jeunes-repo
 
 # Generated at build time
-src/data
-src/lib/data
+src/lib/data/*
+!src/lib/data/classement-villeplus.json

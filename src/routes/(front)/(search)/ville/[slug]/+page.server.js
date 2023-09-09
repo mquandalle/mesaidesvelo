@@ -153,7 +153,16 @@ export async function load({ params }) {
 		};
 	}
 
-	infos.classementVillePlus = classementVilleplus.findIndex((epci) => epci === localisation.epci);
+	const posClassementVillePlus = classementVilleplus.findIndex(
+		(epci) => epci === localisation.epci
+	);
+
+	if (posClassementVillePlus > -1) {
+		infos.classementVillePlus = {
+			position: posClassementVillePlus + 1,
+			total: classementVilleplus.length,
+		};
+	}
 
 	if (barometreFubPerCity[localisation.codeInsee]) {
 		const labelsFub = {

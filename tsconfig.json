@@ -1,0 +1,6 @@
+{
+	"extends": "./.svelte-kit/mesaidesvelo.fr/tsconfig.json",
+	"compilerOptions": {
+		"types": ["bun-types"]
+	}
+}

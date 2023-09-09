@@ -254,11 +254,12 @@
 				Vous pouvez consultez le détail des notes sur le
 				<a href="https://barometre.parlons-velo.fr/2021/palmares/">site du baromètre</a>.
 			</p>
-			{#if infos.classementVillePlus > -1}
+			{#if infos.classementVillePlus}
 				<p>
-					Par ailleurs {leEPCI} se classe {infos.classementVillePlus + 1}<sup
-						>{infos.classementVillePlus === 0 ? 'ère' : 'ème'}</sup
-					>/20 au <a href="https://villes.plus/cyclables">classement ville.plus</a> des villes cyclables.
+					Par ailleurs {leEPCI} se classe {infos.classementVillePlus.position}<sup
+						>{infos.classementVillePlus.position === 1 ? 'ère' : 'ème'}</sup
+					>/{infos.classementVillePlus.total} au
+					<a href="https://villes.plus/cyclables/metropoles">classement ville.plus</a> des villes cyclables.
 					Ce classement mesure la part de pistes cyclables sécurisées pour relier les différentes mairies
 					de la métropole.
 				</p>
