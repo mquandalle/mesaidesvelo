@@ -3833,17 +3833,17 @@ aides . seine-maritime:
     - si:
         variations:
           - si: personnes dans le foyer fiscal = 1
-            alors: revenu fiscal de référence <= 20805/an
+            alors: revenu fiscal de référence <= 20805€/an
           - si: personnes dans le foyer fiscal = 2
-            alors: revenu fiscal de référence <= 30427/an
+            alors: revenu fiscal de référence <= 30427€/an
           - si: personnes dans le foyer fiscal = 3
-            alors: revenu fiscal de référence <= 36591/an
+            alors: revenu fiscal de référence <= 36591€/an
           - si: personnes dans le foyer fiscal = 4
-            alors: revenu fiscal de référence <= 42748/an
+            alors: revenu fiscal de référence <= 42748€/an
           - si: personnes dans le foyer fiscal = 5
-            alors: revenu fiscal de référence <= 48930/an
+            alors: revenu fiscal de référence <= 48930€/an
           - si: personnes dans le foyer fiscal > 5
-            alors: revenu fiscal de référence <= 48930/an + (personnes dans le foyer fiscal - 5) * 6165/an
+            alors: revenu fiscal de référence <= 48930€/an + (personnes dans le foyer fiscal - 5) * 6165€/an
       alors: 400€
     - sinon: 200€
   lien: https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/ma-prime-velo-76.html
@@ -4582,9 +4582,9 @@ aides . feignies:
   plafond: vélo . prix
   lien: http://www.ville-feignies.fr/prime-velo/
 
-aides . ambrechies:
+aides . wambrechies:
   remplace: commune
-  titre:
+  titre: Ville de Wambrechies
   applicable si: localisation . code insee = '59636'
   valeur: 50% * vélo . prix
   plafond:
@@ -4727,6 +4727,8 @@ aides . valenciennes:
       - si: vélo . neuf
         alors:
           variations:
+            - si: vélo . cargo
+              alors: 600€
             - si: vélo . électrique
               alors: 400€
             - si: vélo . mécanique
@@ -4735,6 +4737,8 @@ aides . valenciennes:
       - si: vélo . occasion
         alors:
           variations:
+            - si: vélo . cargo
+              alors: 300€
             - si: vélo . électrique
               alors: 200€
             - si: vélo . mécanique
@@ -6013,6 +6017,17 @@ aides . castelnau de médoc:
       - revenu fiscal de référence <= première tranche IR
   valeur: 100€
   lien: https://www.mairie-castelnau-medoc.fr/actus/1557-aide-a-l-acquisition-de-velos
+
+aides . saulieu:
+  remplace: commune
+  titre: Communauté de communes du Saulieu
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC de Saulieu'
+      - vélo . électrique
+      - vélo . prix >= 650€
+  valeur: 100€
+  lien: https://www.saulieu-morvan.fr/joomla/tourisme-loisirs
 
 aides . la côtière à montluel:
   remplace: intercommunalité

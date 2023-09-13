@@ -1,5 +1,17 @@
 # Historique des modifications
 
+## v3.0.24 - 13/09/2023
+
+Ajoute l'aide suivante :
+
+- Communauté de communes du Saulieu
+
+Corrige les aides suivantes :
+
+- Département de Seine-Maritime
+- Valenciennes Métropole
+- Ville de Wambrechies
+
 ## v3.0.23 - 06/09/2023
 
 Ajoute les aides suivantes :
