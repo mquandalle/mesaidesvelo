@@ -1,5 +1,11 @@
 # Historique des modifications
 
+## next
+
+Mise à jour de l'aide suivante :
+
+- Métropole Grand Lyon
+
 ## v3.0.24 - 13/09/2023
 
 Ajoute l'aide suivante :

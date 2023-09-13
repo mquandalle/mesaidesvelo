@@ -248,35 +248,60 @@ aides . lyon:
   variations:
     - si:
         toutes ces conditions:
-          - vélo . mécanique simple
-          - vélo . prix <= 150€
           - vélo . occasion
+          - vélo . prix <= 150€
+          - revenu fiscal de référence <= 19600€/an
       alors:
         valeur: 100% * vélo . prix
         plafond: 100€
-    - si: vélo . neuf
+    - si:
+        toutes ces conditions:
+          - vélo . neuf
+          - vélo . cargo électrique
       alors:
         valeur: 50% * vélo . prix
         plafond:
           variations:
-            - si: vélo . cargo
-              alors:
-                variations:
-                  - si: revenu fiscal de référence <= 16800 €/an
-                    alors: 800 €
-                  - sinon: 100€
-            - si:
-                toutes ces conditions:
-                  - vélo . prix <= 3000 €
-                  - une de ces conditions:
-                      - vélo . pliant
-                      - vélo . électrique
-              alors:
-                variations:
-                  - si: revenu fiscal de référence <= 16800 €/an
-                    alors: 500 €
-                  - sinon: 100€
-            - sinon: 0€
+            - si: revenu fiscal de référence <= 19600 €/an
+              alors: 1000 €
+            - sinon: 200 €
+    - si:
+        toutes ces conditions:
+          - vélo . neuf
+          - vélo . cargo
+      alors:
+        valeur: 50% * vélo . prix
+        plafond:
+          variations:
+            - si: revenu fiscal de référence <= 19600 €/an
+              alors: 800 €
+            - sinon: 200 €
+    - si:
+        toutes ces conditions:
+          - vélo . neuf
+          - une de ces conditions:
+              - vélo . électrique
+              - vélo . motorisation
+          - vélo . prix <= 3200 €
+      alors:
+        valeur: 50% * vélo . prix
+        plafond:
+          variations:
+            - si: revenu fiscal de référence <= 19600 €/an
+              alors: 500 €
+            - sinon: 100 €
+    - si:
+        toutes ces conditions:
+          - vélo . neuf
+          - vélo . mécanique
+          - vélo . prix <= 3200 €
+      alors:
+        valeur: 50% * vélo . prix
+        plafond:
+          variations:
+            - si: revenu fiscal de référence <= 19600 €/an
+              alors: 300 €
+            - sinon: 100 €
     - sinon: 0€
   lien: https://www.grandlyon.com/services/aide-achat-velo.html
 
