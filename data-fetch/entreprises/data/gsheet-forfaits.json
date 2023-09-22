@@ -1,0 +1,761 @@
+{
+  "range": "'Aide par entreprise'!A2:E958",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "Accor",
+      "20000",
+      "451"
+    ],
+    [
+      "Airbus",
+      "50000",
+      "0"
+    ],
+    [
+      "Air Liquide",
+      "5000",
+      "100",
+      "Réservé aux salariés né bénéficiant pas du remboursement d'un abonnement aux transports publics"
+    ],
+    [
+      "Alstom Transport SA",
+      "25000",
+      "0"
+    ],
+    [
+      "Arcelormittal France",
+      "15000",
+      "0"
+    ],
+    [
+      "Atos France",
+      "5000",
+      "300",
+      "Également une aide à l'achat de vélo"
+    ],
+    [
+      "AXA France",
+      "95000",
+      "0"
+    ],
+    [
+      "BNP Paribas",
+      "190000",
+      "240",
+      "Montant variable de 120€ à 240€"
+    ],
+    [
+      "TF1",
+      "3000",
+      "400"
+    ],
+    [
+      "Bouygues Telecom",
+      "8000",
+      "800"
+    ],
+    [
+      "Bouygues Immobilier",
+      "",
+      "0"
+    ],
+    [
+      "Colas",
+      "",
+      "0"
+    ],
+    [
+      "Bouygues Construction",
+      "",
+      "300",
+      "Également une aide à l'achat d'un vélo électrique à hauteur de 300€"
+    ],
+    [
+      "Capgemini",
+      "",
+      "300"
+    ],
+    [
+      "Carrefour",
+      "320000",
+      "200",
+      "Indemnité kilomètrique"
+    ],
+    [
+      "Crédit Agricole",
+      "37000",
+      "0"
+    ],
+    [
+      "Danone",
+      "",
+      "0"
+    ],
+    [
+      "Dassault",
+      "",
+      "0"
+    ],
+    [
+      "Engie",
+      "",
+      "0"
+    ],
+    [
+      "Essilor Luxottica",
+      "",
+      "0"
+    ],
+    [
+      "Hermès",
+      "",
+      "200"
+    ],
+    [
+      "Kering",
+      "",
+      "0"
+    ],
+    [
+      "L'Oréal",
+      "",
+      "500"
+    ],
+    [
+      "Legrand",
+      "",
+      "0"
+    ],
+    [
+      "LVMH",
+      "",
+      "0"
+    ],
+    [
+      "Michelin",
+      "",
+      "0"
+    ],
+    [
+      "Orange",
+      "150000",
+      "400",
+      "",
+      "http://guide-orange.sudptt.org/spip.php?article253&lang=fr"
+    ],
+    [
+      "Pernod Ricard",
+      "",
+      "0"
+    ],
+    [
+      "Publicis Groupe",
+      "",
+      "0"
+    ],
+    [
+      "Renault",
+      "180000",
+      "0"
+    ],
+    [
+      "Safran",
+      "",
+      "500"
+    ],
+    [
+      "Schneider Electric",
+      "",
+      "40"
+    ],
+    [
+      "Sodexo",
+      "",
+      "0"
+    ],
+    [
+      "Stellantis",
+      "",
+      "0"
+    ],
+    [
+      "Teleperformance",
+      "",
+      "200"
+    ],
+    [
+      "Thalès",
+      "",
+      "0"
+    ],
+    [
+      "TotalEnergies",
+      "98200",
+      "500"
+    ],
+    [
+      "Veolia",
+      "",
+      "0"
+    ],
+    [
+      "Vinci",
+      "200000",
+      "200"
+    ],
+    [
+      "Vivendi",
+      "",
+      "240"
+    ],
+    [
+      "Wordline",
+      "",
+      "240"
+    ],
+    [
+      "EDF",
+      "150000",
+      "0",
+      "Le forfait mobilite durable est pour du covoiturage avec usage des plateformes recommandés pour l’entreprise. Il n’y a pas de forfait pour le vélo.",
+      "https://www.droits-salaries.com/552081317-edf-electricite-de-france/55208131766522-siege/T07519016856-accord-collectif-relatif-a-la-mobilite-durable-du-groupe-edf-autres-teletravail.shtml"
+    ],
+    [
+      "Covea",
+      "",
+      "0"
+    ],
+    [
+      "Lactalis Informatique",
+      "",
+      "0"
+    ],
+    [
+      "La Poste",
+      "",
+      "0"
+    ],
+    [
+      "Datadog France",
+      "",
+      "500"
+    ],
+    [
+      "Harmonie mutuelle",
+      "",
+      "200"
+    ],
+    [
+      "Mutex",
+      "",
+      "200"
+    ],
+    [
+      "Herta",
+      "",
+      "500"
+    ],
+    [
+      "Mediametrie",
+      "",
+      "0"
+    ],
+    [
+      "Valeo Vision",
+      "",
+      "0"
+    ],
+    [
+      "Eco-Compteur",
+      "",
+      "500"
+    ],
+    [
+      "Valeuriad",
+      "",
+      "500"
+    ],
+    [
+      "Via ID",
+      "",
+      "500",
+      "Politique mobilité comprenant le FMD et un programme Velotaf"
+    ],
+    [
+      "Thales",
+      "",
+      "200"
+    ],
+    [
+      "AMAPA",
+      "",
+      "0"
+    ],
+    [
+      "Lidl",
+      "",
+      "0"
+    ],
+    [
+      "CVMO",
+      "",
+      "200"
+    ],
+    [
+      "Kpmg",
+      "",
+      "450"
+    ],
+    [
+      "CIRAD",
+      "",
+      "0"
+    ],
+    [
+      "Sfeir Lille",
+      "",
+      "0"
+    ],
+    [
+      "OVHcloud",
+      "2000",
+      "200",
+      "OVHcloud a copié cette aide à tous les employés à l'international (vous avez la même aide si vous travaillez à Montréal alors qu'OVHcloud paye des impôts dessus)"
+    ],
+    [
+      "Capgemini Technology Services",
+      "",
+      "500"
+    ],
+    [
+      "Fortil Sud Ouest",
+      "",
+      "0"
+    ],
+    [
+      "La pantoufle du berry",
+      "",
+      "200"
+    ],
+    [
+      "Nxo France",
+      "",
+      "0"
+    ],
+    [
+      "Decathlon France",
+      "100000",
+      "500"
+    ],
+    [
+      "Fenwick-linde",
+      "",
+      "0"
+    ],
+    [
+      "Bedrock",
+      "",
+      "33"
+    ],
+    [
+      "RTE Reseau De Transport D Electricite",
+      "",
+      "400"
+    ],
+    [
+      "Crédit Agricole Atlantique Vendee",
+      "",
+      "200"
+    ],
+    [
+      "Ibm Services Center France",
+      "",
+      "50"
+    ],
+    [
+      "BeeToGreen",
+      "",
+      "500"
+    ],
+    [
+      "Valeuriad",
+      "",
+      "500",
+      "",
+      "https://twitter.com/valeuriad/status/1374008781592522752"
+    ],
+    [
+      "BOUYGUES IMMOBILIER",
+      "",
+      "300"
+    ],
+    [
+      "Ecocert",
+      "",
+      "500"
+    ],
+    [
+      "Sodirev",
+      "",
+      "0"
+    ],
+    [
+      "Les Laboratoires Servier",
+      "5000",
+      "420"
+    ],
+    [
+      "Generix Group",
+      "",
+      "200",
+      "Source Intranet Interne "
+    ],
+    [
+      "Ozitem",
+      "",
+      "500",
+      "Mise en place du forfait mobilité durable depuis mai 2022"
+    ],
+    [
+      "Sanofi",
+      "",
+      "60"
+    ],
+    [
+      "Macif",
+      "",
+      "150"
+    ],
+    [
+      "Societe Pour L'informatique Industrielle",
+      "",
+      "400"
+    ],
+    [
+      "Iliad",
+      "",
+      "0"
+    ],
+    [
+      "Leroy Merlin France",
+      "",
+      "0",
+      "Aide a l'achat d'un vélo  musculaire: max 180€, électrique max 300€. Prime covoiturage: max 150€"
+    ],
+    [
+      "Fedex Express Fr",
+      "",
+      "0"
+    ],
+    [
+      "Enedis ",
+      "",
+      "200"
+    ],
+    [
+      "computacenter",
+      "",
+      "0"
+    ],
+    [
+      "Zara France",
+      "",
+      "42"
+    ],
+    [
+      "Stanley Black & Decker Manufacturing Sas",
+      "",
+      "0",
+      "L'employeur ne souhaite pas appliquer ce dispositif."
+    ],
+    [
+      "Ekium",
+      "",
+      "200",
+      "Pour bénéficier du forfait mobilité durable, les collaborateurs doivent justifier d’un usage effectif d’au moins 100 jours* au cours de l’année civile d’un ou plusieurs modes de transports décrits à l’article 5 : Vélo, covoiturage, autopartage (la trottinette n'en fait pas parti). *Pour l’année 2022, l’accord prenant effet le 1er mars 2022, le nombre de jours d’usage effectif est ramené à 80 jours."
+    ],
+    [
+      "Nestle France",
+      "",
+      "200"
+    ],
+    [
+      "Labouesse",
+      "",
+      "0"
+    ],
+    [
+      "arm",
+      "",
+      "500"
+    ],
+    [
+      "Grtgaz",
+      "",
+      "384",
+      "32€ x 12 mois"
+    ],
+    [
+      "Sopra Steria Group",
+      "",
+      "300"
+    ],
+    [
+      "SNCF",
+      "",
+      "50"
+    ],
+    [
+      "Ökofen France",
+      "",
+      "500"
+    ],
+    [
+      "Médiamétrie",
+      "",
+      "0"
+    ],
+    [
+      "Institut Pasteur",
+      "",
+      "180"
+    ],
+    [
+      "CFDT",
+      "",
+      "500"
+    ],
+    [
+      "Vinci",
+      "",
+      "0",
+      "refusé par la direction, réunion NAO"
+    ],
+    [
+      "Hôpital CH4V saint cloud, 92",
+      "",
+      "300"
+    ],
+    [
+      "M2I",
+      "",
+      "700"
+    ],
+    [
+      "Engie",
+      "",
+      "500"
+    ],
+    [
+      "Etudes et Chantiers",
+      "",
+      "400",
+      "Ce montant date de 2021. Il a probablement augmenté depuis cette date"
+    ],
+    [
+      "Kinéis",
+      "",
+      "150"
+    ],
+    [
+      "Archipel aides et soins à domicile",
+      "",
+      "500"
+    ],
+    [
+      "Navya",
+      "",
+      "200"
+    ],
+    [
+      "RTE Réseau de Transport Electricité",
+      "",
+      "400",
+      "",
+      "https://www.droits-salaries.com/444619258-rte-reseau-de-transport-d-electricite/44461925802482-siege/T09222035792-accord-relatif-au-forfait-mobilite-durable-applicable-au-sein-de-rte-autres.shtml"
+    ],
+    [
+      "Sas Vestas France",
+      "",
+      "800"
+    ],
+    [
+      "RTE",
+      "",
+      "400"
+    ],
+    [
+      "Lyra Network",
+      "",
+      "200"
+    ],
+    [
+      "Verallia",
+      "",
+      "451,2",
+      "37,6€ par mois"
+    ],
+    [
+      "Verallia Packaging",
+      "",
+      "451,2",
+      "37,6€ par mois"
+    ],
+    [
+      "BNP Paribas",
+      "",
+      "360"
+    ],
+    [
+      "SNCF",
+      "",
+      "400",
+      "Minimum 5 fois par mois pour une distance de 2km minimum."
+    ],
+    [
+      "Ge Medical Systems",
+      "",
+      "500"
+    ],
+    [
+      "Sncf Reseau",
+      "",
+      "400"
+    ],
+    [
+      "Interway",
+      "",
+      "500"
+    ],
+    [
+      "Ey & Associes",
+      "",
+      "400"
+    ],
+    [
+      "Travelfactory",
+      "",
+      "500"
+    ],
+    [
+      "B.r.l Exploitation",
+      "",
+      "300"
+    ],
+    [
+      "Spie Ics",
+      "",
+      "170"
+    ],
+    [
+      "SNCF",
+      "",
+      "400"
+    ],
+    [
+      "Sauvegarde de l’isere",
+      "",
+      "0"
+    ],
+    [
+      "Solvay Operations France",
+      "",
+      "700"
+    ],
+    [
+      "Inetum",
+      "",
+      "200",
+      "0.25€/km parcouru a vélo sur les trajets domicile-lieu de travail, a déclarer chaque mois dans le compte rendu d'activité, plafond 200€/an (soit 800km indemnisés)"
+    ],
+    [
+      "snam",
+      "",
+      "0"
+    ],
+    [
+      "Elsys Design Sa",
+      "",
+      "0"
+    ],
+    [
+      "Kalhyge",
+      "",
+      "1000"
+    ],
+    [
+      "Sauvegarde isere",
+      "",
+      "500"
+    ],
+    [
+      "General electric",
+      "",
+      "300"
+    ],
+    [
+      "CGI",
+      "",
+      "600"
+    ],
+    [
+      "Nature En Occitanie",
+      "",
+      "200"
+    ],
+    [
+      "CGI",
+      "",
+      "600",
+      "Le montant était de 500€ en 2022 comme mentionné dans le document, passé à 600 en 2023",
+      "https://www.cgi.com/sites/default/files/2023-03/cgi-2022-esg-report-fr.pdf#page=31"
+    ],
+    [
+      "Vinci",
+      "",
+      "0"
+    ],
+    [
+      "Triselec",
+      "",
+      "0"
+    ],
+    [
+      "Caisse d’allocations familiales",
+      "",
+      "400"
+    ],
+    [
+      "Elsan",
+      "",
+      "200"
+    ],
+    [
+      "Mi-gso Pcubed",
+      "",
+      "200"
+    ],
+    [
+      "Orange Business Services",
+      "",
+      "400"
+    ],
+    [
+      "Arte France",
+      "",
+      "500"
+    ],
+    [
+      "Savoye",
+      "",
+      "200",
+      "Indemnité kilométrique 0.25cts/km jusqu'à 200€/an"
+    ],
+    [
+      "Avem",
+      "",
+      "600"
+    ]
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "range": "'Liste noire'!A2:A1000",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "EDF"
+    ],
+    [
+      "Engie"
+    ],
+    [
+      "Decathlon"
+    ],
+    [
+      "Servier Monde"
+    ],
+    [
+      "Servier France"
+    ],
+    [
+      "Institut De Recherches Servier"
+    ],
+    [
+      "Biologie Servier"
+    ],
+    [
+      "Servier International"
+    ],
+    [
+      "Les Laboratoires Servier Industrie"
+    ],
+    [
+      "Servier Affaires Medicales"
+    ],
+    [
+      "Institut De Recherches Internationales Servier Iris"
+    ],
+    [
+      "Technologie Servier"
+    ]
+  ]
+}
