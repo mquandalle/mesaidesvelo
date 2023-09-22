@@ -1,10 +1,17 @@
 # Historique des modifications
 
-## next
+## v3.0.25 - 22/09/2023
 
-Mise à jour de l'aide suivante :
+Ajoute l'aide suivante :
+
+- Ville de Bègles
+
+Mise à jour des aides suivantes :
 
 - Métropole Grand Lyon
+- Communauté d’Agglomération Sophia Antipolis
+- Communauté d'agglomération du Bassin d'Arcachon Nord
+- Ville d’Unieux
 
 ## v3.0.24 - 13/09/2023
 

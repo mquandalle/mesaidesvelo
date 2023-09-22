@@ -2,6 +2,7 @@
 # - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 # - Département Calvados https://www.ouest-france.fr/normandie/falaise-14700/aide-a-lachat-de-velo-electrique-dans-le-calvados-le-departement-pourrait-relancer-sa-subvention-2f83a7b6-cd7d-11ed-b493-b75770ef7f91
 # - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
+# - Grand Calais, pays d'opale https://www.nordlittoral.fr/185513/article/2023-09-20/grand-calais-et-pays-d-opale-vont-vous-aider-acheter-un-velo
 #
 # Renouvellement ?
 # - https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
@@ -528,9 +529,12 @@ aides . unieux:
   titre: Ville d’Unieux
   applicable si:
     toutes ces conditions:
-      - localisation . code insee = '42316'
-      - vélo . électrique
+      - localisation . code insee = "42316"
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
   valeur: 300€
+  plafond: vélo . prix
   lien: https://www.ville-unieux.fr/65-accueil/actusmairie/583-aide-aux-economies-d-energie-transision-energetiques.html
 
 aides . bordeaux:
@@ -547,6 +551,16 @@ aides . bordeaux:
           - vélo . motorisation
   valeur: 100 €
   lien: https://sedeplacer.bordeaux-metropole.fr/a-velo/se-deplacer-a-velo/offres-velo/laide-a-lachat-velo
+
+aides . bègles:
+  remplace: commune
+  titre: Ville de Bègles
+  applicable si:
+    toutes ces conditions:
+      - aides . bordeaux > 0
+      - localisation . code insee = "33039"
+  valeur: 65€
+  lien: https://www.mairie-begles.fr/actualite/recuperateur-deau-et-velo-electrique-la-ville-vous-soutient-pour-vous-equiper/
 
 aides . cenon:
   remplace: commune
@@ -2819,18 +2833,29 @@ aides . sophia antipolis:
     toutes ces conditions:
       - localisation . epci = 'CA de Sophia Antipolis'
       - vélo . électrique ou mécanique
-  valeur: 25% * vélo . prix
-  plafond:
-    grille:
-      assiette: revenu fiscal de référence
-      tranches:
-        - plafond: 1200 €/mois
-          montant: 300€
-        - plafond: 1600 €/mois
-          montant: 200€
-        - plafond: 2000 €/mois
-          montant: 100€
-        - montant: 0€
+      - revenu fiscal de référence <= 19200 €/an
+  variations:
+    - si: vélo . cargo
+      alors:
+        valeur: 25% * vélo . prix
+        plafond: 500€
+    - si: vélo . électrique
+      alors:
+        valeur: 40% * vélo . prix
+        plafond:
+          variations:
+            - si: revenu fiscal de référence <= 6358 €/an
+              alors: 400€
+            - si: revenu fiscal de référence <= 14089 €/an
+              alors: 300€
+            - sinon: 200€
+    - si:
+        toutes ces conditions:
+          - vélo . mécanique
+          - revenu fiscal de référence <= 6358 €/an
+      alors:
+        valeur: 40% * vélo . prix
+        plafond: 150€
   lien: https://www.agglo-sophiaantipolis.fr/vivre-et-habiter/se-deplacer/le-velo/demande-subvention-aide-a-lacquisition
 
 aides . mougins:
@@ -2842,7 +2867,7 @@ aides . mougins:
       - vélo . électrique
   valeur: 25% * vélo . prix
   plafond: 300€
-  lien: https://www.espace-citoyens.net/mougins/espace-citoyens/Demande/NouvelleDemande/SUBV/D_SUBVAE
+  lien: https://www.agglo-sophiaantipolis.fr/vivre-et-habiter/se-deplacer/le-velo/demande-subvention-aide-a-lacquisition
 
 aides . mandelieu:
   remplace: commune
@@ -3996,11 +4021,12 @@ aides . canélan:
 
 aides . bassin d'arcachon nord:
   remplace: intercommunalité
-  titre: Communauté d'agglomération du Bassin d'Arcachon Nord
+  titre: Communauté d'agglomération du Bassin d’Arcachon Nord
   applicable si:
     toutes ces conditions:
       - localisation . epci = "CA du Bassin d'Arcachon Nord"
       - vélo . électrique
+      - revenu fiscal de référence <= 24030€/an
   valeur: 200€
   plafond: vélo . prix
   lien: https://coban-atlantique.fr/aide-financiere-de-la-coban-pour-lachat-dun-vae/

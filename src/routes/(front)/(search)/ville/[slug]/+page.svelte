@@ -25,7 +25,7 @@
 	<link rel="canonical" href="https://mesaidesvelo.fr/ville/{ville.slug}" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@bonforfait" />
-	<meta property="og:title" content="Découvre les aides à l’achat de vélo à {ville.nom}" />
+	<meta property="og:title" content="Découvrez les aides à l’achat de vélo à {ville.nom}" />
 	<meta
 		property="og:image"
 		content="https://mesaidesvelo.fr/ville/{ville.slug}/cover-sharing.png"
