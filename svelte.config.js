@@ -1,12 +1,12 @@
-import vercel from '@sveltejs/adapter-vercel';
 import { mdsvex } from 'mdsvex';
+import nodeAdapter from '@sveltejs/adapter-node';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: [mdsvex()],
 	extensions: ['.svelte', '.svx'],
 	kit: {
-		adapter: vercel(),
+		adapter: nodeAdapter(),
 		files:
 			process.env.VITE_SITE === 'aideretrofit.fr'
 				? {
