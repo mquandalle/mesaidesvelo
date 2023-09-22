@@ -18,9 +18,9 @@
 </script>
 
 <div
-	class="w-full max-w-screen-md m-auto bg-gradient-to-r from-green-100 to-green-200 py-8 px-4 sm:px-6 mt-6 flex flex-col gap-x-4 gap-y-2 sm:flex-row sm:items-center rounded"
+	class="w-full max-w-screen-md m-auto bg-dark-900 py-8 px-4 sm:px-6 mt-6 flex flex-col gap-x-4 gap-y-2 sm:flex-row sm:items-center rounded"
 >
-	<label for="localisation-input">Localisation :</label>
+	<label for="localisation-input" class="text-neutral-50">Localisation :</label>
 	<div class="flex-1 flex flex-row items-center bg-white shadow rounded-3xl px-3 pt-1">
 		<label for="localisation-input" class="relative z-99"
 			><svg

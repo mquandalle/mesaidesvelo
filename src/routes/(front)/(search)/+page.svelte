@@ -20,7 +20,7 @@
 	{#each biggestCities as city}
 		<a
 			href="/ville/{city.toLowerCase()}"
-			class="inline-block mb-2 border border-current rounded-xl text-green-500 px-3 py-1 mx-1 hover:(bg-green-500 text-white)"
+			class="inline-block mb-2 border border-current rounded-xl text-white bg-s4-green px-3 py-1 mx-1 hover:(bg-white text-s4-green)"
 			>{city}</a
 		>
 	{/each}

@@ -3,6 +3,6 @@
 </script>
 
 <span
-	class="text-xs bg-green-50 inline-block px-3 py-1 rounded text-gray-800 font-normal {className}"
+	class="text-xs bg-s4-green inline-block px-3 py-1 rounded text-white font-normal {className}"
 	><slot /></span
 >

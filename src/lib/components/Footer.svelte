@@ -13,21 +13,21 @@
 	{#if !isEmbeded}
 		<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600 md:justify-end">
 			<li>
-				<a href="/a-propos" class="hover:(underline text-green-600)">À propos</a>
+				<a href="/a-propos" class="hover:(underline text-s4-green)">À propos</a>
 			</li>
 			<li>
-				<a href="https://aideretrofit.fr" rel="external" class="  hover:(underline text-green-600)"
+				<a href="https://aideretrofit.fr" rel="external" class="  hover:(underline text-s4-green)"
 					>Aide Retrofit</a
 				>
 			</li>
 			<li>
-				<a href="/liste-aides" class="hover:(underline text-green-600)">Liste des aides</a>
+				<a href="/liste-aides" class="hover:(underline text-s4-green)">Liste des aides</a>
 			</li>
 			<li>
 				<a
 					href="https://github.com/mquandalle/mesaidesvelo"
 					target="_blank"
-					class="inline-flex gap-x-2 hover:(underline text-green-600)"
+					class="inline-flex gap-x-2 hover:(underline text-s4-green)"
 				>
 					Code Source
 					<svg viewBox="15 15 34 34" class="h-4"
