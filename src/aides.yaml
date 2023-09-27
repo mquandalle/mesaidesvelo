@@ -414,19 +414,6 @@ aides . feyzin:
     - sinon: 50€
   lien: https://feyzin.fr/actualites/560-aide-velo-electrique
 
-aides . grigny:
-  remplace: commune
-  titre: Ville de Grigny
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '91286'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-          - vélo . pliant
-  valeur: 100€
-  lien: https://www.mairie-grigny69.fr/prime-velo/
-
 aides . igny:
   remplace: commune
   titre: Ville d’Igny
@@ -1271,6 +1258,19 @@ aides . caen la mer:
       - vélo . électrique
   valeur: 50€
   lien: https://caenlamer.fr/actualites/aide-de-caen-la-mer-pour-lachat-de-velo-assistance-electrique
+
+aides . thue et mue:
+  remplace: commune
+  titre: Ville de Thue et Mue
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '14700'
+      - vélo . électrique
+  variations:
+    - si: revenu fiscal de référence <= 13489 €/an
+      alors: 150€
+    - sinon: 100€
+  lien: https://www.thueetmue.fr/sites/default/files/2022-08/Formulaire%20de%20demande%20aide%20achat%20v%C3%A9lo.pdf
 
 aides . hermanville-sur-mer:
   remplace: commune
@@ -2181,17 +2181,6 @@ aides . vauvert:
       - vélo . électrique
   valeur: 200€
   lien: https://www.vauvert.com/aide-2021-achat-velo-assistance-electrique/
-
-aides . pays d'issoire:
-  remplace: intercommunalité
-  titre: Agglo Pays D'Issoire
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = "CA Agglo Pays d'Issoire"
-      - vélo . électrique
-  valeur: 150€
-  plafond: vélo . prix
-  lien: http://www.mairie-egliseneuvedesliards.fr/fileadmin/Mairie_Egliseneuve-des-Liards/2-Documents/pdf/Prime-VAE_Formulaire-demande1309.pdf
 
 aides . cébazat:
   remplace: commune
@@ -3596,40 +3585,6 @@ aides . saint-jean-de-védas:
     - sinon: 0€
   lien: https://www.saintjeandevedas.fr/actualites/actu-2022/aide-a-l-acquisition-d-un-velo
 
-aides . annemasse:
-  remplace: intercommunalité
-  titre: Annemasse Agglo
-  applicable si: localisation . epci = 'CA Annemasse-Les Voirons-Agglomération'
-  valeur:
-    variations:
-      - si:
-          toutes ces conditions:
-            - vélo . cargo
-            - vélo . neuf
-            - vélo . prix >= 1000€
-        alors: 300€
-      - si:
-          toutes ces conditions:
-            - vélo . électrique
-            - vélo . neuf
-            - vélo . prix >= 750€
-            - vélo . prix <= 4500€
-        alors: 300€
-      - si:
-          toutes ces conditions:
-            - vélo . mécanique
-            - vélo . neuf
-            - vélo . prix >= 200€
-        alors: 100€
-      - si:
-          toutes ces conditions:
-            - vélo . mécanique
-            - vélo . occasion
-            - vélo . prix >= 100€
-        alors: 50€
-      - sinon: 0€
-  lien: https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/prime-velo-demandez-laide-en-quelques-clics
-
 aides . montlucon:
   remplace: intercommunalité
   titre: Montluçon Communauté
@@ -3735,7 +3690,7 @@ aides . saint-pair-sur-mer:
 
 aides . la rochelle:
   remplace: intercommunalité
-  titre: Ville de La Rochelle - Yélo
+  titre: Communauté d'Agglomération de La Rochelle - Yélo
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA de La Rochelle'
@@ -4163,22 +4118,6 @@ aides . plaine de l'ain:
     - sinon: 0€
   lien: https://www.cc-plainedelain.fr/fr/les-subventions.html
 
-aides . bourg-en-bresse:
-  remplace: commune
-  titre: Ville de Bourg-en-Bresse
-  applicable si: localisation . code insee = '01053'
-  valeur: vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo
-        alors: 400€
-      - si: vélo . électrique
-        alors: 300€
-      - si: vélo . mécanique
-        alors: 100€
-      - sinon: 0€
-  lien: https://www.montpon-menesterol.fr/fichiers/269/2023/2361/Le-lien-de-mars-2023.pdf
-
 aides . divonne-les-bains:
   remplace: commune
   titre: Ville de Divonne-les-Bains
@@ -4347,7 +4286,7 @@ aides . saumur val de loire:
       - revenu fiscal de référence <= première tranche IR
   valeur: 10% * vélo . prix
   plafond: 100€
-  lien: https://www.saumurvaldeloire.fr/images/pages/infos-demarches/mobilite/VAE_REGLEMENT_AIDE_ACHAT.pdf
+  lien: https://www.saumurvaldeloire.fr/images/VAE_REGLEMENT_AIDE_ACHAT_2023_2.pdf
 
 aides . loire layon aubance:
   remplace: intercommunalité
@@ -5211,8 +5150,8 @@ aides . cote d'emeraude:
   applicable si:
     toutes ces conditions:
       - localisation . epci = "CC Côte d'Emeraude"
-      - vélo . électrique
-      - revenu fiscal de référence <= première tranche IR
+      - vélo . électrique ou mécanique
+      - revenu fiscal de référence <= 20000€/an
   valeur: 100€
   lien: https://www.cote-emeraude.fr/laide-a-lachat-dun-velo-a-assitance-electrique/
 
@@ -6397,10 +6336,8 @@ vélo . occasion:
       - aides . charenton
       - aides . divonne-les-bains
       - aides . illkirch
-      - aides . annemasse
       - aides . valenciennes
       - aides . montpellier
-      - aides . grigny
       - aides . oullins
       - aides . marcq-en-baroeul
       - aides . grand villeneuvois

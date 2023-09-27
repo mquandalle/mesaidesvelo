@@ -1,5 +1,25 @@
 # Historique des modifications
 
+## v3.0.26 - 27/09/2023
+
+Ajoute l'aide suivante :
+
+- Ville de Thue et Mue
+
+Mise à jour des aides suivantes :
+
+- Communauté d'Agglomération de La Rochelle
+- Communauté de communes Côte d’Émeraude
+- Communauté d'Agglomération de La Rochelle
+- Saumur Val de Loire agglomération
+
+Supprime les aides suivantes :
+
+- Annemasse Agglo
+- Agglo Pays D'Issoire
+- Ville de Bourg-en-Bresse
+- Ville de Grigny
+
 ## v3.0.25 - 22/09/2023
 
 Ajoute l'aide suivante :
