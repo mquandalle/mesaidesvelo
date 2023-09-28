@@ -1264,7 +1264,7 @@ aides . thue et mue:
   titre: Ville de Thue et Mue
   applicable si:
     toutes ces conditions:
-      - localisation . code insee = '14700'
+      - localisation . code insee = '14098'
       - vélo . électrique
   variations:
     - si: revenu fiscal de référence <= 13489 €/an

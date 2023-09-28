@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v3.0.27 - 28/09/2023
+
+Corrige l'aide de Thue et Mue
+
 ## v3.0.26 - 27/09/2023
 
 Ajoute l'aide suivante :
