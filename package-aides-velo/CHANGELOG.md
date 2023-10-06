@@ -1,5 +1,27 @@
 # Historique des modifications
 
+## v3.0.28 - 06/10/2023
+
+Ajoute les aides suivantes :
+
+- Syndicat Mixte des Mobilités de l’Aire Grenobloise
+- Bassin d’Aubenas
+
+Mise à jour des aides suivantes :
+
+- VilleFranche Beaujolais Saône Agglo
+
+Modifie les liens suivants :
+
+- Communauté de Communes Saint-Avold Synergie
+- Ville de Puteaux
+- Ville de Saint-Alban-Leysse
+- Ville de Mandelieu-La Napoule
+
+Supprime les aides suivantes :
+
+- Ville de Daix
+
 ## v3.0.27 - 28/09/2023
 
 Corrige l'aide de Thue et Mue

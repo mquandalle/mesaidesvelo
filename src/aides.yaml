@@ -1,14 +1,15 @@
 # TODO (aide annoncée mais pas encore de page officielle de présentation):
-# - Grenoble https://www.grenoblealpesmetropole.fr/actualite/78/45-bientot-de-nouvelles-aides-a-l-achat-d-un-velo.htm
 # - Département Calvados https://www.ouest-france.fr/normandie/falaise-14700/aide-a-lachat-de-velo-electrique-dans-le-calvados-le-departement-pourrait-relancer-sa-subvention-2f83a7b6-cd7d-11ed-b493-b75770ef7f91
 # - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
 # - Grand Calais, pays d'opale https://www.nordlittoral.fr/185513/article/2023-09-20/grand-calais-et-pays-d-opale-vont-vous-aider-acheter-un-velo
+# - Caluire, https://www.leprogres.fr/transport/2023/10/03/la-commune-contribue-a-financer-l-achat-de-velos-et-forme-les-cyclistes#:~:text=Dans%20le%20cadre%20de%20son,er%20janvier%20au%2031%20d%C3%A9cembre.
 #
 # Renouvellement ?
 # - https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
 #
 # Terminé pour 2023, renouvellement prévu en 2024 :
 # - https://www.cap-atlantique.fr/services-a-la-population/mobilite/les-deplacements-doux/laide-a-lachat-de-velo-elargie
+# - Martigues https://www.ville-martigues.fr/services-en-ligne/deplacements/pistes-cyclables/velo-a-assistance-electrique-aide-a-lachat
 
 aides:
   avec:
@@ -324,16 +325,16 @@ aides . saône-beaujolais:
 aides . villefranche beaujolais saône:
   remplace: intercommunalité
   titre: VilleFranche Beaujolais Saône Agglo
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Villefranche Beaujolais Saône'
-      - vélo . électrique ou mécanique
-  valeur: 25% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . électrique
-        alors: 200€
-      - sinon: 100€
+  applicable si: localisation . epci = 'CA Villefranche Beaujolais Saône'
+  variations:
+    - si: vélo . électrique
+      alors: 500€
+    - si: vélo . mécanique
+      alors: 200€
+    - si: vélo . motorisation
+      alors: 200€
+    - sinon: 0€
+  plafond: vélo . prix
   lien: https://www.agglo-villefranche.fr/aide-a-lachat-velo.html
 
 aides . ville-sur-jarnioux:
@@ -890,6 +891,79 @@ aides . perpignan métropole:
               - vélo . prix <= 1500€
   valeur: 250€
   lien: https://aide-velo.perpignan-mediterranee.org/
+
+aides . grenoble:
+  remplace: intercommunalité
+  titre: Syndicat Mixte des Mobilités de l’Aire Grenobloise
+  applicable si:
+    toutes ces conditions:
+      - une de ces conditions:
+          - localisation . epci = 'Grenoble-Alpes-Métropole'
+          - localisation . epci = 'CC Le Grésivaudan'
+      - revenu fiscal de référence <= 22983 €/an
+  variations:
+    - si:
+        toutes ces conditions:
+          - vélo . mécanique
+          - vélo . neuf
+          - vélo . prix >= 200€
+          - vélo . prix <= 1500€
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 6358 €/an
+            alors: 100€ + 50€
+          - si: revenu fiscal de référence <= 14089 €/an
+            alors: 80€ + 40€
+          - sinon: 60€ + 30€
+    - si:
+        toutes ces conditions:
+          - vélo . mécanique
+          - vélo . occasion
+          - vélo . prix >= 30€
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 6358 €/an
+            alors: 80€ + 40€
+          - si: revenu fiscal de référence <= 14089 €/an
+            alors: 60€ + 30€
+          - sinon: 30€ + 15€
+    - si:
+        toutes ces conditions:
+          - vélo . cargo électrique
+          - vélo . prix >= 1000€
+          - vélo . prix <= 6000€
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 6358 €/an
+            alors: 1000€ + 500€
+          - si: revenu fiscal de référence <= 14089 €/an
+            alors: 800€ + 400€
+          - sinon: 600€ + 300€
+    - si:
+        toutes ces conditions:
+          - vélo . cargo
+          - vélo . prix >= 800€
+          - vélo . prix <= 3000€
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 6358 €/an
+            alors: 400€ + 200€
+          - si: revenu fiscal de référence <= 14089 €/an
+            alors: 300€ + 150€
+          - sinon: 200€ + 100€
+    - si:
+        toutes ces conditions:
+          - vélo . électrique
+          - vélo . prix >= 1000€
+          - vélo . prix <= 4000€
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 6358 €/an
+            alors: 500€ + 250€
+          - si: revenu fiscal de référence <= 14089 €/an
+            alors: 400€ + 200€
+          - sinon: 300€ + 150€
+  lien: https://aidevelo.mobilites-m.fr/
 
 aides . tarbes lourdes pyrénées:
   remplace: intercommunalité
@@ -1725,17 +1799,6 @@ aides . crolles:
   plancher: 150€
   plafond: 600€
   lien: http://www.ville-crolles.fr/vues/pages/services-et-demarches/particuliers/crolles-pratique-cheque-VAE.php#partHome1
-
-aides . daix:
-  remplace: commune
-  titre: Ville de Daix
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '21223'
-      - vélo . électrique
-  valeur: 25% * vélo . prix
-  plafond: 400€
-  lien: https://www.daix.fr/fichiers/news_fichiers1/13/Le%20deux-roues%20electrique_vert.pdf
 
 aides . montval sur loir:
   remplace: commune
@@ -2626,7 +2689,7 @@ aides . saint alban leysse:
       - vélo . prix >= 1500 €
       - vélo . prix <= 3500 €
   valeur: 200€
-  lien: https://www.saintalbanleysse.fr/3180-prime-a-l-achat-d-un-velo-electrique.htm
+  lien: https://www.saintalbanleysse.fr/fileadmin/mediatheque/saint-alban-leysse/6-Actualites/Brochure_VAE_2023.pdf
 
 aides . ardenne:
   remplace: intercommunalité
@@ -2871,7 +2934,7 @@ aides . mandelieu:
       - si: revenu fiscal de référence <= 13489 €/an
         alors: 150€
       - sinon: 100€
-  lien: https://www.mandelieu.fr/services-publics/transports/plan-velo.php
+  lien: https://www.mandelieu.fr/cms_viewFile.php?idtf=113088&path=convention-plan-velo.pdf
 
 aides . pantin:
   remplace: commune
@@ -4195,6 +4258,19 @@ aides . annonay:
     - sinon: 150€
   lien: https://annonayrhoneagglo.fr/article2059.html
 
+aides . bassin d'aubenas:
+  remplace: intercommunalité
+  titre: Bassin d’Aubenas
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Bassin d'Aubenas'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . cargo
+  valeur: 10% * vélo . prix
+  plafond: 200€
+  lien: https://www.bassin-aubenas.fr/actualites/aide-a-lachat-dun-velo-a-assistance-electrique/
+
 aides . lorient:
   remplace: intercommunalité
   titre: Lorient Agglomération
@@ -4823,13 +4899,12 @@ aides . puteaux:
           - vélo . motorisation
           - vélo . électrique
   valeur: 50% * vélo . prix
-  # todo: vérifier l'application de https://www.puteaux.fr/puteaux/Ma-ville/Actualites/Beneficiez-d-une-aide-pour-l-achat-d-un-velo-electrique
   plafond:
     variations:
       - si: vélo . électrique
         alors: 100€
       - sinon: 300€
-  lien: https://www.puteaux.fr/puteaux/Ma-ville/Actualites/Toutes-les-aides-pour-l-achat-d-un-velo
+  lien: https://www.puteaux.fr/Cadre-de-vie/Mobilites-durables
 
 aides . genneviliers:
   remplace: commune
@@ -4895,7 +4970,7 @@ aides . saint-avold:
         par défaut: non
       alors: 100€
     - sinon: 50€
-  lien: https://www.agglo-saint-avold.fr/actualites/aide-a-lachat-dun-velo-a-assistance-electrique/
+  lien: https://casas57.fr/nos-competences/ma-mobilite/velo/aide-a-lachat-dun-velo/
 
 aides . montigny les metz:
   remplace: commune
@@ -6257,6 +6332,8 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
           - localisation . epci = 'CC Saint-Marcellin Vercors Isère Communauté'
           - localisation . epci = 'CU Perpignan Méditerranée Métropole'
+          - localisation . epci = 'Grenoble-Alpes-Métropole'
+          - localisation . epci = 'CC Le Grésivaudan'
       alors: 1000 €
     - si:
         une de ces conditions:
@@ -6326,6 +6403,7 @@ vélo . occasion:
       - aides . ile de france
       - aides . toulouse
       - aides . lyon
+      - aides . grenoble
       - aides . louvigny
       - aides . pantin
       - aides . la roche sur yon
