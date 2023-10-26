@@ -1,5 +1,26 @@
 # Historique des modifications
 
+## v3.0.29 - 26/10/2023
+
+Ajoute les aides suivantes :
+
+- Grand Angoulême
+- Ville de Morzine-Avoriaz
+- Ville de Linselles
+
+Mise à jour des aides suivantes :
+
+- Brest Métropole
+- Communauté des Communes Giennoises
+- Tarbes Lourdes Pyrénées Communauté d'agglomération
+- Ville de Talant
+
+Supprime les aides suivantes :
+
+- Vannes Agglomération
+- Saint-flour communauté
+- Marches du Velay-Rochebaron
+
 ## v3.0.28 - 06/10/2023
 
 Ajoute les aides suivantes :

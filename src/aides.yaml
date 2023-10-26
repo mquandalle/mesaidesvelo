@@ -3,6 +3,7 @@
 # - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
 # - Grand Calais, pays d'opale https://www.nordlittoral.fr/185513/article/2023-09-20/grand-calais-et-pays-d-opale-vont-vous-aider-acheter-un-velo
 # - Caluire, https://www.leprogres.fr/transport/2023/10/03/la-commune-contribue-a-financer-l-achat-de-velos-et-forme-les-cyclistes#:~:text=Dans%20le%20cadre%20de%20son,er%20janvier%20au%2031%20d%C3%A9cembre.
+# - Centre littoral agglo (Guyane) https://www.cacl-guyane.fr/achetez-un-velo-grace-a-lagglo/
 #
 # Renouvellement ?
 # - https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
@@ -977,7 +978,7 @@ aides . tarbes lourdes pyrénées:
               - vélo . prix <= 2000 €
           - vélo . cargo
   valeur: 200€
-  lien: https://www.agglo-tlp.fr/vae
+  lien: https://www.agglo-tlp.fr/page/vae
 
 aides . strasbourg:
   remplace: intercommunalité
@@ -2024,7 +2025,7 @@ aides . faches-thumesnil:
 
 aides . pays sainte odile:
   remplace: commune
-  titre: Pays de Sainte Odile
+  titre: Pays de Sainte-Odile
   applicable si: localisation . epci = 'CC du Pays de Sainte-Odile'
   variations:
     - si: vélo . cargo
@@ -2605,6 +2606,21 @@ aides . cœur de savoie:
           - sinon: 150 €
   lien: https://www.coeurdesavoie.fr/actualite/10362/3783-aide-a-l-achat-de-votre-velo-electrique.htm
 
+aides . morzine-avoriaz:
+  remplace: commune
+  titre: Ville de Morzine-Avoriaz
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '74191'
+      - vélo . électrique ou mécanique
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 200€
+      - sinon: 100€
+  lien: https://www.mairie-morzine-avoriaz.com/mes-demarches/aide-a-lachat-velo/
+
 aides . bourg-saint-maurice:
   remplace: commune
   titre: Ville de Bourg-Saint-Maurice
@@ -2876,7 +2892,7 @@ aides . cote d'or . vélo assemblé ou produit localement:
 #       - vélo . électrique
 #   valeur: 200€
 #   plafond: vélo . prix
-#   lien: https://www.agglo-agen.net/vie-quotidienne/mobilites/aide-velo-electrique-634.html
+#   lien: https://www.agglo-agen.net/vie-quotidienne/mobilites/aide-velo-electrique
 
 aides . sophia antipolis:
   remplace: intercommunalité
@@ -3213,13 +3229,18 @@ aides . frejus:
 aides . gien:
   remplace: intercommunalité
   titre: Communauté des Communes Giennoises
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Giennoises'
-      - vélo . électrique
-  valeur: 25% * vélo . prix
-  plafond: 300€
-  lien: https://www.villedegien.fr/actualites/information/subvention-aux-giennois-pour-lacquisition-dun-velo-a-assistance-electrique/
+  applicable si: localisation . epci = 'CC Giennoises'
+  variations:
+    - si: vélo . électrique
+      alors:
+        valeur: 25% * vélo . prix
+        plafond: 300€
+    - si: vélo . électrique
+      alors:
+        valeur: 50% * vélo . prix
+        plafond: 100€
+    - sinon: 0€
+  lien: https://www.legiennois.fr/legiennois-actualites/2148-aide-a-l-acquisition-de-velo
 
 aides . ferte saint aubin:
   remplace: commune
@@ -3825,28 +3846,6 @@ aides . epinal:
       - sinon: 0€
   lien: https://www.agglo-epinal.fr/se-deplacer/velo/subvention-a-lachat-dun-vae/
 
-aides . vannes:
-  remplace: intercommunalité
-  titre: Vannes Agglomération
-  applicable si: localisation . epci = 'CA Golfe du Morbihan - Vannes Agglomération'
-  valeur: 25% * vélo . prix
-  plafond:
-    variations:
-      - si: vélo . cargo électrique
-        alors: 800€
-      - si: vélo . cargo
-        alors: 400€
-      - si: vélo . électrique
-        alors:
-          variations:
-            - si: revenu fiscal de référence <= 1200 €/mois
-              alors: 300€
-            - si: revenu fiscal de référence <= 1400 €/mois
-              alors: 200€
-            - sinon: 0€
-      - sinon: 0€
-  lien: https://www.golfedumorbihan-vannesagglomeration.bzh/je-me-deplace-velo
-
 aides . quéven:
   remplace: commune
   titre: Ville de Quéven
@@ -4433,7 +4432,7 @@ aides . ville de talant:
       - vélo . électrique
   valeur: 20% * vélo . prix
   plafond: 100€
-  lien: https://www.talant.fr/content_page/item/222-prime_vae.html
+  lien: https://talant.fr/pratique/primes-municipales
 
 aides . pays des achards:
   remplace: intercommunalité
@@ -4603,6 +4602,20 @@ aides . gruson:
         alors: 200€
       - sinon: 100€
   lien: https://www.mairie-gruson.fr/environnement/developpement-durable/aides-a-lachat-dun-velo-electrique
+
+aides . linselles:
+  remplace: commune
+  titre: Ville de Linselles
+  applicable si: localisation . code insee = '59349'
+  valeur: 20% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 80€
+      - si: vélo . mécanique
+        alors: 40€
+      - sinon: 0€
+  lien: https://www.ville-linselles.com/2023/03/01/21822/
 
 aides . iwuy:
   remplace: commune
@@ -5018,6 +5031,7 @@ aides . brest:
       - une de ces conditions:
           - vélo . électrique
           - vélo . cargo
+          - vélo . pliant
   variations:
     - si: vélo . cargo
       alors:
@@ -5595,34 +5609,34 @@ aides . plaine d'estrées:
       - sinon: 0€
   lien: https://www.ccplaine-estrees.com/actualite/renouvellement-de-laide-a-lachat-dun-velo/
 
-# Épuisé pour 2023
-# aides . grand angouleme:
-#   remplace: intercommunalité
-#   titre: Grand Angoulême
-#   applicable si:
-#     toutes ces conditions:
-#       - localisation . epci = 'CA du Grand Angoulême'
-#       - vélo . électrique ou mécanique
-#       - revenu fiscal de référence <= 2000 €/mois
-#   variations:
-#     - si: vélo . électrique
-#       alors:
-#         variations:
-#           - si: revenu fiscal de référence <= 1000 €/mois
-#             alors:
-#               valeur: 50% * vélo . prix
-#               plafond: 400 €
-#           - si: revenu fiscal de référence <= 1500 €/mois
-#             alors:
-#               valeur: 30% * vélo . prix
-#               plafond: 300 €
-#           - sinon:
-#               valeur: 20% * vélo . prix
-#               plafond: 200 €
-#     - sinon:
-#         valeur: 50% * vélo . prix
-#         plafond: 150 €
-#   lien: https://aides-subventions.grandangouleme.fr/catalogue/prime-vae/
+# Épuisé pour 2023, edit: relancé en octobre
+aides . grand angouleme:
+  remplace: intercommunalité
+  titre: Grand Angoulême
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CA du Grand Angoulême'
+      - vélo . électrique ou mécanique
+      - revenu fiscal de référence <= 2000 €/mois
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: revenu fiscal de référence <= 1000 €/mois
+            alors:
+              valeur: 50% * vélo . prix
+              plafond: 400 €
+          - si: revenu fiscal de référence <= 1500 €/mois
+            alors:
+              valeur: 30% * vélo . prix
+              plafond: 300 €
+          - sinon:
+              valeur: 20% * vélo . prix
+              plafond: 200 €
+    - sinon:
+        valeur: 50% * vélo . prix
+        plafond: 150 €
+  lien: https://www.grandangouleme.fr/tous-a-velo/
 
 aides . massif du vercors:
   remplace: intercommunalité
@@ -5968,16 +5982,6 @@ aides . val-revermont:
   valeur: 100€
   lien: http://val-revermont.fr/transition-ecologique-la-commune-met-en-place-un-coup-de-pouce-a-ses-habitants/
 
-aides . marches du velay-rochebaron:
-  remplace: intercommunalité
-  titre: Marches du Velay-Rochebaron
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Marches du Velay-Rochebaron'
-      - vélo . électrique
-  valeur: 100€
-  lien: https://www.marchesduvelayrochebaron.fr/actualite/aide-a-lachat-dun-velo-a-assistance-electrique/
-
 aides . pays de châteaugiron:
   remplace: intercommunalité
   titre: Pays de Châteaugiron
@@ -6010,17 +6014,6 @@ aides . falaise:
           - vélo . motorisation
   valeur: 100€
   lien: https://www.falaise.fr/pratique/deplacements/demande-daides-a-lachat-dun-vae/
-
-aides . saint-flour communauté:
-  remplace: intercommunalité
-  titre: Saint-flour communauté
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC de Saint-Flour'
-      - vélo . électrique
-      - revenu fiscal de référence <= 20233€/an
-  valeur: 100€
-  lien: https://saint-flour-communaute.fr/population/velo-electrique-dans-le-cantal/aide-pour-acheter-un-velo-electrique/
 
 aides . bièvre isère:
   remplace: intercommunalité
@@ -6332,14 +6325,16 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
           - localisation . epci = 'CC Saint-Marcellin Vercors Isère Communauté'
           - localisation . epci = 'CU Perpignan Méditerranée Métropole'
-          - localisation . epci = 'Grenoble-Alpes-Métropole'
           - localisation . epci = 'CC Le Grésivaudan'
       alors: 1000 €
     - si:
         une de ces conditions:
           - localisation . epci = 'CC Haut Val de Sèvre'
       alors: 2000 €
-    - si: localisation . epci = 'CA La Roche sur Yon - Agglomération'
+    - si:
+        une de ces conditions:
+          - localisation . epci = 'CA La Roche sur Yon - Agglomération'
+          - localisation . epci = 'Grenoble-Alpes-Métropole'
       alors: 1500 €
     - si:
         une de ces conditions:
