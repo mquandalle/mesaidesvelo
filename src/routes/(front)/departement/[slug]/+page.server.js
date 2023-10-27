@@ -4,7 +4,13 @@ import { slugify } from '$lib/utils';
 import departements from '@etalab/decoupage-administratif/data/departements.json';
 import regions from '@etalab/decoupage-administratif/data/regions.json';
 import { error, redirect } from '@sveltejs/kit';
+import classementVilleplus from '$lib/data/classement-villeplus.json';
 import { _getCorrespondingContent } from '../../(search)/ville/[slug]/+page.server.js';
+
+// https://www.insee.fr/fr/information/2114773#:~:text=TNCC%20%2D%20Type%20de%20nom%20en%20clair
+
+const articlesDefinisTNCC = ['', '', 'le ', 'la ', 'les ', 'l’'];
+const articlesPartitifsTNCC = ['de ', 'd’', 'du ', 'de la ', 'des ', 'de l’'];
 
 export const _departementWithSlug = departements
 	.filter(({ zone }) => zone === 'metro')
@@ -49,122 +55,130 @@ export async function load({ params }) {
 			slug,
 		}));
 
-	const gender = getGender(departement.code);
+	const classementVillePlus = {
+		position: classementVilleplus.departements.findIndex((d) => d === departement.nom) + 1,
+		total: classementVilleplus.departements.length,
+	};
 
 	return {
-		departement: { ...departement, determinant: gender.determinant, habitants: gender.habitants },
+		departement: {
+			...departement,
+			nomHabitants: getNomHabitants(departement.code),
+		},
+		leDepartement: articlesDefinisTNCC[departement.typeLiaison] + departement.nom,
+		duDepartement: articlesPartitifsTNCC[departement.typeLiaison] + departement.nom,
 		region,
 		aideDepartement,
 		aideDepartementText,
+		classementVillePlus,
 		aideRegion,
 		aideRegionText,
 		aidesLocales,
 	};
 }
 
-function getGender(departementCode) {
-	const genders = `
-    01 | Ain | l' | Aindinois
-    02 | Aisne | l' | Axonais
-    03 | Allier | l' | Bourbonnais
-    04 | Alpes-de-Haute-Provence | les | Bas-Alpins
-    05 | Hautes-Alpes | les | Hauts-Alpins
-    06 | Alpes-Maritimes | les | Maralpins
-    07 | Ardèche | l' | Ardéchois
-    08 | Ardennes | les | Ardennais
-    09 | Ariège | l' | Ariégeois
-    10 | Aube | l' | Aubois
-    11 | Aude | l' | Audois
-    12 | Aveyron | l' | Aveyronnais
-    13 | Bouches-du-Rhône | les | Bucco-Rhodaniens
-    14 | Calvados | le | Calvadosiens
-    15 | Cantal | le | Cantalous ou Cantaliens
-    16 | Charente | la | Charentais
-    17 | Charente-Maritime | la | Charentais ou Charentais-Maritimes
-    18 | Cher | le | Berrichons
-    19 | Corrèze | la | Corréziens
-    20 | Corse-du-Sud | la | Corses du Sud
-    21 | Haute-Corse | la | Corses du Nord
-    22 | Côte-d'Or | la | Côtes-d'Oriens
-    23 | Côtes d'Armor | les | Costarmoricains
-    24 | Creuse | la | Creusois
-    25 | Dordogne | la | Dordognais
-    26 | Drôme | la | Drômois
-    27 | Eure | l' | Eurois
-    28 | Eure-et-Loire | l' | Euréliens
-    29 | Finistère | le | Finistériens
-    30 | Gard | le | Gardois
-    31 | Haute-Garonne | la | Garonnais
-    32 | Gers | le | Gersois
-    33 | Gironde | la | Girondins
-    34 | Hérault | l' | Héraultais
-    35 | Ille-et-Vilaine | l' | Bretilliens
-    36 | Indre | l' | Indrois
-    37 | Indre-et-Loire | l' | Tourangeaux
-    38 | Isère | l' | Isérois
-    39 | Jura | le | Jurassiens
-    40 | Landes | les | Landais
-    41 | Loir-et-Cher | le | Loir-et-Chériens
-    42 | Loire | la | Ligériens
-    43 | Haute-Loire | la | Loirains
-    44 | Loire-Atlantique | la | Loirains
-    45 | Loiret | le | Loirétains
-    46 | Lot | le | Lotois
-    47 | Lot-et-Garonne | le | Lot-et-Garonnais
-    48 | Lozère | la | Lozériens
-    49 | Maine-et-Loire | la | habitants de Maine-et-Loire
-    50 | Manche | la | Manchois
-    51 | Marne | la | Marnais
-    52 | Haute-Marne | la | Hauts-Marnais
-    53 | Mayenne | la | Mayennais
-    54 | Meurthe-et-Moselle | la | Meurthois
-    55 | Meuse | la | Meusiens
-    56 | Morbihan | le | Morbihannais
-    57 | Moselle | la | Mosellans
-    58 | Nièvre | la | Nivernais
-    59 | Nord | le | Nordistes
-    60 | Oise | l' | Oisiens
-    61 | Orne | l' | Ornais
-    62 | Pas-de-Calais | le | Pas-de-Calaisiens
-    63 | Puy-de-Dôme | le | Puydomois
-    64 | Pyrénées-Atlantiques | les | habitants des Pyrénées-Atlantiques
-    65 | Hautes-Pyrénées | les | Hauts-Pyrénéens
-    66 | Pyrénées-Orientales | les | habitants des Pyrénées-Orientales
-    67 | Bas-Rhin | le | Bas-Rhinois
-    68 | Haut-Rhin | le | Haut-Rhinois
-    69 | Rhône | le | Rhodaniens
-    70 | Haute-Saône | la | Haut-Saônois
-    71 | Saône-et-Loire | la | Saône-et-Loiriens
-    72 | Sarthe | la | Sarthois
-    73 | Savoie | la | Savoyards
-    74 | Haute-Savoie | la | Hauts-Savoyards
-    75 | Paris | | Parisiens
-    76 | Seine-Maritime | la | Seinomarins
-    77 | Seine-et-Marne | la | Seine-et-Marnais
-    78 | Yvelines | les | Yvelinois
-    79 | Deux-Sèvres | les | Deux-Sévriens
-    80 | Somme | la | Samariens
-    81 | Tarn | le | Tarnais
-    82 | Tarn-et-Garonne | le | Tarn-et-Garonnais
-    83 | Var | le | Varois
-    84 | Vaucluse | le | Vauclusiens
-    85 | Vendée | la | Vendéens
-    86 | Vienne | la | Viennois
-    87 | Haute-Vienne | la | Hauts-Viennois
-    88 | Vosges | les | Vosgiens
-    89 | Yonne | l' | Yonnais
-    90 | Territoire de Belfort | le | Terrifortains
-    91 | Essonne | l' | Essoniens
-    92 | Hauts-de-Seine | les | habitants des Hauts-de-Seine
-    93 | Seine-Saint-Denis | la | Séquano-Dionysiens
-    94 | Val-de-Marne | le | Val-de-Marnais
-    95 | Val-d'Oise | le | Val-d'Oisiens
+function getNomHabitants(departementCode) {
+	const dataNomHabitants = `
+    01 | Ain | Aindinois
+    02 | Aisne | Axonais
+    03 | Allier | Bourbonnais
+    04 | Alpes-de-Haute-Provence | Bas-Alpins
+    05 | Hautes-Alpes | Hauts-Alpins
+    06 | Alpes-Maritimes | Maralpins
+    07 | Ardèche | Ardéchois
+    08 | Ardennes | Ardennais
+    09 | Ariège | Ariégeois
+    10 | Aube | Aubois
+    11 | Aude | Audois
+    12 | Aveyron | Aveyronnais
+    13 | Bouches-du-Rhône | Bucco-Rhodaniens
+    14 | Calvados | Calvadosiens
+    15 | Cantal | Cantalous ou Cantaliens
+    16 | Charente | Charentais
+    17 | Charente-Maritime | Charentais ou Charentais-Maritimes
+    18 | Cher | Berrichons
+    19 | Corrèze | Corréziens
+    20 | Corse-du-Sud | Corses du Sud
+    21 | Haute-Corse | Corses du Nord
+    22 | Côte-d'Or | Côtes-d'Oriens
+    23 | Côtes d'Armor | Costarmoricains
+    24 | Creuse | Creusois
+    25 | Dordogne | Dordognais
+    26 | Drôme | Drômois
+    27 | Eure | Eurois
+    28 | Eure-et-Loire | Euréliens
+    29 | Finistère | Finistériens
+    30 | Gard | Gardois
+    31 | Haute-Garonne | Garonnais
+    32 | Gers | Gersois
+    33 | Gironde | Girondins
+    34 | Hérault | Héraultais
+    35 | Ille-et-Vilaine | Bretilliens
+    36 | Indre | Indrois
+    37 | Indre-et-Loire | Tourangeaux
+    38 | Isère | Isérois
+    39 | Jura | Jurassiens
+    40 | Landes | Landais
+    41 | Loir-et-Cher | Loir-et-Chériens
+    42 | Loire | Ligériens
+    43 | Haute-Loire | Loirains
+    44 | Loire-Atlantique | Loirains
+    45 | Loiret | Loirétains
+    46 | Lot | Lotois
+    47 | Lot-et-Garonne | Lot-et-Garonnais
+    48 | Lozère | Lozériens
+    49 | Maine-et-Loire | habitants de Maine-et-Loire
+    50 | Manche | Manchois
+    51 | Marne | Marnais
+    52 | Haute-Marne | Hauts-Marnais
+    53 | Mayenne | Mayennais
+    54 | Meurthe-et-Moselle | Meurthois
+    55 | Meuse | Meusiens
+    56 | Morbihan | Morbihannais
+    57 | Moselle | Mosellans
+    58 | Nièvre | Nivernais
+    59 | Nord | Nordistes
+    60 | Oise | Oisiens
+    61 | Orne | Ornais
+    62 | Pas-de-Calais | Pas-de-Calaisiens
+    63 | Puy-de-Dôme | Puydomois
+    64 | Pyrénées-Atlantiques | habitants des Pyrénées-Atlantiques
+    65 | Hautes-Pyrénées | Hauts-Pyrénéens
+    66 | Pyrénées-Orientales | habitants des Pyrénées-Orientales
+    67 | Bas-Rhin | Bas-Rhinois
+    68 | Haut-Rhin | Haut-Rhinois
+    69 | Rhône | Rhodaniens
+    70 | Haute-Saône | Haut-Saônois
+    71 | Saône-et-Loire | Saône-et-Loiriens
+    72 | Sarthe | Sarthois
+    73 | Savoie | Savoyards
+    74 | Haute-Savoie | Hauts-Savoyards
+    75 | Paris | Parisiens
+    76 | Seine-Maritime | Seinomarins
+    77 | Seine-et-Marne | Seine-et-Marnais
+    78 | Yvelines | Yvelinois
+    79 | Deux-Sèvres | Deux-Sévriens
+    80 | Somme | Samariens
+    81 | Tarn | Tarnais
+    82 | Tarn-et-Garonne | Tarn-et-Garonnais
+    83 | Var | Varois
+    84 | Vaucluse | Vauclusiens
+    85 | Vendée | Vendéens
+    86 | Vienne | Viennois
+    87 | Haute-Vienne | Hauts-Viennois
+    88 | Vosges | Vosgiens
+    89 | Yonne | Yonnais
+    90 | Territoire de Belfort | Terrifortains
+    91 | Essonne | Essoniens
+    92 | Hauts-de-Seine | habitants des Hauts-de-Seine
+    93 | Seine-Saint-Denis | Séquano-Dionysiens
+    94 | Val-de-Marne | Val-de-Marnais
+    95 | Val-d'Oise | Val-d'Oisiens  
     `
 		.split('\n')
 		.filter((line) => Boolean(line.trim()))
 		.map((line) => line.split(' | ').map((c) => c.trim()))
-		.map(([code, nom, determinant, habitants]) => ({ code, nom, determinant, habitants }))
-		.map((d) => ({ ...d, determinant: d.determinant.endsWith("'") ? 'l’' : d.determinant + ' ' }));
+		.map(([code, nom, nomHabitants]) => ({ code, nom, nomHabitants }));
 
-	return genders.find((d) => d.code === departementCode);
+	return dataNomHabitants.find((d) => d.code === departementCode).nomHabitants;
 }

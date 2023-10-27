@@ -21,12 +21,6 @@
 
 	const determinant = (nom) => (nom.match(/^[aeiouy]/i) ? 'd’' : 'de ');
 	$: deVille = determinant($page.data.ville.nom) + $page.data.ville.nom;
-	$: leEPCI =
-		($localisation?.epci?.startsWith('Eurométropole')
-			? 'l’'
-			: $localisation?.epci?.startsWith('Métropole')
-			? 'la '
-			: '') + $localisation?.epci;
 </script>
 
 {#if showExplications}
@@ -256,12 +250,21 @@
 			</p>
 			{#if infos.classementVillePlus}
 				<p>
-					Par ailleurs {leEPCI} se classe {infos.classementVillePlus.position}<sup
+					<a href="https://villes.plus/cyclables/{infos.classementVillePlus.typeClassement}"
+						><img
+							src="/images/logo-villesplus.svg"
+							class="w-20 h-20 !my-2 mr-4 float-left"
+							alt="logo villes.plus"
+						/></a
+					>
+					Par ailleurs {infos.classementVillePlus.teritoireClasse} se classe {infos
+						.classementVillePlus.position}<sup
 						>{infos.classementVillePlus.position === 1 ? 'ère' : 'ème'}</sup
 					>/{infos.classementVillePlus.total} au
-					<a href="https://villes.plus/cyclables/metropoles">classement ville.plus</a> des villes cyclables.
-					Ce classement mesure la part de pistes cyclables sécurisées pour relier les différentes mairies
-					de la métropole.
+					<a href="https://villes.plus/cyclables/{infos.classementVillePlus.typeClassement}"
+						>classement des {infos.classementVillePlus.typeClassement} cyclables du site villes.plus</a
+					>. Ce classement mesure la part de pistes cyclables sécurisées pour relier les différentes
+					mairies de la métropole.
 				</p>
 			{/if}
 		{/if}

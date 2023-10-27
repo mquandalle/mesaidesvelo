@@ -153,15 +153,35 @@ export async function load({ params }) {
 		};
 	}
 
-	const posClassementVillePlus = classementVilleplus.findIndex(
-		(epci) => epci === localisation.epci
-	);
+	const classementsVillePlusPriority = ['grandes-villes', 'prefectures', 'communes'];
 
-	if (posClassementVillePlus > -1) {
+	let classementPosition = -1;
+	const typeClassement = classementsVillePlusPriority.find((classement) => {
+		classementPosition = classementVilleplus[classement].findIndex(
+			(nom) => nom.toLowerCase() === city.nom.toLowerCase()
+		);
+		return classementPosition > -1;
+	});
+
+	if (typeClassement) {
 		infos.classementVillePlus = {
-			position: posClassementVillePlus + 1,
-			total: classementVilleplus.length,
+			typeClassement,
+			teritoireClasse: city.nom,
+			position: classementPosition + 1,
+			total: classementVilleplus[typeClassement].length,
 		};
+	} else {
+		const posClassementVillePlus = classementVilleplus.metropoles.findIndex(
+			(epci) => epci === localisation.epci
+		);
+		if (posClassementVillePlus > -1) {
+			infos.classementVillePlus = {
+				typeClassement: 'metropoles',
+				teritoireClasse: localisation.epci.nom,
+				position: posClassementVillePlus + 1,
+				total: classementVilleplus.metropoles.length,
+			};
+		}
 	}
 
 	if (barometreFubPerCity[localisation.codeInsee]) {

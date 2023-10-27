@@ -7,20 +7,19 @@
 </script>
 
 <svelte:head>
-	<title>Les aides au vélo dans {data.departement.determinant}{data.departement.nom}</title>
+	<title>Les aides au vélo dans {data.leDepartement}</title>
 	<meta
 		name="description"
-		content="Découvrez l’ensemble des aides au vélo proposées dans {data.departement
-			.determinant}{data.departement.nom}. Simple, rapide et gratuit."
+		content="Découvrez l’ensemble des aides au vélo proposées dans {data.leDepartement}. Simple, rapide et gratuit."
 	/>
 </svelte:head>
 
 <div class="prose w-full max-w-screen-sm m-auto mt-8">
-	<h1>Les aides à l’achat de vélo dans {data.departement.determinant}{data.departement.nom}</h1>
+	<h1>Les aides à l’achat de vélo dans {data.leDepartement}</h1>
 
 	<p>
-		Vous souhaitez acheter un vélo et vous habitez dans {data.departement.determinant}{data
-			.departement.nom} ? Découvrez les subventions auxquelles vous avez droit !
+		Vous souhaitez acheter un vélo et vous habitez dans {data.leDepartement} ? Découvrez les subventions
+		auxquelles vous avez droit !
 	</p>
 
 	{#if !data.aideDepartement && !data.aideRegion}
@@ -50,7 +49,7 @@
 				intercommunes et métropoles.
 			</p>
 			<p>
-				Heureusement les {data.departement.habitants} peuvent bénéficier de l’aide de la région.
+				Heureusement les {data.departement.nomHabitants} peuvent bénéficier de l’aide de la région.
 			</p>
 		{/if}
 		{#if data.aideRegion}
@@ -85,7 +84,8 @@
 	{/if}
 	<h2>Les aides de l’État</h2>
 	<p>
-		Et bien sûr les {data.departement.habitants} peuvent bénéficier des aides de l’Etat. Il s’agit :
+		Et bien sûr les {data.departement.nomHabitants} peuvent bénéficier des aides de l’Etat. Il s’agit
+		:
 	</p>
 	<ul>
 		<li>Du bonus écologique, ouvert sous conditions à certains type de vélo</li>
@@ -98,4 +98,21 @@
 			pour prendre en charge les frais liés aux déplacements domicile-travail réalisés à vélo
 		</li>
 	</ul>
+	<h2>Classement des départements cyclables</h2>
+	<p>
+		<a href="https://villes.plus/cyclables/departements"
+			><img
+				src="/images/logo-villesplus.svg"
+				class="w-20 h-20 !my-2 mr-4 float-left"
+				alt="logo villes.plus"
+			/></a
+		>
+		Le département {data.duDepartement} est classé {data.classementVillePlus.position}<sup
+			>{data.classementVillePlus.position === 1 ? 'er' : 'ème'}</sup
+		>/{data.classementVillePlus.total} dans le
+		<a href="https://www.villes.plus/cyclables/departements" target="_blank"
+			>classement des départements cyclables</a
+		>. Ce classement mesure la proportion des pistes cyclables sécurisées pour les trajets du
+		quotidien dans {data.leDepartement}.
+	</p>
 </div>
