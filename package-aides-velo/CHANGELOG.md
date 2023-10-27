@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v3.0.30 - 27/10/2023
+
+Corrige le code Insse de Linselles
+
 ## v3.0.29 - 26/10/2023
 
 Ajoute les aides suivantes :

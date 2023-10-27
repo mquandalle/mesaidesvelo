@@ -4606,7 +4606,7 @@ aides . gruson:
 aides . linselles:
   remplace: commune
   titre: Ville de Linselles
-  applicable si: localisation . code insee = '59349'
+  applicable si: localisation . code insee = '59352'
   valeur: 20% * vélo . prix
   plafond:
     variations:
