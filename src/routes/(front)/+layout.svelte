@@ -75,14 +75,29 @@
 
 <div class="app px-3 sm:px-8 {!isEmbeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
 	<header
-		class="{!isEmbeded
-			? 'mt-8'
-			: ''} w-full max-w-screen-md m-auto flex flex-row justify-between items-end"
+		class="{!isEmbeded ? 'mt-8' : ''} w-full max-w-screen-md m-auto flex flex-row items-center"
 	>
 		{#if !isEmbeded}
+			<a href="/" class="hover:opacity-85 transform transition-transform hover:translate-y-0.5"
+				><img
+					src="/images/logo.svg"
+					alt="logo MesAidesVélo"
+					heigt="55"
+					width="88"
+					class="mr-4 float-left"
+				/></a
+			>
+			<div class="flex flex-col">
+				<a href="/" class="text-3xl font-bold cursor-pointer">
+					Mes<span class="text-green-800">Aides</span>Vélo
+				</a>
+				<p class="text-gray-800 mt-0 pt-0 w-full max-w-screen-md m-auto">
+					Trouvez les aides à l’achat d’un vélo
+				</p>
+			</div>
+		{:else}
 			<a href="/" class="text-3xl font-bold cursor-pointer">
-				Mes<span class="text-green-800">Aides</span>Vélo
-				<Emoji emoji="🚲" className="-mt-2" />
+				Mes<span class="text-green-800">Aides</span>Vélo.fr
 			</a>
 		{/if}
 	</header>
