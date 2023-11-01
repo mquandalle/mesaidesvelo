@@ -1,174 +1,342 @@
 Zones à faible émission
 CTRL-C CTRL-V depuis https://www.ecologie.gouv.fr/sites/default/files/ZFE-M_liste.pdf
 
-Département Code INSEE Commune Date d’effet
-06 06088 Nice 31 janvier 2022
-31 31000 Toulouse 1er mars 2022
-31 31772 Colomiers 1er mars 2022
-31 31170 Tournefeuille 1er mars 2022
-34 34057 Castelnau-le-Lez 1er juillet 2022
-34 34077 Clapiers 1er juillet 2022
-34 34116 Grabels 1er juillet 2022
-34 34120 Jacou 1er juillet 2022
-34 34123 Juvignac 1er juillet 2022
-34 34129 Lattes 1er juillet 2022
-34 34090 Le Crès 1er juillet 2022
-34 34172 Montpellier 1er juillet 2022
-34 34198 Pérols 1er juillet 2022
-34 34270 Saint-Jean-de-Védas 1er juillet 2022
-34 34337
-Villeneuve-lès-
-Maguelone 1er juillet 2022
-38 38185 Grenoble 2 mai 2019
+Département code INSEE Commune Date d'effet ZFE
+75 75056 Paris 1er juillet 2019
+Paris
+75 75101 Paris 01 1er juillet 2019
+75 75102 Paris 02 1er juillet 2019
+75 75103 Paris 03 1er juillet 2019
+75 75104 Paris 04 1er juillet 2019
+75 75105 Paris 05 1er juillet 2019
+75 75106 Paris 06 1er juillet 2019
+75 75107 Paris 07 1er juillet 2019
+75 75108 Paris 08 1er juillet 2019
+75 75109 Paris 09 1er juillet 2019
+75 75110 Paris 10 1er juillet 2019
+75 75111 Paris 11 1er juillet 2019
+75 75112 Paris 12 1er juillet 2019
+75 75113 Paris 13 1er juillet 2019
+75 75114 Paris 14 1er juillet 2019
+75 75115 Paris 15 1er juillet 2019
+75 75116 Paris 16 1er juillet 2019
+75 75117 Paris 17 1er juillet 2019
+75 75118 Paris 18 1er juillet 2019
+75 75119 Paris 19 1er juillet 2019
+75 75120 Paris 20 1er juillet 2019
+92 92002 Antony 1er juillet 2020
+92 92004 Asnières
+-sur
+-Seine 16 décembre 2019
+92 92007 Bagneux 26
+-janv
+-22
+92 92009 Bois
+-Colombes 1er juillet 2021
+92 92012 Boulogne
+-Billancourt 1 er juillet 2019
+92 92014 Bourg
+-la
+-Reine 1er juillet 2019
+92 92019 Châtenay
+-Malabry 1 er juin 2021
+92 92020 Châtillon 1 er juin 2021
+92 92022 Chaville 1er juillet 2019
+92 92023 Clamart 02
+-juin
+-21
+92 92024 Clichy
+1er juillet 2019
+92 92025 Colombes 1 er juin 2021
+92 92026 Courbevoie 3 juillet 2019
+92 92032 Fontenay
+-aux
+-Roses 1er juin 2021
+92 92033 Garches 1 er juin 2021
+92 92035 La Garenne
+-Colombes 02/11/2020
+92 92040 Issy
+-les
+-Moulineaux 1er juillet 2019
+92 92044 Levallois
+-Perret 1er juin 2021
+92 92046 Malakoff 1er janvier 2020
+92 92047 Marnes
+-la
+-Coquette 1er juillet 2019
+92 92048 Meudon 1er juillet 2019
+92 92049 Montrouge 01
+-nov
+-21
+92 92050 Nanterre 2 septembre 2019
+92 92051 Neuilly
+-sur
+-Seine 1er juillet 2019
+92 92060 le Plessis Robinson 1 er juin 2021
+92 92062 Puteaux 1er juin 2021
+92 92063 Rueil
+-Malmaison 1er juillet 2019
+92 92064 Saint
+-Cloud 1 er juin 2021
+92 92071 Sceaux 1er juillet 2020
+92 92072 Sèvres 1er juillet 2019
+92 92073 Suresnes 1 er juin 2021
+92 92075 Vanves 1er juillet 2019
+92 92076 Vaucresson 1er juillet 2019
+92 92077 Ville
+-d'Avray 1er juillet 2019
+92 92078 Villeneuve
+-la
+-Garenne 1 er juin 2021
+93 93001 Aubervilliers 1er juillet 2019
+93 93006 Bagnolet 1 er janvier 2022
+93 93039 L'Ile
+-Saint
+-Denis 1 juillet 2019
+93 93045 Les Lilas 1er juillet 2019
+93 93048 Montreuil 1er octobre 2019
+93 93053 Noisy
+-le
+-Sec 30
+-juin
+-21
+93 93055 Pantin 1er juillet 2019
+93 93061 Le Pré
+-Saint
+-Gervais 1er juillet 2019
+93 93063 Romainville 1 er août 2021
+93 93064 Rosny
+-sous
+-Bois 1er juillet 2019
+93 93066 Saint
+-Denis 03
+-juin
+-21
+93 93070 Saint
+-Ouen
+-sur
+-Seine 1er septembre 2019
+94 92052 Nogent
+-sur
+-Marne 16 décembre 2019
+94 94002 Alfortville 1er janvier 2020
+94 94003 Arcueil 1er août 2019
+94 94016 Cachan 1er janvier 2020
+94 94018 Charenton
+-le
+-Pont 1er juillet 2019
+94 94028 Créteil 1er janvier 2022
+94 94018 Charenton
+-le
+-Pont 1er juillet 2019
+94 94033 Fontenay
+-sous
+-Bois 1 janvier 2021
+94 94034 Fresnes 1er février 2022
+94 94037 Gentilly 1er juillet 2019
+94 94038 L’Haÿ
+-les
+-Roses 1er janvier 2021
+94 94041 Ivry
+-sur
+-Seine 1er octobre 2021
+94 94042 Joinville
+-le
+-Pont 01
+-févr
+-22
+94 94043 Le Kremlin
+-Bicêtre 1er juillet 2019
+94 94046 Maisons
+-Alfort 01
+-sept
+-21
+94 94052 Nogent
+-sur
+-Marne 16 décembre 2019
+94 94065 Rungis 1 er juin 2021
+94 94067 Saint
+-Mandé 1er juillet 2019
+94 94069 Saint
+-Maurice 1er juillet 2019
+94 94073 Thiais 16 juillet 2019
+94 94076 Villejuif 1er juillet 2019
+94 94080 Vincennes 1er juillet 2019
+63 63113 Clermont
+-Ferrand 01
+-juil
+-23 Clermont
+-Ferrand
+51 51454 Reims 1er septembre 2021
+Reims
+51 51573 Tinqueux 1er septembre 2021
 38 38057 Bresson 2 mai 2019
-38 38071 Champ-sur-Drac 3 février 2020
+Grenoble
 38 38068 Champagnier 3 février 2020
+38 38071 Champ-sur-Drac 3 février 2020
 38 38111 Claix 3 février 2020
 38 38126 Corenc 3 février 2020
 38 38151 Echirolles 2 mai 2019
 38 38158 Eybens 2 mai 2019
 38 38169 Fontaine 3 février 2020
 38 38179 Gières 3 février 2020
+38 38185 Grenoble 2 mai 2019
 38 38200 Jarrie 3 février 2020
-38 38317 Le Pont-de-Claix 2 mai 2019
-38 38516 La Tronche 2 mai 2019
 38 38229 Meylan 3 février 2020
+38 38328 Quaix-en-Chartreuse 3 février 2020
 38 38252 Montchaboud 3 février 2020
 38 38281 Noyarey 3 février 2020
 38 38309 Poisat 2 mai 2019
-38 38238 Quaix-en-Chartreuse 3 février 2020
+38 38317 Le Pont-de-Claix 2 mai 2019
 38 38382 Saint-Egrève 2 mai 2019
 38 38421 Saint-Martin d'Hères 2 mai 2019
 38 38423 Saint-Martin-le-Vinoux 2 mai 2019
 38 38474 Sassenage 3 février 2020
 38 38485 Seyssinet-Pariset 3 février 2020
 38 38486 Seyssins 3 février 2020
-38 38524
-Varces-Allières-et-
-Risset 3 février 2020
+38 38516 La Tronche 2 mai 2019
+38 38524 Varces-Allières-et-Risset 3 février 2020
 38 38533 Venon 3 février 2020
 38 38540 Veurey-Voroize 3 février 2020
-42 42183 La Ricamarie 31 janvier 2022
-42 42218 Saint-Etienne 31 janvier 2022
-42 42223 Saint-Genest Lerpt 31 janvier 2022
-42 42189 Roche la Molière 31 janvier 2022
-42 42330 Villars 31 janvier 2022
-42 42309 Terrenoire 31 janvier 2022
-42 42237 St-Jean Bonnefonds 31 janvier 2022
-42 42275 Saint-Priest en Jarez 31 janvier 2022
-51 51454 Reims 1er sept. 2021
-51 51573 Tinqueux 1er sept. 2021
-67 67001 Achenheim 1er janvier 2022
-67 67043 Bischheim 1er janvier 2022
-67 67049 Blaesheim 1er janvier 2022
-67 67065 Breuschwickersheim 1er janvier 2022
-67 67118 Eckbolsheim 1er janvier 2022
-67 67119 Eckwersheim 1er janvier 2022
-67 67124 Entzheim 1er janvier 2022
-67 67131 Eschau 1er janvier 2022
-67 67137 Fegersheim 1er janvier 2022
-67 67152 Geispolsheim 1er janvier 2022
-67 67182 Hangenbieten 1er janvier 2022
-67 67204 Hœnheim 1er janvier 2022
-67 67212 Holtzheim 1er janvier 2022
-67 67218 Illkirch-Graffenstaden 1er janvier 2022
-67 67247 Kolbsheim 1er janvier 2022
-67 67519 La Wantzenau 1er janvier 2022
-67 67256 Lampertheim 1er janvier 2022
-67 67267 Lingolsheim 1er janvier 2022
-67 67268 Lipsheim 1er janvier 2022
-67 67296 Mittelhausbergen 1er janvier 2022
-67 67309 Mundolsheim 1er janvier 2022
-67 67326 Niederhausbergen 1er janvier 2022
-67 67343 Oberhausbergen 1er janvier 2022
-67 67350 Oberschaeffolsheim 1er janvier 2022
-67 67363 Osthoffen 1er janvier 2022
-67 67365 Ostwald 1er janvier 2022
-67 67378 Plobsheim 1er janvier 2022
-67 67389 Reichstett 1er janvier 2022
-67 67447 Schiltigheim 1er janvier 2022
-67 67471 Souffelweyersheim 1er janvier 2022
-67 67482 Strasbourg 1er janvier 2022
-67 67506 Vendenheim 1er janvier 2022
-67 67551 Wolfisheim 1er janvier 2022
-69 69034 Caluire-et-Cuire 1er janvier 2020
-69 69266 Villeurbanne 1er janvier 2020
-69 69029 Bron 1er janvier 2020
-69 69259 Vénissieux 1er janvier 2020
-69 69123 Lyon 1er janvier 2020
-75 75056 Paris 1er juillet 2019
-76 76005 Amfreville-la-Mi-Voie 3 janvier 2022
-76 76095 Bihorel 3 janvier 2022
-76 76108 Bois-Guillaume 3 janvier 2022
-76 76103 Bonsecours 3 janvier 2022
-76 76212 Darnétal 3 janvier 2022
-76 76216 Déville-lès-Rouen 3 janvier 2022
-76 76322 Le Grand-Quevilly 3 janvier 2022
-76 76429 Le Mesnil-Esnard 3 janvier 2022
-76 76498 Le Petit-Quevilly 3 janvier 2022
-76 76474
-Notre-Dame-de-
-Bondeville 3 janvier 2022
+69 69123 Lyon 1
+er janvier 2020
+Lyon
+69 69381 Lyon 01 1er janvier 2020
+69 69382 Lyon 02 1er janvier 2020
+69 69383 Lyon 03 1er janvier 2020
+69 69384 Lyon 04 1er janvier 2020
+69 69385 Lyon 05 1er janvier 2020
+69 69386 Lyon 06 1er janvier 2020
+69 69387 Lyon 07 1er janvier 2020
+69 69388 Lyon 08 1er janvier 2020
+69 69389 Lyon 09 1er janvier 2020
+69 69029 Bron 1
+er janvier 2020
+69 69034 Calure et Cuire 1
+er janvier 2020
+69 69259 Venisseux 1
+er janvier 2020
+69 69266 Villeurbanne 1
+er janvier 2020
+34 34057 Castelnau-le-Lez 01/07/2022
+Montpellier
+34 34077 Clapiers 01/07/2022
+34 34116 Grabels 01/07/2022
+34 34120 Jacou 01/07/2022
+34 34123 Juvignac 01/07/2022
+34 34129 Lattes 01/07/2022
+34 34090 Le Crès 01/07/2022
+34 34172 Montpellier 01/07/2022
+34 34198 Pérols 01/07/2022
+34 34270 Saint Jean de Védas 01/07/2022
+34 34337 Villeneuve
+-lès
+-Maguelone 01/07/2022
+67 67001 Achenheim (67001) 01/01/2022
+Strasbourg
+67 67043 Bischheim (67043) 01/01/2022
+67 67049 Blaesheim 01/01/2022
+67 67065 Breuschwickersheim 01/01/2022
+67 67118 Eckbolsheim 01/01/2022
+67 67119 Eckwersheim 01/01/2022
+67 67124 Entzheim 01/01/2022
+67 67131 Eschau 01/01/2022
+67 67137 Fegersheim 01/01/2022
+67 67152 Geispolsheim 01/01/2022
+67 67182 Hangenbieten 01/01/2022
+67 67204 Hœnheim 01/01/2022
+67 67212 Holtzheim 01/01/2022
+67 67218 Illkirch
+-Graffenstaden 01/01/2022
+67 67247 Kolbsheim 01/01/2022
+67 67256 Lampertheim 01/01/2022
+67 67267 Lingolsheim 01/01/2022
+67 67268 Lipsheim 01/01/2022
+67 67296 Mittelhausbergen 01/01/2022
+67 67309 Mundolsheim 01/01/2022
+67 67326 Niederhausbergen 01/01/2022
+67 67343 Oberhausbergen 01/01/2022
+67 67350 Oberschaeffolsheim 01/01/2022
+67 67363 Osthoffen 01/01/2022
+67 67365 Ostwald 01/01/2022
+67 67378 Plobsheim 01/01/2022
+67 67389 Reichstett 01/01/2022
+67 67447 Schiltigheim 01/01/2022
+67 67471 Souffelweyersheim 01/01/2022
+67 67482 Strasbourg 01/01/2022
+67 67506 Vendenheim 01/01/2022
+67 67519 La Wantzenau 01/01/2022
+67 67551 Wolfisheim 01/01/2022
+31 31555 Toulouse 01/03/2022
+31 31149 Colomiers 01/03/2022 Toulouse
+31 31557 Tournefeuille 01/03/2022
+06 06088 Nice 31/01/2022 Nice
+42 42218 Saint
+-Etienne 31/01/2022
+Saint
+-Etienne
+42 42223 Saint
+-Genest
+-Lerpt 31/01/2022
+42 42189 Roche
+-la
+-Molière 31/01/2022
+42 42183 La Ricamarie 31/01/2022
+42 42330 Villars 31/01/2022
+42 42237 Saint
+-Jean
+-Bonnefonds 31/01/2022
+42 42275 Saint
+-Priest
+-en
+-Jarez 31/01/2022
 76 76540 Rouen 1er juillet 2021
-76 76681 Sotteville-lès-Rouen 3 janvier 2022
-92 92002 Antony 1er juillet 2020
-92 92004 Asnières-sur-Seine 16 déc. 2019
-92 92220 Bagneux 26 janvier 2022
-92 92009 Bois-Colombes 1er juillet 2021
-92 92012 Boulogne-Billancourt 1 er juillet 2019
-92 92014 Bourg-la-Reine 1er juillet 2019
-92 92019 Châtenay-Malabry 1er juin 2021
-92 92020 Châtillon 1er juin 2021
-92 92022 Chaville 1er juillet 2019
-92 92023 Clamart 2 juin 2021
-92 92024 Clichy la garenne 1er juillet 2019
-92 92025 Colombes 1er juin 2021
-92 92026 Courbevoie 3 juillet 2019
-92 92033 Garches 1er juin 2021
-92 92040 Issy-les-Moulineaux 1er juillet 2019
-92 92035 La Garenne-Colombes 2 nov. 2020
-92 92060 Le Plessis-Robinson 1er juin 2021
-92 92046 Malakoff 1er janvier 2020
-92 92047 Marnes-la-Coquette 1er juillet 2019
-92 92048 Meudon 1er juillet 2019
-92 92120 Montrouge 1er nov. 2021
-92 92050 Nanterre 2 sept. 2019
-92 92051 Neuilly-sur-Seine 1er juillet 2019
-92 92062 Puteaux 1er juin 2021
-92 92063 Rueil-Malmaison 1er juillet 2019
-92 92064 Saint-Cloud 1er juin 2021
-92 92071 Sceaux 1er juillet 2020
-92 92072 Sèvres 1er juillet 2019
-92 92073 Suresne 1er juin 2021
-92 92075 Vanves 1er juillet 2019
-92 92076 Vaucresson 1er juillet 2019
-92 92077 Ville-d'Avray 1er juillet 2019
-92 92078 Villeneuve-la-Garenne 1er juin 2021
-93 93001 Aubervilliers 1er juillet 2019
-93 93170 Bagnolet 1er janvier 2022
-93 93061 Le Pré-Saint-Gervais 1er juillet 2019
-93 93045 Les Lilas 1er juillet 2019
-93 93039 L'Ile-Saint-Denis 1 juillet 2019
-93 93048 Montreuil 1er octobre 2019
-93 93053 Noisy-le-Sec 3 juin 2021
-93 93055 Pantin 1er juillet 2019
-93 93063 Romainville 3 août 2021
-93 93064 Rosny-sous-Bois 1er juillet 2019
-93 93066 Saint-Denis 3 juin 2021
-93 93070 Saint-Ouen 1er sept. 2019
-94 94002 Alfortville 1er janvier 2020
-94 94003 Arcueil 1er août 2019
-94 94016 Cachan 1er janvier 2020
-94 94018 Charenton-le-Pont 1er juillet 2019
-94 94033 Fontenay-sous-Bois 1er janvier 2021
-94 94200 Ivry-sur-Seine 1er octobre 2021
-94 94340 Joinville-le-Pont 1er février 2022
-94 94043 Le Kremlin-Bicêtre 1er juillet 2019
-94 94700 Maison-Alfort 1er sept. 2021
-94 92052 Nogent-sur-Marne 16 déc. 2019
-94 94065 Rungis 1er juin 2021
-94 94067 Saint-Mandé 1er juillet 2019
-94 94069 Saint-Maurice 1er juillet 2019
-94 94073 Thiais 16 juillet 2019
-94 94076 Villejuif 1er juillet 2019
-94 94080 Vincennes 1er juillet 2019
+Rouen
+76 76005 Amfreville
+-la
+-Mi
+-Voie 03/01/2022
+76 76095 Bihorel 03/01/2022
+76 76108 Bois
+-Guillaume 03/01/2022
+76 76103 Bonsecours 03/01/2022
+76 76212 Darnétal 03/01/2022
+76 76216 Déville
+-lès
+-Rouen 03/01/2022
+76 76322 Le Grand
+-Quevilly 03/01/2022
+76 76429 Le Mesnil
+-Esnard 03/01/2022
+76 76498 Le Petit
+-Quevilly 03/01/2022
+76 76474 Notre
+-Dame
+-de
+-Bondeville 03/01/2022
+76 76681 Sotteville
+-lès
+-Rouen 03/01/2022
+76 76599 Saint
+-Léger
+-du
+-Bourg
+-Denis 01/09/2022
+13 13055 Marseille 01/09/2022
+Marseille
+13 13201 Marseille 01 01/09/2022
+13 13202 Marseille 02 01/09/2022
+13 13203 Marseille 03 01/09/2022
+13 13204 Marseille 04 01/09/2022
+13 13205 Marseille 05 01/09/2022
+13 13206 Marseille 06 01/09/2022
+13 13207 Marseille 07 01/09/2022
+13 13208 Marseille 08 01/09/2022
+13 13209 Marseille 09 01/09/2022
+13 13210 Marseille 10 01/09/2022
+13 13211 Marseille 11 01/09/2022
+13 13212 Marseille 12 01/09/2022
+13 13213 Marseille 13 01/09/2022
+13 13214 Marseille 14 01/09/2022
+13 13215 Marseille 15 01/09/2022
+13 13216 Marseille 16 01/09/2022
