@@ -1,8 +1,15 @@
 # Historique des modifications
 
+## v3.0.31 - 01/11/2023
+
+Ajoute les aides suivantes :
+
+- Grand Calais Terres et Mers - SITAC
+- Ville de Val-de-Reuil
+
 ## v3.0.30 - 27/10/2023
 
-Corrige le code Insse de Linselles
+Corrige le code Insee de Linselles
 
 ## v3.0.29 - 26/10/2023
 

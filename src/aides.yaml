@@ -1,12 +1,9 @@
 # TODO (aide annoncée mais pas encore de page officielle de présentation):
-# - Département Calvados https://www.ouest-france.fr/normandie/falaise-14700/aide-a-lachat-de-velo-electrique-dans-le-calvados-le-departement-pourrait-relancer-sa-subvention-2f83a7b6-cd7d-11ed-b493-b75770ef7f91
-# - Perpignan 1er septembre 2023 https://www.lindependant.fr/2023/06/09/perpignan-lagglo-accorde-une-aide-de-250-euros-pour-lachat-dun-velo-11252025.php#:~:text=Perpignan%20M%C3%A9diterran%C3%A9e%20M%C3%A9tropole%20propose%20une,'un%20kit%20d'%C3%A9lectrification.
-# - Grand Calais, pays d'opale https://www.nordlittoral.fr/185513/article/2023-09-20/grand-calais-et-pays-d-opale-vont-vous-aider-acheter-un-velo
 # - Caluire, https://www.leprogres.fr/transport/2023/10/03/la-commune-contribue-a-financer-l-achat-de-velos-et-forme-les-cyclistes#:~:text=Dans%20le%20cadre%20de%20son,er%20janvier%20au%2031%20d%C3%A9cembre.
 # - Centre littoral agglo (Guyane) https://www.cacl-guyane.fr/achetez-un-velo-grace-a-lagglo/
 #
-# Renouvellement ?
-# - https://coeurdostrevent.fr/citoyennete-et-environnement/prime-achat-velos-electriques/
+# MAJ montants en 2024:
+# - https://www.communaute-urbaine-dunkerque.fr/aide-a-lacquisition-dun-velo
 #
 # Terminé pour 2023, renouvellement prévu en 2024 :
 # - https://www.cap-atlantique.fr/services-a-la-population/mobilite/les-deplacements-doux/laide-a-lachat-de-velo-elargie
@@ -5404,6 +5401,21 @@ aides . arras:
   plafond: 300€
   lien: https://www.cu-arras.fr/a-votre-service/transport-et-mobilite-douce/
 
+aides . grand calais:
+  remplace: intercommunalité
+  titre: Grand Calais Terres et Mers - SITAC
+  applicable si:
+    toutes ces conditions:
+      - une de ces conditions:
+          - localisation . epci = 'CA Grand Calais Terres et Mers'
+          - localisation . code insee = '62397'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . électrique
+      alors: 250€
+    - sinon: 100€
+  lien: https://www.sitac-calais-opale-bus.fr/article.php?id=6637
+
 aides . pays de lumbres:
   remplace: intercommunalité
   titre: Pays de Lumbres
@@ -5466,6 +5478,14 @@ aides . vexin normand:
       - vélo . électrique
   valeur: 150€
   lien: https://www.cdc-vexin-normand.fr/transport/transport-a-la-demande/prime-achat-velo-assistance-electrique.html
+
+aides . val-de-reuil:
+  remplace: commune
+  titre: Ville de Val-de-Reuil
+  applicable si: localisation . code insee = '27701'
+  valeur: 50% * vélo . prix
+  plafond: 200€
+  lien: https://www.valdereuil.fr/services-municipaux/demarches-en-ligne/bonus-tous-a-velo
 
 aides . moselle et madon:
   remplace: intercommunalité
