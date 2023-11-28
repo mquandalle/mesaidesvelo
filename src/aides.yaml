@@ -521,7 +521,7 @@ aides . unieux:
           - vélo . motorisation
   valeur: 300€
   plafond: vélo . prix
-  lien: https://www.ville-unieux.fr/65-accueil/actusmairie/583-aide-aux-economies-d-energie-transision-energetiques.html
+  lien: https://www.ville-unieux.fr/actualites/583-aide-aux-economies-d-energie.html
 
 aides . bordeaux:
   remplace: intercommunalité
@@ -1055,16 +1055,6 @@ aides . hangenbieten:
       alors: 100€
     - sinon: 80€
   lien: https://hangenbieten.fr/wp-content/uploads/2021/03/SKM_C30821031516140.pdf#page=4
-
-aides . gerstheim:
-  remplace: commune
-  titre: Ville de Gerstheim
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '67154'
-      - vélo . électrique
-  valeur: 100€
-  lien: http://www.gerstheim.fr/iso_album/demande_de_subvention_velo.pdf
 
 aides . eschau:
   remplace: commune
@@ -2231,7 +2221,7 @@ aides . sète:
         type: booléen
         par défaut: non
       valeur: 50€
-  lien: https://www.agglopole.fr/lagglo-subventionne-lachat-de-velos-et-trottinettes-electriques/
+  lien: https://www.agglopole.fr/bougerdecouvrir/se-deplacer/l-aide-a-l-achat-de-velos-et-trottinettes-electriques/
 
 aides . vauvert:
   remplace: commune
@@ -5205,7 +5195,7 @@ aides . liffré-cormier:
       alors: 200€
     - sinon: 100€
   plafond: 40% * vélo . prix
-  lien: https://www.liffre-cormier.fr/vivre/transport-mobilite/aide-a-lachat-de-velo-a-assistance-electrique/
+  lien: https://www.liffre-cormier.fr/vivre/transport-mobilite-2/aidevelo/
 
 aides . Vallons de Haute Bretagne:
   remplace: intercommunalité
@@ -6131,7 +6121,47 @@ aides . la côtière à montluel:
       - si: vélo . électrique
         alors: 300€
       - sinon: 0€
-  lien: https://www.3cm.fr/Aide-a-l-achat-de-VAE,5363.html
+  lien: https://www.3cm.fr/18967-aide-a-l-achat-d-un-velo-a-assistance-electrique.htm
+
+aides . pays orne moselle:
+  remplace: intercommunalité
+  titre: Pays Orne Moselle
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays Orne Moselle'
+      - revenu fiscal de référence <= première tranche IR
+      - vélo . électrique ou mécanique
+  valeur: 20% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors: 150€
+      - sinon: 200€
+  lien: https://www.ccpom.fr/aides-a-la-mobilite/
+
+aides . bram:
+  remplace: commune
+  titre: Ville de Bram
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '11049'
+      - vélo . électrique ou mécanique
+      - revenu fiscal de référence <= 35052 €/an
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . électrique
+        alors:
+          variations:
+            - si: revenu fiscal de référence <= 18000 €/an
+              alors: 300 €
+            - sinon: 250 €
+      - sinon:
+          variations:
+            - si: revenu fiscal de référence <= 18000 €/an
+              alors: 150 €
+            - sinon: 100 €
+  lien: https://www.villedebram.fr/actualite/une-aide-a-lachat-de-velos-pour-les-bramais/
 
 aides . region centre:
   remplace: région

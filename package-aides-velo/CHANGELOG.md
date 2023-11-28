@@ -1,5 +1,23 @@
 # Historique des modifications
 
+## v3.0.32 - 28/11/2023
+
+Ajoute les aides suivantes :
+
+- Pays Orne Moselle
+- Ville de Bram
+
+Mise à jour des liens suivants :
+
+- Sète Agglopôle méditerranée
+- Liffré-Cormier Communauté
+- Communauté de Communes de la Côtière à Montluel
+- Ville d’Unieux
+
+Supprime l'aide suivante :
+
+- Ville de Gerstheim
+
 ## v3.0.31 - 01/11/2023
 
 Ajoute les aides suivantes :
