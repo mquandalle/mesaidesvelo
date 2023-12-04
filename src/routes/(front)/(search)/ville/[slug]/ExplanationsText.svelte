@@ -257,14 +257,15 @@
 							alt="logo villes.plus"
 						/></a
 					>
-					Par ailleurs {infos.classementVillePlus.teritoireClasse} se classe {infos
+					Par ailleurs {infos.classementVillePlus.territoireClasse} se classe {infos
 						.classementVillePlus.position}<sup
 						>{infos.classementVillePlus.position === 1 ? 'ère' : 'ème'}</sup
 					>/{infos.classementVillePlus.total} au
 					<a href="https://villes.plus/cyclables/{infos.classementVillePlus.typeClassement}"
-						>classement des {infos.classementVillePlus.typeClassement} cyclables du site villes.plus</a
-					>. Ce classement mesure la part de pistes cyclables sécurisées pour relier les différentes
-					mairies de la métropole.
+						>classement de {infos.classementVillePlus.dateClassement} des {infos.classementVillePlus
+							.nomClassement} cyclables du site villes.plus</a
+					>. Ce classement mesure la part de pistes cyclables sécurisées pour se déplacer dans {infos
+						.classementVillePlus.leTerritoire}.
 				</p>
 			{/if}
 		{/if}

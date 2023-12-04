@@ -22,6 +22,11 @@ const normalizeEpci = (s) => epci.find(({ nom }) => simplify(nom).includes(simpl
 
 const data = Object.fromEntries(await Promise.all(classsements.map(fetchAndNormalize)));
 
+data.dateClassement = new Intl.DateTimeFormat('fr-FR', {
+	year: 'numeric',
+	month: 'long',
+}).format(new Date());
+
 if (data.metropoles.find((n) => !n)) {
 	console.log('❌ Missing EPCI:');
 	console.log(data.metropoles.filter(Boolean).join('\n'));

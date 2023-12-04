@@ -166,9 +166,8 @@ export async function load({ params }) {
 	if (typeClassement) {
 		infos.classementVillePlus = {
 			typeClassement,
-			teritoireClasse: city.nom,
+			territoireClasse: city.nom,
 			position: classementPosition + 1,
-			total: classementVilleplus[typeClassement].length,
 		};
 	} else {
 		const posClassementVillePlus = classementVilleplus.metropoles.findIndex(
@@ -177,11 +176,36 @@ export async function load({ params }) {
 		if (posClassementVillePlus > -1) {
 			infos.classementVillePlus = {
 				typeClassement: 'metropoles',
-				teritoireClasse: localisation.epci.nom,
+				territoireClasse: localisation.epci.nom,
 				position: posClassementVillePlus + 1,
-				total: classementVilleplus.metropoles.length,
 			};
 		}
+	}
+
+	if (infos.classementVillePlus) {
+		const leTerritoire = {
+			departements: 'le département',
+			metropoles: 'la métropole',
+			'grandes-villes': 'la ville',
+			prefectures: 'la préfecture',
+			communes: 'la commune',
+		};
+
+		const nomClassement = {
+			departements: 'départements',
+			metropoles: 'métropoles',
+			'grandes-villes': 'grandes villes',
+			prefectures: 'préfectures',
+			communes: 'villes moyennes',
+		};
+
+		infos.classementVillePlus = {
+			...infos.classementVillePlus,
+			leTerritoire: leTerritoire[infos.classementVillePlus.typeClassement],
+			nomClassement: nomClassement[infos.classementVillePlus.typeClassement],
+			total: classementVilleplus[infos.classementVillePlus.typeClassement].length,
+			dateClassement: classementVilleplus.dateClassement,
+		};
 	}
 
 	if (barometreFubPerCity[localisation.codeInsee]) {
