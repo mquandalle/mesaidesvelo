@@ -46,5 +46,10 @@
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
 		"publicodes": "=1.0.0-beta.70"
+	},
+	"overrides": {
+		"vite": {
+			"rollup": "npm:@rollup/wasm-node"
+		}
 	}
 }
