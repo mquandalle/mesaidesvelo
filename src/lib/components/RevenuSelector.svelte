@@ -34,8 +34,9 @@
 							if (!aide.nodeValue) {
 								return null;
 							}
-							const originalRuleName = aide.explanation.find(({ condition }) => condition.isActive)
-								.consequence.name;
+							const originalRuleName = aide.explanation.find(
+								({ condition }) => condition.nodeValue === true,
+							).consequence.name;
 
 							return originalRuleName;
 						})
@@ -43,7 +44,7 @@
 
 					return originalNames;
 				})
-				.flat()
+				.flat(),
 		);
 	});
 
@@ -119,7 +120,7 @@
 		findAllComparaisonsValue(name, {
 			searchedName: 'revenu fiscal de référence',
 			unit: '€/mois',
-		})
+		}),
 	);
 
 	$: numberFieldIsRequired = tresholds.includes(numberFieldRequired);
@@ -164,7 +165,7 @@
 						};
 					}
 				},
-				{ thresholds: [], dernieresAidesDisplayed: null }
+				{ thresholds: [], dernieresAidesDisplayed: null },
 			)
 			.thresholds.slice(1);
 	}

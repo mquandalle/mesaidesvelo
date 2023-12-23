@@ -114,9 +114,9 @@ aides . ile de france:
     jusqu’à un plafond de $plafond.
   applicable si: localisation . région = '11'
   valeur: 50% * vélo . prix
-  plafond:
-    valeur:
-      nom: $plafond
+  plafond: $plafond
+  avec:
+    $plafond:
       variations:
         - si: vélo . cargo électrique
           alors: 600 €
@@ -131,12 +131,13 @@ aides . ile de france:
         - si:
             toutes ces conditions:
               - vélo . mécanique simple
-              - nom: pour un jeune
-                question: Le bénéficiaire a t-il entre 15 et 25 ans ?
-                type: booléen
-                par défaut: oui
+              - bénéficiaire jeune
           alors: 100 €
         - sinon: 0 €
+    bénéficiaire jeune:
+      question: Le bénéficiaire a t-il entre 15 et 25 ans ?
+      type: booléen
+      par défaut: oui
   lien: https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo
 
 aides . occitanie:
@@ -216,16 +217,17 @@ aides . paris:
       - si: vélo . mécanique
         alors: 100% * vélo . prix . HT
       - sinon: 33% * vélo . prix . HT
-  plafond:
-    nom: $plafond
-    variations:
-      - si: vélo . cargo
-        alors: 600€
-      - si: vélo . électrique
-        alors: 400€
-      - si: vélo . motorisation
-        alors: 400€
-      - sinon: 0€
+  plafond: $plafond
+  avec:
+    $plafond:
+      variations:
+        - si: vélo . cargo
+          alors: 600€
+        - si: vélo . électrique
+          alors: 400€
+        - si: vélo . motorisation
+          alors: 400€
+        - sinon: 0€
   lien: https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373
 
 aides . saint-étienne:
@@ -723,21 +725,23 @@ aides . pays de la loire:
       - une de ces conditions:
           - vélo . pliant
           - vélo . électrique
-      - nom: abonné TER
-        question: Êtes-vous abonnés du TER Pays de la Loire ?
-        description: |
-          Sont éligibles les abonnés Tutti illimité, Métrocéane mensuels, les
-          abonnés annuels de Loire-Atlantique, Maine et Loire et Sarthe, ainsi
-          que les abonnés mensuels des réseaux de Mayenne et Vendée (hors
-          scolaires).
-        type: booléen
-        par défaut: oui
+      - abonné TER
   description: |
     Cette aide à l’achat d’un $vélo est reservée aux abonnés du TER Pays
     de la Loire.
   valeur: 50% * vélo . prix
   plafond: 200€
   lien: https://www.paysdelaloire.fr/les-aides/aide-lachat-dun-velo-pliant-ou-assistance-electrique-vae-pour-les-abonnes-aleop
+  avec:
+    abonné TER:
+      question: Êtes-vous abonnés du TER Pays de la Loire ?
+      description: |
+        Sont éligibles les abonnés Tutti illimité, Métrocéane mensuels, les
+        abonnés annuels de Loire-Atlantique, Maine et Loire et Sarthe, ainsi
+        que les abonnés mensuels des réseaux de Mayenne et Vendée (hors
+        scolaires).
+      type: booléen
+      par défaut: oui
 
 aides . nantes:
   remplace: intercommunalité
@@ -2078,14 +2082,15 @@ aides . molsheim-mutzig:
       - localisation . epci = 'CC de la Région de Molsheim-Mutzig'
       - vélo . électrique
   variations:
-    - si:
-        nom: acheté dans un commerce du territoire
-        question: Le vélo est-il acheté dans un commerce de la communauté de communes ?
-        type: booléen
-        par défaut: non
+    - si: acheté dans un commerce du territoire
       alors: 200 €
     - sinon: 100 €
   lien: https://www.cc-molsheim-mutzig.fr/velos-a-assistance-electrique.htm
+  avec:
+    acheté dans un commerce du territoire:
+      question: Le vélo est-il acheté dans un commerce de la communauté de communes ?
+      type: booléen
+      par défaut: non
 
 # aides . pays rhénan:
 #   remplace: intercommunalité
@@ -2215,13 +2220,14 @@ aides . sète:
   somme:
     - valeur: 25% * vélo . prix
       plafond: 200€
-    - applicable si:
-        nom: acheté dans un commerce local
-        question: Le vélo est-il acheté dans un commerce de Sètre agglopôle méditerranée ?
-        type: booléen
-        par défaut: non
+    - applicable si: acheté dans un commerce local
       valeur: 50€
   lien: https://www.agglopole.fr/bougerdecouvrir/se-deplacer/l-aide-a-l-achat-de-velos-et-trottinettes-electriques/
+  avec:
+    acheté dans un commerce local:
+      question: Le vélo est-il acheté dans un commerce de Sètre agglopôle méditerranée ?
+      type: booléen
+      par défaut: non
 
 aides . vauvert:
   remplace: commune
@@ -3016,13 +3022,7 @@ aides . mons en baroeul:
     jusqu’à $plafond pour ses habitants.
     Note: Les vélos dédiés exclusivement à des activités de loisirs ne sont pas
     éligibles (BMX, VTT, vélo de course)
-  plafond:
-    valeur:
-      nom: $plafond
-      variations:
-        - si: vélo . électrique
-          alors: 400 €
-        - sinon: 200 €
+  plafond: $plafond
   variations:
     - si: vélo . électrique
       alors:
@@ -3060,6 +3060,12 @@ aides . mons en baroeul:
                 plafond: 100€
     - sinon: 0€
   lien: https://www.monsenbaroeul.fr/vivre-mons-en-baroeul/se-deplacer/demander-ma-prime-velo
+  avec:
+    $plafond:
+      variations:
+        - si: vélo . électrique
+          alors: 400 €
+        - sinon: 200 €
 
 aides . annoeullin:
   remplace: commune
@@ -3617,14 +3623,15 @@ aides . châtellrault:
       - localisation . epci = 'CA Grand Châtellerault'
       - vélo . électrique
   variations:
-    - si:
-        nom: ancien abonné vélibleu
-        type: booléen
-        question: Êtes-vous un ancien abonné Vélibleu d’au moins 6 mois avant le 31 décembre 2021 ?
-        par défaut: non
+    - si: ancien abonné vélibleu
       alors: 300€
     - sinon: 200€
   lien: https://www.ville-chatellerault.fr/a-votre-service/deplacements/aide-%C3%A0-l-achat-de-v%C3%A9lo
+  avec:
+    ancien abonné vélibleu:
+      type: booléen
+      question: Êtes-vous un ancien abonné Vélibleu d’au moins 6 mois avant le 31 décembre 2021 ?
+      par défaut: non
 
 aides . grand orb:
   remplace: intercommunalité
@@ -4963,14 +4970,15 @@ aides . saint-avold:
       - localisation . epci = 'CA Saint-Avold Synergie'
       - vélo . électrique
   variations:
-    - si:
-        nom: vélo acheté localement
-        question: Le vélo est-il acheté sur le territoire de l'intercommune Saint-Avold ?
-        type: booléen
-        par défaut: non
+    - si: vélo acheté localement
       alors: 100€
     - sinon: 50€
   lien: https://casas57.fr/nos-competences/ma-mobilite/velo/aide-a-lachat-dun-velo/
+  avec:
+    vélo acheté localement:
+      question: Le vélo est-il acheté sur le territoire de l'intercommune Saint-Avold ?
+      type: booléen
+      par défaut: non
 
 aides . montigny les metz:
   remplace: commune
@@ -5444,8 +5452,7 @@ aides . amboise:
       - localisation . code insee = '37003'
       - vélo . électrique
   produit:
-    taux:
-      variations:
+    - variations:
         - si: revenu fiscal de référence <= 500€/mois
           alors: 50%
         - si: revenu fiscal de référence <= 800€/mois
@@ -5453,8 +5460,7 @@ aides . amboise:
         - si: revenu fiscal de référence <= 1100€/mois
           alors: 30%
         - sinon: 0%
-    assiette:
-      valeur: vélo . prix
+    - valeur: vélo . prix
       plafond: 1200€
   plancher: 200€
   lien: https://www.ville-amboise.fr/57-1229/fiche/demande-d-aide-a-l-achat-d-un-velo-electrique.htm
@@ -5744,11 +5750,7 @@ aides . portes du luxembourg:
       - localisation . epci = 'CC des Portes du Luxembourg'
       - vélo . électrique ou mécanique
   variations:
-    - si:
-        nom: assemblé en France
-        question: Le vélo est-il conçu et assemblé en France ?
-        type: booléen
-        par défaut: non
+    - si: assemblé en France
       alors:
         valeur: 40% * vélo . prix
         plafond: 300 €
@@ -5756,6 +5758,11 @@ aides . portes du luxembourg:
         valeur: 33% * vélo . prix
         plafond: 200 €
   lien: https://www.portesduluxembourg.fr/la-prime-velo
+  avec:
+    assemblé en France:
+      question: Le vélo est-il conçu et assemblé en France ?
+      type: booléen
+      par défaut: non
 
 aides . cazouls-lès-béziers:
   remplace: commune
@@ -6104,15 +6111,8 @@ aides . la côtière à montluel:
     toutes ces conditions:
       - localisation . epci = 'CC de la Côtière à Montluel'
       - une de ces conditions:
-          - nom: travailler à moins de 20km
-            question: Travaillez-vous à moins de 20km de votre domicile ?
-            description: Vous devez justifier d’une activité professionnelle en tant que salarié, employeur ou auto-entrepreneur
-            type: booléen
-            par défaut: oui
-          - nom: abonné TER
-            question: Êtes-vous abonné au TER ?
-            type: booléen
-            par défaut: non
+          - travailler à moins de 20km
+          - abonné TER
   valeur: 15% * vélo . prix
   plafond:
     variations:
@@ -6122,6 +6122,16 @@ aides . la côtière à montluel:
         alors: 300€
       - sinon: 0€
   lien: https://www.3cm.fr/18967-aide-a-l-achat-d-un-velo-a-assistance-electrique.htm
+  avec:
+    travailler à moins de 20km:
+      question: Travaillez-vous à moins de 20km de votre domicile ?
+      description: Vous devez justifier d’une activité professionnelle en tant que salarié, employeur ou auto-entrepreneur
+      type: booléen
+      par défaut: oui
+    abonné TER:
+      question: Êtes-vous abonné au TER ?
+      type: booléen
+      par défaut: non
 
 aides . pays orne moselle:
   remplace: intercommunalité
@@ -6438,7 +6448,7 @@ vélo . occasion:
   # concernent les vélos d'occasion. Ces règles peuvent utiliser les variables
   # `vélo . neuf` et `vélo . occasion` dans leur formule de calcul.
   rend non applicable:
-    règle: aides
+    références à: aides
     sauf dans:
       - aides . montant
 
@@ -6527,11 +6537,15 @@ demandeur . bénéficiaire de minima sociaux:
 
 maximiser les aides:
   par défaut: non
-  remplace:
-    - règle: vélo . prix
-      par: vélo . prix pour maximiser les aides
-    - règle: aides . pays de la loire . abonné TER
-      par: oui
+  avec:
+    maximiser prix vélo:
+      valeur: vélo . prix pour maximiser les aides
+      remplace:
+        références à: vélo . prix
+    abonnement TER pays de la loire:
+      valeur: oui
+      remplace:
+        références à: aides . pays de la loire . abonné TER
 
 localisation:
 localisation . code insee: "''"

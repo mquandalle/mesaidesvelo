@@ -1,7 +1,6 @@
 <script>
 	import { page } from '$app/stores';
 	import MiniatureCollectivite from '$lib/components/MiniatureCollectivite.svelte';
-	import { localisation } from '$lib/stores';
 
 	$: infos = $page.data.infos;
 	$: showExplications = Object.keys(infos ?? {}).length > 0;
