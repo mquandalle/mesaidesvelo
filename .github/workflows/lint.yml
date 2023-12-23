@@ -12,7 +12,7 @@ jobs:
           submodules: 'true'
       - uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '20'
       - run: npm ci
       - name: Run linter
         run: npm run lint
