@@ -13,7 +13,7 @@ test('liste des aides en France', (t) => {
 	t.assert(list.length > 50, 'au moins 50 aides en France');
 	t.false(
 		list.some(({ id: aideId }) => aideId.includes('. monaco') || aideId.includes('. luxembourg')),
-		"pas d'aides de Monaco ou du Luxembourg"
+		"pas d'aides de Monaco ou du Luxembourg",
 	);
 });
 
@@ -28,7 +28,7 @@ test('aides électrique colmar', (t) => {
 	t.is(colmarElectrique.length, 3, '3 aides');
 	t.truthy(
 		colmarElectrique.find(({ title }) => title.toLowerCase().includes('colmar')),
-		'Dont une de la ville'
+		'Dont une de la ville',
 	);
 });
 
@@ -45,7 +45,7 @@ test('motorisation vélo bordeaux', (t) => {
 	t.deepEqual(
 		bordeauxMotorisation[0].collectivity,
 		{ kind: 'epci', value: 'Bordeaux Métropole', code: '243300316' },
-		"Associée à l'EPCI de Bordeaux"
+		"Associée à l'EPCI de Bordeaux",
 	);
 });
 
@@ -59,7 +59,7 @@ test('prise en compte du revenu fiscal de référence', (t) => {
 	t.is(
 		aidesCharenton.reduce((sum, { amount }) => sum + amount, 0),
 		600,
-		"jusqu'à 600 euros d'aides"
+		"jusqu'à 600 euros d'aides",
 	);
 	const aidesCharentonRevenuElevé = aidesVelo({
 		...situationCharenton,
@@ -68,7 +68,7 @@ test('prise en compte du revenu fiscal de référence', (t) => {
 	t.is(
 		aidesCharentonRevenuElevé.reduce((sum, { amount }) => sum + amount, 0),
 		0,
-		"pas d'aides pour un RFR à 5000 €/mois/part"
+		"pas d'aides pour un RFR à 5000 €/mois/part",
 	);
 });
 
@@ -84,7 +84,7 @@ test('interpolation des variables $vélo et $plafond', (t) => {
 		t.notRegex(
 			description,
 			/\$(vélo|plafond|ville)/,
-			`variables interpolées dans la description de ${id}`
-		)
+			`variables interpolées dans la description de ${id}`,
+		),
 	);
 });

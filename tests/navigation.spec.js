@@ -44,7 +44,7 @@ test('Aide not available', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/landerneau');
 	await expect(page.locator('text=motorisation d’un vélo classique')).toHaveCSS(
 		'text-decoration-line',
-		'line-through'
+		'line-through',
 	);
 });
 

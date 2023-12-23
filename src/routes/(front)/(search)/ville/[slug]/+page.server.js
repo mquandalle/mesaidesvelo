@@ -13,7 +13,7 @@ const barometreFubPerCity = Object.fromEntries(
 	barometreFubRawCsv
 		.trim()
 		.split('\n')
-		.map((row) => row.split(';'))
+		.map((row) => row.split(';')),
 );
 
 const labelTourDeFranceCommentairesLines = labelTourDeFranceCommentairesSource
@@ -39,7 +39,7 @@ const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
 		'code insee': {},
 		région: {},
 		département: {},
-	}
+	},
 );
 
 const availableContent = Object.fromEntries(
@@ -51,8 +51,8 @@ const availableContent = Object.fromEntries(
 				.toLowerCase()
 				.replace(/\.svx$/, ''),
 			mod,
-		]
-	)
+		],
+	),
 );
 
 const ruleToContentFilename = (ruleName) => ruleName.toLowerCase().replace('aides . ', '');
@@ -102,7 +102,7 @@ export async function load({ params }) {
 
 	if (
 		[villeRuleName, epciRuleName, departementRuleName, regionRuleName].every(
-			(ruleName) => ruleName === undefined
+			(ruleName) => ruleName === undefined,
 		)
 	) {
 		infos.onlyNationalAides = true;
@@ -158,7 +158,7 @@ export async function load({ params }) {
 	let classementPosition = -1;
 	const typeClassement = classementsVillePlusPriority.find((classement) => {
 		classementPosition = classementVilleplus[classement].findIndex(
-			(nom) => nom.toLowerCase() === city.nom.toLowerCase()
+			(nom) => nom.toLowerCase() === city.nom.toLowerCase(),
 		);
 		return classementPosition > -1;
 	});
@@ -171,7 +171,7 @@ export async function load({ params }) {
 		};
 	} else {
 		const posClassementVillePlus = classementVilleplus.metropoles.findIndex(
-			(epci) => epci === localisation.epci
+			(epci) => epci === localisation.epci,
 		);
 		if (posClassementVillePlus > -1) {
 			infos.classementVillePlus = {

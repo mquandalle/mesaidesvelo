@@ -5,7 +5,7 @@ test('content reference existing rules', () => {
 	const content = import.meta.glob('../src/content/*.svx');
 	const fileNames = Object.keys(content);
 	const existingsRuleNames = Object.keys(aidesAndCollectivities).map((dottedName) =>
-		dottedName.toLowerCase()
+		dottedName.toLowerCase(),
 	);
 	const inferedRuleNames = fileNames.map(
 		(path) =>
@@ -14,7 +14,7 @@ test('content reference existing rules', () => {
 				.split('/')
 				.at(-1)
 				.toLowerCase()
-				.replace(/\.svx$/, '')
+				.replace(/\.svx$/, ''),
 	);
 
 	inferedRuleNames.forEach((ruleName) => {

@@ -7,7 +7,7 @@ import blackList from '$entreprises/gsheet-blacklist.json';
 const entreprisesToRemoveFromInseeData = new Set(
 	[...gSheetForfaits.values.map(([nom]) => nom), ...blackList.values]
 		.flat()
-		.map((name) => name.toLowerCase())
+		.map((name) => name.toLowerCase()),
 );
 
 const tranchesEffectifInsee = {
@@ -77,8 +77,8 @@ export async function GET({ url }) {
 	if (search) {
 		return new Response(
 			JSON.stringify(
-				fuzzysort.go(search, indexedData, searchOptions).map(({ obj: res }) => pick(res))
-			)
+				fuzzysort.go(search, indexedData, searchOptions).map(({ obj: res }) => pick(res)),
+			),
 		);
 	} else {
 		// Par défaut on retourne les entreprises avec le plus de salariés les plus peuplées
@@ -87,8 +87,8 @@ export async function GET({ url }) {
 				indexedData
 					.sort((a, b) => b.effectif - a.effectif)
 					.slice(0, 10)
-					.map(pick)
-			)
+					.map(pick),
+			),
 		);
 	}
 }

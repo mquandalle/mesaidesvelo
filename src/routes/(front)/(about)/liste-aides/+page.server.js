@@ -53,10 +53,10 @@ export async function load() {
 		Object.entries(
 			groupBy(
 				associatedCollectivities.filter(({ collectivity }) =>
-					['code insee', 'epci', 'département'].includes(collectivity.kind)
+					['code insee', 'epci', 'département'].includes(collectivity.kind),
 				),
-				({ departement }) => departement
-			)
+				({ departement }) => departement,
+			),
 		)
 			.sort(([a], [b]) => parseInt(a) - parseInt(b))
 			.map(([dep, aides]) => [
@@ -66,11 +66,11 @@ export async function load() {
 						a.collectivity.kind === 'département'
 							? -1
 							: b.collectivity.kind === 'département'
-							? 1
-							: (b.population ?? 0) - (a.population ?? 0)
+								? 1
+								: (b.population ?? 0) - (a.population ?? 0),
 					)
 					.map(formatAideForClient),
-			])
+			]),
 	);
 
 	return { aidesEtat, aidesRegions, aidesLocales };

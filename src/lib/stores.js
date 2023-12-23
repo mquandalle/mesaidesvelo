@@ -20,8 +20,8 @@ export const localisationSituation = derived([localisation], ([$localisation]) =
 				'localisation . ZFE': `'${$localisation.zfe ? 'oui' : 'non'}'`,
 				'localisation . département': `'${$localisation.departement}'`,
 				'localisation . région': `'${$localisation.region}'`,
-		  }
-		: {}
+			}
+		: {},
 );
 
 export const publicodeSituation = derived(
@@ -32,5 +32,5 @@ export const publicodeSituation = derived(
 			...Object.fromEntries(Object.entries($answers).filter(([, val]) => val)),
 			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {}),
 		};
-	}
+	},
 );

@@ -13,6 +13,6 @@ export async function GET() {
 			...communes.sort((a, b) => b.population - a.population).map(({ slug }) => `/ville/${slug}`),
 		]
 			.map((path) => `https://mesaidesvelo.fr${path}`)
-			.join('\n')
+			.join('\n'),
 	);
 }
