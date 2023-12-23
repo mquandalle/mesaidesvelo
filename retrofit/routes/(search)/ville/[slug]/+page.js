@@ -9,7 +9,7 @@ export async function load({ params, fetch }) {
 	}
 	const resServer = await fetch('/api/ville?slug=' + encodeURIComponent(params.slug));
 	if (!resServer.ok) {
-		throw error(404);
+		error(404);
 	}
 	const ville = await resServer.json();
 	localisation.set(ville);

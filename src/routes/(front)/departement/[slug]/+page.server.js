@@ -23,9 +23,9 @@ export async function load({ params }) {
 	const departement = _departementWithSlug.find((d) => slug === d.slug);
 
 	if (slug === 'paris') {
-		throw redirect(308, '/ville/paris');
+		redirect(308, '/ville/paris');
 	} else if (!departement) {
-		throw error(404);
+		error(404);
 	}
 
 	const region = regions.find((r) => departement.region === r.code);

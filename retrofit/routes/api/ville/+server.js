@@ -6,7 +6,7 @@ export function GET({ url }) {
 	const slug = url.searchParams.get('slug');
 	const ville = data.find((v) => v.slug === slug);
 	if (!ville) {
-		throw error(404);
+		error(404);
 	}
 
 	return new Response(JSON.stringify(rawCityToFullLocalisation(ville)), {

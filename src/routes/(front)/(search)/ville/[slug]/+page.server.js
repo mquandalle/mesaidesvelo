@@ -78,7 +78,7 @@ export async function load({ params }) {
 	const slug = params.slug;
 	const city = communes.find((c) => c.slug === slug);
 	if (!city) {
-		throw error(404);
+		error(404);
 	}
 
 	const localisation = rawCityToFullLocalisation(city);
