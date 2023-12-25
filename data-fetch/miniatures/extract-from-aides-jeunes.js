@@ -43,7 +43,7 @@ const imagesFromAidesJeunes = Object.fromEntries([
 			fileContent
 				.split('\n')
 				.map((line) => line.split(':').map((field) => field.trim()))
-				.filter(([key]) => fieldsToRetrieve.includes(key))
+				.filter(([key]) => fieldsToRetrieve.includes(key)),
 		);
 
 		return [imgKey(data), data];

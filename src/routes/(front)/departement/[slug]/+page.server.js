@@ -23,23 +23,23 @@ export async function load({ params }) {
 	const departement = _departementWithSlug.find((d) => slug === d.slug);
 
 	if (slug === 'paris') {
-		throw redirect(308, '/ville/paris');
+		redirect(308, '/ville/paris');
 	} else if (!departement) {
-		throw error(404);
+		error(404);
 	}
 
 	const region = regions.find((r) => departement.region === r.code);
 
 	const aideDepartement = Object.entries(aidesCollectivities).find(
 		([, { collectivity }]) =>
-			collectivity.kind === 'département' && collectivity.value === departement.code
+			collectivity.kind === 'département' && collectivity.value === departement.code,
 	)?.[0];
 
 	const aideDepartementText = _getCorrespondingContent(aideDepartement);
 
 	const aideRegion = Object.entries(aidesCollectivities).find(
 		([, { collectivity }]) =>
-			collectivity.kind === 'région' && collectivity.value === departement.region
+			collectivity.kind === 'région' && collectivity.value === departement.region,
 	)?.[0];
 
 	const aideRegionText = _getCorrespondingContent(aideRegion);
@@ -48,7 +48,7 @@ export async function load({ params }) {
 		.filter(
 			([, aide]) =>
 				(aide.collectivity.kind === 'epci' || aide.collectivity.kind === 'code insee') &&
-				aide.departement === departement.code
+				aide.departement === departement.code,
 		)
 		.map(([ruleName, { slug }]) => ({
 			titre: engine.getRule(ruleName).rawNode.titre,

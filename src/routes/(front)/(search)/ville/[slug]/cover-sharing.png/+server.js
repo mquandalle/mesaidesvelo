@@ -16,7 +16,7 @@ export async function GET({ params: { slug } }) {
 	const localRuleName = Object.entries(aidesAndCollectivities).find(
 		([, { collectivity }]) =>
 			(collectivity.kind === 'code insee' && collectivity.value === ville.code) ||
-			(collectivity.kind === 'epci' && collectivity.value === ville.epci)
+			(collectivity.kind === 'epci' && collectivity.value === ville.epci),
 	)?.[0];
 
 	const html = template
@@ -25,7 +25,7 @@ export async function GET({ params: { slug } }) {
 			'{logoImgSrc}',
 			localRuleName && miniaturesManifest[localRuleName]
 				? `https://mesaidesvelo.fr/miniatures/${miniaturesManifest[localRuleName]}`
-				: ''
+				: '',
 		);
 	const res = await compile(html);
 

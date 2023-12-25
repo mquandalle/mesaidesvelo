@@ -14,7 +14,7 @@ const config = {
 						appTemplate: 'retrofit/app.html',
 						lib: 'src/lib',
 						assets: 'retrofit/static',
-				  }
+					}
 				: {},
 		outDir: `.svelte-kit/${process.env.VITE_SITE}`,
 	},

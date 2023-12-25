@@ -31,7 +31,7 @@ const villesAvecArrondissements = {
 };
 
 const communesInEpci = Object.fromEntries(
-	epci.flatMap(({ nom, membres }) => membres.map(({ code }) => [code, nom]))
+	epci.flatMap(({ nom, membres }) => membres.map(({ code }) => [code, nom])),
 );
 
 const extraData = [
@@ -61,7 +61,10 @@ const data = [
 	...communes
 		.filter(
 			(c) =>
-				c.type === 'commune-actuelle' && c.codesPostaux && c.population && !c.code?.startsWith('97')
+				c.type === 'commune-actuelle' &&
+				c.codesPostaux &&
+				c.population &&
+				!c.code?.startsWith('97'),
 		)
 		.map((c) => {
 			if (villesAvecArrondissements[c.nom]) {
@@ -80,7 +83,7 @@ const data = [
 				zfe: villeInZFE.includes(c.code),
 				...(communesInEpci[c.code] ? { epci: communesInEpci[c.code] } : {}),
 				codesPostaux: uniq(c.codesPostaux).sort(
-					(a, b) => countTrailingZeros(b) - countTrailingZeros(a)
+					(a, b) => countTrailingZeros(b) - countTrailingZeros(a),
 				),
 			};
 		}),

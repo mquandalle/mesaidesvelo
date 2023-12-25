@@ -25,7 +25,7 @@ const indexedData = data.flatMap(({ codesPostaux, ...rest }) =>
 			indexedCodePostal: fuzzysort.prepare(codePostal),
 			population: cpPrincipal ? rest.population : 10,
 		};
-	})
+	}),
 );
 
 const searchOptions = {
@@ -36,7 +36,7 @@ const searchOptions = {
 		// testé à la main pour faire remonter les plus grosses villes en premier
 		Math.max(
 			a[0] ? a[0].score - 1000 / Math.log(a.obj.population) : -1001,
-			a[1] ? a[1].score - 1 / Math.log(a.obj.population) : -1001
+			a[1] ? a[1].score - 1 / Math.log(a.obj.population) : -1001,
 		),
 };
 
@@ -49,7 +49,7 @@ export async function GET({ url }) {
 				.go(search, indexedData, searchOptions)
 				.map(({ obj }) => rawCityToFullLocalisation(obj))
 		: // Par défaut on retourne les communes les plus peuplées
-		  indexedData
+			indexedData
 				.sort((a, b) => b.population - a.population)
 				.slice(0, 10)
 				.map(rawCityToFullLocalisation);

@@ -49,7 +49,7 @@ export default function aidesVelo(situation: InputParameters = {}): Array<Aide> 
 	return Object.entries(aidesAndCollectivities)
 		.filter(
 			([, { country: aideCountry }]) =>
-				!situation['localisation . pays'] || aideCountry === situation['localisation . pays']
+				!situation['localisation . pays'] || aideCountry === situation['localisation . pays'],
 		)
 		.flatMap(([ruleName]) => {
 			const rule = engine.getRule(ruleName);
@@ -95,11 +95,11 @@ const formatInput = (input: InputParameters) =>
 					? 'oui'
 					: 'non'
 				: key === 'localisation . epci'
-				? `'${epciSirenToName[val]}'`
-				: typeof val === 'string'
-				? `'${val}'`
-				: val,
-		])
+					? `'${epciSirenToName[val]}'`
+					: typeof val === 'string'
+						? `'${val}'`
+						: val,
+		]),
 	);
 
 const epciSirenToName = Object.fromEntries(
@@ -108,5 +108,5 @@ const epciSirenToName = Object.fromEntries(
 			return [];
 		}
 		return [[(collectivity as any).code, collectivity.value]];
-	})
+	}),
 );

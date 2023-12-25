@@ -13,7 +13,7 @@ const sourceRules = fs.readFileSync(new URL('../aides.yaml', import.meta.url).pa
 const engine = new Publicodes(parse(sourceRules));
 
 const aidesRuleNames = Object.keys(engine.getParsedRules()).filter(
-	(ruleName) => ruleName.startsWith('aides .') && engine.getRule(ruleName).rawNode.titre
+	(ruleName) => ruleName.startsWith('aides .') && engine.getRule(ruleName).rawNode.titre,
 );
 
 const extractCollectivityFromAST = (rule) => {
@@ -33,7 +33,7 @@ const extractCollectivityFromAST = (rule) => {
 			}
 		},
 		null,
-		rule
+		rule,
 	);
 	// In our rule basis we reference EPCI by their name but for iteroperability
 	// with third-party systems it is more robust to expose their SIREN code.
@@ -73,8 +73,8 @@ const getCountry = (rule) =>
 	rule.dottedName === 'aides . monaco'
 		? 'monaco'
 		: rule.dottedName === 'aides . luxembourg'
-		? 'luxembourg'
-		: 'france';
+			? 'luxembourg'
+			: 'france';
 
 const associateCollectivityMetadata = (rule) => {
 	const collectivity = extractCollectivityFromAST(rule);
@@ -95,7 +95,7 @@ const res = Object.fromEntries(
 	aidesRuleNames.map((ruleName) => [
 		ruleName,
 		associateCollectivityMetadata(engine.getRule(ruleName)),
-	])
+	]),
 );
 
 writeJsonData('aides-collectivities.json', res);

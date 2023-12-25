@@ -1,9 +1,9 @@
 <script>
 	import { page } from '$app/stores';
-	import AnimatedAmount from '$lib/components./../../lib/components/AnimatedAmount.svelte';
-	import DetailsLine from '$lib/components./../../lib/components/DetailsLine.svelte';
-	import Emoji from '$lib/components./../../lib/components/Emoji.svelte';
-	import Questions from '$lib/components./../../lib/components/Questions.svelte';
+	import AnimatedAmount from '$lib/components/AnimatedAmount.svelte';
+	import DetailsLine from '$lib/components/DetailsLine.svelte';
+	import Emoji from '$lib/components/Emoji.svelte';
+	import Questions from '$lib/components/Questions.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { publicodeSituation, resetAnswers, veloCat } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
