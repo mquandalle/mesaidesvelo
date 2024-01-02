@@ -1,5 +1,9 @@
 # Historique des modifications
 
+## v3.0.33 - 02/01/2024
+
+Corrige l'aide de Paris
+
 ## v3.0.32 - 28/11/2023
 
 Ajoute les aides suivantes :

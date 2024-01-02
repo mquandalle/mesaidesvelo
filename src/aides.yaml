@@ -214,8 +214,8 @@ aides . paris:
   valeur:
     variations:
       - si: vélo . mécanique
-        alors: 33% * vélo . prix . HT
-      - sinon: 100% * vélo . prix . HT
+        alors: 100% * vélo . prix . HT
+      - sinon: 33% * vélo . prix . HT
   plafond:
     nom: $plafond
     variations:
