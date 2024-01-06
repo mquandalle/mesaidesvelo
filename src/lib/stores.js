@@ -17,7 +17,7 @@ export const localisationSituation = derived([localisation], ([$localisation]) =
 		? {
 				'localisation . code insee': `'${$localisation.codeInsee}'`,
 				'localisation . epci': `'${$localisation.epci || ''}'`,
-				'localisation . ZFE': `'${$localisation.zfe ? 'oui' : 'non'}'`,
+				'localisation . ZFE': `${$localisation.zfe ? 'oui' : 'non'}`,
 				'localisation . département': `'${$localisation.departement}'`,
 				'localisation . région': `'${$localisation.region}'`,
 			}

@@ -4,7 +4,7 @@
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
 
-	export let goals;
+	export let goals = undefined;
 	export let demandeNeufOuOccasion = false;
 
 	$: engine = getEngine({
@@ -20,7 +20,7 @@
 	$: questions = uniq(
 		(goals ?? ['aides . montant'])
 			.map((ruleName) => engine.evaluate(ruleName).traversedVariables)
-			.flat()
+			.flat(),
 	)
 		.filter((q) => engine.getRule(q).rawNode.question)
 		.filter((q) => q !== 'vélo . neuf ou occasion')
