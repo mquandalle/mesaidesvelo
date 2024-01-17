@@ -1,5 +1,40 @@
 # Historique des modifications
 
+## v3.0.34 - 17/01/2024
+
+Ajoute les aides suivantes :
+
+- Saint-Brieuc Armor Agglomération
+- Ville de Pont-de-Beauvoisin
+
+Mise à jour aides suivantes :
+
+- Communauté d'agglomération du Bassin d’Arcachon Nord
+- Ville de Cournon-d’Auvergne
+- Ville de Mandelieu-La Napoule
+- Ville de Saint-Pair-sur-Mer
+- Ville de Grande Synthe
+
+Supprime les aides suivantes :
+
+- Grand Besançon Métropole
+- Grand Lieu Communauté
+- Cœur de Savoie
+- Massif du Vercors communauté de communes
+- Maremne Adour Côte-Sud
+- Communauté Urbaine d’Arras
+- Pays de Mormal
+- Plaine d'Estrées Communauté de communes
+- Campagnes de l’Artois
+- Val de Drôme en Biovallée
+- Ville de Falaise
+- Ville de Noyarey
+- Ville de Vif
+- Ville de Villeneuve lez Avignon
+- Ville de Saint-Pierre-du-Mont
+- Ville de Linselles
+- Ville de Marcq-en-Barœul
+
 ## v3.0.33 - 02/01/2024
 
 Corrige l'aide de Paris
