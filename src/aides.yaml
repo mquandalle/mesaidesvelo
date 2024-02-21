@@ -33,11 +33,11 @@ aides . bonus vélo:
   applicable si:
     toutes ces conditions:
       - localisation . pays = 'France'
-      - revenu fiscal de référence <= 14089 €/an
+      - revenu fiscal de référence <= première tranche IR
   valeur: 40% * vélo . prix
   plafond:
     variations:
-      - si: revenu fiscal de référence <= 6358 €/an
+      - si: revenu fiscal de référence <= 7100 €/an
         alors:
           variations:
             - si:
@@ -241,7 +241,7 @@ aides . saint-étienne:
     - si: ménage imposable = non
       alors: 200€
     - sinon: 100€
-  lien: https://www.saint-etienne-metropole.fr/form/demande-aide-vae-2023
+  lien: https://www.saint-etienne-metropole.fr/form/aide-VAE-2024
 
 aides . lyon:
   remplace: intercommunalité
@@ -967,19 +967,19 @@ aides . grenoble:
           - sinon: 300€ + 150€
   lien: https://aidevelo.mobilites-m.fr/
 
-aides . tarbes lourdes pyrénées:
-  remplace: intercommunalité
-  titre: Tarbes Lourdes Pyrénées Communauté d'agglomération
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
-      - une de ces conditions:
-          - toutes ces conditions:
-              - vélo . électrique
-              - vélo . prix <= 2000 €
-          - vélo . cargo
-  valeur: 200€
-  lien: https://www.agglo-tlp.fr/page/vae
+# aides . tarbes lourdes pyrénées:
+#   remplace: intercommunalité
+#   titre: Tarbes Lourdes Pyrénées Communauté d'agglomération
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
+#       - une de ces conditions:
+#           - toutes ces conditions:
+#               - vélo . électrique
+#               - vélo . prix <= 2000 €
+#           - vélo . cargo
+#   valeur: 200€
+#   lien: https://www.agglo-tlp.fr/page/vae
 
 aides . strasbourg:
   remplace: intercommunalité
@@ -1420,15 +1420,15 @@ aides . mondeville:
               montant: 50€
   lien: http://www.mondeville.fr/vivre_a_mondeville/prime_a_l_achat_d_un_velo.html
 
-aides . terre d'auge:
-  remplace: intercommunalité
-  titre: Communauté de communes Terre d’Auge
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = "CC Terre d'Auge"
-      - vélo . électrique
-  valeur: 100€
-  lien: https://www.terredauge.fr/wp-content/uploads/2022/07/aide_vae_reglement_0422.pdf
+# aides . terre d'auge:
+#   remplace: intercommunalité
+#   titre: Communauté de communes Terre d’Auge
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = "CC Terre d'Auge"
+#       - vélo . électrique
+#   valeur: 100€
+#   lien: https://www.terredauge.fr/wp-content/uploads/2022/07/aide_vae_reglement_0422.pdf
 
 aides . flers:
   remplace: intercommunalité
@@ -2471,6 +2471,37 @@ aides . lescar:
     - sinon: 0€
   lien: https://www.lescar.fr/information-transversale/fil-infos/mise-en-place-dune-aide-pour-lacquisition-dun-velo-pour-les-lescariens-1140
 
+aides . bidart:
+  remplace: commune
+  titre: Ville de Bidart
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '64125'
+      - vélo . électrique ou mécanique
+  valeur: 50% * vélo . prix
+  plafond:
+    variations:
+      - si: vélo . cargo électrique
+        alors:
+          variations:
+            - si: revenu fiscal de référence < 28000 €/an
+              alors: 500€
+            - sinon: 400€
+      - si: vélo . électrique
+        alors:
+          variations:
+            - si: revenu fiscal de référence < 28000 €/an
+              alors: 400€
+            - sinon: 300€
+      - si: vélo . mécanique
+        alors:
+          variations:
+            - si: revenu fiscal de référence < 28000 €/an
+              alors: 200€
+            - sinon: 100€
+      - sinon: 0€
+  lien: https://www.bidart.fr/actualites/actualite/aide-a-lachat-dun-velo-47
+
 # aides . pays basque:
 #   remplace: intercommunalité
 #   titre: Agglomération Pays Basque
@@ -2739,16 +2770,16 @@ aides . les crêtes préardennaises:
   plafond: 100€
   lien: https://www.cretespreardennaises.fr/document/document/formulaires-daides-pour-lachat-dun-velo-electrique
 
-aides . erdregesvres:
-  remplace: intercommunalité
-  titre: Communauté de communes d’Erdre et Gesvres
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = "CC d'Erdre et Gesvres"
-      - vélo . électrique
-  valeur: 25% * vélo . prix
-  plafond: 100€
-  lien: https://www.cceg.fr/vos-services/faciliter-et-simplifier-vos-deplacements/bonus-velo-aide-a-lachat-de-velo-a-assistance-electrique
+# aides . erdregesvres:
+#   remplace: intercommunalité
+#   titre: Communauté de communes d’Erdre et Gesvres
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = "CC d'Erdre et Gesvres"
+#       - vélo . électrique
+#   valeur: 25% * vélo . prix
+#   plafond: 100€
+#   lien: https://www.cceg.fr/vos-services/faciliter-et-simplifier-vos-deplacements/bonus-velo-aide-a-lachat-de-velo-a-assistance-electrique
 
 # aides . grand lieu:
 #   remplace: intercommunalité
@@ -3146,16 +3177,16 @@ aides . nevers:
       - sinon: 0 €
   lien: https://www.nevers.fr/actualites/aide-a-lacquisition-dun-velo-2022
 
-aides . sud nivernais:
-  remplace: intercommunalité
-  titre: Communauté de Communes Sud Nivernais
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Sud Nivernais'
-      - vélo . électrique ou mécanique
-  valeur: 30% * vélo . prix
-  plafond: 300€
-  lien: https://www.ccsn.fr/environnement-5/aide-a-lachat-velo/
+# aides . sud nivernais:
+#   remplace: intercommunalité
+#   titre: Communauté de Communes Sud Nivernais
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CC Sud Nivernais'
+#       - vélo . électrique ou mécanique
+#   valeur: 30% * vélo . prix
+#   plafond: 300€
+#   lien: https://www.ccsn.fr/environnement-5/aide-a-lachat-velo/
 
 aides . aurillac:
   remplace: intercommunalité
@@ -3801,16 +3832,16 @@ aides . la rochelle:
     - sinon: 0€
   lien: https://yelo.agglo-larochelle.fr/aide-a-lachat-dun-vae/
 
-aides . île de ré:
-  remplace: intercommunalité
-  titre: Île de Ré Communauté de communes
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = "CC de l'Ile de Ré"
-      - vélo . électrique
-  valeur: 200€
-  plafond: vélo . prix
-  lien: https://cdciledere.fr/aide-pour-lachat-dun-velo-electrique/
+# aides . île de ré:
+#   remplace: intercommunalité
+#   titre: Île de Ré Communauté de communes
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = "CC de l'Ile de Ré"
+#       - vélo . électrique
+#   valeur: 200€
+#   plafond: vélo . prix
+#   lien: https://cdciledere.fr/aide-pour-lachat-dun-velo-electrique/
 
 aides . aunis atlantique:
   remplace: intercommunalité
@@ -3861,6 +3892,7 @@ aides . quéven:
   plafond: 100€
   lien: https://www.queven.com/vivre-a-queven/transports/demande-de-subvention-velo/
 
+# TODO: nouvelle aide à partir du 25 mars 2024
 aides . rochefort:
   remplace: intercommunalité
   titre: Agglomération Rochefort
@@ -3881,7 +3913,7 @@ aides . rochefort:
       - si: revenu fiscal de référence > 380€/mois
         alors: 150€
       - sinon: 200€
-  lien: https://www.agglo-rochefortocean.fr/velo-assistance-electrique-velos-pliants-cargos-aide-lacquisition
+  lien: https://www.agglo-rochefortocean.fr/velo-et-kit-delectrification-aide-lacquisition
 
 aides . saintes:
   remplace: intercommunalité
@@ -4580,17 +4612,17 @@ aides . loos-en-gohelle:
       - sinon: 0€
   lien: https://loos-en-gohelle.fr/wp-content/uploads/2023/04/Dossier-sub.-2023-1.pdf
 
-aides . pévèle carembault:
-  remplace: intercommunalité
-  titre: Pévèle Carembault
-  applicable si: localisation . epci = 'CC Pévèle-Carembault'
-  variations:
-    - si: vélo . électrique
-      alors: 200 €
-    - si: vélo . motorisation
-      alors: 100 €
-    - sinon: 0 €
-  lien: https://demarches.pevelecarembault.fr/mobilite/aide-lachat-dun-velo-electrique-2023
+# aides . pévèle carembault:
+#   remplace: intercommunalité
+#   titre: Pévèle Carembault
+#   applicable si: localisation . epci = 'CC Pévèle-Carembault'
+#   variations:
+#     - si: vélo . électrique
+#       alors: 200 €
+#     - si: vélo . motorisation
+#       alors: 100 €
+#     - sinon: 0 €
+#   lien: https://demarches.pevelecarembault.fr/mobilite/aide-lachat-dun-velo-electrique-2023
 
 aides . gruson:
   remplace: commune
@@ -4704,7 +4736,7 @@ aides . lesquin:
       - si: vélo . mécanique
         alors: 100€
       - sinon: 0€
-  lien: https://www.ville-lesquin.fr/vivre-a-lesquin/environnement/#toc-5
+  lien: https://www.ville-lesquin.fr/lesquin/subventions-municipales
 
 # aides . marcq-en-baroeul:
 #   remplace: commune
@@ -5033,12 +5065,9 @@ aides . brest:
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'Brest Métropole'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-          - vélo . pliant
+      - vélo . électrique
   variations:
-    - si: vélo . cargo
+    - si: vélo . cargo électrique
       alors:
         variations:
           - si: revenu fiscal de référence <= 6538 €/an
@@ -5309,7 +5338,7 @@ aides . morlaix:
       alors: 200 €
     - sinon: 100 €
   plafond: 40% * vélo . prix
-  lien: https://www.morlaix-communaute.bzh/Se-deplacer/Velo/Prime-achat-Velo-a-Assistance-Electrique-VAE
+  lien: https://www.morlaix-communaute.bzh/mon-quotidien/les-deplacements/a-velo/demander-la-prime-a-lacquisition-dun-velo-a-assistance-electrique
 
 aides . poher:
   remplace: intercommunalité
@@ -6496,7 +6525,6 @@ vélo . occasion:
       - aides . saint-marcellin vercors isère
       - aides . aubervilliers
       - aides . grand cubzaguais
-      - aides . île de ré
       - aides . vallée de l'homme
       - aides . denain
       - aides . feignies
@@ -6511,7 +6539,7 @@ revenu fiscal de référence:
   # les aides
   par défaut: 800 €/an
 
-première tranche IR: 14089 €/an
+première tranche IR: 15400 €/an
 ANAH:
 ANAH . plafond ménage modeste: 19565 €/an
 

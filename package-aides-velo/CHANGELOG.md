@@ -1,5 +1,28 @@
 # Historique des modifications
 
+## v3.0.35 - 21/02/2024
+
+Ajoute l'aide suivante :
+
+- Ville de Bidart
+
+Mise à jour des aides suivantes :
+
+- Bonus vélo de l'État
+- Saint-Étienne Métropole
+- Brest Métropole
+- Ville de Lesquin
+- Morlaix Communauté
+
+Supprime les aides suivantes :
+
+- Tarbes Lourdes Pyrénées Communauté d'agglomération
+- Communauté de communes Terre d’Auge
+- Communauté de communes d’Erdre et Gesvres
+- Communauté de Communes Sud Nivernais
+- Île de Ré Communauté de communes
+- Pévèle Carembault
+
 ## v3.0.34 - 17/01/2024
 
 Ajoute les aides suivantes :
@@ -7,7 +30,7 @@ Ajoute les aides suivantes :
 - Saint-Brieuc Armor Agglomération
 - Ville de Pont-de-Beauvoisin
 
-Mise à jour aides suivantes :
+Mise à jour des aides suivantes :
 
 - Communauté d'agglomération du Bassin d’Arcachon Nord
 - Ville de Cournon-d’Auvergne

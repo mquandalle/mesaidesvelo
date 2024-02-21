@@ -85,14 +85,13 @@
 			<li>Être majeur et domicilié en France</li>
 			<li>
 				Avoir un revenu fiscal de référence par part l'année précédant l'achat du vélo inférieur ou
-				égal à 14 089 €
+				égal à 15 400 €
 			</li>
 		</ul>
 		<p>
 			L’aide est de <strong>40% du prix du vélo</strong>, et elle est plafonnée en fonction du type
-			de vélo. Par ailleurs du 15 août au 31 décembre 2023, les ménages les plus modestes
-			bénéficient de plafonds plus élevés ainsi que d’une aide spécifique pour les vélos mécaniques
-			non électriques.
+			de vélo. Par ailleurs les ménages les plus modestes bénéficient de plafonds plus élevés ainsi
+			que d’une aide spécifique pour les vélos mécaniques non électriques.
 		</p>
 
 		<table>
