@@ -1,5 +1,30 @@
 # Historique des modifications
 
+## v3.0.36 - 27/03/2024
+
+Ajoute les aides suivantes :
+
+- Pays de Mormal
+- Massif du Vercors communauté de communes
+- Ville de Sainte-Foy-lès-Lyon
+- Ville de Boé
+
+Mise à jour des aides suivantes :
+
+- Communauté urbaine de Dunkerque
+- Communauté de Communes Saint-Avold Synergie
+- Communauté de communes Arve & Salève
+- Rives de Moselle
+- Agglomération Rochefort
+- Luxembourg
+
+Supprime les aides suivantes :
+
+- Département de Seine-Maritime
+- Communauté des Communes Giennoises
+- Bocage Mayennais Communauté de communes
+- Ville de Vauvert
+
 ## v3.0.35 - 21/02/2024
 
 Ajoute l'aide suivante :

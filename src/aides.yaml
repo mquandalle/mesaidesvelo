@@ -2,12 +2,13 @@
 # - Caluire, https://www.leprogres.fr/transport/2023/10/03/la-commune-contribue-a-financer-l-achat-de-velos-et-forme-les-cyclistes#:~:text=Dans%20le%20cadre%20de%20son,er%20janvier%20au%2031%20d%C3%A9cembre.
 # - Centre littoral agglo (Guyane) https://www.cacl-guyane.fr/achetez-un-velo-grace-a-lagglo/
 #
-# MAJ montants en 2024:
-# - https://www.communaute-urbaine-dunkerque.fr/aide-a-lacquisition-dun-velo
+# https://www.ferolles-attilly.fr/actualites/aide-a-l-achat-de-velo-417.html ?
 #
 # Terminé pour 2023, renouvellement prévu en 2024 :
 # - https://www.cap-atlantique.fr/services-a-la-population/mobilite/les-deplacements-doux/laide-a-lachat-de-velo-elargie
 # - Martigues https://www.ville-martigues.fr/services-en-ligne/deplacements/pistes-cyclables/velo-a-assistance-electrique-aide-a-lachat
+# - Agen https://www.agglo-agen.net/vie-quotidienne/mobilites/aide-velo-electrique
+# - Perpignan  https://aide-velo.perpignan-mediterranee.org/
 
 aides:
   avec:
@@ -347,6 +348,20 @@ aides . ville-sur-jarnioux:
   valeur: 50% * vélo . prix
   plafond: 100€
   lien: https://www.ville-sur-jarnioux.fr/aide-velo/
+
+aides . sainte-foy-lès-lyon:
+  remplace: commune
+  titre: Ville de Sainte-Foy-lès-Lyon
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '69202'
+      - une de ces conditions:
+          - vélo . électrique
+          - vélo . motorisation
+          - vélo . pliant
+          - vélo . cargo
+  valeur: 100€
+  lien: https://www.saintefoyleslyon.fr/demarches-services/mobilites/velo/
 
 aides . pays mornantais:
   remplace: intercommunalité
@@ -870,29 +885,29 @@ aides . toulouse:
       - sinon: 0€
   lien: https://www.toulouse-metropole.fr/missions/environnement/qualite-de-l-air/prime-velo
 
-aides . perpignan métropole:
-  remplace: intercommunalité
-  titre: Perpignan Méditerranée Métropole
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CU Perpignan Méditerranée Métropole'
-      - une de ces conditions:
-          - vélo . cargo
-          - toutes ces conditions:
-              - vélo . électrique
-              - variations:
-                  - si: vélo . neuf
-                    alors: vélo . prix <= 2500€
-                  - sinon: vélo . prix <= 1500€
-          - toutes ces conditions:
-              - vélo . mécanique
-              - vélo . prix >= 600€
-              - vélo . prix <= 1500€
-          - toutes ces conditions:
-              - vélo . motorisation
-              - vélo . prix <= 1500€
-  valeur: 250€
-  lien: https://aide-velo.perpignan-mediterranee.org/
+# aides . perpignan métropole:
+#   remplace: intercommunalité
+#   titre: Perpignan Méditerranée Métropole
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CU Perpignan Méditerranée Métropole'
+#       - une de ces conditions:
+#           - vélo . cargo
+#           - toutes ces conditions:
+#               - vélo . électrique
+#               - variations:
+#                   - si: vélo . neuf
+#                     alors: vélo . prix <= 2500€
+#                   - sinon: vélo . prix <= 1500€
+#           - toutes ces conditions:
+#               - vélo . mécanique
+#               - vélo . prix >= 600€
+#               - vélo . prix <= 1500€
+#           - toutes ces conditions:
+#               - vélo . motorisation
+#               - vélo . prix <= 1500€
+#   valeur: 250€
+#   lien: https://aide-velo.perpignan-mediterranee.org/
 
 aides . grenoble:
   remplace: intercommunalité
@@ -2239,15 +2254,15 @@ aides . sète:
       type: booléen
       par défaut: non
 
-aides . vauvert:
-  remplace: commune
-  titre: Ville de Vauvert
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '30341'
-      - vélo . électrique
-  valeur: 200€
-  lien: https://www.vauvert.com/aide-2021-achat-velo-assistance-electrique/
+# aides . vauvert:
+#   remplace: commune
+#   titre: Ville de Vauvert
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . code insee = '30341'
+#       - vélo . électrique
+#   valeur: 200€
+#   lien: https://www.vauvert.com/grands-projets/une-ville-qui-respire/velo-assistance-electrique-aide/
 
 aides . cébazat:
   remplace: commune
@@ -2928,6 +2943,16 @@ aides . cote d'or . vélo assemblé ou produit localement:
 #   plafond: vélo . prix
 #   lien: https://www.agglo-agen.net/vie-quotidienne/mobilites/aide-velo-electrique
 
+aides . boé:
+  remplace: commune
+  titre: Ville de Boé
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '47031'
+      - vélo . électrique
+  valeur: 100 €
+  lien: https://www.ville-boe.fr/decouvrir-boe/presentation/dernieres-actualites/2101-aide-achat-vae-2024
+
 aides . sophia antipolis:
   remplace: intercommunalité
   titre: Communauté d’Agglomération Sophia Antipolis
@@ -3260,21 +3285,21 @@ aides . frejus:
   plafond: 200 €
   lien: https://www.ville-frejus.fr/ma-ville/valorisation-et-preservation/dossier-de-demande-daide-a-lachat-dun-vae/
 
-aides . gien:
-  remplace: intercommunalité
-  titre: Communauté des Communes Giennoises
-  applicable si: localisation . epci = 'CC Giennoises'
-  variations:
-    - si: vélo . électrique
-      alors:
-        valeur: 25% * vélo . prix
-        plafond: 300€
-    - si: vélo . électrique
-      alors:
-        valeur: 50% * vélo . prix
-        plafond: 100€
-    - sinon: 0€
-  lien: https://www.legiennois.fr/legiennois-actualites/2148-aide-a-l-acquisition-de-velo
+# aides . gien:
+#   remplace: intercommunalité
+#   titre: Communauté des Communes Giennoises
+#   applicable si: localisation . epci = 'CC Giennoises'
+#   variations:
+#     - si: vélo . électrique
+#       alors:
+#         valeur: 25% * vélo . prix
+#         plafond: 300€
+#     - si: vélo . électrique
+#       alors:
+#         valeur: 50% * vélo . prix
+#         plafond: 100€
+#     - sinon: 0€
+#   lien: https://www.legiennois.fr/legiennois-actualites/2148-aide-a-l-acquisition-de-velo
 
 aides . ferte saint aubin:
   remplace: commune
@@ -3450,7 +3475,7 @@ aides . arve salève:
             alors: 50€
           - sinon: 0€
   plafond: 80% * vélo . prix
-  lien: https://www.arve-saleve.fr/primo-velo-2023-laide-a-lachat-de-velo-darve-saleve/
+  lien: https://www.arve-saleve.fr/primo-velo-2024-laide-a-lachat-de-velo-darve-saleve/
 
 aides . cluses arve et montagnes:
   remplace: intercommunalité
@@ -3892,28 +3917,26 @@ aides . quéven:
   plafond: 100€
   lien: https://www.queven.com/vivre-a-queven/transports/demande-de-subvention-velo/
 
-# TODO: nouvelle aide à partir du 25 mars 2024
 aides . rochefort:
   remplace: intercommunalité
   titre: Agglomération Rochefort
   applicable si:
     toutes ces conditions:
       - localisation . epci = 'CA Rochefort Océan'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-          - vélo . pliant
-  valeur: vélo . prix
+      - revenu fiscal de référence <= 15400 €/an
+  valeur: 40% * vélo . prix
   plafond:
     variations:
-      - si: revenu fiscal de référence > 760€/mois
-        alors: 50€
-      - si: revenu fiscal de référence > 500€/mois
-        alors: 100€
-      - si: revenu fiscal de référence > 380€/mois
+      - si: vélo . cargo électrique
+        alors: 325€
+      - si: vélo . électrique
+        alors: 225€
+      - si: vélo . motorisation
         alors: 150€
-      - sinon: 200€
-  lien: https://www.agglo-rochefortocean.fr/velo-et-kit-delectrification-aide-lacquisition
+      - si: vélo . mécanique
+        alors: 100€
+      - sinon: 0€
+  lien: https://www.agglo-rochefortocean.fr/velo-tricycle-et-kit-delectrification-aide-lacquisition
 
 aides . saintes:
   remplace: intercommunalité
@@ -3924,32 +3947,6 @@ aides . saintes:
       - vélo . électrique
   valeur: 200€
   lien: https://www.agglo-saintes.fr/l-agglo-au-quotidien/transports-et-mobilites/530-aide-a-l-achat-d-un-velo-a-assistance-electrique.html
-
-aides . seine-maritime:
-  remplace: département
-  titre: Département de Seine-Maritime
-  applicable si:
-    toutes ces conditions:
-      - localisation . département = '76'
-      - vélo . électrique
-  variations:
-    - si:
-        variations:
-          - si: personnes dans le foyer fiscal = 1
-            alors: revenu fiscal de référence <= 20805€/an
-          - si: personnes dans le foyer fiscal = 2
-            alors: revenu fiscal de référence <= 30427€/an
-          - si: personnes dans le foyer fiscal = 3
-            alors: revenu fiscal de référence <= 36591€/an
-          - si: personnes dans le foyer fiscal = 4
-            alors: revenu fiscal de référence <= 42748€/an
-          - si: personnes dans le foyer fiscal = 5
-            alors: revenu fiscal de référence <= 48930€/an
-          - si: personnes dans le foyer fiscal > 5
-            alors: revenu fiscal de référence <= 48930€/an + (personnes dans le foyer fiscal - 5) * 6165€/an
-      alors: 400€
-    - sinon: 200€
-  lien: https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/ma-prime-velo-76.html
 
 aides . dieppe:
   remplace: commune
@@ -4436,15 +4433,15 @@ aides . laval:
 #   plafond: 100€
 #   lien: https://www.lernee.fr/au-quotidien/mobilite/subvention-velo-electrique/
 
-aides . bocage mayennais:
-  remplace: intercommunalité
-  titre: Bocage Mayennais Communauté de communes
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC du Bocage Mayennais'
-      - vélo . électrique
-  valeur: 100€
-  lien: https://www.bocage-mayennais.fr/bocage-mayennais_au-quotidien_transport-et-mobilite_aide-a-l-achat-de-velo-a-assistance-electrique-vae.phtml
+# aides . bocage mayennais:
+#   remplace: intercommunalité
+#   titre: Bocage Mayennais Communauté de communes
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CC du Bocage Mayennais'
+#       - vélo . électrique
+#   valeur: 100€
+#   lien: https://www.bocage-mayennais.fr/bocage-mayennais_au-quotidien_transport-et-mobilite_aide-a-l-achat-de-velo-a-assistance-electrique-vae.phtml
 
 aides . brive:
   remplace: intercommunalité
@@ -4793,8 +4790,12 @@ aides . dunkerque:
       - localisation . epci = 'CU de Dunkerque'
       - vélo . électrique ou mécanique
   valeur: vélo . prix
-  plafond: 80€
-  lien: https://www.communaute-urbaine-dunkerque.fr/fileadmin/Cud/documents/Subvention/habitat/aide/AideAchatVelo_flyer_A4_Ro.pdf
+  plafond:
+    variations:
+      - si: demandeur . bénéficiaire de minima sociaux
+        alors: 150€
+      - sinon: 80€
+  lien: https://www.communaute-urbaine-dunkerque.fr/aide-a-lacquisition-dun-velo
 
 aides . flandre intérieure:
   remplace: intercommunalité
@@ -5002,7 +5003,7 @@ aides . rives de moselle:
               alors: 150€
             - sinon: 100€
       - sinon: 0€
-  lien: https://www.rivesdemoselle.fr/aide-a-lachat-pour-un-velo-avec-ou-sans-assistance-electrique/
+  lien: https://www.rivesdemoselle.fr/mobilites/#tousavelo
 
 aides . saint-avold:
   remplace: intercommunalité
@@ -5013,7 +5014,7 @@ aides . saint-avold:
       - vélo . électrique
   variations:
     - si: vélo acheté localement
-      alors: 100€
+      alors: 150€
     - sinon: 50€
   lien: https://casas57.fr/nos-competences/ma-mobilite/velo/aide-a-lachat-dun-velo/
   avec:
@@ -5410,22 +5411,22 @@ aides . sainghin en melantois:
       - sinon: 0€
   lien: https://www.sainghin-en-melantois.fr/aide-lachat-dun-velo
 
-# aides . pays de mormal:
-#   remplace: intercommunalité
-#   titre: Pays de Mormal
-#   applicable si:
-#     toutes ces conditions:
-#       - localisation . epci = 'CC du Pays de Mormal'
-#       - vélo . électrique
-#   variations:
-#     - si: demandeur . bénéficiaire de minima sociaux
-#       alors:
-#         valeur: 50% * vélo . prix
-#         plafond: 600€
-#     - sinon:
-#         valeur: 30% * vélo . prix
-#         plafond: 360€
-#   lien: https://www.cc-paysdemormal.fr/environnement-amenagement-html/aide-velo-trottinette-electrique/documents-velo-electrique/
+aides . pays de mormal:
+  remplace: intercommunalité
+  titre: Pays de Mormal
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Pays de Mormal'
+      - vélo . électrique
+  variations:
+    - si: demandeur . bénéficiaire de minima sociaux
+      alors:
+        valeur: 50% * vélo . prix
+        plafond: 600€
+    - sinon:
+        valeur: 30% * vélo . prix
+        plafond: 360€
+  lien: https://www.cc-paysdemormal.fr/environnement-amenagement-html/aide-velo-trottinette-electrique/documents-velo-electrique/
 
 # aides . arras:
 #   remplace: intercommunalité
@@ -5693,18 +5694,24 @@ aides . grand angouleme:
         plafond: 150 €
   lien: https://www.grandangouleme.fr/tous-a-velo/
 
-# aides . massif du vercors:
-#   remplace: intercommunalité
-#   titre: Massif du Vercors communauté de communes
-#   applicable si:
-#     toutes ces conditions:
-#       - localisation . epci = 'CC du Massif du Vercors'
-#       - vélo . électrique
-#   variations:
-#     - si: vélo . neuf
-#       alors: 200 €
-#     - sinon: 300 €
-#   lien: https://www.vercors.org/actualites/bonus-vae/
+aides . massif du vercors:
+  remplace: intercommunalité
+  titre: Massif du Vercors communauté de communes
+  applicable si:
+    toutes ces conditions:
+      - localisation . epci = 'CC du Massif du Vercors'
+      - revenu fiscal de référence <= 21805 €/an
+  variations:
+    - si: vélo . cargo
+      alors: 400 €
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: vélo . neuf
+            alors: 200 €
+          - sinon: 300 €
+    - sinon: 0 €
+  lien: https://www.vercors.org/actualites/bonus-vae/
 
 aides . carmausin-ségala:
   remplace: intercommunalité
@@ -6306,7 +6313,7 @@ aides . luxembourg:
       - localisation . pays = 'Luxembourg'
   valeur: 50% * vélo . prix . HT
   plafond: 600€
-  lien: https://guichet.public.lu/fr/citoyens/transports-mobilite/transports-individuels/aides-financieres-acquisition-detention-vehicule/deduction-mobilite-durable-velo.html
+  lien: https://guichet.public.lu/fr/citoyens/transport/transports-individuels/aides-financieres/deduction-mobilite-durable-velo.html
 
 ########################
 
@@ -6423,7 +6430,6 @@ vélo . prix pour maximiser les aides:
           - localisation . epci = 'CA Luberon Monts de Vaucluse'
           - localisation . epci = 'CA Tarbes-Lourdes-Pyrénées'
           - localisation . epci = 'CC Saint-Marcellin Vercors Isère Communauté'
-          - localisation . epci = 'CU Perpignan Méditerranée Métropole'
           - localisation . epci = 'CC Le Grésivaudan'
       alors: 1000 €
     - si:
@@ -6531,7 +6537,6 @@ vélo . occasion:
       - aides . moselle et madon
       - aides . canélan
       - aides . kremlin-bicetre
-      - aides . perpignan métropole
 
 revenu fiscal de référence:
   question: Quel est votre revenu annuel (quotient familial) ?
