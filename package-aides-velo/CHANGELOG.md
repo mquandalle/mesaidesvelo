@@ -1,5 +1,23 @@
 # Historique des modifications
 
+## v3.0.37 - 04/04/2024
+
+Ajoute l'aide suivante :
+
+- Ville de Saint-Omer
+
+Mise à jour des aides suivantes :
+
+- Massif du Vercors communauté de communes
+- Ville de Grande Synthe
+
+Supprime les aides suivantes :
+
+- Communauté d'Agglomération de La Rochelle - Yélo
+- Caux-Austreberthe communauté de communes
+- Ville de Charenton
+- Ville de Corrèze
+
 ## v3.0.36 - 27/03/2024
 
 Ajoute les aides suivantes :

@@ -50,23 +50,23 @@ test('motorisation vélo bordeaux', (t) => {
 });
 
 test('prise en compte du revenu fiscal de référence', (t) => {
-	const situationCharenton = {
-		'localisation . code insee': '94018',
+	const situationStrasbourg = {
+		'localisation . epci': '246700488',
 		'vélo . type': 'électrique',
 		'aides . prime à la conversion': 'non',
 	};
-	const aidesCharenton = aidesVelo(situationCharenton);
+	const aidesStrasbourg = aidesVelo(situationStrasbourg);
 	t.is(
-		aidesCharenton.reduce((sum, { amount }) => sum + amount, 0),
-		600,
-		"jusqu'à 600 euros d'aides",
+		aidesStrasbourg.reduce((sum, { amount }) => sum + amount, 0),
+		900,
+		"jusqu'à 900 euros d'aides",
 	);
-	const aidesCharentonRevenuElevé = aidesVelo({
-		...situationCharenton,
+	const aidesStrasbourgRevenuElevé = aidesVelo({
+		...situationStrasbourg,
 		'revenu fiscal de référence': '5000 €/mois',
 	});
 	t.is(
-		aidesCharentonRevenuElevé.reduce((sum, { amount }) => sum + amount, 0),
+		aidesStrasbourgRevenuElevé.reduce((sum, { amount }) => sum + amount, 0),
 		0,
 		"pas d'aides pour un RFR à 5000 €/mois/part",
 	);

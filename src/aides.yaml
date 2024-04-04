@@ -2389,20 +2389,6 @@ aides . luberon:
       - sinon: 0€
   lien: https://www.luberonmontsdevaucluse.fr/agglomeration/subvention-velo
 
-aides . charenton:
-  remplace: commune
-  titre: Ville de Charenton
-  description: |
-    Le Pass' Vélo est a demander auprès du CCAS avant l’achat du vélo
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '94018'
-      - revenu fiscal de référence <= 15000 €/an
-      - vélo . électrique ou mécanique
-  valeur: 50% * vélo . prix
-  plafond: 200€
-  lien: https://www.charenton.fr/velo/velo_pass-velo.php
-
 aides . kremlin-bicetre:
   remplace: commune
   titre: Ville du Kremlin-Bicêtre
@@ -3239,6 +3225,28 @@ aides . terre des 2 caps:
   plafond: 250€
   lien: http://www.terredes2caps.fr/
 
+aides . saint-omer:
+  remplace: commune
+  titre: Ville de Saint-Omer
+  applicable si:
+    toutes ces conditions:
+      - localisation . code insee = '62765'
+      - vélo . électrique ou mécanique
+  variations:
+    - si: vélo . électrique
+      alors:
+        variations:
+          - si: étudiant ou jeune en recherche d'emploi
+            alors: 350 €
+          - sinon: 250 €
+    - sinon: 100 €
+  lien: https://www.ville-saint-omer.fr/aides-lacquisition-de-velo
+  avec:
+    étudiant ou jeune en recherche d'emploi:
+      type: booléen
+      par défaut: non
+      question: Êtes-vous étudiant ou jeune de moins de 25 ans en recherche d'emploi ?
+
 aides . carvin:
   remplace: commune
   titre: Ville de Carvin
@@ -3832,30 +3840,30 @@ aides . saint-pair-sur-mer:
   valeur: 200€
   lien: https://saintpairsurmer.fr/prime-a-lacquisition-dun-velo-a-assistance-electrique-2024/
 
-aides . la rochelle:
-  remplace: intercommunalité
-  titre: Communauté d'Agglomération de La Rochelle - Yélo
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CA de La Rochelle'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-  variations:
-    - si: revenu fiscal de référence <= 450 €/mois
-      alors:
-        valeur: 50% * vélo . prix
-        plafond: 400€
-    - si: revenu fiscal de référence <= 650 €/mois
-      alors:
-        valeur: 40% * vélo . prix
-        plafond: 300€
-    - si: revenu fiscal de référence <= 750 €/mois
-      alors:
-        valeur: 30% * vélo . prix
-        plafond: 200€
-    - sinon: 0€
-  lien: https://yelo.agglo-larochelle.fr/aide-a-lachat-dun-vae/
+# aides . la rochelle:
+#   remplace: intercommunalité
+#   titre: Communauté d'Agglomération de La Rochelle - Yélo
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CA de La Rochelle'
+#       - une de ces conditions:
+#           - vélo . électrique
+#           - vélo . cargo
+#   variations:
+#     - si: revenu fiscal de référence <= 450 €/mois
+#       alors:
+#         valeur: 50% * vélo . prix
+#         plafond: 400€
+#     - si: revenu fiscal de référence <= 650 €/mois
+#       alors:
+#         valeur: 40% * vélo . prix
+#         plafond: 300€
+#     - si: revenu fiscal de référence <= 750 €/mois
+#       alors:
+#         valeur: 30% * vélo . prix
+#         plafond: 200€
+#     - sinon: 0€
+#   lien: https://yelo.agglo-larochelle.fr/aide-a-lachat-dun-vae/
 
 # aides . île de ré:
 #   remplace: intercommunalité
@@ -3994,19 +4002,19 @@ aides . cote albatre:
   plafond: 200€
   lien: https://cote-albatre.fr/aide-velo
 
-aides . caux austreberthe:
-  remplace: intercommunalité
-  titre: Caux-Austreberthe communauté de communes
-  applicable si:
-    toutes ces conditions:
-      - localisation . epci = 'CC Caux - Austreberthe'
-      - une de ces conditions:
-          - vélo . électrique
-          - vélo . cargo
-          - vélo . pliant
-  valeur: 30% * vélo . prix
-  plafond: 300€
-  lien: https://www.cccauxaustreberthe.fr/media/images/upload/R%C3%A8glement_Velo_2022.pdf
+# aides . caux austreberthe:
+#   remplace: intercommunalité
+#   titre: Caux-Austreberthe communauté de communes
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . epci = 'CC Caux - Austreberthe'
+#       - une de ces conditions:
+#           - vélo . électrique
+#           - vélo . cargo
+#           - vélo . pliant
+#   valeur: 30% * vélo . prix
+#   plafond: 300€
+#   lien: https://www.cccauxaustreberthe.fr/media/images/upload/R%C3%A8glement_Velo_2022.pdf
 
 aides . pavilly:
   remplace: commune
@@ -4142,15 +4150,15 @@ aides . bourges:
 #   valeur: 200€
 #   lien: https://www.agglo-tulle.fr/vie-pratique/mobilites/transports/velo/aide-achat-vae
 
-aides . corrèze:
-  remplace: commune
-  titre: Ville de Corrèze
-  applicable si:
-    toutes ces conditions:
-      - localisation . code insee = '19062'
-      - vélo . électrique
-  valeur: 100€
-  lien: https://www.mairie-de-correze.fr/app/download/16358677024/Bulletin+Municipal+Janvier+2022.pdf?t=1641302365#page=19
+# aides . corrèze:
+#   remplace: commune
+#   titre: Ville de Corrèze
+#   applicable si:
+#     toutes ces conditions:
+#       - localisation . code insee = '19062'
+#       - vélo . électrique
+#   valeur: 100€
+#   lien: https://www.mairie-de-correze.fr/app/download/16358677024/Bulletin+Municipal+Janvier+2022.pdf?t=1641302365#page=19
 
 aides . montauban:
   remplace: intercommunalité
@@ -4826,9 +4834,9 @@ aides . grande-synthe:
   applicable si: localisation . code insee = '59271'
   variations:
     - si: vélo . électrique
-      alors: 50% * vélo . prix
-    - si: vélo . mécanique
       alors: 20% * vélo . prix
+    - si: vélo . mécanique
+      alors: 50% * vélo . prix
     - sinon: 0€
   plafond: 200€
   lien: https://www.ville-grande-synthe.fr/ma-ville-verte/aide-a-lachat-de-velo/
@@ -5711,7 +5719,7 @@ aides . massif du vercors:
             alors: 200 €
           - sinon: 300 €
     - sinon: 0 €
-  lien: https://www.vercors.org/actualites/bonus-vae/
+  lien: https://www.vercors.org/fr/vie-quotidienne/se-deplacer/a-velo/
 
 aides . carmausin-ségala:
   remplace: intercommunalité
@@ -6511,7 +6519,6 @@ vélo . occasion:
       - aides . béthune bruay
       - aides . haut val de sèvre
       - aides . grand périgueux
-      - aides . charenton
       - aides . divonne-les-bains
       - aides . illkirch
       - aides . valenciennes
