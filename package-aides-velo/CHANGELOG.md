@@ -1,5 +1,38 @@
 # Historique des modifications
 
+## v3.0.38 - 31/05/2024
+
+Ajoute les aides suivantes :
+
+- Perpignan Méditerranée Métropole
+- Agglomération d’Agen
+- Communauté de communes Fier et Usses
+- Campagnes de l’Artois
+- Val d'Yerres Val de Seine
+- Pays de Cruseilles
+- Cévennes Gangeoises et Suménoises
+- Tulle Agglo
+- Ville de Montmorillon
+
+Mise à jour des aides suivantes :
+
+- Bonus vélo de l'État
+- Grand Avignon
+- Riviera Française
+- Communauté de Communes du Val d’Argent
+- Communauté de Communes des Vallons du Lyonnais
+- Ville de Trouville-sur-Mer
+- Ville de Mougins
+
+Supprime les aides suivantes :
+
+- Nevers Agglomération
+- Communauté de Communes du Sisteronais-Buëch
+- Loire Layon Aubance
+- Cœur d'Ostrevent
+- Ville de Pont-Saint-Maxence
+- Terres de Montaigu
+
 ## v3.0.37 - 04/04/2024
 
 Ajoute l'aide suivante :
