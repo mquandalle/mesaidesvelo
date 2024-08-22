@@ -18,6 +18,10 @@ export async function POST({ request }) {
 		return new Response(undefined, { status: 500 });
 	}
 
+	if (message.length < 5) {
+		return new Response('Le message doit contenir au moins 5 caractères', { status: 400 });
+	}
+
 	const res = await fetch('https://api.github.com/repos/mquandalle/mesaidesvelo-feedback/issues', {
 		method: 'POST',
 		headers: {
