@@ -1,18 +1,23 @@
-import aidesVelo from '$lib/../aides.yaml';
+import Engine from 'publicodes';
 import aidesRetrofit from '$lib/../../retrofit/aides.yaml';
-import Publicodes from 'publicodes';
+import { AidesVeloEngine } from '@betagouv/aides-velo';
 
-export const engine = new Publicodes(
-	import.meta.env.VITE_SITE === 'aideretrofit.fr' ? aidesRetrofit : aidesVelo,
-);
+const IS_RETROFIT = import.meta.env.VITE_SITE === 'aideretrofit.fr';
+
+const aidesVeloEngine = IS_RETROFIT ? undefined : new AidesVeloEngine();
+
+export const engine = IS_RETROFIT ? new Engine(aidesRetrofit) : aidesVeloEngine.getEngine();
+
+export const VELO_TYPES = IS_RETROFIT ? undefined : aidesVeloEngine.getOptions('vélo . type');
 
 export function getEngine(situation) {
 	const engineBis = engine.shallowCopy();
 	engineBis.setSituation(situation ?? {});
 
-	// HACK: avoid publicodes memory leak
-	// cf. https://github.com/publicodes/publicodes/issues/239
-	engine.subEngines = [];
+	// NOTE: seems to be fixed
+	// // HACK: avoid publicodes memory leak
+	// // cf. https://github.com/publicodes/publicodes/issues/239
+	// engine.subEngines = [];
 
 	// HACK: traversedVariablesStack are removed from the public API, but still calculated if requested.
 	// The way to ask the engine to compute traversedVariables is to initialize the stack with an empty array.

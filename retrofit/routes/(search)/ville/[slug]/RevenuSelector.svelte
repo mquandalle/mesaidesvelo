@@ -55,7 +55,7 @@
 		goals
 			.flatMap((name) =>
 				findAllComparaisonsValue(name, {
-					searchedName: 'revenu fiscal de référence',
+					searchedName: 'revenu fiscal de référence par part',
 					unit: '€/mois',
 				})
 			)

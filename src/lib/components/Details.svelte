@@ -48,14 +48,14 @@
 		.setSituation({
 			...$publicodeSituation,
 			'vélo . type': `'${$veloCat}'`,
-			'vélo . neuf ou occasion': '"occasion"',
+			'vélo . état': '"occasion"',
 		})
 		.evaluate('aides . montant').nodeValue;
 	$: montantAidesVeloNeuf = engineBis
 		.setSituation({
 			...$publicodeSituation,
 			'vélo . type': `'${$veloCat}'`,
-			'vélo . neuf ou occasion': '"neuf"',
+			'vélo . état': '"neuf"',
 		})
 		.evaluate('aides . montant').nodeValue;
 	$: demandeNeufOuOccasion =

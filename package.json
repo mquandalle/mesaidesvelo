@@ -13,8 +13,8 @@
 		"test": "npm run test:playwright && npm run test:vitest -- run",
 		"test:playwright": "npx playwright test tests/navigation.spec.js",
 		"test:vitest": "vitest",
-		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
-		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+		"lint": "prettier --ignore-path .gitignore --check --config=.prettierrc .",
+		"format": "prettier --ignore-path .gitignore --write  --config=.prettierrc ."
 	},
 	"type": "module",
 	"private": true,
@@ -40,12 +40,13 @@
 		"yaml": "^2.3.4"
 	},
 	"dependencies": {
+		"@betagouv/aides-velo": "^0.1.0-12",
 		"@etalab/decoupage-administratif": "^3.1.1",
 		"fuzzysort": "^2.0.4",
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
-		"publicodes": "^1.0.0-rc.6"
+		"publicodes": "^1.5.4"
 	},
 	"overrides": {
 		"vite": {

@@ -1,5 +1,5 @@
 <script context="module">
-	import { engine } from '$lib/engine';
+	import { engine, VELO_TYPES } from '$lib/engine';
 	import { formatValue, reduceAST } from 'publicodes';
 	import { derived } from 'svelte/store';
 	import { localisationSituation, veloCat } from '$lib/stores';
@@ -11,7 +11,6 @@
 	const numberFieldRequired = Symbol('number field required');
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
-	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
 	const uniq = (arr) => [...new Set(arr)];
 
 	const engineBis = engine.shallowCopy();
@@ -20,7 +19,7 @@
 			return [];
 		}
 		return uniq(
-			bikeKinds
+			VELO_TYPES
 				.map((veloCat) => {
 					engineBis.setSituation({
 						...$localisationSituation,
@@ -118,7 +117,7 @@
 	const uniq = (l) => [...new Set(l)];
 	$: tresholds = (goals ?? $originalNames).flatMap((name) =>
 		findAllComparaisonsValue(name, {
-			searchedName: 'revenu fiscal de référence',
+			searchedName: 'revenu fiscal de référence par part',
 			unit: '€/mois',
 		}),
 	);
@@ -144,7 +143,7 @@
 						...$publicodeSituation,
 						// 'vélo . type': `'${$veloCat}'`,
 						// 'maximiser les aides': 'oui',
-						'revenu fiscal de référence': `${revenu + 1} €/mois`,
+						'revenu fiscal de référence par part': `${revenu + 1} €/mois`,
 					});
 
 					// In some cases the total amount of aides will be the same

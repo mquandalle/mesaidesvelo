@@ -30,7 +30,13 @@ export const publicodeSituation = derived(
 		return {
 			...$localisationSituation,
 			...Object.fromEntries(Object.entries($answers).filter(([, val]) => val)),
-			...($revenuFiscal ? { 'revenu fiscal de référence': `${$revenuFiscal} €/mois` } : {}),
+			...($revenuFiscal
+				? {
+						'revenu fiscal de référence par part . revenu de référence': `${$revenuFiscal} €/mois`,
+						// NOTE: we may want to compute the number of parts from the revenu fiscal
+						'revenu fiscal de référence par part . nombre de parts': 1,
+					}
+				: {}),
 		};
 	},
 );

@@ -20,12 +20,8 @@ export function aidesPerVeloKind(aide) {
 	const getMaximumAideForVeloKind = (kind) =>
 		engineBis
 			.setSituation({
-				'localisation . code insee': `'${
-					aide.collectivity.kind === 'région' ? '' : aide.codeInsee
-				}'`,
-				'localisation . epci': `'${
-					aide.collectivity.kind === 'epci' ? aide.collectivity.value : ''
-				}'`,
+				'localisation . code insee': `'${aide.collectivity.kind === 'région' ? '' : aide.codeInsee}'`,
+				'localisation . epci': `'${aide.collectivity.kind === 'epci' ? aide.collectivity.value : ''}'`,
 				'localisation . région': `'${
 					aide.collectivity.kind === 'région' ? aide.collectivity.value : ''
 				}'`,
@@ -74,6 +70,10 @@ const compactionOptions = [
 	{
 		keys: ['électrique', 'mécanique'],
 		remplace: 'mécanique ou électrique',
+	},
+	{
+		keys: ['adapté'],
+		remplace: 'adapté',
 	},
 ];
 
