@@ -5,24 +5,14 @@
 	import RevenuSelector from './RevenuSelector.svelte';
 
 	export let goals = undefined;
-
+	export let demandeNeufOuOccasion = false;
 
 	$: engine = getEngine({
 		...$publicodeSituation,
 		'vélo . type': `'${$veloCat}'`,
 	});
 
-	const questionsOrder = ['revenu fiscal de référence par part', 'vélo . prix'];
-	const questionsToIgnore = [
-		'vélo . type',
-		'vélo . état',
-		'localisation . code insee',
-		'localisation . epci',
-		'localisation . ZFE',
-		'localisation . département',
-		'localisation . région',
-		'localisation . pays',
-		'revenu fiscal de référence par part . nombre de parts'];
+	const questionsOrder = ['revenu fiscal de référence', 'vélo . prix'];
 
 	const getSortOrder = (name) =>
 		questionsOrder.includes(name) ? questionsOrder.indexOf(name) : Infinity;
@@ -33,9 +23,12 @@
 			.flat(),
 	)
 		.filter((q) => engine.getRule(q).rawNode.question)
-		.filter((q) => !questionsToIgnore.includes(q))
+		.filter((q) => q !== 'vélo . neuf ou occasion')
 		.sort((a, b) => getSortOrder(a) - getSortOrder(b));
 
+	if (demandeNeufOuOccasion) {
+		questions?.unshift('vélo . neuf ou occasion');
+	}
 </script>
 
 {#if questions?.length > 0}
@@ -50,7 +43,7 @@
 			:
 		</p>
 		{#each questions as question}
-			{#if question === 'revenu fiscal de référence par part . revenu de référence'}
+			{#if question === 'revenu fiscal de référence'}
 				<RevenuSelector {goals} />
 			{:else}
 				<Question rule={question} />

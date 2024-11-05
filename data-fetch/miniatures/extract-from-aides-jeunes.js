@@ -2,9 +2,9 @@ import fs from 'node:fs';
 import { join } from 'node:path';
 import { URL } from 'node:url';
 import sharp from 'sharp';
-import { data } from '@betagouv/aides-velo';
-
 import { writeJsonData } from '../../src/scripts/writeData.js';
+
+import aidesWithCollectivities from '../../src/lib/data/aides-collectivities.json' assert { type: 'json' };
 
 const currentPath = new URL('./', import.meta.url).pathname;
 const repoPath = join(currentPath, 'aides-jeunes-repo/');
@@ -57,7 +57,7 @@ if (fs.existsSync(miniatureDirectory)) {
 }
 fs.mkdirSync(miniatureDirectory, { recursive: true });
 
-const thumbnailsManifest = Object.entries(data.aidesAvecLocalisation).reduce((acc, [id, aide]) => {
+const thumbnailsManifest = Object.entries(aidesWithCollectivities).reduce((acc, [id, aide]) => {
 	const aideId = `${aide.collectivity.kind} - ${aide.collectivity.code ?? aide.collectivity.value}`;
 
 	const img = imagesFromAidesJeunes[aideId];

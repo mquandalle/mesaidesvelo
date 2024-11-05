@@ -25,7 +25,7 @@
 			.setSituation({
 				...$publicodeSituation,
 				'vélo . type': `'${$veloCat}'`,
-				'revenu fiscal de référence par part': `${revenu} €/an`,
+				'revenu fiscal de référence': `${revenu} €/an`,
 				'vélo . prix': 'vélo . prix pour maximiser les aides',
 			})
 			.evaluate(ruleName).nodeValue;
