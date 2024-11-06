@@ -12,10 +12,10 @@
 //   l'utilisateur.
 
 import { rawCityToFullLocalisation, removeAccents } from '$lib/utils';
+import { data } from '@betagouv/aides-velo';
 import fuzzysort from 'fuzzysort';
-import data from '$lib/data/communes.json';
 
-const indexedData = data.flatMap(({ codesPostaux, ...rest }) =>
+const indexedData = data.communes.flatMap(({ codesPostaux, ...rest }) =>
 	codesPostaux.map((codePostal, i) => {
 		const cpPrincipal = i === 0;
 		return {

@@ -1,4 +1,4 @@
-import communes from '$lib/data/communes.json';
+import { data } from '@betagouv/aides-velo';
 import { _departementWithSlug } from '../departement/[slug]/+page.server';
 
 /** @type {import('./$types').RequestHandler} */
@@ -10,7 +10,9 @@ export async function GET() {
 			'/forfait-mobilite-durable',
 			'/liste-aides',
 			..._departementWithSlug.map(({ slug }) => `/departement/${slug}`),
-			...communes.sort((a, b) => b.population - a.population).map(({ slug }) => `/ville/${slug}`),
+			...data.communes
+				.sort((a, b) => b.population - a.population)
+				.map(({ slug }) => `/ville/${slug}`),
 		]
 			.map((path) => `https://mesaidesvelo.fr${path}`)
 			.join('\n'),
