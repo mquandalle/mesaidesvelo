@@ -3,7 +3,7 @@
 	import { engine } from '$lib/engine';
 
 	const aidesRuleNames = Object.keys(engine.getParsedRules()).filter(
-		(ruleName) => ruleName.startsWith('aides .') && engine.getRule(ruleName).rawNode.titre
+		(ruleName) => ruleName.startsWith('aides .') && engine.getRule(ruleName).rawNode.titre,
 	);
 
 	const determinants = "(du |de la |de l'|de l’|d'|d’|de la |des |de )";
@@ -14,7 +14,7 @@
 			.replace(new RegExp(`communauté des? communes ${determinants}?`, 'i'), '')
 			.replace(
 				new RegExp(`communauté( urbaine| d'agglomération | de communes)? ?${determinants}?`, 'i'),
-				''
+				'',
 			)
 			.replace(new RegExp(`agglomération\s*$`, 'i'), '')
 			.replace(new RegExp(`département ${determinants}?`, 'i'), '')

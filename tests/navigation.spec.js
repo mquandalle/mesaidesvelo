@@ -58,9 +58,10 @@ test('Thumbnail displayed', async ({ page }) => {
 
 test('Revenu selector', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/bordeaux');
-	await page.waitForTimeout(200);
-	await page.click('text=plus de 2 201 €');
-	await expect(page.locator('text=aide non disponible')).toHaveCount(7);
+	await page.waitForTimeout(500);
+	await page.click('text=plus de 2 076 €');
+
+	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
 
 	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
 	await page.waitForTimeout(100);

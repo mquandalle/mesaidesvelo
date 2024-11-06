@@ -1,6 +1,7 @@
 import { test, expect } from 'vitest';
 import { data } from '@betagouv/aides-velo';
 
+// NOTE: skip for now, more details in https://github.com/mquandalle/mesaidesvelo/issues/247
 test.skip('content reference existing rules', () => {
 	const content = import.meta.glob('../src/content/*.svx');
 	const fileNames = Object.keys(content);

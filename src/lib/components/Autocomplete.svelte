@@ -174,7 +174,7 @@
 			originalResult = theFunction(argument);
 		} catch (error) {
 			console.warn(
-				'Error executing Autocomplete function on value: ' + argument + ' function: ' + theFunction
+				'Error executing Autocomplete function on value: ' + argument + ' function: ' + theFunction,
 			);
 		}
 		let result = originalResult;
@@ -300,7 +300,7 @@
 
 		if (debug) {
 			console.log(
-				"Change user entered text '" + userEnteredText + "' into '" + textFilteredLowerCase + "'"
+				"Change user entered text '" + userEnteredText + "' into '" + textFilteredLowerCase + "'",
 			);
 		}
 		return textFilteredLowerCase;
@@ -439,22 +439,22 @@
 		if (localFiltering) {
 			if (itemFilterFunction) {
 				tempfilteredListItems = listItems.filter((item) =>
-					itemFilterFunction(item.item, searchWords)
+					itemFilterFunction(item.item, searchWords),
 				);
 			} else {
 				tempfilteredListItems = listItems.filter((item) =>
-					defaultItemFilterFunction(item, searchWords)
+					defaultItemFilterFunction(item, searchWords),
 				);
 			}
 
 			if (itemSortFunction) {
 				tempfilteredListItems = tempfilteredListItems.sort((item1, item2) =>
-					itemSortFunction(item1.item, item2.item, searchWords)
+					itemSortFunction(item1.item, item2.item, searchWords),
 				);
 			} else {
 				if (sortByMatchedKeywords) {
 					tempfilteredListItems = tempfilteredListItems.sort((item1, item2) =>
-						defaultItemSortFunction(item1, item2, searchWords)
+						defaultItemSortFunction(item1, item2, searchWords),
 					);
 				}
 			}
@@ -561,7 +561,7 @@
 			} else {
 				if (debug) {
 					console.warn(
-						'Could not scroll selected item into view, scrollIntoViewIfNeeded not supported'
+						'Could not scroll selected item into view, scrollIntoViewIfNeeded not supported',
 					);
 				}
 			}

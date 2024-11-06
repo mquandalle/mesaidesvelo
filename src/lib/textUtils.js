@@ -1,5 +1,5 @@
-import { rules } from '@betagouv/aides-velo';
 import { engine } from '$lib/engine';
+import { BIKE_KINDS } from './aides-velo-utils';
 
 // The list in `velo . type` only contains primary kinds that can be used as
 // inputs in our UIs. But hte rule AST also reference some kinds “computed”
@@ -34,9 +34,9 @@ export function aidesPerVeloKind(aide) {
 			})
 			.evaluate(aide.dottedName);
 
-	const allActiveAides = rules['vélo . type'].possibilités
-		.map((kind) => [kind, getMaximumAideForVeloKind(kind)])
-		.filter(([, max]) => max.nodeValue !== null && max.nodeValue !== 0);
+	const allActiveAides = BIKE_KINDS.map((kind) => [kind, getMaximumAideForVeloKind(kind)]).filter(
+		([, max]) => max.nodeValue !== null && max.nodeValue !== 0,
+	);
 
 	return compactAidesList(allActiveAides);
 }

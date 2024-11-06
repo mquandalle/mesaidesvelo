@@ -34,9 +34,9 @@ const formatAideForClient = (aide) => ({
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-	const associatedCollectivities = Object.keys(data.aidesCollectivities).map((ruleName) => ({
+	const associatedCollectivities = Object.keys(data.aidesAvecLocalisation).map((ruleName) => ({
 		...engine.getRule(ruleName),
-		...data.aidesCollectivities[ruleName],
+		...data.aidesAvecLocalisation[ruleName],
 	}));
 
 	const aidesEtat = associatedCollectivities
