@@ -1,6 +1,5 @@
+import { data } from '@betagouv/aides-velo';
 import { compile } from 'mdsvex';
-import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
-import communes from '$lib/data/communes.json';
 import labelTourDeFrance from '/src/content/label-tour-de-france.json';
 import labelTourDeFranceCommentairesSource from '/src/content/label-tour-de-france-commentaires.txt?raw';
 import barometreFubRawCsv from '/src/content/barometre-fub.csv?raw';
@@ -28,7 +27,7 @@ const commentairesLabelTourDeFrance = labelTourDeFranceCommentairesLines.reduce(
 	}
 }, {});
 
-const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
+const ruleNamePerCollectivity = Object.entries(data.aidesAvecLocalisation).reduce(
 	(manifest, [ruleName, { collectivity }]) => {
 		manifest[collectivity.kind][collectivity.value] = ruleName;
 		return manifest;
@@ -76,7 +75,7 @@ const prependPartialSentence = (content, { prepend } = {}) =>
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 	const slug = params.slug;
-	const city = communes.find((c) => c.slug === slug);
+	const city = data.communes.find((c) => c.slug === slug);
 	if (!city) {
 		error(404);
 	}

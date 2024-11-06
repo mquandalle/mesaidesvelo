@@ -1,5 +1,6 @@
-<script context="module">
+<script context="module" lang="ts">
 	import { engine } from '$lib/engine';
+	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { formatValue, reduceAST } from 'publicodes';
 	import { derived } from 'svelte/store';
 	import { localisationSituation, veloCat } from '$lib/stores';
@@ -11,7 +12,6 @@
 	const numberFieldRequired = Symbol('number field required');
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
-	const bikeKinds = engine?.getRule('vélo . type').rawNode['possibilités'];
 	const uniq = (arr) => [...new Set(arr)];
 
 	const engineBis = engine.shallowCopy();
@@ -20,31 +20,31 @@
 			return [];
 		}
 		return uniq(
-			bikeKinds
-				.map((veloCat) => {
-					engineBis.setSituation({
-						...$localisationSituation,
-						// 'maximiser les aides': 'oui',
-						// 'vélo . type': `'${veloCat}'`,
-					});
+			BIKE_KINDS.map((veloCat) => {
+				engineBis.setSituation({
+					...$localisationSituation,
+					// 'maximiser les aides': 'oui',
+					// 'vélo . type': `'${veloCat}'`,
+				});
 
-					const originalNames = collectivites
-						.map((collectivite) => {
-							const aide = engineBis.evaluate(`aides . ${collectivite}`);
-							if (!aide.nodeValue) {
-								return null;
-							}
-							const originalRuleName = aide.explanation.find(
-								({ condition }) => condition.nodeValue === true,
-							).consequence.name;
+				const originalNames = collectivites
+					.map((collectivite) => {
+						const aide = engineBis.evaluate(`aides . ${collectivite}`);
+						if (!aide.nodeValue) {
+							return null;
+						}
+						// FIXME: Is it only a type error or this is a real issue?
+						// @ts-ignore
+						const originalRuleName = aide.explanation.find(
+							({ condition }) => condition.nodeValue === true,
+						).consequence.name;
 
-							return originalRuleName;
-						})
-						.filter(Boolean);
+						return originalRuleName;
+					})
+					.filter(Boolean);
 
-					return originalNames;
-				})
-				.flat(),
+				return originalNames;
+			}).flat(),
 		);
 	});
 
@@ -55,7 +55,7 @@
 	// We will retrieve [400]
 	// We also need to handle mechanisms that are implemented using comparaisons such
 	// as “grille” or “barème”.
-	function findAllComparaisonsValue(dottedName, { searchedName, unit }) {
+	function findAllComparaisonsValue(dottedName: RuleName, { searchedName, unit }): number[] {
 		const comparaisonOperators = ['<', '<=', '>', '>='];
 		const linearOperatiors = ['-', '+', '*', '/'];
 
@@ -68,7 +68,7 @@
 			return engine.evaluate({ valeur, unité: unit }).nodeValue;
 		};
 
-		const namesToFollow = ['ménage imposable', 'personnes dans le foyer fiscal'];
+		const namesToFollow: RuleName[] = ['foyer . imposable', 'foyer . personnes'];
 
 		const accumulateThresholds = (acc, node) => {
 			if (acc === numberFieldRequired) {
@@ -107,18 +107,19 @@
 	}
 </script>
 
-<script>
+<script lang="ts">
 	import { publicodeSituation, revenuFiscal } from '$lib/stores';
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
+	import type { RuleName } from '@betagouv/aides-velo';
 
 	export let goals;
 
 	const uniq = (l) => [...new Set(l)];
 	$: tresholds = (goals ?? $originalNames).flatMap((name) =>
 		findAllComparaisonsValue(name, {
-			searchedName: 'revenu fiscal de référence',
+			searchedName: 'revenu fiscal de référence par part',
 			unit: '€/mois',
 		}),
 	);
@@ -127,7 +128,9 @@
 
 	$: uniqThresholds =
 		!numberFieldIsRequired &&
-		uniq(tresholds.filter((x) => x !== Infinity).map((x) => Math.round(x))).sort((a, b) => a - b);
+		uniq(tresholds.filter((x: number) => x !== Infinity).map((x: number) => Math.round(x))).sort(
+			(a: number, b: number) => a - b,
+		);
 
 	const engineBis = engine.shallowCopy();
 
@@ -144,7 +147,7 @@
 						...$publicodeSituation,
 						// 'vélo . type': `'${$veloCat}'`,
 						// 'maximiser les aides': 'oui',
-						'revenu fiscal de référence': `${revenu + 1} €/mois`,
+						'revenu fiscal de référence par part': `${revenu + 1} €/mois`,
 					});
 
 					// In some cases the total amount of aides will be the same
@@ -153,7 +156,7 @@
 					// revenu 2 :  a 300         (total 300)
 					// In this case we don't want to filter the threshold #182
 					const aidesDisplayed = $originalNames
-						.map((dottedName) => engineBis.evaluate(dottedName).nodeValue ?? 0)
+						.map((dottedName: RuleName) => engineBis.evaluate(dottedName).nodeValue ?? 0)
 						.join('-');
 
 					if (aidesDisplayed === acc.dernieresAidesDisplayed) {

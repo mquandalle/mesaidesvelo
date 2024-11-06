@@ -1,21 +1,20 @@
 <script>
 	import Emoji from '$lib/components/Emoji.svelte';
 	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
-	import { engine as baseEngine, getEngine } from '$lib/engine';
+	import { getEngine } from '$lib/engine';
+	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
 
-	const bikeKinds = baseEngine?.getRule('vélo . type').rawNode['possibilités'];
-
 	resetAnswers();
 
 	$: engine = getEngine($publicodeSituation);
 	$: engineBis = getEngine($publicodeSituation);
 
-	$: aidesPerBikeKind = bikeKinds.map((cat) => {
+	$: aidesPerBikeKind = BIKE_KINDS.map((cat) => {
 		engineBis.setSituation({
 			...$publicodeSituation,
 			'maximiser les aides': 'oui',

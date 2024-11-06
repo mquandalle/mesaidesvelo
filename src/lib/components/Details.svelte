@@ -5,14 +5,14 @@
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Questions from '$lib/components/Questions.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { publicodeSituation, resetAnswers, veloCat } from '$lib/stores';
+	import { publicodeSituation, resetAnswers, veloTypeValue, veloCat } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 
 	resetAnswers();
 	$: engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$veloCat}'`,
+		'vélo . type': $veloTypeValue,
 	});
 
 	const categoryDescription = baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '';
@@ -42,20 +42,20 @@
 	// TODO: trouver un moyen de ne pas refaire plusieurs fois les mêmes calculs.
 	$: engineBis = engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$veloCat}'`,
+		'vélo . type': $veloTypeValue,
 	});
 	$: montantAidesVeloOccasion = engineBis
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': `'${$veloCat}'`,
-			'vélo . neuf ou occasion': '"occasion"',
+			'vélo . type': $veloTypeValue,
+			'vélo . état': '"occasion"',
 		})
 		.evaluate('aides . montant').nodeValue;
 	$: montantAidesVeloNeuf = engineBis
 		.setSituation({
 			...$publicodeSituation,
-			'vélo . type': `'${$veloCat}'`,
-			'vélo . neuf ou occasion': '"neuf"',
+			'vélo . type': $veloTypeValue,
+			'vélo . état': '"neuf"',
 		})
 		.evaluate('aides . montant').nodeValue;
 	$: demandeNeufOuOccasion =

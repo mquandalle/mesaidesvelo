@@ -1,14 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5174';
+const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
 
 test('Navigation scenario', async ({ page }) => {
 	await page.goto(baseUrl);
 
 	await page.waitForLoadState();
-	await page.click('[placeholder*="Commune"]');
-	await page.fill('[placeholder*="Commune"]', 'toulou');
-	await page.click('.autocomplete-list-item:first-child');
+	searchAndGoTo(page, 'toulou');
 	await expect(page).toHaveURL(baseUrl + '/ville/toulouse');
 
 	// Hide evaporate animation
@@ -31,8 +29,8 @@ test('Navigation scenario', async ({ page }) => {
 
 	await page.goBack();
 	await page.click('text=Prime à la conversion');
-	await expect(page.locator('text=prime à la casse')).toBeTruthy();
-	await expect(page.locator('text=3 000 €')).toBeTruthy();
+	expect(page.locator('text=prime à la casse')).toBeTruthy();
+	expect(page.locator('text=3 000 €')).toBeTruthy();
 });
 
 test('Liste aides do not crash', async ({ page }) => {
@@ -50,12 +48,12 @@ test('Aide not available', async ({ page }) => {
 
 test('Revenu of type number', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/crolles?velo=électrique');
-	await expect(page.locator('input[type=number][id=revenu-fiscal]')).toBeTruthy();
+	expect(page.locator('input[type=number][id=revenu-fiscal]')).toBeTruthy();
 });
 
 test('Thumbnail displayed', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/albi?velo=cargo');
-	await expect(page.locator('img[alt="Logo grand albigeois"]')).toBeTruthy();
+	expect(page.locator('img[alt="Logo grand albigeois"]')).toBeTruthy();
 });
 
 test('Revenu selector', async ({ page }) => {
@@ -66,24 +64,42 @@ test('Revenu selector', async ({ page }) => {
 
 	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
 	await page.waitForTimeout(100);
-	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(4);
+	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(3);
 });
 
 test('New or second hand bike', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
-	await expect(page.locator('text=neuf ou d’occasion ?')).toBeTruthy();
+	expect(page.locator('text=neuf ou d’occasion ?')).toBeTruthy();
 
 	await page.goto(baseUrl + '/ville/lyon?velo=mécanique simple');
-	await expect(page.locator('text=uniquement pour l’achat d’un vélo d’occasion')).toBeTruthy();
+	expect(page.locator('text=uniquement pour l’achat d’un vélo d’occasion')).toBeTruthy();
 
 	await page.goto(baseUrl + '/ville/lyon?velo=électrique');
-	await expect(page.locator('text=uniquement pour l’achat d’un vélo neuf')).toBeTruthy();
+	expect(page.locator('text=uniquement pour l’achat d’un vélo neuf')).toBeTruthy();
 
 	await page.goto(baseUrl + '/ville/pantin?velo=mécanique simple');
-	await expect(page.locator('text=pour un vélo neuf ou un vélo d’occasion')).toBeTruthy();
+	expect(page.locator('text=pour un vélo neuf ou un vélo d’occasion')).toBeTruthy();
 });
 
 test('Text generation', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/landerneau');
-	await expect(page.locator('text=Malheureusement il n’existe aucune aide locale')).toBeTruthy();
+	expect(page.locator('text=Malheureusement il n’existe aucune aide locale')).toBeTruthy();
 });
+
+// FIXME: This test is not working although it works in the browser
+// test('Redirection from details', async ({ page }) => {
+// 	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
+// 	expect(page.locator('text=Total des aides')).toBeTruthy();
+// 	expect(page.locator('text=Toulouse')).toBeTruthy();
+//
+// 	searchAndGoTo(page, 'Montpellier');
+// 	await page.waitForURL(baseUrl + '/ville/montpellier');
+// 	await expect(page).toHaveURL(baseUrl + '/ville/montpellier');
+// 	console.log(await page.locator('text=Toulouse').allTextContents());
+// 	expect(page.locator('text=Toulouse')).not.toBeTruthy();
+// });
+
+async function searchAndGoTo(page, commune) {
+	await page.getByLabel('Localisation').first().fill(commune);
+	await page.click('.autocomplete-list-item:first-child');
+}

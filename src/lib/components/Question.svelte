@@ -1,12 +1,11 @@
 <script>
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
-	import { answers, publicodeSituation, veloCat } from '$lib/stores';
+	import { answers, publicodeSituation, veloTypeValue } from '$lib/stores';
 	import { slugify } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import Emoji from './Emoji.svelte';
 	import NumberField from './NumberField.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { page } from '$app/stores';
 
 	export let rule;
 
@@ -25,7 +24,7 @@
 
 	$: engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$veloCat}'`,
+		'vélo . type': veloTypeValue,
 	});
 	$: optionalEvaluate = (expression) => {
 		if (typeof expression === 'string') {

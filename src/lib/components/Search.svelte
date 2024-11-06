@@ -62,9 +62,10 @@
 			<div slot="no-results">Pas de résultats</div></AutoComplete
 		>
 		{#if $localisation}
-			<span
+			<button
+				aria-label="Effacer la localisation"
 				class="text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800 relative z-99 -ml-[15px]"
-				on:click={() => localisation.set(null)}>&times;</span
+				on:click={() => localisation.set(null)}>&times;</button
 			>
 		{/if}
 	</div>
