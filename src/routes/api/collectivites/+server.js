@@ -6,16 +6,17 @@
 // - associer les communes à une "métropole" (Bordeaux Métropole, Grand Lyon
 //   etc.) ou une intercommunalité. En effet, c'est à cet échelon que sont
 //   souvent définies les aides à la mobilité.
+//   NOTE(Emile): pourrait être fait avec epci.json
 // - chercher par le nom de la commune ou par le code postal via le même champ
 //   de recherche
 // - « recherche approximative » pour gérer les erreurs de saisie de
 //   l'utilisateur.
 
 import { rawCityToFullLocalisation, removeAccents } from '$lib/utils';
-import { data } from '@betagouv/aides-velo';
 import fuzzysort from 'fuzzysort';
+import communes from '$lib/data/communes.json' assert { type: 'json' };
 
-const indexedData = data.communes.flatMap(({ codesPostaux, ...rest }) =>
+const indexedData = communes.flatMap(({ codesPostaux, ...rest }) =>
 	codesPostaux.map((codePostal, i) => {
 		const cpPrincipal = i === 0;
 		return {

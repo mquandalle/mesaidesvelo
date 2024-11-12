@@ -1,7 +1,7 @@
 <script>
 	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { formatDescription } from '$lib/utils';
-	import miniaturesManifest from '$lib/data/miniatures.json';
+	import miniatures from '$lib/data/miniatures';
 
 	import AnimatedAmount from './AnimatedAmount.svelte';
 	import Badge from './Badge.svelte';
@@ -37,13 +37,13 @@
 
 {#if aide.nodeValue !== null}
 	<div class="flex flex-row">
-		{#if miniaturesManifest[ruleName]}
+		{#if miniatures[ruleName]}
 			<div
-				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
+				jclass="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
 				on:click={() => rawNode.lien && window.open(rawNode.lien, '_blank')}
 			>
 				<img
-					src="/miniatures/{miniaturesManifest[ruleName]}"
+					src="/miniatures/{miniatures[ruleName]}"
 					class="object-fill"
 					alt="Logo {title.toLowerCase()}"
 				/>

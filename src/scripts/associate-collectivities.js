@@ -1,16 +1,13 @@
-import fs from 'node:fs';
+import { rules } from '@betagouv/aides-velo';
 import { writeJsonData } from './writeData.js';
 import Publicodes, { reduceAST } from 'publicodes';
-import { parse } from 'yaml';
 
 import communes from '../lib/data/communes.json' assert { type: 'json' };
 import epci from '@etalab/decoupage-administratif/data/epci.json' assert { type: 'json' };
 import departements from '@etalab/decoupage-administratif/data/departements.json' assert { type: 'json' };
 import regions from '@etalab/decoupage-administratif/data/regions.json' assert { type: 'json' };
 
-const sourceRules = fs.readFileSync(new URL('../aides.yaml', import.meta.url).pathname, 'utf8');
-
-const engine = new Publicodes(parse(sourceRules));
+const engine = new Publicodes(rules);
 
 const aidesRuleNames = Object.keys(engine.getParsedRules()).filter(
 	(ruleName) => ruleName.startsWith('aides .') && engine.getRule(ruleName).rawNode.titre,

@@ -1,19 +1,21 @@
-import { data } from '@betagouv/aides-velo';
 import { compile } from 'mdsvex';
 import playwright from 'playwright-aws-lambda';
 import template from './template.html?raw';
+import communes from '$lib/data/communes.json';
+import aidesCollectivites from '$lib/data/aides-collectivities.json';
+import miniatures from '$lib/data/miniatures.json';
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ params: { slug } }) {
 	// NOTE: communes may not be exported by the publicodes package in the
 	// future.
-	const ville = data.communes.find((c) => c.slug === slug);
+	const ville = communes.find((c) => c.slug === slug);
 
 	if (!ville) {
 		throw error(404);
 	}
 
-	const localRuleName = Object.entries(data.aidesAvecLocalisation).find(
+	const localRuleName = Object.entries(aidesCollectivites).find(
 		([, { collectivity }]) =>
 			(collectivity.kind === 'code insee' && collectivity.value === ville.code) ||
 			(collectivity.kind === 'epci' && collectivity.value === ville.epci),
@@ -24,8 +26,8 @@ export async function GET({ params: { slug } }) {
 		localRuleName &&
 			// NOTE: should really be the publicodes package that provides this
 			// information?
-			data.miniatures[localRuleName]
-			? `https://mesaidesvelo.fr/miniatures/${data.miniatures[localRuleName]}`
+			miniatures[localRuleName]
+			? `https://mesaidesvelo.fr/miniatures/${miniatures[localRuleName]}`
 			: '',
 	);
 	const res = await compile(html);

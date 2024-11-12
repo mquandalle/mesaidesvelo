@@ -1,7 +1,7 @@
-import { data } from '@betagouv/aides-velo';
 import { engine } from '$lib/engine';
 import { aidesPerVeloKind } from '$lib/textUtils';
 import { formatValue } from 'publicodes';
+import aidesCollectivites from '$lib/data/aides-collectivities.json';
 
 export const prerender = true;
 
@@ -34,9 +34,9 @@ const formatAideForClient = (aide) => ({
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-	const associatedCollectivities = Object.keys(data.aidesAvecLocalisation).map((ruleName) => ({
+	const associatedCollectivities = Object.keys(aidesCollectivites).map((ruleName) => ({
 		...engine.getRule(ruleName),
-		...data.aidesAvecLocalisation[ruleName],
+		...aidesCollectivites[ruleName],
 	}));
 
 	const aidesEtat = associatedCollectivities
