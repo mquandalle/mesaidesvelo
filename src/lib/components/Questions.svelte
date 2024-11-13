@@ -37,10 +37,9 @@
 	export let goals = undefined;
 	export let demandeNeufOuOccasion = false;
 
-	// FIXME: a better way to handle this should exists
 	$: engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': veloTypeValue,
+		'vélo . type': $veloTypeValue,
 	});
 
 	const getSortOrder = (name: QuestionNames) =>

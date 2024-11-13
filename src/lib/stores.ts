@@ -12,7 +12,7 @@ export const resetAnswers = () => {
 	}
 };
 
-export const veloTypeValue: Readable<Situation['vélo . type']> = derived([veloCat], ([$veloCat]) =>
+export const veloTypeValue = derived([veloCat], ([$veloCat]) =>
 	$veloCat !== null ? (`'${$veloCat}'` as Situation['vélo . type']) : null,
 );
 

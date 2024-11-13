@@ -3,7 +3,7 @@
  * from them.
  */
 import fs from 'fs';
-import { data } from '@betagouv/aides-velo';
+import { miniatures } from '@betagouv/aides-velo/data';
 import sharp from 'sharp';
 import { join } from 'path';
 
@@ -20,7 +20,7 @@ if (fs.existsSync(miniatureDirectory)) {
 fs.mkdirSync(miniatureDirectory, { recursive: true });
 
 const thumbnailsManifest = Object.keys(aidesWithCollectivities).reduce((acc, id) => {
-	const imgSrc = data.miniatures[id];
+	const imgSrc = miniatures[id];
 
 	if (!imgSrc) {
 		return acc;

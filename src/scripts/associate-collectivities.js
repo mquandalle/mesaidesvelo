@@ -1,4 +1,4 @@
-import { rules } from '@betagouv/aides-velo';
+import rules from '@betagouv/aides-velo/rules';
 import { writeJsonData } from './writeData.js';
 import Publicodes, { reduceAST } from 'publicodes';
 
