@@ -39,7 +39,7 @@
 	<div class="flex flex-row">
 		{#if miniatures[ruleName]}
 			<div
-				jclass="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
+				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
 				on:click={() => rawNode.lien && window.open(rawNode.lien, '_blank')}
 			>
 				<img
