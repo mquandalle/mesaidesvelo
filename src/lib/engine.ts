@@ -1,5 +1,4 @@
 import Engine, { type Situation } from 'publicodes';
-import { rules as aidesVelo } from '@betagouv/aides-velo';
 // @ts-ignore
 import aidesRetrofit from '$lib/../../retrofit/aides.yaml';
 import { IS_RETROFIT } from './env';
@@ -7,7 +6,7 @@ import { aidesVeloEngine } from './aides-velo-utils';
 
 export const engine: Engine = IS_RETROFIT
 	? new Engine(aidesRetrofit)
-	: aidesVeloEngine?.getEngine() ?? new Engine(aidesVelo);
+	: aidesVeloEngine?.getEngine();
 
 export function getEngine(situation: Situation<string>): Engine {
 	const engineBis = engine.shallowCopy();
