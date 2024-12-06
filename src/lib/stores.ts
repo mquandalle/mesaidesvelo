@@ -1,14 +1,24 @@
-import type { Questions, Situation } from '@betagouv/aides-velo';
-import { derived, get, writable, type Readable } from 'svelte/store';
+import type { Questions, RuleName, Situation } from '@betagouv/aides-velo';
+import { derived, get, writable } from 'svelte/store';
 
-export const localisation = writable(null);
+export const localisation = writable<any | null>(null);
 export const answers = writable({});
+// NOTE: maybe should be added to persisting answers
 export const revenuFiscal = writable(undefined);
 export const veloCat = writable<Questions['vélo . type']>();
 
+export const PERSISTING_ANSWSERS: RuleName[] = [
+	'demandeur . en situation de handicap',
+	'vélo . prix',
+];
+
+/** resetAnswers() will remove all answers from the store except the ones listed in {@link PERSISTING_ANSWSERS} */
 export const resetAnswers = () => {
 	if (Object.keys(get(answers)).length > 0) {
-		answers.set({});
+		const persistingAnswers = Object.fromEntries(
+			Object.entries(get(answers)).filter(([key]) => PERSISTING_ANSWSERS.includes(key as RuleName)),
+		);
+		answers.set(persistingAnswers);
 	}
 };
 

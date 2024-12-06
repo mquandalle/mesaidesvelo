@@ -131,6 +131,32 @@ test('Revenu selector', async ({ page }) => {
 	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(3);
 });
 
+test('Persisting answers', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/lyon');
+	await page.waitForTimeout(100);
+	await expect(page.locator('text=aide non disponible')).toHaveCount(0);
+
+	await page.click('text=plus de 2 076 €');
+	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
+
+	await page.getByLabel('Oui').click();
+	await expect(page.locator('text=aide non disponible')).toHaveCount(1);
+
+	await page.click("text=Achat d'un vélo électrique");
+	await page.waitForTimeout(100);
+	await expect(page.locator('text=total des aides >> ..')).toHaveText('Total des aides 400 €');
+
+	await page.fill('input:below(label:text("Quel est le prix du vélo  ?"))', '100');
+
+	await page.goBack();
+	await page.waitForTimeout(100);
+
+	await page.click("text=Achat d'un vélo mécanique simple");
+	await page.waitForTimeout(100);
+	await expect(page.locator('text=aide non disponible')).toHaveCount(0);
+	expect(page.getByTestId('question-velo-prix-value-100')).toBeTruthy();
+});
+
 test('New or second hand bike', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
 	expect(page.locator("text=neuf ou d'occasion ?")).toBeTruthy();

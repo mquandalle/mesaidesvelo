@@ -76,7 +76,7 @@
 			:
 		</p>
 		{#each questions as question}
-			{#if $publicodeSituation['demandeur . en situation de handicap'] !== 'oui' && question === 'revenu fiscal de référence par part'}
+			{#if question === 'revenu fiscal de référence par part'}
 				<RevenuSelector {goals} />
 			{:else if question !== 'revenu fiscal de référence par part'}
 				<!-- NOTE: needed to avoid dissociated question and values -->
