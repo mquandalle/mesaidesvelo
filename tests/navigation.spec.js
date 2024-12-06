@@ -123,6 +123,9 @@ test('Revenu selector', async ({ page }) => {
 
 	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
 
+	await page.getByLabel('Oui').click();
+	await expect(page.locator('text=aide non disponible')).toHaveCount(1);
+
 	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
 	await page.waitForTimeout(100);
 	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(3);

@@ -1,6 +1,7 @@
 <script>
 	import Emoji from '$lib/components/Emoji.svelte';
 	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
+	import Question from '$lib/components/Question.svelte';
 	import { getEngine } from '$lib/engine';
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { publicodeSituation, resetAnswers } from '$lib/stores';
@@ -95,6 +96,7 @@
 		<p class="text-gray-600 text-md -mt-7 pl-3 italic">
 			Répondez à la question pour calculer les aides disponibles :
 		</p>
+		<Question rule={'demandeur . en situation de handicap'} />
 		<RevenuSelector />
 	</div>
 {/if}
