@@ -9,7 +9,10 @@
 
 	export let ruleName;
 
-	$: engine = getEngine({ ...$publicodeSituation, 'vélo . type': veloTypeValue });
+	$: engine = getEngine({
+		...$publicodeSituation,
+		'vélo . type': $veloTypeValue,
+	});
 	$: aide = engine.evaluate(ruleName);
 
 	const { title, rawNode } = baseEngine.getRule(ruleName);
@@ -20,15 +23,16 @@
 		ville: $localisation,
 	});
 
-	$: evaluateWithGivenRevenu = (revenu) =>
-		engine
+	$: evaluateWithGivenRevenu = (revenu) => {
+		return engine
 			.setSituation({
 				...$publicodeSituation,
-				'vélo . type': veloTypeValue,
+				'vélo . type': $veloTypeValue,
 				'revenu fiscal de référence par part': `${revenu} €/an`,
 				'vélo . prix': 'vélo . prix pour maximiser les aides',
 			})
 			.evaluate(ruleName).nodeValue;
+	};
 
 	// TODO: we could optimize this calcul which is done 2 times : one time in
 	// revenuSelector and one time here
@@ -38,7 +42,8 @@
 {#if aide.nodeValue !== null}
 	<div class="flex flex-row">
 		{#if miniatures[ruleName]}
-			<div
+			<button
+				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
 				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
 				on:click={() => rawNode.lien && window.open(rawNode.lien, '_blank')}
 			>
@@ -47,7 +52,7 @@
 					class="object-fill"
 					alt="Logo {title.toLowerCase()}"
 				/>
-			</div>
+			</button>
 		{/if}
 		<div class="my-4 mx-3 sm:mx-4 flex-grow">
 			<div class="flex gap-x-4 text-lg flex-wrap">

@@ -30,6 +30,7 @@
 		// de parts'. However, to match the previous behavior, we ask
 		// directly the question to the user, maybe we should change
 		// this to ask separately the number of parts and the revenu.
+		'demandeur . en situation de handicap',
 		'revenu fiscal de référence par part',
 		'vélo . prix',
 	];
@@ -75,10 +76,13 @@
 			:
 		</p>
 		{#each questions as question}
-			{#if question === 'revenu fiscal de référence par part'}
+			{#if $publicodeSituation['demandeur . en situation de handicap'] !== 'oui' && question === 'revenu fiscal de référence par part'}
 				<RevenuSelector {goals} />
-			{:else}
-				<Question rule={question} />
+			{:else if question !== 'revenu fiscal de référence par part'}
+				<!-- NOTE: needed to avoid dissociated question and values -->
+				{#key question}
+					<Question rule={question} />
+				{/key}
 			{/if}
 		{/each}
 	</div>
