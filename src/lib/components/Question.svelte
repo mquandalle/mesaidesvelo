@@ -1,5 +1,6 @@
 <script>
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
+	import SvelteMarkdown from 'svelte-markdown';
 	import { answers, publicodeSituation, veloTypeValue } from '$lib/stores';
 	import { slugify } from '$lib/utils';
 	import { getOptions } from '$lib/aides-velo-utils';
@@ -56,7 +57,7 @@
 			</button>
 			{#if showExplanations}
 				<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide={{ duration: 100 }}>
-					{@html ruleInfos.description}
+					<SvelteMarkdown source={ruleInfos.description} isInline />
 				</p>
 			{/if}
 		{/if}

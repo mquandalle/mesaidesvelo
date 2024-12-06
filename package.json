@@ -49,7 +49,8 @@
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
-		"publicodes": "^1.0.0-rc.6"
+		"publicodes": "^1.0.0-rc.6",
+		"svelte-markdown": "^0.4.1"
 	},
 	"overrides": {
 		"vite": {
