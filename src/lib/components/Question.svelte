@@ -71,13 +71,13 @@
 	{:else if possibilités?.length > 0}
 		<div class="flex gap-2 mt-2 flex-wrap">
 			{#each possibilités as possibilité}
-				<MultipleChoiceAnswer value={possibilité} bind:group={value}
-					>{engine.getRule(ruleParent + ' . ' + possibilité).rawNode.titre ??
+				<MultipleChoiceAnswer value={`'${possibilité}'`} bind:group={value}
+					>{engine.getRule(rule + ' . ' + possibilité).rawNode.titre ??
 						possibilité}</MultipleChoiceAnswer
 				>
 			{/each}
 		</div>
 	{:else}
-		<NumberField bind:value unité={ruleInfos.unité} id={domId} />
+		<NumberField id={domId} unité={ruleInfos.unité} bind:value />
 	{/if}
 </div>

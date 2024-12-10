@@ -2,18 +2,9 @@ import { test, expect } from '@playwright/test';
 
 const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
 
-test.describe('Navigation scenarios', () => {
+test.describe.parallel('Navigation scenarios', () => {
 	test('simple navigation', async ({ page }) => {
-		await page.goto(baseUrl);
-
-		await page.waitForLoadState();
-		searchAndGoTo(page, 'toulou');
-		await expect(page).toHaveURL(baseUrl + '/ville/toulouse');
-
-		// Hide evaporate animation
-		await page.addStyleTag({
-			content: '.evaporate { display: none !important; }',
-		});
+		startNavigation(page, 'toulouse');
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
@@ -35,16 +26,7 @@ test.describe('Navigation scenarios', () => {
 	});
 
 	test('PMR scenario', async ({ page }) => {
-		await page.goto(baseUrl);
-
-		await page.waitForLoadState();
-		searchAndGoTo(page, 'toulou');
-		await expect(page).toHaveURL(baseUrl + '/ville/toulouse');
-
-		// Hide evaporate animation
-		await page.addStyleTag({
-			content: '.evaporate { display: none !important; }',
-		});
+		startNavigation(page, 'toulouse');
 
 		await page.click("text=Achat d'un vélo adapté pour PMR");
 		const totalAides = page.locator('text=Total des aides >> ..');
@@ -61,16 +43,7 @@ test.describe('Navigation scenarios', () => {
 	});
 
 	test('age scenario', async ({ page }) => {
-		await page.goto(baseUrl);
-
-		await page.waitForLoadState();
-		searchAndGoTo(page, 'toulou');
-		await expect(page).toHaveURL(baseUrl + '/ville/toulouse');
-
-		// Hide evaporate animation
-		await page.addStyleTag({
-			content: '.evaporate { display: none !important; }',
-		});
+		startNavigation(page, 'toulouse');
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
@@ -90,6 +63,24 @@ test.describe('Navigation scenarios', () => {
 		await page.fill('input:below(label:text("Quel est votre âge ?"))', '25');
 		await expect(totalAides).toHaveText('Total des aides 850 €', { useInnerText: true });
 		expect(page.getByTestId('question-demandeur-age-value-25')).toBeTruthy();
+	});
+
+	test('multiple choices scenario', async ({ page }) => {
+		startNavigation(page, 'reims');
+
+		await page.click("text=Achat d'un vélo électrique");
+		const totalAides = page.locator('text=Total des aides >> ..');
+		await expect(totalAides).toHaveText('Total des aides 850 €', { useInnerText: true });
+
+		await page.click('text=Étudiant·e');
+		await expect(totalAides).toHaveText('Total des aides 925 €', { useInnerText: true });
+
+		await page.fill('input:below(label:text("Quel est votre âge ?"))', '15');
+		expect(page.getByTestId('question-demandeur-age-value-15')).toBeTruthy();
+		await expect(totalAides).toHaveText('Total des aides 525 €', { useInnerText: true });
+
+		await page.click('text=Autre');
+		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
 	});
 });
 
@@ -131,6 +122,25 @@ test('Revenu selector', async ({ page }) => {
 	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(3);
 });
 
+test('New or second hand bike', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
+	expect(page.locator("text=neuf ou d'occasion ?")).toBeTruthy();
+
+	await page.goto(baseUrl + '/ville/lyon?velo=mécanique simple');
+	expect(page.locator("text=uniquement pour l'achat d'un vélo d'occasion")).toBeTruthy();
+
+	await page.goto(baseUrl + '/ville/lyon?velo=électrique');
+	expect(page.locator("text=uniquement pour l'achat d'un vélo neuf")).toBeTruthy();
+
+	await page.goto(baseUrl + '/ville/pantin?velo=mécanique simple');
+	expect(page.locator("text=pour un vélo neuf ou un vélo d'occasion")).toBeTruthy();
+});
+
+test('Text generation', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/landerneau');
+	expect(page.locator("text=Malheureusement il n'existe aucune aide locale")).toBeTruthy();
+});
+
 test('Persisting answers', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/lyon');
 	await page.waitForTimeout(100);
@@ -157,25 +167,6 @@ test('Persisting answers', async ({ page }) => {
 	expect(page.getByTestId('question-velo-prix-value-100')).toBeTruthy();
 });
 
-test('New or second hand bike', async ({ page }) => {
-	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
-	expect(page.locator("text=neuf ou d'occasion ?")).toBeTruthy();
-
-	await page.goto(baseUrl + '/ville/lyon?velo=mécanique simple');
-	expect(page.locator("text=uniquement pour l'achat d'un vélo d'occasion")).toBeTruthy();
-
-	await page.goto(baseUrl + '/ville/lyon?velo=électrique');
-	expect(page.locator("text=uniquement pour l'achat d'un vélo neuf")).toBeTruthy();
-
-	await page.goto(baseUrl + '/ville/pantin?velo=mécanique simple');
-	expect(page.locator("text=pour un vélo neuf ou un vélo d'occasion")).toBeTruthy();
-});
-
-test('Text generation', async ({ page }) => {
-	await page.goto(baseUrl + '/ville/landerneau');
-	expect(page.locator("text=Malheureusement il n'existe aucune aide locale")).toBeTruthy();
-});
-
 // FIXME: This test is not working although it works in the browser
 // test('Redirection from details', async ({ page }) => {
 // 	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
@@ -188,6 +179,19 @@ test('Text generation', async ({ page }) => {
 // 	console.log(await page.locator('text=Toulouse').allTextContents());
 // 	expect(page.locator('text=Toulouse')).not.toBeTruthy();
 // });
+
+async function startNavigation(page, ville) {
+	await page.goto(baseUrl);
+
+	await page.waitForLoadState();
+	searchAndGoTo(page, ville);
+	await expect(page).toHaveURL(baseUrl + '/ville/' + ville);
+
+	// Hide evaporate animation
+	await page.addStyleTag({
+		content: '.evaporate { display: none !important; }',
+	});
+}
 
 async function searchAndGoTo(page, commune) {
 	await page.getByLabel('Localisation').first().fill(commune);
