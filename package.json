@@ -8,6 +8,7 @@
 		"build": "VITE_SITE=mesaidesvelo.fr vite build",
 		"build:retrofit": "VITE_SITE=aideretrofit.fr vite build",
 		"preview": "VITE_SITE=mesaidesvelo.fr vite preview",
+		"preview:retrofit": "VITE_SITE=aideretrofit.fr vite preview",
 		"sync-entreprises": "node ./data-fetch/entreprises/download-gsheet-data.js",
 		"sync": "svelte-kit sync",
 		"test": "npm run test:playwright && npm run test:vitest -- run",
