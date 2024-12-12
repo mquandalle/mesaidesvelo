@@ -11,19 +11,30 @@
 
 # À propos
 
-## Qu’est ce que c’est ?
+## Qu'est ce que c'est ?
 
-Cet outil rassemble l’ensemble des aides à l’achat de vélo. Il vous permet d’identifier en
-quelques clics celles auxquelles vous avez droit.
+Cet outil rassemble l'ensemble des aides à l'achat de vélo. Il vous permet
+d'identifier en quelques clics celles auxquelles vous avez droit.
 
-Il est gratuit, et développé de manière ouverte.
+Il est gratuit, et développé de manière [ouverte](https://github.com/mquandalle/mesaidesvelo).
 
 ## Quelles sont les aides prises en compte ?
 
-Nous voulons intégrer l’ensemble des aides disponibles dans toutes les villes de France. Il
-s’agit néanmoins d’un travail de fourmi car il n’existe aucune base centrale les recensant
-toutes. Il nous faut donc les saisir à la main une par une.
+Nous voulons intégrer l'ensemble des aides disponibles dans toutes les villes
+de France. Il s'agit néanmoins d'un travail de fourmi car il n'existe aucune
+base centrale les recensant toutes. Il nous faut donc les saisir à la main une
+par une.
 
 ➡ Voir la [liste des aides intégrées](/liste-aides)
+
+## Qui s'en occupe ?
+
+Le projet a été initié par Maxime Quendalle bénévolement, il l'a ensuite
+maintenu pendant quelques temps financé par l'équipe
+de [1jeune1solution](https://mes-aides.1jeune1solution.beta.gouv.fr/).
+
+A présent, la mise à jours des aides est principalement faite par les membres
+des différentes équipes de [beta.gouv.fr](https://beta.gouv.fr) qui les
+utilisent.
 
 </div>

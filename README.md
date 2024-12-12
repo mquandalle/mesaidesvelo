@@ -1,4 +1,4 @@
-# Mesaidesvelo.fr
+# mesaidesvelo.fr
 
 ### Puis-je bénéficier d'aides pour acheter un vélo ?
 
@@ -10,22 +10,30 @@ Les modalités de ces aides sont variées, elles sont parfois cumulables et
 parfois pas, parfois conditionnées à un niveau de revenus et d'autres fois
 ouvertes à tous, etc.
 
-**Mesaidesvelo.fr** rassemble [toutes les
-aides](https://mesaidesvelo.fr/liste-aides) existantes et permet d'en estimer
+**mesaidesvelo.fr** rassemble [toutes les
+aides](https://mesaidesvelo.fr/liste-aides)[^1] existantes et permet d'en estimer
 le montant rapidement et simplement.
+
+[^1]:
+    _ou presque_. En effet, nous allons jusqu'au niveau de la commune pour
+    référencer les aides. Ce qui représente un grand nombre d'aides à maintenir et
+    référencer. Or ce travail est fait à la main par quelques personnes des équipes
+    beta.gouv.fr. Si vous souhaitez faire remonter une aide manquante ou plus à
+    jour, veuillez consulter la section [Comment contribuer
+    ?](#comment-contribuer-).
 
 ### Comment contribuer ?
 
 #### Pour corriger ou proposer une aide
 
+> [!NOTE]
+> Les aides sont modélisées dans un dépôt dédié :
+> [betagouv/publicodes-aides-velo](https://github.com/betagouv/publicodes-aides-velo).
+
 Vous avez identifié une erreur ou une aide que nous ne prenons pas en compte ?
 
 Vous pouvez [ouvrir un ticket sur
 GitHub](https://github.com/betagouv/publicodes-aides-velo/issues/new).
-
-> [!NOTE]
-> Les aides sont modélisées dans un dépôt dédié :
-> [betagouv/publicodes-aides-velo](https://github.com/betagouv/publicodes-aides-velo).
 
 #### Pour améliorer l'application
 

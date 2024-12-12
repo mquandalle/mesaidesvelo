@@ -50,14 +50,17 @@
 		><label for={domId}>{optionalEvaluate(ruleInfos.question)?.replace(/\s+?$/, '\u00A0?')}</label>
 		{#if ruleInfos.description}
 			<button
-				title="Plus d’informations"
+				title="Plus d'informations"
 				class="cursor-pointer"
 				on:click={() => (showExplanations = !showExplanations)}
-				><Emoji emoji="ℹ" />
+				><Emoji className="align-middle" emoji="ℹ" />
 			</button>
 			{#if showExplanations}
-				<p class="m-4 mt-2 text-gray-600 text-sm" transition:slide={{ duration: 100 }}>
-					<SvelteMarkdown source={ruleInfos.description} isInline />
+				<p
+					class="my-2 text-gray-700 prose-sm border-l-2 rounded-r p-2 bg-gray-50"
+					transition:slide={{ duration: 100 }}
+				>
+					<SvelteMarkdown source={ruleInfos.description} />
 				</p>
 			{/if}
 		{/if}

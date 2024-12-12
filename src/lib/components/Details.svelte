@@ -85,7 +85,7 @@
 	<p class="text-gray-700 text-sm">{categoryDescription}</p>
 {/if}
 
-<div class="border-t border-b mt-6 bg-white">
+<div class="border rounded mt-6 bg-white">
 	{#each aidesDetails as ruleName (ruleName)}
 		<div transition:slide={{ duration: 200 }} class="border-b last:border-b-0">
 			<DetailsLine {ruleName} />
@@ -111,11 +111,11 @@
 	<p class="mt-4">
 		{#if aidesDetails.length === 1}Cette aide est valable{:else}Ces aides sont valables{/if}
 		{#if montantAidesVeloNeuf === montantAidesVeloOccasion}
-			pour un vélo neuf ou un vélo d’occasion.
+			pour un vélo neuf ou un vélo d'occasion.
 		{:else if montantAidesVeloOccasion > 0}
-			uniquement pour l’achat d’un vélo d’occasion.
+			uniquement pour l'achat d'un vélo d'occasion.
 		{:else}
-			uniquement pour l’achat d’un vélo neuf.
+			uniquement pour l'achat d'un vélo neuf.
 		{/if}
 	</p>
 {/if}

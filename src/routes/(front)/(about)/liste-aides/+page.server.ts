@@ -42,7 +42,7 @@ export async function load() {
 	const aidesEtat = associatedCollectivities
 		.filter(({ collectivity }) => collectivity.kind === 'pays' && collectivity.value === 'France')
 		.map(({ rawNode }) => ({
-			titre: rawNode.titre.replace(/de l’état/i, '').trim(),
+			titre: rawNode.titre.replace(/de l'état/i, '').trim(),
 		}));
 
 	const aidesRegions = associatedCollectivities

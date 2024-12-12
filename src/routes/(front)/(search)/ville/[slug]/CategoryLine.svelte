@@ -10,7 +10,7 @@
 	<a tabindex="0" data-sveltekit-noscroll {href} rel={relNoFollow ? 'nofollow' : null}>
 		<div
 			role="row"
-			class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-white hover:bg-green-50 cursor-pointer border-b group"
+			class="flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-white hover:bg-green-100 cursor-pointer border-b group"
 		>
 			<div role="cell"><slot /></div>
 			<div role="cell" class="flex-1 flex flex-col items-end gap-x-2">

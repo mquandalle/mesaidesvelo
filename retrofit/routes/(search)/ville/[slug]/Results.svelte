@@ -16,7 +16,7 @@
 </script>
 
 <RevenuSelector goals={activeAides} />
-<div class="border-t border-b mt-6 bg-white">
+<div class="border rounded mt-6 bg-white">
 	{#each activeAides as aide}
 		{@const rawNode = engine.getRule(aide).rawNode}
 		{@const conditionDeRessources = true}

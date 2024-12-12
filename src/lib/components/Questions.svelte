@@ -30,8 +30,8 @@
 		// de parts'. However, to match the previous behavior, we ask
 		// directly the question to the user, maybe we should change
 		// this to ask separately the number of parts and the revenu.
-		'demandeur . en situation de handicap',
 		'revenu fiscal de référence par part',
+		'demandeur . en situation de handicap',
 		'vélo . prix',
 	];
 

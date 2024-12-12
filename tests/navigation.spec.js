@@ -119,7 +119,7 @@ test('Revenu selector', async ({ page }) => {
 
 	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
 	await page.waitForTimeout(100);
-	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(3);
+	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(4);
 });
 
 test('New or second hand bike', async ({ page }) => {

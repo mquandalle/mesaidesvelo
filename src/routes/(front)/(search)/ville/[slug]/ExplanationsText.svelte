@@ -21,7 +21,7 @@
 	$: deVille = determinant($page.data.ville.nom) + $page.data.ville.nom;
 </script>
 
-<div class="prose mt-12">
+<div class="prose mt-12 max-w-full">
 	{#if infos.pays}
 		{@html infos.pays.text}
 	{:else}
@@ -77,6 +77,23 @@
 		{/if}
 
 		<h2>Le bonus écologique de l’État</h2>
+		<!-- Callout to warn about the removal of the bonus écologique -->
+		<div
+			class="flex items-start bg-orange-50 border border-orange-100 p-4 mt-2 rounded gap-4"
+			role="alert"
+		>
+			<span class="bg-orange-100 px-2 py-1 w-min rounded-lg">⚠️</span>
+
+			<span>
+				Période transitoire jusqu'au 14 février 2025 suite à la <a
+					href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000050690951"
+					target="_blank">suppression du bonus écologique</a
+				>. Le bonus ne sera plus disponible pour tout achat passé cette date (voir
+				<a href="https://www.service-public.fr/particuliers/vosdroits/F36828" target="_blank"
+					>Bonus vélo</a
+				>).
+			</span>
+		</div>
 
 		<p>
 			Pour bénéficier du bonus écologique de l’État vous devez remplir les conditions suivantes :
@@ -101,8 +118,8 @@
 					<th colspan="2" class="text-center">Plafond de l'aide</th>
 				</tr>
 				<tr>
-					<th>Revenu : moins de 6&nbsp;358&nbsp;€/an</th>
-					<th>Revenu : moins de 14&nbsp;089&nbsp;€/an</th>
+					<th>Revenu inférieur à 7&nbsp;100&nbsp;€/an ou personne en situation de handicap</th>
+					<th>Revenu inférieur à 15&nbsp;400&nbsp;€/an</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -117,12 +134,17 @@
 					<td>300 €</td>
 				</tr>
 				<tr>
-					<td>Vélo cargo</td>
+					<td>Vélo cargo (avec assistance électrique ou non)</td>
 					<td>2 000 €</td>
 					<td>1 000 €</td>
 				</tr>
 				<tr>
-					<td>Vélo pliant</td>
+					<td>Vélo pliant (avec assistance électrique ou non)</td>
+					<td>2 000 €</td>
+					<td>1 000 €</td>
+				</tr>
+				<tr>
+					<td>Vélo adapté (avec assistance électrique ou non)</td>
 					<td>2 000 €</td>
 					<td>1 000 €</td>
 				</tr>

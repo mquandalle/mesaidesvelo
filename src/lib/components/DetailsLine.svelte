@@ -6,6 +6,7 @@
 	import AnimatedAmount from './AnimatedAmount.svelte';
 	import Badge from './Badge.svelte';
 	import { localisation, publicodeSituation, veloCat, veloTypeValue } from '$lib/stores';
+	import SvelteMarkdown from 'svelte-markdown';
 
 	export let ruleName;
 
@@ -40,7 +41,7 @@
 </script>
 
 {#if aide.nodeValue !== null}
-	<div class="flex flex-row">
+	<div class="flex flex-row items-start">
 		{#if miniatures[ruleName]}
 			<button
 				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
@@ -68,9 +69,9 @@
 					</span>
 				{/if}
 			</div>
-			<p class="text-gray-600 mt-2 text-sm">
-				{notice}
-			</p>
+			<div class="text-gray-600 mt-2 prose-sm">
+				<SvelteMarkdown source={notice} options={{ breaks: true }} />
+			</div>
 			{#if rawNode.lien}
 				<p class="mt-2 text-sm text-green-700">
 					<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>

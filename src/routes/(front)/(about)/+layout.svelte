@@ -10,7 +10,7 @@
 	];
 </script>
 
-<nav class="w-full max-w-screen-md m-auto pb-2 mt-6 shadow-inner">
+<nav class="w-full max-w-screen-md m-auto pb-2 mt-6 border-b">
 	<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600">
 		{#each pages as [path, label]}
 			{@const isActive = $page.url.pathname.startsWith(path)}
@@ -18,9 +18,8 @@
 				<a
 					href={path}
 					aria-current={isActive ? true : undefined}
-					class="hover:(bg-gray-100 rounded-t) p-2 {isActive
-						? 'text-green-700 md:(border-b border-b-green-700 border-b-width-2)'
-						: ''}">{label}</a
+					class="hover:(bg-green-50 text-green-600 rounded) p-2 {isActive ? 'text-green-600' : ''}"
+					>{label}</a
 				>
 			</li>
 		{/each}
@@ -30,7 +29,4 @@
 <slot />
 
 <style>
-	nav {
-		box-shadow: inset 0 -1px 0 #d1d5db;
-	}
 </style>

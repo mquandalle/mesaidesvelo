@@ -43,11 +43,23 @@
 	:global(.bg-green-100) {
 		@apply !bg-sky-100;
 	}
+	:global(.bg-green-200) {
+		@apply !bg-sky-200;
+	}
+	:global(.bg-green-300) {
+		@apply !bg-sky-300;
+	}
+	:global(.bg-green-400) {
+		@apply !bg-sky-400;
+	}
 	:global(.bg-green-500) {
 		@apply !bg-sky-500;
 	}
 	:global(.bg-green-600) {
 		@apply !bg-sky-600;
+	}
+	:global(.border-green-600) {
+		@apply !border-sky-600;
 	}
 	:global(.hover\:bg-green-100) {
 		@apply !hover:bg-sky-100;
@@ -55,8 +67,23 @@
 	:global(.hover\:bg-green-200) {
 		@apply !hover:bg-sky-200;
 	}
+	:global(.hover\:bg-green-300) {
+		@apply !hover:bg-sky-300;
+	}
+	:global(.hover\:bg-green-400) {
+		@apply !hover:bg-sky-400;
+	}
+	:global(.hover\:border-green-300) {
+		@apply !hover:border-sky-300;
+	}
 	:global(.text-green-700) {
 		@apply !text-sky-700;
+	}
+	:global(.hover\:text-green-600) {
+		@apply !hover:text-sky-600;
+	}
+	:global(.hover\:text-green-700) {
+		@apply !hover:text-sky-700;
 	}
 	:global(.border-green-300) {
 		@apply !border-sky-300;

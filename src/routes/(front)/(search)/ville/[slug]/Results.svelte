@@ -96,7 +96,7 @@
 		<p class="text-gray-600 text-md -mt-7 pl-3 italic">
 			Répondez à la question pour calculer les aides disponibles :
 		</p>
-		<Question rule={'demandeur . en situation de handicap'} />
 		<RevenuSelector />
+		<Question rule={'demandeur . en situation de handicap'} />
 	</div>
 {/if}
