@@ -26,7 +26,7 @@
 {#if emoji}
 	<img
 		src="/emojies/{toCodePoint(emoji)}.svg"
-		class="inline align-baseline relative ml-1 leading-none {className}"
+		class="inline align-middle relative ml-1 leading-none {className}"
 		style="height: 1em"
 		draggable="false"
 		alt={emoji}

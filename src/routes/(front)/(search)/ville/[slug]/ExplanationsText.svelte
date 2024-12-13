@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import Emoji from '$lib/components/Emoji.svelte';
 	import MiniatureCollectivite from '$lib/components/MiniatureCollectivite.svelte';
 
 	$: infos = $page.data.infos;
@@ -82,7 +83,9 @@
 			class="flex items-start bg-orange-50 border border-orange-100 p-4 mt-2 rounded gap-4"
 			role="alert"
 		>
-			<span class="bg-orange-100 px-2 py-1 w-min rounded-lg">⚠️</span>
+			<span class="bg-orange-100 px-2 py-1 w-min rounded-lg">
+				<Emoji className="ml-0" emoji="⚠️" />
+			</span>
 
 			<span>
 				Période transitoire jusqu'au 14 février 2025 suite à la <a

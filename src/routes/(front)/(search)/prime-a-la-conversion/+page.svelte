@@ -14,7 +14,7 @@
 	<BackButtonAides />
 
 	<div class="border mt-6 rounded-md shadow-sm">
-		<DetailsLine ruleName="aides . prime à la conversion" />
+		<DetailsLine className="border-b" ruleName="aides . prime à la conversion" />
 		<DetailsLine ruleName="aides . prime à la conversion . surprime ZFE" />
 	</div>
 

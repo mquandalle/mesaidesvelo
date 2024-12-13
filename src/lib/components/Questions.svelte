@@ -36,7 +36,6 @@
 	];
 
 	export let goals = undefined;
-	export let demandeNeufOuOccasion = false;
 
 	$: engine = getEngine({
 		...$publicodeSituation,
@@ -58,10 +57,6 @@
 		)
 		.filter((q: QuestionNames) => !QUESTIONS_TO_IGNORE.includes(q))
 		.sort((a: QuestionNames, b: QuestionNames) => getSortOrder(a) - getSortOrder(b));
-
-	if (demandeNeufOuOccasion) {
-		questions?.unshift('vélo . état');
-	}
 </script>
 
 {#if questions?.length > 0}

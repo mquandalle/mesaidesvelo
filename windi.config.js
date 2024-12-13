@@ -3,6 +3,9 @@ import colors from 'windicss/colors';
 export default {
 	theme: {
 		extend: {
+			width: {
+				'2xs': '14rem',
+			},
 			typography: {
 				DEFAULT: {
 					css: {

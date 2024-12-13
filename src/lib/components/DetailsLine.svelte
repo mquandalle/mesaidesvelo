@@ -8,17 +8,19 @@
 	import { localisation, publicodeSituation, veloCat, veloTypeValue } from '$lib/stores';
 	import SvelteMarkdown from 'svelte-markdown';
 
-	export let ruleName;
+	export let className = '';
+	export let aide;
+	export let veloEtat;
 
 	$: engine = getEngine({
 		...$publicodeSituation,
 		'vélo . type': $veloTypeValue,
+		'vélo . état': `'${veloEtat}'`,
 	});
-	$: aide = engine.evaluate(ruleName);
 
-	const { title, rawNode } = baseEngine.getRule(ruleName);
+	const { title, rawNode } = baseEngine.getRule(aide.ruleName);
 	$: notice = formatDescription({
-		ruleName,
+		ruleName: aide.ruleName,
 		engine,
 		veloCat: $veloCat,
 		ville: $localisation,
@@ -29,10 +31,11 @@
 			.setSituation({
 				...$publicodeSituation,
 				'vélo . type': $veloTypeValue,
+				'vélo . état': `'${veloEtat}'`,
 				'revenu fiscal de référence par part': `${revenu} €/an`,
 				'vélo . prix': 'vélo . prix pour maximiser les aides',
 			})
-			.evaluate(ruleName).nodeValue;
+			.evaluate(aide.ruleName).nodeValue;
 	};
 
 	// TODO: we could optimize this calcul which is done 2 times : one time in
@@ -41,39 +44,39 @@
 </script>
 
 {#if aide.nodeValue !== null}
-	<div class="flex flex-row items-start">
-		{#if miniatures[ruleName]}
+	<div class={'flex flex-row items-start' + ' ' + className}>
+		{#if miniatures[aide.ruleName]}
 			<button
 				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
 				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
 				on:click={() => rawNode.lien && window.open(rawNode.lien, '_blank')}
 			>
 				<img
-					src="/miniatures/{miniatures[ruleName]}"
+					src="/miniatures/{miniatures[aide.ruleName]}"
 					class="object-fill"
 					alt="Logo {title.toLowerCase()}"
 				/>
 			</button>
 		{/if}
 		<div class="my-4 mx-3 sm:mx-4 flex-grow">
-			<div class="flex gap-x-4 text-lg flex-wrap">
-				<h3 class="font-semibold text-md">
-					{title}
-				</h3>
-				<div class="font-bold text-gray-800 flex-1 text-right sm:order-3">
+			<div class="flex">
+				<div class="flex gap-x-4 text-lg flex-wrap">
+					<h3 class="font-semibold text-md">
+						{title}
+						{#if conditionDeRessources}
+							<Badge className="sm:order-1">Sous condition de ressources</Badge>
+						{/if}
+					</h3>
+				</div>
+				<div class="font-bold text-lg text-gray-800 flex-1 text-right sm:order-3">
 					<AnimatedAmount amount={aide.nodeValue} unit={aide.unit} />
 				</div>
-				{#if conditionDeRessources}
-					<span class="w-full sm:w-auto">
-						<Badge className="sm:order-2">Sous condition de ressources</Badge>
-					</span>
-				{/if}
 			</div>
 			<div class="text-gray-600 mt-2 prose-sm">
 				<SvelteMarkdown source={notice} options={{ breaks: true }} />
 			</div>
 			{#if rawNode.lien}
-				<p class="mt-2 text-sm text-green-700">
+				<p class="mt-4 text-sm text-green-700">
 					<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>
 				</p>
 			{/if}

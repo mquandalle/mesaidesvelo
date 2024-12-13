@@ -73,14 +73,15 @@
 	]
 		.filter(Boolean)
 		.flat();
+	$: nbAides = displayedAides.length;
 </script>
 
-<div class="mt-8" />
+<div class="mt-10" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
-<div role="table" class="flex flex-col-reverse bg-white border-t rounded-t sm:text-lg">
-	{#each displayedAides.reverse() as { montant, href, label, emoji, relNoFollow } (label)}
+<div role="table" class="flex flex-col bg-white border rounded sm:text-lg">
+	{#each displayedAides as { montant, href, label, emoji, relNoFollow }, idx (label)}
 		<div animate:flip={{ duration: 600, easing: quintOut }}>
-			<CategoryLine {montant} {href} {relNoFollow}
+			<CategoryLine isFirst={idx === 0} isLast={idx === nbAides - 1} {montant} {href} {relNoFollow}
 				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 			>
 		</div>
