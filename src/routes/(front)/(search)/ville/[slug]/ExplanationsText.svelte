@@ -78,12 +78,11 @@
 		{/if}
 
 		<h2>Le bonus écologique de l’État</h2>
-		<!-- Callout to warn about the removal of the bonus écologique -->
 		<div
 			class="flex items-start bg-orange-50 border border-orange-100 p-4 mt-2 rounded gap-4"
 			role="alert"
 		>
-			<span class="bg-orange-100 px-2 py-1 w-min rounded-lg">
+			<span class="bg-white border border-orange-100 px-2 py-1 w-min rounded-lg">
 				<Emoji className="ml-0" emoji="⚠️" />
 			</span>
 

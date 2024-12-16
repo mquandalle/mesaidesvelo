@@ -44,6 +44,8 @@
 		</PaneNavigation>
 	</div>
 	<ShareButton title="Toutes les aides vélo à {ville.nom}" />
-	<JagisCTA />
+	<section class="mt-8">
+		<JagisCTA />
+	</section>
 	<ExplanationsText />
 </div>
