@@ -93,7 +93,6 @@
 
 <div class="border rounded mt-3 bg-white">
 	{#each aidesDetails as aide (aide.ruleName)}
-		{@debug aide}
 		<div transition:slide={{ duration: 200 }} class="border-b last:border-b-0">
 			<DetailsLine veloEtat={$neufOuOccasion} {aide} />
 		</div>

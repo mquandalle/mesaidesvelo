@@ -10,7 +10,13 @@
 		type="number"
 		class="m-0 text-right w-35 focus:outline-transparent"
 		{id}
-		bind:value
+		on:input={(e) => {
+			// Delayed the update to wait the user to finish typing
+			setTimeout(() => {
+				value = e.target.value === '' ? null : Number(e.target.value);
+			}, 500);
+		}}
+		{value}
 	/>
 	<label for={id}><span class="text-gray-600">{unité || ''}</span></label>
 </div>

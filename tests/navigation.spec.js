@@ -91,7 +91,7 @@ test.describe('Navigation scenarios', () => {
 		const totalAides = page.locator('text=Total des aides >> ..');
 		await expect(totalAides).toHaveText('Total des aides 300 €', { useInnerText: true });
 
-		await page.fill('input:below(label:text("Quel est le prix du vélo  ?"))', '2000');
+		await page.fill('input:below(label:text("Quel est le prix du vélo ?"))', '2000');
 		await expect(totalAides).toHaveText('Total des aides 150 €', { useInnerText: true });
 
 		await page.click('text=Occasion');
