@@ -1,6 +1,6 @@
 <div class="flex gap-4 items-start border border-green-100 rounded bg-green-50 p-4">
 	<span class="bg-white px-2 rounded-lg border border-green-100">
-		<img src="/images/jagis.svg" alt="Logo de jagis.beta.gouv.fr" width="100rem" />
+		<img src="/images/jagis.svg" alt="Logo de jagis.beta.gouv.fr" width="80rem" />
 	</span>
 
 	<div>
