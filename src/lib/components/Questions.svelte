@@ -36,10 +36,12 @@
 	];
 
 	export let goals = undefined;
+	export let veloEtat = 'neuf';
 
 	$: engine = getEngine({
 		...$publicodeSituation,
 		'vélo . type': $veloTypeValue,
+		'vélo . état': `'${veloEtat}'`,
 	});
 
 	const getSortOrder = (name: QuestionNames) =>
@@ -74,8 +76,8 @@
 			{#if question === 'revenu fiscal de référence par part'}
 				<RevenuSelector {goals} />
 			{:else if question !== 'revenu fiscal de référence par part'}
-				<!-- NOTE: needed to avoid dissociated question and values -->
 				{#key question}
+					<!-- NOTE: needed to avoid dissociated question and values -->
 					<Question rule={question} />
 				{/key}
 			{/if}

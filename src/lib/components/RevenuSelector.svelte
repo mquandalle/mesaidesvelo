@@ -147,6 +147,9 @@
 						...$publicodeSituation,
 						// 'vélo . type': `'${$veloCat}'`,
 						// 'maximiser les aides': 'oui',
+						// NOTE: we want to show the RFRPP tresholds even if the
+						// user is in a situation of handicap.
+						'demandeur . en situation de handicap': 'non',
 						'revenu fiscal de référence par part': `${revenu + 1} €/mois`,
 					});
 

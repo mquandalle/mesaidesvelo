@@ -11,7 +11,6 @@
 	const format = (x, { withPlusSign = false } = {}) => {
 		const sign = withPlusSign && x > 0 ? '+' : x < 0 ? '-' : '';
 		const formatedValue = formatValue({ nodeValue: Math.abs(x), unit }, { precision: 0 });
-		console.log('formatedValue', formatedValue);
 		return `${sign}${formatedValue}`.trim();
 	};
 

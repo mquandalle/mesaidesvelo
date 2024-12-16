@@ -108,4 +108,4 @@
 	</div>
 </div>
 
-<Questions />
+<Questions veloEtat={$neufOuOccasion} />
