@@ -22,47 +22,53 @@
 	{#each biggestCities as city}
 		<a
 			href="/ville/{city.toLowerCase()}"
-			class="inline-block text-center border border-current rounded-full text-green-500 px-4 py-2 sm:px-3 sm:py-1 hover:(bg-green-500 text-white)"
+			class="inline-block text-center border border-current rounded-full text-green-600 px-4 py-2 sm:px-3 sm:py-1 hover:(bg-green-600 text-white)"
 			>{city}</a
 		>
 	{/each}
 </div>
 <section class="w-full max-w-screen-md m-auto mt-12">
-	<!-- callout with a summary of the latest features -->
-	<div class="bg-yellow-50 border border-yellow-100 p-4 mt-2 rounded" role="alert">
-		<h2 class="font-bold text-lg mb-4">🚀 Nouveautés !</h2>
-		<ul>
-			<!-- 1. prise en compte des vélos adapté pour les personnes en situation de handicap -->
-			<li class="mb-2">
-				<span class="font-bold">🦿 Vélos adaptés</span> : les aides pour les vélos adaptés sont désormais
-				intégrées.
-			</li>
-			<!-- 2. suppression du bonus écologique et de la prime à la conversion -->
-			<li class="mb-2">
-				<span class="font-bold">🏛️ Aides de nationales</span> :
-				<a href="/prime-a-la-conversion" target="_blank"
-					>suppression du Bonus écologique et de la Prime à la conversion.</a
-				>
-			</li>
-			<!-- 3. relecture et mises à jour de la totalité des aides -->
-			<li class="mb-2">
-				<span class="font-bold">🔍 Mises à jour</span>
-				: relecture et mises à jour de l'ensemble des aides pour 2024.
-			</li>
-		</ul>
-	</div>
-</section>
+	<div
+		class="flex items-start bg-yellow-50 border border-yellow-100 p-4 mt-2 rounded gap-4"
+		role="alert"
+	>
+		<span class="bg-white border border-yellow-100 px-2 py-1 w-min rounded-lg"> ✨ </span>
+		<div>
+			<h3 class="font-semibold text-lg">Nouveautés de fin d'année</h3>
 
-<!-- CTA to the website jagis.beta.gouv.fr with a baseline -->
-<section class="w-full max-w-screen-md m-auto mt-12">
-	<div class="bg-green-50 border border-green-100 p-4 mt-2 rounded" role="alert">
-		<a
-			href="https://jagis.beta.gouv.fr"
-			class="inline-block bg-green-500 text-white font-bold rounded-full py-2 px-4 hover:bg-green-600"
-			>Tester Jagis</a
-		>
-		<p class="text-sm text-gray-600 mt-2">
-			Le site Jagis vous permet de connaître les aides auxquelles vous avez droit en quelques clics.
-		</p>
+			<p class="text-sm text-gray-800 mt-2">
+				Ces derniers mois, plusieurs améliorations ont été apportées à <span class="italic"
+					>MesAidesVélo</span
+				>
+				par les équipes de
+				<a
+					href="https://beta.gouv.fr"
+					target="_blank"
+					class="text-green-600
+					hover:underline">Beta.gouv.fr</a
+				> qui ont repris le travail sur la mise à jour des aides. Voici les principales nouveautés :
+			</p>
+			<ul class="mt-4">
+				<li class="text-sm text-gray-800 mt-2">
+					🚀 <strong>Mise à jours des aides</strong> - la totalité des aides ont été relues et mises
+					à jour et de nouvelles aides ont été ajoutées.
+				</li>
+				<li class="text-sm text-gray-800 mt-2">
+					🦽 <strong>Nouveau type de vélo</strong> - les vélos adaptés pour les personnes à mobilité
+					réduite sont désormais pris en compte.
+				</li>
+				<li class="text-sm text-gray-800 mt-2">
+					🚲 <strong>Meilleure prise en compte de l'occasion</strong> - il est désormais possible de
+					choisir les aides en fonction de l'état du vélo (neuf ou occasion).
+				</li>
+			</ul>
+			<p class="text-sm text-green-600 mt-4">
+				<a
+					href="https://github.com/betagouv/publicodes-aides-velo/releases"
+					target="_blank"
+					class="hover:underline">→ En savoir plus</a
+				>
+			</p>
+		</div>
 	</div>
 </section>

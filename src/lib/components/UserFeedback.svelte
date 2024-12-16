@@ -34,7 +34,7 @@
 {#if state === 'closed'}
 	<button
 		on:click={() => (state = 'open')}
-		class="text-green-700 border border-green-400 px-4 py-2 rounded whitespace-nowrap hover:bg-green-100"
+		class="text-green-600 border border-green-200 px-4 py-2 rounded whitespace-nowrap hover:(text-green-800 bg-green-100)"
 	>
 		Une erreur ? Un oubli ? Contactez-nous !
 	</button>

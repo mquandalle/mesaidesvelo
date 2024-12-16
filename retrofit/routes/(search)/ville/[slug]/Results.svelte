@@ -58,7 +58,7 @@
 					</p>
 				{/if}
 				{#if rawNode.lien}
-					<p class="mt-2 text-sm text-sky-700">
+					<p class="mt-2 text-sm text-sky-600">
 						<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>
 					</p>
 				{/if}

@@ -13,22 +13,22 @@
 	{#if !isEmbeded}
 		<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600 md:justify-end">
 			<li>
-				<a href="/a-propos" class="underline hover:(text-green-600)">À propos</a>
+				<a href="/a-propos" class="text-green-600 hover:underline">À propos</a>
 			</li>
 			<li>
-				<a href="https://aideretrofit.fr" rel="external" class="underline hover:(text-green-600)"
+				<a href="https://aideretrofit.fr" rel="external" class="text-green-600 hover:underline"
 					>Aide Retrofit</a
 				>
 			</li>
 			<li>
-				<a href="/liste-aides" class="underline hover:(text-green-600)">Liste des aides</a>
+				<a href="/liste-aides" class="text-green-600 hover:underline">Liste des aides</a>
 			</li>
 			<li>
 				Code Source :
 				<a
 					href="https://github.com/mquandalle/mesaidesvelo"
 					target="_blank"
-					class="inline-flex gap-x-2 underline hover:text-green-600"
+					class="inline-flex gap-x-2 text-green-600 hover:underline"
 				>
 					Site
 				</a>
@@ -36,7 +36,7 @@
 				<a
 					href="https://github.com/betagouv/publicodes-aides-velo/blob/main/src/rules/aides.publicodes"
 					target="_blank"
-					class="inline-flex underline gap-x-2 hover:(text-green-600)"
+					class="inline-flex gap-x-2 text-green-600 hover:underline"
 				>
 					Aides
 				</a>

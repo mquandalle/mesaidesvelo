@@ -81,7 +81,7 @@
 				<SvelteMarkdown source={notice} options={{ breaks: true }} />
 			</div>
 			{#if rawNode.lien}
-				<p class="mt-4 text-sm text-green-700">
+				<p class="mt-4 text-sm text-green-600">
 					<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>
 				</p>
 			{/if}
