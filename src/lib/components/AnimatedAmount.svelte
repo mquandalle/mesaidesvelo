@@ -4,7 +4,6 @@
 	export let className = '';
 	export let amount;
 	export let unit;
-	export let veloEtat;
 
 	let prevAmount;
 	let difference;

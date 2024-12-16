@@ -1,6 +1,6 @@
 <script>
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { formatDescription } from '$lib/utils';
+	import { formatDescription, slugify } from '$lib/utils';
 	import miniatures from '$lib/data/miniatures';
 
 	import AnimatedAmount from './AnimatedAmount.svelte';
@@ -68,7 +68,12 @@
 						{/if}
 					</h3>
 				</div>
-				<div class="font-bold text-lg text-gray-800 flex-1 text-right sm:order-3">
+				<div
+					class="font-bold text-lg text-gray-800 flex-1 text-right sm:order-3 playwright-{slugify(
+						aide.ruleName,
+					)}"
+					data-testid={slugify(aide.ruleName)}
+				>
 					<AnimatedAmount amount={aide.nodeValue} unit={aide.unit} />
 				</div>
 			</div>

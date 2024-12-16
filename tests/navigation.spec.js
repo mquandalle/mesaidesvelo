@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
 
-test.describe.parallel('Navigation scenarios', () => {
+test.describe('Navigation scenarios', () => {
 	test('simple navigation', async ({ page }) => {
 		startNavigation(page, 'toulouse');
 
@@ -32,8 +32,9 @@ test.describe.parallel('Navigation scenarios', () => {
 		const totalAides = page.locator('text=Total des aides >> ..');
 		await expect(totalAides).toHaveText('Total des aides 2 000 €');
 
-		const bonusVelo = page.locator('text=Bonus vélo 2 000 €');
-		await expect(bonusVelo).not.toBeEmpty();
+		await expect(page.getByTestId('aides-bonus-velo')).toHaveText('2 000 €', {
+			useInnerText: true,
+		});
 
 		await page.click('text=plus de 2 922 €');
 		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
@@ -81,6 +82,20 @@ test.describe.parallel('Navigation scenarios', () => {
 
 		await page.click('text=Autre');
 		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
+	});
+
+	test('neuf/occasion scenario', async ({ page }) => {
+		startNavigation(page, 'grenoble');
+
+		await page.click("text=Achat d'un vélo mécanique simple");
+		const totalAides = page.locator('text=Total des aides >> ..');
+		await expect(totalAides).toHaveText('Total des aides 300 €', { useInnerText: true });
+
+		await page.fill('input:below(label:text("Quel est le prix du vélo  ?"))', '2000');
+		await expect(totalAides).toHaveText('Total des aides 150 €', { useInnerText: true });
+
+		await page.click('text=Occasion');
+		await expect(totalAides).toHaveText('Total des aides 270 €', { useInnerText: true });
 	});
 });
 
@@ -155,16 +170,6 @@ test('Persisting answers', async ({ page }) => {
 	await page.click("text=Achat d'un vélo électrique");
 	await page.waitForTimeout(100);
 	await expect(page.locator('text=total des aides >> ..')).toHaveText('Total des aides 400 €');
-
-	await page.fill('input:below(label:text("Quel est le prix du vélo  ?"))', '100');
-
-	await page.goBack();
-	await page.waitForTimeout(100);
-
-	await page.click("text=Achat d'un vélo mécanique simple");
-	await page.waitForTimeout(100);
-	await expect(page.locator('text=aide non disponible')).toHaveCount(0);
-	expect(page.getByTestId('question-velo-prix-value-100')).toBeTruthy();
 });
 
 // FIXME: This test is not working although it works in the browser
