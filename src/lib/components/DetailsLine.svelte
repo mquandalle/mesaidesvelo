@@ -10,7 +10,7 @@
 
 	export let className = '';
 	export let aide;
-	export let veloEtat;
+	export let veloEtat = 'neuf';
 
 	$: engine = getEngine({
 		...$publicodeSituation,
