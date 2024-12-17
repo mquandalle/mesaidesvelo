@@ -34,7 +34,7 @@
 	>
 		<span class="bg-white border border-yellow-100 px-2 py-1 w-min rounded-lg"> ✨ </span>
 		<div>
-			<h3 class="font-semibold text-lg">Nouveautés de fin d'année</h3>
+			<h3 class="font-semibold text-lg">Dernières nouveautés</h3>
 
 			<p class="text-sm text-gray-800 mt-2">
 				Ces derniers mois, plusieurs améliorations ont été apportées à <span class="italic"
@@ -50,16 +50,16 @@
 			</p>
 			<ul class="mt-4">
 				<li class="text-sm text-gray-800 mt-2">
-					🚀 <strong>Mise à jours des aides</strong> - la totalité des aides ont été relues et mises
-					à jour et de nouvelles aides ont été ajoutées.
+					🚀 <strong>Mise à jour des aides</strong> - la totalité des aides ont été mises à jour et de
+					nouvelles aides ont été ajoutées.
 				</li>
 				<li class="text-sm text-gray-800 mt-2">
 					🦽 <strong>Nouveau type de vélo</strong> - les vélos adaptés pour les personnes à mobilité
 					réduite sont désormais pris en compte.
 				</li>
 				<li class="text-sm text-gray-800 mt-2">
-					🚲 <strong>Meilleure prise en compte de l'occasion</strong> - il est désormais possible de
-					choisir les aides en fonction de l'état du vélo (neuf ou occasion).
+					🚲 <strong>Vélo d'occasion</strong> - il est désormais possible de choisir les aides en fonction
+					de l'état du vélo (neuf ou occasion).
 				</li>
 			</ul>
 			<p class="text-sm text-green-600 mt-4">

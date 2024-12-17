@@ -19,6 +19,6 @@ Techniquement, l’intégration fonctionne avec une [iframe](https://developer.m
 
 ## Paquet NPM
 
-Si l'intégration iframe n'est pas suffisante pour vos besoins et que vous avez des compétences en développement web, vous pouvez utiliser le paquet [aides-velo](https://www.npmjs.com/package/aides-velo) qui contient le code source et les méthodes pour calculer le montant des aides dans une situation donnée.
+Si l'intégration iframe n'est pas suffisante pour vos besoins et que vous avez des compétences en développement web, vous pouvez utiliser le paquet [@betagouv/aides-velo](https://www.npmjs.com/package/@betagouv/aides-velo) qui contient le code source et les méthodes pour calculer le montant des aides dans une situation donnée.
 
 </div>
