@@ -1,6 +1,9 @@
 {
 	"name": "mesaidesvelo",
 	"version": "1.0.0",
+	"engines": {
+		"node": ">=18 <=20"
+	},
 	"scripts": {
 		"postinstall": "node ./src/scripts/postinstall.js",
 		"dev": "VITE_SITE=mesaidesvelo.fr vite dev",
@@ -50,7 +53,7 @@
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
-		"publicodes": "^1.0.0-rc.6",
+		"publicodes": "^1.8.0",
 		"svelte-markdown": "^0.4.1"
 	},
 	"overrides": {
