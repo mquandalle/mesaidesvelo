@@ -15,7 +15,7 @@
 </svelte:head>
 
 <p class="mt-6 w-full max-w-screen-md m-auto text-gray-500 text-right">
-	Essayez avec
+	Essayez avec un exemple :
 
 	{#each biggestCities as city}
 		<a
