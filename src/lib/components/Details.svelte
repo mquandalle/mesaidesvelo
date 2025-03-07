@@ -5,14 +5,17 @@
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Questions from '$lib/components/Questions.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { publicodeSituation, resetAnswers, veloCat } from '$lib/stores';
+	import { publicodeSituation, resetAnswers, veloTypeValue, veloCat } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
+	import { writable } from 'svelte/store';
 	import { slide } from 'svelte/transition';
 
 	resetAnswers();
+	$: neufOuOccasion = writable('neuf');
 	$: engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$veloCat}'`,
+		'vélo . type': $veloTypeValue,
+		'vélo . état': `'${$neufOuOccasion}'`,
 	});
 
 	const categoryDescription = baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '';
@@ -22,46 +25,30 @@
 		$publicodeSituation &&
 		collectivites
 			.map((collectivite) => {
-				const aide = engine.evaluate(`aides . ${collectivite}`);
-				if (!aide.nodeValue) {
+				const aide = engine
+					// .setSituation({
+					// 	...$publicodeSituation,
+					// 	'vélo . type': $veloTypeValue,
+					// 	'vélo . état': `'${$neufOuOccasion}'`,
+					// })
+					.evaluate(`aides . ${collectivite}`);
+
+				if (!aide?.nodeValue) {
 					return null;
 				}
 				const originalRuleName = aide.explanation.find(
 					({ condition }) => condition.nodeValue === true,
 				).consequence.name;
 
-				return originalRuleName;
+				if (!originalRuleName) {
+					return null;
+				}
+
+				return { ruleName: originalRuleName, ...aide };
 			})
 			.filter(Boolean);
 
 	$: sum = engine.evaluate('aides . montant');
-
-	// On simule deux branches : une pour un vélo neuf et une pour un vélo
-	// d'occasion afin de déterminer s'il faut poser la question sur le vélo
-	// neuf ou d'occasion.
-	// TODO: trouver un moyen de ne pas refaire plusieurs fois les mêmes calculs.
-	$: engineBis = engine = getEngine({
-		...$publicodeSituation,
-		'vélo . type': `'${$veloCat}'`,
-	});
-	$: montantAidesVeloOccasion = engineBis
-		.setSituation({
-			...$publicodeSituation,
-			'vélo . type': `'${$veloCat}'`,
-			'vélo . neuf ou occasion': '"occasion"',
-		})
-		.evaluate('aides . montant').nodeValue;
-	$: montantAidesVeloNeuf = engineBis
-		.setSituation({
-			...$publicodeSituation,
-			'vélo . type': `'${$veloCat}'`,
-			'vélo . neuf ou occasion': '"neuf"',
-		})
-		.evaluate('aides . montant').nodeValue;
-	$: demandeNeufOuOccasion =
-		montantAidesVeloOccasion > 0 &&
-		montantAidesVeloNeuf > 0 &&
-		montantAidesVeloNeuf !== montantAidesVeloOccasion;
 </script>
 
 <div class="mt-8" />
@@ -70,7 +57,7 @@
 	class="inline-block text-gray-500 text-md
     cursor-pointer
     hover:text-green-700 transform transition hover:-translate-x-1"
-	data-sveltekit-noscroll
+	data-sveltekit-nosroll
 	href={$page.url.pathname}
 >
 	← Toutes les aides
@@ -85,37 +72,39 @@
 	<p class="text-gray-700 text-sm">{categoryDescription}</p>
 {/if}
 
-<div class="border-t border-b mt-6 bg-white">
-	{#each aidesDetails as ruleName (ruleName)}
+<div class="flex border rounded mt-6 w-min border-gray-200">
+	<button
+		class="text-right rounded-l px-4 py-2 border-r {$neufOuOccasion === 'neuf'
+			? 'bg-sky-100 text-sky-700 font-semibold'
+			: 'hover:bg-sky-50 hover:text-sky-600 '}"
+		on:click={() => ($neufOuOccasion = 'neuf')}
+	>
+		Neuf
+	</button>
+	<button
+		class="rounded-r text-left px-4 py-2 basis-1/2 {$neufOuOccasion === 'occasion'
+			? 'bg-amber-100 text-amber-700 font-semibold'
+			: 'hover:bg-amber-50 hover:text-amber-600'}"
+		on:click={() => ($neufOuOccasion = 'occasion')}
+	>
+		Occasion
+	</button>
+</div>
+
+<div class="border rounded mt-3 bg-white">
+	{#each aidesDetails as aide (aide.ruleName)}
 		<div transition:slide={{ duration: 200 }} class="border-b last:border-b-0">
-			<DetailsLine {ruleName} />
+			<DetailsLine veloEtat={$neufOuOccasion} {aide} />
 		</div>
 	{/each}
 	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b-md">
 		<div class="flex justify-between text-lg">
 			<h3 class="font-semibold text-md">Total des aides</h3>
-			<div class="font-bold"><AnimatedAmount amount={sum.nodeValue} unit={sum.unit} /></div>
-		</div>
-		{#if false}
-			<div class="flex justify-between text-lg mt-3 text-gray-600" transition:slide>
-				<h3 class="font-semibold text-sm">Reste à charge</h3>
-				<div class="font-semibold text-sm">XXX €</div>
+			<div class="font-bold">
+				<AnimatedAmount veloEtat={$neufOuOccasion} amount={sum.nodeValue} unit={sum.unit} />
 			</div>
-		{/if}
+		</div>
 	</div>
 </div>
 
-<Questions {demandeNeufOuOccasion} />
-
-{#if !demandeNeufOuOccasion && $veloCat !== 'motorisation'}
-	<p class="mt-4">
-		{#if aidesDetails.length === 1}Cette aide est valable{:else}Ces aides sont valables{/if}
-		{#if montantAidesVeloNeuf === montantAidesVeloOccasion}
-			pour un vélo neuf ou un vélo d’occasion.
-		{:else if montantAidesVeloOccasion > 0}
-			uniquement pour l’achat d’un vélo d’occasion.
-		{:else}
-			uniquement pour l’achat d’un vélo neuf.
-		{/if}
-	</p>
-{/if}
+<Questions veloEtat={$neufOuOccasion} />

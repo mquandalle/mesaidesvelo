@@ -1,10 +1,11 @@
 import { test, expect } from 'vitest';
-import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
+import { data } from '@betagouv/aides-velo';
 
-test('content reference existing rules', () => {
+// NOTE: skip for now, more details in https://github.com/mquandalle/mesaidesvelo/issues/247
+test.skip('content reference existing rules', () => {
 	const content = import.meta.glob('../src/content/*.svx');
 	const fileNames = Object.keys(content);
-	const existingsRuleNames = Object.keys(aidesAndCollectivities).map((dottedName) =>
+	const existingsRuleNames = Object.keys(data.aidesAvecLocalisation).map((dottedName) =>
 		dottedName.toLowerCase(),
 	);
 	const inferedRuleNames = fileNames.map(

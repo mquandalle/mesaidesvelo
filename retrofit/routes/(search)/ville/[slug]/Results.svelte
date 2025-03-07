@@ -16,7 +16,7 @@
 </script>
 
 <RevenuSelector goals={activeAides} />
-<div class="border-t border-b mt-6 bg-white">
+<div class="border rounded mt-6 bg-white">
 	{#each activeAides as aide}
 		{@const rawNode = engine.getRule(aide).rawNode}
 		{@const conditionDeRessources = true}
@@ -58,7 +58,7 @@
 					</p>
 				{/if}
 				{#if rawNode.lien}
-					<p class="mt-2 text-sm text-sky-700">
+					<p class="mt-2 text-sm text-sky-600">
 						<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>
 					</p>
 				{/if}

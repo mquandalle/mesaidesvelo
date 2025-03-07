@@ -55,12 +55,12 @@
 		goals
 			.flatMap((name) =>
 				findAllComparaisonsValue(name, {
-					searchedName: 'revenu fiscal de référence',
+					searchedName: 'revenu fiscal de référence par part',
 					unit: '€/mois',
-				})
+				}),
 			)
 			.filter((x) => x !== Infinity)
-			.map((x) => Math.round(x))
+			.map((x) => Math.round(x)),
 	).sort((a, b) => a - b);
 </script>
 

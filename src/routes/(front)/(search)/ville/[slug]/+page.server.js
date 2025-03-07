@@ -1,6 +1,4 @@
 import { compile } from 'mdsvex';
-import aidesAndCollectivities from '$lib/data/aides-collectivities.json';
-import communes from '$lib/data/communes.json';
 import labelTourDeFrance from '/src/content/label-tour-de-france.json';
 import labelTourDeFranceCommentairesSource from '/src/content/label-tour-de-france-commentaires.txt?raw';
 import barometreFubRawCsv from '/src/content/barometre-fub.csv?raw';
@@ -8,6 +6,8 @@ import { error } from '@sveltejs/kit';
 import { engine } from '$lib/engine';
 import { rawCityToFullLocalisation } from '$lib/utils';
 import classementVilleplus from '$lib/data/classement-villeplus.json';
+import communes from '$lib/data/communes.json';
+import aidesCollectivites from '$lib/data/aides-collectivities.json';
 
 const barometreFubPerCity = Object.fromEntries(
 	barometreFubRawCsv
@@ -28,7 +28,7 @@ const commentairesLabelTourDeFrance = labelTourDeFranceCommentairesLines.reduce(
 	}
 }, {});
 
-const ruleNamePerCollectivity = Object.entries(aidesAndCollectivities).reduce(
+const ruleNamePerCollectivity = Object.entries(aidesCollectivites).reduce(
 	(manifest, [ruleName, { collectivity }]) => {
 		manifest[collectivity.kind][collectivity.value] = ruleName;
 		return manifest;

@@ -1,10 +1,10 @@
-import aidesCollectivities from '$lib/data/aides-collectivities.json';
 import { engine } from '$lib/engine';
 import { slugify } from '$lib/utils';
 import departements from '@etalab/decoupage-administratif/data/departements.json';
 import regions from '@etalab/decoupage-administratif/data/regions.json';
 import { error, redirect } from '@sveltejs/kit';
 import classementVilleplus from '$lib/data/classement-villeplus.json';
+import aidesCollectivites from '$lib/data/aides-collectivities.json';
 import { _getCorrespondingContent } from '../../(search)/ville/[slug]/+page.server.js';
 
 // https://www.insee.fr/fr/information/2114773#:~:text=TNCC%20%2D%20Type%20de%20nom%20en%20clair
@@ -29,22 +29,23 @@ export async function load({ params }) {
 	}
 
 	const region = regions.find((r) => departement.region === r.code);
+	const aidesAvecLocalisationEntries = Object.entries(aidesCollectivites);
 
-	const aideDepartement = Object.entries(aidesCollectivities).find(
+	const aideDepartement = aidesAvecLocalisationEntries.find(
 		([, { collectivity }]) =>
 			collectivity.kind === 'département' && collectivity.value === departement.code,
 	)?.[0];
 
 	const aideDepartementText = _getCorrespondingContent(aideDepartement);
 
-	const aideRegion = Object.entries(aidesCollectivities).find(
+	const aideRegion = aidesAvecLocalisationEntries.find(
 		([, { collectivity }]) =>
 			collectivity.kind === 'région' && collectivity.value === departement.region,
 	)?.[0];
 
 	const aideRegionText = _getCorrespondingContent(aideRegion);
 
-	const aidesLocales = Object.entries(aidesCollectivities)
+	const aidesLocales = aidesAvecLocalisationEntries
 		.filter(
 			([, aide]) =>
 				(aide.collectivity.kind === 'epci' || aide.collectivity.kind === 'code insee') &&

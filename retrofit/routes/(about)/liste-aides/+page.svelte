@@ -24,11 +24,11 @@
 	<h2>Les aides des métropoles</h2>
 
 	<ul>
-		<li><a href="/ville/lyon">Lyon</a></li>
-		<li><a href="/ville/toulouse">Toulouse</a></li>
-		<li><a href="/ville/grenoble">Grenoble</a></li>
-		<li><a href="/ville/reims">Reims</a></li>
-		<li><a href="/ville/rouen">Rouen Normandie</a></li>
-		<li><a href="/ville/strasbourg">Strasbourg</a></li>
+		<li><a class="!hover:text-sky-600" href="/ville/lyon">Lyon</a></li>
+		<li><a class="!hover:text-sky-600" href="/ville/toulouse">Toulouse</a></li>
+		<li><a class="!hover:text-sky-600" href="/ville/grenoble">Grenoble</a></li>
+		<li><a class="!hover:text-sky-600" href="/ville/reims">Reims</a></li>
+		<li><a class="!hover:text-sky-600" href="/ville/rouen">Rouen Normandie</a></li>
+		<li><a class="!hover:text-sky-600" href="/ville/strasbourg">Strasbourg</a></li>
 	</ul>
 </div>

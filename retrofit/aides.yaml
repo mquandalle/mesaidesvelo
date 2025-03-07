@@ -14,12 +14,12 @@ aides . état:
   titre: Prime au rétrofit électrique
   applicable si: localisation . pays = 'France'
   variations:
-    - si: revenu fiscal de référence <= 13489 €/an
+    - si: revenu fiscal de référence par part <= 13489 €/an
       alors:
         applicable si: oui
         # applicable si:
         #   une de ces conditions:
-        #     - revenu fiscal de référence <= 6300 €/an
+        #     - revenu fiscal de référence par part <= 6300 €/an
         #     - km parcours >= 12000 km/an
         #     - distance domicile-travail >= 30 km
         valeur: 80 % * prix d'achat
@@ -40,7 +40,7 @@ aides . grand est:
   valeur: 50% * prix d'achat
   plafond:
     variations:
-      - si: revenu fiscal de référence <= 13489€/an
+      - si: revenu fiscal de référence par part <= 13489€/an
         alors: 4000€
       - sinon: 2000€
   lien: https://www.iledefrance.fr/transformation-de-vehicules-thermiques-en-vehicules-propres
@@ -51,9 +51,9 @@ aides . grenoble:
   valeur: 40% * prix d'achat
   plafond:
     variations:
-      - si: revenu fiscal de référence <= 6300 €/an
+      - si: revenu fiscal de référence par part <= 6300 €/an
         alors: 12000€
-      - si: revenu fiscal de référence <= 13489 €/an
+      - si: revenu fiscal de référence par part <= 13489 €/an
         alors: 10000€
       - sinon: 6000€
   lien: https://www.grenoblealpesmetropole.fr/762-l-aide-a-l-achat-d-un-vehicule-faibles-emissions.htm#par6680
@@ -77,13 +77,13 @@ aides . toulouse:
   valeur: 40% * prix d'achat
   plafond:
     variations:
-      - si: revenu fiscal de référence <= 6300 €/an
+      - si: revenu fiscal de référence par part <= 6300 €/an
         alors: 3000€
-      - si: revenu fiscal de référence <= 13489 €/an
+      - si: revenu fiscal de référence par part <= 13489 €/an
         alors: 2500€
-      - si: revenu fiscal de référence <= 18800 €/an
+      - si: revenu fiscal de référence par part <= 18800 €/an
         alors: 2000€
-      - si: revenu fiscal de référence <= 35052 €/an
+      - si: revenu fiscal de référence par part <= 35052 €/an
         alors: 1000€
       - sinon: 0€
   lien: https://www.toulouse-metropole.fr/-/aides-a-l-achat-la-transformation-ou-a-la-location-de-vehicules
@@ -92,9 +92,9 @@ aides . reims:
   titre: Ville de Reims
   applicable si: localisation . code insee = '51454'
   variations:
-    - si: revenu fiscal de référence <= 6300 €/an
+    - si: revenu fiscal de référence par part <= 6300 €/an
       alors: 2000€
-    - si: revenu fiscal de référence <= 13489 €/an
+    - si: revenu fiscal de référence par part <= 13489 €/an
       alors: 1000€
     - sinon: 0€
   lien: https://www.reims.fr/qualite-de-vie-environnement/ecologie-urbaine/zone-a-faibles-emissions-mobilite-zfem-de-reims/zfem-de-reims-aides-financieres-pour-changer-de-vehicule-ou-son-moteur
@@ -103,14 +103,14 @@ aides . strasbourg:
   titre: Eurométropole de Strasbourg
   applicable si: localisation . epci = 'Eurométropole de Strasbourg'
   variations:
-    - si: revenu fiscal de référence <= 20966 €/an
+    - si: revenu fiscal de référence par part <= 20966 €/an
       alors: 2500€
     - sinon: 0€
   lien: https://www.strasbourg.eu/zfe-aides
 
 prix d'achat: 20000 €
 
-revenu fiscal de référence: 500 €/an
+revenu fiscal de référence par part: 500 €/an
 km parcours: 15000 km/an
 distance domicile-travail: 100km
 

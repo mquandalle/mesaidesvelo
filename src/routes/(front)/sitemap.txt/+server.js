@@ -1,5 +1,5 @@
-import communes from '$lib/data/communes.json';
 import { _departementWithSlug } from '../departement/[slug]/+page.server';
+import communes from '$lib/data/communes.json' assert { type: 'json' };
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {

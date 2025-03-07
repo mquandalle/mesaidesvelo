@@ -67,7 +67,7 @@
 				href="https://mesaidesvelo.fr"
 				target="_blank"
 				class="inline-block mt-2 font-bold underline hover:text-green-800"
-				>Mes<span class="text-green-800">aides</span>velo.fr</a
+				>Mes<span class="text-green-600">aides</span>velo.fr</a
 			>
 		</p>
 	</div>
@@ -89,7 +89,7 @@
 			>
 			<div class="flex flex-col">
 				<a href="/" class="text-3xl font-bold cursor-pointer">
-					Mes<span class="text-green-800">Aides</span>Vélo
+					Mes<span class="text-green-600">Aides</span>Vélo
 				</a>
 				<p class="text-gray-800 mt-0 pt-0 w-full max-w-screen-md m-auto">
 					Trouvez les aides à l’achat d’un vélo
@@ -97,7 +97,7 @@
 			</div>
 		{:else}
 			<a href="/" class="text-3xl font-bold cursor-pointer">
-				Mes<span class="text-green-800">Aides</span>Vélo.fr
+				Mes<span class="text-green-600">Aides</span>Vélo.fr
 			</a>
 		{/if}
 	</header>

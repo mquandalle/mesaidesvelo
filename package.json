@@ -1,6 +1,9 @@
 {
 	"name": "mesaidesvelo",
 	"version": "1.0.0",
+	"engines": {
+		"node": ">=18 <=20"
+	},
 	"scripts": {
 		"postinstall": "node ./src/scripts/postinstall.js",
 		"dev": "VITE_SITE=mesaidesvelo.fr vite dev",
@@ -8,6 +11,7 @@
 		"build": "VITE_SITE=mesaidesvelo.fr vite build",
 		"build:retrofit": "VITE_SITE=aideretrofit.fr vite build",
 		"preview": "VITE_SITE=mesaidesvelo.fr vite preview",
+		"preview:retrofit": "VITE_SITE=aideretrofit.fr vite preview",
 		"sync-entreprises": "node ./data-fetch/entreprises/download-gsheet-data.js",
 		"sync": "svelte-kit sync",
 		"test": "npm run test:playwright && npm run test:vitest -- run",
@@ -24,15 +28,18 @@
 		"@playwright/test": "^1.40.1",
 		"@rollup/plugin-yaml": "^4.1.2",
 		"@sveltejs/adapter-vercel": "^4.0.3",
-		"@sveltejs/kit": "^2.0.6",
+		"@sveltejs/kit": "^2.7.7",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@tsconfig/svelte": "^5.0.4",
 		"mdsvex": "^0.11.0",
 		"node-fetch": "^3.3.2",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"sharp": "=0.32.6",
 		"svelte": "^4.2.8",
-		"typescript": "^5.3.3",
+		"svelte-check": "^4.0.5",
+		"svelte-preprocess": "^6.0.3",
+		"typescript": "^5.6.3",
 		"vite": "^5.0.10",
 		"vite-plugin-windicss": "^1.9.2",
 		"vitest": "^1.1.0",
@@ -40,12 +47,14 @@
 		"yaml": "^2.3.4"
 	},
 	"dependencies": {
-		"@etalab/decoupage-administratif": "^3.1.1",
+		"@betagouv/aides-velo": "^0.4.1",
+		"@etalab/decoupage-administratif": "^4.0.0",
 		"fuzzysort": "^2.0.4",
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
-		"publicodes": "^1.0.0-rc.6"
+		"publicodes": "^1.8.0",
+		"svelte-markdown": "^0.4.1"
 	},
 	"overrides": {
 		"vite": {

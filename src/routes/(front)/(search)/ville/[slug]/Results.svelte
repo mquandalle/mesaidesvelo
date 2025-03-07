@@ -1,21 +1,21 @@
 <script>
 	import Emoji from '$lib/components/Emoji.svelte';
 	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
-	import { engine as baseEngine, getEngine } from '$lib/engine';
+	import Question from '$lib/components/Question.svelte';
+	import { getEngine } from '$lib/engine';
+	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
 
-	const bikeKinds = baseEngine?.getRule('vélo . type').rawNode['possibilités'];
-
 	resetAnswers();
 
 	$: engine = getEngine($publicodeSituation);
 	$: engineBis = getEngine($publicodeSituation);
 
-	$: aidesPerBikeKind = bikeKinds.map((cat) => {
+	$: aidesPerBikeKind = BIKE_KINDS.map((cat) => {
 		engineBis.setSituation({
 			...$publicodeSituation,
 			'maximiser les aides': 'oui',
@@ -73,14 +73,15 @@
 	]
 		.filter(Boolean)
 		.flat();
+	$: nbAides = displayedAides.length;
 </script>
 
-<div class="mt-8" />
+<div class="mt-10" />
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
-<div role="table" class="flex flex-col-reverse bg-white border-t rounded-t sm:text-lg">
-	{#each displayedAides.reverse() as { montant, href, label, emoji, relNoFollow } (label)}
+<div role="table" class="flex flex-col bg-white border rounded sm:text-lg">
+	{#each displayedAides as { montant, href, label, emoji, relNoFollow }, idx (label)}
 		<div animate:flip={{ duration: 600, easing: quintOut }}>
-			<CategoryLine {montant} {href} {relNoFollow}
+			<CategoryLine isFirst={idx === 0} isLast={idx === nbAides - 1} {montant} {href} {relNoFollow}
 				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
 			>
 		</div>
@@ -97,5 +98,6 @@
 			Répondez à la question pour calculer les aides disponibles :
 		</p>
 		<RevenuSelector />
+		<Question rule={'demandeur . en situation de handicap'} />
 	</div>
 {/if}

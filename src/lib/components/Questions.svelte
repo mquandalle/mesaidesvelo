@@ -1,34 +1,64 @@
-<script>
+<script lang="ts">
 	import { getEngine } from '$lib/engine';
-	import { publicodeSituation, veloCat } from '$lib/stores';
+	import type { QuestionNames } from '$lib/aides-velo-utils';
+	import { publicodeSituation, veloTypeValue } from '$lib/stores';
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
+	import type { RuleName } from '@betagouv/aides-velo';
+
+	const QUESTIONS_TO_IGNORE: QuestionNames[] = [
+		// Ignored as they are automatically resolved
+		'localisation . ZFE',
+		'localisation . epci',
+		'localisation . pays',
+		'localisation . région',
+		'localisation . code insee',
+		'localisation . département',
+		'vélo . type',
+		// Ignored as the 'revenu fiscal de référence par part' is
+		// directly asked.
+		'revenu fiscal de référence par part . nombre de parts',
+		'revenu fiscal de référence par part . revenu de référence',
+		// Not relevant to expose to the user, it's used for internal
+		// computation.
+		'vélo . état',
+	];
+	const QUESTIONS_ORDER: RuleName[] = [
+		// NOTE: this is no longer a question in the model as it's
+		// computed from 'revenu fiscal de référence par part . revenu
+		// de référence' 'revenu fiscal de référence par part . nombre
+		// de parts'. However, to match the previous behavior, we ask
+		// directly the question to the user, maybe we should change
+		// this to ask separately the number of parts and the revenu.
+		'revenu fiscal de référence par part',
+		'demandeur . en situation de handicap',
+		'vélo . prix',
+	];
 
 	export let goals = undefined;
-	export let demandeNeufOuOccasion = false;
+	export let veloEtat = 'neuf';
 
 	$: engine = getEngine({
 		...$publicodeSituation,
-		'vélo . type': `'${$veloCat}'`,
+		'vélo . type': $veloTypeValue,
+		'vélo . état': `'${veloEtat}'`,
 	});
 
-	const questionsOrder = ['revenu fiscal de référence', 'vélo . prix'];
+	const getSortOrder = (name: QuestionNames) =>
+		QUESTIONS_ORDER.includes(name) ? QUESTIONS_ORDER.indexOf(name) : Infinity;
 
-	const getSortOrder = (name) =>
-		questionsOrder.includes(name) ? questionsOrder.indexOf(name) : Infinity;
-	const uniq = (arr) => [...new Set(arr)];
+	const uniq = <T,>(arr: T[]) => [...new Set(arr)];
 	$: questions = uniq(
 		(goals ?? ['aides . montant'])
-			.map((ruleName) => engine.evaluate(ruleName).traversedVariables)
-			.flat(),
+			.map((ruleName: RuleName) => engine.evaluate(ruleName).traversedVariables)
+			?.flat(),
 	)
-		.filter((q) => engine.getRule(q).rawNode.question)
-		.filter((q) => q !== 'vélo . neuf ou occasion')
-		.sort((a, b) => getSortOrder(a) - getSortOrder(b));
-
-	if (demandeNeufOuOccasion) {
-		questions?.unshift('vélo . neuf ou occasion');
-	}
+		.filter(
+			(q: RuleName) =>
+				engine.getRule(q).rawNode.question || 'revenu fiscal de référence par part' === q,
+		)
+		.filter((q: QuestionNames) => !QUESTIONS_TO_IGNORE.includes(q))
+		.sort((a: QuestionNames, b: QuestionNames) => getSortOrder(a) - getSortOrder(b));
 </script>
 
 {#if questions?.length > 0}
@@ -39,14 +69,17 @@
 			€
 		</div>
 		<p class="text-gray-600 text-md -mt-7 pl-3 italic">
-			Répondez {#if questions.length === 1}à la question{:else}aux questions{/if} pour calculer l’aide
+			Répondez {#if questions.length === 1}à la question{:else}aux questions{/if} pour calculer l'aide
 			:
 		</p>
 		{#each questions as question}
-			{#if question === 'revenu fiscal de référence'}
+			{#if question === 'revenu fiscal de référence par part'}
 				<RevenuSelector {goals} />
-			{:else}
-				<Question rule={question} />
+			{:else if question !== 'revenu fiscal de référence par part'}
+				{#key question}
+					<!-- NOTE: needed to avoid dissociated question and values -->
+					<Question rule={question} />
+				{/key}
 			{/if}
 		{/each}
 	</div>

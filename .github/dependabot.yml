@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    versioning-strategy: increase
+    open-pull-requests-limit: 1
+    schedule:
+      interval: 'daily'
+    labels:
+      - aides
+    allow:
+      - dependency-name: '@betagouv/aides-velo'

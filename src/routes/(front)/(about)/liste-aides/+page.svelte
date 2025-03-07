@@ -10,6 +10,7 @@
 <svelte:head>
 	<title>MesAidesVélo - Liste des aides</title>
 </svelte:head>
+
 <div class="prose mt-8 w-full max-w-screen-md m-auto">
 	<h1>Les aides intégrées sur le site</h1>
 	<p>

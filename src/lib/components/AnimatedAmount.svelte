@@ -1,15 +1,17 @@
 <script>
 	import { formatValue } from 'publicodes';
 
+	export let className = '';
 	export let amount;
 	export let unit;
+
 	let prevAmount;
 	let difference;
 
 	const format = (x, { withPlusSign = false } = {}) => {
 		const sign = withPlusSign && x > 0 ? '+' : x < 0 ? '-' : '';
 		const formatedValue = formatValue({ nodeValue: Math.abs(x), unit }, { precision: 0 });
-		return `${sign}\u00A0${formatedValue}`.trim();
+		return `${sign}${formatedValue}`.trim();
 	};
 
 	$: if (typeof window !== 'undefined') {
@@ -21,14 +23,15 @@
 		prevAmount = amount;
 	}
 
-	$: color = difference > 0 ? 'text-green-400' : 'text-red-500';
+	$: color = difference > 0 ? 'text-green-500' : 'text-red-500';
+	$: bgColor = difference > 0 ? 'bg-green-50' : 'bg-red-50';
 </script>
 
-<span class="relative w-[min-content]">
+<span class={`relative w-[min-content] ${className}`}>
 	{#if difference}
 		{#key difference}
 			<span
-				class="evaporate block absolute -top-5 right-0 font-semibold pointer-events-none {color} bg-white"
+				class="evaporate block absolute -top-5 right-0 font-semibold rounded px-2 pointer-events-none {color} {bgColor}"
 				>{format(difference, { withPlusSign: true })}</span
 			>
 		{/key}
