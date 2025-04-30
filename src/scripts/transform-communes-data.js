@@ -11,8 +11,8 @@ import { slugify } from '../lib/utils.js';
 import { writeJsonData } from './writeData.js';
 
 import villeInZFE from '../../data-fetch/zones-faibles-emissions/codes-insee.js';
-import communes from '@etalab/decoupage-administratif/data/communes.json' assert { type: 'json' };
-import epci from '@etalab/decoupage-administratif/data/epci.json' assert { type: 'json' };
+import communes from '@etalab/decoupage-administratif/data/communes.json' with { type: 'json' };
+import epci from '@etalab/decoupage-administratif/data/epci.json' with { type: 'json' };
 
 const duplicateCommunesNames = communes
 	.map(({ nom }) => slugify(nom))
@@ -60,11 +60,8 @@ const extraData = [
 const data = [
 	...communes
 		.filter(
-			(c) =>
-				c.type === 'commune-actuelle' &&
-				c.codesPostaux &&
-				c.population &&
-				!c.code?.startsWith('97'),
+			(c) => c.type === 'commune-actuelle' && c.codesPostaux && c.population,
+			// !c.code?.startsWith('97'),
 		)
 		.map((c) => {
 			if (villesAvecArrondissements[c.nom]) {
