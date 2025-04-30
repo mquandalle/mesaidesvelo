@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { join } from 'path';
 
 import { writeJsonData } from '../scripts/writeData.js';
-import aidesWithCollectivities from '../lib/data/aides-collectivities.json' assert { type: 'json' };
+import aidesWithCollectivities from '../lib/data/aides-collectivities.json' with { type: 'json' };
 
 const currentPath = new URL('./', import.meta.url).pathname;
 const rootPath = join(currentPath, '../../');

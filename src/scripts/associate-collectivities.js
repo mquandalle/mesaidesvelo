@@ -2,10 +2,10 @@ import rules from '@betagouv/aides-velo/rules';
 import { writeJsonData } from './writeData.js';
 import Publicodes, { reduceAST } from 'publicodes';
 
-import communes from '../lib/data/communes.json' assert { type: 'json' };
-import epci from '@etalab/decoupage-administratif/data/epci.json' assert { type: 'json' };
-import departements from '@etalab/decoupage-administratif/data/departements.json' assert { type: 'json' };
-import regions from '@etalab/decoupage-administratif/data/regions.json' assert { type: 'json' };
+import communes from '../lib/data/communes.json' with { type: 'json' };
+import epci from '@etalab/decoupage-administratif/data/epci.json' with { type: 'json' };
+import departements from '@etalab/decoupage-administratif/data/departements.json' with { type: 'json' };
+import regions from '@etalab/decoupage-administratif/data/regions.json' with { type: 'json' };
 
 const engine = new Publicodes(rules);
 
