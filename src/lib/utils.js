@@ -76,3 +76,7 @@ export const rawCityToFullLocalisation = ({
 	region,
 	pays,
 });
+
+export function nodeValueToOuiNon(nodeValue) {
+	return nodeValue === true ? 'oui' : nodeValue === false ? 'non' : nodeValue;
+}

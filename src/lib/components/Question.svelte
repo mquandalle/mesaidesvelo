@@ -2,7 +2,7 @@
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { answers, publicodeSituation, veloTypeValue } from '$lib/stores';
-	import { slugify } from '$lib/utils';
+	import { slugify, nodeValueToOuiNon } from '$lib/utils';
 	import { getOptions } from '$lib/aides-velo-utils';
 	import { slide } from 'svelte/transition';
 	import Emoji from './Emoji.svelte';
@@ -11,12 +11,14 @@
 
 	export let rule;
 
-	let value = $publicodeSituation[rule] ?? '';
+	let value = $publicodeSituation[rule] ?? nodeValueToOuiNon(baseEngine.evaluate(rule).nodeValue);
 
-	$: ruleInfos = baseEngine.getRule(rule).rawNode;
+	$: ruleNode = baseEngine.getRule(rule);
+	$: ruleInfos = ruleNode.rawNode;
 	$: possibilités = getOptions(rule);
 	$: domId = `question-${slugify(rule)}`;
 	$: ruleParent = rule.split(' . ').slice(0, -1).join(' . ');
+	$: ruleType = baseEngine.context.nodesTypes.get(ruleNode)?.type;
 
 	$: if (value) {
 		$answers[rule] = possibilités?.includes(value)
@@ -66,7 +68,7 @@
 		{/if}
 	</span>
 
-	{#if ruleInfos.type === 'booléen'}
+	{#if ruleType === 'boolean'}
 		<div class="flex gap-2 mt-2 flex-wrap">
 			<MultipleChoiceAnswer value="oui" bind:group={value}>Oui</MultipleChoiceAnswer>
 			<MultipleChoiceAnswer value="non" bind:group={value}>Non</MultipleChoiceAnswer>
