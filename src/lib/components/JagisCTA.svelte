@@ -15,8 +15,9 @@
 		</p>
 
 		<a
-			href="https://jagis.beta.gouv.fr"
+			href="https://jagis.beta.gouv.fr/?mtm_campaign=mesaidesveloCTA"
 			class="inline-block mt-4 bg-green-500 text-white font-bold rounded-full py-2 px-4 hover:bg-green-600"
+			target="_blank"
 		>
 			Tester <span class="italic">J'agis</span>
 		</a>
