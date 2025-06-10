@@ -1,11 +1,14 @@
 name: Tests Playwright
-
-on: push
-
+on:
+  deployment_status:
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'deployment_status'
+      && github.event.deployment_status.state == 'success'
+      && contains(github.event.deployment_status.target_url, 'mesaidesvelo')
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,7 +23,7 @@ jobs:
           sudo apt-get install -y libffi-dev libx264-dev libasound2t64
       - name: Install Playwright
         run: npx playwright install --with-deps
-      - name: Run tests
+      - name: Run Playwright tests
         run: npm run test
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}

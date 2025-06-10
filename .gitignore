@@ -14,3 +14,5 @@ data-fetch/miniatures/aides-jeunes-repo
 # Generated at build time
 src/lib/data/*
 !src/lib/data/classement-villeplus.json
+
+test-results/*
