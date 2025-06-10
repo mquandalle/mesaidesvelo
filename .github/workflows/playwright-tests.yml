@@ -1,26 +1,23 @@
 name: Tests Playwright
-on:
-  deployment_status:
+
+on: push
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    if: >
-      github.event_name == 'deployment_status'
-      && github.event.deployment_status.state == 'success'
-      && contains(github.event.deployment_status.target_url, 'mesaidesvelo')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: 'true'
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - run: npm ci
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libasound2 libffi-dev libx264-dev
+          sudo apt-get install -y libffi-dev libx264-dev libasound2t64
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Run Playwright tests
