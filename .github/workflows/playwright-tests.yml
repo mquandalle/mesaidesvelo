@@ -19,8 +19,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libffi-dev libx264-dev libasound2t64
       - name: Install Playwright
-        run: npx playwright install
-      - name: Run Playwright tests
+        run: npx playwright install --with-deps
+      - name: Run tests
         run: npm run test
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
