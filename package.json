@@ -48,7 +48,7 @@
 	},
 	"dependencies": {
 		"@betagouv/aides-velo": "^2.0.1",
-		"@etalab/decoupage-administratif": "^4.0.0",
+		"@etalab/decoupage-administratif": "^5.2.0",
 		"fuzzysort": "^2.0.4",
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
