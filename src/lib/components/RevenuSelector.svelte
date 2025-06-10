@@ -225,8 +225,8 @@
 				<MultipleChoiceAnswer
 					value={displayedThresholds[displayedThresholds.length - 1] + 1}
 					bind:group={$revenuFiscal}
-					>plus de <strong class="font-semibold"
-						>{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €</strong
+					>plus de <strong class="font-semibold">
+						{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €</strong
 					></MultipleChoiceAnswer
 				>
 			{/if}

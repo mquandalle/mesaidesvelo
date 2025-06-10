@@ -161,7 +161,7 @@ test('Persisting answers', async ({ page }) => {
 	await page.waitForTimeout(100);
 	await expect(page.locator('text=aide non disponible')).toHaveCount(0);
 
-	await page.click('text=plus de 2 076 €');
+	await page.click('text=plus de 2 184 €');
 	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
 
 	await page.getByLabel('Oui').click();

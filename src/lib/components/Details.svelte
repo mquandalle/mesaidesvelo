@@ -25,17 +25,12 @@
 		$publicodeSituation &&
 		collectivites
 			.map((collectivite) => {
-				const aide = engine
-					// .setSituation({
-					// 	...$publicodeSituation,
-					// 	'vélo . type': $veloTypeValue,
-					// 	'vélo . état': `'${$neufOuOccasion}'`,
-					// })
-					.evaluate(`aides . ${collectivite}`);
+				const aide = engine.evaluate(`aides . ${collectivite}`);
 
 				if (!aide?.nodeValue) {
 					return null;
 				}
+
 				const originalRuleName = aide.explanation.find(
 					({ condition }) => condition.nodeValue === true,
 				).consequence.name;

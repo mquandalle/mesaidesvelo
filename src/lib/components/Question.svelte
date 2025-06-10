@@ -1,23 +1,23 @@
 <script>
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
-	import { answers, publicodeSituation, veloTypeValue } from '$lib/stores';
+	import { answers, publicodeSituation } from '$lib/stores';
 	import { slugify, nodeValueToOuiNon } from '$lib/utils';
 	import { getOptions } from '$lib/aides-velo-utils';
 	import { slide } from 'svelte/transition';
 	import Emoji from './Emoji.svelte';
 	import NumberField from './NumberField.svelte';
-	import { engine as baseEngine, getEngine } from '$lib/engine';
+	import { engine as baseEngine } from '$lib/engine';
 
 	export let rule;
+	export let engine;
 
-	let value = $publicodeSituation[rule] ?? nodeValueToOuiNon(baseEngine.evaluate(rule).nodeValue);
+	let value = $publicodeSituation[rule] ?? nodeValueToOuiNon(engine.evaluate(rule).nodeValue);
 
 	$: ruleNode = baseEngine.getRule(rule);
 	$: ruleInfos = ruleNode.rawNode;
 	$: possibilités = getOptions(rule);
 	$: domId = `question-${slugify(rule)}`;
-	$: ruleParent = rule.split(' . ').slice(0, -1).join(' . ');
 	$: ruleType = baseEngine.context.nodesTypes.get(ruleNode)?.type;
 
 	$: if (value) {
@@ -32,10 +32,6 @@
 		$answers[rule] = undefined;
 	}
 
-	$: engine = getEngine({
-		...$publicodeSituation,
-		'vélo . type': $veloTypeValue,
-	});
 	$: optionalEvaluate = (expression) => {
 		if (typeof expression === 'string') {
 			return expression;
