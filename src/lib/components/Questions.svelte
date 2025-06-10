@@ -78,7 +78,7 @@
 			{:else if question !== 'revenu fiscal de référence par part'}
 				{#key question}
 					<!-- NOTE: needed to avoid dissociated question and values -->
-					<Question rule={question} />
+					<Question rule={question} {engine} />
 				{/key}
 			{/if}
 		{/each}

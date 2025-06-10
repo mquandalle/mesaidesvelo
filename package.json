@@ -25,7 +25,7 @@
 	"devDependencies": {
 		"@actions/core": "^1.10.1",
 		"@actions/github": "^6.0.0",
-		"@playwright/test": "^1.40.1",
+		"@playwright/test": "^1.52.0",
 		"@rollup/plugin-yaml": "^4.1.2",
 		"@sveltejs/adapter-vercel": "^4.0.3",
 		"@sveltejs/kit": "^2.7.7",
@@ -47,8 +47,8 @@
 		"yaml": "^2.3.4"
 	},
 	"dependencies": {
-		"@betagouv/aides-velo": "^1.0.0",
-		"@etalab/decoupage-administratif": "^4.0.0",
+		"@betagouv/aides-velo": "^2.0.1",
+		"@etalab/decoupage-administratif": "^5.2.0",
 		"fuzzysort": "^2.0.4",
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",

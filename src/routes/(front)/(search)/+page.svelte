@@ -1,4 +1,5 @@
 <script>
+	import JagisCta from '$lib/components/JagisCTA.svelte';
 	import { localisation } from '$lib/stores';
 
 	localisation.set(null);
@@ -27,7 +28,7 @@
 		>
 	{/each}
 </div>
-<section class="w-full max-w-screen-md m-auto mt-12">
+<section class="w-full max-w-screen-md m-auto mt-12 flex flex-col gap-6">
 	<div
 		class="flex items-start bg-yellow-50 border border-yellow-100 p-4 mt-2 rounded gap-4"
 		role="alert"
@@ -45,7 +46,7 @@
 					href="https://beta.gouv.fr"
 					target="_blank"
 					class="text-green-600
-					hover:underline">Beta.gouv.fr</a
+					hover:underline">beta.gouv.fr</a
 				> qui ont repris le travail sur la mise à jour des aides. Voici les principales nouveautés :
 			</p>
 			<ul class="mt-4">
@@ -71,4 +72,6 @@
 			</p>
 		</div>
 	</div>
+
+	<JagisCta />
 </section>

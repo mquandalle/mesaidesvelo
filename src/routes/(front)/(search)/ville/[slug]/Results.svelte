@@ -14,7 +14,6 @@
 
 	$: engine = getEngine($publicodeSituation);
 	$: engineBis = getEngine($publicodeSituation);
-
 	$: aidesPerBikeKind = BIKE_KINDS.map((cat) => {
 		engineBis.setSituation({
 			...$publicodeSituation,
@@ -98,6 +97,6 @@
 			Répondez à la question pour calculer les aides disponibles :
 		</p>
 		<RevenuSelector />
-		<Question rule={'demandeur . en situation de handicap'} />
+		<Question rule={'demandeur . en situation de handicap'} {engine} />
 	</div>
 {/if}
