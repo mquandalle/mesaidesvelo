@@ -19,18 +19,9 @@
 	</p>
 
 	<h2>Les aides de l’État</h2>
-	<ul>
-		{#each data.aidesEtat.filter((a) => !a.titre.includes('conversion')) as aide}
-			<li>
-				{aide.titre}
-			</li>
-		{/each}
-		<li>La <a href="/prime-a-la-conversion">prime à la conversion</a></li>
-	</ul>
+	<p>Il n'existe plus d'aide de l'État pour l'achat d'un vélo.</p>
 	<p>
-		Nous intégrons également les aides de <a href="/ville/monaco" class="hover:text-green-700"
-			>Monaco</a
-		>
+		Nous intégrons les aides de <a href="/ville/monaco" class="hover:text-green-700">Monaco</a>
 		et du <a href="/ville/luxembourg">Luxembourg</a>.
 	</p>
 	<h2>Les aides régionales</h2>

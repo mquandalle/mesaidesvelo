@@ -5,7 +5,7 @@
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Questions from '$lib/components/Questions.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { publicodeSituation, resetAnswers, veloTypeValue, veloCat } from '$lib/stores';
+	import { publicodeSituation, resetAnswers, veloCat, veloTypeValue } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { writable } from 'svelte/store';
 	import { slide } from 'svelte/transition';
@@ -49,9 +49,11 @@
 <div class="mt-8" />
 
 <a
-	class="inline-block text-gray-500 text-md
+	class="
+    inline-block text-gray-500 text-md
     cursor-pointer
-    hover:text-green-700 transform transition hover:-translate-x-1"
+    hover:text-green-700 transform transition hover:-translate-x-1
+  "
 	data-sveltekit-nosroll
 	href={$page.url.pathname}
 >
@@ -69,17 +71,21 @@
 
 <div class="flex border rounded mt-6 w-min border-gray-200">
 	<button
-		class="text-right rounded-l px-4 py-2 border-r {$neufOuOccasion === 'neuf'
+		class="
+      text-right rounded-l px-4 py-2 border-r {$neufOuOccasion === 'neuf'
 			? 'bg-sky-100 text-sky-700 font-semibold'
-			: 'hover:bg-sky-50 hover:text-sky-600 '}"
+			: 'hover:bg-sky-50 hover:text-sky-600 '}
+    "
 		on:click={() => ($neufOuOccasion = 'neuf')}
 	>
 		Neuf
 	</button>
 	<button
-		class="rounded-r text-left px-4 py-2 basis-1/2 {$neufOuOccasion === 'occasion'
+		class="
+      rounded-r text-left px-4 py-2 basis-1/2 {$neufOuOccasion === 'occasion'
 			? 'bg-amber-100 text-amber-700 font-semibold'
-			: 'hover:bg-amber-50 hover:text-amber-600'}"
+			: 'hover:bg-amber-50 hover:text-amber-600'}
+    "
 		on:click={() => ($neufOuOccasion = 'occasion')}
 	>
 		Occasion

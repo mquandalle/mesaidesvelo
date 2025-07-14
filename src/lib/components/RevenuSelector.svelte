@@ -1,9 +1,9 @@
 <script context="module" lang="ts">
-	import { engine } from '$lib/engine';
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
-	import { formatValue, reduceAST } from 'publicodes';
-	import { derived } from 'svelte/store';
+	import { engine, getEngine } from '$lib/engine';
 	import { localisationSituation, veloCat } from '$lib/stores';
+	import Engine, { formatValue, reduceAST } from 'publicodes';
+	import { derived } from 'svelte/store';
 	import Emoji from './Emoji.svelte';
 
 	// In case the formula involve a “linear operation” such as additions or
@@ -15,38 +15,43 @@
 	const uniq = (arr) => [...new Set(arr)];
 
 	const engineBis = engine.shallowCopy();
-	export const originalNames = derived([localisationSituation], ([$localisationSituation]) => {
-		if (!localisationSituation) {
-			return [];
-		}
-		return uniq(
-			BIKE_KINDS.map((veloCat) => {
-				engineBis.setSituation({
-					...$localisationSituation,
-					// 'maximiser les aides': 'oui',
-					// 'vélo . type': `'${veloCat}'`,
-				});
+	export const originalNames = derived(
+		[localisationSituation, publicodeSituation],
+		([$localisationSituation, $publicodeSituation]) => {
+			if (!localisationSituation) {
+				return [];
+			}
 
-				const originalNames = collectivites
-					.map((collectivite) => {
-						const aide = engineBis.evaluate(`aides . ${collectivite}`);
-						if (!aide.nodeValue) {
-							return null;
-						}
-						// FIXME: Is it only a type error or this is a real issue?
-						// @ts-ignore
-						const originalRuleName = aide.explanation.find(
-							({ condition }) => condition.nodeValue === true,
-						).consequence.name;
+			engineBis.setSituation({
+				...$localisationSituation,
+				// TODO: better handle `foyer . personnes` and more generally dependent
+				// variables needed to compute the thresholds.
+				'foyer . personnes': $publicodeSituation['foyer . personnes'] ?? 1,
+			});
 
-						return originalRuleName;
-					})
-					.filter(Boolean);
+			return uniq(
+				BIKE_KINDS.map((veloCat) => {
+					const originalNames = collectivites
+						.map((collectivite) => {
+							const aide = engineBis.evaluate(`aides . ${collectivite}`);
+							if (!aide.nodeValue) {
+								return null;
+							}
+							// FIXME: Is it only a type error or this is a real issue?
+							// @ts-ignore
+							const originalRuleName = aide.explanation.find(
+								({ condition }) => condition.nodeValue === true,
+							).consequence.name;
 
-				return originalNames;
-			}).flat(),
-		);
-	});
+							return originalRuleName;
+						})
+						.filter(Boolean);
+
+					return originalNames;
+				}).flat(),
+			);
+		},
+	);
 
 	// We do a static analysis of the rules AST to search for a particular rule name.
 	// When in find it in a comparaison expression we retreive the value of the other
@@ -61,18 +66,27 @@
 
 		// TODO: There might be a better way to convert a parsed node into a given unit.
 		const convertValue = (node) => {
-			const valeur = formatValue(engine.evaluate(node)).replace(/\s/g, '');
-			if (valeur === '∞') {
+			const valeur = formatValue(engineBis.evaluate(node));
+			if (
+				valeur === '∞' ||
+				valeur === 'Non applicable' ||
+				valeur === 'Pas encore défini' ||
+				valeur === 'Erreur dans le calcul du nombre'
+			) {
 				return Infinity;
 			}
-			return engine.evaluate({ valeur, unité: unit }).nodeValue;
+
+			return engineBis.evaluate({
+				valeur: valeur.replace(/\s/g, ''),
+				unité: unit,
+			}).nodeValue;
 		};
 
 		const namesToFollow: RuleName[] = ['foyer . imposable', 'foyer . personnes'];
 
 		const accumulateThresholds = (acc, node) => {
 			if (acc === numberFieldRequired) {
-				return numberFieldRequired;
+				return acc;
 			}
 
 			if (node.nodeKind === 'grille' && node.explanation.assiette?.dottedName === searchedName) {
@@ -83,9 +97,11 @@
 				comparaisonOperators.includes(node.operationKind)
 			) {
 				if (node.explanation[0]?.dottedName === searchedName) {
-					return [...acc, convertValue(node.explanation[1])];
+					const value = convertValue(node.explanation[1]);
+					return [...acc, value];
 				} else if (node.explanation[1]?.dottedName === searchedName) {
-					return [...acc, convertValue(node.explanation[0])];
+					const value = convertValue(node.explanation[0]);
+					return [...acc, value];
 				}
 			} else if (
 				node.nodeKind === 'operation' &&
@@ -94,8 +110,7 @@
 					node.explanation[1]?.dottedName === searchedName)
 			) {
 				return numberFieldRequired;
-			}
-			// Following reference like this is fragile. We could follow all references
+			} // Following reference like this is fragile. We could follow all references
 			// but would need some special handling for the dependency on parent.
 			// For now this works well enough.
 			else if (node.nodeKind === 'reference' && namesToFollow.includes(node.name)) {
@@ -103,36 +118,38 @@
 			}
 		};
 
-		return reduceAST(accumulateThresholds, [], engine.getRule(dottedName));
+		return reduceAST(accumulateThresholds, [], engineBis.getRule(dottedName));
 	}
 </script>
 
 <script lang="ts">
 	import { publicodeSituation, revenuFiscal } from '$lib/stores';
+	import type { RuleName } from '@betagouv/aides-velo';
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
-	import type { RuleName } from '@betagouv/aides-velo';
+	import Question from './Question.svelte';
 
 	export let goals;
 
 	const uniq = (l) => [...new Set(l)];
-	$: tresholds = (goals ?? $originalNames).flatMap((name) =>
+	const engineBis = getEngine({});
+	$: thresholds = (goals ?? $originalNames).flatMap((name) =>
 		findAllComparaisonsValue(name, {
 			searchedName: 'revenu fiscal de référence par part',
 			unit: '€/mois',
 		}),
 	);
 
-	$: numberFieldIsRequired = tresholds.includes(numberFieldRequired);
+	$: numberFieldIsRequired = thresholds.some(
+		(x: number | symbol) => x === numberFieldRequired || x === Infinity,
+	);
 
 	$: uniqThresholds =
 		!numberFieldIsRequired &&
-		uniq(tresholds.filter((x: number) => x !== Infinity).map((x: number) => Math.round(x))).sort(
+		uniq(thresholds.filter((x: number) => x !== Infinity).map((x: number) => Math.round(x))).sort(
 			(a: number, b: number) => a - b,
 		);
-
-	const engineBis = engine.shallowCopy();
 
 	// Not all statically detected thresholds are impactful for the current computation
 	// as some of them might be in inactive branches of the computation.
@@ -218,7 +235,9 @@
 			{:else}
 				{#each displayedThresholds as threshold}
 					<MultipleChoiceAnswer value={threshold - 1} bind:group={$revenuFiscal}
-						>moins de <strong class="font-semibold">{formatValue(threshold)} €</strong
+						>moins de <strong class="font-semibold"
+							>{formatValue(threshold)}
+							€</strong
 						></MultipleChoiceAnswer
 					>
 				{/each}

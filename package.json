@@ -47,13 +47,13 @@
 		"yaml": "^2.3.4"
 	},
 	"dependencies": {
-		"@betagouv/aides-velo": "^2.2.0",
+		"@betagouv/aides-velo": "^3.0.1",
 		"@etalab/decoupage-administratif": "^5.2.0",
 		"fuzzysort": "^2.0.4",
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
-		"publicodes": "^1.8.2",
+		"publicodes": "^1.9.0",
 		"svelte-markdown": "^0.4.1"
 	},
 	"overrides": {
