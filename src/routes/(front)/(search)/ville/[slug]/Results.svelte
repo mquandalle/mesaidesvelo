@@ -1,9 +1,9 @@
 <script>
-	import Emoji from '$lib/components/Emoji.svelte';
-	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
-	import Question from '$lib/components/Question.svelte';
-	import { getEngine } from '$lib/engine';
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
+	import Emoji from '$lib/components/Emoji.svelte';
+	import Question from '$lib/components/Question.svelte';
+	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
+	import { getEngine } from '$lib/engine';
 	import { publicodeSituation, resetAnswers } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { flip } from 'svelte/animate';
@@ -31,13 +31,6 @@
 		};
 	});
 
-	$: primeALaConversion = engineBis
-		.setSituation({
-			...$publicodeSituation,
-			'vélo . prix': '10000 €',
-		})
-		.evaluate('aides . prime à la conversion');
-
 	// TODO: use `groupBy` partition when available
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/groupBy
 	$: activesAidesPerBikeKind = aidesPerBikeKind.filter(({ montant }) => montant.nodeValue !== 0);
@@ -51,12 +44,6 @@
 			relNoFollow: true,
 			href: `?velo=${cat}`,
 		})),
-		primeALaConversion.nodeValue && {
-			montant: primeALaConversion,
-			href: '/prime-a-la-conversion',
-			label: 'Prime à la conversion',
-			emoji: '🚗',
-		},
 		inFrance && [
 			{
 				montant: engine.evaluate('aides . forfait mobilités durables'),

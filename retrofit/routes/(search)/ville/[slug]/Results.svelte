@@ -1,11 +1,11 @@
 <script>
+	import AnimatedAmount from '$lib/components/AnimatedAmount.svelte';
 	import Badge from '$lib/components/Badge.svelte';
-	import RevenuSelector from './RevenuSelector.svelte';
 	import miniaturesManifest from '$lib/data/miniatures.json';
 	import { engine } from '$lib/engine';
 	import { publicodeSituation } from '$lib/stores';
 	import rules from '../../../../aides.yaml';
-	import AnimatedAmount from '$lib/components/AnimatedAmount.svelte';
+	import RevenuSelector from './RevenuSelector.svelte';
 
 	const aides = Object.keys(rules).filter((aideName) => aideName.startsWith('aides . '));
 	let activeAides = aides.filter((a) => engine.evaluate(a).nodeValue !== null);
@@ -20,16 +20,14 @@
 	{#each activeAides as aide}
 		{@const rawNode = engine.getRule(aide).rawNode}
 		{@const conditionDeRessources = true}
-		<!-- Hack -->
-		{@const miniatureName = aide.includes('état') ? 'aides . prime à la conversion' : aide}
 		<div class="flex flex-row border-b last:border-b-0">
-			{#if miniaturesManifest[miniatureName]}
+			{#if miniaturesManifest[aide]}
 				<div
 					class="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
 					on:click={() => rawNode.lien && window.open(rawNode.lien, '_blank')}
 				>
 					<img
-						src="https://mesaidesvelo.fr/miniatures/{miniaturesManifest[miniatureName]}"
+						src="https://mesaidesvelo.fr/miniatures/{miniaturesManifest[aide]}"
 						class="object-fill"
 						alt="Logo {rawNode.titre.toLowerCase()}"
 					/>

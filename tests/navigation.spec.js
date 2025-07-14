@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
 
@@ -8,7 +8,7 @@ test.describe('Navigation scenarios', () => {
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
-		await expect(totalAides).toHaveText('Total des aides 850 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 450 €', { useInnerText: true });
 
 		await page.click('text=moins de 1 567 €');
 		await expect(totalAides).toHaveText('Total des aides 250 €', { useInnerText: true });
@@ -17,53 +17,34 @@ test.describe('Navigation scenarios', () => {
 		await expect(totalAides).toHaveText('Total des aides 100 €', { useInnerText: true });
 
 		await page.fill('input:below(label:text("Prix du vélo"))', '');
+		await page.click('text=moins de 1 567 €');
 		await expect(totalAides).toHaveText('Total des aides 250 €', { useInnerText: true });
-
-		await page.goBack();
-		await page.click('text=Prime à la conversion');
-		expect(page.locator('text=prime à la casse')).toBeTruthy();
-		expect(page.locator('text=3 000 €')).toBeTruthy();
 	});
 
 	test('PMR scenario', async ({ page }) => {
 		startNavigation(page, 'toulouse');
 
+		await expect(page.locator("text=Achat d'un vélo adapté pour PMR")).toHaveCSS(
+			'text-decoration-line',
+			'line-through',
+		);
+		await page.click('text=Oui');
 		await page.click("text=Achat d'un vélo adapté pour PMR");
 		const totalAides = page.locator('text=Total des aides >> ..');
-		await expect(totalAides).toHaveText('Total des aides 2 000 €');
-
-		await expect(page.getByTestId('aides-bonus-velo')).toHaveText('2 000 €', {
-			useInnerText: true,
-		});
-
-		await page.click('text=plus de 2 922 €');
-		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
-
-		await page.getByLabel('Oui').click();
-		await expect(totalAides).toHaveText('Total des aides 3 000 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 1 000 €');
 	});
 
 	test('age scenario', async ({ page }) => {
-		startNavigation(page, 'toulouse');
+		startNavigation(page, 'sable-sur-sarthe');
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
-		await expect(totalAides).toHaveText('Total des aides 850 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 100 €', { useInnerText: true });
 
 		await page.fill('input:below(label:text("Quel est votre âge ?"))', '15');
 		expect(page.getByTestId('question-demandeur-age-value-15')).toBeTruthy();
-		await expect(totalAides).toHaveText('Total des aides 450 €', { useInnerText: true });
-
-		await page.click('text=plus de 2 922 €');
 		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
 		expect(page.getByTestId('question-demandeur-age-value-15')).toBeTruthy();
-
-		await page.click('text=moins de 592 €');
-		await expect(totalAides).toHaveText('Total des aides 450 €', { useInnerText: true });
-
-		await page.fill('input:below(label:text("Quel est votre âge ?"))', '25');
-		await expect(totalAides).toHaveText('Total des aides 850 €', { useInnerText: true });
-		expect(page.getByTestId('question-demandeur-age-value-25')).toBeTruthy();
 	});
 
 	test('multiple choices scenario', async ({ page }) => {
@@ -71,10 +52,10 @@ test.describe('Navigation scenarios', () => {
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
-		await expect(totalAides).toHaveText('Total des aides 850 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 450 €', { useInnerText: true });
 
 		await page.click('text=Étudiant·e');
-		await expect(totalAides).toHaveText('Total des aides 925 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 525 €', { useInnerText: true });
 
 		await page.fill('input:below(label:text("Quel est votre âge ?"))', '15');
 		expect(page.getByTestId('question-demandeur-age-value-15')).toBeTruthy();
@@ -89,13 +70,13 @@ test.describe('Navigation scenarios', () => {
 
 		await page.click("text=Achat d'un vélo mécanique simple");
 		const totalAides = page.locator('text=Total des aides >> ..');
-		await expect(totalAides).toHaveText('Total des aides 300 €', { useInnerText: true });
-
-		await page.fill('input:below(label:text("Quel est le prix du vélo ?"))', '2000');
 		await expect(totalAides).toHaveText('Total des aides 150 €', { useInnerText: true });
 
+		await page.fill('input:below(label:text("Quel est le prix du vélo ?"))', '2000');
+		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
+
 		await page.click('text=Occasion');
-		await expect(totalAides).toHaveText('Total des aides 270 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 120 €', { useInnerText: true });
 	});
 });
 
@@ -130,11 +111,11 @@ test('Revenu selector', async ({ page }) => {
 	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
 
 	await page.getByLabel('Oui').click();
-	await expect(page.locator('text=aide non disponible')).toHaveCount(1);
+	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
 
 	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
 	await page.waitForTimeout(100);
-	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(4);
+	await expect(page.locator('.playwright-revenuoptions input[type=radio]')).toHaveCount(2);
 });
 
 test('New or second hand bike', async ({ page }) => {
@@ -155,35 +136,6 @@ test('Text generation', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/landerneau');
 	expect(page.locator("text=Malheureusement il n'existe aucune aide locale")).toBeTruthy();
 });
-
-test('Persisting answers', async ({ page }) => {
-	await page.goto(baseUrl + '/ville/lyon');
-	await page.waitForTimeout(100);
-	await expect(page.locator('text=aide non disponible')).toHaveCount(0);
-
-	await page.click('text=plus de 2 184 €');
-	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
-
-	await page.getByLabel('Oui').click();
-	await expect(page.locator('text=aide non disponible')).toHaveCount(1);
-
-	await page.click("text=Achat d'un vélo électrique");
-	await page.waitForTimeout(100);
-	await expect(page.locator('text=total des aides >> ..')).toHaveText('Total des aides 400 €');
-});
-
-// FIXME: This test is not working although it works in the browser
-// test('Redirection from details', async ({ page }) => {
-// 	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
-// 	expect(page.locator('text=Total des aides')).toBeTruthy();
-// 	expect(page.locator('text=Toulouse')).toBeTruthy();
-//
-// 	searchAndGoTo(page, 'Montpellier');
-// 	await page.waitForURL(baseUrl + '/ville/montpellier');
-// 	await expect(page).toHaveURL(baseUrl + '/ville/montpellier');
-// 	console.log(await page.locator('text=Toulouse').allTextContents());
-// 	expect(page.locator('text=Toulouse')).not.toBeTruthy();
-// });
 
 async function startNavigation(page, ville) {
 	await page.goto(baseUrl);

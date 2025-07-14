@@ -7,7 +7,10 @@ export const answers = writable({});
 export const revenuFiscal = writable(undefined);
 export const veloCat = writable<Questions['vélo . type']>();
 
-export const PERSISTING_ANSWSERS: RuleName[] = ['demandeur . en situation de handicap'];
+export const PERSISTING_ANSWSERS: RuleName[] = [
+	'demandeur . en situation de handicap',
+	'foyer . personnes',
+];
 
 /** resetAnswers() will remove all answers from the store except the ones listed in {@link PERSISTING_ANSWSERS} */
 export const resetAnswers = () => {

@@ -2,13 +2,13 @@
  * Download the images from github (aides-jeune repo) and create the miniatures
  * from them.
  */
-import fs from 'fs';
 import { miniatures } from '@betagouv/aides-velo/data';
-import sharp from 'sharp';
+import fs from 'fs';
 import { join } from 'path';
+import sharp from 'sharp';
 
-import { writeJsonData } from '../scripts/writeData.js';
 import aidesWithCollectivities from '../lib/data/aides-collectivities.json' with { type: 'json' };
+import { writeJsonData } from '../scripts/writeData.js';
 
 const currentPath = new URL('./', import.meta.url).pathname;
 const rootPath = join(currentPath, '../../');
@@ -20,7 +20,7 @@ if (fs.existsSync(miniatureDirectory)) {
 fs.mkdirSync(miniatureDirectory, { recursive: true });
 
 const thumbnailsManifest = Object.keys(aidesWithCollectivities).reduce((acc, id) => {
-	const imgSrc = miniatures[id];
+	let imgSrc = miniatures[id];
 
 	if (!imgSrc) {
 		return acc;
