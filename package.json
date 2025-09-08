@@ -2,7 +2,7 @@
 	"name": "mesaidesvelo",
 	"version": "1.0.0",
 	"engines": {
-		"node": ">=18 <=20"
+		"node": ">= 20"
 	},
 	"scripts": {
 		"postinstall": "node ./src/scripts/postinstall.js",
