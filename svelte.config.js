@@ -7,7 +7,9 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex()],
 	extensions: ['.svelte', '.svx'],
 	kit: {
-		adapter: vercel(),
+		adapter: vercel({
+			runtime: 'nodejs22.x',
+		}),
 		files:
 			process.env.VITE_SITE === 'aideretrofit.fr'
 				? {
