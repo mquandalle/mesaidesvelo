@@ -2,7 +2,7 @@
 	"name": "mesaidesvelo",
 	"version": "1.0.0",
 	"engines": {
-		"node": ">=18 <=20"
+		"node": ">=22"
 	},
 	"scripts": {
 		"postinstall": "node ./src/scripts/postinstall.js",
@@ -27,8 +27,8 @@
 		"@actions/github": "^6.0.0",
 		"@playwright/test": "^1.52.0",
 		"@rollup/plugin-yaml": "^4.1.2",
-		"@sveltejs/adapter-vercel": "^4.0.3",
-		"@sveltejs/kit": "^2.7.7",
+		"@sveltejs/adapter-vercel": "^4.0.5",
+		"@sveltejs/kit": "^2.37.1",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@tsconfig/svelte": "^5.0.4",
 		"mdsvex": "^0.11.0",
@@ -47,13 +47,13 @@
 		"yaml": "^2.3.4"
 	},
 	"dependencies": {
-		"@betagouv/aides-velo": "^3.1.0",
+		"@betagouv/aides-velo": "^3.2.0",
 		"@etalab/decoupage-administratif": "^5.2.0",
 		"fuzzysort": "^2.0.4",
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
-		"publicodes": "^1.9.0",
+		"publicodes": "^1.9.1",
 		"svelte-markdown": "^0.4.1"
 	},
 	"overrides": {
