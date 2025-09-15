@@ -27,7 +27,8 @@
 
 ### Éditeur
 
-Maxime Quandalle
+Travail initial par Maxime Quandalle et à présent mis à jour par <a
+href="mailto:emile@calinou.coop">Emile Rolley</a>.
 
 ### Hébergeur
 

@@ -1,4 +1,5 @@
 <script>
+	import { allAides } from '$lib/aides-velo-utils';
 	import { slugify } from '$lib/utils';
 	import departements from '@etalab/decoupage-administratif/data/departements.json';
 	import AideSummary from './AideSummary.svelte';
@@ -14,14 +15,19 @@
 <div class="prose mt-8 w-full max-w-screen-md m-auto">
 	<h1>Les aides intégrées sur le site</h1>
 	<p>
-		Intégrer des aides est un travail manuel. Contactez-nous si vous constatez une erreur ou un
-		oubli !
+		Actuellement, <strong>{allAides.length} aides sont reférencées</strong> sur le site. Intégrer
+		des aides est un travail fastidieux et manuel.
+		<a href="mailto:emile@calinou.coop" target="_blank">Contactez-nous</a> si vous constatez une erreur
+		ou un oubli !
 	</p>
 
+	<p></p>
 	<h2>Les aides de l’État</h2>
-	<p>Il n'existe plus d'aide de l'État pour l'achat d'un vélo.</p>
+	<p>Il n'existe plus d'aide de l'État en France pour l'achat d'un vélo.</p>
 	<p>
-		Nous intégrons les aides de <a href="/ville/monaco" class="hover:text-green-700">Monaco</a>
+		Cependant, nous intégrons les aides de <a href="/ville/monaco" class="hover:text-green-700"
+			>Monaco</a
+		>
 		et du <a href="/ville/luxembourg">Luxembourg</a>.
 	</p>
 	<h2>Les aides régionales</h2>

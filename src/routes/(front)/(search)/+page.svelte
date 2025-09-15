@@ -39,7 +39,7 @@
 
 			<p class="text-sm text-gray-800 mt-2">
 				Ces derniers mois, plusieurs améliorations ont été apportées à <span class="italic"
-					>MesAidesVélo</span
+					>Mes Aides Vélo</span
 				>
 				par les équipes de
 				<a href="https://beta.gouv.fr" target="_blank" class="text-green-600 hover:underline"
@@ -48,9 +48,12 @@
 			</p>
 			<ul class="mt-4">
 				<li class="text-sm text-gray-800 mt-2">
-					🚀 <strong>Mise à jour des aides</strong> - les aides est régulièrement mises à jour.
+					🚀 <strong>Mise à jour des aides</strong> - les aides sont régulièrement mises à jour.
 					Dernière suppression majeure :
-					<a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000050690951" target="_blank"
+					<a
+						href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000050690951"
+						target="_blank"
+						class="text-green-600 hover:underline"
 						>le bonus écologique vélo et la prime à la conversion</a
 					>.
 				</li>
@@ -61,6 +64,10 @@
 				<li class="text-sm text-gray-800 mt-2">
 					🚲 <strong>Vélo d'occasion</strong> - il est désormais possible de choisir les aides en fonction
 					de l'état du vélo (neuf ou occasion).
+				</li>
+				<li class="text-sm text-gray-800 mt-2">
+					📅 <strong>Date de fin et de dernière mise à jour</strong> - chaque aide affiche désormais
+					sa date de fin (si renseignée) ainsi que la date de sa dernière mise à jour.
 				</li>
 			</ul>
 			<p class="text-sm text-green-600 mt-4">
