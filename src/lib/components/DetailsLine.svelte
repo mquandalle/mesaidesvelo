@@ -6,7 +6,6 @@
 	import { formatDescription, slugify } from '$lib/utils';
 	import SvelteMarkdown from 'svelte-markdown';
 	import AnimatedAmount from './AnimatedAmount.svelte';
-	import BackButtonAides from './BackButtonAides.svelte';
 	import Badge from './Badge.svelte';
 
 	export let className = '';
