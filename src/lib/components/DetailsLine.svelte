@@ -1,12 +1,13 @@
 <script>
-	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { formatDescription, slugify } from '$lib/utils';
+	import { allAides } from '$lib/aides-velo-utils';
 	import miniatures from '$lib/data/miniatures';
-
-	import AnimatedAmount from './AnimatedAmount.svelte';
-	import Badge from './Badge.svelte';
+	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { localisation, publicodeSituation, veloCat, veloTypeValue } from '$lib/stores';
+	import { formatDescription, slugify } from '$lib/utils';
 	import SvelteMarkdown from 'svelte-markdown';
+	import AnimatedAmount from './AnimatedAmount.svelte';
+	import BackButtonAides from './BackButtonAides.svelte';
+	import Badge from './Badge.svelte';
 
 	export let className = '';
 	export let aide;
@@ -19,6 +20,10 @@
 	});
 
 	const { title, rawNode } = baseEngine.getRule(aide.ruleName);
+	const { lastUpdate, endDate } = allAides.find((a) => a.id === aide.ruleName) || {
+		lastUpdate: null,
+		endDate: null,
+	};
 	$: notice = formatDescription({
 		ruleName: aide.ruleName,
 		engine,
@@ -61,30 +66,54 @@
 		<div class="my-4 mx-3 sm:mx-4 flex-grow">
 			<div class="flex">
 				<div class="flex gap-x-4 text-lg flex-wrap">
-					<h3 class="font-semibold text-md">
+					<h3 class="font-semibold text-md mb-1">
 						{title}
-						{#if conditionDeRessources}
-							<Badge className="sm:order-1">Sous condition de ressources</Badge>
-						{/if}
 					</h3>
+					<div class="flex flex-wrap gap-2 items-center sm:items-start">
+						{#if endDate}
+							<Badge className="mb-1 sm:mb-0">
+								Jusqu'au {new Date(endDate).toLocaleDateString('fr-FR', {
+									year: 'numeric',
+									month: 'long',
+									day: 'numeric',
+								})}
+							</Badge>
+						{/if}
+						{#if conditionDeRessources}
+							<Badge className="">Sous condition de ressources</Badge>
+						{/if}
+					</div>
 				</div>
 				<div
-					class="font-bold text-lg text-gray-800 flex-1 text-right sm:order-3 playwright-{slugify(
+					class="
+            font-bold text-lg text-gray-800 flex-1 text-right sm:order-3 playwright-{slugify(
 						aide.ruleName,
-					)}"
+					)}
+          "
 					data-testid={slugify(aide.ruleName)}
 				>
 					<AnimatedAmount amount={aide.nodeValue} unit={aide.unit} />
 				</div>
 			</div>
-			<div class="text-gray-600 mt-2 prose-sm">
+			<div class="text-gray-600 mt-4 prose-sm">
 				<SvelteMarkdown source={notice} options={{ breaks: true }} />
 			</div>
-			{#if rawNode.lien}
-				<p class="mt-4 text-sm text-green-600">
-					<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>
-				</p>
-			{/if}
+			<div class="inline-flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
+				{#if rawNode.lien}
+					<p class="mt-4 text-sm text-green-600">
+						<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>
+					</p>
+				{/if}
+				{#if lastUpdate}
+					<p class="mt-4 text-xs text-gray-500 italic">
+						Dernière mise à jour : {lastUpdate.toLocaleDateString('fr-FR', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})}
+					</p>
+				{/if}
+			</div>
 		</div>
 	</div>
 {/if}
