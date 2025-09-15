@@ -1,10 +1,10 @@
+import aidesCollectivites from '$lib/data/aides-collectivities.json';
+import classementVilleplus from '$lib/data/classement-villeplus.json';
 import { engine } from '$lib/engine';
 import { slugify } from '$lib/utils';
 import departements from '@etalab/decoupage-administratif/data/departements.json';
 import regions from '@etalab/decoupage-administratif/data/regions.json';
 import { error, redirect } from '@sveltejs/kit';
-import classementVilleplus from '$lib/data/classement-villeplus.json';
-import aidesCollectivites from '$lib/data/aides-collectivities.json';
 import { _getCorrespondingContent } from '../../(search)/ville/[slug]/+page.server.js';
 
 // https://www.insee.fr/fr/information/2114773#:~:text=TNCC%20%2D%20Type%20de%20nom%20en%20clair
@@ -36,14 +36,14 @@ export async function load({ params }) {
 			collectivity.kind === 'département' && collectivity.value === departement.code,
 	)?.[0];
 
-	const aideDepartementText = _getCorrespondingContent(aideDepartement);
+	const aideDepartementText = await _getCorrespondingContent(aideDepartement);
 
 	const aideRegion = aidesAvecLocalisationEntries.find(
 		([, { collectivity }]) =>
 			collectivity.kind === 'région' && collectivity.value === departement.region,
 	)?.[0];
 
-	const aideRegionText = _getCorrespondingContent(aideRegion);
+	const aideRegionText = await _getCorrespondingContent(aideRegion);
 
 	const aidesLocales = aidesAvecLocalisationEntries
 		.filter(

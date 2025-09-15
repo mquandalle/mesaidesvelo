@@ -40,8 +40,8 @@
 			{/if}
 		{:else}
 			<p>
-				La première chose à noter est que le département {data.departement.nom} ne propose pas d’aide
-				à l’achat de vélo.
+				La première chose à noter est que le département {data.departement.nom}
+				ne propose pas d’aide à l’achat de vélo.
 			</p>
 			<p>
 				Cela est relativement normal car même si certains departements proposent une aide,
@@ -56,12 +56,17 @@
 			{#if data.aideRegionText}
 				<h2>Au niveau de la région {data.region.nom}</h2>
 				<MiniatureCollectivite ruleName={data.aideRegion} titre={data.region.nom} />
+				{@debug data}
 				{@html data.aideRegionText}
 			{:else}
-				<p>En revanche la région {data.region.nom} propose une aide à l’achat de vélo.</p>
+				<p>
+					En revanche la région {data.region.nom} propose une aide à l’achat de vélo.
+				</p>
 			{/if}
 		{:else}
-			<p>En revanche la région {data.region.nom} ne propose pas d’aide à l’achat de vélo.</p>
+			<p>
+				En revanche la région {data.region.nom} ne propose pas d’aide à l’achat de vélo.
+			</p>
 		{/if}
 	{/if}
 
@@ -88,8 +93,10 @@
 		:
 	</p>
 	<ul>
-		<li>Du bonus écologique, ouvert sous conditions à certains type de vélo</li>
-		<li>
+		<li class="line-through">
+			Du bonus écologique, ouvert sous conditions à certains type de vélo
+		</li>
+		<li class="line-through">
 			De la <a href="/prime-a-la-conversion">prime à la conversion</a>, conditionnée à la remise à
 			la casse d’une voiture ancienne
 		</li>
