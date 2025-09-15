@@ -35,6 +35,8 @@ de [1jeune1solution](https://mes-aides.1jeune1solution.beta.gouv.fr/).
 
 A présent, la mise à jours des aides est principalement faite par les membres
 des différentes équipes de [beta.gouv.fr](https://beta.gouv.fr) qui les
-utilisent.
+utilisent. En particulier, <a href="mailto:emile@calinou.coop"
+target="_blank">Emile Rolley</a> dans le câdre du projet <a
+href="https://jagis.beta.gouv.fr" target="_blank" class="italic">J'agis</a>.
 
 </div>
