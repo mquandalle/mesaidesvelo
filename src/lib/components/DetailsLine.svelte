@@ -23,6 +23,8 @@
 		lastUpdate: null,
 		endDate: null,
 	};
+	const isExpired = new Date().getTime() >= endDate?.getTime();
+
 	$: notice = formatDescription({
 		ruleName: aide.ruleName,
 		engine,
@@ -48,7 +50,7 @@
 </script>
 
 {#if aide.nodeValue !== null}
-	<div class={'flex flex-row items-start' + ' ' + className}>
+	<div class={'flex flex-row items-start ' + (isExpired ? 'bg-gray-50 ' : '') + ' ' + className}>
 		{#if miniatures[aide.ruleName]}
 			<button
 				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
@@ -70,8 +72,11 @@
 					</h3>
 					<div class="flex flex-wrap gap-2 items-center sm:items-start">
 						{#if endDate}
-							<Badge className="mb-1 sm:mb-0">
-								Jusqu'au {new Date(endDate).toLocaleDateString('fr-FR', {
+							<Badge
+								className={'mb-1 sm:mb-0 ' +
+									(isExpired ? 'bg-red-50 border-red-100 text-red-800' : '')}
+							>
+								Jusqu'au {endDate.toLocaleDateString('fr-FR', {
 									year: 'numeric',
 									month: 'long',
 									day: 'numeric',
@@ -104,7 +109,7 @@
 					</p>
 				{/if}
 				{#if lastUpdate}
-					<p class="mt-4 text-xs text-gray-500 italic">
+					<p class="mt-4 text-[0.66rem] text-gray-500 italic">
 						Dernière mise à jour : {lastUpdate.toLocaleDateString('fr-FR', {
 							year: 'numeric',
 							month: 'long',
