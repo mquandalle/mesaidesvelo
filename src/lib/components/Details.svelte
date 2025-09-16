@@ -27,6 +27,13 @@
 	$: montantNeuf = engineNeuf.evaluate('aides . montant').nodeValue;
 	$: engine = $neufOuOccasion === 'neuf' ? engineNeuf : engineOccasion;
 
+	$: $neufOuOccasion =
+		montantNeuf > 0 && montantOccasion > 0
+			? $neufOuOccasion
+			: montantOccasion > 0
+				? 'occasion'
+				: 'neuf';
+
 	const categoryDescription = baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '';
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
@@ -121,7 +128,7 @@
 			<DetailsLine veloEtat={$neufOuOccasion} {aide} />
 		</div>
 	{/each}
-	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b-md">
+	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b">
 		<div class="flex justify-between text-lg">
 			<h3 class="font-semibold text-md">Total des aides</h3>
 			<div class="font-bold">

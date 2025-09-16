@@ -90,6 +90,7 @@
 				</div>
 				<div
 					class="
+            ml-4
             font-bold text-lg text-gray-800 flex-1 text-right sm:order-3 playwright-{slugify(
 						aide.ruleName,
 					)}

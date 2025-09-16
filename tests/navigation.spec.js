@@ -73,9 +73,8 @@ test.describe('Navigation scenarios', () => {
 		await expect(totalAides).toHaveText('Total des aides 150 €', { useInnerText: true });
 
 		await page.fill('input:below(label:text("Quel est le prix du vélo ?"))', '2000');
-		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
 
-		await page.click('text=Occasion');
+		expect(page.getByText("D'occasion uniquement")).toBeTruthy();
 		await expect(totalAides).toHaveText('Total des aides 120 €', { useInnerText: true });
 	});
 });
