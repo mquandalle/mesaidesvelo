@@ -9,14 +9,23 @@
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { writable } from 'svelte/store';
 	import { slide } from 'svelte/transition';
+	import Badge from './Badge.svelte';
 
 	resetAnswers();
 	$: neufOuOccasion = writable('neuf');
-	$: engine = getEngine({
+	$: engineOccasion = getEngine({
 		...$publicodeSituation,
 		'vélo . type': $veloTypeValue,
-		'vélo . état': `'${$neufOuOccasion}'`,
+		'vélo . état': `'occasion'`,
 	});
+	$: montantOccasion = engineOccasion.evaluate('aides . montant').nodeValue;
+	$: engineNeuf = getEngine({
+		...$publicodeSituation,
+		'vélo . type': $veloTypeValue,
+		'vélo . état': `'neuf'`,
+	});
+	$: montantNeuf = engineNeuf.evaluate('aides . montant').nodeValue;
+	$: engine = $neufOuOccasion === 'neuf' ? engineNeuf : engineOccasion;
 
 	const categoryDescription = baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '';
 
@@ -69,27 +78,41 @@
 	<p class="text-gray-700 text-sm">{categoryDescription}</p>
 {/if}
 
-<div class="flex border rounded mt-6 w-min border-gray-200">
-	<button
-		class="
-      text-right rounded-l px-4 py-2 border-r {$neufOuOccasion === 'neuf'
-			? 'bg-sky-100 text-sky-700 font-semibold'
-			: 'hover:bg-sky-50 hover:text-sky-600 '}
-    "
-		on:click={() => ($neufOuOccasion = 'neuf')}
-	>
-		Neuf
-	</button>
-	<button
-		class="
-      rounded-r text-left px-4 py-2 basis-1/2 {$neufOuOccasion === 'occasion'
-			? 'bg-amber-100 text-amber-700 font-semibold'
-			: 'hover:bg-amber-50 hover:text-amber-600'}
-    "
-		on:click={() => ($neufOuOccasion = 'occasion')}
-	>
-		Occasion
-	</button>
+<div class="mt-6">
+	{#if montantNeuf > 0 && montantOccasion > 0 && montantNeuf !== montantOccasion}
+		<div class="flex border rounded w-min border-gray-200">
+			<button
+				class="
+          text-right rounded-l px-4 py-2 border-r {$neufOuOccasion === 'neuf'
+					? 'bg-sky-100 text-sky-700 font-semibold'
+					: 'hover:bg-sky-50 hover:text-sky-600 '}
+        "
+				on:click={() => ($neufOuOccasion = 'neuf')}
+			>
+				Neuf
+			</button>
+			<button
+				class="
+          rounded-r text-left px-4 py-2 basis-1/2 {$neufOuOccasion === 'occasion'
+					? 'bg-amber-100 text-amber-700 font-semibold'
+					: 'hover:bg-amber-50 hover:text-amber-600'}
+        "
+				on:click={() => ($neufOuOccasion = 'occasion')}
+			>
+				D'occasion
+			</button>
+		</div>
+	{:else if montantNeuf > 0 && montantOccasion > 0 && montantNeuf === montantOccasion}
+		<Badge className="px-4 py-2 text-[0.875rem]">Neuf ou d'occasion</Badge>
+	{:else if montantNeuf}
+		<Badge className="bg-sky-50 px-4 py-2 text-[0.875rem] !text-sky-700 border-sky-100">
+			Neuf uniquement
+		</Badge>
+	{:else if montantOccasion}
+		<Badge className="bg-amber-50 px-4 py-2 text-[0.875rem] !text-amber-700 border-amber-100">
+			D'occasion uniquement
+		</Badge>
+	{/if}
 </div>
 
 <div class="border rounded mt-3 bg-white">
