@@ -111,7 +111,7 @@
 				{/if}
 				{#if lastUpdate}
 					<p class="mt-4 text-[0.66rem] text-gray-500 italic">
-						Dernière mise à jour : {lastUpdate.toLocaleDateString('fr-FR', {
+						Mise à jour le {lastUpdate.toLocaleDateString('fr-FR', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
