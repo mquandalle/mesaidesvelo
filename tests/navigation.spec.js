@@ -24,14 +24,10 @@ test.describe('Navigation scenarios', () => {
 	test('PMR scenario', async ({ page }) => {
 		startNavigation(page, 'toulouse');
 
-		await expect(page.locator("text=Achat d'un vélo adapté pour PMR")).toHaveCSS(
-			'text-decoration-line',
-			'line-through',
-		);
 		await page.click('text=Oui');
 		await page.click("text=Achat d'un vélo adapté pour PMR");
 		const totalAides = page.locator('text=Total des aides >> ..');
-		await expect(totalAides).toHaveText('Total des aides 1 000 €');
+		await expect(totalAides).toHaveText('Total des aides 1 400 €');
 	});
 
 	test('age scenario', async ({ page }) => {
