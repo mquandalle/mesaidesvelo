@@ -56,7 +56,6 @@
 			{#if data.aideRegionText}
 				<h2>Au niveau de la région {data.region.nom}</h2>
 				<MiniatureCollectivite ruleName={data.aideRegion} titre={data.region.nom} />
-				{@debug data}
 				{@html data.aideRegionText}
 			{:else}
 				<p>

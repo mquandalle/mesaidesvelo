@@ -10,7 +10,12 @@
 
 	const format = (x, { withPlusSign = false } = {}) => {
 		const sign = withPlusSign && x > 0 ? '+' : x < 0 ? '-' : '';
-		const formatedValue = formatValue({ nodeValue: Math.abs(x), unit }, { precision: 0 });
+		const formatedValue = formatValue(
+			{ nodeValue: Math.abs(x), unit },
+			{
+				precision: 0,
+			},
+		);
 		return `${sign}${formatedValue}`.trim();
 	};
 
@@ -27,7 +32,7 @@
 	$: bgColor = difference > 0 ? 'bg-green-50' : 'bg-red-50';
 </script>
 
-<span class={`relative w-[min-content] ${className}`}>
+<span class={`relative w-[min-content] text-green-700 ${className}`}>
 	{#if difference}
 		{#key difference}
 			<span

@@ -1,8 +1,23 @@
-La région Occitanie propose depuis le 1er janvier 2022 un dispostif nommé « Eco chêque mobilité bonus forfait mobilité durable ».
+La région Occitanie propose depuis le 1er janvier 2022 un dispostif nommé <a
+href="https://www.laregion.fr/Eco-cheque-mobilite-Bonus-forfait-mobilite-durable"
+target="_blank">« Eco-chèque mobilité » - Bonus forfait mobilité durable</a>.
+Ce dispostif est complémentaire avec les deux dispostifs existants :
 
-C'est une aide plus restrictive que la majorité des aides accordées par les collectivités locales car elle réservées aux salariés perçevant le <a href="/forfait-mobilite-durable">forfait mobilités durables</a> de la part de leur employeur. Il s’agit pour la région d’une manière d’encourager les employeurs locaux à verser ce forfait à leurs salariés.
+- <a href="https://www.laregion.fr/Eco-cheque-mobilite-velo-a-assistance-electrique"
+target="_blank">« Eco-chèque mobilité » - Achat d’un vélo à assistance électrique</a>
+- <a href="https://www.laregion.fr/Eco-cheque-mobilite-Bonus-velo-adapte-PMR"
+target="_blank">« Eco-chèque mobilité » - Bonus vélo adapté PMR</a>
 
-L’aide est valable à la fois pour un vélo à assistance électrique mais aussi pour un vélo classique. Le plafond de l’aide dépend de si la personne est imposable :
+
+C'est une aide plus restrictive que la majorité des aides accordées par les
+collectivités locales car elle réservées aux salariés perçevant le <a
+href="/forfait-mobilite-durable">forfait mobilités durables</a> de la part de
+leur employeur. Il s’agit pour la région d’une manière d’encourager les
+employeurs locaux à verser ce forfait à leurs salariés.
+
+L’aide est valable à la fois pour un vélo à assistance électrique mais aussi
+pour un vélo classique. Le plafond de l’aide dépend de si la personne est
+imposable :
 
 |                        | Vélo électrique                                         | Vélo classique                                          |
 | ---------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
