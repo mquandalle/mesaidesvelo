@@ -1,10 +1,9 @@
 <script>
-	import JagisCta from '$lib/components/JagisCTA.svelte';
 	import { localisation } from '$lib/stores';
 
 	localisation.set(null);
 
-	const biggestCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes'];
+	const biggestCities = ['Paris', 'Lyon', 'Toulouse', 'Nantes', 'Montpellier', 'Strasbourg'];
 </script>
 
 <svelte:head>
@@ -16,7 +15,7 @@
 </svelte:head>
 
 <div
-	class="flex flex-wrap sm:flex-row items-center justify-end gap-3 mt-6 w-full max-w-screen-md m-auto text-gray-500"
+	class="flex flex-wrap sm:flex-row items-center justify-start gap-3 mt-6 w-full max-w-screen-md m-auto text-gray-500"
 >
 	Essayez avec
 
@@ -79,6 +78,4 @@
 			</p>
 		</div>
 	</div>
-
-	<JagisCta />
 </section>
