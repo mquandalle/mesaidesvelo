@@ -16,7 +16,11 @@
 Cet outil rassemble l'ensemble des aides à l'achat de vélo. Il vous permet
 d'identifier en quelques clics celles auxquelles vous avez droit.
 
-Il est gratuit, et développé de manière [ouverte](https://github.com/mquandalle/mesaidesvelo).
+Il est gratuit, et développé de manière
+[ouverte](https://github.com/mquandalle/mesaidesvelo). Le calcul des aides est
+modélisé grâce au langage [Publicodes](https://publi.codes) et disponible sous
+forme de [bibliothèque
+JavaScript](https://github.com/betagouv/publicodes-aides-velo).
 
 ## Quelles sont les aides prises en compte ?
 
@@ -29,14 +33,16 @@ par une.
 
 ## Qui s'en occupe ?
 
-Le projet a été initié par Maxime Quendalle bénévolement, il l'a ensuite
-maintenu pendant quelques temps financé par l'équipe
-de [1jeune1solution](https://mes-aides.1jeune1solution.beta.gouv.fr/).
+Depuis septembre 2025, c'est la coopérative [Calinou](https://calinou.coop) qui
+s'occupe de la maintenance et du développement du site.
 
-A présent, la mise à jours des aides est principalement faite par les membres
-des différentes équipes de [beta.gouv.fr](https://beta.gouv.fr) qui les
-utilisent. En particulier, <a href="mailto:emile@calinou.coop"
-target="_blank">Emile Rolley</a> dans le câdre du projet <a
-href="https://jagis.beta.gouv.fr" target="_blank" class="italic">J'agis</a>.
+Le projet a été initié par Maxime Quendalle bénévolement, qu'il a ensuite
+maintenu pendant quelques temps financé par l'équipe de
+[1jeune1solution](https://mes-aides.1jeune1solution.beta.gouv.fr/).
+
+En octobre 2024, <a href="mailto:emile@calinou.coop" target="_blank">Emile
+Rolley</a> dans le cadre du projet <a href="https://jagis.beta.gouv.fr"
+target="_blank" class="italic">J'agis</a>, a repris la maintenance de la mise à
+jour des aides ainsi que de l'amélioration du simulateur.
 
 </div>

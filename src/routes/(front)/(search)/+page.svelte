@@ -1,10 +1,11 @@
-<script>
-	import JagisCta from '$lib/components/JagisCTA.svelte';
+<script lang="ts">
+	import Autumn2025 from '$lib/components/releases/Autumn2025.svelte';
+	import Spring2025 from '$lib/components/releases/Spring2025.svelte';
 	import { localisation } from '$lib/stores';
 
 	localisation.set(null);
 
-	const biggestCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes'];
+	const biggestCities = ['Paris', 'Lyon', 'Toulouse', 'Nantes', 'Montpellier', 'Strasbourg'];
 </script>
 
 <svelte:head>
@@ -16,7 +17,7 @@
 </svelte:head>
 
 <div
-	class="flex flex-wrap sm:flex-row items-center justify-end gap-3 mt-6 w-full max-w-screen-md m-auto text-gray-500"
+	class="flex flex-wrap sm:flex-row items-center justify-start gap-3 mt-6 w-full max-w-screen-md m-auto text-gray-500"
 >
 	Essayez avec
 
@@ -28,57 +29,34 @@
 		>
 	{/each}
 </div>
+
+<!-- Latest release info -->
+
 <section class="w-full max-w-screen-md m-auto mt-12 flex flex-col gap-6">
 	<div
 		class="flex items-start bg-yellow-50 border border-yellow-100 p-4 mt-2 rounded gap-4"
 		role="alert"
 	>
 		<span class="bg-white border border-yellow-100 px-2 py-1 w-min rounded-lg"> ✨ </span>
-		<div>
+		<div class="text-sm text-gray-800">
 			<h3 class="font-semibold text-lg">Dernières nouveautés</h3>
-
-			<p class="text-sm text-gray-800 mt-2">
-				Ces derniers mois, plusieurs améliorations ont été apportées à <span class="italic"
-					>Mes Aides Vélo</span
-				>
-				par les équipes de
-				<a href="https://beta.gouv.fr" target="_blank" class="text-green-600 hover:underline"
-					>beta.gouv.fr</a
-				> qui ont repris le travail sur la mise à jour des aides. Voici les principales nouveautés :
-			</p>
-			<ul class="mt-4">
-				<li class="text-sm text-gray-800 mt-2">
-					🚀 <strong>Mise à jour des aides</strong> - les aides sont régulièrement mises à jour.
-					Dernière suppression majeure :
-					<a
-						href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000050690951"
-						target="_blank"
-						class="text-green-600 hover:underline"
-						>le bonus écologique vélo et la prime à la conversion</a
-					>.
-				</li>
-				<li class="text-sm text-gray-800 mt-2">
-					🦽 <strong>Nouveau type de vélo</strong> - les vélos adaptés pour les personnes à mobilité
-					réduite sont désormais pris en compte.
-				</li>
-				<li class="text-sm text-gray-800 mt-2">
-					🚲 <strong>Vélo d'occasion</strong> - il est désormais possible de choisir les aides en fonction
-					de l'état du vélo (neuf ou occasion).
-				</li>
-				<li class="text-sm text-gray-800 mt-2">
-					📅 <strong>Date de fin et de dernière mise à jour</strong> - chaque aide affiche désormais
-					sa date de fin (si renseignée) ainsi que la date de sa dernière mise à jour.
-				</li>
-			</ul>
-			<p class="text-sm text-green-600 mt-4">
-				<a
-					href="https://github.com/betagouv/publicodes-aides-velo/releases"
-					target="_blank"
-					class="hover:underline">→ En savoir plus</a
-				>
-			</p>
+			<Autumn2025 />
 		</div>
 	</div>
-
-	<JagisCta />
 </section>
+
+<!-- List of previous releases -->
+
+<details class="w-full max-w-screen-md m-auto mt-12 flex flex-col gap-6">
+	<summary class="text-lg font-bold cursor-pointer"> Historique des mises à jour </summary>
+
+	<div class="flex flex-col gap-6">
+		<div class="flex items-start bg-gray-50 border border-gray-100 p-4 rounded gap-4">
+			<span class="bg-white border border-gray-100 px-2 py-1 w-min rounded-lg"> 🗓️ </span>
+			<div>
+				<h3 class="font-semibold text-lg">Printemps 2025</h3>
+				<Spring2025 />
+			</div>
+		</div>
+	</div>
+</details>

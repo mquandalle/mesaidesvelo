@@ -1,11 +1,11 @@
 <script>
+	import { building, dev } from '$app/environment';
 	import { preloadCode } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { localisation } from '$lib/stores';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import { localisation } from '$lib/stores';
 	import { onMount, setContext } from 'svelte';
-	import { building, dev } from '$app/environment';
 
 	onMount(() => {
 		preloadCode('/', '/ville/*');
@@ -101,7 +101,7 @@
 			</a>
 		{/if}
 	</header>
-	<div class="pb-6 {!isEmbeded ? 'flex-1' : ''}">
+	<div class="pb-12 {!isEmbeded ? 'flex-1' : ''}">
 		<slot />
 	</div>
 	<Footer />
