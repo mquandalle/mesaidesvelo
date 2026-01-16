@@ -7,6 +7,7 @@ import fs from 'fs';
 import { join } from 'path';
 import sharp from 'sharp';
 
+import got from 'got';
 import aidesWithCollectivities from '../lib/data/aides-collectivities.json' with { type: 'json' };
 import { writeJsonData } from './writeData.js';
 
@@ -30,35 +31,40 @@ for (const id of ids) {
 	}
 
 	const imgName = imgSrc.split('/').at(-1).split('.')[0] + '.webp';
-	await generateThumbnail(imgSrc, imgName);
-	thumbnailsManifest[id] = imgName;
+	const filePath = join(miniatureDirectory, imgName);
+
+	if (fs.existsSync(filePath)) {
+		console.log(`Thumbnail ${imgName} already exists, skipping download.`);
+		continue;
+	}
+
+	try {
+		await generateThumbnail(imgSrc, filePath);
+		console.log(`Generated thumbnail for aid ID ${id}`);
+		thumbnailsManifest[id] = imgName;
+	} catch (e) {
+		console.error(`Failed to generate thumbnail for aid ID ${id}: ${e.message}`);
+	}
 
 	if (imgSrc.startsWith('https://upload.wikimedia.org/')) {
 		console.log(`Waiting to avoid Wikimedia rate limiting...`);
-		await new Promise((resolve) => setTimeout(resolve, 3000));
+		await new Promise((resolve) => setTimeout(resolve, 5000));
 	}
 }
 
-async function generateThumbnail(imgSrc, imgName) {
-	const resp = await fetch(imgSrc);
+async function generateThumbnail(imgSrc, filePath) {
+	const buffer = await got(imgSrc, {
+		headers: {
+			'user-agent':
+				'mesaidesvelo/1.0 (https://github.com/mquandalle/mesaidesvelo; contact: emile@calinou.coop)',
+		},
+		retry: {
+			limit: 5,
+		},
+		timeout: { request: 30000 },
+	}).buffer();
 
-	if (!resp.ok) {
-		console.error(`Fail fetching ${imgSrc} – HTTP status: ${resp.status}`);
-		return;
-	}
-
-	const contentType = resp.headers.get('content-type') || '';
-	if (!contentType.startsWith('image/')) {
-		console.error(`Content-Type is not an image for ${imgSrc}: ${contentType}`);
-		return;
-	}
-
-	const buffer = Buffer.from(await resp.arrayBuffer());
-	const img = sharp(buffer);
-	await img
-		.resize({ fit: 'inside', height: 170, width: 120 })
-		.webp()
-		.toFile(join(miniatureDirectory, imgName));
+	await sharp(buffer).resize({ fit: 'inside', height: 170, width: 120 }).webp().toFile(filePath);
 }
 
 writeJsonData('miniatures.json', thumbnailsManifest);
