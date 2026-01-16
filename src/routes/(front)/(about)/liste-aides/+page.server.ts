@@ -23,14 +23,24 @@ const groupBy = (list, f) =>
 		};
 	}, {});
 
-const formatAideForClient = (aide) => ({
-	titre: aide.rawNode.titre.replace(/région/i, '').trim(),
-	lien: aide.rawNode.lien,
-	slug: aide.slug,
-	maximumsPerVeloKind: aidesPerVeloKind(aide)
-		.sort(([, maxA], [, maxB]) => maxA.nodeValue - maxB.nodeValue)
-		.map(([kind, maximumAide]) => [kind, formatValue(maximumAide)]),
-});
+const formatAideForClient = (aide, allAides = []) => {
+	const hasDuplicateTitre =
+		allAides.filter(
+			(a) =>
+				a.rawNode.titre.replace(/région/i, '').trim() ===
+				aide.rawNode.titre.replace(/région/i, '').trim(),
+		).length > 1;
+
+	return {
+		titre: aide.rawNode.titre.replace(/région/i, '').trim(),
+		...(hasDuplicateTitre && { description: aide.rawNode.description }),
+		lien: aide.rawNode.lien,
+		slug: aide.slug,
+		maximumsPerVeloKind: aidesPerVeloKind(aide)
+			.sort(([, maxA], [, maxB]) => maxA.nodeValue - maxB.nodeValue)
+			.map(([kind, maximumAide]) => [kind, formatValue(maximumAide)]),
+	};
+};
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
@@ -47,7 +57,7 @@ export async function load() {
 
 	const aidesRegions = associatedCollectivities
 		.filter(({ collectivity }) => collectivity.kind === 'région')
-		.map(formatAideForClient);
+		.map((aide) => formatAideForClient(aide, associatedCollectivities));
 
 	const aidesLocales = Object.fromEntries(
 		Object.entries(
@@ -69,7 +79,7 @@ export async function load() {
 								? 1
 								: (b.population ?? 0) - (a.population ?? 0),
 					)
-					.map(formatAideForClient),
+					.map((aide) => formatAideForClient(aide, associatedCollectivities)),
 			]),
 	);
 
