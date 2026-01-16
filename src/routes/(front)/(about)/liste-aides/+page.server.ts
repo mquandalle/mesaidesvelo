@@ -1,3 +1,5 @@
+export const ssr = false;
+
 import { engine } from '$lib/engine';
 import { aidesPerVeloKind } from '$lib/textUtils';
 import { formatValue } from 'publicodes';
@@ -14,8 +16,8 @@ export const prerender = true;
  * }} AideSummary
  */
 
-const groupBy = (list, f) =>
-	list.reduce((acc, elm) => {
+const groupBy = <T>(list: T[], f: (item: T) => string): Record<string, T[]> =>
+	list.reduce((acc: Record<string, T[]>, elm) => {
 		const key = f(elm);
 		return {
 			...acc,
