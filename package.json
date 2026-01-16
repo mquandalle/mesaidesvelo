@@ -50,6 +50,7 @@
 		"@betagouv/aides-velo": "^3.4.0",
 		"@etalab/decoupage-administratif": "^5.2.0",
 		"fuzzysort": "^2.0.4",
+		"got": "^14.6.6",
 		"jsdom": "^23.0.1",
 		"playwright-aws-lambda": "^0.10.0",
 		"playwright-core": "^1.40.1",
