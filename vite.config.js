@@ -10,7 +10,8 @@ const config = {
 		WindiCSS({
 			scan: {
 				dirs: [path.resolve('./src'), path.resolve('./retrofit')],
-				exclude: ['node_modules', '.git'],
+				exclude: ['.git', 'node_modules'],
+				include: [path.resolve('./node_modules/layerchart/**/*.{svelte,js}')],
 				fileExtensions: ['svelte', 'ts', 'js', 'svx'],
 			},
 		}),
