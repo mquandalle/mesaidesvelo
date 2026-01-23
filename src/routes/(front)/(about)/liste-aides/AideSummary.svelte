@@ -4,7 +4,9 @@
 	export let aide;
 </script>
 
-<a href="/ville/{aide.slug}" class="hover:text-green-700">{aide.titre}</a>
+<a href="/ville/{aide.slug}" class="hover:text-green-700">{aide.titre} </a>
+{#if aide.description}
+	- {aide.description.length > 50 ? aide.description.slice(0, 50) + '...' : aide.description}{/if}
 <a
 	href={aide.lien}
 	target="_blank"
@@ -14,6 +16,9 @@
 	>site officiel</a
 ><br />
 <div class="inline-block text-xs text-gray-600">
+	{#if aide.maximumsPerVeloKind.length === 0}
+		Le calcul de l'aide maximale est soumis à des conditions spécifiques.
+	{/if}
 	{#each aide.maximumsPerVeloKind as [kind, maximumAide]}
 		<div class="inline-block not-last:border-r border-gray-300 mr-2 pr-2 last:mr-0">
 			{kind}
