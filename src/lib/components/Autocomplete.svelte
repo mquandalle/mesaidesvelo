@@ -3,9 +3,9 @@
 	// We removed a few options, but we should simplify this component further
 	// and migrate it to windi.css
 
-	import { onMount } from 'svelte';
-	import { removeAccents } from '$lib/utils';
 	import { browser } from '$app/environment';
+	import { removeAccents } from '$lib/utils';
+	import { onMount } from 'svelte';
 
 	// the list of items  the user can select from
 	export let items = [];
@@ -48,10 +48,10 @@
 	};
 
 	// events
-	export let beforeChange = function (oldSelectedItem, newSelectedItem) {
+	export let beforeChange = function (_oldSelectedItem, _newSelectedItem) {
 		return true;
 	};
-	export let onChange = function (newSelectedItem) {};
+	export let onChange = function (_newSelectedItem) {};
 	export let onFocus = function () {};
 	export let onBlur = function () {};
 	export let onCreate = function (text) {
@@ -355,9 +355,7 @@
 
 		if (!searchFunction) {
 			processListItems(textFiltered);
-		}
-
-		// external search which provides items
+		} // external search which provides items
 		else {
 			lastRequestId = lastRequestId + 1;
 			const currentRequestId = lastRequestId;
@@ -387,9 +385,7 @@
 					items = [];
 					processListItems(textFiltered);
 				}
-			}
-
-			// searchFunction is a regular function
+			} // searchFunction is a regular function
 			else {
 				let result = await searchFunction(textFiltered);
 
@@ -672,7 +668,7 @@
 			console.log('onEsc');
 		}
 
-		//if (text) return clear();
+		// if (text) return clear();
 		e.stopPropagation();
 		if (opened) {
 			input.focus();
@@ -705,9 +701,7 @@
 
 		if (!text) {
 			filteredListItems = listItems;
-		}
-
-		// When an async component is initialized, the item list
+		} // When an async component is initialized, the item list
 		// must be loaded when the input is focused.
 		else if (!listItems.length && selectedItem && searchFunction) {
 			search();
@@ -865,9 +859,11 @@
 </script>
 
 <div
-	class="{className ? className : ''}
+	class="
+    {className ? className : ''}
     {hideArrow || !items.length ? 'hide-arrow' : ''}
-    autocomplete select is-fullwidth {uniqueId}"
+    autocomplete select is-fullwidth {uniqueId}
+  "
 	class:is-loading={showLoadingIndicator && loading}
 >
 	<select name={selectName} id={selectId}>
@@ -896,17 +892,23 @@
 		/>
 	</div>
 	<div
-		class="{dropdownClassName
+		class="
+      {dropdownClassName
 			? dropdownClassName
 			: ''} autocomplete-list shadow-md rounded-b-3xl {showList ? '' : 'hidden'}
-      is-fullwidth"
+      is-fullwidth
+    "
 		bind:this={list}
 	>
 		{#if filteredListItems && filteredListItems.length > 0}
 			{#each filteredListItems as listItem, i}
 				{#if listItem}
-					<div
-						class="autocomplete-list-item {i === highlightIndex ? 'bg-green-100' : ''}"
+					<button
+						class="
+              block w-full text-left autocomplete-list-item {i === highlightIndex
+							? 'bg-green-100'
+							: ''}
+            "
 						class:confirmed={isConfirmed(listItem.item)}
 						on:click={() => onListItemClick(listItem)}
 						on:pointerenter={() => {
@@ -924,7 +926,7 @@
 								{@html listItem.label}
 							{/if}
 						</slot>
-					</div>
+					</button>
 				{/if}
 			{/each}
 		{:else if loading && loadingText}
@@ -932,9 +934,9 @@
 				<slot name="loading" {loadingText}>{loadingText}</slot>
 			</div>
 		{:else if create}
-			<div class="autocomplete-list-item-create" on:click={selectItem}>
+			<button class="autocomplete-list-item-create" on:click={selectItem}>
 				<slot name="create" {createText}>{createText}</slot>
-			</div>
+			</button>
 		{:else if noResultsText}
 			<div class="autocomplete-list-item-no-results">
 				<slot name="no-results" {noResultsText}>{noResultsText}</slot>
