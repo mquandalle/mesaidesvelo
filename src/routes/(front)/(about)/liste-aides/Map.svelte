@@ -1,5 +1,5 @@
 <script>
-	import geojson from '$lib/data/regions.json';
+	import geojson from '$lib/data/regions-geojson-version-simplifiee.json';
 	import aidesCollectivites from '$lib/data/aides-collectivities.json';
 	import { scaleQuantile } from 'd3-scale';
 	import { schemeGreens } from 'd3-scale-chromatic';
