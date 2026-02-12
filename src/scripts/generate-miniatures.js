@@ -13,19 +13,13 @@ import { writeJsonData } from './writeData.js';
 
 const currentPath = new URL('./', import.meta.url).pathname;
 const rootPath = join(currentPath, '../../');
-
 const miniatureDirectory = join(rootPath, 'static/miniatures/');
-if (fs.existsSync(miniatureDirectory)) {
-	fs.rmSync(miniatureDirectory, { recursive: true });
-}
-fs.mkdirSync(miniatureDirectory, { recursive: true });
 
 const thumbnailsManifest = {};
 const ids = Object.keys(aidesWithCollectivities);
 
 for (const id of ids) {
 	let imgSrc = miniatures[id];
-
 	if (!imgSrc) {
 		continue;
 	}
@@ -35,6 +29,7 @@ for (const id of ids) {
 
 	if (fs.existsSync(filePath)) {
 		console.log(`Thumbnail ${imgName} already exists, skipping download.`);
+		thumbnailsManifest[id] = imgName;
 		continue;
 	}
 
