@@ -3,8 +3,8 @@
 	import { slugify } from '$lib/utils';
 	import departements from '@etalab/decoupage-administratif/data/departements.json';
 	import AideSummary from './AideSummary.svelte';
-	import Map from './Map.svelte';
-
+	import RegionalMap from './RegionalMap.svelte';
+	import LocalMap from './LocalMap.svelte';
 	/** @type {import('./$types').PageData} */
 	export let data;
 </script>
@@ -32,12 +32,7 @@
 		et du <a href="/ville/luxembourg">Luxembourg</a>.
 	</p>
 	<h2>Les aides régionales</h2>
-	<details>
-		<summary>Voir la carte des régions</summary>
-		<div style="height: 500px; width: 100%; margin-top: 1em;">
-			<Map />
-		</div>
-	</details>
+	<RegionalMap />
 	<ul>
 		{#each data.aidesRegions as aide}
 			<li>
@@ -47,7 +42,7 @@
 	</ul>
 
 	<h2>Les aides locales</h2>
-
+	<LocalMap />
 	{#each departements.filter(({ code }) => code.length === 2 && code !== '2A' && code !== '2B') as departement}
 		<h3>
 			<a href="/departement/{slugify(departement.nom)}">{departement.code} - {departement.nom}</a>
