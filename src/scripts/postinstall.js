@@ -1,3 +1,2 @@
-await import('./transform-communes-data.js');
-await import('./associate-collectivities.js');
+await import('./add-slugs-to-imported-files.js');
 await import('./generate-miniatures.js');
