@@ -1,29 +1,10 @@
 <script>
-	import geojson from '$lib/data/regions-geojson-version-simplifiee.json';
-	import aidesCollectivites from '$lib/data/aides-collectivities.json';
-	import { scaleQuantile } from 'd3-scale';
-	import { schemeGreens } from 'd3-scale-chromatic';
 	import { geoMercator } from 'd3-geo';
 	import { Chart, Svg, GeoPath, Legend, Tooltip } from 'layerchart';
 
-	const enrichGeojson = geojson.features.map((feature) => {
-		const regionCode = feature.properties.code;
-		const nbAides = Object.entries(aidesCollectivites).filter(
-			([_, aide]) => aide.collectivity.kind === 'région' && aide.collectivity.value === regionCode,
-		).length;
-
-		return {
-			...feature,
-			properties: {
-				...feature.properties,
-				nbAides: nbAides,
-			},
-		};
-	});
-
-	const colorScale = scaleQuantile()
-		.domain([0, Math.max(...enrichGeojson.map((d) => d.properties.nbAides))])
-		.range(schemeGreens[3]);
+	export let geojson;
+	export let enrichGeojson;
+	export let colorScale;
 </script>
 
 <div class="h-[600px] overflow-hidden">

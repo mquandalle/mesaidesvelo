@@ -76,11 +76,12 @@ const getCountry = (rule) =>
 const associateCollectivityMetadata = (rule) => {
 	const collectivity = extractCollectivityFromAST(rule);
 	const codeInsee = getCodeInseeForCollectivity(collectivity);
-	const { slug, departement, population } = getCommune(codeInsee) ?? {};
+	const { slug, region, departement, population } = getCommune(codeInsee) ?? {};
 	const country = getCountry(rule);
 	return {
 		collectivity,
 		codeInsee,
+		region,
 		departement,
 		population,
 		slug,
