@@ -5,8 +5,8 @@
 import { slugify } from '../lib/utils.js';
 import { writeJsonData } from './writeData.js';
 
+import communes from '../lib/data/communes.json' with { type: 'json' };
 import aidesCollectivities from '@betagouv/aides-velo/data/aides-collectivities.json' with { type: 'json' };
-import communes from '@betagouv/aides-velo/data/communes.json' with { type: 'json' };
 
 // ===== Traitement des communes =====
 
