@@ -57,6 +57,8 @@ const formatAideForClient = (aide) => {
 		maximumsPerVeloKind: aidesPerVeloKind(aide)
 			.sort(([, maxA], [, maxB]) => maxA.nodeValue - maxB.nodeValue)
 			.map(([kind, maximumAide]) => [kind, formatValue(maximumAide)]),
+		regionCode: aide.region,
+		departementCode: aide.departement,
 	};
 };
 
