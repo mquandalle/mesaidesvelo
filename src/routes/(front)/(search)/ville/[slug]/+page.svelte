@@ -4,7 +4,6 @@
 	import Details from '$lib/components/Details.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 	import ShareButton from '$lib/components/ShareButton.svelte';
-	import JagisCTA from '$lib/components/JagisCTA.svelte';
 	import { veloCat } from '$lib/stores';
 	import { fly } from 'svelte/transition';
 	import ExplanationsText from './ExplanationsText.svelte';
@@ -44,8 +43,5 @@
 		</PaneNavigation>
 	</div>
 	<ShareButton title="Toutes les aides vélo à {ville.nom}" />
-	<section class="mt-8">
-		<JagisCTA />
-	</section>
 	<ExplanationsText />
 </div>

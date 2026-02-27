@@ -50,7 +50,7 @@
 		"yaml": "^2.3.4"
 	},
 	"dependencies": {
-		"@betagouv/aides-velo": "^3.4.0",
+		"@betagouv/aides-velo": "^3.6.1",
 		"@etalab/decoupage-administratif": "^5.2.0",
 		"fuzzysort": "^2.0.4",
 		"got": "^14.6.6",
