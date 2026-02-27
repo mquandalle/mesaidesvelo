@@ -24,7 +24,7 @@ for (const id of ids) {
 		continue;
 	}
 
-	const imgName = imgSrc.split('/').at(-1).split('.')[0] + '.webp';
+	const imgName = decodeURIComponent(imgSrc.split('/').at(-1).split('.')[0]) + '.webp';
 	const filePath = join(miniatureDirectory, imgName);
 
 	if (fs.existsSync(filePath)) {
