@@ -22,8 +22,8 @@
 		sont désormais pris en compte.
 	</li>
 	<li class="text-sm text-gray-800 mt-2">
-		🚲 <strong>Vélo d'occasion</strong> - il est désormais possible de choisir les aides en fonction
-		de l'état du vélo (neuf ou occasion).
+		🚲 <strong>Vélo d'occasion</strong> - il est désormais possible de choisir les aides en fonction de
+		l'état du vélo (neuf ou occasion).
 	</li>
 </ul>
 <p class="text-sm text-green-600 mt-4">
