@@ -2,7 +2,7 @@ import { compile } from 'mdsvex';
 import playwright from 'playwright-aws-lambda';
 import template from './template.html?raw';
 import communes from '$lib/data/communes.json';
-import aidesCollectivites from '$lib/data/aides-collectivities.json';
+import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
 import miniatures from '$lib/data/miniatures.json';
 
 /** @type {import('./$types').RequestHandler} */
@@ -15,7 +15,7 @@ export async function GET({ params: { slug } }) {
 		throw error(404);
 	}
 
-	const localRuleName = Object.entries(aidesCollectivites).find(
+	const localRuleName = Object.entries(aidesWithLocalisation).find(
 		([, { collectivity }]) =>
 			(collectivity.kind === 'code insee' && collectivity.value === ville.code) ||
 			(collectivity.kind === 'epci' && collectivity.value === ville.epci),
