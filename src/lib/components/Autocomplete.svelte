@@ -253,7 +253,7 @@
 	}
 
 	// -- Reactivity --
-	$: items, prepareListItems();
+	$: (items, prepareListItems());
 
 	let loaded = false;
 	onMount(() => {
@@ -268,7 +268,7 @@
 		loaded && onChange(selectedItem);
 	}
 
-	$: selectedItem, onSelectedItemChanged();
+	$: (selectedItem, onSelectedItemChanged());
 
 	$: highlightedItem =
 		filteredListItems &&
