@@ -9,7 +9,6 @@ import classementVilleplus from '$lib/data/classement-villeplus.json';
 import communes from '$lib/data/communes.json';
 import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
 
-
 const barometreFubPerCity = Object.fromEntries(
 	barometreFubRawCsv
 		.trim()
