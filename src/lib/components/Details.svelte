@@ -76,9 +76,10 @@
 	← Toutes les aides
 </a>
 <h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
-	{titleCategory($veloCat)}{#if emojiCategory($veloCat)}&nbsp;<Emoji
-			emoji={emojiCategory($veloCat)}
-		/>{/if}
+	{titleCategory($veloCat)}
+	{#if emojiCategory($veloCat)}&nbsp;
+		<Emoji className="min-h-7 -ml-2 -mt-1" emoji={emojiCategory($veloCat)} />
+	{/if}
 </h2>
 
 {#if categoryDescription}

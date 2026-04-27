@@ -1,14 +1,14 @@
 <script>
 	import geojson from '$lib/data/regions-geojson-version-simplifiee.json';
-	import aidesCollectivites from '$lib/data/aides-collectivities.json';
 	import { scaleQuantile } from 'd3-scale';
 	import { schemeGreens } from 'd3-scale-chromatic';
 	import { geoMercator } from 'd3-geo';
 	import { Chart, Svg, GeoPath, Legend, Tooltip } from 'layerchart';
+	import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
 
 	const enrichGeojson = geojson.features.map((feature) => {
 		const regionCode = feature.properties.code;
-		const nbAides = Object.entries(aidesCollectivites).filter(
+		const nbAides = Object.entries(aidesWithLocalisation).filter(
 			([_, aide]) => aide.collectivity.kind === 'région' && aide.collectivity.value === regionCode,
 		).length;
 

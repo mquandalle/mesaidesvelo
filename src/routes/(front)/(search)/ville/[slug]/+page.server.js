@@ -7,7 +7,7 @@ import { engine } from '$lib/engine';
 import { rawCityToFullLocalisation } from '$lib/utils';
 import classementVilleplus from '$lib/data/classement-villeplus.json';
 import communes from '$lib/data/communes.json';
-import aidesCollectivites from '$lib/data/aides-collectivities.json';
+import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
 
 const barometreFubPerCity = Object.fromEntries(
 	barometreFubRawCsv
@@ -28,7 +28,7 @@ const commentairesLabelTourDeFrance = labelTourDeFranceCommentairesLines.reduce(
 	}
 }, {});
 
-const ruleNamePerCollectivity = Object.entries(aidesCollectivites).reduce(
+const ruleNamePerCollectivity = Object.entries(aidesWithLocalisation).reduce(
 	(manifest, [ruleName, { collectivity }]) => {
 		manifest[collectivity.kind][collectivity.value] = ruleName;
 		return manifest;

@@ -1,11 +1,11 @@
 import { test, expect } from 'vitest';
-import { data } from '@betagouv/aides-velo';
+import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
 
 // NOTE: skip for now, more details in https://github.com/mquandalle/mesaidesvelo/issues/247
 test.skip('content reference existing rules', () => {
 	const content = import.meta.glob('../src/content/*.svx');
 	const fileNames = Object.keys(content);
-	const existingsRuleNames = Object.keys(data.aidesAvecLocalisation).map((dottedName) =>
+	const existingsRuleNames = Object.keys(aidesWithLocalisation).map((dottedName) =>
 		dottedName.toLowerCase(),
 	);
 	const inferedRuleNames = fileNames.map(

@@ -2,7 +2,7 @@
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { engine, getEngine } from '$lib/engine';
 	import { localisationSituation, veloCat } from '$lib/stores';
-	import Engine, { formatValue, reduceAST } from 'publicodes';
+	import { formatValue, reduceAST } from 'publicodes';
 	import { derived } from 'svelte/store';
 	import Emoji from './Emoji.svelte';
 
@@ -77,7 +77,10 @@
 			}
 
 			return engineBis.evaluate({
-				valeur: valeur.replace(/\s/g, ''),
+				// NOTE: the formated value looks like "1 000,50" and we need to
+				// convert it to "1000.50" to be able to parse it as a number. This // is
+				// a bit hacky but it works for now.
+				valeur: valeur.replace(/\s/g, '').replace(/,/g, '.'),
 				unité: unit,
 			}).nodeValue;
 		};
@@ -128,7 +131,6 @@
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
-	import Question from './Question.svelte';
 
 	export let goals;
 
@@ -217,8 +219,9 @@
 			title="Plus d'informations"
 			class="cursor-pointer"
 			on:click={() => (showExplanations = !showExplanations)}
-			><Emoji className="align-middle" emoji="ℹ" /></span
 		>
+			<Emoji className="align-middle" emoji="ℹ" />
+		</span>
 		{#if showExplanations}
 			<p
 				class="my-2 text-gray-700 prose-sm border-l-2 rounded-r p-2 bg-gray-50"
@@ -234,20 +237,20 @@
 				<NumberField bind:value={$revenuFiscal} id="revenu-fiscal" unité="€" />
 			{:else}
 				{#each displayedThresholds as threshold}
-					<MultipleChoiceAnswer value={threshold - 1} bind:group={$revenuFiscal}
-						>moins de <strong class="font-semibold"
-							>{formatValue(threshold)}
-							€</strong
-						></MultipleChoiceAnswer
-					>
+					<MultipleChoiceAnswer value={threshold - 1} bind:group={$revenuFiscal}>
+						moins de <strong class="font-semibold">
+							{formatValue(threshold)} €
+						</strong>
+					</MultipleChoiceAnswer>
 				{/each}
 				<MultipleChoiceAnswer
 					value={displayedThresholds[displayedThresholds.length - 1] + 1}
 					bind:group={$revenuFiscal}
-					>plus de <strong class="font-semibold">
-						{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €</strong
-					></MultipleChoiceAnswer
 				>
+					plus de <strong class="font-semibold">
+						{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €
+					</strong>
+				</MultipleChoiceAnswer>
 			{/if}
 		</div>
 	</div>

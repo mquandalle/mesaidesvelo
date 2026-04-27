@@ -3,7 +3,9 @@ export const ssr = false;
 import { engine } from '$lib/engine';
 import { aidesPerVeloKind } from '$lib/textUtils';
 import { formatValue } from 'publicodes';
-import aidesCollectivites from '$lib/data/aides-collectivities.json';
+import type { RuleNode } from 'publicodes';
+import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
+import type { Localisation } from '@betagouv/aides-velo';
 
 export const prerender = true;
 
@@ -28,14 +30,17 @@ const groupBy = <T>(list: T[], f: (elm: T) => string): Record<string, T[]> =>
 		{} as Record<string, T[]>,
 	);
 
-const associatedCollectivities = Object.keys(aidesCollectivites).map((ruleName) => ({
+const associatedCollectivities = Object.keys(aidesWithLocalisation).map((ruleName) => ({
 	...engine.getRule(ruleName),
-	...aidesCollectivites[ruleName],
+	...aidesWithLocalisation[ruleName],
 }));
 
 const collectivitiesTitles = associatedCollectivities.reduce(
 	(acc, collectivity) => {
 		const title = collectivity.rawNode.titre;
+
+		if (!title) return acc;
+
 		if (!acc.all.includes(title)) {
 			acc.all.push(title);
 		} else {
@@ -43,13 +48,13 @@ const collectivitiesTitles = associatedCollectivities.reduce(
 		}
 		return acc;
 	},
-	{ all: [], duplicates: [] },
+	{ all: [] as string[], duplicates: [] as string[] },
 );
 
-const formatAideForClient = (aide) => {
+const formatAideForClient = (aide: RuleNode & Localisation) => {
 	return {
-		titre: aide.rawNode.titre.replace(/région/i, '').trim(),
-		...(collectivitiesTitles.duplicates.includes(aide.rawNode.titre) && {
+		titre: aide.rawNode.titre?.replace(/région/i, '').trim(),
+		...(collectivitiesTitles.duplicates.includes(aide.rawNode.titre ?? '') && {
 			description: aide.rawNode.description,
 		}),
 		lien: aide.rawNode.lien,
@@ -65,7 +70,7 @@ export async function load() {
 	const aidesEtat = associatedCollectivities
 		.filter(({ collectivity }) => collectivity.kind === 'pays' && collectivity.value === 'France')
 		.map(({ rawNode }) => ({
-			titre: rawNode.titre.replace(/de l'état/i, '').trim(),
+			titre: rawNode.titre?.replace(/de l'état/i, '').trim(),
 		}));
 
 	const aidesRegions = associatedCollectivities
@@ -78,7 +83,7 @@ export async function load() {
 				associatedCollectivities.filter(({ collectivity }) =>
 					['code insee', 'epci', 'département'].includes(collectivity.kind),
 				),
-				({ departement }) => departement,
+				({ departement }) => departement ?? '',
 			),
 		)
 			.sort(([a], [b]) => parseInt(a) - parseInt(b))
