@@ -74,7 +74,7 @@
 			role="alert"
 		>
 			<span class="bg-white border border-red-100 px-2 py-1 w-min rounded-lg">
-				<Emoji className="ml-0" emoji="❌" />
+				<Emoji className="ml-0 !mt-0 !mb-0" emoji="❌" />
 			</span>
 			<span>
 				La prime à la conversion pour un vélo à assistance électrique (VAE) est
