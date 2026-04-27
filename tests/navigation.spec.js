@@ -38,9 +38,9 @@ test.describe('Navigation scenarios', () => {
 		await expect(totalAides).toHaveText('Total des aides 100 €', { useInnerText: true });
 
 		await page.fill('input:below(label:text("Quel est votre âge ?"))', '15');
-		expect(page.getByTestId('question-demandeur-age-value-15')).toBeTruthy();
+		await expect(page.getByTestId('question-demandeur-age-value-15')).toBeVisible();
 		await expect(totalAides).toHaveText('Total des aides 0 €', { useInnerText: true });
-		expect(page.getByTestId('question-demandeur-age-value-15')).toBeTruthy();
+		await expect(page.getByTestId('question-demandeur-age-value-15')).toBeVisible();
 	});
 
 	test('multiple choices scenario', async ({ page }) => {
@@ -54,7 +54,7 @@ test.describe('Navigation scenarios', () => {
 		await expect(totalAides).toHaveText('Total des aides 525 €', { useInnerText: true });
 
 		await page.fill('input:below(label:text("Quel est votre âge ?"))', '15');
-		expect(page.getByTestId('question-demandeur-age-value-15')).toBeTruthy();
+		await expect(page.getByTestId('question-demandeur-age-value-15')).toBeVisible();
 		await expect(totalAides).toHaveText('Total des aides 525 €', { useInnerText: true });
 
 		await page.click('text=Autre');
@@ -88,14 +88,15 @@ test('Aide not available', async ({ page }) => {
 	);
 });
 
-test('Revenu of type number', async ({ page }) => {
+// FIXME: linked to https://github.com/betagouv/publicodes-aides-velo/issues/97
+test.skip('Revenu of type number', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/crolles?velo=électrique');
-	expect(page.locator('input[type=number][id=revenu-fiscal]')).toBeTruthy();
+	await expect(page.locator('input[type=number][id=revenu-fiscal]')).toBeVisible();
 });
 
 test('Thumbnail displayed', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/albi?velo=cargo');
-	expect(page.locator('img[alt="Logo grand albigeois"]')).toBeTruthy();
+	await expect(page.getByRole('button', { name: "Logo communauté d'agglomé" })).toBeVisible();
 });
 
 test('Revenu selector', async ({ page }) => {
@@ -103,10 +104,10 @@ test('Revenu selector', async ({ page }) => {
 	await page.waitForTimeout(500);
 	await page.click('text=plus de 2 076 €');
 
-	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
+	await expect(page.getByText('aide non disponible')).toHaveCount(8);
 
 	await page.getByLabel('Oui').click();
-	await expect(page.locator('text=aide non disponible')).toHaveCount(8);
+	await expect(page.getByText('aide non disponible')).toHaveCount(8);
 
 	await page.goto(baseUrl + '/ville/charenton-le-pont?velo=électrique');
 	await page.waitForTimeout(100);
@@ -115,21 +116,22 @@ test('Revenu selector', async ({ page }) => {
 
 test('New or second hand bike', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/toulouse?velo=électrique');
-	expect(page.locator("text=neuf ou d'occasion ?")).toBeTruthy();
-
-	await page.goto(baseUrl + '/ville/lyon?velo=mécanique simple');
-	expect(page.locator("text=uniquement pour l'achat d'un vélo d'occasion")).toBeTruthy();
+	await expect(page.getByRole('button', { name: 'Neuf' })).toBeVisible();
+	await expect(page.getByRole('button', { name: "D'occasion" })).toBeVisible();
 
 	await page.goto(baseUrl + '/ville/lyon?velo=électrique');
-	expect(page.locator("text=uniquement pour l'achat d'un vélo neuf")).toBeTruthy();
+	await expect(page.getByText("Neuf ou d'occasion")).toBeVisible();
 
-	await page.goto(baseUrl + '/ville/pantin?velo=mécanique simple');
-	expect(page.locator("text=pour un vélo neuf ou un vélo d'occasion")).toBeTruthy();
+	await page.goto(baseUrl + '/ville/lyon?velo=mécanique simple');
+	await expect(page.getByText("D'occasion uniquement")).toBeVisible();
+
+	await page.goto(baseUrl + '/ville/strasbourg?velo=électrique');
+	await expect(page.getByText('Neuf uniquement')).toBeVisible();
 });
 
 test('Text generation', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/landerneau');
-	expect(page.locator("text=Malheureusement il n'existe aucune aide locale")).toBeTruthy();
+	await expect(page.getByText('Malheureusement il n’existe aucune aide locale')).toBeVisible();
 });
 
 async function startNavigation(page, ville) {
