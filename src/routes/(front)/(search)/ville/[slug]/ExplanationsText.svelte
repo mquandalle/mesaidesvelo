@@ -69,22 +69,14 @@
 		{/if}
 
 		<h2>Le bonus écologique de l’État</h2>
-		<div
-			class="flex items-start bg-red-50 border border-red-100 p-4 mt-2 rounded gap-4"
-			role="alert"
-		>
-			<span class="bg-white border border-red-100 px-2 py-1 w-min rounded-lg">
-				<Emoji className="ml-0 !mt-0 !mb-0" emoji="❌" />
-			</span>
-			<span>
-				La prime à la conversion pour un vélo à assistance électrique (VAE) est
-				<a
-					href="https://www.service-public.fr/particuliers/vosdroits/F36828"
-					target="_blank"
-					class="text-green-600 hover:underline">supprimée depuis le 14 février 2025</a
-				>.
-			</span>
-		</div>
+		<p class="bg-red-50 border border-red-100 p-4 mt-2 rounded gap-4" role="alert">
+			La prime à la conversion pour un vélo à assistance électrique (VAE) est
+			<a
+				href="https://www.service-public.fr/particuliers/vosdroits/F36828"
+				target="_blank"
+				class="text-green-600 hover:underline">supprimée depuis le 14 février 2025</a
+			>.
+		</p>
 	{/if}
 
 	<!-- {#if $page.data.ville.zfe} -->
