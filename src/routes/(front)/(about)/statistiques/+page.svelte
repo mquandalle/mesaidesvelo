@@ -30,14 +30,21 @@
 <div class="max-w-screen-lg m-auto">
 	<iframe
 		plausible-embed
-		src="https://plausible.io/share/mesaidesvelo.fr?auth=LfNTf6VXOA2eUNAku7tfL&embed=true&theme=light&background=transparant"
+		src="https://plausible.quandalle.com/share/mesaidesvelo.fr?auth=718e74b5c4076bd9b8f95e64fa847c9a&embed=true&theme=light"
 		title="Statistiques Plausible de MesAidesVélo"
 		scrolling="no"
 		frameborder="0"
 		loading="lazy"
-		style="width: 1px; min-width: 100%; height: 1600px;"
+		style="width: 1px; min-width: 100%; height: 1600px; color-scheme: auto;"
 	></iframe>
-	<script async src="https://plausible.io/js/embed.host.js"></script>
+	<div style="font-size: 14px; padding-bottom: 14px;">
+		Stats powered by <a
+			target="_blank"
+			style="color: #4F46E5; text-decoration: underline;"
+			href="https://plausible.io">Plausible Analytics</a
+		>
+	</div>
+	<script async src="https://plausible.quandalle.com/js/embed.host.js"></script>
 </div>
 
 <div class="prose w-full max-w-screen-md m-auto">
