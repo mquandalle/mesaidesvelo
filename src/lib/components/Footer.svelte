@@ -20,12 +20,6 @@
 				<li>
 					<a href="/a-propos" class="text-green-600 hover:underline">À propos</a>
 				</li>
-				<!-- NOTE(@EmileRolley): je désactive ce lien car, aideretrofit.fr n'est plus maintenu -->
-				<!-- <li> -->
-				<!-- 	<a href="https://aideretrofit.fr" rel="external" class="text-green-600 hover:underline" -->
-				<!-- 		>Aide Retrofit</a -->
-				<!-- 	> -->
-				<!-- </li> -->
 				<li>
 					<a href="/liste-aides" class="text-green-600 hover:underline">Liste des aides</a>
 				</li>

@@ -1,4 +1,3 @@
-import yaml from '@rollup/plugin-yaml';
 import { sveltekit } from '@sveltejs/kit/vite';
 import path from 'node:path';
 import WindiCSS from 'vite-plugin-windicss';
@@ -9,13 +8,12 @@ const config = {
 		sveltekit(),
 		WindiCSS({
 			scan: {
-				dirs: [path.resolve('./src'), path.resolve('./retrofit')],
+				dirs: [path.resolve('./src')],
 				exclude: ['.git', 'node_modules'],
 				include: [path.resolve('./node_modules/layerchart/**/*.{svelte,js}')],
 				fileExtensions: ['svelte', 'ts', 'js', 'svx'],
 			},
 		}),
-		yaml(),
 	],
 	resolve: {
 		alias: {

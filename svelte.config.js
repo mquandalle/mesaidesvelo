@@ -10,16 +10,6 @@ const config = {
 		adapter: vercel({
 			runtime: 'nodejs22.x',
 		}),
-		files:
-			process.env.VITE_SITE === 'aideretrofit.fr'
-				? {
-						routes: 'retrofit/routes',
-						appTemplate: 'retrofit/app.html',
-						lib: 'src/lib',
-						assets: 'retrofit/static',
-					}
-				: {},
-		outDir: `.svelte-kit/${process.env.VITE_SITE}`,
 	},
 };
 
