@@ -43,16 +43,16 @@ const ruleNamePerCollectivity = Object.entries(aidesWithLocalisation).reduce(
 );
 
 const availableContent = Object.fromEntries(
-	Object.entries(import.meta.glob('/src/content/*.svx', { as: 'raw', eager: true })).map(
-		([name, mod]) => [
-			name
-				.split('/')
-				.at(-1)
-				.toLowerCase()
-				.replace(/\.svx$/, ''),
-			mod,
-		],
-	),
+	Object.entries(
+		import.meta.glob('/src/content/*.svx', { query: '?raw', import: 'default', eager: true }),
+	).map(([name, mod]) => [
+		name
+			.split('/')
+			.at(-1)
+			.toLowerCase()
+			.replace(/\.svx$/, ''),
+		mod,
+	]),
 );
 
 const ruleToContentFilename = (ruleName) => ruleName.toLowerCase().replace('aides . ', '');

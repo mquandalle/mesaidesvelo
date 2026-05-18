@@ -1,9 +1,9 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { engine, getEngine } from '$lib/engine';
 	import { localisationSituation, veloCat } from '$lib/stores';
 	import { formatValue, reduceAST } from 'publicodes';
-	import { derived } from 'svelte/store';
+	import { derived as derivedStore } from 'svelte/store';
 	import Emoji from './Emoji.svelte';
 
 	// In case the formula involve a “linear operation” such as additions or
@@ -15,7 +15,7 @@
 	const uniq = (arr) => [...new Set(arr)];
 
 	const engineBis = engine.shallowCopy();
-	export const originalNames = derived(
+	export const originalNames = derivedStore(
 		[localisationSituation, publicodeSituation],
 		([$localisationSituation, $publicodeSituation]) => {
 			if (!localisationSituation) {
@@ -128,30 +128,34 @@
 <script lang="ts">
 	import { publicodeSituation, revenuFiscal } from '$lib/stores';
 	import type { RuleName } from '@betagouv/aides-velo';
+	import { untrack } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import NumberField from './NumberField.svelte';
 
-	export let goals;
+	let { goals = undefined } = $props();
 
 	const uniq = (l) => [...new Set(l)];
 	const engineBis = getEngine({});
-	$: thresholds = (goals ?? $originalNames).flatMap((name) =>
-		findAllComparaisonsValue(name, {
-			searchedName: 'revenu fiscal de référence par part',
-			unit: '€/mois',
-		}),
+	let thresholds = $derived(
+		(goals ?? $originalNames).flatMap((name) =>
+			findAllComparaisonsValue(name, {
+				searchedName: 'revenu fiscal de référence par part',
+				unit: '€/mois',
+			}),
+		),
 	);
 
-	$: numberFieldIsRequired = thresholds.some(
-		(x: number | symbol) => x === numberFieldRequired || x === Infinity,
+	let numberFieldIsRequired = $derived(
+		thresholds.some((x: number | symbol) => x === numberFieldRequired || x === Infinity),
 	);
 
-	$: uniqThresholds =
+	let uniqThresholds = $derived(
 		!numberFieldIsRequired &&
-		uniq(thresholds.filter((x: number) => x !== Infinity).map((x: number) => Math.round(x))).sort(
-			(a: number, b: number) => a - b,
-		);
+			uniq(thresholds.filter((x: number) => x !== Infinity).map((x: number) => Math.round(x))).sort(
+				(a: number, b: number) => a - b,
+			),
+	);
 
 	// Not all statically detected thresholds are impactful for the current computation
 	// as some of them might be in inactive branches of the computation.
@@ -195,33 +199,49 @@
 			.thresholds.slice(1);
 	}
 
-	$: displayedThresholds =
+	let displayedThresholds = $derived(
 		!numberFieldIsRequired &&
-		($veloCat ? removeUnecessaryThresholds(uniqThresholds) : uniqThresholds);
+			($veloCat ? removeUnecessaryThresholds(uniqThresholds) : uniqThresholds),
+	);
 
-	$: if (
-		$revenuFiscal &&
-		!numberFieldIsRequired &&
-		!displayedThresholds.map((threshold) => threshold - 1).includes($revenuFiscal)
-	) {
-		const closestThreshold = displayedThresholds.find((plafond) => $revenuFiscal <= plafond);
+	function clampRevenuFiscalToDisplayedThresholds() {
+		if (numberFieldIsRequired || displayedThresholds.length === 0) {
+			return;
+		}
+
+		const currentRevenuFiscal = untrack(() => $revenuFiscal);
+		if (!currentRevenuFiscal) {
+			return;
+		}
+
+		const validValues = displayedThresholds.map((threshold) => threshold - 1);
+		if (validValues.includes(currentRevenuFiscal)) {
+			return;
+		}
+
+		const closestThreshold = displayedThresholds.find((plafond) => currentRevenuFiscal <= plafond);
 		$revenuFiscal = closestThreshold
 			? closestThreshold - 1
 			: displayedThresholds[displayedThresholds.length - 1] + 1;
 	}
 
-	let showExplanations = false;
+	$effect(() => {
+		clampRevenuFiscalToDisplayedThresholds();
+	});
+
+	let showExplanations = $state(false);
 </script>
 
 {#if numberFieldIsRequired || displayedThresholds.length > 0}
 	<div class="mt-6">
-		Quel est votre revenu net mensuel (quotient familial) ? <span
+		Quel est votre revenu net mensuel (quotient familial) ? <button
+			type="button"
 			title="Plus d'informations"
 			class="cursor-pointer"
-			on:click={() => (showExplanations = !showExplanations)}
+			onclick={() => (showExplanations = !showExplanations)}
 		>
 			<Emoji className="align-middle" emoji="ℹ" />
-		</span>
+		</button>
 		{#if showExplanations}
 			<p
 				class="my-2 text-gray-700 prose-sm border-l-2 rounded-r p-2 bg-gray-50"
@@ -236,8 +256,12 @@
 			{#if numberFieldIsRequired}
 				<NumberField bind:value={$revenuFiscal} id="revenu-fiscal" unité="€" />
 			{:else}
-				{#each displayedThresholds as threshold}
-					<MultipleChoiceAnswer value={threshold - 1} bind:group={$revenuFiscal}>
+				{#each displayedThresholds as threshold (threshold)}
+					<MultipleChoiceAnswer
+						value={threshold - 1}
+						group={$revenuFiscal}
+						onSelect={(value) => ($revenuFiscal = value)}
+					>
 						moins de <strong class="font-semibold">
 							{formatValue(threshold)} €
 						</strong>
@@ -245,7 +269,8 @@
 				{/each}
 				<MultipleChoiceAnswer
 					value={displayedThresholds[displayedThresholds.length - 1] + 1}
-					bind:group={$revenuFiscal}
+					group={$revenuFiscal}
+					onSelect={(value) => ($revenuFiscal = value)}
 				>
 					plus de <strong class="font-semibold">
 						{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €

@@ -1,14 +1,19 @@
-<script>
+<script lang="ts">
 	import { formatValue } from 'publicodes';
+	import type { Unit } from 'publicodes';
 
-	export let className = '';
-	export let amount;
-	export let unit;
+	interface Props {
+		className?: string;
+		amount: number;
+		unit?: Unit;
+	}
 
-	let prevAmount;
-	let difference;
+	let { className = '', amount, unit }: Props = $props();
 
-	const format = (x, { withPlusSign = false } = {}) => {
+	let prevAmount: number | undefined;
+	let difference = $state<number | undefined>();
+
+	const format = (x: number, { withPlusSign = false } = {}) => {
 		const sign = withPlusSign && x > 0 ? '+' : x < 0 ? '-' : '';
 		const formatedValue = formatValue(
 			{ nodeValue: Math.abs(x), unit },
@@ -19,17 +24,18 @@
 		return `${sign}${formatedValue}`.trim();
 	};
 
-	$: if (typeof window !== 'undefined') {
+	$effect(() => {
 		const activeElement = document.activeElement;
-		const ignoreInput = activeElement.tagName === 'INPUT' && activeElement.type === 'number';
+		const ignoreInput =
+			activeElement instanceof HTMLInputElement && activeElement.type === 'number';
 		if (!ignoreInput && prevAmount !== undefined) {
 			difference = amount - prevAmount;
 		}
 		prevAmount = amount;
-	}
+	});
 
-	$: color = difference > 0 ? 'text-green-500' : 'text-red-500';
-	$: bgColor = difference > 0 ? 'bg-green-50' : 'bg-red-50';
+	let color = $derived(difference > 0 ? 'text-green-500' : 'text-red-500');
+	let bgColor = $derived(difference > 0 ? 'bg-green-50' : 'bg-red-50');
 </script>
 
 <span class={`relative w-[min-content] text-green-700 ${className}`}>

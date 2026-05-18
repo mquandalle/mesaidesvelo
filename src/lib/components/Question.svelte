@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
-	import SvelteMarkdown from 'svelte-markdown';
+	import SvelteMarkdown from '@modal-labs/svelte-markdown';
 	import { answers, publicodeSituation } from '$lib/stores';
 	import { slugify, nodeValueToOuiNon } from '$lib/utils';
 	import { getOptions } from '$lib/aides-velo-utils';
@@ -9,38 +9,46 @@
 	import NumberField from './NumberField.svelte';
 	import { engine as baseEngine } from '$lib/engine';
 
-	export let rule;
-	export let engine;
+	let { rule, engine } = $props();
 
-	let value = $publicodeSituation[rule] ?? nodeValueToOuiNon(engine.evaluate(rule).nodeValue);
+	// svelte-ignore state_referenced_locally
+	let value = $state(
+		$publicodeSituation[rule] ?? nodeValueToOuiNon(engine.evaluate(rule).nodeValue),
+	);
 
-	$: ruleNode = baseEngine.getRule(rule);
-	$: ruleInfos = ruleNode.rawNode;
-	$: possibilités = getOptions(rule);
-	$: domId = `question-${slugify(rule)}`;
-	$: ruleType = baseEngine.context.nodesTypes.get(ruleNode)?.type;
+	let ruleNode = $derived(baseEngine.getRule(rule));
+	let ruleInfos = $derived(ruleNode.rawNode);
+	let possibilités = $derived(getOptions(rule));
+	let domId = $derived(`question-${slugify(rule)}`);
+	let ruleType = $derived(baseEngine.context.nodesTypes.get(ruleNode)?.type);
 
-	$: if (value) {
-		$answers[rule] = possibilités?.includes(value)
-			? `'${value}'`
-			: // NOTE: we don't use unité here anymore as we don't
-				// really need it for now and it was causing some
-				// issues when retrieving it from the situation and
-				// therefore duplicating the unit.
-				value;
-	} else if (value === null) {
-		$answers[rule] = undefined;
+	function setValue(nextValue) {
+		value = nextValue;
+		if (nextValue) {
+			answers.update(($answers) => ({
+				...$answers,
+				[rule]: possibilités?.includes(nextValue)
+					? `'${nextValue}'`
+					: // NOTE: we don't use unité here anymore as we don't
+						// really need it for now and it was causing some
+						// issues when retrieving it from the situation and
+						// therefore duplicating the unit.
+						nextValue,
+			}));
+		} else if (nextValue === null) {
+			answers.update(($answers) => ({ ...$answers, [rule]: undefined }));
+		}
 	}
 
-	$: optionalEvaluate = (expression) => {
+	function optionalEvaluate(expression) {
 		if (typeof expression === 'string') {
 			return expression;
 		} else {
 			return engine.evaluate(expression).nodeValue;
 		}
-	};
+	}
 
-	let showExplanations = false;
+	let showExplanations = $state(false);
 </script>
 
 <div class="flex flex-col mt-6 items-start">
@@ -50,7 +58,7 @@
 			<button
 				title="Plus d'informations"
 				class="cursor-pointer"
-				on:click={() => (showExplanations = !showExplanations)}
+				onclick={() => (showExplanations = !showExplanations)}
 				><Emoji className="align-middle" emoji="ℹ" />
 			</button>
 			{#if showExplanations}
@@ -66,19 +74,19 @@
 
 	{#if ruleType === 'boolean'}
 		<div class="flex gap-2 mt-2 flex-wrap">
-			<MultipleChoiceAnswer value="oui" bind:group={value}>Oui</MultipleChoiceAnswer>
-			<MultipleChoiceAnswer value="non" bind:group={value}>Non</MultipleChoiceAnswer>
+			<MultipleChoiceAnswer value="oui" group={value} onSelect={setValue}>Oui</MultipleChoiceAnswer>
+			<MultipleChoiceAnswer value="non" group={value} onSelect={setValue}>Non</MultipleChoiceAnswer>
 		</div>
 	{:else if possibilités?.length > 0}
 		<div class="flex gap-2 mt-2 flex-wrap">
-			{#each possibilités as possibilité}
-				<MultipleChoiceAnswer value={`'${possibilité}'`} bind:group={value}
+			{#each possibilités as possibilité (possibilité)}
+				<MultipleChoiceAnswer value={`'${possibilité}'`} group={value} onSelect={setValue}
 					>{engine.getRule(rule + ' . ' + possibilité).rawNode.titre ??
 						possibilité}</MultipleChoiceAnswer
 				>
 			{/each}
 		</div>
 	{:else}
-		<NumberField id={domId} unité={ruleInfos.unité} bind:value />
+		<NumberField id={domId} unité={ruleInfos.unité} bind:value={() => value, setValue} />
 	{/if}
 </div>

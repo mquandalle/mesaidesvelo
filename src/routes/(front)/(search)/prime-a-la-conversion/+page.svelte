@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import BackButtonAides from '$lib/components/BackButtonAides.svelte';
 </script>
 
 <div class="w-full max-w-screen-md m-auto">
-	<div class="mt-8" />
+	<div class="mt-8"></div>
 	<BackButtonAides />
 
 	<div class="border mt-6 rounded-md shadow-sm">

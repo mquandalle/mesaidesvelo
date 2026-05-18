@@ -1,9 +1,10 @@
 <script>
 	// TODO: supporter la recherche par région ou département
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { localisation } from '$lib/stores';
 	import AutoComplete from '$lib/components/Autocomplete.svelte';
-	import { navigating } from '$app/stores';
+	import { navigating } from '$app/state';
 
 	async function loadItems(keyword) {
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
@@ -50,22 +51,28 @@
 			onFocus={autoSelectInput}
 			onChange={(val) => {
 				const derivedPath = val ? `/ville/${val.slug}` : `/`;
-				if (!$navigating) {
-					goto(derivedPath, { noScroll: true });
+				if (!navigating.to) {
+					goto(resolve(derivedPath), { noScroll: true });
 				}
 			}}
 		>
-			<div slot="item" let:item>
-				<span class="tabular-nums">{item.codePostal}</span> - {item.nom}
-			</div>
-			<div slot="loading">Chargement...</div>
-			<div slot="no-results">Pas de résultats</div></AutoComplete
-		>
+			{#snippet item({ item })}
+				<div>
+					<span class="tabular-nums">{item.codePostal}</span> - {item.nom}
+				</div>
+			{/snippet}
+			{#snippet loading()}
+				<div>Chargement...</div>
+			{/snippet}
+			{#snippet noResults()}
+				<div>Pas de résultats</div>
+			{/snippet}
+		</AutoComplete>
 		{#if $localisation}
 			<button
 				aria-label="Effacer la localisation"
 				class="text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800 relative z-99 -ml-[15px]"
-				on:click={() => localisation.set(null)}>&times;</button
+				onclick={() => localisation.set(null)}>&times;</button
 			>
 		{/if}
 	</div>

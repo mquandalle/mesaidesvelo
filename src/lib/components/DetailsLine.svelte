@@ -1,38 +1,48 @@
-<script>
+<script lang="ts">
 	import { allAides } from '$lib/aides-velo-utils';
-	import miniatures from '$lib/data/miniatures';
+	import miniatures from '$lib/data/miniatures.json';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { localisation, publicodeSituation, veloCat, veloTypeValue } from '$lib/stores';
 	import { formatDescription, slugify } from '$lib/utils';
-	import SvelteMarkdown from 'svelte-markdown';
+	import SvelteMarkdown from '@modal-labs/svelte-markdown';
 	import AnimatedAmount from './AnimatedAmount.svelte';
 	import Badge from './Badge.svelte';
 
-	export let className = '';
-	export let aide;
-	export let veloEtat = 'neuf';
+	interface Props {
+		className?: string;
+		aide: any;
+		veloEtat?: string;
+	}
 
-	$: engine = getEngine({
-		...$publicodeSituation,
-		'vélo . type': $veloTypeValue,
-		'vélo . état': `'${veloEtat}'`,
-	});
+	let { className = '', aide, veloEtat = 'neuf' }: Props = $props();
 
-	const { title, rawNode } = baseEngine.getRule(aide.ruleName);
-	const { lastUpdate, endDate } = allAides.find((a) => a.id === aide.ruleName) || {
-		lastUpdate: null,
-		endDate: null,
-	};
-	const isExpired = new Date().getTime() >= endDate?.getTime();
+	let ruleDefinition = $derived(baseEngine.getRule(aide.ruleName));
+	let title = $derived(ruleDefinition.title);
+	let rawNode = $derived(ruleDefinition.rawNode);
+	let lien = $derived(typeof rawNode.lien === 'string' ? rawNode.lien : undefined);
+	let aideMetadata = $derived(allAides.find((a) => a.id === aide.ruleName));
+	let lastUpdate = $derived(aideMetadata?.lastUpdate ?? null);
+	let endDate = $derived(aideMetadata?.endDate ?? null);
+	let engine = $derived(
+		getEngine({
+			...$publicodeSituation,
+			'vélo . type': $veloTypeValue,
+			'vélo . état': `'${veloEtat}'`,
+		}),
+	);
 
-	$: notice = formatDescription({
-		ruleName: aide.ruleName,
-		engine,
-		veloCat: $veloCat,
-		ville: $localisation,
-	});
+	let isExpired = $derived(new Date().getTime() >= endDate?.getTime());
 
-	$: evaluateWithGivenRevenu = (revenu) => {
+	let notice = $derived(
+		formatDescription({
+			ruleName: aide.ruleName,
+			engine,
+			veloCat: $veloCat,
+			ville: $localisation,
+		}),
+	);
+
+	function evaluateWithGivenRevenu(revenu) {
 		return engine
 			.setSituation({
 				...$publicodeSituation,
@@ -42,11 +52,13 @@
 				'vélo . prix': 'vélo . prix pour maximiser les aides',
 			})
 			.evaluate(aide.ruleName).nodeValue;
-	};
+	}
 
 	// TODO: we could optimize this calcul which is done 2 times : one time in
 	// revenuSelector and one time here
-	$: conditionDeRessources = evaluateWithGivenRevenu(100) !== evaluateWithGivenRevenu(100000);
+	let conditionDeRessources = $derived(
+		evaluateWithGivenRevenu(100) !== evaluateWithGivenRevenu(100000),
+	);
 </script>
 
 {#if aide.nodeValue !== null}
@@ -55,7 +67,7 @@
 			<button
 				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
 				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
-				on:click={() => rawNode.lien && window.open(rawNode.lien, '_blank')}
+				onclick={() => lien && window.open(lien, '_blank')}
 			>
 				<img
 					src="/miniatures/{miniatures[aide.ruleName]}"
@@ -104,9 +116,9 @@
 				<SvelteMarkdown source={notice} options={{ breaks: true }} />
 			</div>
 			<div class="inline-flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
-				{#if rawNode.lien}
+				{#if lien}
 					<p class="mt-4 text-sm text-green-600">
-						<a href={rawNode.lien} target="_blank" class="hover:underline">→ En savoir plus</a>
+						<a href={lien} target="_blank" class="hover:underline">→ En savoir plus</a>
 					</p>
 				{/if}
 				{#if lastUpdate}

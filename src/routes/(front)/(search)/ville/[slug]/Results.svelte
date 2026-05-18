@@ -12,57 +12,65 @@
 
 	resetAnswers();
 
-	$: engine = getEngine($publicodeSituation);
-	$: engineBis = getEngine($publicodeSituation);
-	$: aidesPerBikeKind = BIKE_KINDS.map((cat) => {
-		engineBis.setSituation({
-			...$publicodeSituation,
-			'maximiser les aides': 'oui',
-			'vélo . type': `'${cat}'`,
-		});
+	let engine = $derived(getEngine($publicodeSituation));
+	let engineBis = $derived(getEngine($publicodeSituation));
+	let aidesPerBikeKind = $derived(
+		BIKE_KINDS.map((cat) => {
+			engineBis.setSituation({
+				...$publicodeSituation,
+				'maximiser les aides': 'oui',
+				'vélo . type': `'${cat}'`,
+			});
 
-		const montant = engineBis.evaluate('aides . montant');
+			const montant = engineBis.evaluate('aides . montant');
 
-		return {
-			cat,
-			label: titleCategory(cat),
-			emoji: emojiCategory(cat),
-			montant,
-		};
-	});
+			return {
+				cat,
+				label: titleCategory(cat),
+				emoji: emojiCategory(cat),
+				montant,
+			};
+		}),
+	);
 
 	// TODO: use `groupBy` partition when available
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/groupBy
-	$: activesAidesPerBikeKind = aidesPerBikeKind.filter(({ montant }) => montant.nodeValue !== 0);
-	$: inactivesAidesPerBikeKind = aidesPerBikeKind.filter(({ montant }) => montant.nodeValue === 0);
+	let activesAidesPerBikeKind = $derived(
+		aidesPerBikeKind.filter(({ montant }) => montant.nodeValue !== 0),
+	);
+	let inactivesAidesPerBikeKind = $derived(
+		aidesPerBikeKind.filter(({ montant }) => montant.nodeValue === 0),
+	);
 
-	$: inFrance = !!engine.evaluate("localisation . pays = 'France'").nodeValue;
+	let inFrance = $derived(!!engine.evaluate("localisation . pays = 'France'").nodeValue);
 
-	$: displayedAides = [
-		...activesAidesPerBikeKind.map(({ cat, ...rest }) => ({
-			...rest,
-			relNoFollow: true,
-			href: `?velo=${cat}`,
-		})),
-		inFrance && [
-			{
-				montant: engine.evaluate('aides . forfait mobilités durables'),
-				href: '/forfait-mobilite-durable',
-				label: 'Forfait mobilités durables',
-			},
-			...inactivesAidesPerBikeKind.map(({ cat, ...rest }) => ({
+	let displayedAides = $derived(
+		[
+			...activesAidesPerBikeKind.map(({ cat, ...rest }) => ({
 				...rest,
+				relNoFollow: true,
 				href: `?velo=${cat}`,
-				emoji: null,
 			})),
-		],
-	]
-		.filter(Boolean)
-		.flat();
-	$: nbAides = displayedAides.length;
+			inFrance && [
+				{
+					montant: engine.evaluate('aides . forfait mobilités durables'),
+					href: '/forfait-mobilite-durable',
+					label: 'Forfait mobilités durables',
+				},
+				...inactivesAidesPerBikeKind.map(({ cat, ...rest }) => ({
+					...rest,
+					href: `?velo=${cat}`,
+					emoji: null,
+				})),
+			],
+		]
+			.filter(Boolean)
+			.flat(),
+	);
+	let nbAides = $derived(displayedAides.length);
 </script>
 
-<div class="mt-10" />
+<div class="mt-10"></div>
 <p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
 <div role="table" class="flex flex-col bg-white border rounded sm:text-lg">
 	{#each displayedAides as { montant, href, label, emoji, relNoFollow }, idx (label)}

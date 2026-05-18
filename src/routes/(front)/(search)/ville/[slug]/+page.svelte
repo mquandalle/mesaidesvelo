@@ -1,6 +1,7 @@
-<script>
-	import { page } from '$app/stores';
+<script lang="ts">
+	import { page } from '$app/state';
 
+	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import Details from '$lib/components/Details.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 	import ShareButton from '$lib/components/ShareButton.svelte';
@@ -8,12 +9,29 @@
 	import { fly } from 'svelte/transition';
 	import ExplanationsText from './ExplanationsText.svelte';
 	import Results from './Results.svelte';
+	import type { PageData } from './$types';
 
-	/** @type {import('./$types').PageData */
-	export let data;
-	const ville = data.ville;
+	interface Props {
+		data: PageData;
+	}
 
-	$: veloCat.set($page.url?.searchParams.get('velo'));
+	let { data }: Props = $props();
+	let ville = $derived(data.ville);
+
+	const isBikeKind = (velo: string | null): velo is (typeof BIKE_KINDS)[number] =>
+		BIKE_KINDS.includes(velo as (typeof BIKE_KINDS)[number]);
+
+	const getSelectedVeloCat = () => {
+		const requestedVelo = page.url.searchParams.get('velo');
+		return isBikeKind(requestedVelo) ? requestedVelo : undefined;
+	};
+
+	function syncVeloCatFromUrl() {
+		veloCat.set(getSelectedVeloCat());
+	}
+
+	syncVeloCatFromUrl();
+	$effect(syncVeloCatFromUrl);
 </script>
 
 <svelte:head>

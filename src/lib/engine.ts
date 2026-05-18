@@ -2,7 +2,7 @@ import type Engine from 'publicodes';
 import type { Situation } from 'publicodes';
 import { aidesVeloEngine } from './aides-velo-utils';
 
-export const engine: Engine = aidesVeloEngine.getEngine();
+export const engine = aidesVeloEngine.getEngine() as unknown as Engine;
 
 export function getEngine(situation: Situation<string>): Engine {
 	const engineBis = engine.shallowCopy();

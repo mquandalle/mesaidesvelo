@@ -7,30 +7,38 @@
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
 
-	export let goals = undefined;
-	export let veloEtat = 'neuf';
+	interface Props {
+		goals?: any;
+		veloEtat?: string;
+	}
 
-	$: engine = getEngine({
-		...$publicodeSituation,
-		'vélo . type': $veloTypeValue,
-		'vélo . état': `'${veloEtat}'`,
-	});
+	let { goals = undefined, veloEtat = 'neuf' }: Props = $props();
+
+	let engine = $derived(
+		getEngine({
+			...$publicodeSituation,
+			'vélo . type': $veloTypeValue,
+			'vélo . état': `'${veloEtat}'`,
+		}),
+	);
 
 	const getSortOrder = (name: QuestionNames) =>
 		QUESTIONS_ORDER.includes(name) ? QUESTIONS_ORDER.indexOf(name) : Infinity;
 
 	const uniq = <T,>(arr: T[]) => [...new Set(arr)];
-	$: questions = uniq(
-		(goals ?? ['aides . montant'])
-			.map((ruleName: RuleName) => engine.evaluate(ruleName).traversedVariables)
-			?.flat(),
-	)
-		.filter(
-			(q: RuleName) =>
-				engine.getRule(q).rawNode.question || 'revenu fiscal de référence par part' === q,
+	let questions = $derived(
+		uniq(
+			(goals ?? ['aides . montant'])
+				.map((ruleName: RuleName) => engine.evaluate(ruleName).traversedVariables)
+				?.flat(),
 		)
-		.filter((q: QuestionNames) => !QUESTIONS_TO_IGNORE.includes(q))
-		.sort((a: QuestionNames, b: QuestionNames) => getSortOrder(a) - getSortOrder(b));
+			.filter(
+				(q: RuleName) =>
+					engine.getRule(q).rawNode.question || 'revenu fiscal de référence par part' === q,
+			)
+			.filter((q: QuestionNames) => !QUESTIONS_TO_IGNORE.includes(q))
+			.sort((a: QuestionNames, b: QuestionNames) => getSortOrder(a) - getSortOrder(b)),
+	);
 </script>
 
 {#if questions?.length > 0}

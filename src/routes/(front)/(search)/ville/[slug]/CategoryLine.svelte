@@ -1,14 +1,31 @@
-<script>
+<script lang="ts">
 	import AnimatedAmount from '$lib/components/AnimatedAmount.svelte';
+	import type { Unit } from 'publicodes';
+	import type { Snippet } from 'svelte';
 
-	export let montant;
-	export let href;
-	export let relNoFollow = false;
-	export let isFirst = false;
-	export let isLast = false;
+	interface Props {
+		montant: {
+			nodeValue: number | null;
+			unit?: Unit;
+		};
+		href: string;
+		relNoFollow?: boolean;
+		isFirst?: boolean;
+		isLast?: boolean;
+		children?: Snippet;
+	}
+
+	let {
+		montant,
+		href,
+		relNoFollow = false,
+		isFirst = false,
+		isLast = false,
+		children,
+	}: Props = $props();
 </script>
 
-{#if montant.nodeValue !== 0}
+{#if typeof montant.nodeValue === 'number' && montant.nodeValue !== 0}
 	<a tabindex="0" data-sveltekit-noscroll {href} rel={relNoFollow ? 'nofollow' : null}>
 		<div
 			role="row"
@@ -18,7 +35,7 @@
 				' ' +
 				(isLast ? 'rounded-b' : 'border-b')}
 		>
-			<div role="cell"><slot /></div>
+			<div role="cell">{@render children?.()}</div>
 			<div role="cell" class="flex-1 flex flex-col items-end gap-x-2">
 				<span class="text-xs text-gray-500">jusqu’à</span>
 				<span class="font-semibold text-right text-xl whitespace-nowrap"
@@ -43,7 +60,7 @@
 			' ' +
 			(isLast ? 'rounded-b' : 'border-b')}
 	>
-		<div role="cell" class="line-through text-gray-600"><slot /></div>
+		<div role="cell" class="line-through text-gray-600">{@render children?.()}</div>
 		<div role="cell" class="flex-1 flex flex-col items-end gap-x-2 text-right">
 			<span class="text-sm text-gray-500">aide non <br class="sm:hidden" />disponible</span>
 		</div>

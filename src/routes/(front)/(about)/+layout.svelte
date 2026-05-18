@@ -1,5 +1,10 @@
-<script>
-	import { page } from '$app/stores';
+<script lang="ts">
+	import { page } from '$app/state';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const pages = [
 		['/a-propos', 'Questions fréquentes'],
@@ -13,7 +18,7 @@
 <nav class="w-full max-w-screen-md m-auto pb-2 mt-6 border-b">
 	<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600">
 		{#each pages as [path, label]}
-			{@const isActive = $page.url.pathname.startsWith(path)}
+			{@const isActive = page.url.pathname.startsWith(path)}
 			<li>
 				<a
 					href={path}
@@ -26,7 +31,7 @@
 	</ul>
 </nav>
 
-<slot />
+{@render children?.()}
 
 <style>
 </style>

@@ -1,8 +1,8 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { getContext } from 'svelte';
 
-	let state = 'closed';
+	let feedbackState = $state('closed');
 	const { embedSource } = getContext('embed');
 
 	async function submitFeedback(evt) {
@@ -17,42 +17,44 @@
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ message, page: $page.url.pathname, embedSource }),
+			body: JSON.stringify({ message, page: page.url.pathname, embedSource }),
 		});
 
 		if (!serverResponse.ok) {
-			state = 'error';
+			feedbackState = 'error';
 		} else {
-			state = 'sent';
+			feedbackState = 'sent';
 			setTimeout(() => {
-				state = 'closed';
+				feedbackState = 'closed';
 			}, 20000);
 		}
 	}
 </script>
 
-{#if state === 'closed'}
+{#if feedbackState === 'closed'}
 	<button
-		on:click={() => (state = 'open')}
+		onclick={() => (feedbackState = 'open')}
 		class="text-green-600 border border-green-600 rounded-full px-4 py-2 rounded whitespace-nowrap hover:(bg-green-600 text-white)"
 	>
 		Une erreur ? Un oubli ? Contactez-nous !
 	</button>
-{:else if state === 'open'}
-	<form class="flex flex-col items-start gap-y-2" on:submit={submitFeedback}>
+{:else if feedbackState === 'open'}
+	<form class="flex flex-col items-start gap-y-2" onsubmit={submitFeedback}>
 		<label for="feedback-message">Votre message :</label>
-		<!-- svelte-ignore a11y-autofocus -->
+		<!-- svelte-ignore a11y_autofocus -->
 		<textarea
 			class="border border-green-600 p-3 w-[65ch] h-30 rounded"
 			autofocus
 			id="feedback-message"
-		/>
+		></textarea>
 		<div class="flex gap-x-4 uppercase">
 			<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded"> Envoyer </button>
-			<button class="text-gray-500" on:click={() => (state = 'closed')}> Fermer </button>
+			<button type="button" class="text-gray-500" onclick={() => (feedbackState = 'closed')}>
+				Fermer
+			</button>
 		</div>
 	</form>
-{:else if state === 'sent'}
+{:else if feedbackState === 'sent'}
 	<div>
 		<p class="text-xl">Merci pour votre retour ! 😍</p>
 		<p class="text-xs mt-2">
@@ -63,7 +65,7 @@
 			>.
 		</p>
 	</div>
-{:else if state === 'error'}
+{:else if feedbackState === 'error'}
 	<div>
 		<p class="text-xl">Une erreur s'est produite ☹</p>
 		<p class="text-xs mt-2">

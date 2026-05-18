@@ -34,38 +34,40 @@
 		}}
 		padding={{ bottom: 100 }}
 		tooltip={{ raiseTarget: true }}
-		let:tooltip
 	>
-		<Svg>
-			<g>
-				{#each enrichGeojson as feature}
-					<GeoPath
-						geojson={feature}
-						fill={colorScale(feature.properties.nbAides)}
-						class="stroke-none hover:stroke-black/50"
-						{tooltip}
-					/>
-				{/each}
-			</g>
-			<GeoPath {geojson} class="fill-none stroke-black/30 pointer-events-none" />
-		</Svg>
-		<Legend title="Nombre d'aides" scale={colorScale} />
+		{#snippet children({ tooltip })}
+			<Svg>
+				<g>
+					{#each enrichGeojson as feature}
+						<GeoPath
+							geojson={feature}
+							fill={colorScale(feature.properties.nbAides)}
+							class="stroke-none hover:stroke-black/50"
+							{tooltip}
+						/>
+					{/each}
+				</g>
+				<GeoPath {geojson} class="fill-none stroke-black/30 pointer-events-none" />
+			</Svg>
+			<Legend title="Nombre d'aides" scale={colorScale} />
 
-		<Tooltip.Root
-			let:data
-			class="bg-white/90 dark:bg-gray-800/90 border border-gray-300 dark:border-gray-700"
-		>
-			<Tooltip.Header>
-				{data.properties.nom}
-			</Tooltip.Header>
-			<Tooltip.List>
-				<Tooltip.Item
-					label="Nombre d'aides"
-					value={data.properties.nbAides}
-					format="integer"
-					valueAlign="right"
-				/>
-			</Tooltip.List>
-		</Tooltip.Root>
+			<Tooltip.Root
+				class="bg-white/90 dark:bg-gray-800/90 border border-gray-300 dark:border-gray-700"
+			>
+				{#snippet children({ data })}
+					<Tooltip.Header>
+						{data.properties.nom}
+					</Tooltip.Header>
+					<Tooltip.List>
+						<Tooltip.Item
+							label="Nombre d'aides"
+							value={data.properties.nbAides}
+							format="integer"
+							valueAlign="right"
+						/>
+					</Tooltip.List>
+				{/snippet}
+			</Tooltip.Root>
+		{/snippet}
 	</Chart>
 </div>

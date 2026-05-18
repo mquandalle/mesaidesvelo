@@ -51,14 +51,14 @@ const collectivitiesTitles = associatedCollectivities.reduce(
 	{ all: [] as string[], duplicates: [] as string[] },
 );
 
-const formatAideForClient = (aide: RuleNode & Localisation) => {
+const formatAideForClient = (aide: RuleNode & Localisation & { slug?: string }) => {
 	return {
 		titre: aide.rawNode.titre?.replace(/région/i, '').trim(),
 		...(collectivitiesTitles.duplicates.includes(aide.rawNode.titre ?? '') && {
 			description: aide.rawNode.description,
 		}),
 		lien: aide.rawNode.lien,
-		slug: aide.slug,
+		slug: aide.slug ?? '',
 		maximumsPerVeloKind: aidesPerVeloKind(aide)
 			.sort(([, maxA], [, maxB]) => maxA.nodeValue - maxB.nodeValue)
 			.map(([kind, maximumAide]) => [kind, formatValue(maximumAide)]),

@@ -7,155 +7,128 @@
 	import { removeAccents } from '$lib/utils';
 	import { onMount } from 'svelte';
 
-	// the list of items  the user can select from
-	export let items = [];
+	let {
+		// the list of items the user can select from
+		items = [],
+		// function to use to get all items (alternative to providing items)
+		searchFunction = false,
+		// field of each item that's used for the labels in the list
+		labelFieldName = undefined,
+		keywordsFieldName = labelFieldName,
+		valueFieldName = undefined,
+		labelFunction = function (item) {
+			if (item === undefined || item === null) {
+				return '';
+			}
+			return labelFieldName ? item[labelFieldName] : item;
+		},
+		keywordsFunction = function (item) {
+			if (item === undefined || item === null) {
+				return '';
+			}
+			return keywordsFieldName ? item[keywordsFieldName] : labelFunction(item);
+		},
+		valueFunction = function (item) {
+			if (item === undefined || item === null) {
+				return item;
+			}
+			return valueFieldName ? item[valueFieldName] : item;
+		},
+		keywordsCleanFunction = function (keywords) {
+			return keywords;
+		},
+		textCleanFunction = function (userEnteredText) {
+			return userEnteredText;
+		},
+		debug = false,
+		// events
+		beforeChange = function (_oldSelectedItem, _newSelectedItem) {
+			return true;
+		},
+		onChange = function (_newSelectedItem) {},
+		onFocus = function () {},
+		onBlur = function () {},
+		onCreate = function (text) {
+			if (debug) {
+				console.log('onCreate: ' + text);
+			}
+		},
+		// Behaviour properties
+		selectFirstIfEmpty = false,
+		minCharactersToSearch = 1,
+		create = false,
+		// ignores the accents when matching items
+		ignoreAccents = true,
+		// all the input keywords should be matched in the item keywords
+		matchAllKeywords = true,
+		// sorts the items by the number of matchink keywords
+		sortByMatchedKeywords = false,
+		// allow users to use a custom item filter function
+		itemFilterFunction = undefined,
+		// allow users to use a custom item sort function
+		itemSortFunction = undefined,
+		// do not allow re-selection after initial selection
+		lock = false,
+		// delay to wait after a keypress to search for new items
+		delay = 0,
+		// true to perform local filtering of items, even if searchFunction is provided
+		localFiltering = true,
+		// option to hide the dropdown arrow
+		hideArrow = false,
+		// option to show loading indicator when the async function is executed
+		showLoadingIndicator = false,
+		// text displayed when no items match the input text
+		noResultsText = 'No results found',
+		// text displayed when async data is being loaded
+		loadingText = 'Loading results...',
+		// text displayed when async data is being loaded
+		createText = 'Not found, add anyway?',
+		// the text displayed when no option is selected
+		placeholder = undefined,
+		// apply a className to the control
+		className = undefined,
+		// apply a className to the input control
+		inputClassName = undefined,
+		// apply a id to the input control
+		inputId = undefined,
+		// generate an HTML input with this name
+		name = undefined,
+		// generate a <select> tag that holds the value
+		selectName = undefined,
+		// apply a id to the <select>
+		selectId = undefined,
+		// add the title to the HTML input
+		title = undefined,
+		// make the input readonly
+		readonly = undefined,
+		// apply a className to the dropdown div
+		dropdownClassName = undefined,
+		// selected item state
+		selectedItem = undefined,
+		value = undefined,
+		text = undefined,
+		item: itemSnippet,
+		loading: loadingSnippet,
+		noResults: noResultsSnippet,
+		createItem: createSnippet,
+	} = $props();
 
-	// function to use to get all items (alternative to providing items)
-	export let searchFunction = false;
-
-	// field of each item that's used for the labels in the list
-	export let labelFieldName = undefined;
-	export let keywordsFieldName = labelFieldName;
-	export let valueFieldName = undefined;
-
-	export let labelFunction = function (item) {
-		if (item === undefined || item === null) {
-			return '';
-		}
-		return labelFieldName ? item[labelFieldName] : item;
-	};
-
-	export let keywordsFunction = function (item) {
-		if (item === undefined || item === null) {
-			return '';
-		}
-		return keywordsFieldName ? item[keywordsFieldName] : labelFunction(item);
-	};
-
-	export let valueFunction = function (item) {
-		if (item === undefined || item === null) {
-			return item;
-		}
-		return valueFieldName ? item[valueFieldName] : item;
-	};
-
-	export let keywordsCleanFunction = function (keywords) {
-		return keywords;
-	};
-
-	export let textCleanFunction = function (userEnteredText) {
-		return userEnteredText;
-	};
-
-	// events
-	export let beforeChange = function (_oldSelectedItem, _newSelectedItem) {
-		return true;
-	};
-	export let onChange = function (_newSelectedItem) {};
-	export let onFocus = function () {};
-	export let onBlur = function () {};
-	export let onCreate = function (text) {
-		if (debug) {
-			console.log('onCreate: ' + text);
-		}
-	};
-
-	// Behaviour properties
-	export let selectFirstIfEmpty = false;
-	export let minCharactersToSearch = 1;
-	export let create = false;
-
-	// ignores the accents when matching items
-	export let ignoreAccents = true;
-
-	// all the input keywords should be matched in the item keywords
-	export let matchAllKeywords = true;
-
-	// sorts the items by the number of matchink keywords
-	export let sortByMatchedKeywords = false;
-
-	// allow users to use a custom item filter function
-	export let itemFilterFunction = undefined;
-
-	// allow users to use a custom item sort function
-	export let itemSortFunction = undefined;
-
-	// do not allow re-selection after initial selection
-	export let lock = false;
-
-	// delay to wait after a keypress to search for new items
-	export let delay = 0;
-
-	// true to perform local filtering of items, even if searchFunction is provided
-	export let localFiltering = true;
-
-	// UI properties
-
-	// option to hide the dropdown arrow
-	export let hideArrow = false;
-
-	// option to show loading indicator when the async function is executed
-	export let showLoadingIndicator = false;
-
-	// text displayed when no items match the input text
-	export let noResultsText = 'No results found';
-
-	// text displayed when async data is being loaded
-	export let loadingText = 'Loading results...';
-
-	// text displayed when async data is being loaded
-	export let createText = 'Not found, add anyway?';
-
-	// the text displayed when no option is selected
-	export let placeholder = undefined;
-
-	// apply a className to the control
-	export let className = undefined;
-
-	// HTML input UI properties
-	// apply a className to the input control
-	export let inputClassName = undefined;
-	// apply a id to the input control
-	export let inputId = undefined;
-	// generate an HTML input with this name
-	export let name = undefined;
-	// generate a <select> tag that holds the value
-	export let selectName = undefined;
-	// apply a id to the <select>
-	export let selectId = undefined;
-	// add the title to the HTML input
-	export let title = undefined;
-	// make the input readonly
-	export let readonly = undefined;
-	// apply a className to the dropdown div
-	export let dropdownClassName = undefined;
-
-	export let debug = false;
-
-	// --- Public State ----
-
-	// selected item state
-	export let selectedItem = undefined;
-	export let value = undefined;
-	export let highlightedItem = undefined;
-
-	// --- Internal State ----
 	const uniqueId = 'sautocomplete-' + Math.floor(Math.random() * 1000);
 
 	// HTML elements
-	let input;
-	let list;
+	let input = $state();
+	let list = $state();
 
 	// UI state
-	let opened = false;
-	let loading = false;
-	let highlightIndex = -1;
-	export let text;
-	let filteredTextLength = 0;
+	let opened = $state(false);
+	let loading = $state(false);
+	let highlightIndex = $state(-1);
+	let filteredTextLength = $state(0);
 
 	// view model
-	let filteredListItems;
-	let listItems = [];
+	let filteredListItems = $state([]);
+	let listItems = $derived(prepareListItems());
+	let showList = $derived(opened && ((items && items.length > 0) || filteredTextLength > 0));
 
 	// requests/responses counters
 	let lastRequestId = 0;
@@ -217,13 +190,14 @@
 			console.log('items: ' + JSON.stringify(items));
 		}
 
+		let preparedItems = [];
 		if (!Array.isArray(items)) {
 			console.warn('Autocomplete items / search function did not return array but', items);
-			items = [];
+			return preparedItems;
 		}
 
 		const length = items ? items.length : 0;
-		listItems = new Array(length);
+		preparedItems = new Array(length);
 
 		if (length > 0) {
 			items.forEach((item, i) => {
@@ -231,14 +205,16 @@
 				if (listItem == undefined) {
 					console.log('Undefined item for: ', item);
 				}
-				listItems[i] = listItem;
+				preparedItems[i] = listItem;
 			});
 		}
 
 		if (debug) {
-			console.log(listItems.length + ' items to search');
+			console.log(preparedItems.length + ' items to search');
 			console.timeEnd(timerId);
 		}
+
+		return preparedItems;
 	}
 
 	function getListItem(item) {
@@ -252,33 +228,32 @@
 		};
 	}
 
-	// -- Reactivity --
-	$: (items, prepareListItems());
-
 	let loaded = false;
 	onMount(() => {
 		loaded = true;
 	});
 
-	function onSelectedItemChanged() {
+	function syncSelectedItem({ notify = false } = {}) {
 		value = valueFunction(selectedItem);
 		text = safeLabelFunction(selectedItem);
 
 		filteredListItems = listItems;
-		loaded && onChange(selectedItem);
+		if (notify && loaded) {
+			onChange(selectedItem);
+		}
 	}
 
-	$: (selectedItem, onSelectedItemChanged());
+	syncSelectedItem();
 
-	$: highlightedItem =
-		filteredListItems &&
-		highlightIndex &&
-		highlightIndex >= 0 &&
-		highlightIndex < filteredListItems.length
-			? filteredListItems[highlightIndex].item
-			: null;
-
-	$: showList = opened && ((items && items.length > 0) || filteredTextLength > 0);
+	// svelte-ignore state_referenced_locally
+	let syncedSelectedItem = selectedItem;
+	$effect(() => {
+		if (selectedItem === syncedSelectedItem) {
+			return;
+		}
+		syncedSelectedItem = selectedItem;
+		syncSelectedItem();
+	});
 
 	function prepareUserEnteredText(userEnteredText) {
 		if (userEnteredText === undefined || userEnteredText === null) {
@@ -425,8 +400,6 @@
 
 	function processListItems(textFiltered) {
 		// cleans, filters, orders, and highlights the list items
-		prepareListItems();
-
 		const textFilteredWithoutAccents = ignoreAccents ? removeAccents(textFiltered) : textFiltered;
 		const searchWords = textFilteredWithoutAccents.split(/\s+/g);
 
@@ -476,7 +449,6 @@
 			// allow undefined items if create is enabled
 			const createdItem = onCreate(text);
 			if ('undefined' !== typeof createdItem) {
-				prepareListItems();
 				filteredListItems = listItems;
 				const index = findItemIndex(createdItem, filteredListItems);
 				if (index >= 0) {
@@ -496,8 +468,9 @@
 		const newSelectedItem = listItem.item;
 		if (beforeChange(selectedItem, newSelectedItem)) {
 			// simple selection
-			selectedItem = undefined; // triggers change even if the the same item is selected
 			selectedItem = newSelectedItem;
+			syncedSelectedItem = selectedItem;
+			syncSelectedItem({ notify: true });
 		}
 		return true;
 	}
@@ -854,7 +827,26 @@
 			return false;
 		}
 
-		return listItem == selectedItem;
+		return safeLabelFunction(listItem) === safeLabelFunction(selectedItem);
+	}
+
+	function getHighlightedParts(label) {
+		let highlighted = false;
+
+		return String(label ?? '')
+			.split(/(<\/?b>)/i)
+			.flatMap((part) => {
+				const tag = part.toLowerCase();
+				if (tag === '<b>') {
+					highlighted = true;
+					return [];
+				}
+				if (tag === '</b>') {
+					highlighted = false;
+					return [];
+				}
+				return part ? [{ text: part, highlighted }] : [];
+			});
 	}
 </script>
 
@@ -883,12 +875,12 @@
 			readonly={readonly || (lock && selectedItem)}
 			bind:this={input}
 			bind:value={text}
-			on:input={onInput}
-			on:focus={onFocusInternal}
-			on:blur={onBlurInternal}
-			on:keydown={onKeyDown}
-			on:click={onInputClick}
-			on:keypress={onKeyPress}
+			oninput={onInput}
+			onfocus={onFocusInternal}
+			onblur={onBlurInternal}
+			onkeydown={onKeyDown}
+			onclick={onInputClick}
+			onkeypress={onKeyPress}
 		/>
 	</div>
 	<div
@@ -901,51 +893,66 @@
 		bind:this={list}
 	>
 		{#if filteredListItems && filteredListItems.length > 0}
-			{#each filteredListItems as listItem, i}
+			{#each filteredListItems as listItem, i (listItem.item ?? listItem.label ?? i)}
 				{#if listItem}
 					<button
 						class="
               block w-full text-left autocomplete-list-item {i === highlightIndex
 							? 'bg-green-100'
 							: ''}
-            "
+							"
 						class:confirmed={isConfirmed(listItem.item)}
-						on:click={() => onListItemClick(listItem)}
-						on:pointerenter={() => {
+						onclick={() => onListItemClick(listItem)}
+						onpointerenter={() => {
 							highlightIndex = i;
 						}}
 					>
-						<slot
-							name="item"
-							item={listItem.item}
-							label={listItem.highlighted ? listItem.highlighted : listItem.label}
-						>
-							{#if listItem.highlighted}
-								{@html listItem.highlighted}
-							{:else}
-								{@html listItem.label}
-							{/if}
-						</slot>
+						{#if itemSnippet}
+							{@render itemSnippet({
+								item: listItem.item,
+								label: listItem.highlighted ? listItem.highlighted : listItem.label,
+							})}
+						{:else}
+							{#each getHighlightedParts(listItem.highlighted ?? listItem.label) as part, index (`${index}-${part.highlighted}-${part.text}`)}
+								{#if part.highlighted}
+									<b>{part.text}</b>
+								{:else}
+									{part.text}
+								{/if}
+							{/each}
+						{/if}
 					</button>
 				{/if}
 			{/each}
 		{:else if loading && loadingText}
 			<div class="autocomplete-list-item-loading">
-				<slot name="loading" {loadingText}>{loadingText}</slot>
+				{#if loadingSnippet}
+					{@render loadingSnippet({ loadingText })}
+				{:else}
+					{loadingText}
+				{/if}
 			</div>
 		{:else if create}
-			<button class="autocomplete-list-item-create" on:click={selectItem}>
-				<slot name="create" {createText}>{createText}</slot>
+			<button class="autocomplete-list-item-create" onclick={selectItem}>
+				{#if createSnippet}
+					{@render createSnippet({ createText })}
+				{:else}
+					{createText}
+				{/if}
 			</button>
 		{:else if noResultsText}
 			<div class="autocomplete-list-item-no-results">
-				<slot name="no-results" {noResultsText}>{noResultsText}</slot>
+				{#if noResultsSnippet}
+					{@render noResultsSnippet({ noResultsText })}
+				{:else}
+					{noResultsText}
+				{/if}
 			</div>
 		{/if}
 	</div>
 </div>
 
-<svelte:window on:click={onDocumentClick} />
+<svelte:window onclick={onDocumentClick} />
 
 <style>
 	.autocomplete {

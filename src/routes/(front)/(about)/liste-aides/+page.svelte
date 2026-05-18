@@ -1,12 +1,16 @@
-<script>
+<script lang="ts">
 	import { allAides } from '$lib/aides-velo-utils';
 	import { slugify } from '$lib/utils';
 	import departements from '@etalab/decoupage-administratif/data/departements.json';
 	import AideSummary from './AideSummary.svelte';
 	import Map from './Map.svelte';
+	import type { PageData } from './$types';
 
-	/** @type {import('./$types').PageData} */
-	export let data;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 </script>
 
 <svelte:head>

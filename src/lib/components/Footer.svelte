@@ -1,5 +1,5 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { getContext } from 'svelte';
 	import UserFeedback from './UserFeedback.svelte';
 
@@ -10,7 +10,7 @@
 	class="flex flex-col items-start gap-3 py-6 justify-between w-full max-w-screen-md mx-auto text-xs border-t border-gray-200"
 >
 	<div class="flex flex-col sm:flex-row gap-6 sm:items-center text-[0.8rem] mb-2">
-		{#if !isEmbeded || $page.url.pathname !== '/'}
+		{#if !isEmbeded || page.url.pathname !== '/'}
 			<div class="h-fit">
 				<UserFeedback />
 			</div>

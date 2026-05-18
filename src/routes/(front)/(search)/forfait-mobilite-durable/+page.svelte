@@ -1,29 +1,9 @@
-<script>
+<script lang="ts">
 	import BackButtonAides from '$lib/components/BackButtonAides.svelte';
-
-	const googleFormURL =
-		'https://docs.google.com/forms/d/e/1FAIpQLSeES7UU67CKAO2y5lzOwy6Q_8cLiPab_sywWIO3mOYa_xVQFA/viewform';
-
-	const prefillGoogleFormURL = (company) =>
-		googleFormURL + '?entry.216851643=' + encodeURIComponent(company);
-
-	/** @type {import('./$types').PageData */
-	export let data;
-
-	let entreprises = data.entreprises;
-	let searchEntreprise = '';
-
-	async function loadResults(keyword) {
-		const url = `/api/entreprises?search=${encodeURIComponent(keyword)}`;
-		const response = await fetch(url);
-		entreprises = await response.json();
-	}
-
-	$: typeof window !== 'undefined' && loadResults(searchEntreprise);
 </script>
 
 <div class="w-full max-w-screen-md m-auto">
-	<div class="mt-8" />
+	<div class="mt-8"></div>
 	<BackButtonAides />
 	<h1 class="mt-4 text-3xl font-semibold text-gray-800">
 		Le <span class="text-green-800">Forfait Mobilités Durables</span>

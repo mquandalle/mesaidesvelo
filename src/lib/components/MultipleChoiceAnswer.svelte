@@ -1,8 +1,16 @@
-<script>
-	export let group;
-	export let value;
+<script lang="ts">
+	import type { Snippet } from 'svelte';
 
-	$: isSelected = group === value;
+	interface Props {
+		group?: string | number;
+		value: string | number;
+		onSelect?: (value: string | number) => void;
+		children?: Snippet;
+	}
+
+	let { group, value, onSelect = () => {}, children }: Props = $props();
+
+	let isSelected = $derived(group === value);
 </script>
 
 <label
@@ -10,8 +18,8 @@
 		? 'bg-green-500 border-green-600 text-white'
 		: 'bg-white text-gray-700 hover:bg-green-100 hover:border-green-200 hover:text-gray-800'}"
 >
-	<input type="radio" bind:group {value} />
-	<span class="text-current"><slot /></span>
+	<input type="radio" checked={isSelected} {value} onchange={() => onSelect(value)} />
+	<span class="text-current">{@render children?.()}</span>
 </label>
 
 <style>

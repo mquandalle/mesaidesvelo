@@ -1,5 +1,6 @@
 <script>
-	import { page } from '$app/stores';
+	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
 	import AnimatedAmount from '$lib/components/AnimatedAmount.svelte';
 	import DetailsLine from '$lib/components/DetailsLine.svelte';
 	import Emoji from '$lib/components/Emoji.svelte';
@@ -7,71 +8,77 @@
 	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { publicodeSituation, resetAnswers, veloCat, veloTypeValue } from '$lib/stores';
 	import { emojiCategory, titleCategory } from '$lib/utils';
-	import { writable } from 'svelte/store';
 	import { slide } from 'svelte/transition';
 	import Badge from './Badge.svelte';
 
 	resetAnswers();
-	$: neufOuOccasion = writable('neuf');
-	$: engineOccasion = getEngine({
-		...$publicodeSituation,
-		'vélo . type': $veloTypeValue,
-		'vélo . état': `'occasion'`,
-	});
-	$: montantOccasion = engineOccasion.evaluate('aides . montant').nodeValue;
-	$: engineNeuf = getEngine({
-		...$publicodeSituation,
-		'vélo . type': $veloTypeValue,
-		'vélo . état': `'neuf'`,
-	});
-	$: montantNeuf = engineNeuf.evaluate('aides . montant').nodeValue;
-	$: engine = $neufOuOccasion === 'neuf' ? engineNeuf : engineOccasion;
-
-	$: $neufOuOccasion =
+	let selectedVeloEtat = $state('neuf');
+	let engineOccasion = $derived(
+		getEngine({
+			...$publicodeSituation,
+			'vélo . type': $veloTypeValue,
+			'vélo . état': `'occasion'`,
+		}),
+	);
+	let montantOccasion = $derived(engineOccasion.evaluate('aides . montant').nodeValue);
+	let engineNeuf = $derived(
+		getEngine({
+			...$publicodeSituation,
+			'vélo . type': $veloTypeValue,
+			'vélo . état': `'neuf'`,
+		}),
+	);
+	let montantNeuf = $derived(engineNeuf.evaluate('aides . montant').nodeValue);
+	let neufOuOccasion = $derived(
 		montantNeuf > 0 && montantOccasion > 0
-			? $neufOuOccasion
+			? selectedVeloEtat
 			: montantOccasion > 0
 				? 'occasion'
-				: 'neuf';
+				: 'neuf',
+	);
+	let engine = $derived(neufOuOccasion === 'neuf' ? engineNeuf : engineOccasion);
 
-	const categoryDescription = baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '';
+	let categoryDescription = $derived(
+		baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '',
+	);
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
-	$: aidesDetails =
+	let aidesDetails = $derived(
 		$publicodeSituation &&
-		collectivites
-			.map((collectivite) => {
-				const aide = engine.evaluate(`aides . ${collectivite}`);
+			collectivites
+				.map((collectivite) => {
+					const aide = engine.evaluate(`aides . ${collectivite}`);
 
-				if (!aide?.nodeValue) {
-					return null;
-				}
+					if (!aide?.nodeValue) {
+						return null;
+					}
 
-				const originalRuleName = aide.explanation.find(
-					({ condition }) => condition.nodeValue === true,
-				).consequence.name;
+					const originalRuleName = aide.explanation.find(
+						({ condition }) => condition.nodeValue === true,
+					).consequence.name;
 
-				if (!originalRuleName) {
-					return null;
-				}
+					if (!originalRuleName) {
+						return null;
+					}
 
-				return { ruleName: originalRuleName, ...aide };
-			})
-			.filter(Boolean);
+					return { ruleName: originalRuleName, ...aide };
+				})
+				.filter(Boolean),
+	);
 
-	$: sum = engine.evaluate('aides . montant');
+	let sum = $derived(engine.evaluate('aides . montant'));
 </script>
 
-<div class="mt-8" />
+<div class="mt-8"></div>
 
 <a
 	class="
     inline-block text-gray-500 text-md
     cursor-pointer
     hover:text-green-700 transform transition hover:-translate-x-1
-  "
-	data-sveltekit-nosroll
-	href={$page.url.pathname}
+	"
+	data-sveltekit-noscroll
+	href={resolve(page.url.pathname)}
 >
 	← Toutes les aides
 </a>
@@ -91,21 +98,21 @@
 		<div class="flex border rounded w-min border-gray-200">
 			<button
 				class="
-          text-right rounded-l px-4 py-2 border-r {$neufOuOccasion === 'neuf'
+	          text-right rounded-l px-4 py-2 border-r {neufOuOccasion === 'neuf'
 					? 'bg-sky-100 text-sky-700 font-semibold'
 					: 'hover:bg-sky-50 hover:text-sky-600 '}
-        "
-				on:click={() => ($neufOuOccasion = 'neuf')}
+	        "
+				onclick={() => (selectedVeloEtat = 'neuf')}
 			>
 				Neuf
 			</button>
 			<button
 				class="
-          rounded-r text-left px-4 py-2 basis-1/2 {$neufOuOccasion === 'occasion'
+	          rounded-r text-left px-4 py-2 basis-1/2 {neufOuOccasion === 'occasion'
 					? 'bg-amber-100 text-amber-700 font-semibold'
 					: 'hover:bg-amber-50 hover:text-amber-600'}
-        "
-				on:click={() => ($neufOuOccasion = 'occasion')}
+	        "
+				onclick={() => (selectedVeloEtat = 'occasion')}
 			>
 				D'occasion
 			</button>
@@ -126,17 +133,17 @@
 <div class="border rounded mt-3 bg-white">
 	{#each aidesDetails as aide (aide.ruleName)}
 		<div transition:slide={{ duration: 200 }} class="border-b last:border-b-0">
-			<DetailsLine veloEtat={$neufOuOccasion} {aide} />
+			<DetailsLine veloEtat={neufOuOccasion} {aide} />
 		</div>
 	{/each}
 	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b">
 		<div class="flex justify-between text-lg">
 			<h3 class="font-semibold text-md">Total des aides</h3>
 			<div class="font-bold">
-				<AnimatedAmount veloEtat={$neufOuOccasion} amount={sum.nodeValue} unit={sum.unit} />
+				<AnimatedAmount amount={sum.nodeValue} unit={sum.unit} />
 			</div>
 		</div>
 	</div>
 </div>
 
-<Questions veloEtat={$neufOuOccasion} />
+<Questions veloEtat={neufOuOccasion} />

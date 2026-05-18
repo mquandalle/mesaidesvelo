@@ -1,9 +1,13 @@
-<script>
+<script lang="ts">
 	import MiniatureCollectivite from '$lib/components/MiniatureCollectivite.svelte';
 	import Search from '$lib/components/Search.svelte';
+	import type { PageData } from './$types';
 
-	/** @type {import('./$types').PageData}*/
-	export let data;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 </script>
 
 <svelte:head>

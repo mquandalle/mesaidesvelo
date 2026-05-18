@@ -1,14 +1,20 @@
-<script>
+<script lang="ts">
 	import { building, dev } from '$app/environment';
 	import { preloadCode } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { localisation } from '$lib/stores';
 	import { onMount, setContext } from 'svelte';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	onMount(() => {
-		preloadCode('/', '/ville/*');
+		preloadCode('/');
+		preloadCode('/ville/*');
 
 		// This is a work-around a cold-start issue with the search
 		// autocompletion. By calling this endpoint as soon as possible we
@@ -19,11 +25,11 @@
 		}
 	});
 
-	const isEmbeded = Boolean(building ? false : $page.url.searchParams.get('iframe'));
-	const embedSource = isEmbeded && $page.url.searchParams.get('utm_source');
+	const isEmbeded = Boolean(building ? false : page.url.searchParams.get('iframe'));
+	const embedSource = isEmbeded && page.url.searchParams.get('utm_source');
 	setContext('embed', { isEmbeded, embedSource });
 
-	let pageElement;
+	let pageElement = $state<HTMLElement>();
 
 	onMount(() => {
 		if (!isEmbeded) {
@@ -38,26 +44,30 @@
 			window.parent?.postMessage({ kind: 'resize-height', value }, '*');
 		});
 
-		observer.observe(pageElement);
+		if (pageElement) {
+			observer.observe(pageElement);
+		}
 	});
 
 	// When the site is embeded in an iframe, we don't want to track a “visit”
 	// every time the page is loaded, as the iframe is oftentimes low on the
 	// page and the user might not interact with it or even see it. We disable
 	// tracking up until the first click interaction;
-	let enableTracking = import.meta.env.PROD && !isEmbeded;
+	let enableTracking = $state(import.meta.env.PROD && !isEmbeded);
 
 	// The city can be provided from the URL, for instance /ville/paris. The
 	// `data` output of a load function provides a mechanism for pages to pass
 	// data 'upward' to layouts, which is useful in our case since the selected
 	// city is a "global state".
-	localisation.set($page.data?.ville ?? null);
-	$: if ($page.data?.ville) {
-		localisation.set($page.data.ville);
+	function syncLocalisationFromPageData() {
+		localisation.set(page.data?.ville ?? null);
 	}
+
+	syncLocalisationFromPageData();
+	$effect(syncLocalisationFromPageData);
 </script>
 
-<svelte:window on:click={() => (enableTracking = true)} />
+<svelte:window onclick={() => (enableTracking = true)} />
 
 {#if isEmbeded}
 	<div class="embeded-too-small text-xl text-center items-center justify-center h-[100vh]">
@@ -82,7 +92,7 @@
 				><img
 					src="/images/logo.svg"
 					alt="logo MesAidesVélo"
-					heigt="55"
+					height="55"
 					width="88"
 					class="mr-4 float-left"
 				/></a
@@ -102,7 +112,7 @@
 		{/if}
 	</header>
 	<div class="pb-12 {!isEmbeded ? 'flex-1' : ''}">
-		<slot />
+		{@render children?.()}
 	</div>
 	<Footer />
 

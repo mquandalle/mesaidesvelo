@@ -1,38 +1,40 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import MiniatureCollectivite from '$lib/components/MiniatureCollectivite.svelte';
 
-	$: infos = $page.data.infos;
+	let infos = $derived(page.data.infos);
 
-	$: enumeration = [
-		'l’État',
-		infos?.region?.titre,
-		infos?.département?.titre,
-		infos?.epci?.titre,
-		infos?.ville?.titre,
-	]
-		.filter(Boolean)
-		.reduce((concatenation, item, index, list) => {
-			const separator = index === 0 ? '' : index === list.length - 1 ? ' et ' : ', ';
-			return concatenation + separator + item;
-		}, '');
+	let enumeration = $derived(
+		[
+			'l’État',
+			infos?.region?.titre,
+			infos?.département?.titre,
+			infos?.epci?.titre,
+			infos?.ville?.titre,
+		]
+			.filter(Boolean)
+			.reduce((concatenation, item, index, list) => {
+				const separator = index === 0 ? '' : index === list.length - 1 ? ' et ' : ', ';
+				return concatenation + separator + item;
+			}, ''),
+	);
 
 	const determinant = (nom) => (nom.match(/^[aeiouy]/i) ? 'd’' : 'de ');
-	$: deVille = determinant($page.data.ville.nom) + $page.data.ville.nom;
+	let deVille = $derived(determinant(page.data.ville.nom) + page.data.ville.nom);
 </script>
 
 <div class="prose mt-12 max-w-full">
 	{#if infos.pays}
 		{@html infos.pays.text}
 	{:else}
-		<h1>Les aides à l’achat de vélo à {$page.data.ville.nom}</h1>
+		<h1>Les aides à l’achat de vélo à {page.data.ville.nom}</h1>
 
 		{#if !infos.onlyNationalAides}
 			<p>
 				Acheter un nouveau vélo peut être un investissement important. Heureusement, vous pouvez
 				peut-être bénéficier d'<strong
-					>aides financières pour l'achat d'un vélo à {$page.data.ville.nom}</strong
+					>aides financières pour l'achat d'un vélo à {page.data.ville.nom}</strong
 				>. En effet {enumeration} cherchent à encourager l'usage du vélo car c'est un moyen de transport
 				écologique et bon pour la santé.
 			</p>
@@ -50,7 +52,7 @@
 				personnalisez le résultat en quelques clics.
 			</p>
 
-			{#each ['epci', 'ville', 'region', 'département'] as collectivite}
+			{#each ['epci', 'ville', 'region', 'département'] as collectivite (collectivite)}
 				{#if infos[collectivite]}
 					<h2>
 						Les aides {#if collectivite === 'département'}du{:else}de{/if}
@@ -63,7 +65,7 @@
 		{:else}
 			<p>
 				Malheureusement <strong>il n’existe aucune aide locale</strong> à l’achat de vélo dans la
-				ville de {$page.data.ville.nom}. En effet ni la ville, ni le département, ni la région ne
+				ville de {page.data.ville.nom}. En effet ni la ville, ni le département, ni la région ne
 				proposent d’aide.
 			</p>
 		{/if}
@@ -79,8 +81,8 @@
 		</p>
 	{/if}
 
-	<!-- {#if $page.data.ville.zfe} -->
-	<!-- 	<h2>{$page.data.ville.nom} est une zone à faibles émissions mobilité (ZFE)</h2> -->
+	<!-- {#if page.data.ville.zfe} -->
+	<!-- 	<h2>{page.data.ville.nom} est une zone à faibles émissions mobilité (ZFE)</h2> -->
 	<!-- 	<img -->
 	<!-- 		src="/images/panneau-zfe.webp" -->
 	<!-- 		alt="Signalisation d'une zone ZFE avec les vignettes Crit'Air" -->
@@ -90,7 +92,7 @@
 	<!-- 		Instaurée dans le cadre de la loi Climat d'août 2021, la mise en place des Zones à faibles -->
 	<!-- 		émissions mobilité est obligatoire avant le 31 décembre 2024 pour toutes les agglomérations de -->
 	<!-- 		plus de 150 000 habitants. Mais les villes qui le souhaitent peuvent mettre en place le mesure -->
-	<!-- 		avant, ce qui est le cas à {$page.data.ville.nom}. -->
+	<!-- 		avant, ce qui est le cas à {page.data.ville.nom}. -->
 	<!-- 	</p> -->
 	<!-- 	<p> -->
 	<!-- 		Dans les ZFE les véhicules les plus polluants identifiés par les vignettes Crit'Air 5, 4 et 3 -->
@@ -108,7 +110,7 @@
 	<!-- {/if} -->
 
 	{#if infos.labelTourDeFrance}
-		<h2>{$page.data.ville.nom} labellisé par le Tour-de-France</h2>
+		<h2>{page.data.ville.nom} labellisé par le Tour-de-France</h2>
 		<img
 			src="/images/ville-a-velo/{infos.labelTourDeFrance.note}.jpeg"
 			alt="Label ville à vélo du Tour de France"
@@ -126,7 +128,7 @@
 		<p class="font-bold">
 			La ville {deVille} a reçu la labellisation « {infos.labelTourDeFrance.note} vélo{#if infos.labelTourDeFrance.note > 1}s{/if}
 			»{#if infos.labelTourDeFrance.note === 4}, la meilleure note possible{/if}
-			{#if infos.labelTourDeFrance.commentaire}{' '}
+			{#if infos.labelTourDeFrance.commentaire}
 				avec le commentaire du jury :{:else}.{/if}
 		</p>
 		{#if infos.labelTourDeFrance.commentaire}
@@ -147,7 +149,7 @@
 		</p>
 		<div class="flex justify-center my-8">
 			<div class="classement-fub flex shadow shadow-md">
-				{#each [['#e44b23', 'G'], ['#f39939', 'F'], ['#fccb2d', 'E'], ['#ffee31', 'D'], ['#c8d228', 'C'], ['#79b52e', 'B'], ['#4b9833', 'A'], ['#00822C', 'A+']] as [background, label]}
+				{#each [['#e44b23', 'G'], ['#f39939', 'F'], ['#fccb2d', 'E'], ['#ffee31', 'D'], ['#c8d228', 'C'], ['#79b52e', 'B'], ['#4b9833', 'A'], ['#00822C', 'A+']] as [background, label] (label)}
 					<span style:background class:active={label === infos.barometreFub.note}>{label}</span>
 				{/each}
 			</div>

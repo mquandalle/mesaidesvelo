@@ -1,8 +1,12 @@
-<script>
-	export let emoji;
-	export let className = '';
+<script lang="ts">
+	interface Props {
+		emoji: any;
+		className?: string;
+	}
+
+	let { emoji, className = '' }: Props = $props();
 	// From twitter/twemoji source code
-	function toCodePoint(unicodeSurrogates, sep) {
+	function toCodePoint(unicodeSurrogates, sep = '-') {
 		let r = [],
 			c = 0,
 			p = 0,
@@ -19,13 +23,13 @@
 				r.push(c.toString(16));
 			}
 		}
-		return r.join(sep || '-');
+		return r.join(sep);
 	}
 </script>
 
 {#if emoji}
 	<img
-		src="/emojies/{toCodePoint(emoji)}.svg"
+		src={`/emojies/${toCodePoint(emoji)}.svg`}
 		class="inline align-middle relative ml-1 leading-none {className}"
 		style="height: 1em"
 		draggable="false"
