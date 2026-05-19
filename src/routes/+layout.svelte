@@ -1,5 +1,5 @@
 <script lang="ts">
-	import 'virtual:windi.css';
+	import '../app.css';
 	interface Props {
 		children?: import('svelte').Snippet;
 	}

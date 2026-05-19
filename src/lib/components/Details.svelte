@@ -73,7 +73,7 @@
 
 <a
 	class="
-    inline-block text-gray-500 text-md
+    inline-block text-gray-500 text-base
     cursor-pointer
     hover:text-green-700 transform transition hover:-translate-x-1
 	"
@@ -138,7 +138,7 @@
 	{/each}
 	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b">
 		<div class="flex justify-between text-lg">
-			<h3 class="font-semibold text-md">Total des aides</h3>
+			<h3 class="font-semibold text-base">Total des aides</h3>
 			<div class="font-bold">
 				<AnimatedAmount amount={sum.nodeValue} unit={sum.unit} />
 			</div>

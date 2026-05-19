@@ -1,20 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import path from 'node:path';
-import WindiCSS from 'vite-plugin-windicss';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [
-		sveltekit(),
-		WindiCSS({
-			scan: {
-				dirs: [path.resolve('./src')],
-				exclude: ['.git', 'node_modules'],
-				include: [path.resolve('./node_modules/layerchart/**/*.{svelte,js}')],
-				fileExtensions: ['svelte', 'ts', 'js', 'svx'],
-			},
-		}),
-	],
+	plugins: [sveltekit()],
 	resolve: {
 		alias: {
 			$entreprises: path.resolve('./data-fetch/entreprises/data'),

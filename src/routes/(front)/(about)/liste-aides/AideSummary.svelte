@@ -36,14 +36,14 @@
 		Le calcul de l'aide maximale est soumis à des conditions spécifiques.
 	{/if}
 	{#each aide.maximumsPerVeloKind as [kind, maximumAide] (kind)}
-		<div class="inline-block not-last:border-r border-gray-300 mr-2 pr-2 last:mr-0">
+		<div class="inline-block border-r border-gray-300 mr-2 pr-2 last:mr-0 last:border-r-0">
 			{kind}
 			<a
 				href={resolve('/ville/[slug]', { slug: aide.slug }) +
 					'?velo=' +
 					encodeURIComponent(getBikeKind(kind))}
 				rel="nofollow"
-				class="inline-block pl-1 !no-underline !text-gray-700 !hover:text-green-600"
+				class="inline-block pl-1 !no-underline !text-gray-700 hover:!text-green-600"
 				>{maximumAide}</a
 			>
 		</div>

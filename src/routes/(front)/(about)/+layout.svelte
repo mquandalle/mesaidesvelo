@@ -23,8 +23,9 @@
 				<a
 					href={path}
 					aria-current={isActive ? true : undefined}
-					class="hover:(bg-green-50 text-green-600 rounded) p-2 {isActive ? 'text-green-600' : ''}"
-					>{label}</a
+					class="hover:bg-green-50 hover:text-green-600 hover:rounded p-2 {isActive
+						? 'text-green-600'
+						: ''}">{label}</a
 				>
 			</li>
 		{/each}

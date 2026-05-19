@@ -29,7 +29,7 @@
 	<a tabindex="0" data-sveltekit-noscroll {href} rel={relNoFollow ? 'nofollow' : null}>
 		<div
 			role="row"
-			class={'flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-white hover:bg-green-100 cursor-pointer group' +
+			class={'flex gap-x-2 px-2 sm:gap-x-4 sm:px-4 items-center justify-between py-2 bg-white hover:bg-green-100 cursor-pointer group' +
 				' ' +
 				(isFirst ? 'rounded-t' : '') +
 				' ' +
@@ -54,7 +54,7 @@
 {:else}
 	<div
 		role="row"
-		class={'flex gap-x-2 px-2 sm:(gap-x-4 px-4) items-center justify-between py-2 bg-gray-50  group' +
+		class={'flex gap-x-2 px-2 sm:gap-x-4 sm:px-4 items-center justify-between py-2 bg-gray-50  group' +
 			' ' +
 			(isFirst ? 'rounded-t' : '') +
 			' ' +

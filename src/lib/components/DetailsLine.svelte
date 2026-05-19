@@ -79,7 +79,7 @@
 		<div class="my-4 mx-3 sm:mx-4 flex-grow">
 			<div class="flex">
 				<div class="flex gap-x-4 text-lg flex-wrap">
-					<h3 class="font-semibold text-md mb-1">
+					<h3 class="font-semibold text-base mb-1">
 						{title}
 					</h3>
 					<div class="flex flex-wrap gap-2 items-center sm:items-start">

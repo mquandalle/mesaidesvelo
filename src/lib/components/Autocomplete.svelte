@@ -1,7 +1,7 @@
 <script>
 	// Adapted from https://github.com/pstanoev/simple-svelte-autocomplete
 	// We removed a few options, but we should simplify this component further
-	// and migrate it to windi.css
+	// and migrate it to Tailwind CSS
 
 	import { browser } from '$app/environment';
 	import { removeAccents } from '$lib/utils';

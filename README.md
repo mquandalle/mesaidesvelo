@@ -39,7 +39,7 @@ GitHub](https://github.com/betagouv/publicodes-aides-velo/issues/new).
 
 Si vous êtes développeur/euse vous pouvez aussi améliorer l'application. Il
 s'agit d'une application JavaScript, utilisant [Svelte
-Kit](https://kit.svelte.dev) et [Windi.css](https://windicss.org) pour
+Kit](https://kit.svelte.dev) et [Tailwind CSS](https://tailwindcss.com) pour
 l'interface.
 
 Pour lancer l'application en mode développement utilisez les commandes

@@ -88,7 +88,7 @@
 		>
 			€
 		</div>
-		<p class="text-gray-600 text-md -mt-7 pl-3 italic">
+		<p class="text-gray-600 text-base -mt-7 pl-3 italic">
 			Répondez à la question pour calculer les aides disponibles :
 		</p>
 		<RevenuSelector />

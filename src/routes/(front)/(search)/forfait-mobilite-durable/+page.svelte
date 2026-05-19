@@ -87,7 +87,7 @@
 	<!-- 							<span class="text-xs text-gray-600 block leading-4" -->
 	<!-- 								>{entreprise.commentaire} -->
 	<!-- 								<a -->
-	<!-- 									class="text-green-800 whitespace-nowrap hover:(text-green-600 underline)" -->
+	<!-- 									class="text-green-800 whitespace-nowrap hover:text-green-600 hover:underline" -->
 	<!-- 									href={entreprise.reference} -->
 	<!-- 									target="_blank">plus d’infos</a -->
 	<!-- 								> -->
@@ -98,7 +98,7 @@
 	<!-- 						href={prefillGoogleFormURL(entreprise.nom)} -->
 	<!-- 						target="_blank" -->
 	<!-- 						title="Éditer cette entreprise" -->
-	<!-- 						class="inline-block self-center ml-2 border px-2 py-1 whitespace-nowrap sm:px-3 -my-0.5 rounded-xl bg-gray-50 text-gray-600 hover:(bg-green-100 text-green-900 border-green-500 font-semibold)" -->
+	<!-- 						class="inline-block self-center ml-2 border px-2 py-1 whitespace-nowrap sm:px-3 -my-0.5 rounded-xl bg-gray-50 text-gray-600 hover:bg-green-100 hover:text-green-900 hover:border-green-500 hover:font-semibold" -->
 	<!-- 					> -->
 	<!-- 						<svg -->
 	<!-- 							xmlns="http://www.w3.org/2000/svg" -->

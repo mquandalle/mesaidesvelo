@@ -48,7 +48,7 @@
 		>
 			€
 		</div>
-		<p class="text-gray-600 text-md -mt-7 pl-3 italic">
+		<p class="text-gray-600 text-base -mt-7 pl-3 italic">
 			Répondez {#if questions.length === 1}à la question{:else}aux questions{/if} pour calculer l'aide
 			:
 		</p>

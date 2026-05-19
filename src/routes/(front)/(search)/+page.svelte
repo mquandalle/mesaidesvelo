@@ -24,7 +24,7 @@
 	{#each biggestCities as city}
 		<a
 			href="/ville/{city.toLowerCase()}"
-			class="inline-block text-center border border-current rounded-full text-green-600 px-4 py-2 sm:px-3 sm:py-1 hover:(bg-green-600 text-white)"
+			class="inline-block text-center border border-current rounded-full text-green-600 px-4 py-2 sm:px-3 sm:py-1 hover:bg-green-600 hover:text-white"
 			>{city}</a
 		>
 	{/each}
