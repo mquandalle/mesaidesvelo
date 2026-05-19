@@ -1,9 +1,8 @@
 <script module lang="ts">
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { engine, getEngine } from '$lib/engine';
-	import { localisationSituation, veloCat } from '$lib/stores';
-	import { formatValue, reduceAST } from 'publicodes';
-	import { derived as derivedStore } from 'svelte/store';
+	import type { RuleName } from '@betagouv/aides-velo';
+	import { formatValue, reduceAST, type Situation } from 'publicodes';
 	import Emoji from './Emoji.svelte';
 
 	// In case the formula involve a “linear operation” such as additions or
@@ -12,61 +11,68 @@
 	const numberFieldRequired = Symbol('number field required');
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
-	const uniq = (arr) => [...new Set(arr)];
+	const uniq = <T,>(arr: T[]) => [...new Set(arr)];
 
-	const engineBis = engine.shallowCopy();
-	export const originalNames = derivedStore(
-		[localisationSituation, publicodeSituation],
-		([$localisationSituation, $publicodeSituation]) => {
-			if (!localisationSituation) {
-				return [];
-			}
+	const thresholdEngine = engine.shallowCopy();
 
-			engineBis.setSituation({
-				...$localisationSituation,
-				// TODO: better handle `foyer . personnes` and more generally dependent
-				// variables needed to compute the thresholds.
-				'foyer . personnes': $publicodeSituation['foyer . personnes'] ?? 1,
-			});
+	function setThresholdEngineSituation(
+		localisationSituation: Situation<string>,
+		publicodeSituation: Situation<string>,
+	) {
+		thresholdEngine.setSituation({
+			...localisationSituation,
+			// TODO: better handle `foyer . personnes` and more generally dependent
+			// variables needed to compute the thresholds.
+			'foyer . personnes': publicodeSituation['foyer . personnes'] ?? 1,
+		});
+	}
 
-			return uniq(
-				BIKE_KINDS.map((veloCat) => {
-					const originalNames = collectivites
-						.map((collectivite) => {
-							const aide = engineBis.evaluate(`aides . ${collectivite}`);
-							if (!aide.nodeValue) {
-								return null;
-							}
-							// FIXME: Is it only a type error or this is a real issue?
-							// @ts-ignore
-							const originalRuleName = aide.explanation.find(
-								({ condition }) => condition.nodeValue === true,
-							).consequence.name;
+	function getOriginalNames(
+		localisationSituation: Situation<string>,
+		publicodeSituation: Situation<string>,
+	): RuleName[] {
+		if (Object.keys(localisationSituation).length === 0) {
+			return [];
+		}
 
-							return originalRuleName;
-						})
-						.filter(Boolean);
+		setThresholdEngineSituation(localisationSituation, publicodeSituation);
 
-					return originalNames;
-				}).flat(),
-			);
-		},
-	);
+		return uniq(
+			(BIKE_KINDS ?? []).map(() => {
+				return collectivites
+					.map((collectivite) => {
+						const aide = thresholdEngine.evaluate(`aides . ${collectivite}`);
+						if (!aide.nodeValue) {
+							return null;
+						}
+
+						// FIXME: Is it only a type error or this is a real issue?
+						// @ts-ignore
+						return aide.explanation.find(({ condition }) => condition.nodeValue === true)
+							.consequence.name;
+					})
+					.filter(Boolean);
+			}).flat(),
+		) as RuleName[];
+	}
 
 	// We do a static analysis of the rules AST to search for a particular rule name.
-	// When in find it in a comparaison expression we retreive the value of the other
+	// When we find it in a comparaison expression we retrieve the value of the other
 	// side of the expression.
 	// For exemple in: applicable si: my . rule <= 400 €
 	// We will retrieve [400]
 	// We also need to handle mechanisms that are implemented using comparaisons such
 	// as “grille” or “barème”.
-	function findAllComparaisonsValue(dottedName: RuleName, { searchedName, unit }): number[] {
+	function findAllComparaisonsValue(
+		dottedName: RuleName,
+		{ searchedName, unit }: { searchedName: RuleName; unit: string },
+	): Array<number | typeof numberFieldRequired> {
 		const comparaisonOperators = ['<', '<=', '>', '>='];
 		const linearOperatiors = ['-', '+', '*', '/'];
 
 		// TODO: There might be a better way to convert a parsed node into a given unit.
-		const convertValue = (node) => {
-			const valeur = formatValue(engineBis.evaluate(node));
+		const convertValue = (node: any) => {
+			const valeur = formatValue(thresholdEngine.evaluate(node));
 			if (
 				valeur === '∞' ||
 				valeur === 'Non applicable' ||
@@ -76,9 +82,9 @@
 				return Infinity;
 			}
 
-			return engineBis.evaluate({
+			return thresholdEngine.evaluate({
 				// NOTE: the formated value looks like "1 000,50" and we need to
-				// convert it to "1000.50" to be able to parse it as a number. This // is
+				// convert it to "1000.50" to be able to parse it as a number. This is
 				// a bit hacky but it works for now.
 				valeur: valeur.replace(/\s/g, '').replace(/,/g, '.'),
 				unité: unit,
@@ -87,13 +93,15 @@
 
 		const namesToFollow: RuleName[] = ['foyer . imposable', 'foyer . personnes'];
 
-		const accumulateThresholds = (acc, node) => {
+		const accumulateThresholds = (acc: any, node: any) => {
 			if (acc === numberFieldRequired) {
 				return acc;
 			}
 
 			if (node.nodeKind === 'grille' && node.explanation.assiette?.dottedName === searchedName) {
-				const thresholds = node.explanation.tranches.map(({ plafond }) => convertValue(plafond));
+				const thresholds = node.explanation.tranches.map(({ plafond }: { plafond: any }) =>
+					convertValue(plafond),
+				);
 				return [...acc, ...thresholds];
 			} else if (
 				node.nodeKind === 'operation' &&
@@ -113,62 +121,82 @@
 					node.explanation[1]?.dottedName === searchedName)
 			) {
 				return numberFieldRequired;
-			} // Following reference like this is fragile. We could follow all references
-			// but would need some special handling for the dependency on parent.
-			// For now this works well enough.
-			else if (node.nodeKind === 'reference' && namesToFollow.includes(node.name)) {
+			} else if (node.nodeKind === 'reference' && namesToFollow.includes(node.name)) {
+				// Following references like this is fragile. We could follow all references
+				// but would need some special handling for the dependency on parent.
 				return [...acc, ...findAllComparaisonsValue(node.dottedName, { searchedName, unit })];
 			}
 		};
 
-		return reduceAST(accumulateThresholds, [], engineBis.getRule(dottedName));
+		return reduceAST(accumulateThresholds, [], thresholdEngine.getRule(dottedName));
 	}
-</script>
 
-<script lang="ts">
-	import { publicodeSituation, revenuFiscal } from '$lib/stores';
-	import type { RuleName } from '@betagouv/aides-velo';
-	import { untrack } from 'svelte';
-	import { slide } from 'svelte/transition';
-	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
-	import NumberField from './NumberField.svelte';
+	function findAllRevenuThresholds(
+		names: RuleName[],
+		localisationSituation: Situation<string>,
+		publicodeSituation: Situation<string>,
+	) {
+		setThresholdEngineSituation(localisationSituation, publicodeSituation);
 
-	let { goals = undefined } = $props();
-
-	const uniq = (l) => [...new Set(l)];
-	const engineBis = getEngine({});
-	let thresholds = $derived(
-		(goals ?? $originalNames).flatMap((name) =>
+		return names.flatMap((name) =>
 			findAllComparaisonsValue(name, {
 				searchedName: 'revenu fiscal de référence par part',
 				unit: '€/mois',
 			}),
+		);
+	}
+</script>
+
+<script lang="ts">
+	import { getSimulationForm } from '$lib/simulation/context.svelte';
+	import { slide } from 'svelte/transition';
+	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
+	import NumberField from './NumberField.svelte';
+
+	type Props = {
+		goals?: RuleName[];
+	};
+
+	let { goals = undefined }: Props = $props();
+	const form = getSimulationForm();
+
+	const engineBis = getEngine({});
+
+	let originalNames = $derived(getOriginalNames(form.localisationSituation, form.publicodeSituation));
+	let thresholds = $derived(
+		findAllRevenuThresholds(
+			goals ?? originalNames,
+			form.localisationSituation,
+			form.publicodeSituation,
 		),
 	);
 
 	let numberFieldIsRequired = $derived(
-		thresholds.some((x: number | symbol) => x === numberFieldRequired || x === Infinity),
+		thresholds.some((x) => x === numberFieldRequired || x === Infinity),
 	);
 
 	let uniqThresholds = $derived(
-		!numberFieldIsRequired &&
-			uniq(thresholds.filter((x: number) => x !== Infinity).map((x: number) => Math.round(x))).sort(
-				(a: number, b: number) => a - b,
-			),
+		numberFieldIsRequired
+			? []
+			: uniq(
+					thresholds
+						.filter((x): x is number => typeof x === 'number' && x !== Infinity)
+						.map((x) => Math.round(x)),
+				).sort((a, b) => a - b),
 	);
 
 	// Not all statically detected thresholds are impactful for the current computation
 	// as some of them might be in inactive branches of the computation.
-	// We evaluate all the thresholds and only keep the one that induice a change in the result.
-	function removeUnecessaryThresholds(thresholds) {
+	// We evaluate all the thresholds and only keep the one that induce a change in the result.
+	function removeUnecessaryThresholds(thresholds: number[]) {
 		return [0, ...thresholds]
 			.reduce(
 				(acc, revenu) => {
 					// TODO: we could optimize this calcul which is done 2
 					// times : one time in DetailsLine and one time here
 					engineBis.setSituation({
-						...$publicodeSituation,
-						// 'vélo . type': `'${$veloCat}'`,
+						...form.publicodeSituation,
+						// 'vélo . type': `'${form.veloCat}'`,
 						// 'maximiser les aides': 'oui',
 						// NOTE: we want to show the RFRPP tresholds even if the
 						// user is in a situation of handicap.
@@ -181,8 +209,8 @@
 					// revenu 1 :  a 100, b 200  (total 300)
 					// revenu 2 :  a 300         (total 300)
 					// In this case we don't want to filter the threshold #182
-					const aidesDisplayed = $originalNames
-						.map((dottedName: RuleName) => engineBis.evaluate(dottedName).nodeValue ?? 0)
+					const aidesDisplayed = originalNames
+						.map((dottedName) => engineBis.evaluate(dottedName).nodeValue ?? 0)
 						.join('-');
 
 					if (aidesDisplayed === acc.dernieresAidesDisplayed) {
@@ -194,40 +222,22 @@
 						};
 					}
 				},
-				{ thresholds: [], dernieresAidesDisplayed: null },
+				{ thresholds: [] as number[], dernieresAidesDisplayed: null as string | null },
 			)
 			.thresholds.slice(1);
 	}
 
 	let displayedThresholds = $derived(
-		!numberFieldIsRequired &&
-			($veloCat ? removeUnecessaryThresholds(uniqThresholds) : uniqThresholds),
+		numberFieldIsRequired
+			? []
+			: form.veloCat
+				? removeUnecessaryThresholds(uniqThresholds)
+				: uniqThresholds,
 	);
 
-	function clampRevenuFiscalToDisplayedThresholds() {
-		if (numberFieldIsRequired || displayedThresholds.length === 0) {
-			return;
-		}
-
-		const currentRevenuFiscal = untrack(() => $revenuFiscal);
-		if (!currentRevenuFiscal) {
-			return;
-		}
-
-		const validValues = displayedThresholds.map((threshold) => threshold - 1);
-		if (validValues.includes(currentRevenuFiscal)) {
-			return;
-		}
-
-		const closestThreshold = displayedThresholds.find((plafond) => currentRevenuFiscal <= plafond);
-		$revenuFiscal = closestThreshold
-			? closestThreshold - 1
-			: displayedThresholds[displayedThresholds.length - 1] + 1;
+	function setRevenuFiscal(value: string | number) {
+		form.revenuFiscal = Number(value);
 	}
-
-	$effect(() => {
-		clampRevenuFiscalToDisplayedThresholds();
-	});
 
 	let showExplanations = $state(false);
 </script>
@@ -254,13 +264,17 @@
 		{/if}
 		<div class="flex gap-2 mt-2 flex-wrap playwright-revenuoptions">
 			{#if numberFieldIsRequired}
-				<NumberField bind:value={$revenuFiscal} id="revenu-fiscal" unité="€" />
+				<NumberField
+					bind:value={() => form.revenuFiscal, (value) => (form.revenuFiscal = value)}
+					id="revenu-fiscal"
+					unité="€"
+				/>
 			{:else}
 				{#each displayedThresholds as threshold (threshold)}
 					<MultipleChoiceAnswer
 						value={threshold - 1}
-						group={$revenuFiscal}
-						onSelect={(value) => ($revenuFiscal = value)}
+						group={form.revenuFiscal ?? undefined}
+						onSelect={setRevenuFiscal}
 					>
 						moins de <strong class="font-semibold">
 							{formatValue(threshold)} €
@@ -269,8 +283,8 @@
 				{/each}
 				<MultipleChoiceAnswer
 					value={displayedThresholds[displayedThresholds.length - 1] + 1}
-					group={$revenuFiscal}
-					onSelect={(value) => ($revenuFiscal = value)}
+					group={form.revenuFiscal ?? undefined}
+					onSelect={setRevenuFiscal}
 				>
 					plus de <strong class="font-semibold">
 						{formatValue(displayedThresholds[displayedThresholds.length - 1] + 1)} €

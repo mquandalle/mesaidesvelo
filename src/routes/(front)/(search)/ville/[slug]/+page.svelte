@@ -1,11 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/state';
-
-	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import Details from '$lib/components/Details.svelte';
 	import PaneNavigation from '$lib/components/PaneNavigation.svelte';
 	import ShareButton from '$lib/components/ShareButton.svelte';
-	import { veloCat } from '$lib/stores';
+	import { getSimulation } from '$lib/simulation/context.svelte';
 	import { fly } from 'svelte/transition';
 	import ExplanationsText from './ExplanationsText.svelte';
 	import Results from './Results.svelte';
@@ -16,22 +13,8 @@
 	}
 
 	let { data }: Props = $props();
+	const simulation = getSimulation();
 	let ville = $derived(data.ville);
-
-	const isBikeKind = (velo: string | null): velo is (typeof BIKE_KINDS)[number] =>
-		BIKE_KINDS.includes(velo as (typeof BIKE_KINDS)[number]);
-
-	const getSelectedVeloCat = () => {
-		const requestedVelo = page.url.searchParams.get('velo');
-		return isBikeKind(requestedVelo) ? requestedVelo : undefined;
-	};
-
-	function syncVeloCatFromUrl() {
-		veloCat.set(getSelectedVeloCat());
-	}
-
-	syncVeloCatFromUrl();
-	$effect(syncVeloCatFromUrl);
 </script>
 
 <svelte:head>
@@ -52,8 +35,8 @@
 
 <div class="w-full max-w-screen-md m-auto">
 	<div in:fly={{ y: 30 }}>
-		<PaneNavigation depth={$veloCat ? 1 : 0}>
-			{#if $veloCat}
+		<PaneNavigation depth={simulation.veloCat ? 1 : 0}>
+			{#if simulation.veloCat}
 				<Details />
 			{:else}
 				<Results />

@@ -2,7 +2,7 @@
 	import { allAides } from '$lib/aides-velo-utils';
 	import miniatures from '$lib/data/miniatures.json';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { localisation, publicodeSituation, veloCat, veloTypeValue } from '$lib/stores';
+	import { getSimulationForm } from '$lib/simulation/context.svelte';
 	import { formatDescription, slugify } from '$lib/utils';
 	import SvelteMarkdown from '@modal-labs/svelte-markdown';
 	import AnimatedAmount from './AnimatedAmount.svelte';
@@ -15,6 +15,7 @@
 	}
 
 	let { className = '', aide, veloEtat = 'neuf' }: Props = $props();
+	const form = getSimulationForm();
 
 	let ruleDefinition = $derived(baseEngine.getRule(aide.ruleName));
 	let title = $derived(ruleDefinition.title);
@@ -25,28 +26,28 @@
 	let endDate = $derived(aideMetadata?.endDate ?? null);
 	let engine = $derived(
 		getEngine({
-			...$publicodeSituation,
-			'vélo . type': $veloTypeValue,
+			...form.publicodeSituation,
+			...(form.veloTypeValue ? { 'vélo . type': form.veloTypeValue } : {}),
 			'vélo . état': `'${veloEtat}'`,
 		}),
 	);
 
-	let isExpired = $derived(new Date().getTime() >= endDate?.getTime());
+	let isExpired = $derived(endDate ? new Date().getTime() >= endDate.getTime() : false);
 
 	let notice = $derived(
 		formatDescription({
 			ruleName: aide.ruleName,
 			engine,
-			veloCat: $veloCat,
-			ville: $localisation,
+			veloCat: form.veloCat,
+			ville: form.localisation,
 		}),
 	);
 
-	function evaluateWithGivenRevenu(revenu) {
+	function evaluateWithGivenRevenu(revenu: number) {
 		return engine
 			.setSituation({
-				...$publicodeSituation,
-				'vélo . type': $veloTypeValue,
+				...form.publicodeSituation,
+				...(form.veloTypeValue ? { 'vélo . type': form.veloTypeValue } : {}),
 				'vélo . état': `'${veloEtat}'`,
 				'revenu fiscal de référence par part': `${revenu} €/an`,
 				'vélo . prix': 'vélo . prix pour maximiser les aides',
@@ -63,14 +64,14 @@
 
 {#if aide.nodeValue !== null}
 	<div class={'flex flex-row items-start ' + (isExpired ? 'bg-gray-50 ' : '') + ' ' + className}>
-		{#if miniatures[aide.ruleName]}
+		{#if miniatures[aide.ruleName as keyof typeof miniatures]}
 			<button
 				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
 				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 shrink-0 opacity-85 cursor-pointer"
 				onclick={() => lien && window.open(lien, '_blank')}
 			>
 				<img
-					src="/miniatures/{miniatures[aide.ruleName]}"
+					src="/miniatures/{miniatures[aide.ruleName as keyof typeof miniatures]}"
 					class="object-fill"
 					alt="Logo {title.toLowerCase()}"
 				/>

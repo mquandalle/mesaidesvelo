@@ -1,16 +1,22 @@
 <script lang="ts">
 	import { building, dev } from '$app/environment';
-	import { preloadCode } from '$app/navigation';
+	import { afterNavigate, preloadCode } from '$app/navigation';
 	import { page } from '$app/state';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import { localisation } from '$lib/stores';
+	import { setSimulation } from '$lib/simulation/context.svelte';
+	import { SimulationState } from '$lib/simulation/state.svelte';
 	import { onMount, setContext } from 'svelte';
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
 
 	let { children }: Props = $props();
+	const simulation = setSimulation(new SimulationState());
+
+	afterNavigate(() => {
+		simulation.rememberLocalisation(page.data?.ville);
+	});
 
 	onMount(() => {
 		preloadCode('/');
@@ -55,16 +61,6 @@
 	// tracking up until the first click interaction;
 	let enableTracking = $state(import.meta.env.PROD && !isEmbeded);
 
-	// The city can be provided from the URL, for instance /ville/paris. The
-	// `data` output of a load function provides a mechanism for pages to pass
-	// data 'upward' to layouts, which is useful in our case since the selected
-	// city is a "global state".
-	function syncLocalisationFromPageData() {
-		localisation.set(page.data?.ville ?? null);
-	}
-
-	syncLocalisationFromPageData();
-	$effect(syncLocalisationFromPageData);
 </script>
 
 <svelte:window onclick={() => (enableTracking = true)} />

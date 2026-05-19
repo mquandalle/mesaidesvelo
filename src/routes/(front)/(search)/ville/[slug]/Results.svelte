@@ -4,20 +4,22 @@
 	import Question from '$lib/components/Question.svelte';
 	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
 	import { getEngine } from '$lib/engine';
-	import { publicodeSituation, resetAnswers } from '$lib/stores';
+	import { getSimulation, setSimulationForm } from '$lib/simulation/context.svelte';
+	import { SimulationFormState } from '$lib/simulation/state.svelte';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
 
-	resetAnswers();
+	const simulation = getSimulation();
+	const form = setSimulationForm(new SimulationFormState(simulation));
 
-	let engine = $derived(getEngine($publicodeSituation));
-	let engineBis = $derived(getEngine($publicodeSituation));
+	let engine = $derived(getEngine(form.publicodeSituation));
+	let engineBis = $derived(getEngine(form.publicodeSituation));
 	let aidesPerBikeKind = $derived(
 		BIKE_KINDS.map((cat) => {
 			engineBis.setSituation({
-				...$publicodeSituation,
+				...form.publicodeSituation,
 				'maximiser les aides': 'oui',
 				'vélo . type': `'${cat}'`,
 			});

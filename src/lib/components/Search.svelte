@@ -2,15 +2,12 @@
 	// TODO: supporter la recherche par région ou département
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { localisation } from '$lib/stores';
 	import AutoComplete from '$lib/components/Autocomplete.svelte';
+	import { getSimulation } from '$lib/simulation/context.svelte';
+	import type { Localisation } from '$lib/simulation/situation';
 	import { navigating } from '$app/state';
 
-	type Localisation = {
-		nom: string;
-		slug: string;
-		codePostal: string;
-	};
+	const simulation = getSimulation();
 
 	async function loadItems(keyword: string): Promise<Localisation[]> {
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
@@ -41,7 +38,7 @@
 			placeholder="Commune ou Code postal"
 			search={loadItems}
 			id="localisation-input"
-			selected={$localisation}
+			selected={simulation.selectedLocalisation}
 			onselect={(val) => {
 				if (!navigating.to) {
 					goto(resolve('/ville/[slug]', { slug: val.slug }), { noScroll: true });
@@ -54,11 +51,14 @@
 				</div>
 			{/snippet}
 		</AutoComplete>
-		{#if $localisation}
+		{#if simulation.selectedLocalisation}
 			<button
 				aria-label="Effacer la localisation"
 				class="absolute right-3 top-1/2 z-30 -translate-y-1/2 text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800"
-				onclick={() => localisation.set(null)}>&times;</button
+				onclick={() => {
+					simulation.clearRememberedLocalisation();
+					goto('/', { noScroll: true });
+				}}>&times;</button
 			>
 		{/if}
 	</div>

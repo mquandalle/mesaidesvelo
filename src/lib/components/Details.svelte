@@ -6,25 +6,28 @@
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Questions from '$lib/components/Questions.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
-	import { publicodeSituation, resetAnswers, veloCat, veloTypeValue } from '$lib/stores';
+	import { getSimulation, setSimulationForm } from '$lib/simulation/context.svelte';
+	import { SimulationFormState } from '$lib/simulation/state.svelte';
 	import { emojiCategory, titleCategory } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import Badge from './Badge.svelte';
 
-	resetAnswers();
+	const simulation = getSimulation();
+	const form = setSimulationForm(new SimulationFormState(simulation));
+
 	let selectedVeloEtat = $state('neuf');
 	let engineOccasion = $derived(
 		getEngine({
-			...$publicodeSituation,
-			'vélo . type': $veloTypeValue,
+			...form.publicodeSituation,
+			...(form.veloTypeValue ? { 'vélo . type': form.veloTypeValue } : {}),
 			'vélo . état': `'occasion'`,
 		}),
 	);
 	let montantOccasion = $derived(engineOccasion.evaluate('aides . montant').nodeValue);
 	let engineNeuf = $derived(
 		getEngine({
-			...$publicodeSituation,
-			'vélo . type': $veloTypeValue,
+			...form.publicodeSituation,
+			...(form.veloTypeValue ? { 'vélo . type': form.veloTypeValue } : {}),
 			'vélo . état': `'neuf'`,
 		}),
 	);
@@ -39,12 +42,12 @@
 	let engine = $derived(neufOuOccasion === 'neuf' ? engineNeuf : engineOccasion);
 
 	let categoryDescription = $derived(
-		baseEngine.getRule(`vélo . ${$veloCat}`).rawNode?.description ?? '',
+		form.veloCat ? (baseEngine.getRule(`vélo . ${form.veloCat}`).rawNode?.description ?? '') : '',
 	);
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
 	let aidesDetails = $derived(
-		$publicodeSituation &&
+		form.publicodeSituation &&
 			collectivites
 				.map((collectivite) => {
 					const aide = engine.evaluate(`aides . ${collectivite}`);
@@ -83,9 +86,9 @@
 	← Toutes les aides
 </a>
 <h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
-	{titleCategory($veloCat)}
-	{#if emojiCategory($veloCat)}&nbsp;
-		<Emoji className="min-h-7 -ml-2 -mt-1" emoji={emojiCategory($veloCat)} />
+	{titleCategory(form.veloCat)}
+	{#if emojiCategory(form.veloCat)}&nbsp;
+		<Emoji className="min-h-7 -ml-2 -mt-1" emoji={emojiCategory(form.veloCat)} />
 	{/if}
 </h2>
 

@@ -1,9 +1,6 @@
 <script lang="ts">
 	import Autumn2025 from '$lib/components/releases/Autumn2025.svelte';
 	import Spring2025 from '$lib/components/releases/Spring2025.svelte';
-	import { localisation } from '$lib/stores';
-
-	localisation.set(null);
 
 	const biggestCities = ['Paris', 'Lyon', 'Toulouse', 'Nantes', 'Montpellier', 'Strasbourg'];
 </script>

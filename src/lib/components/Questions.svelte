@@ -2,7 +2,7 @@
 	import type { QuestionNames } from '$lib/aides-velo-utils';
 	import { getEngine } from '$lib/engine';
 	import { QUESTIONS_ORDER, QUESTIONS_TO_IGNORE } from '$lib/questions';
-	import { publicodeSituation, veloTypeValue } from '$lib/stores';
+	import { getSimulationForm } from '$lib/simulation/context.svelte';
 	import type { RuleName } from '@betagouv/aides-velo';
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
@@ -13,31 +13,34 @@
 	}
 
 	let { goals = undefined, veloEtat = 'neuf' }: Props = $props();
+	const form = getSimulationForm();
 
 	let engine = $derived(
 		getEngine({
-			...$publicodeSituation,
-			'vélo . type': $veloTypeValue,
+			...form.publicodeSituation,
+			...(form.veloTypeValue ? { 'vélo . type': form.veloTypeValue } : {}),
 			'vélo . état': `'${veloEtat}'`,
 		}),
 	);
 
-	const getSortOrder = (name: QuestionNames) =>
+	const getSortOrder = (name: RuleName) =>
 		QUESTIONS_ORDER.includes(name) ? QUESTIONS_ORDER.indexOf(name) : Infinity;
 
 	const uniq = <T,>(arr: T[]) => [...new Set(arr)];
 	let questions = $derived(
-		uniq(
-			(goals ?? ['aides . montant'])
-				.map((ruleName: RuleName) => engine.evaluate(ruleName).traversedVariables)
-				?.flat(),
+		(
+			uniq(
+				(goals ?? ['aides . montant'])
+					.map((ruleName: RuleName) => engine.evaluate(ruleName).traversedVariables)
+					?.flat(),
+			) as RuleName[]
 		)
 			.filter(
 				(q: RuleName) =>
 					engine.getRule(q).rawNode.question || 'revenu fiscal de référence par part' === q,
 			)
-			.filter((q: QuestionNames) => !QUESTIONS_TO_IGNORE.includes(q))
-			.sort((a: QuestionNames, b: QuestionNames) => getSortOrder(a) - getSortOrder(b)),
+			.filter((q) => !QUESTIONS_TO_IGNORE.includes(q as QuestionNames))
+			.sort((a, b) => getSortOrder(a) - getSortOrder(b)),
 	);
 </script>
 
@@ -55,7 +58,7 @@
 		{#each questions as question}
 			{#if question === 'revenu fiscal de référence par part'}
 				<RevenuSelector {goals} />
-			{:else if question !== 'revenu fiscal de référence par part'}
+			{:else}
 				{#key question}
 					<!-- NOTE: needed to avoid dissociated question and values -->
 					<Question rule={question} {engine} />

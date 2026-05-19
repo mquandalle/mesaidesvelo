@@ -1,7 +1,7 @@
 <script lang="ts">
 	import MultipleChoiceAnswer from './MultipleChoiceAnswer.svelte';
 	import SvelteMarkdown from '@modal-labs/svelte-markdown';
-	import { answers, publicodeSituation } from '$lib/stores';
+	import { getSimulationForm } from '$lib/simulation/context.svelte';
 	import { slugify, nodeValueToOuiNon } from '$lib/utils';
 	import { getOptions } from '$lib/aides-velo-utils';
 	import { slide } from 'svelte/transition';
@@ -10,10 +10,10 @@
 	import { engine as baseEngine } from '$lib/engine';
 
 	let { rule, engine } = $props();
+	const form = getSimulationForm();
 
-	// svelte-ignore state_referenced_locally
-	let value = $state(
-		$publicodeSituation[rule] ?? nodeValueToOuiNon(engine.evaluate(rule).nodeValue),
+	let value = $derived(
+		form.getAnswer(rule) ?? nodeValueToOuiNon(engine.evaluate(rule).nodeValue),
 	);
 
 	let ruleNode = $derived(baseEngine.getRule(rule));
@@ -22,30 +22,22 @@
 	let domId = $derived(`question-${slugify(rule)}`);
 	let ruleType = $derived(baseEngine.context.nodesTypes.get(ruleNode)?.type);
 
-	function setValue(nextValue) {
-		value = nextValue;
-		if (nextValue) {
-			answers.update(($answers) => ({
-				...$answers,
-				[rule]: possibilités?.includes(nextValue)
-					? `'${nextValue}'`
-					: // NOTE: we don't use unité here anymore as we don't
-						// really need it for now and it was causing some
-						// issues when retrieving it from the situation and
-						// therefore duplicating the unit.
-						nextValue,
-			}));
-		} else if (nextValue === null) {
-			answers.update(($answers) => ({ ...$answers, [rule]: undefined }));
-		}
+	function setValue(nextValue: string | number | null) {
+		// NOTE: we don't use unité here anymore as we don't really need it for now
+		// and it was causing issues when retrieving it from the situation.
+		form.setAnswer(rule, nextValue);
 	}
 
-	function optionalEvaluate(expression) {
+	function optionalEvaluate(expression: any) {
 		if (typeof expression === 'string') {
 			return expression;
 		} else {
 			return engine.evaluate(expression).nodeValue;
 		}
+	}
+
+	function getNumberValue() {
+		return typeof value === 'number' ? value : null;
 	}
 
 	let showExplanations = $state(false);
@@ -77,7 +69,7 @@
 			<MultipleChoiceAnswer value="oui" group={value} onSelect={setValue}>Oui</MultipleChoiceAnswer>
 			<MultipleChoiceAnswer value="non" group={value} onSelect={setValue}>Non</MultipleChoiceAnswer>
 		</div>
-	{:else if possibilités?.length > 0}
+	{:else if (possibilités?.length ?? 0) > 0}
 		<div class="flex gap-2 mt-2 flex-wrap">
 			{#each possibilités as possibilité (possibilité)}
 				<MultipleChoiceAnswer value={`'${possibilité}'`} group={value} onSelect={setValue}
@@ -87,6 +79,6 @@
 			{/each}
 		</div>
 	{:else}
-		<NumberField id={domId} unité={ruleInfos.unité} bind:value={() => value, setValue} />
+		<NumberField id={domId} unité={ruleInfos.unité} bind:value={getNumberValue, setValue} />
 	{/if}
 </div>
