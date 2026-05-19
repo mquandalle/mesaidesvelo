@@ -134,9 +134,15 @@
 	}
 
 	function handleBlur(event: FocusEvent) {
-		if (!isInsideContainer(event.relatedTarget)) {
-			close();
+		if (isInsideContainer(event.relatedTarget)) {
+			return;
 		}
+
+		window.setTimeout(() => {
+			if (!isInsideContainer(document.activeElement)) {
+				close();
+			}
+		}, 120);
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -254,6 +260,7 @@
 							: ''}"
 						role="option"
 						aria-selected={index === highlightedIndex}
+						onmousedown={(event) => event.preventDefault()}
 						onclick={() => selectItem(suggestion)}
 						onpointerenter={() => (highlightedIndex = index)}
 					>
