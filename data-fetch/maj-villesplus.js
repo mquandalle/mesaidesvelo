@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import epci from '@etalab/decoupage-administratif/data/epci.json' assert { type: 'json' };
+import epci from '@etalab/decoupage-administratif/data/epci.json' with { type: 'json' };
 import { slugify } from '../src/lib/utils.js';
 import { writeJsonData } from '../src/scripts/writeData.js';
 

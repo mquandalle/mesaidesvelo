@@ -15,7 +15,7 @@
 
 	<h2 class="font-semibold text-2xl mt-12">Je travaille dans le secteur public</h2>
 
-	<div class="border mt-4 p-4 bg-white rounded-md shadow-sm">
+	<div class="border mt-4 p-4 bg-white rounded-md shadow-xs">
 		<div class="flex flex-col sm:flex-row-reverse gap-x-8 text-lg">
 			<dl class="flex flex-row sm:flex-col gap-x-3 mb-2 items-center sm:items-start">
 				<dt class="sm:text-xs text-gray-600">Montant du forfait</dt>
@@ -51,14 +51,14 @@
 	<!-- 	concurrents ! -->
 	<!-- </p> -->
 	<!---->
-	<!-- <div class="flex flex-col border mt-6 bg-white rounded-md shadow-sm"> -->
+	<!-- <div class="flex flex-col border mt-6 bg-white rounded-md shadow-xs"> -->
 	<!-- 	<label class="block bg-gray-50 p-4 border-b" -->
 	<!-- 		>Votre entreprise :<br /> -->
 	<!-- 		<input -->
 	<!-- 			type="text" -->
 	<!-- 			placeholder="EDF, Renault..." -->
 	<!-- 			bind:value={searchEntreprise} -->
-	<!-- 			class="border focus:border-green-400 bg-white p-2 rounded w-full shadow-sm mt-1" -->
+	<!-- 			class="border focus:border-green-400 bg-white p-2 rounded w-full shadow-xs mt-1" -->
 	<!-- 		/> -->
 	<!-- 	</label> -->
 	<!---->

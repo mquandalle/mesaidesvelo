@@ -14,7 +14,7 @@
 
 import { rawCityToFullLocalisation, removeAccents } from '$lib/utils';
 import fuzzysort from 'fuzzysort';
-import communes from '$lib/data/communes.json' assert { type: 'json' };
+import communes from '$lib/data/communes.json' with { type: 'json' };
 
 const indexedData = communes.flatMap(({ codesPostaux, ...rest }) =>
 	codesPostaux.map((codePostal, i) => {
@@ -32,13 +32,16 @@ const indexedData = communes.flatMap(({ codesPostaux, ...rest }) =>
 const searchOptions = {
 	keys: ['indexedName', 'indexedCodePostal'],
 	limit: 10,
-	threshold: -1000,
-	scoreFn: (a) =>
+	threshold: 0,
+	scoreFn: (a) => {
 		// testé à la main pour faire remonter les plus grosses villes en premier
-		Math.max(
-			a[0] ? a[0].score - 1000 / Math.log(a.obj.population) : -1001,
-			a[1] ? a[1].score - 1 / Math.log(a.obj.population) : -1001,
-		),
+		const populationLog = Math.log(a.obj.population);
+
+		return Math.max(
+			a[0] ? a[0].score - 1 / populationLog : 0,
+			a[1] ? a[1].score - 0.001 / populationLog : 0,
+		);
+	},
 };
 
 /** @type {import('./$types').RequestHandler} */

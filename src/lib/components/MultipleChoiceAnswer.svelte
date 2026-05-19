@@ -14,7 +14,7 @@
 </script>
 
 <label
-	class="border rounded px-4 py-2 shadow-sm flex items-center gap-x-2 cursor-pointer {isSelected
+	class="border rounded px-4 py-2 shadow-xs flex items-center gap-x-2 cursor-pointer {isSelected
 		? 'bg-green-500 border-green-600 text-white'
 		: 'bg-white text-gray-700 hover:bg-green-100 hover:border-green-200 hover:text-gray-800'}"
 >

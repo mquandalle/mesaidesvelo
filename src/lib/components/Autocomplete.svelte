@@ -224,7 +224,7 @@
 		{placeholder}
 		autocomplete="off"
 		disabled={!browser}
-		class="autocomplete-input relative z-20 h-9 w-full bg-transparent py-0 pr-10 pl-2 text-base outline-none placeholder:text-gray-500 disabled:cursor-wait"
+		class="autocomplete-input relative z-20 h-9 w-full bg-transparent py-0 pr-10 pl-2 text-base outline-hidden placeholder:text-gray-500 disabled:cursor-wait"
 		role="combobox"
 		aria-autocomplete="list"
 		aria-controls={listId}

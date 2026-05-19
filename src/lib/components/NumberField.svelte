@@ -8,7 +8,7 @@
 	let { value = $bindable(), unité, id }: Props = $props();
 </script>
 
-<div class="border rounded p-2 mt-1 bg-white shadow-sm">
+<div class="border rounded p-2 mt-1 bg-white shadow-xs">
 	<input
 		data-testid={`${id}-value-${value}`}
 		type="number"

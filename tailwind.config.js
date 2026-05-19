@@ -1,5 +1,3 @@
-import typography from '@tailwindcss/typography';
-
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts,svx}', './node_modules/layerchart/**/*.{svelte,js}'],
@@ -35,5 +33,4 @@ export default {
 			}),
 		},
 	},
-	plugins: [typography],
 };

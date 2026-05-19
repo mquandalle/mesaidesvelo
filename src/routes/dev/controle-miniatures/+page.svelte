@@ -45,7 +45,7 @@
 >
 	{#each aidesRuleNames as aideRuleName}
 		{@const title = engine.getRule(aideRuleName).rawNode.titre}
-		<article class="flex flex-col justify-between items-center border shadow-sm p-2">
+		<article class="flex flex-col justify-between items-center border shadow-xs p-2">
 			<div>
 				<a href={googleSearchImageHref(title)} {title}>
 					{#if miniaturesManifest[aideRuleName]}

@@ -58,10 +58,16 @@ function capitalizeWords(str) {
 const searchOptions = {
 	keys: ['indexedName'],
 	limit: 10,
-	threshold: -1000,
-	scoreFn: (a) =>
+	threshold: 0,
+	scoreFn: (a) => {
 		// testé à la main pour faire remonter les plus grosses villes en premier
-		a[0] ? a[0].score * (1 - Math.log((a.obj.effectif || 1000) / 10000) * 0.8) : -1001,
+		if (!a[0]) {
+			return 0;
+		}
+
+		const effectifWeight = 1 - Math.log((a.obj.effectif || 1000) / 10000) * 0.8;
+		return Math.max(0, 1 + (a[0].score - 1) * effectifWeight);
+	},
 };
 
 /** @type {import('./$types').RequestHandler} */

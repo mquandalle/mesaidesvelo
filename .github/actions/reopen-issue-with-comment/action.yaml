@@ -9,5 +9,5 @@ inputs:
   comment:
     description: 'The comment body.'
 runs:
-  using: 'node16'
+  using: 'node24'
   main: './main.js'

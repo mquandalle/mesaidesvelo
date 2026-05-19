@@ -6,7 +6,7 @@
 	<div class="mt-8"></div>
 	<BackButtonAides />
 
-	<div class="border mt-6 rounded-md shadow-sm">
+	<div class="border mt-6 rounded-md shadow-xs">
 		<!-- {#if aides.length === 0} -->
 		<p class="p-4 italic text-gray-600">
 			La prime à la conversion pour un vélo à assistance électrique (VAE) est

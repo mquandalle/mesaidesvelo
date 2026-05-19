@@ -187,6 +187,8 @@
 </div>
 
 <style>
+	@reference '../../../../../app.css';
+
 	.classement-fub span {
 		height: 40px;
 		width: 40px;
@@ -202,6 +204,6 @@
 	.classement-fub span.active {
 		transform: scale(1.3);
 		z-index: 10;
-		@apply rounded shadow shadow-md;
+		@apply rounded shadow-sm shadow-md;
 	}
 </style>

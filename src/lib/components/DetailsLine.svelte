@@ -66,7 +66,7 @@
 		{#if miniatures[aide.ruleName]}
 			<button
 				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
-				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 flex-shrink-0 opacity-85 cursor-pointer"
+				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 shrink-0 opacity-85 cursor-pointer"
 				onclick={() => lien && window.open(lien, '_blank')}
 			>
 				<img
