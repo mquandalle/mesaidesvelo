@@ -4,6 +4,9 @@ const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
 
 test.describe('Navigation scenarios', () => {
 	test('simple navigation', async ({ page }) => {
+		const pageErrors = [];
+		page.on('pageerror', (error) => pageErrors.push(error.message));
+
 		startNavigation(page, 'toulouse');
 
 		await page.click("text=Achat d'un vélo électrique");
@@ -19,6 +22,8 @@ test.describe('Navigation scenarios', () => {
 		await page.fill('input:below(label:text("Prix du vélo"))', '');
 		await page.click('text=moins de 1 567 €');
 		await expect(totalAides).toHaveText('Total des aides 250 €', { useInnerText: true });
+
+		expect(pageErrors).toEqual([]);
 	});
 
 	test('PMR scenario', async ({ page }) => {
