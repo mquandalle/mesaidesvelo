@@ -60,7 +60,6 @@
 	// page and the user might not interact with it or even see it. We disable
 	// tracking up until the first click interaction;
 	let enableTracking = $state(import.meta.env.PROD && !isEmbeded);
-
 </script>
 
 <svelte:window onclick={() => (enableTracking = true)} />

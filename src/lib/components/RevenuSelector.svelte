@@ -38,21 +38,23 @@
 		setThresholdEngineSituation(localisationSituation, publicodeSituation);
 
 		return uniq(
-			(BIKE_KINDS ?? []).map(() => {
-				return collectivites
-					.map((collectivite) => {
-						const aide = thresholdEngine.evaluate(`aides . ${collectivite}`);
-						if (!aide.nodeValue) {
-							return null;
-						}
+			(BIKE_KINDS ?? [])
+				.map(() => {
+					return collectivites
+						.map((collectivite) => {
+							const aide = thresholdEngine.evaluate(`aides . ${collectivite}`);
+							if (!aide.nodeValue) {
+								return null;
+							}
 
-						// FIXME: Is it only a type error or this is a real issue?
-						// @ts-ignore
-						return aide.explanation.find(({ condition }) => condition.nodeValue === true)
-							.consequence.name;
-					})
-					.filter(Boolean);
-			}).flat(),
+							// FIXME: Is it only a type error or this is a real issue?
+							// @ts-ignore
+							return aide.explanation.find(({ condition }) => condition.nodeValue === true)
+								.consequence.name;
+						})
+						.filter(Boolean);
+				})
+				.flat(),
 		) as RuleName[];
 	}
 
@@ -162,7 +164,9 @@
 
 	const engineBis = getEngine({});
 
-	let originalNames = $derived(getOriginalNames(form.localisationSituation, form.publicodeSituation));
+	let originalNames = $derived(
+		getOriginalNames(form.localisationSituation, form.publicodeSituation),
+	);
 	let thresholds = $derived(
 		findAllRevenuThresholds(
 			goals ?? originalNames,

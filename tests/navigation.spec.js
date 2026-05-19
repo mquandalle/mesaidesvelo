@@ -7,7 +7,7 @@ test.describe('Navigation scenarios', () => {
 		const pageErrors = [];
 		page.on('pageerror', (error) => pageErrors.push(error.message));
 
-		startNavigation(page, 'toulouse');
+		await startNavigation(page, 'toulouse');
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
@@ -27,7 +27,7 @@ test.describe('Navigation scenarios', () => {
 	});
 
 	test('PMR scenario', async ({ page }) => {
-		startNavigation(page, 'toulouse');
+		await startNavigation(page, 'toulouse');
 
 		await page.click('text=Oui');
 		await page.click("text=Achat d'un vélo adapté pour PMR");
@@ -36,7 +36,7 @@ test.describe('Navigation scenarios', () => {
 	});
 
 	test('age scenario', async ({ page }) => {
-		startNavigation(page, 'sable-sur-sarthe');
+		await startNavigation(page, 'sable-sur-sarthe');
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
@@ -49,7 +49,7 @@ test.describe('Navigation scenarios', () => {
 	});
 
 	test('multiple choices scenario', async ({ page }) => {
-		startNavigation(page, 'reims');
+		await startNavigation(page, 'reims');
 
 		await page.click("text=Achat d'un vélo électrique");
 		const totalAides = page.locator('text=Total des aides >> ..');
@@ -67,7 +67,7 @@ test.describe('Navigation scenarios', () => {
 	});
 
 	test('neuf/occasion scenario', async ({ page }) => {
-		startNavigation(page, 'grenoble');
+		await startNavigation(page, 'grenoble');
 
 		await page.click("text=Achat d'un vélo mécanique simple");
 		const totalAides = page.locator('text=Total des aides >> ..');
@@ -143,7 +143,7 @@ async function startNavigation(page, ville) {
 	await page.goto(baseUrl);
 
 	await page.waitForLoadState();
-	searchAndGoTo(page, ville);
+	await searchAndGoTo(page, ville);
 	await expect(page).toHaveURL(baseUrl + '/ville/' + ville);
 
 	// Hide evaporate animation

@@ -12,9 +12,7 @@
 	let { rule, engine } = $props();
 	const form = getSimulationForm();
 
-	let value = $derived(
-		form.getAnswer(rule) ?? nodeValueToOuiNon(engine.evaluate(rule).nodeValue),
-	);
+	let value = $derived(form.getAnswer(rule) ?? nodeValueToOuiNon(engine.evaluate(rule).nodeValue));
 
 	let ruleNode = $derived(baseEngine.getRule(rule));
 	let ruleInfos = $derived(ruleNode.rawNode);

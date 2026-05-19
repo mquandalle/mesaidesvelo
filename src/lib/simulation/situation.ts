@@ -49,7 +49,9 @@ export function localisationToSituation(localisation: Localisation | null): Situ
 
 export function compactAnswers(answers: Answers): Situation<string> {
 	return Object.fromEntries(
-		Object.entries(answers).filter(([, value]) => value !== null && value !== undefined && value !== ''),
+		Object.entries(answers).filter(
+			([, value]) => value !== null && value !== undefined && value !== '',
+		),
 	) as Situation<string>;
 }
 
@@ -65,8 +67,6 @@ export function buildPublicodeSituation({
 	return {
 		...localisationSituation,
 		...compactAnswers(answers),
-		...(revenuFiscal
-			? { 'revenu fiscal de référence par part': `${revenuFiscal} €/mois` }
-			: {}),
+		...(revenuFiscal ? { 'revenu fiscal de référence par part': `${revenuFiscal} €/mois` } : {}),
 	};
 }
