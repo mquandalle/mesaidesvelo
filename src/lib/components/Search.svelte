@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// TODO: supporter la recherche par région ou département
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
@@ -6,15 +6,16 @@
 	import AutoComplete from '$lib/components/Autocomplete.svelte';
 	import { navigating } from '$app/state';
 
-	async function loadItems(keyword) {
+	type Localisation = {
+		nom: string;
+		slug: string;
+		codePostal: string;
+	};
+
+	async function loadItems(keyword: string): Promise<Localisation[]> {
 		const url = `/api/collectivites?search=${encodeURIComponent(keyword)}`;
 		const response = await fetch(url);
-		return await response.json();
-	}
-
-	function autoSelectInput() {
-		const inputElement = document.getElementById('localisation-input');
-		inputElement.select();
+		return (await response.json()) as Localisation[];
 	}
 </script>
 
@@ -22,7 +23,7 @@
 	class="w-full max-w-screen-md mx-auto mt-10 bg-gradient-to-r from-green-100 to-green-200 py-6 sm:py-8 px-4 sm:px-6 mt-6 flex flex-col gap-x-4 gap-y-2 sm:flex-row sm:items-center rounded border border-green-300"
 >
 	<label for="localisation-input" class="sm:text-lg text-green-900">Localisation</label>
-	<div class="flex-1 flex flex-row items-center bg-white shadow rounded-3xl px-3 pt-1">
+	<div class="relative flex-1 flex flex-row items-center bg-white shadow rounded-3xl px-3 pt-1">
 		<label for="localisation-input" class="relative z-99"
 			><svg
 				focusable="false"
@@ -35,24 +36,15 @@
 			></label
 		>
 		<AutoComplete
-			className="w-full"
-			labelFunction={(item) => {
-				if (item === null || item === undefined) {
-					return '';
-				}
-				return `${item.codePostal} - ${item.nom}`;
-			}}
+			class="w-full"
+			label={(item) => `${item.codePostal} - ${item.nom}`}
 			placeholder="Commune ou Code postal"
-			searchFunction={loadItems}
-			localFiltering={false}
-			hideArrow={true}
-			inputId="localisation-input"
-			selectedItem={$localisation}
-			onFocus={autoSelectInput}
-			onChange={(val) => {
-				const derivedPath = val ? `/ville/${val.slug}` : `/`;
+			search={loadItems}
+			id="localisation-input"
+			selected={$localisation}
+			onselect={(val) => {
 				if (!navigating.to) {
-					goto(resolve(derivedPath), { noScroll: true });
+					goto(resolve('/ville/[slug]', { slug: val.slug }), { noScroll: true });
 				}
 			}}
 		>
@@ -61,17 +53,11 @@
 					<span class="tabular-nums">{item.codePostal}</span> - {item.nom}
 				</div>
 			{/snippet}
-			{#snippet loading()}
-				<div>Chargement...</div>
-			{/snippet}
-			{#snippet noResults()}
-				<div>Pas de résultats</div>
-			{/snippet}
 		</AutoComplete>
 		{#if $localisation}
 			<button
 				aria-label="Effacer la localisation"
-				class="text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800 relative z-99 -ml-[15px]"
+				class="absolute right-3 top-1/2 z-30 -translate-y-1/2 text-3xl font-light cursor-pointer text-gray-500 hover:text-gray-800"
 				onclick={() => localisation.set(null)}>&times;</button
 			>
 		{/if}
