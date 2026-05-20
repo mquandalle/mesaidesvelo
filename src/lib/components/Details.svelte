@@ -2,13 +2,13 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import AnimatedAmount from '$lib/components/AnimatedAmount.svelte';
+	import BikeCategoryIcon, { bikeCategoryImageSlug } from '$lib/components/BikeCategoryIcon.svelte';
 	import DetailsLine from '$lib/components/DetailsLine.svelte';
-	import Emoji from '$lib/components/Emoji.svelte';
 	import Questions from '$lib/components/Questions.svelte';
 	import { engine as baseEngine, getEngine } from '$lib/engine';
 	import { getSimulation, setSimulationForm } from '$lib/simulation/context.svelte';
 	import { SimulationFormState } from '$lib/simulation/state.svelte';
-	import { emojiCategory, titleCategory } from '$lib/utils';
+	import { titleCategory } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import Badge from './Badge.svelte';
 
@@ -44,6 +44,7 @@
 	let categoryDescription = $derived(
 		form.veloCat ? (baseEngine.getRule(`vélo . ${form.veloCat}`).rawNode?.description ?? '') : '',
 	);
+	let transitionKey = $derived(bikeCategoryImageSlug(form.veloCat));
 
 	const collectivites = ['commune', 'intercommunalité', 'département', 'région', 'état'];
 	let aidesDetails = $derived(
@@ -72,77 +73,90 @@
 	let sum = $derived(engine.evaluate('aides . montant'));
 </script>
 
-<div class="mt-8"></div>
-
-<a
-	class="
-    inline-block text-gray-500 text-base
-    cursor-pointer
-    hover:text-green-700 transform transition hover:-translate-x-1
-	"
-	data-sveltekit-noscroll
-	href={resolve(page.url.pathname)}
+<section
+	class="mt-8 grid items-start gap-x-5 gap-y-5 sm:grid-cols-[minmax(0,1fr)_300px] sm:items-center"
 >
-	← Toutes les aides
-</a>
-<h2 class="font-bold mt-2 mb-5 text-gray-900 text-xl">
-	{titleCategory(form.veloCat)}
-	{#if emojiCategory(form.veloCat)}&nbsp;
-		<Emoji className="min-h-7 -ml-2 -mt-1" emoji={emojiCategory(form.veloCat)} />
-	{/if}
-</h2>
+	<a
+		class="
+		    inline-flex items-center text-sm font-semibold text-[#647085]
+		    cursor-pointer
+		    hover:text-[#16a34a] transform transition hover:-translate-x-1
+				sm:col-start-1
+			"
+		data-sveltekit-noscroll
+		href={resolve(page.url.pathname)}
+	>
+		← Toutes les aides
+	</a>
 
-{#if categoryDescription}
-	<p class="text-gray-700 text-sm">{categoryDescription}</p>
-{/if}
+	<div class="min-w-0 sm:col-start-1">
+		<h2
+			class="mav-bike-title-transition mb-3 text-3xl leading-[1.05] font-[800] text-[#10233a] sm:text-4xl"
+			style={transitionKey ? `--mav-bike-title-transition: mav-bike-title-${transitionKey}` : ''}
+		>
+			{titleCategory(form.veloCat)}
+		</h2>
 
-<div class="mt-6">
-	{#if montantNeuf > 0 && montantOccasion > 0 && montantNeuf !== montantOccasion}
-		<div class="flex border rounded w-min border-gray-200">
-			<button
-				class="
-	          text-right rounded-l px-4 py-2 border-r {neufOuOccasion === 'neuf'
-					? 'bg-sky-100 text-sky-700 font-semibold'
-					: 'hover:bg-sky-50 hover:text-sky-600 '}
-	        "
-				onclick={() => (selectedVeloEtat = 'neuf')}
-			>
-				Neuf
-			</button>
-			<button
-				class="
-	          rounded-r text-left px-4 py-2 basis-1/2 {neufOuOccasion === 'occasion'
-					? 'bg-amber-100 text-amber-700 font-semibold'
-					: 'hover:bg-amber-50 hover:text-amber-600'}
-	        "
-				onclick={() => (selectedVeloEtat = 'occasion')}
-			>
-				D'occasion
-			</button>
-		</div>
-	{:else if montantNeuf > 0 && montantOccasion > 0 && montantNeuf === montantOccasion}
-		<Badge className="px-4 py-2 text-[0.875rem]">Neuf ou d'occasion</Badge>
-	{:else if montantNeuf}
-		<Badge className="bg-sky-50 px-4 py-2 text-[0.875rem] !text-sky-700 border-sky-100">
-			Neuf uniquement
-		</Badge>
-	{:else if montantOccasion}
-		<Badge className="bg-amber-50 px-4 py-2 text-[0.875rem] !text-amber-700 border-amber-100">
-			D'occasion uniquement
-		</Badge>
-	{/if}
-</div>
+		{#if categoryDescription}
+			<p class="max-w-[680px] text-sm leading-6 text-[#647085]">{categoryDescription}</p>
+		{/if}
+	</div>
 
-<div class="border rounded mt-3 bg-white">
+	<BikeCategoryIcon
+		category={form.veloCat}
+		variant="illustration"
+		className="h-36 w-full max-w-[260px] mx-auto object-center sm:h-40 sm:max-w-[300px] sm:mx-0 sm:justify-self-end sm:object-right sm:col-start-2 sm:row-start-1 sm:row-span-3 sm:self-center"
+		{transitionKey}
+	/>
+
+	<div class="sm:col-start-1">
+		{#if montantNeuf > 0 && montantOccasion > 0 && montantNeuf !== montantOccasion}
+			<div class="inline-flex rounded-full border border-[#d4ded9] bg-white p-1 shadow-sm">
+				<button
+					class="
+			          rounded-full px-4 py-2 text-sm font-bold {neufOuOccasion === 'neuf'
+						? 'bg-[#e5f4ff] text-[#0f5e91]'
+						: 'text-[#647085] hover:bg-[#f2f7f5] hover:text-[#263754]'}
+			        "
+					onclick={() => (selectedVeloEtat = 'neuf')}
+				>
+					Neuf
+				</button>
+				<button
+					class="
+			          rounded-full px-4 py-2 text-sm font-bold {neufOuOccasion === 'occasion'
+						? 'bg-[#fff2cf] text-[#8a5b00]'
+						: 'text-[#647085] hover:bg-[#f2f7f5] hover:text-[#263754]'}
+			        "
+					onclick={() => (selectedVeloEtat = 'occasion')}
+				>
+					D'occasion
+				</button>
+			</div>
+		{:else if montantNeuf > 0 && montantOccasion > 0 && montantNeuf === montantOccasion}
+			<Badge className="px-4 py-2 text-[0.875rem]">Neuf ou d'occasion</Badge>
+		{:else if montantNeuf}
+			<Badge className="bg-sky-50 px-4 py-2 text-[0.875rem] !text-sky-700 border-sky-100">
+				Neuf uniquement
+			</Badge>
+		{:else if montantOccasion}
+			<Badge className="bg-amber-50 px-4 py-2 text-[0.875rem] !text-amber-700 border-amber-100">
+				D'occasion uniquement
+			</Badge>
+		{/if}
+	</div>
+</section>
+
+<div class="mt-6 overflow-hidden rounded border border-[#dfe6ef] bg-white">
 	{#each aidesDetails as aide (aide.ruleName)}
-		<div transition:slide={{ duration: 200 }} class="border-b last:border-b-0">
+		<div transition:slide={{ duration: 200 }} class="border-b border-[#edf1ee] last:border-b-0">
 			<DetailsLine veloEtat={neufOuOccasion} {aide} />
 		</div>
 	{/each}
-	<div class="py-4 px-3 sm:px-4 bg-gray-50 rounded-b">
+	<div class="bg-[#fafafa] px-4 py-4 sm:px-5">
 		<div class="flex justify-between text-lg">
-			<h3 class="font-semibold text-base">Total des aides</h3>
-			<div class="font-bold">
+			<h3 class="text-base font-bold text-[#263754]">Total des aides</h3>
+			<div class="font-[800] text-[#10233a]">
 				<AnimatedAmount amount={sum.nodeValue} unit={sum.unit} />
 			</div>
 		</div>

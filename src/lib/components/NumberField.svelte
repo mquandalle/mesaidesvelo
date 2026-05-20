@@ -8,11 +8,13 @@
 	let { value = $bindable(), unité, id }: Props = $props();
 </script>
 
-<div class="border rounded p-2 mt-1 bg-white shadow-xs">
+<div
+	class="mt-2 inline-flex items-center rounded-full border border-[#d4ded9] bg-white px-4 py-2 shadow-sm focus-within:border-[#16a34a] focus-within:ring-3 focus-within:ring-[#16a34a]/12"
+>
 	<input
 		data-testid={`${id}-value-${value}`}
 		type="number"
-		class="m-0 text-right w-35 focus:outline-transparent"
+		class="m-0 w-30 bg-transparent text-right text-[#172338] outline-none"
 		{id}
 		oninput={(e) => {
 			const target = e.currentTarget;
@@ -23,7 +25,7 @@
 		}}
 		{value}
 	/>
-	<label for={id}><span class="text-gray-600">{unité || ''}</span></label>
+	<label for={id}><span class="ml-2 text-[#647085]">{unité || ''}</span></label>
 </div>
 
 <style>

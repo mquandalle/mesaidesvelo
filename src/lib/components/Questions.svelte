@@ -45,13 +45,8 @@
 </script>
 
 {#if questions?.length > 0}
-	<div class="border-l-4 border-green-200 pl-4 py-4 ml-4">
-		<div
-			class="inline-block relative -left-8.5 bg-white border-4 border-green-200 w-8 h-8 rounded-full font-bold text-green-300 text-center leading-6"
-		>
-			€
-		</div>
-		<p class="text-gray-600 text-base -mt-7 pl-3 italic">
+	<section class="mt-6 border-l-4 border-[#86efac] py-4 pl-4">
+		<p class="text-base italic text-[#647085]">
 			Répondez {#if questions.length === 1}à la question{:else}aux questions{/if} pour calculer l'aide
 			:
 		</p>
@@ -65,5 +60,5 @@
 				{/key}
 			{/if}
 		{/each}
-	</div>
+	</section>
 {/if}

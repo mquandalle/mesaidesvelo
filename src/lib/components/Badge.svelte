@@ -8,6 +8,6 @@
 </script>
 
 <span
-	class="text-xs text-green-800 bg-green-50 border border-green-100 inline-block px-3 py-1 rounded font-normal {className}"
+	class="inline-block rounded-full border border-[#cfe2da] bg-[#dcfce7] px-3 py-1 text-xs font-semibold text-[#15803d] {className}"
 	>{@render children?.()}</span
 >

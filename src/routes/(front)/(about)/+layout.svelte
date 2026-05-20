@@ -15,16 +15,19 @@
 	];
 </script>
 
-<nav class="w-full max-w-screen-md m-auto pb-2 mt-6 border-b">
-	<ul class="flex flex-wrap gap-x-4 gap-y-3 text-gray-600">
+<nav
+	class="mx-auto mt-6 w-full max-w-screen-md border-b border-[#dfe6ef] pb-3"
+	aria-label="Pages d'information"
+>
+	<ul class="flex flex-wrap gap-2 text-sm text-[#647085]">
 		{#each pages as [path, label]}
 			{@const isActive = page.url.pathname.startsWith(path)}
 			<li>
 				<a
 					href={path}
 					aria-current={isActive ? true : undefined}
-					class="hover:bg-green-50 hover:text-green-600 hover:rounded p-2 {isActive
-						? 'text-green-600'
+					class="inline-flex rounded-full px-3 py-2 font-semibold no-underline hover:bg-[#dcfce7] hover:text-[#16a34a] {isActive
+						? 'bg-[#dcfce7] text-[#16a34a]'
 						: ''}">{label}</a
 				>
 			</li>

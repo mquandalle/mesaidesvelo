@@ -20,9 +20,9 @@
 </script>
 
 {#if shareApiAvailabe}
-	<p class="sm:text-center mt-4">
+	<p class="mt-5 sm:text-center">
 		<button
-			class="border rounded px-6 py-2 text-green-800 font-semibold bg-green-50 hover:bg-green-200 border border-green-200 hover:border-green-300"
+			class="rounded-full border border-[#cfe2da] bg-white px-5 py-2 text-sm font-bold text-[#16a34a] shadow-sm hover:border-[#16a34a] hover:bg-[#f0fdf4]"
 			onclick={share}
 			>Partager cette page <Emoji emoji="🚀" />
 		</button>

@@ -34,22 +34,28 @@
 {#if feedbackState === 'closed'}
 	<button
 		onclick={() => (feedbackState = 'open')}
-		class="text-green-600 border border-green-600 rounded-full px-4 py-2 rounded whitespace-nowrap hover:bg-green-600 hover:text-white"
+		class="whitespace-nowrap rounded-full border border-[#cfe2da] bg-white px-4 py-2 font-semibold text-[#16a34a] shadow-sm hover:border-[#16a34a] hover:bg-[#f0fdf4]"
 	>
 		Une erreur ? Un oubli ? Contactez-nous !
 	</button>
 {:else if feedbackState === 'open'}
 	<form class="flex flex-col items-start gap-y-2" onsubmit={submitFeedback}>
-		<label for="feedback-message">Votre message :</label>
+		<label for="feedback-message" class="font-semibold text-[#263754]">Votre message :</label>
 		<!-- svelte-ignore a11y_autofocus -->
 		<textarea
-			class="border border-green-600 p-3 w-[65ch] h-30 rounded"
+			class="h-30 w-[min(65ch,calc(100vw-2rem))] rounded-lg border border-[#d4ded9] bg-white p-3 outline-none focus:border-[#16a34a] focus:ring-3 focus:ring-[#16a34a]/12"
 			autofocus
 			id="feedback-message"
 		></textarea>
-		<div class="flex gap-x-4 uppercase">
-			<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded"> Envoyer </button>
-			<button type="button" class="text-gray-500" onclick={() => (feedbackState = 'closed')}>
+		<div class="flex gap-x-4">
+			<button type="submit" class="rounded-full bg-[#16a34a] px-4 py-2 font-bold text-white">
+				Envoyer
+			</button>
+			<button
+				type="button"
+				class="font-semibold text-[#647085]"
+				onclick={() => (feedbackState = 'closed')}
+			>
 				Fermer
 			</button>
 		</div>
@@ -59,7 +65,7 @@
 		<p class="text-xl">Merci pour votre retour ! 😍</p>
 		<p class="text-xs mt-2">
 			→ Vous pouvez suivre les demandes sur <a
-				class="text-green-700 underline"
+				class="text-[#16a34a] underline"
 				href="https://github.com/mquandalle/mesaidesvelo/issues"
 				target="_blank">Github</a
 			>.

@@ -3,7 +3,7 @@
 <link href="/prism-dracula.css" rel="stylesheet">
 </svelte:head>
 
-<div class="prose mt-8 w-full max-w-screen-md m-auto">
+<div class="prose mx-auto mt-8 w-full max-w-screen-md">
 
 # Intégrer sur mon site
 

@@ -4,6 +4,17 @@
 @source '../node_modules/layerchart';
 
 @layer base {
+	:root {
+		--mav-ink: #172338;
+		--mav-muted: #647085;
+		--mav-line: #dfe6ef;
+		--mav-soft: #f5f8f6;
+		--mav-green: #16a34a;
+		--mav-green-dark: #14532d;
+		--mav-green-soft: #dcfce7;
+		--mav-amber-soft: #fff8e6;
+	}
+
 	*,
 	::after,
 	::before,
@@ -13,11 +24,165 @@
 	}
 
 	body {
-		@apply bg-white text-gray-900;
+		margin: 0;
+		background: white;
+		color: var(--mav-ink);
+		font-family:
+			Inter,
+			ui-sans-serif,
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			'Segoe UI',
+			sans-serif;
 	}
 
 	button:not(:disabled),
 	[role='button']:not(:disabled) {
 		cursor: pointer;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	button,
+	input {
+		font: inherit;
+	}
+
+	.prose {
+		color: var(--mav-ink);
+	}
+
+	.prose a {
+		color: var(--mav-green);
+		font-weight: 650;
+		text-decoration-color: color-mix(in srgb, var(--mav-green), transparent 65%);
+		text-underline-offset: 0.18em;
+	}
+
+	.prose h1,
+	.prose h2,
+	.prose h3 {
+		color: #10233a;
+		letter-spacing: 0;
+	}
+
+	.prose h1 {
+		font-size: 2rem;
+		line-height: 1.05;
+	}
+
+	@media (min-width: 640px) {
+		.prose h1 {
+			font-size: 2.75rem;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.mav-logo-transition {
+		view-transition-name: mav-logo;
+	}
+
+	.mav-search-transition {
+		view-transition-name: mav-search;
+	}
+
+	.mav-bike-icon-transition {
+		view-transition-name: var(--mav-bike-icon-transition);
+	}
+
+	.mav-bike-title-transition {
+		view-transition-name: var(--mav-bike-title-transition);
+	}
+
+	::view-transition-group(*) {
+		animation-duration: 300ms;
+		animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	::view-transition-group(mav-logo),
+	::view-transition-group(mav-search) {
+		animation-duration: 260ms;
+		animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	::view-transition-old(mav-logo),
+	::view-transition-new(mav-logo),
+	::view-transition-old(mav-search),
+	::view-transition-new(mav-search) {
+		height: 100%;
+		mix-blend-mode: normal;
+	}
+
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		mix-blend-mode: normal;
+	}
+
+	:root.mav-route-morph .mav-logo-transition {
+		animation: mav-logo-morph-fallback 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	:root.mav-route-morph .mav-search-transition {
+		animation: mav-search-morph-fallback 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	:root.mav-bike-route-morph .mav-bike-icon-transition {
+		animation: mav-bike-icon-morph-fallback 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	:root.mav-bike-route-morph .mav-bike-title-transition {
+		animation: mav-bike-title-morph-fallback 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	@keyframes mav-logo-morph-fallback {
+		from {
+			opacity: 0.75;
+			transform: translateY(18px) scale(1.08);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	@keyframes mav-search-morph-fallback {
+		from {
+			opacity: 0.72;
+			transform: translateY(26px) scaleX(1.08);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0) scaleX(1);
+		}
+	}
+
+	@keyframes mav-bike-icon-morph-fallback {
+		from {
+			opacity: 0.78;
+			transform: translateY(18px) scale(0.92);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	@keyframes mav-bike-title-morph-fallback {
+		from {
+			opacity: 0.7;
+			transform: translateY(12px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 }

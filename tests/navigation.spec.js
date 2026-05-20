@@ -93,6 +93,25 @@ test('Aide not available', async ({ page }) => {
 	);
 });
 
+test('Logo navigation clears the search input', async ({ page }) => {
+	await page.goto(baseUrl + '/ville/toulouse');
+	await page.getByRole('link', { name: 'MesAidesVélo' }).click();
+
+	await expect(page).toHaveURL(baseUrl + '/');
+	await expect(page.getByLabel('Localisation')).toHaveValue('');
+});
+
+test('Mobile search clear keeps selected locality when closed', async ({ page }) => {
+	await page.setViewportSize({ width: 375, height: 667 });
+	await page.goto(baseUrl + '/ville/paris');
+
+	await page.getByRole('combobox', { name: 'Localisation' }).click();
+	await page.getByRole('button', { name: 'Effacer la recherche' }).click();
+	await page.getByRole('button', { name: 'Fermer la recherche' }).click();
+
+	await expect(page.getByRole('combobox', { name: 'Localisation' })).toHaveValue('75000 - Paris');
+});
+
 // FIXME: linked to https://github.com/betagouv/publicodes-aides-velo/issues/97
 test.skip('Revenu of type number', async ({ page }) => {
 	await page.goto(baseUrl + '/ville/crolles?velo=électrique');

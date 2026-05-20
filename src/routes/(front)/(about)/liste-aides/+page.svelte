@@ -17,7 +17,7 @@
 	<title>MesAidesVélo - Liste des aides</title>
 </svelte:head>
 
-<div class="prose mt-8 w-full max-w-screen-md m-auto">
+<div class="prose mx-auto mt-8 w-full max-w-screen-md">
 	<h1>Les aides intégrées sur le site</h1>
 	<p>
 		Actuellement, <strong>{allAides.length} aides sont reférencées</strong> sur le site. Intégrer
@@ -42,7 +42,7 @@
 			<Map />
 		</div>
 	</details>
-	<ul>
+	<ul class="not-prose list-none pl-0">
 		{#each data.aidesRegions as aide}
 			<li>
 				<AideSummary {aide} />
@@ -58,7 +58,7 @@
 		</h3>
 		{@const aides = data.aidesLocales[departement.code]}
 		{#if aides}
-			<ul>
+			<ul class="not-prose list-none pl-0">
 				{#each aides as aide}
 					<li>
 						<AideSummary {aide} />

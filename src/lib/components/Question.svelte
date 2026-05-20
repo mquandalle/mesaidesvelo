@@ -41,19 +41,19 @@
 	let showExplanations = $state(false);
 </script>
 
-<div class="flex flex-col mt-6 items-start">
-	<span
+<div class="mt-6 flex flex-col items-start">
+	<span class="text-sm font-bold text-[#263754]"
 		><label for={domId}>{optionalEvaluate(ruleInfos.question)?.replace(/\s+?$/, '\u00A0?')}</label>
 		{#if ruleInfos.description}
 			<button
 				title="Plus d'informations"
-				class="cursor-pointer"
+				class="ml-1 cursor-pointer align-middle opacity-75 hover:opacity-100"
 				onclick={() => (showExplanations = !showExplanations)}
 				><Emoji className="align-middle" emoji="ℹ" />
 			</button>
 			{#if showExplanations}
 				<p
-					class="my-2 text-gray-700 prose-sm border-l-2 rounded-r p-2 bg-gray-50"
+					class="my-3 rounded-lg border border-[#dfe6ef] bg-[#fbfcfb] p-3 text-sm font-normal leading-6 text-[#647085] prose-sm"
 					transition:slide={{ duration: 100 }}
 				>
 					<SvelteMarkdown source={ruleInfos.description} />
@@ -63,12 +63,12 @@
 	</span>
 
 	{#if ruleType === 'boolean'}
-		<div class="flex gap-2 mt-2 flex-wrap">
+		<div class="mt-3 flex flex-wrap gap-2">
 			<MultipleChoiceAnswer value="oui" group={value} onSelect={setValue}>Oui</MultipleChoiceAnswer>
 			<MultipleChoiceAnswer value="non" group={value} onSelect={setValue}>Non</MultipleChoiceAnswer>
 		</div>
 	{:else if (possibilités?.length ?? 0) > 0}
-		<div class="flex gap-2 mt-2 flex-wrap">
+		<div class="mt-3 flex flex-wrap gap-2">
 			{#each possibilités as possibilité (possibilité)}
 				<MultipleChoiceAnswer value={`'${possibilité}'`} group={value} onSelect={setValue}
 					>{engine.getRule(rule + ' . ' + possibilité).rawNode.titre ??

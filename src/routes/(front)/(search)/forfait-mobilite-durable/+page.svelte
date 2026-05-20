@@ -1,27 +1,44 @@
 <script lang="ts">
 	import BackButtonAides from '$lib/components/BackButtonAides.svelte';
+	import BikeCategoryIcon from '$lib/components/BikeCategoryIcon.svelte';
+
+	const transitionKey = 'forfait-mobilites-durables';
 </script>
 
-<div class="w-full max-w-screen-md m-auto">
-	<div class="mt-8"></div>
-	<BackButtonAides />
-	<h1 class="mt-4 text-3xl font-semibold text-gray-800">
-		Le <span class="text-green-800">Forfait Mobilités Durables</span>
-	</h1>
-	<p class="text-gray-900 mt-2">
-		Votre employeur peut prendre en charge les frais liés à vos déplacements domicile-travail
-		réalisés à vélo. Le montant est forfaitaire et dépend de chaque employeur.
-	</p>
+<div class="mx-auto w-full max-w-screen-md">
+	<section class="mt-8 grid items-center gap-5 sm:grid-cols-[minmax(0,1fr)_300px]">
+		<div class="flex min-w-0 flex-col items-start">
+			<BackButtonAides />
+			<div class="mt-5">
+				<h1
+					class="mav-bike-title-transition text-3xl leading-[1.05] font-[800] text-[#10233a] sm:text-4xl"
+					style={`--mav-bike-title-transition: mav-bike-title-${transitionKey}`}
+				>
+					Le <span class="text-[#16a34a]">Forfait Mobilités Durables</span>
+				</h1>
+				<p class="mt-4 max-w-[680px] text-base leading-7 text-[#647085]">
+					Votre employeur peut prendre en charge les frais liés à vos déplacements domicile-travail
+					réalisés à vélo. Le montant est forfaitaire et dépend de chaque employeur.
+				</p>
+			</div>
+		</div>
+		<BikeCategoryIcon
+			category="forfait-mobilites-durables"
+			variant="illustration"
+			className="h-32 w-full max-w-[260px] justify-self-end object-right sm:h-44 sm:max-w-[300px]"
+			{transitionKey}
+		/>
+	</section>
 
-	<h2 class="font-semibold text-2xl mt-12">Je travaille dans le secteur public</h2>
+	<h2 class="mt-12 text-2xl font-[800] text-[#10233a]">Je travaille dans le secteur public</h2>
 
-	<div class="border mt-4 p-4 bg-white rounded-md shadow-xs">
-		<div class="flex flex-col sm:flex-row-reverse gap-x-8 text-lg">
-			<dl class="flex flex-row sm:flex-col gap-x-3 mb-2 items-center sm:items-start">
-				<dt class="sm:text-xs text-gray-600">Montant du forfait</dt>
-				<dt class="font-bold text-gray-800 text-right whitespace-nowrap">300 €/an</dt>
+	<div class="mt-4 rounded-lg border border-[#dfe6ef] bg-white p-5 shadow-sm">
+		<div class="flex flex-col gap-x-8 gap-y-4 text-lg sm:flex-row-reverse">
+			<dl class="mb-2 flex flex-row items-center gap-x-3 sm:flex-col sm:items-start">
+				<dt class="text-sm font-semibold text-[#647085] sm:text-xs">Montant du forfait</dt>
+				<dt class="text-right text-2xl font-[800] whitespace-nowrap text-[#10233a]">300 €/an</dt>
 			</dl>
-			<div class="text-gray-700 flex-1 text-sm">
+			<div class="flex-1 text-sm leading-6 text-[#647085]">
 				<p class="">
 					Les agents publics bénéficient d’un forfait de <strong>100 € à 300 € par an</strong> en fonction
 					nombre de déplacements. Cela concerne :
@@ -32,18 +49,18 @@
 					<li>la fonction publique hospitalière</li>
 					<li>la fonction publique territoriale</li>
 				</ul>
-				<p class="mt-2 text-sm text-green-700">
+				<p class="mt-3 text-sm font-bold text-[#16a34a]">
 					<a
 						href="https://www.ecologie.gouv.fr/politiques-publiques/faq-forfait-mobilites-durables-fmd"
 						target="_blank"
-						class="hover:underline">→ En savoir plus</a
+						class="hover:underline">En savoir plus →</a
 					>
 				</p>
 			</div>
 		</div>
 	</div>
 
-	<h2 class="font-semibold text-2xl mt-12">Je travaille dans le secteur privé</h2>
+	<h2 class="mt-12 text-2xl font-[800] text-[#10233a]">Je travaille dans le secteur privé</h2>
 	<!-- NOTE(@EmileRolley): I decided to hide this part as I doesn't have control over the data and it was promoting non-ethical companies. -->
 	<!-- <p class="text-gray-600 text-base mt-2 text-sm"> -->
 	<!-- 	Pour les salariés du secteur privé, le montant du forfait dépend de chaque employeur. Retrouvez -->
@@ -140,11 +157,11 @@
 			>. Il est théoriquement possible de verser un forfait supérieur à 900 € mais il faudra alors
 			payer des impôts et des cotisations sur la part dépassant ce seuil.
 		</p>
-		<p class="mt-2 text-sm text-green-700">
+		<p class="mt-2 text-sm font-bold text-[#16a34a]">
 			<a
 				href="https://www.ecologie.gouv.fr/politiques-publiques/faq-forfait-mobilites-durables-fmd"
 				target="_blank"
-				class="hover:underline mt-2 text-sm !text-green-700">→ En savoir plus</a
+				class="mt-2 text-sm !text-[#16a34a] hover:underline">En savoir plus →</a
 			>
 		</p>
 		<h3 class="font-bold">Comment mettre en place le forfait mobilités durables ?</h3>

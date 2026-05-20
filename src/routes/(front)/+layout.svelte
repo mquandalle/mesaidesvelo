@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { building, dev } from '$app/environment';
-	import { afterNavigate, preloadCode } from '$app/navigation';
+	import { afterNavigate, onNavigate, preloadCode } from '$app/navigation';
 	import { page } from '$app/state';
 	import Emoji from '$lib/components/Emoji.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import Search from '$lib/components/Search.svelte';
 	import { setSimulation } from '$lib/simulation/context.svelte';
 	import { SimulationState } from '$lib/simulation/state.svelte';
 	import { onMount, setContext } from 'svelte';
@@ -13,6 +14,68 @@
 
 	let { children }: Props = $props();
 	const simulation = setSimulation(new SimulationState());
+
+	onNavigate((navigation) => {
+		if (typeof document === 'undefined') {
+			return;
+		}
+
+		const isSearchTransition =
+			(page.url.pathname === '/' && navigation.to?.url.pathname.startsWith('/ville/')) ||
+			(page.url.pathname.startsWith('/ville/') && navigation.to?.url.pathname === '/');
+		const nextUrl = navigation.to?.url;
+		const isSameCityBikeTransition =
+			nextUrl?.pathname === page.url.pathname &&
+			page.url.pathname.startsWith('/ville/') &&
+			page.url.searchParams.get('velo') !== nextUrl.searchParams.get('velo');
+		const isForfaitMobilitesTransition =
+			(page.url.pathname.startsWith('/ville/') &&
+				nextUrl?.pathname === '/forfait-mobilite-durable') ||
+			(page.url.pathname === '/forfait-mobilite-durable' &&
+				Boolean(nextUrl?.pathname.startsWith('/ville/')));
+		const isBikeDetailTransition = isSameCityBikeTransition || isForfaitMobilitesTransition;
+
+		if (!isSearchTransition && !isBikeDetailTransition) {
+			return;
+		}
+
+		const documentWithTransition = document as Document & {
+			startViewTransition?: (callback: () => Promise<void> | void) => {
+				finished: Promise<void>;
+			};
+		};
+
+		if (!documentWithTransition.startViewTransition) {
+			if (isSearchTransition) {
+				document.documentElement.classList.add('mav-route-morph');
+			}
+			if (isBikeDetailTransition) {
+				document.documentElement.classList.add('mav-bike-route-morph');
+			}
+			return () => {
+				window.setTimeout(() => {
+					document.documentElement.classList.remove('mav-route-morph');
+					document.documentElement.classList.remove('mav-bike-route-morph');
+				}, 320);
+			};
+		}
+
+		return new Promise<void>((resolve) => {
+			if (isBikeDetailTransition) {
+				document.documentElement.classList.add('mav-native-bike-route-morph');
+			}
+
+			const transition = documentWithTransition.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+			transition.finished
+				.catch(() => {})
+				.finally(() => {
+					document.documentElement.classList.remove('mav-native-bike-route-morph');
+				});
+		});
+	});
 
 	afterNavigate(() => {
 		simulation.rememberLocalisation(page.data?.ville);
@@ -60,6 +123,10 @@
 	// page and the user might not interact with it or even see it. We disable
 	// tracking up until the first click interaction;
 	let enableTracking = $state(import.meta.env.PROD && !isEmbeded);
+
+	function resetSearchOnHomeNavigation() {
+		simulation.clearRememberedLocalisation();
+	}
 </script>
 
 <svelte:window onclick={() => (enableTracking = true)} />
@@ -78,34 +145,45 @@
 	</div>
 {/if}
 
-<div class="app px-3 sm:px-8 {!isEmbeded ? 'h-screen' : ''} flex flex-col" bind:this={pageElement}>
-	<header
-		class="{!isEmbeded ? 'mt-8' : ''} w-full max-w-screen-md m-auto flex flex-row items-center"
-	>
-		{#if !isEmbeded}
-			<a href="/" class="hover:opacity-85 transform transition-transform hover:translate-y-0.5"
-				><img
-					src="/images/logo.svg"
-					alt="logo MesAidesVélo"
-					height="55"
-					width="88"
-					class="mr-4 float-left"
-				/></a
-			>
-			<div class="flex flex-col">
-				<a href="/" class="text-3xl font-bold cursor-pointer">
-					Mes<span class="text-green-600">Aides</span>Vélo
+<div
+	class="app flex flex-col px-4 sm:px-6 {!isEmbeded ? 'min-h-screen' : ''}"
+	bind:this={pageElement}
+>
+	{#if page.url.pathname !== '/' || isEmbeded}
+		<header
+			class={[
+				!isEmbeded ? 'pt-5 pb-2' : 'pt-3',
+				'relative z-50 mx-auto grid w-full max-w-screen-md items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)]',
+			]}
+		>
+			{#if !isEmbeded}
+				<a
+					href="/"
+					class="flex min-w-0 items-center gap-2.5 no-underline transition-opacity hover:opacity-85"
+					onclick={resetSearchOnHomeNavigation}
+					aria-label="MesAidesVélo"
+				>
+					<img
+						src="/images/logo.svg"
+						alt=""
+						class="mav-logo-transition h-11 w-auto shrink-0"
+					/>
+					<span class="text-xl font-extrabold text-[#172338]"
+						>Mes<span class="text-[#16a34a]">Aides</span>Vélo</span
+					>
 				</a>
-				<p class="text-gray-800 mt-0 pt-0 w-full max-w-screen-md m-auto">
-					Trouvez les aides à l’achat d’un vélo
-				</p>
-			</div>
-		{:else}
-			<a href="/" class="text-3xl font-bold cursor-pointer">
-				Mes<span class="text-green-600">Aides</span>Vélo.fr
-			</a>
-		{/if}
-	</header>
+				{#if page.url.pathname.startsWith('/ville/')}
+					<div class="w-full md:w-[360px] md:justify-self-end">
+						<Search variant="header" />
+					</div>
+				{/if}
+			{:else}
+				<a href="/" class="text-2xl font-bold cursor-pointer">
+					Mes<span class="text-[#16a34a]">Aides</span>Vélo.fr
+				</a>
+			{/if}
+		</header>
+	{/if}
 	<div class="pb-12 {!isEmbeded ? 'flex-1' : ''}">
 		{@render children?.()}
 	</div>

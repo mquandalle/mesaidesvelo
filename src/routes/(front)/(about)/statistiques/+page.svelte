@@ -27,10 +27,10 @@
 	<title>Statistiques - MesAidesVélo</title>
 </svelte:head>
 
-<div class="max-w-screen-lg m-auto">
+<div class="mx-auto mt-8 w-full max-w-screen-lg">
 	<iframe
 		plausible-embed
-		src="https://plausible.quandalle.com/share/mesaidesvelo.fr?auth=718e74b5c4076bd9b8f95e64fa847c9a&embed=true&theme=light"
+		src="https://plausible.quandalle.com/share/mesaidesvelo.fr?auth=718e74b5c4076bd9b8f95e64fa847c9a&embed=true&theme=light&background=transparent&width=manual"
 		title="Statistiques Plausible de MesAidesVélo"
 		scrolling="no"
 		frameborder="0"
@@ -47,7 +47,7 @@
 	<script async src="https://plausible.quandalle.com/js/embed.host.js"></script>
 </div>
 
-<div class="prose w-full max-w-screen-md m-auto">
+<div class="prose mx-auto mt-8 w-full max-w-screen-md">
 	<h2>Ils en parlent</h2>
 	<ul>
 		{#each articles as article (article.url)}

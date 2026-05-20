@@ -248,17 +248,20 @@
 
 {#if numberFieldIsRequired || displayedThresholds.length > 0}
 	<div class="mt-6">
-		Quel est votre revenu net mensuel (quotient familial) ? <button
+		<span class="text-sm font-bold text-[#263754]">
+			Quel est votre revenu net mensuel (quotient familial) ?
+		</span>
+		<button
 			type="button"
 			title="Plus d'informations"
-			class="cursor-pointer"
+			class="ml-1 cursor-pointer align-middle opacity-75 hover:opacity-100"
 			onclick={() => (showExplanations = !showExplanations)}
 		>
 			<Emoji className="align-middle" emoji="ℹ" />
 		</button>
 		{#if showExplanations}
 			<p
-				class="my-2 text-gray-700 prose-sm border-l-2 rounded-r p-2 bg-gray-50"
+				class="my-3 rounded-lg border border-[#dfe6ef] bg-[#fbfcfb] p-3 text-sm leading-6 text-[#647085] prose-sm"
 				transition:slide={{ duration: 100 }}
 			>
 				Le montant des aides dépend de votre revenu par part de quotient familial. Sur votre avis
@@ -266,7 +269,7 @@
 				nombre de parts du quotient familial, puis divisé par 12.
 			</p>
 		{/if}
-		<div class="flex gap-2 mt-2 flex-wrap playwright-revenuoptions">
+		<div class="mt-3 flex flex-wrap gap-2 playwright-revenuoptions">
 			{#if numberFieldIsRequired}
 				<NumberField
 					bind:value={() => form.revenuFiscal, (value) => (form.revenuFiscal = value)}

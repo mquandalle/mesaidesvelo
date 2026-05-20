@@ -14,8 +14,15 @@
 		return typeof paneDepth === 'number' ? paneDepth : 0;
 	}
 
+	function isNativeBikeRouteMorph() {
+		return (
+			typeof document !== 'undefined' &&
+			document.documentElement.classList.contains('mav-native-bike-route-morph')
+		);
+	}
+
 	function getNavigationDuration() {
-		return navigating.type === 'popstate' ? 0 : duration;
+		return navigating.type === 'popstate' || isNativeBikeRouteMorph() ? 0 : duration;
 	}
 
 	function transitionX(paneDepth: number) {

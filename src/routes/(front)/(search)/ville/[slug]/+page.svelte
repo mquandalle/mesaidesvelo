@@ -33,7 +33,7 @@
 	/>
 </svelte:head>
 
-<div class="w-full max-w-screen-md m-auto">
+<div class="mx-auto w-full max-w-screen-md">
 	<div in:fly={{ y: 30 }}>
 		<PaneNavigation depth={simulation.veloCat ? 1 : 0}>
 			{#if simulation.veloCat}

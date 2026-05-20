@@ -18,7 +18,7 @@
 	/>
 </svelte:head>
 
-<div class="prose w-full max-w-screen-sm m-auto mt-8">
+<div class="prose mx-auto mt-8 w-full max-w-screen-md">
 	<h1>Les aides à l’achat de vélo dans {data.leDepartement}</h1>
 
 	<p>

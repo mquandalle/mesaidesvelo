@@ -6,9 +6,9 @@
 
 {#if simulation.selectedLocalisation}
 	<a
-		class="inline-block text-gray-500 text-base
+		class="inline-flex text-sm font-semibold text-[#647085]
 cursor-pointer
-hover:text-green-700 transform transition hover:-translate-x-1"
+hover:text-[#16a34a] transform transition hover:-translate-x-1"
 		data-sveltekit-noscroll
 		href="ville/{simulation.selectedLocalisation.slug}"
 	>

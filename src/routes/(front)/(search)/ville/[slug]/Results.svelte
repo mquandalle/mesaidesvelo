@@ -1,12 +1,11 @@
 <script>
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
-	import Emoji from '$lib/components/Emoji.svelte';
 	import Question from '$lib/components/Question.svelte';
 	import RevenuSelector from '$lib/components/RevenuSelector.svelte';
 	import { getEngine } from '$lib/engine';
 	import { getSimulation, setSimulationForm } from '$lib/simulation/context.svelte';
 	import { SimulationFormState } from '$lib/simulation/state.svelte';
-	import { emojiCategory, titleCategory } from '$lib/utils';
+	import { titleCategory } from '$lib/utils';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import CategoryLine from './CategoryLine.svelte';
@@ -29,7 +28,7 @@
 			return {
 				cat,
 				label: titleCategory(cat),
-				emoji: emojiCategory(cat),
+				iconCategory: cat,
 				montant,
 			};
 		}),
@@ -58,42 +57,36 @@
 					montant: engine.evaluate('aides . forfait mobilités durables'),
 					href: '/forfait-mobilite-durable',
 					label: 'Forfait mobilités durables',
+					iconCategory: 'forfait-mobilites-durables',
 				},
 				...inactivesAidesPerBikeKind.map(({ cat, ...rest }) => ({
 					...rest,
 					href: `?velo=${cat}`,
-					emoji: null,
 				})),
 			],
 		]
 			.filter(Boolean)
 			.flat(),
 	);
-	let nbAides = $derived(displayedAides.length);
 </script>
 
-<div class="mt-10"></div>
-<p class="mb-3 text-gray-600">Vous pouvez bénéficier des aides suivantes :</p>
-<div role="table" class="flex flex-col bg-white border rounded sm:text-lg">
-	{#each displayedAides as { montant, href, label, emoji, relNoFollow }, idx (label)}
-		<div animate:flip={{ duration: 600, easing: quintOut }}>
-			<CategoryLine isFirst={idx === 0} isLast={idx === nbAides - 1} {montant} {href} {relNoFollow}
-				>{label}{#if emoji}&nbsp;<Emoji {emoji} />{/if}</CategoryLine
-			>
+<p class="mt-12 mb-4 text-lg text-[#647085]">Vous pourriez bénéficier des aides suivantes&nbsp;:</p>
+
+<div role="list" class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+	{#each displayedAides as { montant, href, label, iconCategory, relNoFollow } (label)}
+		<div class="h-full" animate:flip={{ duration: 600, easing: quintOut }}>
+			<CategoryLine {montant} {href} {relNoFollow} {iconCategory}>
+				{label}
+			</CategoryLine>
 		</div>
 	{/each}
 </div>
 {#if inFrance}
-	<div class="border-l-4 border-green-200 pl-4 py-4 ml-4">
-		<div
-			class="inline-block relative -left-8 bg-white border-4 border-green-200 w-8 h-8 rounded-full font-bold text-green-300 text-center leading-6"
-		>
-			€
-		</div>
-		<p class="text-gray-600 text-base -mt-7 pl-3 italic">
+	<section class="mt-6 border-l-4 border-[#86efac] py-4 pl-4">
+		<p class="text-base italic text-[#647085]">
 			Répondez à la question pour calculer les aides disponibles :
 		</p>
 		<RevenuSelector />
 		<Question rule={'demandeur . en situation de handicap'} {engine} />
-	</div>
+	</section>
 {/if}

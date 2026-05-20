@@ -21,7 +21,7 @@
 <title>Mentions légales - MesAidesVélo</title>
 </svelte:head>
 
-<div class="prose mt-8 w-full max-w-screen-md m-auto">
+<div class="prose mx-auto mt-8 w-full max-w-screen-md">
 
 ## Mentions Légales
 

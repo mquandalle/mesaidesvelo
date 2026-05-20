@@ -14,9 +14,9 @@
 </script>
 
 <label
-	class="border rounded px-4 py-2 shadow-xs flex items-center gap-x-2 cursor-pointer {isSelected
-		? 'bg-green-500 border-green-600 text-white'
-		: 'bg-white text-gray-700 hover:bg-green-100 hover:border-green-200 hover:text-gray-800'}"
+	class="flex cursor-pointer items-center gap-x-2 rounded-full border px-4 py-2 text-sm font-semibold shadow-sm {isSelected
+		? 'border-[#16a34a] bg-[#16a34a] text-white'
+		: 'border-[#d4ded9] bg-white text-[#263754] hover:border-[#16a34a] hover:bg-[#f0fdf4]'}"
 >
 	<input type="radio" checked={isSelected} {value} onchange={() => onSelect(value)} />
 	<span class="text-current">{@render children?.()}</span>
@@ -24,7 +24,7 @@
 
 <style>
 	input[type='radio'] {
-		--form-control-color: #059669;
+		--form-control-color: #16a34a;
 		appearance: none;
 		background-color: white;
 		margin: 0;

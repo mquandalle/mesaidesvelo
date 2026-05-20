@@ -63,24 +63,29 @@
 </script>
 
 {#if aide.nodeValue !== null}
-	<div class={'flex flex-row items-start ' + (isExpired ? 'bg-gray-50 ' : '') + ' ' + className}>
+	<div
+		class={'flex flex-col gap-3 p-4 sm:flex-row sm:items-start sm:p-5 ' +
+			(isExpired ? 'bg-[#fbfcfb] ' : '') +
+			' ' +
+			className}
+	>
 		{#if miniatures[aide.ruleName as keyof typeof miniatures]}
 			<button
 				title="Logo {title.toLowerCase()} (ouvrir le site dans un nouvel onglet)"
-				class="basis-12 sm:basis-18 py-4 pl-3 pr-0 shrink-0 opacity-85 cursor-pointer"
+				class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-[#dfe6ef] bg-white p-2 opacity-90 hover:opacity-100 sm:h-14 sm:w-14"
 				onclick={() => lien && window.open(lien, '_blank')}
 			>
 				<img
 					src="/miniatures/{miniatures[aide.ruleName as keyof typeof miniatures]}"
-					class="object-fill"
+					class="max-h-full max-w-full object-contain"
 					alt="Logo {title.toLowerCase()}"
 				/>
 			</button>
 		{/if}
-		<div class="my-4 mx-3 sm:mx-4 flex-grow">
-			<div class="flex">
-				<div class="flex gap-x-4 text-lg flex-wrap">
-					<h3 class="font-semibold text-base mb-1">
+		<div class="min-w-0 flex-grow">
+			<div class="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
+				<div class="min-w-0">
+					<h3 class="mb-2 text-base font-bold text-[#263754]">
 						{title}
 					</h3>
 					<div class="flex flex-wrap gap-2 items-center sm:items-start">
@@ -103,8 +108,7 @@
 				</div>
 				<div
 					class="
-            ml-4
-            font-bold text-lg text-gray-800 flex-1 text-right sm:order-3 playwright-{slugify(
+            font-[800] text-xl text-[#10233a] text-left sm:text-right playwright-{slugify(
 						aide.ruleName,
 					)}
           "
@@ -113,17 +117,17 @@
 					<AnimatedAmount amount={aide.nodeValue} unit={aide.unit} />
 				</div>
 			</div>
-			<div class="text-gray-600 mt-4 prose-sm">
+			<div class="mt-4 text-sm leading-6 text-[#647085] prose-sm">
 				<SvelteMarkdown source={notice} options={{ breaks: true }} />
 			</div>
 			<div class="inline-flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
 				{#if lien}
-					<p class="mt-4 text-sm text-green-600">
-						<a href={lien} target="_blank" class="hover:underline">→ En savoir plus</a>
+					<p class="mt-4 text-sm font-semibold text-[#16a34a]">
+						<a href={lien} target="_blank" class="hover:underline">En savoir plus →</a>
 					</p>
 				{/if}
 				{#if lastUpdate}
-					<p class="mt-4 text-[0.66rem] text-gray-500 italic">
+					<p class="mt-4 text-[0.7rem] text-[#8b98a8] italic">
 						Mis à jour le {lastUpdate.toLocaleDateString('fr-FR', {
 							year: 'numeric',
 							month: 'long',
