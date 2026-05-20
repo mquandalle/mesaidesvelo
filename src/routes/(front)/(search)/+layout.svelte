@@ -10,6 +10,9 @@
 </script>
 
 <Search />
+
+{@render children?.()}
+
 {#if page.url.pathname !== '/'}
 	<PaneNavigation
 		depth={page.url.pathname === '/prime-a-la-conversion' ||
