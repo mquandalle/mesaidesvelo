@@ -14,7 +14,7 @@
 </svelte:head>
 
 <div
-	class="flex flex-wrap sm:flex-row items-center justify-start gap-3 mt-6 w-full max-w-screen-md m-auto text-gray-500"
+	class="flex flex-wrap sm:flex-row items-center justify-start gap-3 mt-6 w-full max-w-3xl m-auto text-gray-500"
 >
 	Essayez avec
 
@@ -29,7 +29,7 @@
 
 <!-- Latest release info -->
 
-<section class="w-full max-w-screen-md m-auto mt-12 flex flex-col gap-6">
+<section class="w-full max-w-3xl m-auto mt-12 flex flex-col gap-6">
 	<div
 		class="flex items-start bg-yellow-50 border border-yellow-100 p-4 mt-2 rounded gap-4"
 		role="alert"
@@ -44,7 +44,7 @@
 
 <!-- List of previous releases -->
 
-<details class="w-full max-w-screen-md m-auto mt-12 flex flex-col gap-6">
+<details class="w-full max-w-3xl m-auto mt-12 flex flex-col gap-6">
 	<summary class="text-lg font-bold cursor-pointer"> Historique des mises à jour </summary>
 
 	<div class="flex flex-col gap-6">
