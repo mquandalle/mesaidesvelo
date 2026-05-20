@@ -184,4 +184,11 @@
 		--tag-border: #dbe2ea;
 		--tag-color: #647085;
 	}
+
+	.amount-tag--muted .amount-tag__body strong {
+		font-size: 0.46rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0;
+	}
 </style>
