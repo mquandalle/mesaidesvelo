@@ -47,9 +47,9 @@
 		"vitest": "^4.1.6"
 	},
 	"dependencies": {
-		"@betagouv/aides-velo": "^4.0.0",
 		"@etalab/decoupage-administratif": "6.0.0",
 		"@modal-labs/svelte-markdown": "^0.5.0",
+		"aides-velo": "^5.0.0",
 		"fuzzysort": "^3.1.0",
 		"got": "^15.0.5",
 		"jsdom": "^29.1.1",

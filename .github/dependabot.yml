@@ -9,4 +9,4 @@ updates:
     labels:
       - aides
     allow:
-      - dependency-name: '@betagouv/aides-velo'
+      - dependency-name: 'aides-velo'

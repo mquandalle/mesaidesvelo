@@ -4,8 +4,8 @@ import { engine } from '$lib/engine';
 import { aidesPerVeloKind } from '$lib/textUtils';
 import { formatValue } from 'publicodes';
 import type { RuleNode } from 'publicodes';
-import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
-import type { Localisation } from '@betagouv/aides-velo';
+import { aidesWithLocalisation } from 'aides-velo/data';
+import type { Localisation } from 'aides-velo';
 
 export const prerender = true;
 

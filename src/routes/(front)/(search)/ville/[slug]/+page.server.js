@@ -7,7 +7,7 @@ import { engine } from '$lib/engine';
 import { rawCityToFullLocalisation } from '$lib/utils';
 import classementVilleplus from '$lib/data/classement-villeplus.json';
 import communes from '$lib/data/communes.json';
-import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
+import { aidesWithLocalisation } from 'aides-velo/data';
 
 const barometreFubPerCity = Object.fromEntries(
 	barometreFubRawCsv

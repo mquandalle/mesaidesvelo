@@ -2,7 +2,7 @@
  * Download the images from github (aides-jeune repo) and create the miniatures
  * from them.
  */
-import { miniatures, aidesWithLocalisation } from '@betagouv/aides-velo/data';
+import { miniatures, aidesWithLocalisation } from 'aides-velo/data';
 import fs from 'fs';
 import { join } from 'path';
 import sharp from 'sharp';

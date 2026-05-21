@@ -5,7 +5,7 @@ import departements from '@etalab/decoupage-administratif/data/departements.json
 import regions from '@etalab/decoupage-administratif/data/regions.json';
 import { error, redirect } from '@sveltejs/kit';
 import { _getCorrespondingContent } from '../../(search)/ville/[slug]/+page.server.js';
-import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
+import { aidesWithLocalisation } from 'aides-velo/data';
 
 // https://www.insee.fr/fr/information/2114773#:~:text=TNCC%20%2D%20Type%20de%20nom%20en%20clair
 

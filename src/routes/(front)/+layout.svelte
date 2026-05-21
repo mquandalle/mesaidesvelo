@@ -163,11 +163,7 @@
 					onclick={resetSearchOnHomeNavigation}
 					aria-label="MesAidesVélo"
 				>
-					<img
-						src="/images/logo.svg"
-						alt=""
-						class="mav-logo-transition h-11 w-auto shrink-0"
-					/>
+					<img src="/images/logo.svg" alt="" class="mav-logo-transition h-11 w-auto shrink-0" />
 					<span class="text-xl font-extrabold text-[#172338]"
 						>Mes<span class="text-[#16a34a]">Aides</span>Vélo</span
 					>

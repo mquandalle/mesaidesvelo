@@ -71,12 +71,12 @@ test.describe('Navigation scenarios', () => {
 
 		await page.click("text=Achat d'un vélo mécanique simple");
 		const totalAides = page.locator('text=Total des aides >> ..');
-		await expect(totalAides).toHaveText('Total des aides 150 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 50 €', { useInnerText: true });
 
 		await page.fill('input:below(label:text("Quel est le prix du vélo ?"))', '2000');
 
 		expect(page.getByText("D'occasion uniquement")).toBeTruthy();
-		await expect(totalAides).toHaveText('Total des aides 120 €', { useInnerText: true });
+		await expect(totalAides).toHaveText('Total des aides 50 €', { useInnerText: true });
 	});
 });
 

@@ -1,4 +1,4 @@
-import type { RuleName } from '@betagouv/aides-velo';
+import type { RuleName } from 'aides-velo';
 import type { QuestionNames } from './aides-velo-utils';
 
 export const QUESTIONS_TO_IGNORE: QuestionNames[] = [

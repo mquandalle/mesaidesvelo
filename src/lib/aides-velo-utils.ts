@@ -1,4 +1,4 @@
-import { AidesVeloEngine, type Questions } from '@betagouv/aides-velo';
+import { AidesVeloEngine, type Questions } from 'aides-velo';
 
 export const aidesVeloEngine = new AidesVeloEngine();
 

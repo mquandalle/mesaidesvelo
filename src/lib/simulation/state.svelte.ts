@@ -1,5 +1,5 @@
 import { page } from '$app/state';
-import type { RuleName } from '@betagouv/aides-velo';
+import type { RuleName } from 'aides-velo';
 import {
 	buildPublicodeSituation,
 	isPersistingAnswer,

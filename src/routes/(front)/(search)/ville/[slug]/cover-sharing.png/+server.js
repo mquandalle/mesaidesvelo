@@ -2,7 +2,7 @@ import { compile } from 'mdsvex';
 import playwright from 'playwright-aws-lambda';
 import template from './template.html?raw';
 import communes from '$lib/data/communes.json';
-import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
+import { aidesWithLocalisation } from 'aides-velo/data';
 import miniatures from '$lib/data/miniatures.json';
 
 /** @type {import('./$types').RequestHandler} */

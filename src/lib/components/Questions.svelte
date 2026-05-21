@@ -3,7 +3,7 @@
 	import { getEngine } from '$lib/engine';
 	import { QUESTIONS_ORDER, QUESTIONS_TO_IGNORE } from '$lib/questions';
 	import { getSimulationForm } from '$lib/simulation/context.svelte';
-	import type { RuleName } from '@betagouv/aides-velo';
+	import type { RuleName } from 'aides-velo';
 	import Question from './Question.svelte';
 	import RevenuSelector from './RevenuSelector.svelte';
 

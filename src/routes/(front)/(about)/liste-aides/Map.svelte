@@ -4,7 +4,7 @@
 	import { schemeGreens } from 'd3-scale-chromatic';
 	import { geoMercator } from 'd3-geo';
 	import { Chart, Svg, GeoPath, Legend, Tooltip } from 'layerchart';
-	import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
+	import { aidesWithLocalisation } from 'aides-velo/data';
 
 	const enrichGeojson = geojson.features.map((feature) => {
 		const regionCode = feature.properties.code;

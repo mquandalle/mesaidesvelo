@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { BIKE_KINDS } from '$lib/aides-velo-utils';
 	import { engine, getEngine } from '$lib/engine';
-	import type { RuleName } from '@betagouv/aides-velo';
+	import type { RuleName } from 'aides-velo';
 	import { formatValue, reduceAST, type Situation } from 'publicodes';
 	import Emoji from './Emoji.svelte';
 

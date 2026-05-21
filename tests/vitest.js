@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { aidesWithLocalisation } from '@betagouv/aides-velo/data';
+import { aidesWithLocalisation } from 'aides-velo/data';
 
 // NOTE: skip for now, more details in https://github.com/mquandalle/mesaidesvelo/issues/247
 test.skip('content reference existing rules', () => {

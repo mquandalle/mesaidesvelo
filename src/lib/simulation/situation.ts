@@ -1,5 +1,5 @@
 import { BIKE_KINDS } from '$lib/aides-velo-utils';
-import type { Questions, RuleName } from '@betagouv/aides-velo';
+import type { Questions, RuleName } from 'aides-velo';
 import type { Situation } from 'publicodes';
 
 export type Localisation = {
