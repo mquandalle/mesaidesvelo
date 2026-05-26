@@ -33,9 +33,6 @@ par une.
 
 ## Qui s'en occupe ?
 
-Depuis septembre 2025, c'est la coopérative [Calinou](https://calinou.coop) qui
-s'occupe de la maintenance et du développement du site.
-
 Le projet a été initié par Maxime Quendalle bénévolement, qu'il a ensuite
 maintenu pendant quelques temps financé par l'équipe de
 [1jeune1solution](https://mes-aides.1jeune1solution.beta.gouv.fr/).
@@ -43,6 +40,10 @@ maintenu pendant quelques temps financé par l'équipe de
 En octobre 2024, <a href="mailto:emile@calinou.coop" target="_blank">Emile
 Rolley</a> dans le cadre du projet <a href="https://jagis.beta.gouv.fr"
 target="_blank" class="italic">J'agis</a>, a repris la maintenance de la mise à
-jour des aides ainsi que de l'amélioration du simulateur.
+jour des aides ainsi que de l'amélioration du simulateur. Il a ensuite
+continuité la maintenance et le développement du site au sein de la coopérative
+[Calinou](https://calinou.coop).
+
+En mai 2026, Maxime Quendalle décide de reprendre la main sur le développement.
 
 </div>
